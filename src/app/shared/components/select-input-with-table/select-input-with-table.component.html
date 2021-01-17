@@ -1,0 +1,20 @@
+<div class="dps-select-input-with-table">
+  <mat-form-field [appearance]="appearance" [color]="color" [floatLabel]="floatLabel"
+    [hideRequiredMarker]="hideRequiredMarker" [hintLabel]="hintLabel" [ngClass]="{'cant-edit':!canEdit}">
+    <span class="dps-trigger" [matMenuTriggerFor]="menuRef"></span>
+    <input #input matInput [placeholder]="placeholder" [errorStateMatcher]="errorStateMatcher"
+      [placeholder]="placeholder" [formControl]="formControl" [readonly]="readonly" (blur)="onInputBlur($event)"
+      (focus)="onInputFocus($event)">
+    <ng-content></ng-content>
+    <button mat-icon-button matSuffix (click)="onArrowClick($event)" [disabled]="readonly">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-menu #menuRef="matMenu" class="dps-table-panel">
+    <div #div>
+      <dps-common-grid-table [minWidth]="tableMinWidth" [columns]="columns" [rows]="_rows" [rippleEnabled]="true"
+        (rowClick)="onRowClick($event)" (rowDblClick)="onRowClick($event)">
+      </dps-common-grid-table>
+    </div>
+  </mat-menu>
+</div>

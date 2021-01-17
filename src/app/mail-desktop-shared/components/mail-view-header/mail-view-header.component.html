@@ -1,0 +1,42 @@
+<mat-toolbar class="dps-mail-view-header">
+  <button mat-icon-button (click)="delete($event)" matTooltip="Delete" matTooltipPosition="below">
+    <mat-icon matListIcon>delete_sweep</mat-icon>
+  </button>
+  <button mat-icon-button (click)="flag($event)"
+    [matTooltip]="(item && item.data.flag.flagStatus === 'flagged')?'Complete':'Flag'" matTooltipPosition="below">
+    <mat-icon matListIcon>{{(item && item.data.flag.flagStatus === 'flagged')?'check':'flag'}}</mat-icon>
+  </button>
+  <button mat-icon-button (click)="readUnread($event)"
+    [matTooltip]="(item && item.data.isRead)?'Mark as unread':'Mark as read'" matTooltipPosition="below">
+    <mat-icon matListIcon>{{(item && item.data.isRead)?'mail_outline':'markunread_mailbox'}}</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Attach to DPS file" matTooltipPosition="below" [disabled]="item.diaryId" (click)="onAttachToDpsFile()">
+    <mat-icon matListIcon>screen_share</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Attach to new mail" matTooltipPosition="below" (click)="onAttachToNewMail()">
+    <mat-icon matListIcon>attachment</mat-icon>
+  </button>
+
+  <span fxFlex="1 1 auto"></span>
+  <button mat-icon-button matTooltip="Print" matTooltipPosition="below" dpsMailMessagePrint *ngIf="!isProtectedMail"
+    [item]="item.data" [timeZone]="timeZone">
+    <mat-icon>print</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="!isWindowUrlPopup" (click)="onOpenUrlPoup($event)" matTooltip="Pop-up"
+    matTooltipPosition="below">
+    <mat-icon>open_in_new </mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="!isWindowUrlPopup && emailReadingPaneMode==='hide'" (click)="onPrevious($event)"
+    matTooltip="Previos" matTooltipPosition="below" [disabled]="hasPrevious===false">
+    <mat-icon matListIcon>arrow_upward</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="!isWindowUrlPopup && emailReadingPaneMode==='hide'" (click)="onNext($event)"
+    matTooltip="Next" matTooltipPosition="below" [disabled]="hasNext===false">
+    <mat-icon matListIcon>arrow_downward</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onClose($event)" matTooltip="Close" matTooltipPosition="below">
+    <mat-icon class="dps-mail-exit" matListIcon>close</mat-icon>
+  </button>
+
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="!item || item.loading"></mat-progress-bar>

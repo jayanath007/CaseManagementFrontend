@@ -1,0 +1,357 @@
+@import '~styles/variables.scss';
+
+.opportunities-stats-layout {
+  height: 100%;
+  width: 100%;
+  ;
+
+  mat-icon {
+    vertical-align: text-bottom;
+  }
+
+  .opportunities-heading {
+    h1 {
+      padding: 10px 0px 10px 28px;
+      font-size: $primary-font-size + 4;
+      color: #245475;
+      background: #e0f2ff;
+      font-weight: 500;
+    }
+  }
+
+  .dps-white-gray-scroll {
+    overflow: scroll;
+    height: calc(100% - 44px);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: $primary-font-size + 2;
+  }
+
+  .opportunities-stat-works {
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-left: 52px;
+    padding-right: 52px;
+    height: 500px;
+
+    .quotes-sent {
+      width: 500px;
+    }
+
+
+
+    ::ng-deep {
+
+      mat-card {
+        padding: 0px;
+        min-height: 205px;
+        max-height: 220px;
+        box-shadow: none;
+        // border: 1px solid #eae9e9;
+      }
+
+      .mat-card-header-text {
+        margin: 0px;
+        width: 100%;
+        // background: #f7f7f7;
+        padding: 5px 0px 10px 15px;
+      }
+
+      .mat-card-header .mat-card-title {
+        font-size: $primary-font-size + 2;
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+
+      .mat-card-header .mat-card-title {
+        margin-bottom: 0px;
+      }
+
+
+    }
+
+    .dps-oppertunity-stats-item-0,
+    .dps-oppertunity-stats-item-1,
+    .dps-oppertunity-stats-item-2,
+    .dps-oppertunity-stats-item-3 {
+      width: 48%;
+      height: 48%;
+    }
+
+
+
+    .dps-oppertunity-stats-item-0 {
+
+      .sent {
+        color: #d05804;
+        background: #fddcc08a;
+        font-weight: 600;
+        border: 3px solid #f98f45;
+
+        font-weight: 600;
+
+        &:hover {
+          background: #fff;
+          border: 4px solid #d05804;
+          font-size: 42px;
+        }
+      }
+
+      ::ng-deep {
+
+        mat-card {
+          border: 1px solid #ffded4;
+        }
+
+        .mat-card-header-text {
+          // border-bottom: 3px solid #e0b4a6;
+        }
+
+        .mat-card-header-text {
+          background: #ffeee9;
+        }
+      }
+
+      mat-card-header {
+        mat-icon {
+          line-height: 28px;
+        }
+      }
+    }
+
+    .dps-oppertunity-stats-item-1 {
+
+      .sent {
+        color: #2b5b7d;
+        background: #e0f2ff;
+        font-weight: 600;
+        border: 3px solid #99c4e2;
+
+        &:hover {
+          background: #fff;
+          border: 4px solid #2b5b7d;
+          font-size: 42px;
+        }
+      }
+
+      ::ng-deep {
+
+        mat-card {
+          border: 1px solid #d1e6f5;
+        }
+
+        .mat-card-header-text {}
+
+        .mat-card-header-text {
+          background: #e0f2ff;
+        }
+      }
+
+      mat-card-header {
+        mat-icon {
+          line-height: 28px;
+        }
+      }
+    }
+
+    .dps-oppertunity-stats-item-2 {
+
+      .sent {
+        color: #569259;
+        background: #eaffeb;
+        font-weight: 600;
+        border: 3px solid #a9c7aa;
+
+        &:hover {
+          background: #fff;
+          border: 4px solid #569259;
+          font-size: 42px;
+        }
+      }
+
+      ::ng-deep {
+
+        mat-card {
+          border: 1px solid #d4ead4;
+        }
+
+        .mat-card-header-text {
+          // border-bottom: 3px solid #a0d0a2;
+        }
+
+        .mat-card-header-text {
+          background: #edfded;
+        }
+      }
+
+      mat-card-header {
+        mat-icon {
+          line-height: 28px;
+        }
+      }
+    }
+
+    .dps-oppertunity-stats-item-3 {
+
+      .sent {
+        color: #a75943;
+        background: #ffded4;
+        font-weight: 600;
+        border: 3px solid #e4a08c;
+
+        &:hover {
+          background: #fff;
+          border: 4px solid #a75943;
+          font-size: 42px;
+        }
+      }
+
+      ::ng-deep {
+
+        mat-card {
+          border: 1px solid #ffded4;
+        }
+
+        .mat-card-header-text {
+          // border-bottom: 3px solid #e0b4a6;
+        }
+
+        .mat-card-header-text {
+          background: #ffeee9;
+        }
+      }
+
+      mat-card-header {
+        mat-icon {
+          line-height: 28px;
+        }
+      }
+    }
+
+
+    mat-card-content {
+
+      .details-row {
+
+        .info-block {
+
+          text-align: center;
+
+          span {
+            font-size: $primary-font-size + 2;
+            font-weight: 500;
+          }
+        }
+
+        .quotes-info {
+          display: inline-block;
+          font-size: 23px;
+          line-height: 60px;
+          cursor: pointer;
+          margin: 25px 8px 10px 8px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          text-align: center;
+          position: relative;
+          text-decoration: none;
+          z-index: 1;
+
+        }
+
+
+
+
+      }
+
+    }
+  }
+
+  .pending-quotes {
+    padding: 26px 40px 8px 40px;
+
+    ::ng-deep {
+
+      mat-card {
+        padding: 0px;
+        min-height: 205px;
+        max-height: 220px;
+        box-shadow: none;
+        border: 1px solid #eae9e9;
+        width: 98.2%;
+        margin: 8px 0px 0px 14px;
+      }
+
+      .mat-card-header-text {
+        margin: 0px;
+        width: 100%;
+        background: #f7f7f7;
+        padding: 5px 0px 10px 15px;
+      }
+
+      .mat-card-header .mat-card-title {
+        font-size: $primary-font-size + 2;
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+
+      .mat-card-header .mat-card-title {
+        margin-bottom: 0px;
+      }
+
+    }
+
+    mat-card-content {
+      .details-row {
+
+        // justify-content: space-around;
+
+        .info-block {
+          float: left;
+          //   width: 8%;
+          height: 150px;
+          text-align: center;
+
+          span {
+            font-size: $primary-font-size + 2;
+            font-weight: 500;
+          }
+        }
+
+        .quotes-info {
+          display: inline-block;
+          font-size: 30px;
+          line-height: 75px;
+          cursor: pointer;
+          margin: 25px 25px 10px 18px;
+          width: 75px;
+          height: 75px;
+          border-radius: 50%;
+          text-align: center;
+          position: relative;
+          text-decoration: none;
+          z-index: 1;
+
+        }
+      }
+
+      .pending {
+        color: #6b6b6b;
+        background: #f5f5f5;
+        font-weight: 600;
+        border: 3px solid #6b6b6b;
+
+        &:hover {
+          background: #fff;
+          border: 4px solid #909090;
+          font-size: 42px;
+        }
+      }
+
+    }
+
+  }
+
+}

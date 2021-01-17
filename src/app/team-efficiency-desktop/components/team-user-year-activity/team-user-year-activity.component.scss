@@ -1,0 +1,310 @@
+@import '~styles/variables.scss';
+
+.dps-team-user-year-activity {
+  height: 100%;
+
+  .dps-user-activity-content {
+    height: calc(100% - 502px);
+  }
+
+  mat-chip-list {
+    height: 40px;
+    overflow-x: hidden;
+    background: #f2f2f2;
+    padding: 2px 0px 0px;
+    border-radius: 4px;
+
+    ::ng-deep.mat-chip-list-wrapper {
+      margin: 0px;
+    }
+  }
+
+
+  .dps-badge-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .dps-badge {
+      border-radius: 30px;
+      padding: 2px 0px;
+      position: relative;
+      height: 30px;
+      min-width: 30px;
+      left: 34px;
+      top: 5px;
+      z-index: 10;
+      line-height: 30px;
+      font-size: 11px;
+    }
+
+    mat-chip {
+      padding: 15px 0px 15px 4.5em;
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+
+      p {
+        position: relative;
+        right: 22px;
+        font-size: 15px;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+    }
+
+    &.dps-allowed {
+      button {
+        background: #438f6b;
+      }
+
+      mat-chip {
+        background-color: #82ac98 !important;
+      }
+    }
+
+    &.dps-taken {
+      button {
+        background: #ae8d30;
+      }
+
+      mat-chip {
+        background-color: #bcae87 !important;
+      }
+    }
+
+    &.dps-remaining {
+      button {
+        background: #5b8ebb;
+      }
+
+      mat-chip {
+        background-color: #8bbce5 !important;
+      }
+    }
+
+    &.dps-lost-days {
+      button {
+        background: #b8715d;
+      }
+
+      mat-chip {
+        background-color: #e8b8ae !important;
+      }
+    }
+  }
+}
+
+// .dps-team-chart {
+//   display: flex;
+//   flex-direction: row;
+
+// }
+
+// .dps-team-chart mat-card { 
+//   width: 50%
+// }
+
+.dps-team-chart {
+  display: flex;
+  flex-direction: row;
+  height: 420px;
+  width: auto;
+  padding: 6px;
+  max-height: 420px;
+
+}
+
+.dps-team-chart mat-card {
+  width: 33%;
+  padding: 0px;
+  margin: 4px;
+}
+
+mat-card-title {
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+
+
+$anime-time: 8s;
+
+$box-size: 200px;
+$clip-distance: 0.05;
+$clip-size: $box-size * (1 + $clip-distance * 2);
+$path-width: 2px;
+
+$main-color: #af6709;
+
+%full-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.bb {
+  @extend %full-fill;
+  width: $box-size;
+  height: $box-size;
+  margin: auto;
+  color: $main-color;
+  box-shadow: inset 0 0 0 1px rgba($main-color, 0.5);
+
+  &::before,
+  &::after {
+    @extend %full-fill;
+    content: "";
+    margin: -1 * $clip-distance * 100%;
+    box-shadow: inset 0 0 0 $path-width;
+    animation: clipMe $anime-time linear infinite;
+  }
+
+  &::before {
+    animation-delay: $anime-time * -0.5;
+  }
+
+  &:hover {
+
+    &::after,
+    &::before {
+      background-color: rgba(#fff, 0.3);
+    }
+  }
+}
+
+@keyframes clipMe {
+
+  0%,
+  100% {
+    clip: rect(0px, $clip-size, $path-width, 0px);
+  }
+
+  25% {
+    clip: rect(0px, $path-width, $clip-size, 0px);
+  }
+
+  50% {
+    clip: rect($clip-size - $path-width, $clip-size, $clip-size, 0px);
+  }
+
+  75% {
+    clip: rect(0px, $clip-size, $clip-size, $clip-size - $path-width);
+  }
+}
+
+.dps-sick-indidator {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.dps-sick-indidator-outer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: relative;
+  top: 12%;
+}
+
+.dps-team-card-content {
+  // justify-content: space-around;
+  // padding: 10px 12em 0px 0px;
+  justify-content: center;
+
+  &.dps-sick-section {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+
+    .top-header {
+      font-size: 30px;
+      font-weight: 500;
+      color: #f1b881;
+    }
+
+    .primary-header {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+
+    }
+
+    .secondary-header {
+      font-size: 47px;
+      font-weight: 400;
+      color: #f1b881;
+
+    }
+  }
+
+  &.dps-training-section {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+
+    .top-header {
+      font-size: 30px;
+      font-weight: 500;
+      color: #486b00;
+    }
+
+    .primary-header {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+
+    }
+
+    .secondary-header {
+      font-size: 47px;
+      font-weight: 400;
+      color: #486b00;
+
+    }
+  }
+
+  &.dps-holiday-section {
+   
+
+    .top-header {
+      font-size: 30px;
+      font-weight: 500;
+      color: #c20b14;
+      text-align: center;
+    }
+
+    .primary-header {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+
+    }
+
+    .secondary-header {
+      font-size: 47px;
+      font-weight: 400;
+      color: #c20b14;
+
+    }
+  }
+}
+
+.indicator-icon {
+  position: absolute;
+  margin: auto;
+  left: 0%;
+  right: 0;
+  width: 230px;
+  top: 47px;
+}

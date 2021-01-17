@@ -1,0 +1,39 @@
+<div class="multi-select-outer-wrapper" fxLayout="column" fxLayoutAlign="center">
+    <div fxFlexAlign="center" class="multi-select-wrapper">
+        <mat-list>
+            <mat-list-item>
+                <span matLine class="item-selected-wrap">{{(selectedItems && selectedItems.length > 0) ? '('+selectedItems.length+')':''}} items selected</span>
+            </mat-list-item>
+        </mat-list>
+        <mat-nav-list dense>
+            <mat-list-item class="btn-wrapper" (click)="delete($event)">
+                <mat-icon matListIcon>delete_sweep</mat-icon>
+                <span matLine>Delete</span>
+            </mat-list-item>
+            <mat-list-item (click)="flag($event)">
+                <mat-icon matListIcon>{{(selectedItems && selectedItems.length && selectedItems[0].data.flag.flagStatus === 'flagged')?'check':'flag'}}</mat-icon>
+                <span matLine>{{(selectedItems && selectedItems.length && selectedItems[0].data.flag.flagStatus === 'flagged')?'Complete':'Flag'}}</span>
+            </mat-list-item>
+            <mat-list-item (click)="readUnread($event)">
+                <mat-icon matListIcon>{{(selectedItems && selectedItems.length && selectedItems[0].data.isRead)?'mail_outline':'markunread_mailbox'}}</mat-icon>
+                <span matLine>{{(selectedItems && selectedItems.length && selectedItems[0].data.isRead)?'Mark as unread':'Mark as read'}}</span>
+            </mat-list-item>
+            <mat-list-item [matMenuTriggerFor]="folderMenu.childMenu">
+                <mat-icon matListIcon>folder_open</mat-icon>
+                <i class="material-icons icon-child-menu">forward</i>
+                <span matLine>Move to folder</span>
+                <dps-folder-menu-item-list #folderMenu [folders]="folders" [parentFolderId]="msgRootFolderId" (selectFolder)="onMoveToFolder($event)"></dps-folder-menu-item-list>
+            </mat-list-item>
+            <mat-list-item (click)="onAttachToDpsFile()" *ngIf="showAttachToFile">
+                <mat-icon matListIcon>screen_share</mat-icon>
+                <span matLine>Attach to DPS file</span>
+            </mat-list-item>
+            <mat-list-item (click)="onAttachToNewMail()">
+                <mat-icon matListIcon>attachment</mat-icon>
+                <span matLine>Attach to new mail</span>
+            </mat-list-item>
+ 
+        </mat-nav-list>
+        <button mat-raised-button class="cancel-list" (click)="onCancel()">Cancel</button>
+    </div>
+</div>

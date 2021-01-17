@@ -1,0 +1,43 @@
+.dps-name {
+  width: 450px;
+}
+
+.dps-team-user-item-list {
+  // height: auto !important;
+  height: 100px !important;
+ 
+}
+
+.dps-team-user-item {
+  padding: 8px 0px 0px;
+  font-size: 12px;
+.dps-team-user-item-l-top{
+  padding: 3px 10px;
+}
+  .s-name {
+    font-weight: 500;
+    font-size: 15px;
+    color: #3a5c70;
+    padding: 3px 0px;
+  }
+
+  .f-name {
+    color: #648494;
+  }
+}
+
+.dps-team-user-item-status {
+  .status {
+    font-size: 11px;
+    color: #308921;
+    font-weight: 600;
+    position: relative;
+    top: 8px;
+  }
+}
+.dps-selected-user{
+  &:hover{
+    background: #64abe2 !important;
+  }
+  background: #64abe2;
+}

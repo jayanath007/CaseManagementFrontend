@@ -1,0 +1,86 @@
+<div class="dps-notification-wrap general">
+  <mat-toolbar class="popup-toolbar">
+    <span class="title">
+      <span>Price Cap Limits</span>
+    </span>
+    <span class="spacer"></span>
+    <mat-icon class="header-icon close" (click)="onClosePopup()">close</mat-icon>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+  <div *ngIf="currentLimit && currentLimit.length>0" class="bill-information-wrapper">
+    <div class="bill-information-general">
+      <mat-form-field floatLabel="always" class="investigation-input">
+        <mat-select [ngModel]="userInput?.limitedType" [placeholder]="selectedLimit?.classType"
+          (selectionChange)="onChangeUserInput(inputKey.limitedType, $event.value)">
+          <mat-option *ngFor="let limit of currentLimit" [value]="limit?.limitType">
+            {{ limit?.limitTypeDesc }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div class="bill-information-sub">
+
+        <span>
+          <label> Opened </label>
+          {{selectedLimit?.openedDate | date:'dd-MM-yyyy' }}
+        </span>
+
+        <span>
+          <label> Closed </label>
+          {{selectedLimit?.closedDate | date:'dd-MM-yyyy' }}
+        </span>
+
+        <span>
+          <label>Billed </label>
+          {{selectedLimit?.billedDate | date:'dd-MM-yyyy' }}
+        </span>
+        <div class="clear"></div>
+      </div>
+
+
+    </div>
+
+    <div class="bill-information-total">
+      <div class="bill-information-total-sub">
+        <span class="price-total"> {{selectedLimit?.currentTot  | number : '1.2-2'}} </span>
+        <span class="price-total-lbl">Current Total</span>
+      </div>
+      <div class="bill-information-total-sub">
+        <span class="price-total">{{selectedLimit?.currentLimit  | number : '1.2-2'}}</span>
+        <span class="price-total-lbl">Current Limit</span>
+      </div>
+
+    </div>
+
+    <div class="posting-date">
+      <label>Posting Date</label> {{userInput[inputKey.postingData] | date:'dd-MM-yyyy' }}
+    </div>
+
+    <div class="history-item-grid-controllers">
+      <mat-form-field floatLabel="always">
+        <input #newLimitInput matInput placeholder="New Limit" type="number" [ngModel]="userInput.newLimit"
+          (focusout)="onChangeUserInput(inputKey.newLimit, newLimitInput.value)">
+      </mat-form-field>
+
+
+      <mat-form-field floatLabel="always">
+        <input matInput [matDatepicker]="picker" placeholder="Granted date"
+          [ngModel]="userInput[inputKey.grantedDate] | date:'yyyy-MM-dd'"
+          (dateChange)="onChangeUserInput(inputKey.grantedDate,  $event.value)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-flat-button class="dps-general-button-large" (click)="btnExceedClick()">Exceed</button>
+    </div>
+
+
+    <dps-common-grid-table class="price-cap-limit-data" [columns]="columns" class="price-cap-limit-data"
+      [rows]="gridRows" (rowClick)="onSelectHistoryItem($event)" (rowButtonClick)="onRowButtonClick($event)">
+    </dps-common-grid-table>
+
+  </div>
+
+</div>

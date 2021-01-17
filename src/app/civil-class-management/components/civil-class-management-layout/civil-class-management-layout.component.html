@@ -1,0 +1,56 @@
+<div fxLayout="column" style="height: 100%;">
+  <dps-common-popup-header icon="work" title="Civil Class Management" buttons="close" [loading]="isLoading"
+    iconColor="#ffffff" titleColor="#ffffff" toolbarColor="#1b6ebe" (buttonClick)="onClose()">
+  </dps-common-popup-header>
+  <div fxFlex="calc(100%-43px)" fxLayout="column" fxLayoutGap="1em" class="dps-civil-class-management-layout">
+    <div class="dps-civil-management-report-info-content dps-white-gray-scroll" fxFlex="calc(100%-50px)">
+      <div class="lenth-calc" fxLayout="column">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="row-highlight-inner">
+            <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+              [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+        </div>
+
+        <div [@.disabled]="true" fxFlex="calc(100%-30px)"
+          class="grid-sub-options dps-white-gray-scroll dps-crime-management-grid-content">
+          <mat-accordion [multi]="false">
+            <mat-expansion-panel *ngFor="let item of classList ; let index =index; let isOdd=odd; let isEven=even"
+              class="dps-mat-pannel mat-elevation-z" [expanded]="index === openRowIndex"
+              (opened)="OpenRow(index, item)">
+              <mat-expansion-panel-header collapsedHeight="34px" expandedHeight="34px"
+                class="expansion-panelgrid-header">
+                <mat-panel-title fxLayout="row">
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item.className}}"></div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item.feeEarner}}"></div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+                    innerHTML="{{item.openDate | date:'dd/MM/yyyy'}}">
+                  </div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+                    innerHTML="{{item.closeDate | date:'dd/MM/yyyy'}}">
+                  </div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+                    innerHTML="{{item.billDate | date:'dd/MM/yyyy'}}">
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div fxLayout="row">
+                <div fxLayout="column" style="align-items: center;">
+                  <button mat-icon-button (click)="onRecordTime(item)">
+                    <mat-icon>alarm_add</mat-icon>
+                  </button>
+                  <span>Time</span>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <div class="dps-bottom-btn">
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,230 @@
+<div class="dps-chaser-form" fxLayout="column">
+  <!-- mat-typography -->
+  <div fxflex="">
+    <mat-list>
+      <span fxFlex="1 1 auto"></span>
+      <mat-list-item
+        [ngClass]="{nghide: contactMapResponce?.contactEmailsViewModel && contactMapResponce.contactEmailsViewModel?.length > 0}"
+        *ngIf="contactMapResponce?.contactEmailsViewModel && contactMapResponce.contactEmailsViewModel?.length > 0"
+        class="dps-unlink-address {{animationClass}}">
+        <span>
+          Warning – Send emails not connected to the case file -
+          <a (click)="onOpenUnlinkEmailAddressesDialog()"> Click to connect </a>
+          or cancel</span>
+      </mat-list-item>
+      <span fxFlex="1 1 auto"></span>
+    </mat-list>
+    <!-- <div *ngIf="contactMapResponce?.contactEmailsViewModel && contactMapResponce.contactEmailsViewModel?.length > 0"
+      class="dps-unlink-address">
+     </div> -->
+    <mat-list-item class="section-header"> Attach to a DPS File?</mat-list-item>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="strat center">
+      <mat-form-field fxFlex="1 1 auto">
+        <span matPrefix></span>
+        <input type="search" [disabled]="true" [ngModel]="fileNo" #searchTextInput matInput placeholder="File No">
+        <button class="file-no-btn" matSuffix mat-icon-button mat-button (click)="onSearchClear()" tabindex="-1">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button class="file-no-btn" matSuffix mat-icon-button mat-button (click)="onMatterSearch()" tabindex="-1">
+          <mat-icon>search</mat-icon>
+        </button>
+
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="strat center">
+      <mat-form-field floatLabel="always" fxFlex="1 1 auto">
+        <textarea matInput placeholder="File Note" maxlength="500" [ngModel]="fileNoteData"
+          (focusout)="onFileNoteChanged($event.target.value)"></textarea>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="strat center" fxLayoutGap="34px">
+      <mat-form-field>
+        <mat-select [disabled]="!hasMatter" placeholder=Folder [ngModel]="selectedFolder" floatPlaceholder="never"
+          (selectionChange)="onFolderChanged($event.value)">
+          <mat-option *ngFor="let folder of folderList" [value]="folder">
+            {{folder.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [disabled]="!hasMatter" placeholder="For FE" [ngModel]="selectedFeeEarner" floatPlaceholder="never"
+          (selectionChange)="onChangeFeeEarner($event.value)">
+          <mat-option *ngFor="let feeEarner of feeEarnerList" [value]="feeEarner">
+            {{ feeEarner.user_ID }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="34px"
+        *ngIf="(pageLoadType===eBillingType.PrecedentH || pageLoadType===eBillingType.PrecedentS) && hasMatter">
+        <mat-form-field floatLabel="always" class="form-field-section">
+          <input [dpsNumberOnly]=8 type="number" #selectedUnit matInput placeholder="Units" min="0" maxlength="8"
+            [ngModel]="precedentUnitValue" (focusout)="onPrecedentUnitFocusOut(selectedUnit)">
+        </mat-form-field>
+        <mat-form-field class="dps-matform-currency" floatLabel="always">
+          <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+          <input class="dps-remove-arrow rate" type="number" #selectedRate matInput placeholder="Rate" min="0"
+            maxlength="11" step="0.01" [ngModel]="precedentRate" (focusout)="onPrecedentChangeRate(selectedRate)">
+        </mat-form-field>
+        <mat-form-field floatLabel="always" class="dps-matform-home">
+          <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+          <input class="value" matInput placeholder="Value" disabled [ngModel]="precedentValueTotal | number : '1.2-2'">
+        </mat-form-field>
+        <mat-checkbox class="example-margin" [ngModel]="uncharged" (change)="onChangeuncharged($event)" color="primary">
+          Uncharged</mat-checkbox>
+      </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="strat center">
+      <!-- eBilling Comment - phase,task,activity -->
+      <mat-form-field floatLabel="always" *ngIf="(pageLoadType===eBillingType.PrecedentH) && hasMatter">
+        <mat-select placeholder="Work Type" [ngModel]="selectedWorkType" (selectionChange)="onChangeWorkType($event)"
+          [disabled]="isLoading">
+          <mat-option *ngFor="let workTypeItem of worktypeList" [value]="workTypeItem">
+            {{ workTypeItem.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="34px"
+        *ngIf="(pageLoadType===eBillingType.PrecedentS) && hasMatter">
+        <mat-form-field floatLabel="always">
+          <mat-select placeholder="Phase" [ngModel]="selectedPhase" (selectionChange)="onChangePhase($event)"
+            [disabled]="isLoading">
+            <mat-option *ngFor="let phaseItem of phaseList" [value]="phaseItem">
+              {{ phaseItem.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-select placeholder="Task" [ngModel]="selectedTask" (selectionChange)="onChangeTask($event)"
+            [disabled]="isLoading">
+            <mat-option *ngFor="let taskItem of phaseWiseTaskList" [value]="taskItem">
+              {{ taskItem.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-select placeholder="Activity" [ngModel]="selectedActivity" (selectionChange)="onChangeActivity($event)"
+            [disabled]="isLoading">
+            <mat-option *ngFor="let activitiItem of activitiList" [value]="activitiItem">
+              {{ activitiItem.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div *ngIf="(moduleIsActive(module.Crime) | async) && (timeRecordTypes.CrimeTime === timeRecordType)">
+      <mat-list-item class="legal-aid section-header">LegalAid
+        Details</mat-list-item>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-checkbox class="example-margin" [ngModel]="uncharged" (change)="onChangeuncharged($event)" color="primary">
+          Uncharged</mat-checkbox>
+      </div>
+
+      <div fxLayout="column" class="dps-crime-inputs">
+
+        <div fxLayoutAlign="strat center" fxLayout="row wrap" fxLayoutGap="2em">
+
+          <mat-form-field floatLabel="always">
+            <mat-select placeholder="Class" [ngModel]="selectedClassType"
+              (selectionChange)="onChangeClassType($event.value)">
+              <mat-option *ngFor="let class of filterClassType" [value]="class">
+                ({{ class.rectype }}) {{ class.classname }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="always">
+            <mat-select placeholder="Work Type" [ngModel]="selectedAttType"
+              (selectionChange)="onChangeCrimeWorkType($event.value)">
+              <mat-option *ngFor="let type of filterAttTypeList" [value]="type">
+                {{ type.attDescription }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(timeRecordTypes.CivilTime === timeRecordType)">
+      <mat-list-item class="legal-aid section-header">LegalAid
+        Details</mat-list-item>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-checkbox class="example-margin" [ngModel]="uncharged" (change)="onChangeuncharged($event)" color="primary">
+          Uncharged</mat-checkbox>
+      </div>
+
+      <div fxLayout="column" class="dps-crime-inputs">
+
+        <div fxLayoutAlign="strat center" fxLayout="row wrap" fxLayoutGap="2em">
+
+          <mat-form-field floatLabel="always">
+            <mat-select placeholder="Class" [ngModel]="selectedCivilClass"
+              (selectionChange)="onChangeCivilClass($event.value)">
+              <mat-option *ngFor="let class of civilClassList" [value]="class">
+                {{ class.className }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="always">
+            <mat-select placeholder="Funding Level" [ngModel]="selectedCivilLevel"
+              (selectionChange)="onChangeCivilLevel($event.value)">
+              <mat-option *ngFor="let level of civilLevelList" [value]="level">
+                {{ level.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!(pageLoadType===eBillingType.PrecedentH || pageLoadType===eBillingType.PrecedentS)">
+      <mat-list-item class="section-header"> Extra Units</mat-list-item>
+      <div fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="34px">
+        <span matLine *ngIf="typeValueDisable">(Fee Earner rates in use)</span>
+        <mat-form-field *ngIf="!typeValueDisable">
+          <mat-select [disabled]="!hasMatter" placeholder="Types" [ngModel]="selectedTimeType" floatPlaceholder="never"
+            (selectionChange)="onTimeTypeChange($event.value)">
+            <mat-option *ngFor="let timeType of timeTypeList" [value]="timeType">
+              {{ timeType.dtL_Label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" class="form-field-section">
+          <input [dpsNumberOnly]=8 [disabled]="!hasMatter" type="number" matInput placeholder="Units" min="1"
+            maxlength="8" [ngModel]="unitValue" (focusout)="onUnitFocusOut($event.target.value)"
+            (keyup)="removeDecimal($event.target)">
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-accordion [multi]="false" class="open-file-list">
+      <mat-expansion-panel class="opened-case-selection" (click)=openFileExpan($event) (afterExpand)="onAfterExpand()">
+        <mat-expansion-panel-header collapsedHeight="34px" expandedHeight="34px" class="chaser_open_file">
+          <mat-panel-title>
+            <span>
+              <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loadingMatterList">
+              </i> Suggested files
+            </span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- <div *ngFor="let openfile of openCasefileData">
+            <span (click)=openFileSelct(openfile)>{{openfile.MatterReferenceNo}}</span>
+          </div> -->
+        <mat-nav-list class="open-folder-list dps-white-gray-scroll">
+          <mat-list #CaseFiles *ngFor="let openfile of openCasefileData">
+            <mat-list-item class="dps-list-mail {{openfile.source}}" (click)=openFileSelct(openfile)
+              [ngClass]="{'case-highlight': openfile.source===selectedSourceType && (selectedMatterRef == openfile?.MatterReferenceNo || selectedMatterInfo?.MatterReferenceNo==openfile?.MatterReferenceNo)}">
+              <mat-icon class="open-folder" mat-list-icon>folder</mat-icon>
+              <p mat-line>
+                <span class="open_file">{{openfile.source}} </span>
+                <span class="dps_file-info">{{openfile.var1}} {{openfile.var2}} {{openfile.var3}} </span>
+              </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>

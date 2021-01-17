@@ -1,0 +1,97 @@
+/* .screen-view-wrapper
+{
+    background: #99b7e4;
+    overflow: auto;
+} */
+
+.screen-edit-wrapper
+{
+    
+    width: 100%;
+    height: 100%;
+    background: #74b1d8;
+    
+}
+
+.screen-edit-wrapper.left-panel-active .ov-list-wrap
+{
+    width: 355px;
+}
+.screen-edit-wrapper.right-panel-active dps-right-bar
+{
+    width: 370px;
+}
+.screen-edit-wrapper.left-panel-deactive .ov-list-wrap
+{
+    width: 0;
+}
+.screen-edit-wrapper.right-panel-deactive dps-right-bar
+{
+    width: 0;
+}
+.screen-edit-wrapper.left-panel-active.right-panel-deactive .screen-canvas-wrapper
+{
+    width: calc(100% - 355px);
+}
+.screen-edit-wrapper.left-panel-deactive.right-panel-active .screen-canvas-wrapper
+{
+    width: calc(100% - 370px);
+}
+.screen-edit-wrapper .screen-canvas-wrapper,
+.screen-edit-wrapper.left-panel-active.right-panel-active .screen-canvas-wrapper
+{
+    width: calc(100% - 725px);
+}
+.screen-edit-wrapper.left-panel-deactive.right-panel-deactive .screen-canvas-wrapper
+{
+    width: 99.6%;
+}
+.screen-canvas-wrapper
+{
+    transition: all 0.2s ease-in;
+}
+
+dps-header-bar
+{
+    background: #5a9ac3;
+    width: 100%;
+    padding: 11px 0 1px;
+    display: block;
+}
+.ov-list-wrap
+{
+    height: 100%;
+    overflow: hidden;
+}
+dps-ov-list
+{
+    background: #a4ceea;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+dps-right-bar
+{
+    background: #a4cfea;
+    overflow: hidden;
+    position: relative;
+    padding-left: 6px;
+}
+.screen-canvas-wrapper
+{
+    float: left;
+}
+.screen-edit-eliment-container
+{
+    overflow: auto;
+    width: 100%;
+    height: calc(100% - 110px);
+    position: relative;
+}
+dps-header-bar
+{
+    width: 100%;
+    display: block;
+    clear: both;
+}

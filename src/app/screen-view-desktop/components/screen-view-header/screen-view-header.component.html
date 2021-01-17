@@ -1,0 +1,52 @@
+<div fxLayout="row" class="screen-views-top-header-wrapper">
+
+    <!-- <div *ngIf="screenViewState?.isDisabaleTabLogic">{{ screenViewState?.isDisabaleTabLogic}}</div> -->
+
+
+    <div class="screens-navigation-buttons" *ngIf="screenList?.length > 1">
+        <button data-main-button="true" [disabled]="currentIndex === 0" (click)="prives($event)" mat-icon-button>
+            <i class="material-icons">chevron_left</i>
+        </button>
+        <button data-main-button="true" [disabled]="screenList?.length === currentIndex +1" (click)="next($event)"
+            mat-icon-button>
+            <i class="material-icons">chevron_right</i>
+        </button>
+    </div>
+
+    <div class="screen-title" fxFlex="1 1 auto">
+        {{screenDefinition?.screenTitle}}
+    </div>
+    <!-- <mat-checkbox color="warn"  #enableTabLogic 
+         [checked]='screenViewState?.isDisabaleTabLogic' 
+        (change)="onChange($event.checked)"  >
+            Disable 
+        </mat-checkbox> -->
+    <!-- [ngClass]="{'enabled': screenViewState?.isDisabaleTabLogic }" [disabled]="screenViewState?.isDisabaleTabLogic "  -->
+
+
+
+    <div class="controller-buttons">
+        <button data-main-button="true" mat-button class="save-screen" (click)="ok()">
+            OK
+        </button>
+        <button data-main-button="true" (click)="close()" fxFlexAlign="end" color="warn" mat-icon-button>
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="hasTabLogic || isMasterMatter" class="screen-view-tab-logic-controller enabled">
+    {{hasTabLogic?'Run Tab Logic':'Plot Sync'}}
+    <button data-main-button="true" class="run-tab-logic" mat-button (click)="runTabLogic()"
+        *ngIf="hasTabLogic && !isMasterMatter">
+        Run
+    </button>
+    <button data-main-button="true" class="run-tab-logic" mat-button (click)="runTabLogicPlotSync()"
+        *ngIf="hasTabLogic && isMasterMatter">
+        Sync
+    </button>
+    <button data-main-button="true" class="run-tab-logic" mat-button (click)="runPlotSync()"
+        *ngIf="!hasTabLogic && isMasterMatter">
+        Sync
+    </button>
+</div>

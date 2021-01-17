@@ -1,0 +1,45 @@
+<mat-nav-list dence class="dps-grid-nav-list" *ngIf="!onlySelectMatter">
+  <mat-list-item class="dps-grid-list-item" disableRipple
+    *ngFor="let rowData of linkedMatterData; let index =index; let isOdd=odd; let isEven=even"
+    (dpsClick)="onSelectRow($event,rowData)"
+    [ngClass]="getMultiSelect(rowData.matterReferenceNo) ? 'multi-select-matter-active' : rowData.isMasterMatter? 'parent-matter-active':(isOdd?'dps_row_separation-0':'dps_row_separation-1')">
+    <div fxLayout="row" class="grid-data">
+      <div *ngIf="matterData?.isPlotMasterMatter" class="row-data checkbox"
+        [fxFlex]="getFxFlexProperty(getCellIndex(0))">
+        <mat-checkbox class="property-value-check-box" [disabled]="openFrom === matterLinkedType.OpenCase || plotRange"
+          [checked]='isSelected(rowData.matterReferenceNo)' #selectedMatter
+          (click)="onSelectedMatter($event,selectedMatter, rowData.matterReferenceNo)"></mat-checkbox>
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(1))" innerHTML="{{rowData.matterReferenceNo}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(2))" innerHTML="{{rowData.matterDetails}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(3))">
+        <button matTooltip="Open" matTooltipPosition="right" mat-icon-button class="open_matter"
+          (click)="openLinkedMatter($event, rowData)">
+          <mat-icon>folder</mat-icon>
+        </button></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(4))"
+        innerHTML="{{rowData.lastUsed  | date :'dd/MM/yyyy'}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(5))"
+        innerHTML="{{rowData.startDate  | date :'dd/MM/yyyy'}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(getCellIndex(6))" innerHTML="{{rowData.feeEarner}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>
+<mat-nav-list dence class="dps-grid-nav-list" *ngIf="onlySelectMatter">
+  <mat-list-item class="dps-grid-list-item" disableRipple
+    *ngFor="let rowData of linkedMatterData; let index =index; let isOdd=odd; let isEven=even"
+    (dpsClick)="onSelectRow($event,rowData)"
+    [ngClass]="getMultiSelect(rowData.matterReferenceNo) ? 'multi-select-matter-active' :rowData.isMasterMatter? 'parent-matter-active':(isOdd?'dps_row_separation-0':'dps_row_separation-1')">
+    <div fxLayout="row" class="grid-data">
+      <div class="row-data checkbox" [fxFlex]="getFxFlexProperty(0)">
+        <mat-checkbox [checked]='isSelected(rowData.matterReferenceNo)' class="property-value-check-box" #selectedMatter
+          (click)="onSelectedMatter($event,selectedMatter, rowData.matterReferenceNo)"></mat-checkbox>
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.matterReferenceNo}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData.matterDetails}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

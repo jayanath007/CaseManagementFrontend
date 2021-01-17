@@ -1,0 +1,93 @@
+.dps-attendees-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+mat-form-field.dps-attendee-form {
+  width: 80px;
+}
+
+
+.dps-recipient-input {
+  width: calc(100% - 100px);
+}
+
+mat-option {
+  font-size: 12px !important;
+  font-weight: 400;
+  color: #4c4c4c !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+
+  background: #c9e7fd;
+}
+
+.dps-person-email {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px
+}
+
+span.dps-person-name {
+  position: absolute;
+  top: -9px;
+  text-align: center;
+  width: 28px;
+  color: white;
+  font-size: 13px
+}
+
+div.dps-calendar-attendees {
+  padding-left: 38px;
+  line-height: 14px;
+}
+
+div.dps-calendar-attendees small {
+  display: block;
+  color: #005f9c;
+
+}
+
+div.dps-calendar-attendees small,
+div.dps-calendar-attendees div {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.dps-person-mail {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+}
+
+.dps-person-display-name {
+  position: absolute;
+  top: -9px;
+  text-align: center;
+  width: 28px;
+  color: white;
+  font-size: 13px
+}
+
+.person-display-name {
+  padding-left: 38px;
+}
+
+i {
+  font-size: 25px;
+}
+
+mat-nav-list {
+  padding-top: 0px;
+}
+
+mat-icon {
+  color: #0D557C;
+}

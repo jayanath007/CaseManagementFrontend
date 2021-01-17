@@ -1,0 +1,52 @@
+<mat-accordion [@.disabled]="true" [multi]="false">
+
+  <mat-expansion-panel class="dps-dictation-expansion-panel mat-elevation-z" [expanded]="item?.expanded" [ngClass]="{'active-normal': item?.urgentValue === urgentValue.normal,
+    'active-important': item?.urgentValue === urgentValue.important,
+    'active-urgent': item?.urgentValue === urgentValue.urgent, 'upload-in-progress': item?.statusDescription ===
+    'Processing'}" *ngFor="let item of dictationGridData; let index =index; let isOdd=odd; let isEven=even"
+    [ngClass]="item?.expanded?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <!-- {{item | json}} -->
+    <mat-expansion-panel-header class="expansion-panelgrid-header" (click)="gridRowExpan(item)" collapsedHeight="35px"
+      expandedHeight="35px">
+      <mat-panel-title class="grid-panel-title">
+        <div fxLayout class="grid-data">
+          <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+          <div class="row-data indicator" [fxFlex]="getFxFlexProperty(1)"> <span *ngIf="item?.dpsFileID">
+              <mat-icon class="material-icons dps-matter-indicator">note</mat-icon>
+              <mat-icon class="dps-link-matter-indicator">link</mat-icon>
+            </span></div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{ item?.sentByName }}"></div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{item?.sentTime | date :'dd/MM/yyyy'}}">
+          </div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{item?.matterRef }}"></div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{item?.comment }}"></div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{(item?.length || 0 )|secondsToMinutes}}">
+          </div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{item?.dueDate  | date :'dd/MM/yyyy' }}">
+          </div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{item?.createdDate  | date :'dd/MM/yyyy'}}">
+          </div>
+          <div class="row-data" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{item?.lockedByName}}"></div>
+
+          <div class="row-data" [fxFlex]="getFxFlexProperty(10)"><span
+              *ngIf="item?.urgentValue===urgentValue.normal">Normal</span>
+            <span *ngIf="item?.urgentValue===urgentValue.important">Important</span>
+            <span *ngIf="item?.urgentValue===urgentValue.urgent">Urgent</span>
+          </div>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" *ngIf="true">
+      <dps-dictations-grid-button-details [dictFileName]="item?.dictFileName"
+        (openDictationPdf)="onPdfFileClick($event)" [dictationGridFilters]="dictationGridFilters" [itemRow]="item"
+        [usetType]="usetType" (playDictations)="onPlayDictations($event)"
+        (openWordFileDictation)="onOpenWordFileDictation($event)"
+        (openDictatioProfiling)="onOpenDictatioProfiling($event)"
+        (competedJobDictations)="onCompetedJobDictations($event)" (openCaseDictation)="onOpenCaseDictation($event)"
+        (openCaseFile)="onOpenCaseFile($event)" (finishJobUpdate)="onFinishJobUpdate($event)" style="width: auto;">
+      </dps-dictations-grid-button-details>
+      <span fxFlex="1 1 auto"></span>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

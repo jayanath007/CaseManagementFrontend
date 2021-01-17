@@ -1,0 +1,64 @@
+.notification-body {
+  /* display: table-cell; */
+  display: block;
+  min-height: auto;
+  padding: 20px;
+  font-size: 12px;
+  height: 500px;
+}
+
+dps-column-header {
+  font-weight: 700;
+  text-align: left;
+  border-right: 1px solid #c3c3ca;
+  padding: 12px 6px 6px;
+  line-height: 18px;
+  background-color: #eae4e4;
+}
+
+.row-highlight {
+  background-color: #ecf7f4;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  width: calc(100% - 15px);
+}
+
+dps-select-role {
+    width: 18%
+}
+.email-listing
+{
+  font-size: 14px;
+
+}
+mat-selection-list
+{
+  outline: none;
+}
+.button-container
+{
+  padding: 20px 0;
+  border-top: 1px dashed #949ea7;
+  margin: 0 30px;
+  text-align: right;
+}
+
+.confirm
+{
+    background: #274e8a; 
+    color: #fff;
+ 
+}
+
+.cancel
+{
+
+    float: right;
+}
+
+.min-message
+{
+  font-size: 11px !important;
+  padding-top: 4px !important;
+  color: #e88c67;
+}

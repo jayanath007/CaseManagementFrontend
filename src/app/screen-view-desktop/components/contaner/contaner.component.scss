@@ -1,0 +1,24 @@
+@import '~styles/variables.scss';
+.field-property-container
+{
+    /* border: 1px solid rgb(16, 107, 158);
+    background: rgb(130, 169, 228); */
+    float: right;
+    background: #7fb0d4;
+    user-select: none;  
+    width: 100%;
+    position: relative;
+}
+.field-property-container label
+{
+    float: left;
+    font-size: $secondary-font-size;
+    font-family: Arial, Helvetica, $primary-font-stack;
+    margin-top: 3px;
+    letter-spacing: -0.30pt;
+ }
+ label.search-field-property{
+    color: #0040ff !important;
+ }
+
+  

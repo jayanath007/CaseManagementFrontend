@@ -1,0 +1,76 @@
+<!-- <h3>Class Information</h3> -->
+
+<div class="cls-inf-main-filters-wrap top" fxLayout="row">
+  <div class="cls-inf-main-filters drops" fxLayout="row" fxLayoutGap="15px grid" fxFlex="100" >
+
+    <div class="add-btnAdvoAssi" fxFlex="47">
+      <mat-form-field floatLabel="always"
+        [matTooltip]="stageReachedList | filter : 'key' : infomationModel[modelProperty?.stageReached]: 'value'"
+        matTooltipPosition="above">
+        <mat-select placeholder="Stage Reached" [ngModel]="infomationModel[modelProperty?.stageReached]"
+          (selectionChange)="onChangeUserInput(modelProperty?.stageReached, $event.value)">
+          <mat-option *ngFor="let item of stageReachedList" [value]="item.key" [matTooltip]="item.value"
+            matTooltipPosition="above">
+            {{ item.key }} {{ item.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field floatLabel="always" fxFlex="53" 
+      [matTooltip]="matterTypeList | filter : 'key' : infomationModel[modelProperty?.matterType]: 'value'"
+      matTooltipPosition="above">
+      <mat-select placeholder="Matter Type" [ngModel]="infomationModel[modelProperty?.matterType]"
+        (selectionChange)="onChangeUserInput(modelProperty?.matterType, $event.value)">
+        <mat-option *ngFor="let item of matterTypeList" [value]="item.key" [matTooltip]="item.value"
+          matTooltipPosition="above">
+          {{ item.key }} {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+</div>
+
+
+<div class="cls-inf-main-filters-wrap bottom" fxLayout="row">
+<div class="cls-inf-main-filters drops" fxLayout="row" fxFlex="80" fxLayoutGap="15px grid">
+  <mat-form-field floatLabel="always" fxFlex="60" 
+  [matTooltip]="outComeCode | filter : 'key' : infomationModel[modelProperty?.outcomeCode]: 'value'"
+  matTooltipPosition="above">
+  <mat-select placeholder="Outcome Code" [ngModel]="infomationModel[modelProperty?.outcomeCode]"
+    (selectionChange)="onChangeUserInput(modelProperty?.outcomeCode, $event.value)">
+    <mat-option *ngFor="let item of outComeCode" [value]="item.key" [matTooltip]="item.value"
+      matTooltipPosition="above">
+      {{ item.key }} {{ item.value }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field floatLabel="always" fxFlex="40" 
+  [matTooltip]="caseTypes | filter : 'key' : infomationModel[modelProperty?.caseType]: 'value'"
+      matTooltipPosition="above">
+      <mat-select placeholder="Case Type" [ngModel]="infomationModel[modelProperty?.caseType]"
+        (selectionChange)="onChangeUserInput(modelProperty?.caseType, $event.value)">
+        <mat-option *ngFor="let item of caseTypes" [value]="item.value" [matTooltip]="item.value"
+          matTooltipPosition="above">
+            {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  
+
+  <div class="cls-inf-main-filters inputs" fxLayout="row" fxFlex="20" fxLayoutGap="15px grid">
+    <mat-form-field floatLabel="always" fxFlex="118px">
+      <input #dsccRefInput matInput placeholder="DSCC Ref" [ngModel]="infomationModel[modelProperty?.dsccRef]"
+        (focusout)="onChangeUserInput(modelProperty?.dsccRef, dsccRefInput.value)">
+    </mat-form-field>
+    <mat-form-field floatLabel="always" fxFlex="100px">
+      <input #noOfDefendantsInput matInput placeholder="No of Defendants" type="number"
+        [ngModel]="infomationModel[modelProperty?.noOfDefendants]"
+        (focusout)="onChangeUserInput(modelProperty?.noOfDefendants, noOfDefendantsInput.value)">
+    </mat-form-field>
+  </div>
+</div>

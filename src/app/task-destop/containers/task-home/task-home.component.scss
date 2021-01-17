@@ -1,0 +1,27 @@
+@import '~styles/variables.scss';
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.open-case-grid-header {
+  background: #2a5eb2;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.open-case-grid-header .mat-expansion-panel-header-title {
+  color: $primary;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.open-case-grid {
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dps-task-home {
+  height: 100%;
+  width: 100%;
+}

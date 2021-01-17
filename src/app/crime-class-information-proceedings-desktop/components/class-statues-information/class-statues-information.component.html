@@ -1,0 +1,35 @@
+  <h3><i class="fa fa-info-circle" aria-hidden="true"></i> Class Status Information</h3>
+
+  <div class="class-status-information">
+    <mat-form-field floatLabel="always">
+      <input matInput [matDatepicker]="openDatePicker" placeholder="Open Date"
+        [ngModel]="infomationModel[modelProperty.openedDate] | date:'yyyy-MM-dd'"
+        (dateChange)="onChangeUserInput(modelProperty.openedDate, $event.value)">
+      <mat-datepicker-toggle matSuffix [for]="openDatePicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #openDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" *ngIf="controlProperty && controlProperty[controler.dtpBillDate]?.visible">
+      <input [disabled]="!(controlProperty[controler.dtpBillDate]?.enabled)" matInput [matDatepicker]="billDatePicker"
+        placeholder="Billed Date" [ngModel]="infomationModel[modelProperty.billedDate] | date:'yyyy-MM-dd'"
+        (dateChange)="onChangeUserInput(modelProperty.billedDate, $event.value)">
+      <mat-datepicker-toggle [disabled]="!(controlProperty[controler.dtpBillDate]?.enabled)" matSuffix
+        [for]="billDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #billDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always" *ngIf="controlProperty && controlProperty[controler.dtpCloseDate]?.visible">
+      <input matInput [disabled]="!(controlProperty[controler.dtpCloseDate]?.enabled)" [matDatepicker]="closeDatePicker"
+        placeholder="Close Date" [ngModel]="infomationModel[modelProperty.closedDate] | date:'yyyy-MM-dd'"
+        (dateChange)="onChangeUserInput(modelProperty.closedDate, $event.value)">
+      <mat-datepicker-toggle [disabled]="!(controlProperty[controler.dtpCloseDate]?.enabled)" matSuffix
+        [for]="closeDatePicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #closeDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox [ngModel]="infomationModel[modelProperty?.excludeFromCDS6Checked]" class="cdf-6"
+      (change)="onChangeUserInput(modelProperty?.excludeFromCDS6Checked, $event.checked)">Exclude from
+      CDS6
+    </mat-checkbox>
+  </div>

@@ -1,0 +1,2 @@
+<dps-calendar-group-item [calendarGroup]="calendarGroup" (toggledgroup)="onGroupToggle($event)" (toggleCalendar)="onToggleCalendar($event)"  *ngFor="let calendarGroup of calendarGroups|keyValues"
+(calendarGroupEditOperations)="onCalendarGroupEditOperations($event)" (calendarEditOperations)="onCalendarEditOperations($event)" ></dps-calendar-group-item>

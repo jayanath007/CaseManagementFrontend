@@ -1,0 +1,27 @@
+<div fxLayout="column" class="dps-item-grid dps-white-gray-scroll" >
+    <!-- style="overflow-x:auto" -->
+  <div fxLayout="column" class="dps-item-grid-inner">
+    <div class="row-highlight" dpsIsMobile>
+      <div class="row-highlight-inner">
+        <dps-column-header *ngFor="let header of gridColoumn" [fxFlex]="header.extras.fxFlex" [def]="header" [filterAnchor]="header.extras.filterAnchor"
+          (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)">
+        </dps-column-header>
+      </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="isGridLoding"></mat-progress-bar>
+    </div>
+
+    <div [fxFlex]="gridContentFxFlex" class="dps-white-gray-scroll dps-item-grid-content">
+      <ng-content></ng-content>
+    </div>
+    <mat-paginator *ngIf="pageEvent" class="footer-shadow" [pageIndex]="pageEvent?.pageIndex" [length]="pageEvent?.length" [pageSize]="pageEvent?.pageSize"
+      [pageSizeOptions]="[10, 25, 50]" (page)="onPageEvent($event)">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<!-- <div class="dps-grid-x">
+  <div class="dps-grid-min-width">
+
+  </div>
+</div> -->

@@ -1,0 +1,38 @@
+<div class="dps-grid-list-item" *ngFor="let row of gridData; let isOdd=odd;" (click)="onRowSelect(row)"
+  [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+  <div fxLayout="row" class="grid-data" [ngClass]="{'active': row?.id===viewData?.selectedRow?.id}">
+    <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{row?.dateReqst| date:'dd-MM-yyyy'}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{row?.type}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{row?.dateReqrd| date:'dd-MM-yyyy'}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{row?.ref}}"></div>
+    <div class="row-data dps-authorization-matterref" [fxFlex]="getFxFlexProperty(4)"
+      (dblclick)="onMatterRefClick(row?.matterRef)" innerHTML="{{row?.matterRef}}"></div>
+    <div class="row-data dps-authorization-dtls" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{row?.matterDetails}}">
+    </div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{row?.clientName}}"></div>
+    <div class="row-data dps-authorization-reason" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{row?.reason}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(8)" (dblclick)="onViewFile(row?.supplierRef,row?.attachment)">
+      <mat-icon matTooltipPosition="right">
+        <i [ngClass]="row?.attachment | attachmentIcon"><span></span></i>
+      </mat-icon>
+      <span class="type"> {{row?.notes}}</span>
+    </div>
+    <div class="row-data net" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{row?.net | number : '1.2-2'}}"></div>
+    <div class="row-data vat" [fxFlex]="getFxFlexProperty(10)" innerHTML="{{row?.vat | number : '1.2-2'}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(11)" innerHTML="{{row?.payee}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(12)" innerHTML="{{row?.feeEarner}}"></div>
+    <div class="row-data" [fxFlex]="getFxFlexProperty(13)" innerHTML="{{row?.requestedBy}}"></div>
+
+    <div *ngIf="(row?.level===0)" class="row-data" [fxFlex]="getFxFlexProperty(14)"></div>
+    <div *ngIf="( row?.level!==0)" class="row-data" [fxFlex]="getFxFlexProperty(14)" innerHTML="{{row?.level}}"></div>
+
+    <div *ngIf="checkVisibility(row?.level,row?.authorisedBy,row?.requestedBy,user?.general?.user)"
+      class="row-data checked" [fxFlex]="getFxFlexProperty(15)">
+    </div>
+    <div *ngIf="!checkVisibility(row?.level,row?.authorisedBy,row?.requestedBy,user?.general?.user)"
+      class="row-data checked" [fxFlex]="getFxFlexProperty(15)">
+      <mat-checkbox [ngModel]="row?.selected" (change)="onChanckChanged(row?.id,$event)" color="primary">
+      </mat-checkbox>
+    </div>
+  </div>
+</div>

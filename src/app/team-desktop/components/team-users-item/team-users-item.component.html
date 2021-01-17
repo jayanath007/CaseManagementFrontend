@@ -1,0 +1,21 @@
+<mat-list-item [title]="" class="dps-team-user-item-list" [ngClass]="{'dps-selected-user': user?.user === selectedTeamUser?.user}">
+  <!-- selected-user -->
+  <div class="dps-team-user-item-list" fxLayout="column wrap">
+    <div class="dps-team-user-item" fxLayout="row">
+        <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-team-member-avatar" [ngStyle]="{'background-color': user?.userEmail | recipientColorCode}">
+            <span>{{user?.fullName | nameInitials}}</span>
+          </button>
+      <img matListAvatar [hidden]="!showProfileImg" src="{{user?.userEmail | dpsUserImage | async}}" alt="..."
+        (load)="showProfileImg=true">
+      <div fxLayout="column" class="dps-team-user-item-l-top">
+        <span class="s-name">{{user?.fullName}}</span>
+        <span class="f-name">{{user?.userEmail}}</span>
+      </div>
+    </div>
+    <div class="dps-team-user-item-status">
+      <span class="status">{{user?.lastMovement.userDes}}</span>
+      <!-- <span *ngIf="!user.enabled" class="status">offline</span> -->
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</mat-list-item>

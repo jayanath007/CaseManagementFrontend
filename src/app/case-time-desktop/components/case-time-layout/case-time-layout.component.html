@@ -1,0 +1,9 @@
+<div class="dps-case-time-layout {{fontSizeClass}}"  fxLayout="column">
+  <div class="dps-casetime" fxFlex="calc(100%-50px)">
+    <dps-case-time [fontSizeClass]="fontSizeClass" (selectRow)="onSelectRow($event)" (viewChange)="onViewChange($event)" [columnDef]="filterColumnDef" [caseTimeData]="caseTimeData"
+      [pageInfo]="pageInfo" (gridButton)="onEditTimeClick($event)"></dps-case-time>
+  </div>
+  <mat-paginator  class="footer-shadow" [pageIndex]="pageInfo?.pageIndex" [length]="caseTimeData?.total" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

@@ -1,0 +1,49 @@
+<div fxLayout="column" class="dps-team-movement-add">
+  <div fxLayout="column">
+    <mat-toolbar class="dps-toolbar-box-shadow team-header">
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="team-icon">playlist_add</mat-icon>
+        <span class="team-text">Amend Review Date and Note</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="refferalNoteLoading" mode="indeterminate"></mat-progress-bar>
+    <div class="dps-add-movement-popup" fxLayout="column" fxLayoutGap="10px">
+      <div class="dps-team-form-container">
+        <div class="dps-team-form">
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="pickerx" placeholder="Review Date"
+              [ngModel]="reviewDate | date:'yyyy-MM-dd'" (dateChange)="onChangeReviewDate($event)"
+              [disabled]="refferalNoteLoading">
+            <mat-datepicker-toggle matSuffix [for]="pickerx" [disabled]="refferalNoteLoading"></mat-datepicker-toggle>
+            <mat-datepicker #pickerx></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Review Note" #reviewNotesInput [value]="reviewNotes"
+              (blur)="onChangeReviewNotes(reviewNotesInput.value)" [disabled]="refferalNoteLoading">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Key Message" #keyMassage [value]="keyMessage"
+              (blur)="onChangeKeyMessage(keyMassage.value)" [disabled]="refferalNoteLoading">
+          </mat-form-field>
+
+
+        </div>
+        <div class="dps-btm-btn" fxLayoutGap="1em">
+
+          <button mat-raised-button class="dps-task-submit" (click)="onSubmitData()" tabindex="-1"
+            [disabled]="refferalNoteLoading">Submit</button>
+          <button class="cancel" style="color: #537894;
+      background: #fff;" mat-raised-button (click)="onClose()" tabindex="2">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="dps-folder-permissions-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow">
+      <mat-icon>lock_open</mat-icon>
+      <span fxFlex="1 1 auto">Permissions for the {{selectedFolder.displayName}} folder</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="folderPermissions">
+      <button mat-icon-button (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onRemove()" *ngIf="selectedPermission.userId.userDisplayName">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!folderPermissions"></mat-progress-bar>
+  <div fxFlex="calc(100%-105px)" fxLayout="column">
+    <div fxLayout="column" fxFlex="calc(100%-61px)">
+      <div fxFlex="calc(100%-334px)" *ngIf="folderPermissions">
+        <div class="folder-permissions-levels" *ngIf="folderPermissions">
+          <div class="table-header" fxLayout="row">
+            <span>Name</span>
+            <span>Permission level</span>
+            <div></div>
+          </div>
+          <div class="folder-permissions-levels-content dps-white-gray-scroll">
+            <div class="row-line" fxLayout="row" *ngFor="let permission of folderPermissions.permissionSet" (click)="onSelectUserPermission(permission)"
+              [ngClass]="{'dps-selected': permission.isSelected}">
+              <span [title]="permission.userId.userId">{{permission.userId.userDisplayName||permission.userId.userId}}</span>
+              <span>{{permission.permissionLevel|permissionLevel}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-list class="permissions-subheader" *ngIf="selectedPermission">
+        <h3 matSubheader>Permissions</h3>
+      </mat-list>
+      <div fxLayout="row" fxFlex="300px" *ngIf="selectedPermission">
+        <mat-list fxFlex="50%" fxLayout="column">
+          <h3 matSubheader>Permission level:</h3>
+          <mat-form-field>
+            <mat-select [value]="selectedPermission.permissionLevel" (selectionChange)="onPermissionLevelChange($event)">
+              <mat-option [value]="level" *ngFor="let level of (PermissionLevel | keyValues)" [ngStyle]="{'display': level===PermissionLevel.Custom?'none':''}"
+                [hidden]="level===PermissionLevel.Custom">{{level|permissionLevel}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="dps-radio-group">
+            <h3 matSubheader>Read:</h3>
+            <mat-radio-group fxLayout="column" (change)="onValueChange($event.value,'readItems')" [ngModel]="selectedPermission.readItems">
+              <mat-radio-button color="primary" [value]="ReadItems.None">
+                None
+              </mat-radio-button>
+              <mat-radio-button color="primary" [value]="ReadItems.FullDetails">
+                Full details
+              </mat-radio-button>
+            </mat-radio-group>
+            <h3 matSubheader>Delete access:</h3>
+            <mat-radio-group fxLayout="column" (change)="onValueChange($event.value,'deleteItems')" [ngModel]="selectedPermission.deleteItems">
+              <mat-radio-button color="primary" [value]="EditDeleteItems.None">
+                None
+              </mat-radio-button>
+              <mat-radio-button color="primary" [value]="EditDeleteItems.Owned">
+                Own
+              </mat-radio-button>
+              <mat-radio-button color="primary" [value]="EditDeleteItems.All">
+                All
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+        </mat-list>
+        <mat-list fxFlex="50%" fxLayout="column">
+
+          <h3 matSubheader>Write:</h3>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked,'canCreateItems')" [ngModel]="selectedPermission.canCreateItems">Create
+            items</mat-checkbox>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked,'canCreateSubFolders')" [ngModel]="selectedPermission.canCreateSubFolders">Create
+            subfolders</mat-checkbox>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked?EditDeleteItems.Owned:EditDeleteItems.None,'editItems')"
+            [disabled]="selectedPermission.editItems===EditDeleteItems.All" [ngModel]="selectedPermission.editItems===EditDeleteItems.Owned || selectedPermission.editItems===EditDeleteItems.All">Edit
+            own</mat-checkbox>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked?EditDeleteItems.All:EditDeleteItems.None,'editItems')"
+            [ngModel]="selectedPermission.editItems===EditDeleteItems.All">Edit
+            all</mat-checkbox>
+
+          <h3 matSubheader>Other:</h3>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked,'isFolderOwner')" [ngModel]="selectedPermission.isFolderOwner">Folder
+            owner</mat-checkbox>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked,'isFolderContact')" [ngModel]="selectedPermission.isFolderContact"
+            [disabled]="!selectedPermission.userId.userDisplayName">Folder
+            contact</mat-checkbox>
+          <mat-checkbox color="primary" (change)="onValueChange($event.checked,'isFolderVisible')" [ngModel]="selectedPermission.isFolderVisible">Folder
+            visible</mat-checkbox>
+        </mat-list>
+      </div>
+    </div>
+    <mat-divider mat-inset></mat-divider>
+    <div fxLayout="row" fxLayoutAlign=" center" fxFlex="60px">
+      <span fxFlex="1 1 auto"></span>
+      <button class="dps-footer-btn" mat-raised-button color="primary" (click)="onOk()" [disabled]="!folderPermissions">Ok</button>
+      <button class="dps-footer-btn" mat-raised-button (click)="onClose()">Cancel</button>
+    </div>
+  </div>
+
+</div>

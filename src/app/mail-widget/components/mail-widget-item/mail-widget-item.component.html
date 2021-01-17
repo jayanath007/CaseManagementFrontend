@@ -1,0 +1,78 @@
+<mat-list-item class="widget-item {{'widget-item'+layout}}" [ngClass]="{'dps-unread-mail':!item?.isRead}"
+  (click)="onClickItem(item)">
+  <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-sender-avatar"
+    [ngStyle]="{'background-color': item?.from?.emailAddress?.address | recipientColorCode}">
+    <span>{{item?.from?.emailAddress?.name | nameInitials}}</span>
+  </button>
+  <img matListAvatar [hidden]="!showProfileImg"
+    src="{{item?.from?.emailAddress?.address | dpsUserImage | async}}" alt="..."
+    (load)="showProfileImg=true">
+
+
+  <div matLine class="dps-mail-item-data content" fxLayout="column">
+    <div class="dps-mail-item-data-col1">
+      <div class="dps-mail-item-name">
+        <span class="dps-mail-item-To" mat-line>
+          <span>{{item?.from?.emailAddress?.name}} {{item?.meetingMessageType}}</span>
+        </span>
+      </div>
+      <div class="dps-mail-item-icons">
+        <div class="dps-icon">
+          <a *ngIf="item?.singleValueExtendedProperties" class="dps-icon-index">
+            <i class="material-icons" *ngIf="item?.singleValueExtendedProperties[0].value===261">reply</i>
+            <i class="material-icons" *ngIf="item?.singleValueExtendedProperties[0].value===262">forward</i>
+          </a>
+          <a *ngIf="item?.meetingMessageType" class="dps-meeting-icons">
+            <span
+              *ngIf="item?.meetingMessageType==='meetingTenativelyAccepted' || item?.meetingMessageType==='meetingTentativelyAccepted' ">
+              <i class="fa fa-calendar-o"></i>
+              <i class="fa fa-question"></i>
+            </span>
+            <i *ngIf="!(item?.meetingMessageType==='meetingTenativelyAccepted' || item?.meetingMessageType==='meetingTentativelyAccepted')"
+              class="fa"
+              [ngClass]="{'fa-calendar-minus-o':item.meetingMessageType==='meetingCancelled',
+                                                                    'fa-calendar-times-o':item?.meetingMessageType==='meetingDeclined',
+                                                                    'fa-calendar-check-o':item?.meetingMessageType==='meetingAccepted',
+                                                                    'fa-calendar-o':item?.meetingMessageType==='meetingRequest'}"
+              aria-hidden="true"></i>
+          </a>
+          <a *ngIf="item?.hasAttachments">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+          </a>
+          <a *ngIf="item?.importance!=='normal'">
+            <i class="fa" [ngClass]="item.importance==='high'?'fa-exclamation':'fa-long-arrow-down'"
+              aria-hidden="true"></i>
+          </a>
+          <a *ngIf="item.subject | isDPSMail:companyCode">
+            <img src="is-dps-mail.png" width="13px" height="13px">
+          </a>
+          <a *ngIf="item.flag && item.flag.flagStatus && item.flag.flagStatus!=='notFlagged'">
+            <i class="fa" [ngClass]="item.flag.flagStatus=='complete'?'fa-check':'fa-flag-o'" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dps-mail-item-data-col2">
+      <div class="dps-mail-item-preview">
+        <!-- fxFlex="1 1 auto" fxLayout="column" fxLayoutWrap="nowrap" -->
+        <div class="dps-mail-item-subject">
+          <!-- fxFlex="0 0 auto" -->
+          <span class="mail-subject-text">{{item?.subject||'(No subject)'}}</span>
+        </div>
+
+      </div>
+
+
+      <div class="dps-mail-item-body">
+        <span class="mail-body-preview-text">{{item?.bodyPreview}}&nbsp; </span>
+        <span class="dps-mail-item-date">{{item?.receivedDateTime | timezone:timeZone | dpsDate}}</span>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- <span class="dps-mail-item-date">{{item?.receivedDateTime | timezone:timeZone | dpsDate}}</span> -->
+
+</mat-list-item>
+<!-- <mat-divider></mat-divider> -->

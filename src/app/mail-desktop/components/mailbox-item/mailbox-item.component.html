@@ -1,0 +1,43 @@
+<mat-nav-list dense>
+  <mat-divider></mat-divider>
+  <mat-list-item [title]="mailBox.mail==='me'?profile.upn:mailBox.mail" (click)="onMailboxToggle($event)"
+    (contextmenu)="contextmenuOpen($event)">
+    <img class="dps-user-avator" matListAvatar
+      [src]="(mailBox.mail==='me'?profile.upn:mailBox.mail) | dpsUserImage | async" (load)="showProfileImg=true"
+      alt="mailBox.mail" [hidden]="!showProfileImg">
+    <button matListAvatar mat-icon-button class="dps-owner-avatar" *ngIf="!showProfileImg"
+      [ngStyle]="{'background-color': ((mailBox.mail==='me'?profile.upn:mailBox.mail) | recipientColorCode)}">
+      <span>{{(mailBox.mail==='me'?profile.name:mailBox.displayName) | nameInitials}}</span>
+    </button>
+    <!-- <mat-icon class="dps-owner" matListIcon *ngIf="!showProfileImg && mailBox.mail ==='me'">perm_identity</mat-icon> -->
+    <h4 mat-line [matMenuTriggerFor]="mailBoxMenu"> {{mailBox.displayName}}</h4>
+    <button mat-icon-button *ngIf="!mailBox.loading">
+      <mat-icon>{{mailBox.init?'keyboard_arrow_right':(mailBox.expanded?'keyboard_arrow_up':'keyboard_arrow_down')}}
+      </mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="mailBox.loading">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-circle-o-notch" class="fa fa-spin"></mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item disableRipple *ngIf="showInput">
+    <input #createInput style="width: 100%;" (keyup)="onKey($event, $event.target.value)"
+      (blur)="onCreateRootFolder($event.target.value)">
+  </mat-list-item>
+  <mat-menu #mailBoxMenu="matMenu">
+    <button class="dps-folder-action" mat-menu-item *ngIf="mailBox.mail==='me'" (click)="onAddSharedFolder()">Add
+      shared folder...</button>
+    <button class="dps-folder-action" mat-menu-item *ngIf="mailBox.mail!=='me'" (click)="onRemoveSharedFolder()">Remove
+      shared folder</button>
+    <button class="dps-folder-action" mat-menu-item *ngIf="mailBox.mail==='me'" (click)="showInput=true">Create
+      new folder</button>
+    <button class="dps-folder-action" *ngIf="mailBox.mail==='me'" mat-menu-item
+      (click)="permissions()">Permissions...</button>
+    <button class="dps-folder-action" mat-menu-item (click)="onRefreshMailBox()">Refresh Folders</button>
+  </mat-menu>
+</mat-nav-list>
+<dps-folder-tree-view *ngIf="mailBox.expanded" (moveItems)="onMoveItems($event)"
+  (newRootFolder)="onNewRootFolder($event)" (itemEditOperations)="onFolderEditOperation($event)"
+  (itemToggleExpand)="onFolderToggle($event)" (itemSelect)="onFolderSelect($event)" [folders]="mailBoxFolders"
+  (itemRefresh)="onFolderRefresh($event)" [deleteItemsFolder]="deleteItemsFolder" [isGroupMode]="isGroupMode">
+</dps-folder-tree-view>

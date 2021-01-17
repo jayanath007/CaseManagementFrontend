@@ -1,0 +1,39 @@
+@import '~styles/variables.scss';
+
+.general-input-type-text {
+  text-align: center;
+  padding: 10px;
+}
+
+.input-section {
+  margin-bottom: 32px;
+
+  mat-radio-button,
+  mat-checkbox {
+    margin-right: 15px;
+  }
+
+  .dps-option {
+    width: 100%;
+  }
+}
+
+.figure {
+  // background: #daefc9;
+  // border: 2px #b6cca3 dotted;
+  margin-right: 20px;
+
+  mat-form-field {
+    font-size: $primary-font-size + 1;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: $primary-font-size;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    display: flex;
+  }
+}

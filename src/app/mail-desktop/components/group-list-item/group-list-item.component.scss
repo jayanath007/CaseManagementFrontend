@@ -1,0 +1,31 @@
+@import '~styles/variables.scss';
+
+.dps-user-avator {
+  height: 36px !important;
+  width: 36px !important;
+  margin-left: 25px;
+}
+
+.dps-owner-avatar {
+  height: 36px !important;
+  width: 36px !important;
+  color: $primary;
+  padding: 8px 0px 0px 0px;
+  margin-left: 25px;
+}
+
+.dps-owner-avatar span {
+  font-family: $primary-font-stack;
+  font-size: 15px;
+  position: relative;
+  bottom: 10px;
+}
+
+.dps-group-selected h4 {
+  color: #0D557C;
+  font-weight: 500;
+}
+
+mat-list-item.dps-group-selected {
+  background-color: #dcdbdb !important;
+}

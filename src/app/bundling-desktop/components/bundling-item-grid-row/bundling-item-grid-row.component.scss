@@ -1,0 +1,51 @@
+@import '~styles/variables.scss';
+
+.grid-data {
+  font-size: $primary-font-size - 2;
+  display: table-row;
+  word-break: break-word;
+  font-family: $primary-font-stack;
+  cursor: pointer;
+  
+}
+
+mat-icon {
+  font-size: $primary-font-size + 6;
+  // text-align: center;
+  text-align: initial;
+}
+
+.grid-data .row-data:last-child {
+  border-right: none;
+  // text-align: center;
+}
+
+.row-data.type-column {
+  text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+} 
+
+.row-data {
+  color: #211f1f;
+  // border-right: 1px solid #c3c3ca;
+  border-right: 1px solid #b3b3b3;
+  display: table-cell;
+  font-size: $primary-font-size - 2;
+  padding: $dps-grid-padding;
+  line-height: 20px;
+
+  
+}
+
+.dps-selected-row {
+  background: #ffebaf;
+  font-weight: 500;
+  &:hover {
+    background: #f7dc8d;
+    
+  }
+}
+
+

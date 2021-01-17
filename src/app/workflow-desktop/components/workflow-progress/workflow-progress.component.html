@@ -1,0 +1,69 @@
+<div class="menu-flow-wizard-panel">
+  <div class="menu-flow-wizard-panel-top">
+    <h1 *ngIf="type==SessionTypes.FileLogic">
+      <span *ngIf="workerInput?.logicType==FileLogicTypes.EntryLogic">Executing file entry logic</span>
+      <span *ngIf="workerInput?.logicType==FileLogicTypes.ExitLogic">Executing file exit logic</span>
+    </h1>
+    <div class="the-wizard">
+      <a class="wizard-child-01" [ngClass]="{'active': state.isCurrentState(ProgressSteps.Started)}">
+        <span class="wizard-icon-base">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+        <span *ngIf="!state.didProgress(ProgressSteps.Processing)">Starting</span>
+        <span *ngIf="state.didProgress(ProgressSteps.Processing)">Started</span>
+      </a>
+
+      <a *ngIf="type==SessionTypes.FileLogic" class="wizard-child-02"
+        [ngClass]="{'active': state.isCurrentState(ProgressSteps.Processing) }">
+        <span class="wizard-icon-base">
+          <img class="animate-not" src="/assets/workflow-images/open-file-animation.gif">
+        </span>
+        <span>Processing</span>
+      </a>
+
+      <a *ngIf="type==SessionTypes.Templete" class="wizard-child-02" [ngClass]="{'active': state.didProgress(ProgressSteps.ViewDoc) && state.isCurrentState(ProgressSteps.Processing),
+    'processing': state.isCurrentState(ProgressSteps.Processing), 
+    'now': !state.waitingForInput && state.isCurrentState(ProgressSteps.Processing)}">
+        <span class="wizard-icon-base">
+          <img class="animate" src="/assets/workflow-images/document-process-animation.gif">
+        </span>
+        <span *ngIf="!state.didProgress(ProgressSteps.ViewDoc)">Processing</span>
+        <span *ngIf="state.didProgress(ProgressSteps.ViewDoc)">Processed</span>
+      </a>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="view-saving-options" *ngIf="type==SessionTypes.Templete">
+
+      <a class="wizard-child-03 view-document" [ngClass]="{'active': state.didProgress(ProgressSteps.ViewDoc)}"
+        (click)="onOpenDocument()" [attr.disabled]="!state.didProgress(ProgressSteps.ViewDoc)">
+        <span class="wizard-icon-base">
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+        </span>
+        <span>View Document</span>
+      </a>
+
+      <a class="wizard-child-05 save"
+        [ngClass]="{'active': state.didProgress(ProgressSteps.EditDoc)?  state.didProgress(ProgressSteps.ViewDoc) : state.didProgress(ProgressSteps.SaveConfirm)}"
+        (click)="onConfirmSaveToDiary(DialogResult.Yes)"
+        [attr.disabled]="state.didProgress(ProgressSteps.EditDoc) ?  !state.didProgress(ProgressSteps.ViewDoc) : !state.didProgress(ProgressSteps.SaveConfirm)">
+        <span class="wizard-icon-base">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+        </span>
+        <span>Save</span>
+      </a>
+      <a class="wizard-child-04 dont-save"
+        [ngClass]="{'active': state.didProgress(ProgressSteps.EditDoc) ?  state.didProgress(ProgressSteps.ViewDoc) : state.didProgress(ProgressSteps.SaveConfirm)}"
+        (click)="onConfirmSaveToDiary(DialogResult.No)"
+        [attr.disabled]="state.didProgress(ProgressSteps.EditDoc) ?  !state.didProgress(ProgressSteps.ViewDoc) : !state.didProgress(ProgressSteps.SaveConfirm)">
+        <span class="wizard-icon-base">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+        <span>Don't save</span>
+      </a>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

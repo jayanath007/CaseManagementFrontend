@@ -1,0 +1,244 @@
+.dps-team-flex-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #f1f1f1;
+  flex-direction: row;
+  line-height: 38px;
+  min-width: 1000px;
+  overflow-x: auto;
+}
+
+.dps-team-flex-container>div {
+  color: #6d5e5e;
+  width: 100px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.dps-column-status,
+.dps-column-year-summery,
+.dps-column-total {
+  .dps-team-col-header {
+
+    background: #1e5379 !important;
+    color: #cfd1d1;
+    border-right: 1px solid #3a6685;
+    padding: 0px 5px;
+
+
+  }
+}
+
+
+
+.dps-column-status {
+  .dps-team-col-header.status {
+    background: #3c6c8f !important;
+    padding: 0px 0px !important;
+    border-bottom: 0px solid #1e5379;
+    color: #cfd1d1;
+  }
+}
+
+.dps-column-year-summery {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  // overflow-x: auto;
+
+  .dps-team-col-header-outer {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .dps-team-col-header {
+      display: flex;
+      flex-basis: 100%;
+     
+    }
+  }
+
+  .team-year-summery-data {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+
+    .team-year-column-data {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex-grow: 1;
+
+      .team-year-data {
+        border-bottom: 1px solid #e3e3e3;
+
+        &:nth-child(2n) {
+          background: #d8dfe3;
+        }
+      }
+    }
+  }
+}
+
+.dps-column-total {
+  .dps-team-col-header {
+    border-bottom: 0px solid #1e5379;
+    background: #3c6c8f !important;
+  }
+
+  .team-year-data-tot {
+    border-bottom: 1px solid #e3e3e3;
+    background: #dbdbdb;
+    &:nth-child(2n + 1) {
+      background: #d8dfe3;
+    }
+  }
+
+}
+
+
+.month-name{
+  justify-content: center;
+}
+
+
+
+
+
+
+
+// chathu table
+.dps-year-activity-grid {
+  overflow-x: auto;
+  height: 100%;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.table-scroll {
+  /*width:100%; */
+  display: block;
+  empty-cells: show;
+  height: 100%;
+  min-width: 1366px;
+  /* Decoration */
+  border-spacing: 0;
+  // border: 1px solid #f6f9fc;
+}
+
+.table-scroll thead {
+  background-color: #f1f1f1;
+  position: relative;
+  display: block;
+  width: calc(100% - 15px);
+  font-size: 11px;
+  height: 35px;
+  overflow: hidden;
+  background: #dae8f4;
+}
+
+.table-scroll tbody {
+  /* Position */
+  display: block;
+  position: relative;
+  width: 100%;
+  // overflow-y: scroll;
+  /* Decoration */
+  // border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.table-scroll tr {
+  width: 100%;
+  display: flex;
+}
+
+.table-scroll td,
+.table-scroll th {
+  flex-basis: 100%;
+  flex-grow: 2;
+  display: block;
+  // padding: 1rem;
+  padding: 13px 8px;
+  text-align: left;
+  color: #667a89;
+}
+
+/* Other options */
+
+.table-scroll.small-first-col td:first-child,
+.table-scroll.small-first-col th:first-child {
+  // flex-basis:20%;
+  flex-grow: 1;
+}
+
+.table-scroll tbody::nth-child(2) tr:nth-child(2n) {
+  background-color: rgba(130, 130, 170, 0.1);
+}
+
+.body-half-screen {
+  height: calc(100% - 53px);
+  overflow-y: scroll;
+
+  & :hover {
+    cursor: pointer;
+    opacity: .9;
+  }
+
+  tr,
+  td {
+    // height: 30px;
+  }
+
+  tr {
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  td {
+    // position: relative;
+    // bottom: 8px;
+    padding: 5px 8px !important;
+    font-size: 13px;
+    color: #63849f;
+    margin: 5px 0px;
+  }
+}
+
+.small-col {
+  flex-basis: 10%;
+}
+
+.dps-team-stats {
+  background: #dbdbdb !important;
+  padding: 0px 0px !important;
+  // margin: 0px 20px 0px 2px !important;
+  border-bottom: 1px solid #e7e7e7;
+
+
+  mat-icon {
+    width: 15px !important;
+    height: 15px !important;
+    font-size: 16px !important;
+    border-radius: 100%;
+    padding: 5px;
+    color: #fff;
+    position: relative;
+    left: 0px;
+    top: 6px;
+  }
+}
+
+.dps-stats-text {
+  background: #c8d6e2 !important;
+
+}
+
+mat-icon.dps-round-icons {
+
+  // padding: 11px !important;
+  width: 19px !important;
+  height: 19px !important;
+  font-size: 19px !important;
+  // color: #ecf8ff;
+  // background: #58616738;
+  border-radius: 100%;
+}

@@ -1,0 +1,11 @@
+<!-- [(ngModel)]="selectedDepartment"
+<div>{{selectedDepartment?.groupId}}</div> -->
+<mat-form-field floatLabel="never">
+    <span matPrefix>&nbsp;&nbsp;</span>
+  <mat-select placeholder="Department" (selectionChange)="OnDepartmentChanged($event)" [ngModel]="selectDepartment">
+    <mat-option>-- None --</mat-option>
+    <mat-option *ngFor="let department of departmentList" [value]="department">
+      {{department.groupName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,97 @@
+@import '~styles/variables.scss';
+.dps-work-done-main-header {
+  background: $workdone-primary;
+  padding: 0 16px 60px 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.grid-contents.mat-card-content>:first-child,
+.grid-contents.mat-card>:first-child {
+  margin-top: -77px;
+}
+
+dps-work-done-views {
+  height: 61px;
+}
+
+.grid-contents.mat-card {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.grid-wrapper-main {
+  // box-shadow: 0px 0px 8px 0px #333;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  background-color: $primary;
+  height: calc(100% + 77px);
+}
+
+.dps-work-done-main-contentainer {
+  height: 100%;
+  background-color: $content-background;
+}
+
+.dps-team-member-sidenav {
+  background: #40657e;
+  width: 225px;
+  height: 100%;
+}
+
+.dps-team-member-sidenav .mat-card {
+  padding: 0 10px 10px 10px;
+}
+
+.grid-contents.mat-card:not {
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+
+.team-members-side-nav-controller {
+  height: 45px;
+  font-size: 18px;
+  color: #33434c;
+  width: 45px;
+  margin-top: 14px;
+  margin-left: 15px;
+  background: #a2bdb3;
+  margin-right: 11px;
+}
+
+.team-members-side-nav-controller .fa-chevron-left {
+  font-size: 10px;
+  background: #34434b;
+  border-radius: 100%;
+  position: absolute;
+  width: 15px;
+  height: 17px;
+  line-height: 17px;
+  padding-left: 1px;
+  color: #bedad1;
+  top: 4px;
+  right: -6px;
+  padding-right: 1px;
+}
+
+.team-members-side-nav-controller:hover .fa-chevron-left {
+  background: #bedad1;
+  color: #34434b;
+}
+
+.team-member-header .mat-list-item {
+  background: #1b3142;
+  color: $primary;
+  padding: 5px 0px;
+}
+
+.team-member-header {
+  padding-top: 0;
+}
+
+.team-member-header .team-member-lbl {
+  text-align: right;
+}
+
+.team-member-header .team-member-count {
+  margin-left: 10px;
+  margin-top: 4px;
+}

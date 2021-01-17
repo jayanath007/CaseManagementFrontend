@@ -1,0 +1,49 @@
+<div class="screen-parameter-container">
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Application" #application readonly [ngModel]="screenDefinition?.applicationWithPrefix">
+  </mat-form-field>
+
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Screen Number" #screenNumber readonly [ngModel]="screenDefinition?.screenNumber">
+  </mat-form-field>
+
+
+
+
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Screen Title" #screenTitle (blur)="onScreenTitleChange(screenTitle.value)" [ngModel]="screenDefinition?.screenEditTitle">
+  </mat-form-field>
+
+  <mat-form-field class="property-value-drop">
+    <mat-select #LoadForm placeholder="Load From" [ngModel]="screenDefinition?.dataSource" (selectionChange)="onLoadFormChange($event)">
+      <mat-option *ngFor="let dataSource of DataSourceList" [value]="dataSource.sourceId">
+        {{ dataSource.sourceName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    
+  <div [hidden]="screenDefinition?.dataSource!==3">
+    <mat-form-field class="property-value-drop">
+      <mat-select #fieldTypeName placeholder="Contact Type" [value]="screenDefinition?.contactType"
+        (selectionChange)="onContactTypeChange($event)">
+        <mat-option *ngFor="let contactType of screenDefinition?.screenContactTypes" [value]="contactType.tP_ID">
+              {{contactType.tP_Description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    {{selectedContanerComponent?.uiComponentType}}
+    <mat-checkbox color="primary" class="property-value-check-box"   (change)="onOneOnlyPerMatter(oneOnlyPerMatter.checked)"  #oneOnlyPerMatter [checked]="screenDefinition?.oneOnlyPerMatter">One Only Per Matter</mat-checkbox>
+    <mat-checkbox  class="property-value-check-box" (change)="onLocked(locked.checked)"  #locked  [checked]="screenDefinition?.locked">Locked</mat-checkbox>
+  </div>
+  
+  <div class="parameter-options" fxLayout="column">
+
+   
+
+
+  <mat-checkbox class="property-value-check-box" #mustValidate  (change)="onMustValidate(mustValidate.checked)" [checked]="screenDefinition?.mustValidate" >Must Validate</mat-checkbox>
+  <!-- <div>
+    <button class="button" class="save-parameter" (click)="onSaveScreenParameters()">save</button>
+  </div> -->
+</div>

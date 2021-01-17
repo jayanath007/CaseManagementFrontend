@@ -1,0 +1,52 @@
+<!-- Login Screen   - ------------------------------------------------  start  -->
+
+<div *ngIf="isLoading" class="dps-full-page-loader"></div>
+
+<div fxLayout="column" id="dps-dashboard-main-header" class="dps-dashboard-main-header">
+  <div fxLayout=" row" class="dps-background-content">
+
+
+    <div class="dps-logo-btn spitfire">
+      <div id="spitfire-img"></div>
+    </div>
+
+    <div fxLayout="column" class="dps-logo-btn right-side">
+      <div fxLayout="column" class="dps-login-text-wrapper">
+        <h1>Login</h1>
+        <small
+          *ngIf="(appConfig.appId || appConfig.googleClientId) && !(appConfig.appId && appConfig.googleClientId)">Click
+          Continue to Login to the spitfire platform</small>
+        <small *ngIf="appConfig.appId && appConfig.googleClientId">Select your spitfire platform</small>
+      </div>
+
+
+      <div fxLayout="row" [ngClass]="{'dual-login-active' : (appConfig.googleClientId && appConfig.appId)}"
+        class="dps-login-container">
+        <a (click)="microsoft()" *ngIf="appConfig.appId">
+          <img src="assets/login/microsoft-login.png" />
+          <span class="login-btn" id="spitfire-microsoft"><span>Continue</span><i
+              class="material-icons">keyboard_arrow_right</i></span>
+          <small>Login with Microsoft</small>
+        </a>
+
+        <a (click)="google()" *ngIf="appConfig.googleClientId">
+          <img src="assets/login/google-login.png" />
+          <span class="login-btn" id="spitfire-google"><span>Continue</span><i
+              class="material-icons">keyboard_arrow_right</i></span>
+          <small>Login with Google</small>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+
+</style>
+
+
+
+
+<!-- Login Screen   - ------------------------------------------------  end  -->

@@ -1,0 +1,158 @@
+<div class="dps-probate-layout" fxLayout="column">
+  <dps-common-popup-header icon="policy" [title]="'Assets and Liabilities Overview '" buttons="close"
+    (buttonClick)="onClose()" iconColor="
+    #dca709" titleColor="#c6d1da" [loading]="loading" toolbarColor="#00233f">
+  </dps-common-popup-header>
+  <div [ngClass]="{'dps-disable-div': deceasedInfo?.dateofDeath === null || loading }"> </div>
+  <div class="dps-probate-layout-inner" fxFlex="calc(100% - 46px);" fxLayout="column">
+    <mat-accordion>
+      <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+
+        <mat-expansion-panel-header collapsedHeight="35px">
+          <mat-panel-title>
+            <h4>Deceased's Details</h4>
+            <h4 class="dps-matter-ref"> Matter Ref &nbsp;: {{matterData?.matterReferenceNo}} </h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row wrap" fxLayoutGap="2em">
+          <mat-form-field>
+            <input matInput #fname readonly (blur)="onChangeFirstName(fname.value)" [value]="deceasedInfo?.firstName"
+              placeholder="First name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput #sname readonly (blur)="onChangeSureName(sname.value)" [value]="deceasedInfo?.surName"
+              placeholder="Surname">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput readonly [ngModel]="deceasedInfo?.dateofDeath | date:'dd/MM/yyyy'"
+              placeholder="Date of death">
+
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput readonly [ngModel]="deceasedInfo?.taxYear | date:'dd/MM/yyyy'" placeholder="Tax Year">
+
+          </mat-form-field>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-tab-group class="dps-probate-tab-group">
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <span>Estate Overview</span>
+        </ng-template>
+
+        <div class="dps-container-btn" fxLayout="row wrap" fxLayoutGap="5px">
+          <button class="blue" mat-button (click)="onAddProbateOverView(FormType.Asset)">
+            <mat-icon>home_work</mat-icon>
+            New Asset
+          </button>
+          <button class="blue" mat-button (click)="onAddProbateOverView(FormType.Liability)">
+            <mat-icon>grading</mat-icon>
+            New Liability
+          </button>
+          <button class="blue" mat-button (click)="onAddProbateOverView(FormType.Gift)">
+            <mat-icon>card_giftcard</mat-icon>
+            New Gift
+          </button>
+          <button class="blue" mat-button (click)="onAddProbateOverView(FormType.Exemption)">
+            <mat-icon>accessibility_new</mat-icon>
+            New Exemption
+          </button>
+          <span fxFlex="1 1 auto"></span>
+          <button class="red" mat-button (click)="onDeleteSelectedProbateRow()">
+            <mat-icon>close</mat-icon>
+            Delete
+          </button>
+        </div>
+
+        <dps-estate-overview class="dps-white-gray-scroll" (editEstateClick)="onEditEstateClick($event)"
+          fxFlex="calc(100%-44px)" style="overflow-y: auto;" [selectedRow]="selectedRow?.selectedEstateRow"
+          (selectedRowClick)="onSelectedRowClick($event)" [estateOverViews]="estateOverViews">
+        </dps-estate-overview>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Transactions</span>
+        </ng-template>
+        <dps-transaction style="height: 100%;overflow-y: auto; display: flex;"
+          (submitSaveData)="onSubmitSaveData($event)" (selectedRowClick)="onSelectedRowClick($event)"
+          (edittransactionClick)="onEdittransactionClick($event)" [transactions]="transactions"
+          (deleteSelectedRow)="onDeleteSelectedRow($event)" [transactionsEditRow]="transactionsEditRow"
+          [matterData]="matterData" (clear)="onClear()" [token]="token"
+          [selectedRow]="selectedRow?.selectedTransaction">
+        </dps-transaction>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Distribution</span>
+        </ng-template>
+        <dps-distribution (editDistributionClick)="onEditDistributionClick($event)"
+          (selectedRowClick)="onSelectedRowClick($event)" [distributionViewItems]="distributionViewItems"
+          [matterData]="matterData" [distributionEditRow]="distributionEditRow" [token]="token"
+          (deleteSelectedRow)="onDeleteSelectedRow($event)" [selectedRow]="selectedRow?.selectedDistribution"
+          style="height: 100%;overflow-y: auto; display: flex;" class="dps-white-gray-scroll">
+
+        </dps-distribution>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Spouse or Civil Partner</span>
+        </ng-template>
+        <dps-spouse-civil-partner class="dps-white-gray-scroll" (spouseCivilUpdate)="onUpdateSpouseCivil($event)"
+          [spouseorCivilPatnerData]="spouseorCivilPatnerData"
+          style="height: 100%;overflow-y: auto; display: flex;   background: #d3dce9;">
+        </dps-spouse-civil-partner>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>RNRB</span>
+        </ng-template>
+        <dps-residence-nil-rate-band [residenceNilRateBandData]="residenceNilRateBandData"
+          (rnrbDataUpdate)="onRnrbDataUpdate($event)" class="dps-white-gray-scroll"
+          style="height: 100%;overflow-y: auto; display: flex;  ">
+        </dps-residence-nil-rate-band>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>IHT forms & estate accounts </span>
+        </ng-template>
+
+        <div class="dps-container-btn dps-ihf" fxLayout="row wrap" fxLayoutGap="5px">
+          <button mat-button (click)="onGenerateForm($event)">
+            <mat-icon>file_copy</mat-icon>
+            Generate Forms
+          </button>
+          <button (click)="onGenerateAccounts($event)" mat-button>
+            <mat-icon>account_balance_wallet</mat-icon>
+            Generate Accounts
+          </button>
+
+          <span fxFlex="1 1 auto"></span>
+          <div class="iht-checkboxes" fxLayout="row">
+            <mat-checkbox (change)="onChangeIHT205($event.checked)">Always generate IHT205
+            </mat-checkbox>
+            <mat-checkbox (change)="onChangeIHT400($event.checked)">Always generate IHT400
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <dps-iht-form-grid [ihtFormsData]="ihtFormsData" [selectedIhtRow]="selectedIhtRow"
+          (openIhtFrom)="onOpenIntForm($event)">
+        </dps-iht-form-grid>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+</div>

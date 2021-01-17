@@ -1,0 +1,28 @@
+.multi-select-wrapper-inner
+{
+    width: 215px;
+}
+.item-selected-wrap,
+mat-list-item
+{
+    color: #284f8a;
+}
+.cancel-list
+{
+    margin-top: 23px;
+    margin-left: 21px;
+}
+.multi-select-outer-wrapper{
+    height:100%;
+    width:100%;
+}
+mat-list-item.btn-wrapper{
+    color: #b72222;
+}
+.icon-child-menu{
+    position: absolute;
+     margin-top: 1px; 
+     font-size: 14px;
+      line-height: 45px;
+     margin-left: 7px;
+}

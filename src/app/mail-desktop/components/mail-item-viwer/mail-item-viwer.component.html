@@ -1,0 +1,42 @@
+<dps-mail-view-layout [item]="item" (next)="onNext($event)" (previous)="onPrevious($event)" (close)="onClose($event)"
+  (itemReadUnread)="onItemReadUnread($event)" (itemFlag)="onItemFlag($event)" (itemDelete)="onItemDelete($event)"
+  (meetingResponse)="onMeetingResponse($event)" (replyForward)="onReplyForward($event)"
+  (downloardFileAttachment)="onDownloardFileAttachment($event)" (viewDpsFile)="onViewDpsFile($event)"
+  *ngIf="item && !item.data.isDraft" (openAttachement)="onOpenAttachement($event)" (openUrlPoup)="onOpenUrlPoup($event)"
+  (setAutoReadItemId)="onSetAutoReadItemId($event)" (attachToNewMail)="onAttachToNewMail($event)" [timeZone]="timeZone"
+  [companyCode]="companyCode" [emailReadingPaneMode]="emailReadingPaneMode" [autoReadItemId]="autoReadItemId"
+  (removeFromCalendar)="onRemoveFromCalendar($event)">
+</dps-mail-view-layout>
+<mat-progress-bar mode="indeterminate"
+  *ngIf="emailReadingPaneMode!=='hide' && (draftToken$.asObservable()|async)!==item?.data.id && item?.data.isDraft">
+</mat-progress-bar>
+<dps-compose-mail-store-manager [emailReadingPaneMode]="emailReadingPaneMode" [composeItem]="item.data"
+  *ngIf="item?.data.isDraft && (draftToken$.asObservable()|async)">
+  <dps-compose-mail-manager #composeManager
+    [token]="emailReadingPaneMode==='hide'?'draftMail':(draftToken$.asObservable()|async)">
+    <dps-compose-mail-layout *ngIf="(composeManager.composeItem$|async)?.isDraft"
+      [composeItem]="composeManager.composeItem$|async" [followUpText]="composeManager.followUpText$|async"
+      [isDirty]="composeManager.isDirty$|async" (close)="onClose($event)" (send)="composeManager.onSend($event)"
+      (draft)="composeManager.onDraft($event)" (discard)="composeManager.onDiscard($event)"
+      (addToRecipient)="composeManager.onAddToRecipient($event)"
+      (addCcRecipient)="composeManager.onAddCcRecipient($event)"
+      (addBccRecipient)="composeManager.onAddBccRecipient($event)"
+      (removeToRecipient)="composeManager.onRemoveToRecipient($event)"
+      (removeCcRecipient)="composeManager.onRemoveCcRecipient($event)"
+      (removeBccRecipient)="composeManager.onRemoveBccRecipient($event)"
+      (flagFollowUp)="composeManager.onFlagFollowUp($event)" (importance)="composeManager.onImportance($event)"
+      (addAttachment)="composeManager.onAddAttachment($event)"
+      [isComposeCloseItem]="composeManager.isComposeCloseItem$|async"
+      (downloardFileAttachment)="composeManager.onDownloardFileAttachment($event)"
+      (deleteAttachment)="composeManager.onDeleteAttachment($event)" (clear)="composeManager.onClear($event)"
+      (openUrlPoup)="composeManager.onOpenUrlPoup($event)" (subjectChange)="composeManager.onSubjectChange($event)"
+      [signature]="(composeManager.user$|async).signature" [profile]="(composeManager.user$|async).profile"
+      [hasEmailSendAsPermission]="(composeManager.user$|async)?.general?.isUserHasEmailSendAsPermission"
+      [enaableChaser]="(composeManager.user$|async).isChaserEnable"
+      [listAttachements]="composeManager.listAttachements$|async"
+      [lastInlineAttachment]="composeManager.lastInlineAttachment$|async" [refItem]="composeManager.refItem$|async"
+      (openAttachement)="composeManager.onOpenAttachement($event)" (bodyChange)="composeManager.onBodyChange($event)"
+      [token]="composeManager.token">
+    </dps-compose-mail-layout>
+  </dps-compose-mail-manager>
+</dps-compose-mail-store-manager>

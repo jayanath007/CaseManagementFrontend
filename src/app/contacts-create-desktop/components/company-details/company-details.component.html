@@ -1,0 +1,56 @@
+<mat-form-field>
+  <mat-placeholder>Letter Title</mat-placeholder>
+  <input [value]="selectedContact?.letterTitle" (focusout)="onChangeDetails('letterTitle', $event.target.value)" (focusout)="onChangeDetails('letterTitle', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Name</mat-placeholder>
+  <input [value]="selectedContact?.companyName" (focusout)="onChangeDetails('companyName', $event.target.value)" matInput>
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Post Code</mat-placeholder>
+  <input [value]="selectedContact?.postCode" (focusout)="onChangeDetails('postCode', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Address Line 1</mat-placeholder>
+  <input [value]="selectedContact?.address1" (focusout)="onChangeDetails('address1', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Address Line 2</mat-placeholder>
+  <input [value]="selectedContact?.address2" (focusout)="onChangeDetails('address2', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Town</mat-placeholder>
+  <input [value]="selectedContact?.town" (focusout)="onChangeDetails('town', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Country</mat-placeholder>
+  <input [value]="selectedContact?.country" (focusout)="onChangeDetails('country', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Telephone</mat-placeholder>
+  <mat-icon matPrefix>local_phone &nbsp;</mat-icon>
+  <input [value]="selectedContact?.companyPhone" type="tel" (focusout)="onChangeDetails('companyPhone', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Fax</mat-placeholder>
+  <input [value]="selectedContact?.companyFax" (focusout)="onChangeDetails('companyFax', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>DX</mat-placeholder>
+  <input [value]="selectedContact?.companyDX" (focusout)="onChangeDetails('companyDX', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Web</mat-placeholder>
+  <input [value]="selectedContact?.companyWeb" (focusout)="onChangeDetails('companyWeb', $event.target.value)" matInput>
+</mat-form-field>

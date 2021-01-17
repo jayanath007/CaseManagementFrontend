@@ -1,0 +1,173 @@
+<mat-sidenav-container (backdropClick)="onMemberNavClick()">
+  <mat-sidenav-container (backdropClick)="onMemberNavClick()" autosize
+    [style.display]="activeOutlet !== 'main'  ? 'none': 'block'">
+    <mat-sidenav dpsIsMobile [disableClose]="true" class="dps-team-member-sidenav" *ngIf="initView === true"
+      #teammembers position="end" [mode]="memListPanelMode" [opened]="isMemberNavExpan" fxLayout="column">
+      <dps-team-member-manager #teammemberlist [teamMemberToken]="teamMemberToken"></dps-team-member-manager>
+      <mat-list dense class="team-member-header">
+        <mat-list-item>
+          <div fxFlex="row">
+            <button mat-icon-button (click)="onMemberNavClick()">
+              <mat-icon>reorder</mat-icon>
+            </button>
+            <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+            <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+              <mat-chip> {{teamMemberCount}} </mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+        [teamMemberList]="teammemberlist.teamMemberList$ | async"
+        [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async"
+        [selected]="teammemberlist.selected$ | async" (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+        (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+      </dps-team-member-list>
+    </mat-sidenav>
+    <div class="dps-matter-search-main-contentainer" fxLayout="column">
+      <mat-card class="dps-matter-search-main-header">
+        <mat-card-content class="detailed-header-inner">
+          <div class="dps-profile">
+            <dps-user-profile-detail [selectedDepartment]="selectedDepartment"
+              [selectedTeamMember]="selectedTeamMember">
+            </dps-user-profile-detail>
+          </div>
+          <div class="header-info-middle-container">
+            <dps-matter-search-header [selectedDepartment]="selectedDepartment" [departmentList]="departmentList"
+              (updateSelectedDepartment)="onDepartmentChange($event)" [activeView]="activeView"
+              [totalMatterCount]="totalMatterCount" [homeCurrancy]="homeCurrancy"
+              [totalBillsOutstanding]="totalBillsOutstanding"
+              [matterDisplyName]="resoleModuleName('matter_search')|async">
+            </dps-matter-search-header>
+          </div>
+          <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+        <div class="grid-wrapper-main" fxLayout="column">
+          <div id="matter-search-print-section" style="display: none">
+            <div style="font-weight: normal; font-family: Roboto,' Helvetica Neue', sans-serif;">
+              <div
+                style="border-top:1px solid black;border-bottom:1px solid black;display: flex;flex-direction: row;justify-content: space-between;">
+                <div>
+                  <h2 style="font-size: 17px; font-weight: 500;" class="dps-text" *ngIf="selectedTeamMember">
+                    {{selectedTeamMember.fullName}}</h2>
+                  <h2 style="font-size: 16px;
+                  padding-left: 10px;
+                  font-weight: 400;" class="dps-text" *ngIf="selectedDepartment && !selectedTeamMember">
+                    {{selectedDepartment.groupName}}</h2>
+                  <h3 style="font-size: 11px;" class="dps-text" *ngIf="selectedTeamMember?.userEmail">Email:-
+                    {{selectedTeamMember.userEmail}}</h3>
+                  <h3 style="font-size: 11px;" class="dps-text" *ngIf="selectedTeamMember?.userMobileNo">Phone No:-
+                    {{selectedTeamMember.userMobileNo}}</h3>
+                </div>
+                <div style="display: flex;
+                flex-direction: row;
+                margin: 10px 0px;">
+                  <div style="padding: 10px 9px;
+                 ">
+                    <span *ngIf="activeView==='MyMatters'" style="font-size: 22px;">{{totalMatterCount}}</span>
+                    <span style="font-size: 22px;" *ngIf="activeView==='Recent50'">50</span>
+                    <label *ngIf="activeView==='MyMatters'">{{resoleModuleName('matter_search')|async}}</label>
+                    <label *ngIf="activeView==='Recent50'">Recent {{resoleModuleName('matter_search')|async}}</label>
+                    <label style="padding-left: 7px;
+                    font-size: 20px;
+                    font-weight: 400;" *ngIf="activeView==='AllMatters'">All
+                      {{resoleModuleName('matter_search')|async}}</label>
+                  </div>
+                  <div style="padding: 0px 9px;
+                  display: flex;
+                  flex-direction: column; border-left: 1px solid #8c7272;" *ngIf="activeView==='MyMatters'">
+                    <span
+                      style="font-size: 22px;
+                    text-align: center;">{{homeCurrancy | currencySymbols}}{{totalBillsOutstanding | number : '1.2-2'}}</span>
+                    <label style="font-size: 12px;">Total Bills Outstanding</label>
+                  </div>
+                </div>
+                <div>
+                  <h3 style="font-size: 15px;
+                  font-weight: 500;" class="dps-text" *ngIf="selectedDepartment">Department:-
+                    {{selectedDepartment.groupName}}</h3>
+                </div>
+              </div>
+
+
+              <div class="search-fields" style="border-bottom:1px solid black;">
+                <div style="display: flex;flex-direction:row;justify-content: space-between;font-size: 13px;">
+                  <h3 class="dps-text">
+                    <span *ngIf="activeView === MatterViews.Recent">Recent 50
+                      {{resoleModuleName('matter_search')|async}}</span>
+                    <span *ngIf="activeView === MatterViews.MyMatter">My
+                      {{resoleModuleName('matter_search')|async}}</span>
+                    <span
+                      *ngIf="activeView !=='AllMatters' &&(isClosedMatters || isInactiveFeeEarner || isCompletedMatters)">/</span>
+                    <span *ngIf="isClosedMatters">Include Closed {{resoleModuleName('matter_search')|async}}</span>
+                    <span *ngIf="isCompletedMatters">Include Completed
+                      {{resoleModuleName('matter_search')|async}}</span>
+                    <span *ngIf="isInactiveFeeEarner">Include Inactive Fee-earners</span>
+                  </h3>
+                  <h3 style="font-size:14px;font-weight:400;" class="dps-text" *ngIf="totalItems>0">
+                    {{(paginatorDef?.currentPage*paginatorDef?.itemPerPage)+1}} -
+                    {{((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)>=totalItems?totalItems:((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)}}
+                    of {{totalItems}} </h3>
+                  <h3 class="dps-text" *ngIf="searchText">Search text:- {{searchText}}</h3>
+                </div>
+
+
+
+              </div>
+
+
+              <div>
+                <table>
+                  <tr>
+                    <th *ngFor="let def of columnDef" [hidden]="def?.extras?.hidden || !def?.extras?.label">
+                      {{def?.extras?.label}}</th>
+                  </tr>
+                  <tr *ngFor="let item of matterData">
+                    <td>{{item.data.matterReferenceNo}}</td>
+                    <td>{{item.data.appID}}</td>
+                    <td>{{item.data.clientName}}</td>
+                    <td *ngIf="activeView!==MatterViews.Recent">{{item.data.lastUsed | date :'dd/MM/yyyy'}}</td>
+                    <td *ngIf="activeView!==MatterViews.Recent">{{item.data.reviewDate| date :'dd/MM/yyyy'}}</td>
+                    <td>{{item.data.matterDetails}}</td>
+                    <td *ngIf="activeView!==MatterViews.Recent">{{item.data.reviewNote}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+          <dps-matter-search-views (fontSizeClassChangeValue)="onFontSizeClassChange($event)"
+            class="matter-search-result-views" [searchText]="searchText" [totalItems]="totalItems"
+            (updateSelectedSearchText)="onSearchTextChanged($event)"
+            (onClosedMattersChangeValue)="onClosedMattersChange($event)"
+            (onCompletedMattersChangeValue)="onCompletedMattersChange($event)"
+            [isInactiveFeeEarner]="isInactiveFeeEarner" [matterCreationTitle]="matterCreationTitle"
+            [isMLSEnableMatter]="isMLSEnableMatter" (onInactiveFeeEarners)="onInactiveFeeEarnersChange($event)"
+            (changeMatterViewOut)="changeMatterView($event)" [isClosedMatters]="isClosedMatters"
+            [isCompletedMatters]="isCompletedMatters" [selectedDepartment]="selectedDepartment"
+            [matterDisplyName]="resoleModuleName('matter_search')|async" (refresh)="onRefresh()" (print)="onPrint()"
+            [activeView]="activeView" (mlsEnableChange)="onMLSEnableChange($event)"
+            (clickMatterMenu)="onClickMatterMenu($event)">
+          </dps-matter-search-views>
+          <dps-matter-search-grid fxFlex="calc(100%-70px)" class="matter-search-grid {{fontSizeClass}}"
+            [homeCurrancy]="homeCurrancy" [columnDef]="columnDef" [matterData]="matterData"
+            [paginatorDef]="paginatorDef" [totalItems]="totalItems" (rowSelect)="onRowSelect($event)"
+            [isPlotUser]="isPlotUser" [plotVarValues]="plotVarValues" (toggleExpand)="onToggleExpand($event)"
+            (viewChange)="onViewChange($event)" (updateOpenCaseClick)="onOpenCaseClick($event)"
+            (updateTimeRecordingClick)="onTimeRecordingClick($event)" (updateNewMailClick)="onNewMailClick($event)"
+            [activeView]=activeView [searchText]="searchText" [isGridLoading]="isGridLoading"
+            [isDepartmentLoading]="isDepartmentLoading" (ledgerCardClick)="onOpenLedgerCard($event)"
+            (openMLS)="onMLSClick($event)" (openEChitWithMatter)="onOpenEChitWithMatter($event)"
+            (openBillingRequest)="onOpenBillingRequestPopup($event)"
+            (openReferralNoteAndDate)="onOpenReferralNoteAndDate($event)">
+          </dps-matter-search-grid>
+
+        </div>
+      </mat-card>
+    </div>
+  </mat-sidenav-container>

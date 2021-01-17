@@ -1,0 +1,40 @@
+
+.dps-save-grid {
+  // padding-left: 15px;
+}
+.row-highlight {
+  background: #96caee;
+  width: calc(100% - 15px);
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+}
+
+.dps-save-grid {
+  height: 100%;
+  // padding-left: 15px;
+  overflow-y: hidden;
+}
+
+.dps-grid-x {
+  overflow-x: auto;
+  height: 100%;
+}
+
+.dps-width-controller {
+  min-width: 1600px;
+  height: 100%;
+  // overflow-x: auto;
+}
+
+.grid-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+mat-nav-list {
+  height: 100%;
+}
+
+.footer-shadow {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}

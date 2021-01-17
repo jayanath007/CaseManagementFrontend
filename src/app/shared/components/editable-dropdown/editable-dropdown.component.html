@@ -1,0 +1,15 @@
+<mat-form-field class="dps-editable-drop-down">
+  <mat-placeholder>{{placeholder}}
+    <span class="required-star" *ngIf="required">*</span>
+  </mat-placeholder>
+  <input *ngIf="!numberOnly" matInput #autoCompleteInput [formControl]="textInputControl"
+    (keyup.enter)="onKeyupEnter($event)" [matAutocomplete]="auto">
+  <input *ngIf="numberOnly" [dpsNumberOnly]=4 matInput #autoCompleteInput [formControl]="textInputControl"
+    (keyup.enter)="onKeyupEnter($event)" [matAutocomplete]="auto">
+  <mat-icon (click)="dropdownIconClick($event)">arrow_drop_down</mat-icon>
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of dropdownValues" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

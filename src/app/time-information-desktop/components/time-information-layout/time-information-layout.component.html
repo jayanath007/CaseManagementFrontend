@@ -1,0 +1,169 @@
+<div class="time-information-general-outer" fxLayout="column">
+  <div class="time-information-general">
+
+    <mat-toolbar class="top">
+      <span fxFlex="1 1 auto">
+        <i class="material-icons time-rc-head-icon">alarm_on</i>
+        Time Recording {{model.classId > 109 ? 'AGFS' : ''}}
+        <span *ngIf="model.classId === 4">(Proceeding Class)</span>
+        <span *ngIf="model.classId === 3">(Investigation Class)</span>
+      </span>
+      <button class="time-rc-close" mat-icon-button (click)="onClose()">
+        <i class="material-icons">close</i>
+      </button>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading || isUpdateRateFiles"></mat-progress-bar>
+
+    <div class="top-panel">
+
+      <form novalidate [formGroup]="formParentGroup">
+        <mat-form-field class="time-information-input" [ngClass]="{'long': !(classList && classList.length > 1)}"
+          [matTooltip]="filteredAttTypesList | filter : 'attId' : model.attTypeId: 'attDescription'"
+          matTooltipPosition="above">
+          <mat-select placeholder="Attendance Type" formControlName="attTypeId"
+            (selectionChange)="onTypeListChange($event.value)" *ngIf="model.classId <= 109">
+            <mat-option [value]="type.attId" *ngFor="let type of filteredAttTypesList">
+              {{type.attDescription}}
+            </mat-option>
+          </mat-select>
+          <input matInput type="text" readonly *ngIf="model.classId > 109" value="AFGS">
+        </mat-form-field>
+
+        <mat-form-field class="time-information-input sub">
+          <mat-select placeholder="Fee Earner" formControlName="feeEarner" (valueChange)="onChangeFeeEarner($event)">
+            <mat-option [value]="user.userId" *ngFor="let user of feeEarnerList">
+              {{user.userId}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="time-information-input tc-date">
+          <input matInput [matDatepicker]="datepicker" placeholder="Choose a date" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="time-information-input class" *ngIf="classList && classList.length > 1">
+          <mat-select placeholder="Class" formControlName="classId" (selectionChange)="onClassChange($event.value)">
+            <mat-option [value]="class.rectype" *ngFor="let class of classList">
+              {{class.classname}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="clear"></div>
+      </form>
+
+    </div>
+
+  </div>
+
+  <div class="time-information-content">
+
+    <span [ngSwitch]="model.attTypeId" *ngIf="model.classId===3">
+
+      <dps-investigation-ic1 *ngSwitchCase="1" [model]="model" [editOriginaMmodel]="editOriginaMmodel"
+        [mpu]="settings?.mpu" [resetCount]="resetCount" (changeTab)="onChangeTap($event)"
+        (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)" (exceedLimit)="onExceedLimit()"
+        (removeAttendee)="onRemoveAttendee($event)">
+      </dps-investigation-ic1>
+
+      <dps-investigation-ic2 *ngSwitchCase="2" [model]="model" (changeTab)="onChangeTap($event)" [mpu]="settings?.mpu"
+        [resetCount]="resetCount" [policeSLookupList]="policeSLookupList" (modelChange)="onModelChange($event)"
+        (rateCalculation)="onRateCalculation($event)">
+      </dps-investigation-ic2>
+
+      <dps-investigation-ic3 *ngSwitchCase="3" [model]="model" [isEditMode]=[isEditMode] [mpu]="settings?.mpu"
+        [resetCount]="resetCount" (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)"
+        (openLookup)="onOpenLookup($event)" (rateCalculation)="onRateCalculation($event)"
+        (removeLookupBind)="onRemoveAttendee($event)">
+      </dps-investigation-ic3>
+
+      <dps-investigation-ic3 *ngSwitchCase="4" [model]="model" [isEditMode]=[isEditMode] [mpu]="settings?.mpu"
+        [resetCount]="resetCount" (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)"
+        (openLookup)="onOpenLookup($event)" (rateCalculation)="onRateCalculation($event)"
+        (removeLookupBind)="onRemoveAttendee($event)">
+      </dps-investigation-ic3>
+
+    </span>
+
+    <span [ngSwitch]="model.attTypeId" *ngIf="model.classId===4">
+
+      <dps-proceedings-rc1 *ngSwitchCase="1" [model]="model" [mpu]="settings?.mpu" [resetCount]="resetCount"
+        (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)" (removeAttendee)="onRemoveAttendee($event)">
+      </dps-proceedings-rc1>
+
+      <dps-proceedings-rc2 *ngSwitchCase="2" [model]="model" (changeTab)="onChangeTap($event)" [mpu]="settings?.mpu"
+        [resetCount]="resetCount" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (removeLookupBind)="onRemoveAttendee($event)" (rateCalculation)="onRateCalculation($event)">
+      </dps-proceedings-rc2>
+
+      <dps-proceedings-rc2 *ngSwitchCase="3" [model]="model" [isEditMode]=[isEditMode] [mpu]="settings?.mpu"
+        [resetCount]="resetCount" [editOriginaMmodel]="editOriginaMmodel" (changeTab)="onChangeTap($event)"
+        (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)" (removeLookupBind)="onRemoveAttendee($event)"
+        (exceedLimit)="onExceedLimit()">
+      </dps-proceedings-rc2>
+
+      <dps-proceedings-rc1 *ngSwitchCase="4" [model]="model" [mpu]="settings?.mpu" [resetCount]="resetCount"
+        (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)" (removeLookupBind)="onRemoveAttendee($event)">
+      </dps-proceedings-rc1>
+
+      <dps-proceedings-rc2 *ngSwitchCase="5" [model]="model" [isEditMode]=[isEditMode] [mpu]="settings?.mpu"
+        [resetCount]="resetCount" (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)"
+        (openLookup)="onOpenLookup($event)" (rateCalculation)="onRateCalculation($event)"
+        (removeLookupBind)="onRemoveAttendee($event)">
+      </dps-proceedings-rc2>
+
+    </span>
+    <span [ngSwitch]="model.attTypeId" *ngIf="model.classId >= 100 && model.classId <= 109">
+      <dps-lgfs-cc1 *ngSwitchCase="1" [model]="model" [mpu]="settings?.mpu" [resetCount]="resetCount" [gradeList]="gradeList"
+        (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)">
+      </dps-lgfs-cc1>
+      <dps-lgfs-cc2 *ngSwitchCase="2" [model]="model" [mpu]="settings?.mpu" [resetCount]="resetCount" [gradeList]="gradeList"
+        (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)">
+      </dps-lgfs-cc2>
+    </span>
+    <span [ngSwitch]="model.attTypeId" *ngIf="model.classId >= 110 && model.classId <= 119">
+      <!-- open class LGFS - and CC2 is chosen - please note this screen is the same as AGFS   -->
+      <dps-lgfs-cc2 *ngSwitchCase="1" [model]="model" [mpu]="settings?.mpu" [resetCount]="resetCount"
+        (changeTab)="onChangeTap($event)" (modelChange)="onModelChange($event)" (openLookup)="onOpenLookup($event)"
+        (rateCalculation)="onRateCalculation($event)">
+      </dps-lgfs-cc2>
+    </span>
+  </div>
+
+  <dps-ck-editor [debounceTime]="500" *ngIf="selectedTabIndex === 1" [(ngModel)]="model.userControlText">
+  </dps-ck-editor>
+
+  <div class="bottom-controller-wrapper" fxFlex="row">
+
+    <div class="tc-button-set">
+      <button class="tc-general-btn" mat-raised-button tabindex="2"
+        [disabled]="settings.crimeSettings.IsClassClosed||isLoading"
+        (click)="onClickAction(UserAction.New)">New</button>
+      <button class="tc-general-btn" mat-raised-button tabindex="-1"
+        [disabled]="settings.crimeSettings.IsClassClosed || isLoading || !model.feeEarner"
+        (click)="onClickAction(UserAction.Save)">Save</button>
+      <button class="tc-general-btn" mat-raised-button [disabled]="isLoading || model.timeId === 0"
+        (click)="onClickAction(UserAction.Print)">Print</button>
+      <button class="tc-general-btn" color="warn" mat-raised-button
+        [disabled]="settings.crimeSettings.IsClassClosed || !settings.crimeSettings.IsCrimeSupervisor || isLoading || model.timeId === 0"
+        (click)="onClickAction(UserAction.Delete)">Delete</button>
+    </div>
+
+  </div>
+  <button class="grid-popup" (click)="openGridPopup()">
+    <i class="material-icons">open_in_new</i> <span> All</span>
+  </button>
+  <dps-time-record-grid [gridColumnDef]="gridColumnDef" [timeRecordsGridData]="timeRecordsGridData" [allData]="false"
+    [selectedType]="model?.attTypeId" [isloading]="isloadingTimeRecords" (selectGridItem)="onSelectGridItem($event)">
+  </dps-time-record-grid>
+
+
+</div>

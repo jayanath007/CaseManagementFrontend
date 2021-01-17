@@ -1,0 +1,39 @@
+<div class="dps_wrk_flow_heading" dpsIsMobile>
+    <span matTooltipPosition="above" matTooltip="Add Note" class="workflow_rule_headings" color="primary">
+        <button mat-button (click)="rowMoveUp()" [disabled]="!(amendScreensWorkflow$ |async)  || !upBtnEnable">
+            <i class="material-icons fa fa-chevron-circle-up"></i>
+            <span> Up</span>
+        </button>
+    </span>
+    <!-- <button mat-button (click)="rowMoveUp()">Up</button> -->
+    <button mat-button (click)="rowMoveDown()" [disabled]="!(amendScreensWorkflow$ |async)  || !downBtnEnable" class="workflow_rule_headings" color="primary">
+        <i class="fa fa-chevron-circle-down"></i>
+        <span>Down</span>
+    </button>
+    <button mat-button (click)="SaveWorkflowRules()" [disabled]="!(amendScreensWorkflow$ |async) " class="workflow_rule_headings" color="primary">
+        <i class="fa fa-check-square-o"></i>
+        <span>Save</span>
+    </button>
+    <button mat-button (click)="addNewRule()" class="workflow_rule_headings" color="primary" [disabled]="!(amendScreensWorkflow$ |async) ">
+        <i class="fa fa-plus-circle"></i>
+        <span>Add new</span>
+    </button>
+    <button mat-button (click)="deleteWorkflowRules()" [disabled]="!(amendScreensWorkflow$ |async)  || !getBtnDeleteEnable" class="workflow_rule_headings" color="primary">
+        <i class="fa fa-trash"></i>
+        <span>Delete</span>
+    </button>
+
+    <button mat-button (click)="exportRule()" [disabled]="!btnExportEnable" class="workflow_rule_headings" color="primary">
+        <i class="fa fa-plus-circle"></i>
+        <span>Export</span>
+    </button>
+    <button mat-button (click)="fileUploader.onFileUploadBtnClick()" [disabled]="!(amendScreensWorkflow$ |async)" class="workflow_rule_headings" color="primary">
+        <i class="fa fa-exchange"></i>
+        <dps-file-uploader #fileUploader (fileUpload)="importRule($event)" [multiple]="false"></dps-file-uploader>
+        <span>Import</span>
+    </button>
+    <button mat-button (click)="closePopup()" class="workflow_rule_headings" color="warn">
+        <i class="fa fa-times"></i>
+        <span>Exit</span>
+    </button>
+</div>

@@ -1,0 +1,70 @@
+@import '~styles/variables.scss';
+
+mat-list {
+  padding-top: 1px !important;
+}
+
+.dps-clmn-main-group {
+  // background: #b1d9fd;
+  background: #c8e5ff;
+  color: #0a4c77;
+  cursor: pointer;
+}
+
+.content-level {
+  padding-left: 40px;
+}
+
+.dps-bundling-group {
+  display: flex;
+  align-items: center;
+
+  .group-mode {
+    margin-right: 5px;
+
+  }
+
+  .group-mode,
+  .group-count {
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.dps-case-file-grid-row {
+  padding-left: 30px;
+}
+
+dps-bundling-item-grid-row {
+  ::ng-deep .dps_row_separation-1 {
+    // background: #c9e5ff;
+    // background: #e4f2ff;
+    background: #ebf0f5;
+  }
+}
+
+.dps_selected_group {
+  mat-list-item {
+    background-color: #5689b7 !important;
+  }
+
+  span {
+    color: white;
+  }
+
+  div {
+    color: white;
+  }
+}
+
+.dps-load-more {
+  &:hover {
+    opacity: .9;
+  }
+
+  background: #d0ecd0;
+  color: #043304;
+  font-weight: 600;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+}

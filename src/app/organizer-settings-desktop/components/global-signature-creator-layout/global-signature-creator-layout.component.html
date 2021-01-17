@@ -1,0 +1,97 @@
+<div class="dps-organizer-signature-layout" fxLayout="column">
+  <dps-common-popup-header [title]="'Global Signature'" icon="perm_identity" toolbarColor="#004487">
+  </dps-common-popup-header>
+
+  <div class="dps-signature-content dps-white-gray-scroll" fxFlex="calc(100%-98px)" fxLayout="column">
+    <div fxLayout="row">
+      <dps-ck-editor [debounceTime]="500" [(ngModel)]="signatureTemplete" (change)="onSignatureChange()" [config]="{}">
+      </dps-ck-editor>
+      <div>
+        <div class="dps_signature-creator_button">
+          <button style="margin-left: 20px;" [disabled]="!userInfo" mat-button (click)="onSignatureCreatorBtnClicked()">
+            Signature Creator
+          </button>
+        </div>
+        <mat-accordion [ngClass]="{'dps_show_help': (showHelp && !signatureTemplete) }">
+          <div *ngIf="showHelp && !signatureTemplete" class="dps_show_help_content" fxLayout="row">
+            <span><i>Drag items here </i></span>
+            <img [src]="helpImage" style="width: 238px; height: 112px;">
+          </div>
+          <mat-expansion-panel expanded="true" class="dps_signature_drag_items_group mat-elevation-z0">
+            <mat-expansion-panel-header class="dps_signature_drag_items_header">
+              <mat-panel-title>
+                User
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-chip-list fxLayout="column" class="dps_signature_drag_item dps-white-gray-scroll">
+              <mat-chip dpsDraggable [dragData]="signkey.Name" [doNotChangeData]="true">Name </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.SignatureBlockName" [doNotChangeData]="true">Signature
+                block name </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.AskForName" [doNotChangeData]="true">Ask for name
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.DirectDialNumber" [doNotChangeData]="true">Direct dial
+                number
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.EmailAddress" [doNotChangeData]="true">Email Address
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.MobileNumber" [doNotChangeData]="true"> Mobile Number
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.JobTitle" [doNotChangeData]="true">Job Title </mat-chip>
+            </mat-chip-list>
+          </mat-expansion-panel>
+          <mat-expansion-panel class="dps_signature_drag_items_group mat-elevation-z0">
+            <mat-expansion-panel-header class="dps_signature_drag_items_header">
+              <mat-panel-title>
+                Branch
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-chip-list fxLayout="column" class="dps_signature_drag_item dps-white-gray-scroll">
+              <mat-chip dpsDraggable [dragData]="signkey.BranchName" [doNotChangeData]="true">Branch Name</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchAddressLine1" [doNotChangeData]="true">Address Line 1
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchAddressLine2" [doNotChangeData]="true">Address Line 2
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchCounty" [doNotChangeData]="true">Country
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchPostCode" [doNotChangeData]="true">Post Code
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchEmail" [doNotChangeData]="true">Email Address
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchTelephoneNo" [doNotChangeData]="true"> Telephone No
+              </mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchFaxNo" [doNotChangeData]="true">Fax No</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchMisc1" [doNotChangeData]="true">Misc 1</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.BranchMisc2" [doNotChangeData]="true">Misc 2</mat-chip>
+            </mat-chip-list>
+          </mat-expansion-panel>
+          <mat-expansion-panel class="dps_signature_drag_items_group mat-elevation-z0">
+            <mat-expansion-panel-header class="dps_signature_drag_items_header">
+              <mat-panel-title>
+                Company
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-chip-list fxLayout="column" class="dps_signature_drag_item dps-white-gray-scroll">
+              <mat-chip dpsDraggable [dragData]="signkey.CompanyName" [doNotChangeData]="true">Company Name</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.CompanyMisc1" [doNotChangeData]="true">Misc 1</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.CompanyMisc2" [doNotChangeData]="true">Misc 2</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.CompanyMisc3" [doNotChangeData]="true">Misc 3</mat-chip>
+              <mat-chip dpsDraggable [dragData]="signkey.CompanyMisc4" [doNotChangeData]="true">Misc 4</mat-chip>
+            </mat-chip-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+    </div>
+
+
+    <div fxLayout="row">
+      <div class="dps-white-gray-scroll dps_global_sign_preview" [innerHTML]="(signatureHtml$|async)|safeHtml"
+        id="globalSignPreview">
+      </div>
+      <mat-dialog-actions class="dps_action_button" fxLayout="column" fxLayoutGap="20px">
+        <button class="update" mat-button [mat-dialog-close]="signatureTemplete">Update</button>
+        <button class="discard" [mat-dialog-close]="'$discard$'" mat-button mat-dialog-close>Discard</button>
+      </mat-dialog-actions>
+    </div>
+
+  </div>

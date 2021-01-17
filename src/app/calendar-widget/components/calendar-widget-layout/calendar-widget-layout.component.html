@@ -1,0 +1,69 @@
+<mat-toolbar>
+  <mat-toolbar-row class="header calender-event">
+    <mat-icon class="header-icon">event</mat-icon>
+    <span class="header-name" color="primary" (click)="goToCalendar()">Today's Events</span>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" class="dps-navigate-btn" [disabled]="!(canNavigate && canNavigateLeft)"
+      (click)="clickNavigateFefore()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" class="dps-navigate-btn" (click)="clickNavigateNext()"
+      [disabled]="!(canNavigate && canNavigateRight)">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #mainmenu="matMenu">
+      <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+        Remove
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<!-- && theme === Theme.Classic -->
+<!-- <mat-spinner mode="indeterminate" *ngIf="isLoading && theme === Theme.Angular7" diameter="35" strokeWidth="3"></mat-spinner> -->
+<!-- <div *ngIf="!isLoading && theme === Theme.Classic">
+  <div class="empty-view" *ngIf="data?.length === 0 || !data">
+    <p class="data-empty" *ngIf="data?.length === 0"> No item to preview</p>
+    <p class="data-empty" *ngIf="!data"> Something went wrong </p>
+  </div>
+</div> -->
+<mat-nav-list dense class="widget-item-list calender-events dps-white-gray-scroll" *ngIf="theme === Theme.Classic">
+  <dps-calendar-widget-item *ngFor="let item of data; let isOdd=odd; let isEven=even"
+    [ngClass]="isOdd?'separator-0':'separator-1'" [item]="item" (selectItem)="openItem($event)" [item]="item">
+  </dps-calendar-widget-item>
+  <dps-epmty-widget-item *ngFor="let item of emptyListForClasic">
+  </dps-epmty-widget-item>
+</mat-nav-list>
+
+<div id="widget_calender_events" fxLayoutGap="10px" fxLayout="row"
+  class="widget-item-list-v7 calender-events dps-white-gray-scroll" *ngIf="theme === Theme.Angular7">
+  <dps-calendar-widget-item *ngFor="let item of data; let isOdd=odd; let isEven=even"
+    [ngClass]="isOdd?'separator-0':'separator-1'" [item]="item" (selectItem)="openItem($event)" [item]="item">
+  </dps-calendar-widget-item>
+  <div class="dps-empty-item" *ngFor="let item of emptyList">
+    <div class="detail-view" fxLayout="column" fxLayoutAlign="space-evenly center">
+      <!-- No Events today -->
+      <span class="dps-empty-events l1"></span>
+      <span class="dps-empty-events l2"></span>
+    </div>
+    <div fxLayout="column" class="time-view">
+      <div fxLayout="row" class="dps-empty-line">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="dps-time-indicator" fxLayout="row">
+        <span>AM</span>
+        <span>AM</span>
+      </div>
+
+    </div>
+  </div>
+</div>

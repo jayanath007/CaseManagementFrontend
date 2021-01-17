@@ -1,0 +1,47 @@
+<!-- @@@@ {{ClientRowData | json}} -->
+<div fxLayout="row" class="grid-data" *ngIf="popupInputData?.popupType!==clientPopupType.OpportunityClientSearch">
+  <div class="row-data ref" [fxFlex]="getFxFlexProperty(0)"
+    innerHTML="{{ClientRowData.clientReference | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{ClientRowData.clientName  | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data telephone" [fxFlex]="getFxFlexProperty(2)"
+    innerHTML="{{ClientRowData.clientMobileTelephoneNo | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{ClientRowData.clientPostCode | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+    innerHTML="{{ClientRowData.clientContactName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+    innerHTML="{{ClientRowData.clientEmail | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)">
+    <span *ngIf="ClientRowData.clientAddress1"
+      innerHTML="{{ClientRowData.clientAddress1 | seacrhTextHighligh : searchText}},">
+    </span>
+    <span *ngIf="ClientRowData.clientAddress2"
+      innerHTML="{{ClientRowData.clientAddress2 | seacrhTextHighligh : searchText}},">
+    </span>
+    <span *ngIf="ClientRowData.clientTown" innerHTML="{{ClientRowData.clientTown | seacrhTextHighligh : searchText}},">
+    </span>
+    <span *ngIf="ClientRowData.clientCountry"
+      innerHTML="{{ClientRowData.clientCountry | seacrhTextHighligh : searchText}},">
+    </span>
+  </div>
+</div>
+<!-- /////// For Opportunity client search //////////// -->
+<div fxLayout="row" class="grid-data" *ngIf="popupInputData?.popupType===clientPopupType.OpportunityClientSearch">
+  <div class="row-data ref" [fxFlex]="getFxFlexProperty(0)"
+    innerHTML="{{ClientRowData.salesAccountRef | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{ClientRowData.type  | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data telephone" [fxFlex]="getFxFlexProperty(2)"
+    innerHTML="{{ClientRowData.lastName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{ClientRowData.firstName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+    innerHTML="{{ClientRowData.accountName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+    innerHTML="{{ClientRowData.companyName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)"
+    innerHTML="{{ClientRowData.email1 | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(7)"
+    innerHTML="{{ClientRowData.address1 | seacrhTextHighligh : searchText}}"></div>
+</div>

@@ -1,0 +1,48 @@
+<div fxLayout="column">
+  <div>
+    <dps-common-popup-header icon="multiple_stop" title="Previous Transactions" buttons="close"
+      [loading]="isPreviousTransLoading" iconColor="#a9c0f6" titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+    </dps-common-popup-header>
+  </div>
+  <div fxLayout="row" class="transactions-toolbar">
+    <mat-radio-group (change)="onGridFilterChange($event.value)" [ngModel]="radioButtonValue" fxLayout="row"
+      fxLayoutGap="2rem">
+      <mat-radio-button color="primary" [value]='gridFilterType.showAll'>All</mat-radio-button>
+      <mat-radio-button color="primary" [value]='gridFilterType.showOffice'>Office</mat-radio-button>
+      <mat-radio-button color="primary" [value]='gridFilterType.showClient'>Client</mat-radio-button>
+    </mat-radio-group>
+    <mat-checkbox class="include-closed-matters" color="primary" (change)="onShowBalancesChange($event.checked)">
+      <span>Show Balances Only</span>
+    </mat-checkbox>
+    <span fxFlex="1 1 auto"></span>
+    <mat-chip-list>
+      <mat-chip class="mref">M.Ref: {{matterData?.matterReferenceNo}}</mat-chip>
+    </mat-chip-list>
+    <button class="print-traansaction" mat-button (click)="onPrint()">
+      <span class="material-icons">
+        print
+      </span>
+    </button>
+  </div>
+  <div fxLayout="column" style="overflow-x: auto;" class="dps-white-gray-scroll dps-grid">
+    <div fxLayout="column" fxFlex="calc(100%-87px)" style="min-width:1000px;">
+      <div class="row-highlight" dpsIsMobile [ngClass]="filterTypeClass">
+        <div class="row-highlight-inner">
+          <dps-column-header *ngFor="let header of getGridColumnDef" [fxFlex]="header?.extras?.fxFlex" [def]="header"
+            [filterAnchor]="header?.extras?.filterAnchor" (toggleSorting)="onToggleSorting($event)"
+            (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)">
+          </dps-column-header>
+        </div>
+        <dps-previous-transactions-grid [columnDef]="getGridColumnDef" [previousTransGridData]="previousTransGridData"
+          [gridCloumnVisibleStatus]="1" [balanceOnly]="balanceOnly" [gridFilterData]="gridFilterData">
+        </dps-previous-transactions-grid>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column">
+    <mat-paginator fxFlex="50px" #paginator [length]="5" [pageIndex]="previousTransGridData?.PaginatorDef?.currentPage"
+      [pageSize]="previousTransGridData?.PaginatorDef?.itemPerPage" [pageSizeOptions]="[25,50,100]"
+      (page)="onChangePage($event)" class="footer-shadow">
+    </mat-paginator>
+  </div>
+</div>

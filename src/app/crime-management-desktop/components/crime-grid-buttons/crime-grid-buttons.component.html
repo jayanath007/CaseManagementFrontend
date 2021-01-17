@@ -1,0 +1,58 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-crime-grid-button time-info" fxLayout="column" *ngIf="classItem?.rectype === 4">
+    <button mat-icon-button (click)="onActionClick(userAction.CRM7)">
+      <mat-icon fontSet="fontawesome" class="fa" fontIcon="fa-file-text"></mat-icon>
+    </button>
+    <span>CRM 7</span>
+  </div>
+  <div class="dps-crime-grid-button time-info" fxLayout="column" *ngIf="classItem?.rectype < 100">
+    <button mat-icon-button (click)="onActionClick(userAction.CRM11)">
+      <mat-icon fontSet="fontawesome" class="fa" fontIcon="fa-file-text"></mat-icon>
+    </button>
+    <span>CRM 11</span>
+  </div>
+  <!-- <div class="dps-crime-grid-button time-info" fxLayout="column" *ngIf="classItem?.rectype === 3">
+    <button  mat-icon-button (click)="onActionClick(userAction.CRM18)">
+      <mat-icon fontSet="fontawesome" class="fa" fontIcon="fa-file-text"></mat-icon>
+    </button>
+    <span>CRM 18</span>
+  </div> -->
+  <div class="dps-crime-grid-button" fxLayout="column" *ngIf="classItem?.rectype < 100">
+    <button mat-icon-button>
+      <mat-icon fontSet="fontawesome" class="fa" fontIcon="fa-list-ol"></mat-icon>
+    </button>
+    <span>Lead UNF</span>
+  </div>
+  <!-- Request by osman -->
+  <!-- <div class="dps-crime-grid-button" fxLayout="column"> 
+    <button  mat-icon-button>
+      <mat-icon>watch</mat-icon>
+    </button>
+    <span>CDStandby</span>
+  </div> -->
+  <div class="dps-crime-grid-button" fxLayout="column" *ngIf="classItem?.rectype < 100">
+    <button mat-icon-button>
+      <mat-icon>tune</mat-icon>
+    </button>
+    <span>Limits</span>
+  </div>
+  <div class="dps-crime-grid-button time-info" fxLayout="column" *ngIf="classItem?.rectype < 100">
+    <button mat-icon-button (click)="onActionClick(userAction.DeleteClass)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <span>Delete</span>
+  </div>
+  <div class="dps-crime-grid-button time-info" fxLayout="column">
+    <button mat-icon-button (click)="onActionClick(userAction.ProcessClass)">
+      <mat-icon>alarm_add</mat-icon>
+    </button>
+    <span>Time</span>
+  </div>
+  <div *ngIf="(moduleIsActive(module.Crime) | async) && classItem?.rectype < 100"
+    class="dps-crime-grid-button class-info" fxLayout="column">
+    <button mat-icon-button (click)="onActionClick(userAction.OpenClassInfo)">
+      <mat-icon>info</mat-icon>
+    </button>
+    <span>Class info</span>
+  </div>
+</div>

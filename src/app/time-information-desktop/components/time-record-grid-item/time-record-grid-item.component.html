@@ -1,0 +1,33 @@
+<div fxLayout="column">
+  <div *ngFor="let item of rows; let index = index; let isOdd=odd; let isEven=even">
+    <div fxLayout class="grid-data"
+      [ngClass]="index === selectedIndex?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+      (click)="onRowDblClick(item, index)">
+      <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item?.date | date :'dd/MM/yyyy' }}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item?.feeEarner}}"></div>
+      <div class="row-data" *ngIf="allData" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item?.attTypeText }}"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+        innerHTML="{{travellingTimeSum(item)}} ({{ travellingValueSum(item)  | number : '1.2-2' }})"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+        innerHTML="{{item?.waitPS }} ({{item?.waitingVal | number : '1.2-2' }})"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+        innerHTML="{{item?.adviAssi }} ({{item?.advAssiVal | number : '1.2-2' }})"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(6)"
+        innerHTML="{{item?.attCsl}} ({{item?.attCslVal | number : '1.2-2' }})"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(7)"
+        innerHTML="{{prepTimeSum(item) }} ({{prepValueSum(item) | number : '1.2-2' }})"></div>
+
+      <div class="row-data" [fxFlex]="getFxFlexProperty(8)"
+        innerHTML="{{item?.adv }} ( {{item?.advVal | number : '1.2-2'}})"></div>
+
+      <div class="row-data disbursements" [fxFlex]="getFxFlexProperty(9)"
+        innerHTML="{{disbursementTotal(item) | number : '1.2-2'}}"></div>
+
+    </div>
+  </div>
+</div>

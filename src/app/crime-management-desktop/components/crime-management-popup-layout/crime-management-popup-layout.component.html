@@ -1,0 +1,20 @@
+<div class="crime-information-general">
+  <mat-toolbar class="top">
+    <span fxFlex="1 1 auto">
+      <i class="material-icons time-rc-head-icon">alarm_on</i>
+      Case Class Management
+    </span>
+    <button class="time-rc-close" mat-icon-button (click)="onClose()">
+      <i class="material-icons">close</i>
+    </button>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <mat-dialog-content class="dps-white-gray-scroll">
+    <dps-crime-management-content [rateFileloading]="rateFileloading" (rateFileUpdate)="onRateFileUpdate()"
+      [isLoading]="isLoading" [classList]="classList" [classType]="classType" [addClassModel]="addClassModel"
+      (updateAddClassModel)="onUpdateAddClassModel($event)" (userAction)="onUserAction($event)" (expandRow)="onExpandRow($event)">
+    </dps-crime-management-content>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+</div>

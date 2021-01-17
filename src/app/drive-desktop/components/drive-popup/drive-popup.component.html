@@ -1,0 +1,26 @@
+<div class="dps-drive-popup" fxLayout="column">
+  <mat-toolbar fxFlex="40px" class="dps-toolbar-box-shadow">
+    <mat-icon>cloud_queue</mat-icon>
+    <span fxFlex="1 1 auto">{{(rootFoldersListManager.activeDrive$|async)?.name||'My Drive'}}</span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div fxFlex="calc(100%-40px)" fxLayout="row">
+    <div fxFlex="300px">
+      <dps-root-folders-list-manager #rootFoldersListManager [isDriveFolderSelect]="true" [isPopup]="true"></dps-root-folders-list-manager>
+    </div>
+    <div fxFlex="1 1 auto" fxLayout="column" class="dps-drive-folder-content spline">
+      <div class="dps-drive-file-path" *ngIf="rootFoldersListManager.activeDrive$|async">
+        <dps-drive-file-path-manager [isPopup]="true"></dps-drive-file-path-manager>
+      </div>
+      <div fxFlex="1 1 auto" class="dps-white-gray-scroll">
+        <dps-drive-folder-content-manager #driveFolderContentManager [viewType]="ExplorerViewType.Detail" [isPopup]="true"></dps-drive-folder-content-manager>
+      </div>
+      <div fxFlex="60px" fxLayout="row" fxLayoutAlign="end center" class="dps-footer">
+        <button mat-raised-button  [mat-dialog-close]="driveFolderContentManager.itemList$|async" class="dps-attch">Attach</button>
+        <button mat-raised-button (click)="onClose()" class="dps-cancel" >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div fxLayout="row" [ngClass]="{'active': rowData.selected}" class="grid-data" (click)="onRowClick(rowData)">
+
+  <div class="row-data name" fxFlex="10"> {{rowData.data.ref}}</div>
+  <div class="row-data" fxFlex="35"> {{rowData.data.name}} </div>
+  <div class="row-data" fxFlex="25"> {{rowData.data.details}}</div>
+  <div class="row-data" fxFlex="10"> {{rowData.data.postCode}}</div>
+  <div class="row-data" fxFlex="10"> {{rowData.data.dob}}</div>
+  <div class="row-data" fxFlex="10"> {{rowData.data.match}}</div>
+  
+</div>

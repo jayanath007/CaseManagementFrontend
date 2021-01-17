@@ -1,0 +1,5 @@
+<div class="dps-task-home" fxLayout="column">
+  <dps-task-grid fxFlex="100%" (IsExpandSelection)="IsExpand($event)" (PageEvent)="PageChangeEvent($event)" [TaskData]="taskData$ | async"
+    [PageInfo]="pageInfo$ | async">
+  </dps-task-grid>
+</div>

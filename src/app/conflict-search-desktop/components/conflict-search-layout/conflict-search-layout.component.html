@@ -1,0 +1,151 @@
+<div class="dps-conflict-main-layout" fxLayout="column">
+  <div class="general-loader-light" [hidden]="!loadingData" mode="indeterminate"></div>
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow header-toolbar">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center">
+        <mat-icon matListIcon class="conflict-mat-icon">loop</mat-icon>
+        <span class="clients-text">Conflict Search</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button matTooltip="Close" (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxLayout="column" fxFlex="calc(100% - 55px)" fxFlex="1 1 auto">
+    <mat-sidenav-container class="dps-sidenav-container">
+      <mat-sidenav class="dps-conflict-search-side-nav" mode="side" position="start" opened>
+        <div class="search-fields dps-white-gray-scroll dps-blue-scroll">
+          <form novalidate [formGroup]="conflictSearchForm" class="dps-form">
+            <div class="conflict-search-form-field">
+              <mat-form-field class="example-full-width">
+                <input matInput id="surnameId" placeholder="Last Name" formControlName="surname" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput id="fornameId" placeholder="First Name" formControlName="forname" />
+              </mat-form-field>
+              <mat-form-field class="date-field" floatLabel="date Of Birth">
+                <input matInput [matDatepicker]="picker" placeholder="DOB" formControlName="dOB">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput id="postCodeId" placeholder="Postcode" formControlName="postCode" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width" [hidden]="!showMatterDetail">
+                <input matInput id="matterDetailsId" placeholder="{{resoleModuleName('matter_search')|async}} Details"
+                  formControlName="matterDetails" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput id="companyId" placeholder="Company" formControlName="company" />
+              </mat-form-field>
+            </div>
+            <!-- <div class="dps-oppertunity-conflict"
+              *ngIf="(openFrom===conflictSearchOpenFrom.OpportunitySave || openFrom===conflictSearchOpenFrom.OpportunityQuote)">
+
+              <mat-form-field class="dps-input-outer example-full-width">
+                <mat-placeholder>Company</mat-placeholder>
+                <input matInput matInput id="companyId" formControlName="company" />
+                <button matSuffix mat-button mat-button tabindex="1" (click)="onAddCompany()" class="btn-input">
+                  <mat-icon>add_comment</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <div class="dps-company-list-outer">
+                <mat-list class="dps-company-list dps-blue-scroll dps-white-gray-scroll">
+                  <mat-list-item class="" *ngFor="let searchCompany of companyList">
+                    <h4 mat-line>{{searchCompany}}</h4>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div> -->
+
+            <div class="example-full-width">
+              <mat-checkbox class="conflict-search-checkbox" (change)="chnageIsClientTypeCompany()"
+                id="isClientTypeCompany" color="primary" formControlName="isClientTypeCompany" change>
+                Search {{resoleModuleName('matter_search')|async}} Details</mat-checkbox>
+            </div>
+            <div class="example-full-width">
+              <mat-checkbox class="conflict-search-checkbox mat_line" id="includeClientWithNoMatterId" color="primary"
+                formControlName="includeClientWithNoMatter">
+                Include {{resoleModuleName('client_search')|async}} with no current
+                {{resoleModuleName('matter_search')|async}} & closed
+                {{resoleModuleName('matter_search')|async}}</mat-checkbox>
+            </div>
+            <mat-dialog-actions class="example-full-width conflict-search-buttons"
+              *ngIf="!(openFrom===conflictSearchOpenFrom.OpportunitySave || openFrom===conflictSearchOpenFrom.OpportunityQuote)">
+              <button mat-button tabindex="1" matTooltip="Search" [hidden]="!getIsSearchEnabale"
+                (click)="onSearchClient()">
+                <i class="material-icons">
+                  search
+                </i>
+              </button>
+              <button mat-button tabindex="1" matTooltip="Clear" [hidden]="getIsSearchEnabale" (click)="onClear()">
+                <i class="material-icons">
+                  youtube_searched_for
+                </i>
+              </button>
+              <button mat-button tabindex="1" matTooltip="Save & New" [hidden]="getIsSearchEnabale"
+                (click)="onSaveAndNew($event)">Save
+                & New</button>
+              <button mat-button tabindex="2" matTooltip="Save" [hidden]="getIsSearchEnabale" (click)="onSave($event)"
+                [disabled]="isLoading">
+                <i class="material-icons">
+                  save
+                </i>
+              </button>
+              <button mat-button (click)="onClose()" matTooltip="Close">
+                <i class="material-icons">
+                  close
+                </i>
+              </button>
+            </mat-dialog-actions>
+            <mat-dialog-actions class="example-full-width conflict-search-buttons"
+              *ngIf="(openFrom===conflictSearchOpenFrom.OpportunitySave || openFrom===conflictSearchOpenFrom.OpportunityQuote)">
+              <button mat-button tabindex="1" matTooltip="Run Conflict Search"
+                (click)="onRunOpportunityConflictSearch()">
+                <i class="material-icons">
+                  search
+                </i>
+              </button>
+              <button mat-button tabindex="1" matTooltip="Save Search" (click)="onSaveOpportunityConflictSearch()">
+                <i class="material-icons">
+                  save
+                </i>
+              </button>
+            </mat-dialog-actions>
+          </form>
+        </div>
+      </mat-sidenav>
+      <div fxLayout="column" fxFlexFill class="dps-sidenav-content">
+        <div class="conflict-search-main-body">
+          <dps-grid-container [gridColoumn]="conflictSearchGridColumn" [pageEvent]="conflictSearchPageEvent"
+            (page)="onConflictSearchPageChange($event)">
+            <dps-conflict-search-grid-contant (rowClick)="onRowClick($event)" [gridColoumn]="conflictSearchGridColumn"
+              [gridData]="conflictSearchList">
+            </dps-conflict-search-grid-contant>
+          </dps-grid-container>
+        </div>
+        <div fxLayout="column wrap" class="conflict-search-main-body">
+          <div class="header-result-summary" fxLayout="column">
+            <div fxLayout="row wrap">
+              <h1>
+                <span>{{resoleModuleName('client_search')|async}} Name: </span> {{client?.clientName }} </h1>
+            </div>
+            <div fxLayout="row wrap">
+              <p>
+                <span>Address: </span>{{ getClientAddress }} </p>
+            </div>
+          </div>
+          <dps-grid-container fxFlex="calc(100% - 60px)" [isGridLoding]="clientMatterLoading"
+            [gridColoumn]="clientMatterhGridColumn" [pageEvent]="clientMatterPageEvent"
+            (page)="onClientMatterhPageChange($event)">
+            <dps-client-matter-grid-contant [gridColoumn]="clientMatterhGridColumn" [gridData]="clientMatterList">
+            </dps-client-matter-grid-contant>
+          </dps-grid-container>
+        </div>
+      </div>
+    </mat-sidenav-container>
+  </div>
+</div>

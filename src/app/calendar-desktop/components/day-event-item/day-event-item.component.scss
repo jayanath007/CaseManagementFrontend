@@ -1,0 +1,89 @@
+@import '~styles/variables.scss';
+
+.dps-calender-day-event {
+    height: 48px;
+}
+
+dps-day-event {
+    border-bottom: 1px solid $primary;
+}
+
+div.day_wrapper {
+    padding-left: 5px;
+}
+.dps-calender-day-event.busy {
+    border-left: 5px solid $calendar-day-busy;
+}
+
+.dps-calender-day-event.free {
+    border-left: 5px solid $calendar-day-free;
+}
+
+.dps-calender-day-event.tentative {
+    border-left: 5px solid $calendar-day-tentative;
+}
+
+.dps-calender-day-event.oof {
+    border-left: 5px solid $calendar-day-oof;
+}
+
+.dps-calender-day-event.workingElsewhere {
+    border-left: 5px solid $calendar-day-workingElsewhere;
+}
+
+.dps-calender-day-event.unknown {
+    border-left: 5px solid $calendar-day-unknown;
+}
+
+div.dps-cal-evnt-tme {
+    width: 100%
+}
+
+div.day_wrapper span {
+    vertical-align: 17px;
+}
+
+div.dps-cal-evnt {
+    padding-left: 5px;
+}
+
+div.dps-location {
+    margin: 3px 0px 0px 0px;
+}
+
+span.dps_calender_sidenav_icons i {
+    font-size: 15px;
+}
+
+
+span.dps_calender_sidenav_icons {
+    padding: 0px 5px 0px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 15%;
+}
+
+.dps-event-location {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    float: left;
+    width: 85%;
+    display: block;
+    
+}
+
+.dps-event-subject {
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    overflow: hidden;
+    word-break: break-word;
+    min-width: 80%;
+    float: left;
+    width: 96%;
+}
+

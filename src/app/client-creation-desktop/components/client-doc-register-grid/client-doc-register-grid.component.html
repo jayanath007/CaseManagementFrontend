@@ -1,0 +1,17 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+  <mat-list-item [ngClass]="{'active': rowData.selected}" class="dps-grid-list-item" *ngFor="let rowData of gridData; let index =index; let isOdd=odd; let isEven=even"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" [ngClass]="{'active': rowData.selected}"
+    (click)="onRowClick(rowData)">
+    
+    <div fxLayout class="grid-data">    
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData.documentRef}}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.type}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData.location}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{rowData.address}}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{rowData.reviewDate | date :'dd/MM/yyyy' }}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{rowData.destroyDate | date :'dd/MM/yyyy' }}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{rowData.matterRef}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{rowData.matterDetails}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

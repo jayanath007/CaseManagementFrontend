@@ -1,0 +1,66 @@
+<div class="ov-button-wrap button-row">
+  <span class="title">Screen Application Variables</span>
+  <div class="edit-mode">
+    <button mat-mini-fab class="mat-elevation-z0 edit" [ngClass]="{'disabale': !(selectedOvItem?.length === 1) }" [hidden]="selectedOvItem?.length !== 0"
+    title="Edit Field"  
+    tabindex="-4" (click)="onOvEdit()">
+      <mat-icon>mode_edit</mat-icon>
+    </button>
+
+    <button mat-mini-fab class="mat-elevation-z0 delete" [ngClass]="{'disabale': !(selectedOvItem?.length > 0) }" color="warn"
+      title ="Delete Field(s) from application" 
+      tabindex="-4" (click)="onOvDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="ov-regular">
+
+    <button mat-mini-fab class="mat-elevation-z0 file-upload" tabindex="-1"
+    title ="Export Screen Variable List to Excel"  
+    (click)="excelExport()">
+    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+    </button>
+
+    <button mat-mini-fab class="mat-elevation-z0" tabindex="-2" (click)="ovAddLable()"
+    title ="Add New Label"  >
+      <mat-icon>label</mat-icon>
+    </button>
+    
+    <button mat-mini-fab class="mat-elevation-z0" tabindex="-3" (click)="ovIteminsert()"
+    title ="Add Field">
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+  </div>
+  
+
+  <div class="clearfix"></div>
+  
+</div>
+
+<mat-form-field class="ov-search">
+  <input matInput placeholder="Search" [ngModel]="seachText" #search (keyup)="onSearchChange(search.value)" />
+  <button mat-button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear(search.value)">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<div class="ov-list-container">
+  <div class="edit-screen-left-components">
+    <div class="ov-list-header">
+      <div class="var">Var#</div>
+      <div class="type"> Type </div>
+      <div class="label">Label</div>
+      <div class="field-usage"> &nbsp;</div>
+      <div class="clear"></div>
+    </div>
+    <virtual-scroll [items]="ovItemList" class="dps-white-gray-scroll dps-blue-scroll" (update)="getViewPortItems($event)">
+      <div class="ovItemFirst" dropZone="ovItemFirst" dpsDroppable (onDrop)="onDropItem($event,defultDataItem)" (onDragEnter)="onDragEnterItem($event, defultDataItem)"
+        [ngClass]="{'componenet-drag-space dps-ov-item':  ( isShowDropInOvItem && defultDataItem.onScreen ) }"> </div>
+
+      <dps-ov-item class="dps-ov-item" (onComponentChange)=onComponentChangeUpdate($event) (onOvChange)=onOvItemChange($event)
+        (onShowDropInOvItem)=onDropInOvItemChange($event) (onDropItem)=onDrop($event) *ngFor="let item of viewPortItems let index =index;let isOdd=odd;let isEven=even"
+        [class.odd]="isOdd" [class.even]="isEven" [isShowDropInOvItem]="isShowDropInOvItem" [dataItem]="item">
+      </dps-ov-item>
+    </virtual-scroll>
+  </div>
+</div>

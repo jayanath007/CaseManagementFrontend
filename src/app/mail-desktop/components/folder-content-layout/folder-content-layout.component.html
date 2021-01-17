@@ -1,0 +1,20 @@
+<div [ngClass]="{'dps-folder-content-hidden': hidden}" class="dps-folder-content">
+  <div class="dps-mail-list" fxLayout="column">
+    <dps-mail-list-header fxFlex="50px" (viewChange)="onListViewChange($event)" [itemPerPage]="listOptions?.itemPerPage" [filter]="listOptions?.filter"
+      [orderBy]="listOptions?.orderBy" [sortDir]="listOptions?.sortDir" [total]="listOptions?.total" [isSearching]="isSearching"
+      [pageIndex]="listOptions?.pageIndex" [selectedItems]="selectedItems" (itemsReadUnread)="onItemsReadUnread($event)" (itemsFlag)="onItemsFlag($event)"
+      (itemsDelete)="onItemsDelete($event)" [itemsLoading]="isItemsLoading && !hidden" (attachToNewMail)="onAttachToNewMail($event)"
+      [folderList]="folderList" (moveToFolder)="onMoveToFolder($event)" [companyCode]="companyCode"></dps-mail-list-header>
+
+    <dps-mail-list-view [items]="activeItems" fxFlex="calc(100% - 50px)" (itemsReadUnread)="onItemsReadUnread($event)" (itemsFlag)="onItemsFlag($event)"
+      (itemCheck)="onItemCheck($event)" (itemsDelete)="onItemsDelete($event)" (itemSelect)="onItemSelect($event)" [selectedItems]="selectedItems"
+      [timeZone]="timeZone" [companyCode]="companyCode">
+    </dps-mail-list-view>
+    <div class="dps-empty-folder" *ngIf="!isItemsLoading && activeItems && activeItems.length < 1">
+      <h2>
+        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+      </h2>
+      <h3>This folder is empty.</h3>
+    </div>
+  </div>
+</div>

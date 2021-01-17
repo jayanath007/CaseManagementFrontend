@@ -1,0 +1,47 @@
+@import '~styles/variables.scss';
+h3
+{
+    padding: 0 0 20px;
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    margin: 0;
+    color: $primary;
+}
+
+
+.police-station-information {
+
+    
+
+    ::ng-deep {
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+        background-color: #c8c8c8;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background-color: #c0c0c0;
+    }
+    
+    }
+
+    .police-station-id , .scheme-id , .scheme-name {
+        ::ng-deep .mat-form-field-infix {
+            width: 204px;
+        }
+    }
+
+    mat-form-field {
+        mat-icon {
+            color: $primary;
+            font-size: 18px;
+        }
+    }
+
+    .advice-calls-responce-time {
+        ::ng-deep .mat-form-field-infix {
+            width: 187px;
+        }
+    }
+}
+
+    

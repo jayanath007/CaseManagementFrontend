@@ -1,0 +1,16 @@
+<div class="dps-module-layout" fxLayout="column">
+  <div class="dps-module-layout-header" [ngClass]="moduleColor" [fxFlex]="layoutHeaderHeight||'65px'">
+    <ng-content select="[dps-layout-header]">
+    </ng-content>
+  </div>
+  <div [fxFlex]="'calc(100%-'+(layoutHeaderHeight||'65px')+')'" fxLayout="column">
+    <div class="dps-module-layout-background" [ngClass]="moduleColor" [ngStyle]="{'height': contentHeaderHeight}">
+    </div>
+    <div class="dps-module-layout-forground" [style.padding]="contentPadding" fxLayout="column">
+      <mat-card>
+        <ng-content select="[dps-layout-content]">
+        </ng-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

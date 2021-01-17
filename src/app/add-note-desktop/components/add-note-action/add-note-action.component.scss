@@ -1,0 +1,8 @@
+mat-option  {
+    font-size: 12px !important;
+  }
+
+  .mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #006cc1;
+    background: #d9eeff;
+}

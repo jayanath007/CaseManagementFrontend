@@ -1,0 +1,38 @@
+@import '~styles/variables.scss';
+
+
+
+.mat-option:hover {
+    background: #e6f1fd;
+}
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $header-primary;
+    background: #e6f1fd;
+    font-weight: 500;
+}
+
+
+.dps-open-look-up
+{
+    border: 1px solid #3271ea;
+    color: #103e6f;
+    background: #c1e0fd;
+    border-radius: 4px;
+    padding: 0px 0px 0px;
+    opacity: .7;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 15px;
+
+    &:hover{
+        opacity: .9;
+    }
+}
+.dps-open-look-up{
+    mat-icon{
+        font-size: 18px !important;
+    }
+   
+}

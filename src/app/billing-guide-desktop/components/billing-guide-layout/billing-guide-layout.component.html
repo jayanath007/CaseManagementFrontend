@@ -1,0 +1,174 @@
+<div fxLayout="column" class="dps-billing-guide">
+
+  <mat-toolbar>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="fa-rotate-90 matter-icon">line_weight</mat-icon>
+        <span class="header-text" matTooltip="{{billingGuideData.matterRef}}" matTooltipPosition="after">Billing Guide
+          - Time Analysis:{{billingGuideData.matterRef}} </span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="dps-billing-outer dps-white-gray-scroll" fxLayout="column wrap" >
+      <!-- fxFlex="calc(100% - 103px)" -->
+
+    <div fxLayout="column" class="dps-billing-inner">
+      <mat-list class="dps-groups" dense>
+        <mat-list-item>
+          <mat-icon matListIcon>tune</mat-icon>
+          <h4 mat-subheader> Analysis Type</h4>
+        </mat-list-item>
+
+        <div class="content-wrapper" fxLayout="column wrap" fxLayoutGap="1rem">
+          <mat-radio-group (change)="onAnalysisTypeChange($event)" [(ngModel)]='analysisType' fxLayout="row"
+            fxLayoutGap="2rem">
+            <mat-radio-button color="primary" [value]='AnalysisType.Time'>Time</mat-radio-button>
+            <mat-radio-button color="primary" [value]='AnalysisType.BillingGuide'>Billing Guide</mat-radio-button>
+          </mat-radio-group>
+          <!-- <div fxLayout="row wrap" fxLayoutGap="2rem">
+            <mat-form-field class="date-picker-inner">
+              <input matInput [matDatepicker]="fromDateicker" [readonly]="true" [disabled]='selected===AnalysisType.Time'
+                [(ngModel)]='fromDate' placeholder="From">
+              <mat-datepicker-toggle matSuffix [for]="fromDateicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromDateicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="date-picker-inner">
+              <input matInput [matDatepicker]="toDatePicker" [readonly]="true" [disabled]='selected===AnalysisType.Time'
+                [(ngModel)]='toDate' placeholder="To">
+              <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #toDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div> -->
+        </div>
+
+
+      </mat-list>
+
+      <mat-list class="dps-groups" dense>
+        <mat-list-item>
+          <mat-icon matListIcon class="fa" fontSet="fontawesome" fontIcon="fa-sort-amount-desc"></mat-icon>
+          <h4 mat-subheader>Sort By</h4>
+        </mat-list-item>
+        <div class="content-wrapper" fxLayout="column wrap">
+          <mat-radio-group [(ngModel)]='billingGuideSortBy' fxLayout="row" fxLayoutGap="2rem">
+            <mat-radio-button color="primary" [value]='SortBy.FeeEarner'>Fee Earner</mat-radio-button>
+            <mat-radio-button color="primary" [value]='SortBy.Date' [disabled]='selected===AnalysisType.BillingGuide'>Date</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-list>
+
+      <mat-list class="dps-groups" dense>
+        <mat-list-item>
+          <mat-icon matListIcon class="fa" fontSet="fontawesome" fontIcon="fa-clock-o"></mat-icon>
+          <h4 mat-subheader>Show</h4>
+        </mat-list-item>
+        <div class="content-wrapper" fxLayout="row wrap" fxLayoutGap="2rem">
+          <mat-radio-group [(ngModel)]='billingGuideShowTime' fxLayout="row" fxLayoutGap="1rem">
+            <mat-radio-button color="primary" [value]='ShowTime.AllTime' [disabled]='selected===AnalysisType.BillingGuide'>All
+              Time</mat-radio-button>
+              <div fxLayout="column wrap" fxLayoutGap="1rem" class="show-time-input">
+                  <mat-radio-button color="primary" [value]='ShowTime.BilledTime' [disabled]='selected===AnalysisType.BillingGuide'>Billed
+                      Time</mat-radio-button>
+                      <mat-form-field floatPlaceholder="always">
+                          <input disabled="true" matInput placeholder="Billed Value" readonly="readonly" [value]="billedValueData?.billedValue | number : '1.2-2'">
+                        </mat-form-field>
+              </div>
+              <div fxLayout="column wrap" fxLayoutGap="1rem" class="show-time-input">
+                  <mat-radio-button class="unbilled" color="primary" [value]='ShowTime.UnBilled'>Unbilled Time</mat-radio-button>
+                  <mat-form-field floatPlaceholder="always">
+                      <input disabled="true" matInput placeholder="Unbilled Value" readonly="readonly" [value]="billedValueData?.unbilledValue | number : '1.2-2'">
+                    </mat-form-field>
+              </div>
+           
+          </mat-radio-group>
+
+          <!-- <div class="show-time-input" fxLayout="column" fxLayoutGap="1rem"> </div> -->
+
+          <div class="dps-group-by-slide-toggle" fxLayout="column wrap" fxLayoutGap="6px" *ngIf="selected!==AnalysisType.Time" style="padding: 5px 0px">
+            <section>
+              <mat-slide-toggle color="primary" (change)="onSummaryReportChange($event)" [(ngModel)]='chkBillingSummaryReport'>
+                Summary Report
+              </mat-slide-toggle>
+            </section>
+            <section>
+              <mat-slide-toggle color="primary" (change)="onIncludeDisbursementChange($event)" [(ngModel)]='chkIncludeDisbursement'>
+                Include Disbursement
+              </mat-slide-toggle>
+            </section>
+          </div>
+          <div fxLayout="row wrap" fxLayoutGap="2rem">
+            <mat-form-field class="date-picker-inner">
+              <input matInput [matDatepicker]="fromDateicker" [readonly]="true" [disabled]='selected===AnalysisType.Time'
+                [(ngModel)]='fromDate' placeholder="From">
+              <mat-datepicker-toggle matSuffix [for]="fromDateicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromDateicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="date-picker-inner">
+              <input matInput [matDatepicker]="toDatePicker" [readonly]="true" [disabled]='selected===AnalysisType.Time'
+                [(ngModel)]='toDate' placeholder="To">
+              <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #toDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- <div fxLayout="row" fxLayoutGap="2rem">
+             
+             
+          </div> -->
+
+        </div>
+      </mat-list>
+
+      <mat-list class="dps-groups" dense>
+        <mat-list-item>
+          <mat-icon matListIcon class="fa" fontSet="fontawesome" fontIcon="fa-list-ul"></mat-icon>
+          <h4 mat-subheader>Group By</h4>
+        </mat-list-item>
+        <div class="content-wrapper" fxLayout="column wrap" fxLayoutGap="1rem">
+          <div fxLayout="row wrap" class="dps-group-by-slide-toggle" fxLayoutGap="20px">
+            <section>
+              <mat-slide-toggle color="primary" (change)="onFeeEarnerChange($event)" [(ngModel)]='chkFeeEarner'> 
+                <!--  [disabled]='chkBillingSummaryReport !== true &&  selected===AnalysisType.BillingGuide ' -->
+                Fee Earner
+              </mat-slide-toggle>
+            </section>
+            <section>
+              <mat-slide-toggle color="primary" *ngIf="selected!==AnalysisType.Time" (change)="onTypeChange($event)"  [(ngModel)]='chkType'>
+                Type
+              </mat-slide-toggle>
+            </section>
+            <section [hidden]='selected===AnalysisType.BillingGuide || selected===AnalysisType.Time'>
+              <mat-slide-toggle color="primary" [(ngModel)]='chkActivity' [disabled]='chkBillingSummaryReport === true'>
+                Activity
+              </mat-slide-toggle>
+            </section>
+            <section [hidden]='selected===AnalysisType.BillingGuide'>
+              <mat-slide-toggle color="primary" [(ngModel)]='chkHideZeroValues'>
+                Hide 0 Value Item
+              </mat-slide-toggle>
+            </section>
+          </div>
+        </div>
+
+      </mat-list>
+
+    </div>
+  </div>
+
+  <div class="dps-footer">
+    <mat-divider></mat-divider>
+    <div class="footer-button" fxLayoutGap="10px">
+      <span fxFlex="1 1 auto"></span>
+      <button mat-raised-button  class="dps-billing-submit" tabindex="2" (click)="onSubmit()">Ok</button>
+      <button class="dps-cancel" tabindex="-1" (click)="onClose()">Cancel</button>
+    </div>
+  </div>
+</div>

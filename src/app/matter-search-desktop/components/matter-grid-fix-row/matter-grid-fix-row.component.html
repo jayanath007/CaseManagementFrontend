@@ -1,0 +1,46 @@
+<div fxLayout class="grid-data dps-matter-search-grid-data" *ngIf="!isPlotUser">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)" [ngClass]="{'dps-exponential-column-hide': isPopup}"></div>
+  <div class="row-data" *ngIf="activeView=='Recent50' || activeView=='SuggestByEmails'" (dblclick)="getRowDatata()"
+    [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{matterRowData.data.matterReferenceNo | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data app-code" *ngIf="activeView=='Recent50'  || activeView=='SuggestByEmails'"
+    [fxFlex]="getFxFlexProperty(2)" innerHTML="{{matterRowData.data.app_Code | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" *ngIf="activeView=='Recent50'  || activeView=='SuggestByEmails'" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{matterRowData.data.clientName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data " *ngIf="activeView=='Recent50'  || activeView=='SuggestByEmails'"
+    [fxFlex]="getFxFlexProperty(4)" innerHTML="{{matterRowData.data.matterDetails | seacrhTextHighligh : searchText}}">
+  </div>
+
+
+  <div class="row-data" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{matterRowData.data.matterReferenceNo | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data app-code" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'"
+    [fxFlex]="getFxFlexProperty(2)" innerHTML="{{matterRowData.data.app_Code | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{matterRowData.data.clientName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data lastused-date" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'"
+    [fxFlex]="getFxFlexProperty(4)"
+    innerHTML="{{matterRowData.data.lastUsed | date :'dd/MM/yyyy' | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data review-date" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'"
+    [fxFlex]="getFxFlexProperty(5)"
+    innerHTML="{{matterRowData.data.reviewDate | date :'dd/MM/yyyy' | seacrhTextHighligh : searchText}}">
+  </div>
+  <div class="row-data" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'" [fxFlex]="getFxFlexProperty(6)"
+    innerHTML="{{matterRowData.data.matterDetails | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" *ngIf="activeView!='Recent50' && activeView!='SuggestByEmails'" [fxFlex]="getFxFlexProperty(7)"
+    innerHTML="{{matterRowData.data.reviewNote | seacrhTextHighligh : searchText}}"></div>
+</div>
+
+<div fxLayout class="grid-data dps-matter-search-grid-data" *ngIf="isPlotUser">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)" [ngClass]="{'dps-exponential-column-hide': isPopup}"></div>
+  <div class="row-data" (dblclick)="getRowDatata()" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{matterRowData.data.matterReferenceNo | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(2)"
+    innerHTML="{{matterRowData.data.clientName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data " [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{matterRowData.data.matterDetails | seacrhTextHighligh : searchText}}"> </div>
+  <div *ngFor="let item of plotVarValues ; let index =index;" class="row-data " [fxFlex]="getFxFlexProperty(index + 4)"
+    innerHTML="{{matterRowData.data['var'+(index+1)] | seacrhTextHighligh : searchText}}">
+  </div>
+
+</div>

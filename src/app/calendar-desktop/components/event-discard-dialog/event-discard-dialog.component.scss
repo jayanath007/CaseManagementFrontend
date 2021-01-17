@@ -1,0 +1,72 @@
+@import '~styles/variables.scss';
+.organizer-alert p
+{
+    font-size: 12px;
+}
+.organizer-alert mat-dialog-content
+{
+    text-align: right;
+}
+.organizer-alert .mat-dialog-title
+{
+    padding: 5px 14px 5px;
+    color: $primary;
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.organizer-alert.general .mat-dialog-title
+{
+    background-color: #274e8a;
+}
+.mat-dialog-title .fa
+{
+    margin-right: 5px;
+
+}
+p{
+    padding: 0px 12px;
+}
+
+button.full-button
+{
+    background: #e8e8e8;
+    width: 100%;
+    margin: 5px 0px;
+    padding: 15px 0;
+
+}
+button.full-button.active
+{
+    background: #0465a5;
+}
+button.full-button strong
+{
+    font-size: 13px;
+    color: #585858;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+}
+
+button.full-button p
+{
+    font-size: $secondary-font-size;
+    color: #5f5f5f;
+    line-height: 16px;
+    padding: 0;
+    margin: 0px;
+}
+button.full-button.active strong,
+button.full-button.active p
+{  
+    color: $primary;
+
+}
+.mat-dialog-content
+{
+    margin: 0 0 0 0;
+    padding: 0 10px 10px;
+}

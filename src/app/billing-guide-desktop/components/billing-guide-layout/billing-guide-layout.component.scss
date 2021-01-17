@@ -1,0 +1,160 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-billing-guide-popup-panel {
+  .mat-dialog-container {
+    border-radius: 0px;
+  }
+}
+
+.dps-billing-guide {
+  height: 100%;
+}
+mat-list {
+&.dps-groups{
+  mat-list-item{
+    height: 35px;
+  }
+  
+}
+}
+.dps-billing-outer{
+  overflow-y: auto;
+  height: calc(100% - 100px);
+}
+mat-toolbar {
+  min-height: 42px;
+  mat-toolbar-row.dps-toolbar-box-shadow {
+    background: $dps-popup-matbar;
+    color: #dfeaff;
+    font-size: $primary-font-size;
+    height: 42px;
+    .dps-header {
+     
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+      mat-icon {
+        vertical-align: middle;
+        border-radius: 100%;
+        // border: 2px solid #97d3fb;
+        padding: 3px;
+        // color: #a9c6fd;
+        color: #b1c3ce;
+        margin-right: 5px;
+        font-size: 20px;
+      }
+      .header-test {
+        color: #e3f4ff;
+        width: 100%;
+        font-size: 13px;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+.dps-billing-inner {
+  .show-time-input{
+    // margin-top: 50px;
+    mat-form-field{
+      padding-left: 8px;
+    }
+   
+  }
+  .unbilled{
+    width:90px;
+  }
+  padding: 3px 10px 3px;
+  mat-list-item {
+    background: #e8f1f9;
+    mat-icon {
+      color: #04477d;
+    }
+    h3 {
+      font-size: 15px;
+      color: #30587b;
+    }
+    h4 {
+     
+      color: #30587b;
+    }
+  }
+  .content-wrapper {
+    padding: 5px 20px;
+  }
+}
+
+.footer-button {
+  padding: 6px 10px;
+
+}
+
+.dps-billing-submit {
+  background: $dps-primary-view;
+  color: $primary;
+  margin: 0 !important;
+}
+
+button {
+  font-size: $primary-font-size - 2;
+  border-radius: 0px;
+}
+
+mat-radio-button {
+  padding: 10px 0px;
+}
+
+.dps-billing-inner {
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #1e6aad !important;
+  }
+  ::ng-deep .mat-checkbox,
+    ::ng-deep .mat-radio-button {
+      font-size: $primary-font-size - 2;
+      color: $header-primary;
+    }
+  
+  ::ng-deep .mat-form-field {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+    width: 120px;
+    margin-right: 5px;
+    .mat-form-field-ripple.mat-form-field-ripple {
+      background: $header-primary;
+    }
+    .mat-form-field-label {
+      color: $header-primary;
+    }
+  }
+  ::ng-deep .mat-checkbox {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+  }
+}
+
+.dps-footer {
+  height: 50px;
+  
+}
+.time-analysis{
+  display: flex;
+  margin-right: 2rem;
+}
+.dps-group-by-slide-toggle{
+  mat-slide-toggle{
+    padding-bottom:15px; 
+  }
+}
+.date-picker-inner{
+  width: 120px !important;
+}
+::ng-deep .dps-billing-guide-popup-panel{
+  mat-dialog-container{
+   height: 100%;
+  }
+}
+mat-slide-toggle{
+  ::ng-deep .mat-slide-toggle-content{
+    font-size: 12px;
+  }
+}

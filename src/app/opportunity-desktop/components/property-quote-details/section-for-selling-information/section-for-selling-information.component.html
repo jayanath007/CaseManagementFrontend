@@ -1,0 +1,29 @@
+<div class="input-section seperator">
+
+  <h3>Selling Information </h3>
+  <div fxLayout="row" class="dps-radio-btn">
+    <mat-radio-group fxLayoutGap="2em" [ngModel]="propertyQuRequest[key.isSaleHouse]"
+      (change)="onChnageProQuoteRequest(key.isSaleHouse, $event.value)">
+      <mat-radio-button class="example-radio-button" [value]="true">
+        House
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="false">
+        Flat
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div fxLayout="row" class="general-stripped-seperator" fxLayoutGap="2em">
+    <mat-checkbox [ngModel]="propertyQuRequest[key.saleleasehold] === leaseHold.Yes"
+      (change)="onChnageProQuoteRequest(key.saleleasehold, ($event.checked === true ? leaseHold.Yes : leaseHold.No))"
+      color="primary">
+      <label>Selling leasehold</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('s', 'shared_ownership', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.sellShare]" (change)="onChnageProQuoteRequest(key.sellShare, $event.checked)"
+      color="primary">
+      <!-- <label>Selling in shared ownership?</label> -->
+      <label>{{costDescription('s', 'shared_ownership', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+  </div>
+
+</div>

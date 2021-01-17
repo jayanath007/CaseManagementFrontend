@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+
+.dps-team-drowp-menu {
+
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+  color: #4c4c4c !important;
+  height: 38px !important;
+
+}
+
+.dps-team-form {
+
+
+
+  padding: 20px 10px 24px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  display: flex;
+
+
+
+  ::ng-deep .mat-form-field {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+    width: 250px;
+    margin-right: 5px;
+
+    .mat-form-field-ripple.mat-form-field-ripple {
+      background: $header-primary;
+    }
+
+    .mat-form-field-label {
+      color: $header-primary;
+    }
+  }
+}
+
+.dps-btm-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+
+  .dps-task-submit {
+    background: #0d508c;
+    color: #fff;
+  }
+
+  button {
+    background: #0d508c;
+  }
+}
+
+.cancel {
+  color: $primary;
+  background: #696a6c;
+  margin-left: 4px;
+}
+
+.dps-selected-icon {
+  font-size: 16px;
+  position: relative;
+  top: 5px;
+  color: #3774a9;
+}
+
+.dps-option-menu-icon {
+  font-size: 16px;
+}

@@ -1,0 +1,49 @@
+<div class="dps-mail-widget-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="header mail">
+      <mat-icon class="header-icon">mail_outline</mat-icon>
+      <span class="header-name" color="primary" (click)="goToMail()">Inbox</span>
+      <div class="unread-msg" matTooltip="Un-read mail" *ngIf="inboxInfo?.unreadItemCount > 0">{{unreadCount}}</div>
+      <span class="spacer"></span>
+      <!-- <mat-chip-list>
+      <mat-chip>{{inboxInfo?.unreadItemCount}}</mat-chip>
+    </mat-chip-list> -->
+      <button mat-icon-button matTooltip="Compose" (click)="newMail()" class="option-btn compose">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #mainmenu="matMenu">
+        <button mat-menu-item class="dps-folder-action" (click)="onRemove()">
+          Remove
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-progress-bar *ngIf="isLoading && !data?.length && layout===1" mode="indeterminate"></mat-progress-bar>
+  <mat-spinner mode="indeterminate" *ngIf="isLoading && !data?.length && layout===2" diameter="35" strokeWidth="3">
+  </mat-spinner>
+  <!-- <div *ngIf="!isLoading && layout===1">
+    <div class="empty-view" *ngIf="data?.length === 0 || !data">
+      <p class="wrong-massage" *ngIf="data?.length === 0"> No item to preview</p>
+      <p class="wrong-massage" *ngIf="!data"> Something went wrong </p>
+    </div>
+  </div> -->
+  <mat-nav-list dense class="widget-item-list dps-white-gray-scroll" fxFlex="calc(100%-66px)">
+
+    <dps-mail-widget-item *ngFor="let item of items; let isOdd=odd; let isEven=even" [timeZone]="timeZone"
+      [companyCode]="companyCode" [ngClass]="isOdd?'separator-0':'separator-1'" [item]="item"
+      (selectItem)="openItem($event)" [layout]="layout"></dps-mail-widget-item>
+
+    <mat-list-item class="dps-empty-mail" *ngFor="let item of emptyList">
+      <div matListAvatar class="dps-empty-round"></div>
+      <div class="dps-empty-line" matLine fxLayout="column" fxLayoutGap="5px">
+        <span></span>
+        <span></span>
+      </div>
+    </mat-list-item>
+
+  </mat-nav-list>
+</div>

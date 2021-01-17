@@ -1,0 +1,74 @@
+@import '~styles/variables.scss';
+
+.dps-notification {
+  background: $primary;
+  padding: 0;
+}
+
+.dps-notification .bottom-controllers {
+  padding: 8px 7px 7px 0;
+}
+
+.report-method mat-icon {
+  vertical-align: middle;
+}
+
+.dps-mat-card.dps-notification.mat-card {
+  // padding: 0px;
+  margin-bottom: 5px;
+}
+
+.dps-notification-wrap .dps-notification-content {
+  padding: 4px 16px 16px 16px;
+  display: block;
+}
+
+.report-error {
+  padding: 10px;
+  margin: 0;
+  font-size: $primary-font-size - 1;
+  border: 1px dashed #e4c9c9;
+  padding: 12px;
+  background: #eceaea;
+
+  h3 {
+    padding: 0 0 7px 0;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+
+    span {
+      float: right;
+      color: #969696;
+      font-size: 12px;
+    }
+  }
+}
+
+.notification-body.dps-white-gray-scroll {
+  overflow: auto;
+}
+
+.report-method {
+  color: #404040;
+  font-size: $primary-font-size - 3;
+
+  .mat-icon {
+    font-size: $primary-font-size + 8;
+    color: #0d508c;
+  }
+
+  .mail {
+    cursor: pointer;
+
+    a {
+      color: #2c6aa9;
+    }
+  }
+}
+
+.phone a {
+  text-decoration: none;
+  color: #2c6aa9;
+
+}

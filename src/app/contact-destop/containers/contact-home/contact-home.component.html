@@ -1,0 +1,5 @@
+<div class="dps-contact-grid"  fxLayout="column">
+  <dps-contact-grid fxFlex="100%" (IsExpandSelection)="IsExpand($event)" (PageEvent)="PageChangeEvent($event)" [ContactData]="contactData$ | async"
+    [PageInfo]="pageInfo$ | async">
+  </dps-contact-grid>
+</div>

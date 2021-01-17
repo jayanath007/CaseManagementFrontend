@@ -1,0 +1,145 @@
+@import '~styles/variables.scss';
+
+.dps-folder-permissions-layout {
+  height: 100%;
+
+  mat-toolbar {
+    min-height: 0px !important;
+
+    .dps-toolbar-box-shadow {
+      background: #006cc1;
+
+      mat-icon {
+        color: $primary;
+      }
+
+      span {
+        padding-left: 16px;
+        color: $toolbar-title;
+        font-size: $primary-font-size+2;
+      }
+    }
+  }
+
+  .permissions-subheader {
+    padding: 10px 0px 0px 0px;
+
+    h3 {
+      height: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #000000;
+    }
+  }
+
+  .dps-selected {
+    background-color: $sky-blue
+  }
+
+  mat-toolbar-row {
+    height: 50px;
+  }
+
+  .dps-footer-btn {
+    margin-right: 10px;
+  }
+
+  mat-list {
+    padding: 10px;
+  }
+
+  mat-radio-group {
+    padding-left: 16px;
+
+    mat-radio-button {
+      height: 25px;
+    }
+  }
+
+  mat-checkbox {
+    padding-left: 16px;
+    height: 25px;
+  }
+
+  mat-form-field {
+    padding: 0px 16px;
+    top: -12px;
+  }
+
+  .dps-permissions-title {
+    padding: 0px 16px;
+  }
+
+  .dps-radio-group {
+    top: -17px;
+    position: relative;
+  }
+}
+
+.table-header {
+  width: 100%;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #757575;
+
+  span {
+    width: calc(50% - 15px);
+    padding: 10px;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    font-weight: 600;
+    background: #bcbebf;
+  }
+
+  div {
+    width: 16px;
+  }
+}
+
+.folder-permissions-levels-content {
+  overflow-y: scroll;
+  height: calc(100% - 40px);
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #757575;
+
+  span {
+    width: 50%;
+    padding: 10px;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+  }
+
+  .row-line {
+    border-bottom: 1px solid #9c9898;
+    cursor: pointer;
+  }
+}
+
+.folder-permissions-levels {
+  padding: 0px 15px;
+  height: 100%;
+}
+
+.dps-folder-permissions-layout {
+  ::ng-deep .mat-form-field {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+
+    .mat-form-field-label {
+      color: $header-primary;
+    }
+  }
+
+  ::ng-deep .mat-checkbox {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+  }
+
+  ::ng-deep .mat-radio-label {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+  }
+}

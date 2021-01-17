@@ -1,0 +1,51 @@
+<div class="dps-notification-wrap general">
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <mat-icon style="margin-top: 7px; float: left;" matListIcon>link</mat-icon>
+        <span> Link Email Addresses to File </span>
+      </span>
+      <span class="spacer"></span>
+      <mat-icon class="header-icon close" (click)="onClose()">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content class="notification-body dps-white-gray-scroll dps-blue-scroll">
+    <div fxFlex="1 1 auto" fxLayout="column">
+      <!-- <div class="row-highlight" dpsIsMobile>
+        <div class="row-highlight-inner">
+          <dps-column-header *ngFor="let header of gridColumns" [fxFlex]="header.extras.fxFlex" [def]="header"
+            [filterAnchor]="header.extras.filterAnchor">
+          </dps-column-header>
+        </div>
+      </div> -->
+      <mat-dialog-content *ngIf="!inputData?.haveOneToOneTypes" class="notification-body dps-white-gray-scroll dps-blue-scroll">
+        <mat-selection-list>
+          <mat-list-option class="email-listing" *ngFor="let inputItem of inputData?.contactEmailsViewModel" (selectionChange)="selectItem(inputItem)"
+            [selected]="inputItem.isSelect">
+            {{inputItem?.email}} - {{inputItem?.typeName}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-dialog-content>
+      <mat-dialog-content *ngIf="inputData?.haveOneToOneTypes" class="notification-body dps-white-gray-scroll dps-blue-scroll">
+        <mat-selection-list>
+          <mat-list-option *ngFor="let inputItem of inputData?.contactEmailsViewModel" (selectionChange)="selectItem(inputItem)" [selected]="inputItem.isSelect">
+            {{inputItem?.email}} - {{inputItem?.typeName}}
+            <div class="min-message" *ngIf="inputItem?.isReplase && inputItem?.isSelect && !inputItem?.unableToLinkContact">
+              Replace existing contact on this matter.
+            </div>
+            <div class="min-message" *ngIf="inputItem?.isSelect && inputItem?.unableToLinkContact">
+              Cannot be added! Already more than one contact in this type.
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-dialog-content>
+    </div>
+  </mat-dialog-content>
+  <div class="button-container">
+    <button class="confirm" mat-raised-button (click)="onLinkContact()">
+      OK</button>
+    <button class="dps-cancel" (click)="onClose()">
+      Cancel</button>
+    <div class="clear"></div>
+  </div>
+</div>

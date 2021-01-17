@@ -1,0 +1,35 @@
+@import '~styles/variables.scss';
+mat-list-item {
+  height: 40px !important;
+}
+
+.dps-calendar-avatar {
+  height: 36px !important;
+  width: 36px !important;
+  color: $primary;
+  padding: 8px 0px 0px 0px;
+}
+
+.dps-calendar-avatar span {
+  font-family: $primary-font-stack;
+  font-size: $primary-font-size + 1;
+  position: relative;
+  bottom: 10px ;
+}
+
+.dps-calender-list {
+  margin: 0px 0px 1px 0px;
+  ;
+}
+
+mat-icon.dps-cal-cake,
+mat-icon.dps-cal-event {
+  background-color: $calender-bck;
+  color: $calender-bck-color;
+  padding: 8px !important
+}
+
+.dps-user-avator {
+  height: 36px !important;
+  width: 36px !important;
+}

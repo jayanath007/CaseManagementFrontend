@@ -1,0 +1,127 @@
+.dps-helping-vdo-widget-layout {
+  height: 100%;
+
+  mat-toolbar {
+    background: #075788;
+    color: #dae1e4;
+  }
+  ::ng-deep .mat-card-header-text{
+    width: calc(100% - 64px);
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+mat-card{
+  padding: 7px 10px 7px 10px;
+    height: 65px;
+    border-radius: 0px;
+}
+.dps-helping-vdo-widget-content {
+
+  height: 100%;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #849fb0;
+    border: 4px;
+    border-radius: 4px;
+  }
+}
+
+.dps-white-gray-scroll::-webkit-scrollbar,
+.mat-menu-panel::-webkit-scrollbar,
+.fc-scroller::-webkit-scrollbar,
+.mat-select-panel::-webkit-scrollbar,
+.mat-autocomplete-panel::-webkit-scrollbar,
+.mat-dialog-container::-webkit-scrollbar,
+.time-information-content .mat-tab-body-content::-webkit-scrollbar {
+  height: 15px;
+  width: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.dps-vedio-widget {
+  display: flex;
+  flex-direction: row;
+}
+
+.dps-vedio-slot {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.dps-vedio-title {
+  width: 90%;
+  font-size: 12px;
+  font-family: roboto;
+  color: #29567b;
+  padding-top: 12px;
+}
+
+iframe {
+  height: 200px;
+  width: 90%;
+
+}
+
+p {
+  font-family: Lato;
+}
+
+.example-card {
+
+  margin: 4px
+}
+
+a {
+  width: 100%;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: #2c6182;
+}
+
+.dps-info-list {
+  &:nth-child(2n) {
+    background-color: rgba(71, 118, 147, 0.06);
+  }
+
+  &:nth-child(2n + 1) {
+    background-color: rgba(44, 97, 130, 0.16);
+  }
+}
+
+mat-card-title {
+  font-weight: 400 !important;;
+  font-size: 13px !important;
+}
+mat-card-subtitle{
+   font-size: 12px;
+    color: #00131e;
+    margin: 0px 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dps-more-icon {
+  color: #2e698e;
+}
+
+.dps-bbc-logo {
+  width: 40px;
+    height: 40px;
+    border: 2px solid #d6e3ebdb;
+    background: #fff;
+    padding: 5px;
+}

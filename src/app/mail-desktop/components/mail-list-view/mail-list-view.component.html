@@ -1,0 +1,6 @@
+<div class="dps-mail-list-view dps-white-gray-scroll">
+  <mat-nav-list dense>
+    <dps-mail-list-item *ngFor="let item of items" [item]="item" (itemReadUnread)="onItemsReadUnread($event)" (itemSelect)="onItemSelect($event)"
+      (itemFlag)="onItemsFlag($event)" (itemCheck)="onItemCheck($event)" (itemDelete)="onItemsDelete($event)" [selectedItems]="selectedItems" [timeZone]="timeZone" [companyCode]="companyCode"></dps-mail-list-item>
+  </mat-nav-list>
+</div>

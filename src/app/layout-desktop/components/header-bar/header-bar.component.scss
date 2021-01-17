@@ -1,0 +1,217 @@
+@import '~styles/variables.scss';
+
+.dps-user-avatar {
+  height: 40px;
+  // border-radius: 50%;
+}
+
+.dps-main-header-right {
+  width: 345px;
+  height: 50px;
+}
+
+div.dps-header-tab {
+  width: calc(100% - 345px);
+
+  ::ng-deep.mat-tab-header-pagination {
+    background: #384a58;
+  }
+
+  ::ng-deep.mat-tab-header-pagination-chevron {
+    border-color: #fff;
+  }
+
+  .case-tab {
+    display: flex;
+    flex-direction: row;
+
+    .case-text {
+      text-overflow: ellipsis;
+      max-width: 150px;
+      display: block;
+      overflow: hidden;
+      padding-left: 6px;
+    }
+  }
+}
+
+.dps-main-right {
+  padding-top: 10px;
+
+  .dps-module-section {
+    display: flex;
+    margin-right: 10px;
+
+    ::ng-deep {
+      .hd-bar-notifications-btn {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.dps-user-name {
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  padding-right: 10px;
+  color: #297ca3;
+  font-weight: 600;
+  line-height: 16px;
+  font-size: 13px;
+
+
+  span {
+
+    color: #65aad2;
+    margin-right: 3px;
+    margin-left: 10px;
+  }
+}
+
+.dps-header-name {
+  text-align: center;
+  /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
+.dps-user-img {
+  display: inline-block;
+}
+
+.dps-user-img button {
+  border-radius: unset;
+  height: 50px;
+  width: 50px;
+}
+
+.dps-user-img img {
+  // border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  // filter: grayscale(100%);
+}
+
+.dps-header-name mat-icon {
+  position: relative;
+  top: 6px;
+}
+
+.dps-header-name span {
+  font-size: 16px;
+}
+
+.dps-user-btn {
+  /* line-height: 62px; */
+  padding: 0px;
+  line-height: 12px;
+  border-radius: 0px;
+  height: 50px;
+
+  ::ng-deep.mat-button-wrapper {
+    line-height: normal;
+  }
+}
+
+.dps-user-btn mat-icon {
+  font-size: 40px;
+  padding-bottom: 12px;
+  padding-right: 18px;
+}
+
+mat-toolbar.dps-header-bar {
+  padding-right: 0px;
+
+  ::ng-deep {
+    .opened-case-tab .mat-tab-header {
+      border-bottom: none;
+    }
+
+    .opened-case-tab .mat-tab-label {
+      background: #dce7ec;
+      margin-right: 1px;
+    }
+
+    .opened-case-tab .mat-tab-label.mat-tab-label-active,
+    .opened-case-tab .mat-tab-label.mat-tab-label-active:focus,
+    .opened-case-tab .mat-tab-label:not(.mat-tab-disabled):focus .opened-case-tab .mat-tab-label.mat-tab-label-active:active {
+      background: #346c84 !important;
+      color: $primary;
+      box-shadow: 1px 4px 1px #11516d;
+      margin-right: 3px;
+    }
+
+    .opened-case-tab .mat-tab-label.mat-tab-label {
+      opacity: 1;
+      padding: 0 10px;
+      font-size: $primary-font-size - 2;
+      min-width: 100px;
+      height: 42px;
+      font-weight: normal;
+    }
+
+    .opened-case-tab .mat-tab-label.mat-tab-label .mat-icon.close {
+      font-size: $primary-font-size - 1;
+      font-weight: bold;
+      background: #f32f1d;
+      border-radius: 100%;
+      width: 13px;
+      height: 13px;
+      color: $primary;
+      padding: 3px;
+      margin: 6px 0 0 5px;
+      line-height: 13px;
+      vertical-align: top;
+      opacity: 0.8;
+    }
+
+    .opened-case-tab .mat-tab-label.mat-tab-label .mat-icon.credit-card {
+      vertical-align: top;
+      font-size: $primary-font-size + 7;
+      margin-top: 3px;
+    }
+
+    .opened-case-tab .mat-tab-label.mat-tab-label .mat-icon:hover {
+      opacity: 1;
+    }
+
+    .opened-case-tab.mat-tab-group.mat-primary .mat-ink-bar,
+    .opened-case-tab.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+      background-color: #5b97b1;
+    }
+  }
+}
+
+.dps-header-name mat-icon {
+  background: #269ee6;
+  border-radius: 100%;
+  padding: 5px;
+  color: $primary;
+}
+
+.mat-toolbar {
+  // background: $primary;
+  background: #1c2c39;
+
+}
+
+.opened-case-tab {
+  width: 100%;
+}
+
+.dps-team-member-avatar span {
+  font-size: 16px;
+  color: white;
+}
+
+::ng-deep .opencase-tab-disabale {
+
+  .mat-tab-label.mat-tab-label-active,
+  .mat-tab-label {
+    cursor: default;
+    pointer-events: none;
+    background: #a2a2a2 !important;
+  }
+}

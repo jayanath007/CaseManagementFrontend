@@ -1,0 +1,22 @@
+<div disableRipple dpsClick (dpsClick)="onSelectRow($event,item)" (dpsDblClick)="onOpenDocument($event,item)" *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even"
+  [dpsDraggable]="true" [dragData]="{item:item, group:groupData}" (onDragStart)="onSelectRow($event,item)" [dropZones]="['inBundle']"
+  [ngClass]="isItemSelect(item)?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+  <div fxLayout class="grid-data">
+    <div class="row-data date-done mat_line" [fxFlex]="getFxFlexProperty(0)">{{item.dateDone |
+      date:'dd/MM/yyyy h:mm a'}} </div>
+
+    <div class="row-data type-column" [fxFlex]="getFxFlexProperty(1)">
+      <mat-icon>
+        <span>
+          <i [ngClass]="item.letter_name | attachmentIcon"></i>
+        </span>
+      </mat-icon>
+      <span class="type"> {{item.letter_name}}</span>
+    </div>
+
+    <div class="row-data action-column" [fxFlex]="getFxFlexProperty(2)">
+      {{item.note}}
+    </div>
+
+  </div>
+</div>

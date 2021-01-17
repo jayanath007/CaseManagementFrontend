@@ -1,0 +1,33 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-matter-grid-button" (click)="onOpenCaseClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.Matter) | async">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+    <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onAddTimeRecord()" fxLayout="column"
+    *ngIf="moduleIsActive(module.TimeRecorded) | async">
+    <button mat-icon-button>
+      <mat-icon>alarm_add</mat-icon>
+    </button>
+    <span>Add Time</span>
+  </div>
+
+  <div class="dps-matter-grid-button" *ngIf="((!row.billed) && (moduleIsActive(module.TimeRecorded) | async))"
+    (click)="onEditTimeRecord()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>border_color</mat-icon>
+    </button>
+    <span>Edit Time</span>
+  </div>
+  <!-- <div class="dps-matter-grid-button" *ngIf="((row.timeEventId) && (moduleIsActive(module.TimeRecorded) | async))"
+    (click)="onEditAttendanceNote ()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span>Attendance Note </span>
+  </div> -->
+
+</div>

@@ -1,0 +1,198 @@
+<!-- <input id="coverPageUploader" style="display: none" type="file"
+  accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/rtf,application/pdf,image/jpeg,image/bmp,image/png,image/tiff"
+  (change)="onCoverPageUpload($event)" /> -->
+<dps-file-uploader
+  accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/rtf,application/pdf,image/jpeg,image/bmp,image/png,image/tiff"
+  #coverPageUploader inputId="coverPageUploader" (fileUpload)="onCoverPageUpload($event)" [multiple]="false">
+</dps-file-uploader>
+
+<div fxLayout="column" style="height: 100%;">
+  <div class="dps-bundling-actions-btn">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="dps-bundle-action" fxLayout="row" fxLayoutAlign="center center">
+        <button color="primary" mat-button (click)="openExisting($event)" class="Open Existing">
+          <mat-icon class="mat-18">
+            <span> folder_open</span>
+          </mat-icon>
+          <span matSuffix>Open Existing...</span>
+        </button>
+        <button color="primary" mat-button (click)="onNameTextSave($event)" class="Open Existing" [disabled]="!isDirty">
+          <mat-icon class="mat-18">
+            <span> save </span>
+          </mat-icon>
+          <span matSuffix>Save</span>
+        </button>
+        <button color="primary" mat-button (click)="onCoreBundled($event)" class="Open Existing"
+          [disabled]="!bunldeId || bunldeId === 0 || !coreBundleHeader?.pbH_Name">
+          <mat-icon class="mat-18">
+            <span> create_new_folder </span>
+          </mat-icon>
+          <span *ngIf="!bundleHeaderView?.pbH_IsCoreBundle" matSuffix>Create Core Bundle</span>
+          <span *ngIf="bundleHeaderView?.pbH_IsCoreBundle" matSuffix>Edit Core Bundle</span>
+        </button>
+        <button mat-icon-button class="dps-bndle-help"
+          matTooltip="Drag and drop items from the bottom pane you want to include in the bundle.
+         You can also drag items on the top pane to rearrange them.
+         To exclude the date, clear the checkbox in the date picker. Options dialog will be presented before submitting the bundle."
+          matTooltipClass="example-tooltip-back"
+          aria-label="Button that displays a tooltip when focused or hovered over">
+          <mat-icon aria-label="Example icon-button with a heart icon">
+            <span> info</span>
+          </mat-icon>
+        </button>
+        <span *ngIf="bunldeId > 0">
+          <mat-checkbox [ngModel]="isPreserveExistingPage? isPreserveExistingPage.checked: false"
+            [disabled]="!isPreserveExistingPage.enable" (change)="onChangePreserveExistingPage($event.checked)"
+            color="primary">
+            Preserve Existing Pagination <br>
+            <span *ngIf="!bundleHeaderView?.pbH_IsCoreBundle" class="dps-preserve">(only for previously completed
+              bundle)</span>
+            <span *ngIf="bundleHeaderView?.pbH_IsCoreBundle" class="dps-preserve">(required for core bundle)</span>
+          </mat-checkbox>
+        </span>
+      </div>
+      <div class="dps-bundle-btn" fxLayout="row">
+        <button color="primary" mat-raised-button (click)="onOpenLogFile()" *ngIf="bundleHeaderView?.pbH_BundleID > 0">
+          <mat-icon class="mat-18">
+            <span> picture_as_pdf </span>
+          </mat-icon>
+          <span matSuffix>View Log</span>
+        </button>
+        <button color="primary" mat-raised-button (click)="onOpenMonitor()" *ngIf="bundleHeaderView?.pbH_BundleID > 0">
+          <mat-icon class="mat-18">
+            <span> picture_as_pdf </span>
+          </mat-icon>
+          <span matSuffix>Bundle Monitor</span>
+        </button>
+        <button color="primary" mat-raised-button (click)="onBundled($event)" class="Bundled-PDF">
+          <mat-icon class="mat-18">
+            <span> insert_drive_file </span>
+          </mat-icon>
+          <span matSuffix>Send to Bundle</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="width:100%" class="dps-folder-list-heading" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" class="dps-bundle-heading">
+      <h5>Layout of Your Bundle</h5>
+
+    </div>
+    <div class="bundle-controlling" fxLayout="row">
+      <button color="primary" mat-button (click)="onUp($event)">
+        <mat-icon class="mat-18">
+          <span> keyboard_arrow_up </span> </mat-icon>
+        <span class="btn-bundling" matSuffix>Up</span>
+      </button>
+      <button color="primary" mat-button (click)="onDown($event)">
+        <mat-icon class="mat-18">
+          <span> keyboard_arrow_down</span>
+        </mat-icon>
+        <span class="btn-bundling" matSuffix>Down</span>
+      </button>
+      <button color="primary" mat-button (click)="onHeading($event)">
+        <mat-icon class="mat-18">
+          <span> create </span>
+        </mat-icon>
+        <span class="btn-bundling" matSuffix>Heading</span>
+      </button>
+      <button color="primary" mat-button (click)="onAdd($event)">
+        <mat-icon class="mat-18">
+          <span>add </span>
+        </mat-icon>
+        <span class="btn-bundling" matSuffix>Add</span>
+      </button>
+      <button color="primary" mat-button (click)="onRemove($event)" [disabled]="disabledRemove">
+        <mat-icon class="mat-18">
+          <span> remove </span>
+        </mat-icon>
+        <span class="btn-bundling" matSuffix>Remove</span>
+      </button>
+    </div>
+  </div>
+  <div class="dps-tree-view dps-white-gray-scroll" [ngClass]="{'dps-core-bundle': bundleHeaderView?.pbH_IsCoreBundle}">
+    <div class="dps-folder-list-item">
+      <div fxLayout="column wrap" style="margin-bottom: 5px;" class="dps-folder-list dps-white-gray-scroll">
+        <mat-list-item *ngFor="let item of bundlingItemList ; let index =index; let isOdd=odd; let isEven=even" dpsClick
+          (dpsClick)="onSelectProfileItem($event,item)" (dblclick)="onDblClickDocView($event,item)"
+          [dpsDraggable]="true" [dragData]="item" (onDragStart)="onStartMoveItem(item)" (onDragEnd)="onEndMoveItem()"
+          [dropZones]="['inBundle']"
+          [ngClass]="item.selected?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+
+          <div dpsDroppable dropZone="inBundle" (click)="onSelectProfileItem($event,item)"
+            (onDrop)="onDrop($event,item)" (onDragEnter)="onDragEnter(item)"
+            [ngClass]="{'dps-core-bundle-item': item?.isCoreBunlde}">
+            <span [ngStyle]="{'padding-left.px': (item.length > 0? 0 : ((item.level) * 20)+16)}"
+              [ngClass]="{'dps-cover-page': item.isCoverPage}" matLine class="dps-folder-item-name"
+              title="{{item.lable}}">
+              <mat-icon *ngIf="item.isCoverPage" mat-list-icon>
+                <span> description</span>
+              </mat-icon>
+              <div *ngIf="item.isFolder && !item.isRoot">
+                <mat-icon mat-list-icon (click)="onExpanFolder(item)"
+                  *ngIf="item.isFolder && !item.expanded && haveSubElement(item)">
+                  <span>keyboard_arrow_right</span>
+                </mat-icon>
+                <mat-icon mat-list-icon (click)="onExpanFolder(item)"
+                  *ngIf="item.isFolder && item.expanded && haveSubElement(item)">
+                  <span>keyboard_arrow_down</span>
+                </mat-icon>
+                <span class="dps-no-sub-element-folder" *ngIf="item.isFolder && !haveSubElement(item)"></span>
+                <mat-icon mat-list-icon>
+                  <span>folder</span>
+                </mat-icon>
+              </div>
+              <div *ngIf="item?.data && item?.data.letter_name" class="dps-letter-name">
+                <mat-icon>
+                  <span>
+                    <i [ngClass]="item?.data.letter_name | attachmentIcon"><span></span></i>
+                  </span>
+                </mat-icon>
+              </div>
+              <span *ngIf="!item.isEdit" [ngClass]="{'dps-bundle-name': item.isRoot}" dpsClick
+                (dpsClick)="onSelectProfileItem($event,item)" (dblclick)="clickEditLable($event, item)"
+                class="grid-data mat-line">{{item.lable}}</span>
+              <div *ngIf="item.isEdit" fxFlex="1 1 20" fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="40px">
+                <input class="input-line" (click)="onLableInput($event)" #itemName matInput maxlength="299"
+                  [value]="item?.lable" (keyup.enter)="onLableChange(item,itemName.value)"
+                  (blur)="onLableChange(item,itemName.value)">
+              </div>
+              <mat-icon *ngIf="item.isCoverPage && !uploadInProgras" mat-list-icon
+                (click)="coverPageUploader.onFileUploadBtnClick()">
+                <span> add </span>
+              </mat-icon>
+              <i *ngIf="item.isCoverPage && uploadInProgras"
+                class="dps-doc-upload-spin fa fa-circle-o-notch fa-spin"></i>
+              <mat-icon *ngIf="item.isCoverPage && item?.data && item?.data.letter_name && !uploadInProgras"
+                mat-list-icon (click)="onRemoveCoverPage(item)">
+                <span>close</span>
+              </mat-icon>
+
+              <mat-form-field floatPlaceholder="always" *ngIf="!item.isFolder && !item.isCoverPage">
+                <input matInput [matDatepicker]="picker" [ngModel]="item?.date | date:'yyyy-MM-dd'"
+                  (dateChange)="onChangeDateDone(item, $event)" [disabled]="!item.isFileDateEnable">
+                <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="!item.isFileDateEnable">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-checkbox *ngIf="!item.isFolder && !item.isRoot && !item.isCoverPage"
+                [ngModel]="item.isFileDateEnable" (click)="onChangeItemDateEnable(item, $event)" color="primary">
+              </mat-checkbox>
+              <span class="bundle-pageNoLabel">
+                {{item.pageNoLabel}}
+              </span>
+              <span *ngIf="!item.isFolder && !item.isRoot && !item.isCoverPage &&  item.isSavedItem &&
+              !item.pageNoLabel" class="bundle-missing-Label">
+                Missing page #
+              </span>
+              <span class="dps-drop-itemvalidation" *ngIf="disableDrop && item.id === dropedItem?.id">Can't moved
+                here.</span>
+            </span>
+          </div>
+        </mat-list-item>
+        <div dpsDroppable dropZone="inBundle" class="dps-empty-drop-area" (onDrop)="onDrop($event,null)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div fxLayout="column" class="dps-msg-viewer-popup">
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow dps-msg-viewer-header">
+      <span></span>
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="matter-icon">mail_outline</mat-icon>
+        <span class="clients-text">MSG Viewer</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxFlex="calc(100%-42px)">
+    <dps-msg-viewer [input]="data.input" (close)="onClose()"></dps-msg-viewer>
+  </div>
+</div>

@@ -1,0 +1,269 @@
+@import '~styles/variables.scss';
+
+.dps-font-icon {
+
+  color: #45535d;
+  height: 18px;
+
+}
+
+dps-ck-editor {
+  padding: 10px;
+}
+
+.left-pading {
+  padding-left: 30px;
+}
+
+.dps-regional-setting {
+  width: calc(100% - 30px);
+}
+
+.format-prevew {
+  margin-left: 30px;
+  border: solid 1px #e0e0e0;
+  padding: 0px 10px;
+  border-radius: 4px;
+}
+
+h3,
+div {
+  font-family: $primary-font-stack;
+}
+
+h3 {
+  font-size: $primary-font-size - 2;
+  font-weight: 600;
+  color: #175296;
+  text-transform: uppercase;
+}
+
+mat-tab-group {
+  height: 100%;
+}
+
+button.dps-signature-creator {
+  background: #175296;
+  text-transform: uppercase;
+  font-size: $primary-font-size - 3;
+  color: $primary;
+  cursor: pointer;
+}
+
+
+button.dps-signature-creator:hover {
+  background: #4c94e6;
+}
+
+button.dps-stting-sve {
+  background: #175296;
+  color: $primary;
+  margin-right: 10px;
+}
+
+button.dps-stting-sve,
+button.dps-stting-cancel {
+  font-size: $primary-font-size - 2;
+}
+
+.dps-stting-cancel {
+  background: none;
+  box-shadow: 0px 0px 1px #939393;
+  color: #016cc1;
+  border: 1px solid #016cc1;
+  line-height: 34px;
+
+
+  cursor: pointer;
+}
+
+mat-slide-toggle {
+  font-size: $primary-font-size - 2;
+}
+
+button {
+  border-radius: 0px !important;
+}
+
+.DPS_signature_auto_add {
+  font-size: $primary-font-size - 2;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.ng-tns-c33-17 {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 500;
+}
+
+.mat-checkbox-background {
+  background-color: #5994ea;
+}
+
+.chaser_event {
+
+  height: 30px;
+  line-height: 30px;
+
+  ::ng-deep .mat-slide-toggle-content {
+    width: 100px;
+  }
+}
+
+
+
+mat-option {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+}
+
+mat-select {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 500;
+}
+
+.dps-user-img {
+  position: relative;
+  padding: 20px 0px;
+  display: block;
+}
+
+.upload-waiting-spinner {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+
+}
+
+.settings-prof-upload-button {
+  display: inline-block;
+}
+
+.upload-spinner {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  position: absolute;
+  /* background-repeat:repeat-y;  */
+}
+
+.upload-spinner.active {
+  background-image: url("white50.png");
+  background-position: 100% 0;
+}
+
+.organizer-settings-layout {
+  height: calc(100% - 48px);
+
+  .dps-white-gray-scroll {
+    overflow-y: auto;
+  }
+
+  .dps-mail-setting-actions {
+    margin: 10px 10px 0px 0px;
+  }
+
+  ::ng-deep {
+    .mat-tab-body-wrapper {
+      height: 100%;
+    }
+  }
+}
+
+.dps-signature-setting {
+  padding: 6px;
+
+  mat-icon {
+    color: $primary;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.dps-general-settings {
+  height: 100%;
+}
+
+.dps-messages-format {
+  padding-bottom: 5px;
+
+  span {
+    font-size: 14px;
+  }
+
+  mat-button-toggle-group {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+
+  mat-form-field {
+    &.dps-content-type {
+      width: 100px;
+    }
+
+    &.dps-font-famly {
+      width: 200px;
+      padding-left: 0px;
+    }
+
+    &.dps-font-size {
+      width: 100px;
+    }
+
+    height: 50px;
+    padding: 0px 5px;
+
+    ::ng-deep {
+      .mat-form-field-infix {
+        padding: 0px;
+      }
+
+      .mat-form-field-outline {
+        height: 38px;
+      }
+    }
+  }
+}
+
+.dps-calendar-color-palet .dps-folder-action {
+  border: 1px solid $primary;
+  width: 40px;
+}
+
+.dps-calendar-color-palet .dps-selected-color {
+  border-color: $calender-boder;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: $primary-font-size - 2;
+}
+
+.dps-font-color {
+  background-color: #fff;
+}
+
+.dps_global_sig_chk {
+  font-size: $primary-font-size - 2;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.dps_global_sign_preview {
+  height: 300px;
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+}
+
+.dps_global_sign_preview .loading {
+  text-align: center;
+  margin: auto;
+  width: 50px;
+}

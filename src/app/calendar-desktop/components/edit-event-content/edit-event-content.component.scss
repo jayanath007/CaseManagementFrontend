@@ -1,0 +1,165 @@
+@import '~styles/variables.scss';
+
+div,
+span {
+  font-family: $primary-font-stack;
+}
+
+div.dps-cal-event {
+  height: 100%;
+}
+
+div.dps-event-calendar {
+  padding-left: 40px;
+  height: 100%;
+}
+
+.dps-lable {
+  color: #227fca;
+  font-weight: 400;
+  font-size: $primary-font-size - 1;
+  padding-right: 10px;
+}
+
+.dps-event-input,
+.dps-location-input {
+  width: 100%;
+  margin-bottom: -20px;
+}
+
+.dps-message {
+  padding-top: 5px;
+}
+
+.dps-message div {
+  height: 30px;
+  width: 100%;
+  border-left: 3px solid #a6a6a6;
+  background-color: #efefef;
+}
+
+.dps-message .dps-event-message {
+  padding-left: 10px;
+  color: #767676;
+  font-family: $primary-font-stack;
+  font-size: $primary-font-size - 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  padding-top: 8px;
+}
+
+.dps-edit-event-content {
+  width: 100%;
+  height: calc(100% - 15px);
+  min-width: 880px;
+}
+
+.calender_event_msg {
+  margin-top: 4px;
+}
+
+span.details {
+  font-size: 22px;
+  color: #3e3c3c;
+  font-weight: 300;
+}
+
+div.calender_event,
+div.calender_atendees {
+  padding-top: 30px;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  background: #c9e7fd;
+}
+
+mat-option {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+  color: #4c4c4c !important;
+  height: 38px !important;
+}
+
+.edi-event-form-controller {
+  margin-right: 10px;
+  display: inline-block;
+  width: 140px;
+}
+
+.edit_event_contoller {
+  margin: 25px 0 5px 0;
+}
+
+mat-button-toggle {
+  font-size: $primary-font-size - 2;
+  color: $calender-primary;
+  background: #e8f6ff;
+}
+
+.dps_edit_event-start {
+  margin-right: 8px;
+}
+
+.dps-event-edit-form {
+  margin: 25px 0px 5px 25px;
+}
+
+mat-checkbox {
+  margin: 10px 0px 0px 10px;
+  font-size: 12px;
+}
+
+.dps_edit_event_from {
+  width: 100%;
+}
+
+.dps-open-series {
+  color: #0062AF;
+  cursor: pointer;
+}
+
+span.dps_evt_details {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: #005f9c;
+}
+
+.dps-attachment-list {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 5px;
+}
+
+.dps-date-input {
+  color: #000;
+}
+
+.dps-date-input.disabled {
+  color: rgba(0, 0, 0, .38);
+}
+
+.dps-chip-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  margin-left: -6px;
+  padding-right: 3px;
+}
+
+.dps-location-rooms-gio {
+  margin-bottom: -20px;
+
+  mat-form-field {
+    width: 300px;
+    padding-right: 20px;
+
+    mat-icon {
+      color: #227fca;
+      padding-right: 2px;
+    }
+  }
+}

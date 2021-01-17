@@ -1,0 +1,42 @@
+
+mat-dialog-content
+{
+    padding: 0;
+    margin-top: -24px;
+}
+.date-picker-ufn
+{
+    margin-left: 24px;
+}
+.label-componenent-wrap
+{
+    position: relative;
+    overflow: hidden;
+    background: #7fb0d5;
+}
+
+h4 
+{
+    background: #234661;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 13px;
+}
+
+.save-screen,
+.cancel-screen
+{
+    background: #6aaf40;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 17px;
+    padding: 5px;
+    min-width: 41px;
+}
+.cancel-screen
+{
+    background: #4063af;
+}

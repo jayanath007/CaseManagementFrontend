@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+
+.dps-case-contact-layout {
+  height: calc(100% - 48px);
+}
+
+.dps-case-contact-layout mat-toolbar{
+    background: $primary;
+    height: 100%;
+}
+
+.dps-case-contact-layout {
+  height: 100%;
+  overflow: hidden;
+}
+
+.footer-shadow{
+    box-shadow:0 0px 0px rgba(0,0,0,0.16), 0 -1px 6px rgba(0,0,0,0.16);
+    z-index:2;
+  }
+
+  mat-paginator {
+    height: 50px !important;
+  }
+
+  div.dps-layout {
+    width:100%;
+  }

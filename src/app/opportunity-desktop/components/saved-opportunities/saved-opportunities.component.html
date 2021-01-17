@@ -1,0 +1,28 @@
+<div fxLayout="column" class="dps-save-grid ">
+  <!-- dps-white-gray-scroll -->
+  <div class="dps-grid-x dps-white-gray-scroll">
+    <div class="dps-width-controller dps-white-gray-scroll" fxLayout="column">
+      <div class="row-highlight" dpsIsMobile>
+        <div class="inner-highlight">
+          <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header?.extras?.fxFlex" [def]="header"
+            [filterAnchor]="header?.extras?.filterAnchor" (toggleSorting)="onToggleSorting($event)"
+            (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)">
+          </dps-column-header>
+        </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading?.savedGridLoading"></mat-progress-bar>
+      </div>
+      <div fxLayout="column" fxFlex="calc(100%-54px)" *ngIf="!isLoading?.savedGridLoading"
+        class="dps-white-gray-scroll grid-content {{fontSizeClass}}">
+        <dps-save-opportunity-record-row [columnDef]="columnDef" [rowData]="rowData"
+          [loadSaveOpportunityData]="loadSaveOpportunityData?.data" [selectedStatus]="selectedStatus"
+          [isLoading]="isLoading?.savedGridLoading" (openOpprtunity)="onOpenOpprtunity($event)"
+          (selectedRowItem)="onRowSelect($event)" (clickOnNotificationSetting)="onClickNotificationSetting($event)">
+        </dps-save-opportunity-record-row>
+      </div>
+    </div>
+  </div>
+  <mat-paginator fxFlex="50px" #paginator [length]="loadSaveOpportunityData?.total"
+    [pageIndex]="paginetorDef?.currentPage" [pageSize]="paginetorDef?.itemPerPage" [pageSizeOptions]="[25,50,100]"
+    (page)="onChangePage($event)" class="footer-shadow">
+  </mat-paginator>
+</div>

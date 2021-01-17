@@ -1,0 +1,137 @@
+<div fxLayout="row" class="dps-grid-row-inner-container">
+  <div fxLayout="row">
+    <!-- fxLayoutGap="2em" -->
+    <div class="dps-grid-row-inner-btn btn" (click)="onPlayDictationsClick(itemRow)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">play_circle_outline</mat-icon>
+      </span>
+      <span>Play</span>
+    </div>
+
+    <div class="dps-grid-row-inner-btn btn" matTooltip="View Document" (click)="onPdfFileClick(itemRow)"
+      fxLayout="column">
+      <span>
+        <mat-icon class="material-icons"> picture_as_pdf</mat-icon>
+      </span>
+      <span>File</span>
+    </div>
+
+    <div class="dps-grid-row-inner-btn btn" *ngIf="itemRow.secFor===0" matTooltip="Profile"
+      (click)="onOpenDictatioProfiling(itemRow)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">how_to_reg</mat-icon>
+      </span>
+      <span>Profile</span>
+    </div>
+    <!-- <div *ngIf="dictationGridFilters?.jobStage?.key != jobFolderType.Completed"> -->
+
+    <div class="dps-grid-row-inner-btn btn" *ngIf="validateWordBtn()" (click)="onWordFileClick(itemRow)"
+      fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">insert_drive_file_outline</mat-icon>
+      </span>
+      <span>Open in word</span>
+    </div>
+
+
+
+
+    <!-- <div *ngIf="usetType !='A'" class="dps-grid-row-inner-btn btn" (click)="onCheckingDictationsClick()" fxLayout="column" [matMenuTriggerFor]="forCheking">
+      <span>  <mat-icon class="material-icons">find_in_page_outline</mat-icon></span>
+      <span>For Checking</span>
+    </div> -->
+    <div *ngIf="validateSaveBtn()" class="dps-grid-row-inner-btn btn" matTooltip="Save as Draft"
+      (click)="onFinishJobUpdate(itemRow, jobFolderType.TypistDrafts)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">save_alt</mat-icon>
+      </span>
+      <span>Save as Draft</span>
+    </div>
+    <div *ngIf="validateCheckingBtn()" class="dps-grid-row-inner-btn btn" matTooltip="Send to Author for checking"
+      (click)="onFinishJobUpdate(itemRow, jobFolderType.Transcribed)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">done</mat-icon>
+      </span>
+      <span>Checking</span>
+    </div>
+
+
+
+    <div *ngIf="validateApprovePrintBtn()" class="dps-grid-row-inner-btn btn" matTooltip="Approve and send for Printing"
+      (click)="onFinishJobUpdate(itemRow, jobFolderType.Approved)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">done_all</mat-icon>
+      </span>
+      <span>Approve</span>
+    </div>
+    <div *ngIf="validateApprovePrintBtn()" class="dps-grid-row-inner-btn btn" matTooltip="Record Amendment"
+      (click)="onFinishJobUpdate(itemRow, jobFolderType.ToAmend)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">done_all</mat-icon>
+      </span>
+      <span>Amend</span>
+    </div>
+    <div *ngIf="validateMatterBtn()" class="dps-grid-row-inner-btn btn" (click)="onOpenCaseClick(itemRow)"
+      fxLayout="column">
+      <span>
+        <mat-icon>folder_outline</mat-icon>
+      </span>
+      <span>Link Matter</span>
+    </div>
+
+    <div *ngIf="validateCompleteBtn()" class="dps-grid-row-inner-btn btn" matTooltip="Send to Jobs completed"
+      (click)="onCompetedDictationsClick(itemRow, jobFolderType.Completed)" fxLayout="column">
+      <span>
+        <mat-icon class="material-icons">done_all</mat-icon>
+      </span>
+      <span>Complete</span>
+    </div>
+
+
+    <!-- </div> -->
+  </div>
+
+
+  <div class="dps-ref" fxLayoutGap="2em" fxLayout="row">
+    <span (click)="onOpenCaseFile(itemRow?.matterReferenceNo)">Matter Ref : {{itemRow?.matterReferenceNo}}</span>
+    <span>Send To : {{itemRow?.sentByName}}</span>
+  </div>
+
+
+
+  <mat-menu #forCheking="matMenu">
+    <div class="dps-checking-menu-first">Send to</div>
+    <button mat-menu-item [matMenuTriggerFor]="vertebrates">
+      <mat-checkbox></mat-checkbox><span>Group A</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="invertebrates">
+      <mat-checkbox></mat-checkbox> <span></span> Group B
+    </button>
+  </mat-menu>
+
+  <mat-menu #vertebrates="matMenu">
+    <button mat-menu-item>
+      <mat-checkbox></mat-checkbox><span>Steven Langman</span>
+    </button>
+    <button mat-menu-item>
+      <mat-checkbox></mat-checkbox><span>Fawad Tariq</span>
+    </button>
+    <button mat-menu-item>
+      <mat-checkbox></mat-checkbox><span>Grant Berman</span>
+    </button>
+
+  </mat-menu>
+
+  <mat-menu #invertebrates="matMenu">
+    <button mat-menu-item>
+      <mat-checkbox></mat-checkbox><span>Steve Jones</span>
+    </button>
+    <button mat-menu-item>
+      <mat-checkbox></mat-checkbox><span>Scott</span>
+    </button>
+
+  </mat-menu>
+
+
+
+</div>

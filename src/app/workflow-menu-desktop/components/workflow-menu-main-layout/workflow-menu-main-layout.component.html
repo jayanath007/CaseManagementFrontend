@@ -1,0 +1,149 @@
+<mat-sidenav-container>
+  <mat-sidenav class="workflow-menu-main-layout" [disableClose]="true" [mode]="propertiesPanelMode" position="end"
+    [opened]="menuButtonClickType=='WorkflowMenuView' && menuPropertyButtonClick">
+    <dps-matter-summary style="height: 100%;" [menuMatterSummery]="matterSummeryList"
+      [menuShortCutKeys]="matterShortCutList">
+    </dps-matter-summary>
+  </mat-sidenav>
+  <div class="workflow-menu-container">
+    <div *ngIf="menuButtonClickType=='WorkflowMenuView'" fxLayout="column" fxFlex="1 1 100">
+
+      <mat-list fxLayout="column" class="dps_path dps-view-controller">
+        <mat-list-item class="dps_wrkflowpath_header">
+          <div *ngIf="!searchText" fxLayout="row" fxFlexAlign="center">
+            <mat-icon class="dps_folder">folder</mat-icon>
+            <button mat-icon-button class="backward-path btn" [disabled]="openFilePathHistory?.length < 1"
+              (click)="backwardMenuPath()">
+              <mat-icon class="dps_path_icons">keyboard_arrow_left</mat-icon>
+            </button>
+            <button mat-icon-button class="forward-path btn" [disabled]="forwardFilePathHistory?.length < 1"
+              (click)="forwardMenuPath()">
+              <mat-icon class="dps_path_icons">keyboard_arrow_right</mat-icon>
+            </button>
+
+            <div (click)="selectFilePath(menuItem)" *ngFor="let menuItem of openFilePath">
+              <div fxLayout="row" class="dps_folder_name">
+                <button mat-icon-button>
+                  <mat-icon class="dpspath_icon">keyboard_arrow_right </mat-icon>
+                </button>
+                <span>{{menuItem.data.atN_Desc}}</span>
+              </div>
+            </div>
+          </div>
+          <span fxFlex="1 1 auto"></span>
+          <div class="workflow-search">
+            <input class="workflow-search-input" autocomplete="off" type="search" matInput #searchWorkflowItem matInput
+              placeholder="Search" [value]="searchText" (keydown)="onWorkflowItemSearchBykeyDown($event)" />
+            <button matSuffix mat-icon-button (click)="onWorkflowItemSearch('')" class="clear-btn">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <button class="search-btn" matSuffix mat-icon-button
+              (click)="onWorkflowItemSearch(searchWorkflowItem.value)">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="false"
+            (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+            (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()"></dps-grid-font-controller>
+        </mat-list-item>
+      </mat-list>
+
+      <div class="workflow-controller">
+        <div class="row-highlight" dpsIsMobile>
+          <mat-list fxLayout="row">
+            <mat-list-item class="column-header menu-tree">Workflow Menu</mat-list-item>
+            <div class="column-header">
+              <mat-list-item class="description row-data">
+                <span class="text">Description</span>
+                <span fxFlex="1 1 auto"></span>
+                <!-- <mat-icon  (click)="onCommandColumnClick()" class="fa" [ngClass]="{'fa-chevron-circle-left':isommandColumnShow ,'fa-chevron-circle-right': !isommandColumnShow}"></mat-icon> -->
+                <button class="command-icon" mat-fab (click)="onCommandColumnClick()">
+                  <mat-icon class="fa"
+                    [ngClass]="{'fa-chevron-circle-left':isCommandColumnShow ,'fa-chevron-circle-right': !isCommandColumnShow}">
+                  </mat-icon>
+                  <span *ngIf="isCommandColumnShow" class="command-test">Command</span>
+                </button>
+                <!-- [ngClass]="{'fa fa-chevron-circle-right':isommandColumnShow && !isommandColumnShow,'fa fa-chevron-circle-left'}" -->
+
+              </mat-list-item>
+              <span fxFlex="1 1 auto"></span>
+              <mat-list-item class="date-done dps-date-done-header row-data">Last Done</mat-list-item>
+              <mat-list-item class="done-by dps-date-done-header  row-data">Done By</mat-list-item>
+            </div>
+            <!-- <mat-list-item style="width:20%;" (click)="onCommandColumnClick()" *ngIf="isommandColumnShow">Command</mat-list-item> -->
+          </mat-list>
+        </div>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+        <div fxLayout="row" class="workflow-controller-wrapper">
+          <div class="dps-workflow-menu-tree dps-white-gray-scroll">
+            <dps-workflow-menu-view *ngIf="!searchText && menuTreeItems?.length" (itemChange)="onItemChange($event)"
+              [gridFontSize]="gridFontSize" [menuTreeItems]=menuTreeItems>
+            </dps-workflow-menu-view>
+
+            <div *ngIf="searchText" class="search-filter-applied"  fxLayout="column" fxLayoutAlign="center flex-start">
+              <span class="filter-text"> Filter applied for <label>{{searchText}}</label></span>
+              <span class="path">
+                <strong>Template path Selected</strong>
+              </span>
+              <mat-list class="filter-result-folders dps-white-gray-scroll" fxLayout="row">
+                <mat-list-item  *ngFor="let perentItem of perentFileList">
+                  <mat-icon *ngIf="perentItem?.data?.atN_Type===1">keyboard_arrow_right</mat-icon>
+                  <mat-icon *ngIf="perentItem?.data?.atN_Type===1" mat-list-icon>folder</mat-icon>
+                  <div mat-line *ngIf="perentItem?.data?.atN_Type===1">{{perentItem?.data?.atN_Desc}}</div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <div class="dps-workflow-menu-details" dpsIsMobile>
+            <dps-workflow-menu-view-details [isCommandColumnShow]="isCommandColumnShow"
+              (menuViewItem)="menuViewItemClick($event)" [selectedMenuChildList]=selectedMenuChildList
+              [searchText]="searchText" (runWorkFlow)="runWorkFlow($event)" (editTemplate)="editTemplate($event)"
+              (onCheckin)="doCheckin($event)" (onDiscardCheckin)="doDiscardCheckin($event)"
+              (detailSelectedItem)="onDetailSelectedItem($event)" (downloadTemplate)="downloadTemplate($event)"
+              [gridFontSize]="gridFontSize">
+            </dps-workflow-menu-view-details>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Menu edit -->
+    <div *ngIf="menuButtonClickType=='WorkflowMenuEdit'" fxFlex="" class="dps-workflow-menu" fxLayout="column"
+      dpsIsMobile>
+
+      <div class="workflowmenu-edit-font-controller">
+        <span fxFlex="1 1 auto"></span>
+        <dps-grid-font-controller [activeClass]="buttonActiveClassEdit" [showRefreshButton]="false"
+          (fontSizeMin)="onFontSizeMinusClickEdit()" (fontSizeReset)="onFontSizeResetClickEdit()"
+          (fontSizePlus)="onFontSizePlusClickEdit()" (refresh)="onRefresh()"></dps-grid-font-controller>
+      </div>
+      <div class="dps-workflowmenu-edit-content">
+        <div class="row-highlight" dpsIsMobile>
+          <mat-list fxLayout="row" fxFlex="">
+            <!-- class="grid-data {{gridFontSizeEdit}}" -->
+            <mat-list-item class="column-header dps-folder-description-item-header  {{gridFontSizeEdit}}">
+              <span class="column-header-text">Description</span>
+            </mat-list-item>
+            <mat-list-item class="column-header dps-folder-list-item-header  {{gridFontSizeEdit}}">
+              <span class="column-header-text">Menu Name / Screen Number / Template Filename / Other</span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+        <div class="dps-white-gray-scroll dps-scroll">
+          <!-- grid-data {{gridFontSizeEdit}} -->
+          <dps-ui-tree *ngIf="menuTreeItems?.length" [cutOrCopyItem]="cutOrCopyItem" (itemChange)="onItemChange($event)"
+            (exportMenus)="onExportMenus($event)" [menuTreeItems]="menuTreeItems" (onImportMenu)="importMenu($event)"
+            (keyUpDown)="keyUpDown($event)" [gridFontSizeEdit]="gridFontSizeEdit"
+            (menuduplicate)="onMenuDuplicate($event)"></dps-ui-tree>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</mat-sidenav-container>
+
+<!-- <div *ngIf="menuButtonClickType=='WorkflowMenuView' && menuPropertyButtonClick">
+  <dps-matter-summary [menuMatterSummery]="matterSummeryList" [menuShortCutKeys]="matterShortCutList"></dps-matter-summary>
+</div> -->

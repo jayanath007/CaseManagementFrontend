@@ -1,0 +1,62 @@
+@import '~styles/variables.scss';
+
+.dps-client-search-grid , .dps-client-grid {
+  height: 100%;
+}
+
+.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+.dps-client-main-controller {
+  min-width: 1400px;
+  height:100%;
+}
+
+.dps-column-header {
+  height:40px;
+}
+
+.grid-sub-options {
+  width:100%;
+  overflow-y:scroll
+}
+
+.row-highlight.dps-is-mobile , dps-matter-grid {
+  width: 100%;
+}
+
+.row-highlight.dps-is-mobile dps-column-header {
+  font-size: $secondary-font-size;
+}
+
+.row-highlight {
+  width: calc(100% - 15px);
+  background-color: #e8f4f9;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  height: 40px;
+}
+
+
+
+.dps-selected-row mat-expansion-panel-header {
+  background: #1a5c8c;
+}
+
+.footer-shadow {
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+.client-search-grid-header,.expansion-panelgrid-header{
+  display: table;
+  width: 100%;
+  height: auto !important;
+  position: relative;
+}
+
+mat-expansion-panel{
+ border-bottom: 1px solid #f1f2f4;
+}

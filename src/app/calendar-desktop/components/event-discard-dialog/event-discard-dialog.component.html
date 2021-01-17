@@ -1,0 +1,116 @@
+<div class="organizer-alert general" *ngIf="data==='Discard'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i> Discard changes</h2>
+  <mat-dialog-content>
+    <button mat-button class="full-button active" (click)="close('Discard')">
+      <strong>Discard</strong>
+      <p>Don't save the changes to this event.</p>
+    </button>
+
+    <button mat-button class="full-button" (click)="close('Cancel')">
+      <strong>Don't discard</strong>
+      <p>Return to the event for further editing.</p>
+    </button>
+  </mat-dialog-content>
+</div>
+
+
+<div class="organizer-alert general" *ngIf="data==='Close'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>Discard changes</h2>
+  <p class="mat-typography">You've made changes to this event. Do you want to continue editing or discard your changes?</p>
+  <mat-dialog-content>
+    <button mat-button class="full-button" (click)="close('Discard')">
+      <strong>Discard</strong>
+      <p>Don't save the changes to this event.</p>
+    </button>
+
+    <button mat-button class="full-button active" (click)="close('Cancel')">
+      <strong>Don't discard</strong>
+      <p>Return to the event for further editing.</p>
+    </button>
+  </mat-dialog-content>
+</div>
+
+<div class="organizer-alert general" *ngIf="data==='Delete'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>Delete event</h2>
+  <p class="mat-typography">Are you sure you want to delete this event?</p>
+  <mat-dialog-content>
+    <button mat-button class="full-button" (click)="close('Delete')">
+      <strong>Delete</strong>
+    </button>
+
+    <button mat-button class="full-button active" (click)="close('Cancel')">
+      <strong>Back</strong>
+    </button>
+  </mat-dialog-content>
+</div>
+<div class="organizer-alert general" *ngIf="data==='AttachmentsChanged'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>Attachments changed</h2>
+  <p class="mat-typography">You've made changes to this event. Do you want to continue editing or discard your changes?</p>
+  <mat-dialog-content>
+
+    <button mat-button class="full-button" (click)="close('Send')">
+      <strong>Don't send</strong>
+      <p>Attachment updates won't be sent to attendees</p>
+    </button>
+
+    <button mat-button class="full-button active" (click)="close('Cancel')">
+      <strong>Don't discard</strong>
+      <p>Return to the event for further editing.</p>
+    </button>
+  </mat-dialog-content>
+</div>
+
+<div class="organizer-alert general" *ngIf="data==='TitleValidation'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i> No event title</h2>
+  <p class="mat-typography">Do you want to save the event without a title?</p>
+  <mat-dialog-content>
+    <button mat-button class="full-button" (click)="close('Send')">
+      <strong>Save</strong>
+    </button>
+    <button mat-button class="full-button  active" (click)="close('Cancel')">
+      <strong>Back</strong>
+    </button>
+  </mat-dialog-content>
+</div>
+
+<div class="organizer-alert general" *ngIf="data==='TitleValidationWithAttendees'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i> No event title</h2>
+  <p class="mat-typography">Are you sure you want to send this event to attendees?</p>
+  <mat-dialog-content>
+    <button mat-button class="full-button" (click)="close('Send')">
+      <strong>Send</strong>
+    </button>
+    <button mat-button class="full-button  active" (click)="close('Cancel')">
+      <strong>Back</strong>
+    </button>
+  </mat-dialog-content>
+</div>
+
+<div class="organizer-alert general" *ngIf="data==='OpenSeries'">
+  <h2 mat-dialog-title>
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>Open series</h2>
+  <p class="mat-typography">You've made changes to this occurrence. Do you want to save and open series / Discard and open series or continue editing
+    your changes ?</p>
+
+  <mat-dialog-content>
+    <button mat-button class="full-button active" (click)="close('OpenSeriesSave')">
+      <strong>Save and open series</strong>
+    </button>
+
+    <button mat-button class="full-button" (click)="close('OpenSeriesDiscard')">
+      <strong>Discard and open series</strong>
+    </button>
+
+    <button mat-button class="full-button" (click)="close('Cancel')">
+      <strong>Back</strong>
+    </button>
+
+  </mat-dialog-content>
+
+</div>

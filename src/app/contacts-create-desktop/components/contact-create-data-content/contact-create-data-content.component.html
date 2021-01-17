@@ -1,0 +1,60 @@
+<div class="dps-contacts-tab" fxFlex="1 1 auto">
+  <mat-tab-group fxFlex="1 1 auto" [selectedIndex]="selectedTab" (selectedTabChange)="onChangeTap($event)">
+    <!-- <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="dps-tab-header-content">
+          <mat-icon>dns</mat-icon>
+          <span>Details</span>
+        </div>
+      </ng-template>
+      <mat-card class="contacts-details" fxLayout="row wrap">
+        <div fxLayout="row wrap" fxLayoutGap="35px" style="width:50%">
+          <dps-personal-details [selectedContact]="selectedContact"></dps-personal-details>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="35px" style="width:50%" class="address-field">
+          <dps-company-details [selectedContact]="selectedContact" (changeDetails)="onChangeDetails($event)">
+          </dps-company-details>
+          <dps-case-specific-details *ngIf="mode === ModeType.BaseOnFile" [selectedContact]="selectedContact">
+          </dps-case-specific-details>
+          <dps-other-contact-details *ngIf="mode !== ModeType.BaseOnFile" [selectedContact]="selectedContact">
+          </dps-other-contact-details>
+        </div>
+      </mat-card>
+    </mat-tab> -->
+    <mat-tab *ngIf="showSearchTab">
+      <ng-template mat-tab-label>
+        <div class="dps-tab-header-content">
+          <mat-icon>search</mat-icon>
+          <span>Search Results
+          </span>
+        </div>
+
+      </ng-template>
+      <div class="case-contact-manager-grid-outer-wrapper">
+        <dps-case-contact-manager fxFlex="calc(100% - 50px)" [matterInfo]="matterData"
+          [refreshCount]="0" [token]="token" [fromContact]="true" [searchText]="contactSearchKey"
+          (selectRowForSearch)="onChangeContact($event)" [token]="'contact-creation'">
+        </dps-case-contact-manager>
+      </div>
+    </mat-tab>
+    <!-- <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="dps-tab-header-content">
+          <mat-icon>insert_drive_file</mat-icon>
+          <span>Documents</span>
+        </div>
+      </ng-template>
+      <div class="contacts-documents"></div>
+    </mat-tab> -->
+    <!-- <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="dps-tab-header-content">
+          <mat-icon>subject</mat-icon>
+          <span>Matters</span>
+        </div>
+      </ng-template>
+
+      <div class="contacts-matters"></div>
+    </mat-tab> -->
+  </mat-tab-group>
+</div>

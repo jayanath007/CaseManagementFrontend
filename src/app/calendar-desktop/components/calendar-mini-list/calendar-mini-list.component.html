@@ -1,0 +1,14 @@
+<mat-nav-list dense >
+  <dps-calendar-mini-list-item *ngFor="let calendar of calendarList" [calendar]="calendar" (toggleCalendar)="onToggleCalendar($event)"></dps-calendar-mini-list-item>
+  <!-- <div *ngFor="let calendar of calendarList"  [ngStyle]="{'background-color': calendar.selected?calendar.color:''}" style="margin: 4px 0px;">
+    <mat-list-item (click)="onToggleCalendar(calendar)" [title]="calendar.data.owner.address" [matTooltip]="calendar.data.name" matTooltipPosition="right">
+      <mat-icon matListIcon *ngIf="calendar.isBirthdaysCalendar" style="background-color: #8a8a8a; color: #dcdcdc; padding: 8px;">cake</mat-icon>
+      <mat-icon matListIcon *ngIf="(calendar.isSecondary&&!calendar.isBirthdaysCalendar)" style="background-color: #8a8a8a; color: #dcdcdc; padding: 8px;">event</mat-icon>
+      <img matListAvatar *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar)" style="height: 36px; width: 36px;"
+        [src]="calendar.data.owner.address | dpsUserImage" (load)="showProfileImg=true" alt="calendar.data.owner.address" [hidden]="!showProfileImg">
+      <button matListAvatar mat-icon-button class="dps-calendar-avatar" *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar) && !showProfileImg" [ngStyle]="{'background-color': (calendar.data.owner.address | recipientColorCode)}">
+        <span>{{calendar.data.owner.name | nameInitials}}</span>
+      </button>
+    </mat-list-item>
+  </div> -->
+</mat-nav-list>

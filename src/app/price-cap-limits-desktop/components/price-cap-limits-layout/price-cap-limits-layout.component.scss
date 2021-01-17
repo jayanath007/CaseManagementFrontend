@@ -1,0 +1,69 @@
+
+@import '~styles/variables.scss';
+
+.dps-notification-wrap
+{
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 1;
+    
+}
+.bill-information-wrapper
+{
+    padding: 20px;
+}
+.bill-information-general
+{
+    
+    float: left;
+}
+
+.bill-information-total
+{
+    float: right;
+    text-align: right;
+    margin-top: 39px;
+
+    .bill-information-total-sub
+    {
+        text-align: right;
+        float: right;
+        margin-left: 10px;
+
+        label
+        {
+            font-weight: bold;
+        }
+
+        .price-total
+        {
+            display: block;
+            font-size: 17px;
+            color: $primary-blue-dark;
+            font-weight: 500;
+        }
+    }
+}
+
+.posting-date
+{
+    clear: both;
+    padding: 5px 0 27px 0;
+
+    label
+    {
+        color: $primary-blue-dark;
+        display: block;
+        padding-bottom: 4px;
+        font-weight: bold;
+    }
+}
+
+.history-item-grid-controllers
+{
+    margin: 5px 0;
+    
+    .mat-form-field
+    {
+    margin-right: 10px;
+    }
+}

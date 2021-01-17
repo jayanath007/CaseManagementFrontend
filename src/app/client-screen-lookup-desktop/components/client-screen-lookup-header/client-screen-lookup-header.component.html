@@ -1,0 +1,31 @@
+<mat-toolbar-row>
+
+<div class="dps-primary-action-btn-inner" fxLayoutAlign="space-between center" >
+
+    <div class="look-up-actions">
+
+            <button mat-button (click)="addNewLookup()" class="scr-lookup_headings" color="primary">
+            <i class="fa fa-plus-circle"></i>
+            <span>Add New Record</span>
+            </button>
+            <button mat-button (click)="onCancelChanges()" class="scr-lookup_headings" color="primary">
+            <i class="fa fa-minus-circle"></i>
+            <span>Cancel Changes</span>
+            </button>
+
+    </div>
+
+    <div class="look-up-actions">
+            <span class="type">Type - {{screenLookupList?.luT_Type}}</span>
+            
+            <span class="desp">Description</span>
+            <mat-form-field>
+            <input matInput [value]='screenLookupList?.luT_Description' (focusout)="onChangeDescription($event)">
+            </mat-form-field>
+            
+    </div>
+    </div>
+
+
+
+</mat-toolbar-row >

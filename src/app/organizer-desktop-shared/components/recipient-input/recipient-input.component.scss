@@ -1,0 +1,103 @@
+@import '~styles/variables.scss';
+
+.dps-recipient-input {
+  width: 100%;
+  font-size: $primary-font-size - 2;
+}
+
+mat-chip-list mat-chip.dps-recipient-chip {
+  padding: 1px 11px;
+  margin: 1px !important;
+}
+
+.dps-recipient-chip {
+
+  div,
+  img {
+    border-radius: 50%;
+    position: relative;
+    right: 10px;
+  }
+
+  img {
+    height: 28px;
+    width: 28px;
+  }
+
+  div {
+    color: $primary;
+    padding: 5px;
+    height: 18px;
+    width: 18px;
+
+    span {
+      width: 18px;
+      height: 18px;
+      top: 6px;
+      text-align: center;
+      position: absolute;
+      font-size: $primary-font-size - 2;
+      line-height: 17px;
+    }
+  }
+}
+
+.dps-recipient-input mat-chip {
+  background-color: #e0edff;
+}
+
+.dps-recipient-input mat-chip mat-icon {
+  color: #0079c4;
+  font-weight: 400;
+  font-size: $primary-font-size + 4;
+}
+
+.dps-recipient-input .dps-lable {
+  color: #0079c4;
+  font-weight: 400;
+  font-size: $primary-font-size;
+}
+
+.dps-recipient-input mat-chip .dps-recipient-name {
+  color: #424242;
+  font-weight: 400;
+  font-size: $primary-font-size - 2;
+}
+
+mat-option {
+  font-size: $primary-font-size - 1;
+  height: 40px !important;
+}
+
+.dps_recipient {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px
+}
+
+.dps_recipient_name {
+  position: absolute;
+  top: -9px;
+  text-align: center;
+  width: 28px;
+  color: white;
+  font-size: $primary-font-size - 1;
+}
+
+.dps-display-name {
+  padding-left: 38px;
+}
+
+i.fa {
+  font-size: $primary-font-size + 11;
+}
+
+mat-nav-list {
+  padding-top: 0px;
+
+  mat-icon {
+    color: #0D557C
+  }
+}

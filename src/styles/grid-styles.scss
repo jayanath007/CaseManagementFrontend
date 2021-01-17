@@ -1,0 +1,146 @@
+@import 'variables.scss';
+@supports (-ms-ime-align: auto) {
+  .row-data {
+    display: block !important;
+    word-break: break-all;
+  }
+  .row-highlight {
+    width: calc(100% - 12px) !important;
+  }
+  .dps-grid-x {
+    overflow-y: hidden;
+  }
+}
+
+.dps-grid-x {
+  overflow-y: hidden
+}
+
+dps-column-header {
+  font-weight: 700;
+  text-align: left;
+  border-right: 1px solid #c3c3ca;
+  padding: 12px 6px 6px;
+  font-size: 12px;
+  line-height: 18px;
+  font-family: $primary-font-stack;
+}
+
+dps-column-header:last-child {
+  border-right: unset;
+}
+
+.row-data {
+  border-right: 1px solid #c3c3ca;
+  display: table-cell;
+  padding: 6px 6px 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.row-data:last-child {
+  border-right: unset;
+}
+
+dps-ledger-card-grid {
+  .row-data.mat_line {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+dps-ledger-card-option {
+  mat-form-field {
+    .mat-input-element {
+      caret-color: $primary !important;
+    }
+    .mat-form-field-ripple {
+      background-color: $primary;
+    }
+  }
+}
+
+.dps-grid-content {
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dps-filter-btn.mat-icon-button {
+  border-radius: 10px;
+  width: unset;
+  height: unset;
+  line-height: unset;
+  
+}
+.dps-filter-btn{
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+
+// common grid
+.dps-item-grid {
+  height: 100%;
+  .row-highlight {
+    width: calc(100% - 15px);
+    background-color: #d7ebf3;
+    box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+    z-index: 2;
+    height: 30px;
+  }
+  .row-highlight-inner {
+    height: 35px;
+  }
+}
+
+.dps-item-grid-inner {
+  padding-left: 15px;
+  flex: 1;
+  height: 100%;
+  dps-column-header {
+    font-weight: 500;
+    padding: 10px 6px 10px;
+  }
+}
+
+.header {
+  font-weight: 500;
+  text-align: left;
+  border-right: 1px solid #c3c3ca;
+  padding: 6px 6px 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.header:last-child {
+  border-right: unset;
+}
+
+.dps-grid-nav-list {
+  padding-top: 0px !important;
+}
+
+.dps-grid-list-item {
+  height: auto !important;
+}
+
+.dps-grid-list-item .mat-list-item-content {
+  padding: 0px 0px !important;
+}
+
+.dps-grid-list-item {
+  flex: 1;
+  border-bottom: 1px solid #f1f1f1;
+  .grid-data {
+    flex: 1;
+    word-break: break-word;
+    .row-data.mat_line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

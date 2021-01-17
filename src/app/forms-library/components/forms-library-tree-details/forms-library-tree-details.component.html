@@ -1,0 +1,23 @@
+<div class="dps-white-gray-scroll dps-scroll">
+  <div class="matlist-wrapper" *ngFor="let menuItem of selectedMenuChildList ; let i = index" [attr.tabindex]="i"
+    [attr.id]="i" (keydown)="upDownClick($event, menuItem,i)">
+    <mat-list dpsIsMobile class="detail-list-items" [ngClass]="{'fl-details-row-selected': menuItem && selectedItem &&
+      menuItem.treeId===selectedItem?.treeId}" fxLayout="row" dpsClick [debounceTime]="350"
+      (dpsDblClick)="onDetailViewItemClick($event,menuItem)" (dpsClick)="itemSelect(menuItem)">
+      <mat-list-item class="row-data command-description dps-">
+        <div class="detail">
+          <mat-icon class="fa" [ngClass]="{'fa-folder dps-menu-icon':menuItem.nodeType===TreeItemType.Folder
+          ,'fa-th-large dps-template-icon':menuItem.nodeType===TreeItemType.Template}"></mat-icon>
+          <span class="description-test grid-data">{{menuItem?.data?.description}}</span>
+          <!-- <span
+            *ngIf="menuItem && selectedItem && menuItem.treeId===selectedItem?.treeId && menuItem.nodeType===TreeItemType.Template"
+            class="description-test grid-data"> {{menuItem?.data?.path}}</span> -->
+          <span fxFlex="1 1 auto"></span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div *ngIf="!(selectedMenuChildList?.length>0)" class="form-library-noitem">
+    No Files to view
+  </div>
+</div>

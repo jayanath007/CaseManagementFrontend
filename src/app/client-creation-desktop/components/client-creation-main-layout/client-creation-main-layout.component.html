@@ -1,0 +1,1454 @@
+<div class="dps-client-main-layout" fxLayout="column">
+  <div class="general-loader-light" mode="indeterminate" *ngIf="!metaData || isLoading || !initDataModel?.loadInitData">
+  </div>
+  <div class="dps-client-creation-header">
+
+    <!-- [mode]="mode" -->
+    <dps-client-creation-header [mode]="mode" [isModelDirty]="isModelDirty" [clientTitle]="headerTitle"
+      [permission]="user?.general?.userAccessRights" [matterDisplyName]="matterDisplayName"
+      [isPlotUser]="isPlotUser$|async" (clientAdd)="onClientAdd()" (clientSave)="onClientSave()"
+      (clientClear)="onClientClear()" (clientDelete)="onClientDelete()" (popupClosed)="onPopupClosed()"
+      (popupCancel)="onPopupCancel()" (clientOk)="onClientOk()" (clientOpenMatter)="onClientOpenMatterClick()"
+      (clientSearch)="onClientSearch(clientModelData?.client)" (screenEdit)="onScreenEdit()">
+    </dps-client-creation-header>
+
+    <dps-client-creation-banner-message fxLayout="row"
+      *ngIf="clientModelData && clientModelData.client && clientModelData.client.clientId > 0"
+      [client]="clientModelData.client" [riskAssessmentData]="clientModelData.riskAssessment"
+      [hiddenIdCheck]="!metaDataLinker('INPtpgIDCheck')?.scL_Visible"
+      [riskAssessmentHidden]="(!metaDataLinker('INPtpgRiskAnalysis')?.scL_Visible) || !(access.checkModuleIsActive(module.RiskAssessment) | async)">
+    </dps-client-creation-banner-message>
+
+    <div class="dps-client-creation-common-section" *ngIf="metaData">
+      <div class="dps-client-creation-common-section-outer-wrapper" fxLayout="row">
+
+
+        <div fxLayout="row wrap" fxLayoutGap="2rem">
+          <!--  {{isLoading}}
+          {{initDataModel?.branchList | json}} -->
+          <!-- @@{{clientModelData?.client?.privetIndividual | json}}##{{!typeChangedControllersModel?.isProofPrivateIndvVisibility}} -->
+
+
+          <dps-edit-screen-text-input [maxlength]="100"
+            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientName')"
+            [modelData]="clientModelData?.client?.clientName" [meta]="metaDataLinker('INPtxtClientName')">
+          </dps-edit-screen-text-input>
+
+          <dps-edit-screen-text-input [maxlength]="20"
+            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientReference')"
+            [modelData]="clientModelData?.client?.clientReference" [meta]="metaDataLinker('INPtxtClientRefID')">
+          </dps-edit-screen-text-input>
+
+          <dps-edit-screen-single-column-select [comboModelData]="initDataModel?.branchList" showType="value"
+            [modelData]="clientModelData?.client?.branchID" [noEntriesFoundLabel]="noEntriesFoundLabel"
+            [placeholderLabel]="placeholderLabel" [columnName]="'Name'" [meta]="metaDataLinker('INPcboClientBranch')"
+            (selectionchangedData)="onBranchChanged(ControllerType.cmb,$event,'branchID')">
+          </dps-edit-screen-single-column-select>
+
+          <dps-edit-screen-single-column-select [comboModelData]="initDataModel?.clientTypeList" showType="value"
+            [modelData]="clientModelData?.client?.clientType" [noEntriesFoundLabel]="noEntriesFoundLabel"
+            [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientType')"
+            (selectionchangedData)="onClientTypeChange(ControllerType.cmb,$event,'clientType')">
+          </dps-edit-screen-single-column-select>
+          <dps-edit-screen-datepicker class="form-row-input"
+            (dateChange)="onValueChanged(ControllerType.dtp,$event,'startDate')"
+            [modelData]="clientModelData?.client?.startDate" [meta]="metaDataLinker('INPdteClientStartDate')">
+          </dps-edit-screen-datepicker>
+
+
+          <div class="header-proof" fxLayout="row wrap">
+            <div class="proof-id btn"
+              *ngIf="getProofOfDocVisibility('Proof of ID') && clientModelData?.client?.clientId && clientModelData?.client?.clientId != -1  && clientModelData?.client?.clientType">
+              <label>{{typeChangedControllersModel?.proofOfIdLable}}</label>
+              <span class="icon fa fa-exclamation"></span>
+            </div>
+            <div class="proof-add btn"
+              *ngIf="getProofOfDocVisibility('Proof of Address') && clientModelData?.client?.clientId && clientModelData?.client?.clientId != -1  && clientModelData?.client?.clientType">
+              <label>{{typeChangedControllersModel?.proofOfAddressLable}}</label>
+              <span class="icon fa fa-exclamation"></span>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="column" fxFlexAlign="end end">
+          <dps-edit-screen-paginator *ngIf="clientSeatchList && clientSeatchList.length>1"
+            (changePage)="onPageChange($event)" [pageIndex]="clientIndex" [pagesLength]="clientSeatchList.length">
+          </dps-edit-screen-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex="1 1 auto" *ngIf="metaData" class="dps-client-creation-content">
+    <!-- fxFlex="calc(100%-230px)" -->
+    <!-- <mat-sidenav-container class="dps-sidenav-container"> -->
+    <!-- <mat-sidenav class="dps-client-creation-side-nav dps-white-gray-scroll" mode="side" [opened]="true"> -->
+    <mat-nav-list dense class="dps-client-creation dps-white-gray-scroll">
+      <!-- Client Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-user'" [meta]="metaDataLinker('INPtpgClient')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgClient'}" (click)="clientTabClick('INPtpgClient')">
+      </dps-edit-screen-tab>
+      <!-- Credit Defaults Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-credit-card'" [meta]="metaDataLinker('INPtpgCreditDefaults')"
+        [modelData]="clientModelData" [ngClass]="{'active':selectedTab==='INPtpgCreditDefaults'}"
+        (click)="clientTabClick('INPtpgCreditDefaults')">
+      </dps-edit-screen-tab>
+      <!-- Personal Tab Header -->
+      <!-- <dps-edit-screen-tab [tabIcon]="'fa-lock'" [hidden]="!typeChangedControllersModel?.isPersonalTabVisibility"
+        [meta]="metaDataLinker('INPtpgPersonal')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgPersonal'}" (click)="clientTabClick('INPtpgPersonal')">
+      </dps-edit-screen-tab> -->
+      <!-- Company Tab Header -->
+      <!-- <dps-edit-screen-tab [tabIcon]="'fa-newspaper-o'" [hidden]="!typeChangedControllersModel?.isCompanyTabVisibility"
+        [meta]="metaDataLinker('
+        ')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgCompany'}" (click)="clientTabClick('INPtpgCompany')">
+      </dps-edit-screen-tab> -->
+      <!-- Crime Tab Header -->
+      <dps-edit-screen-tab [hidden]="mode === Mode.AddMode || !isCrimeTabVisibility" [tabIcon]="'fa-balance-scale'"
+        [meta]="metaDataLinker('INPtpgCrime')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgCrime'}" (click)="clientTabClick('INPtpgCrime')">
+      </dps-edit-screen-tab>
+      <!-- Matters Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-briefcase'" [meta]="metaDataLinker('INPtpgMatters')"
+        [modelData]="clientModelData" [ngClass]="{'active':selectedTab==='INPtpgMatters'}"
+        (click)="clientTabClick('INPtpgMatters')">
+      </dps-edit-screen-tab>
+      <!-- Notes Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-file-o'" [meta]="metaDataLinker('INPtpgNotes')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgNotes'}" (click)="clientTabClick('INPtpgNotes')">
+      </dps-edit-screen-tab>
+      <!-- Doc Register Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-tag'" [meta]="metaDataLinker('INPtpgDocRegister')"
+        [modelData]="clientModelData" [ngClass]="{'active':selectedTab==='INPtpgDocRegister'}"
+        (click)="clientTabClick('INPtpgDocRegister')">
+      </dps-edit-screen-tab>
+      <!-- ID Check Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-check-square-o'" [meta]="metaDataLinker('INPtpgIDCheck')"
+        [modelData]="clientModelData" [ngClass]="{'active':selectedTab==='INPtpgIDCheck'}"
+        (click)="clientTabClick('INPtpgIDCheck')">
+      </dps-edit-screen-tab>
+      <!-- Documents Tab Header -->
+      <dps-edit-screen-tab [tabIcon]="'fa-folder'" [meta]="metaDataLinker('INPtpgDocuments')"
+        [modelData]="clientModelData" [ngClass]="{'active':selectedTab==='INPtpgDocuments'}"
+        (click)="clientTabClick('INPtpgDocuments')">
+      </dps-edit-screen-tab>
+      <!-- Risk Analysis Tab Header -->
+      <dps-edit-screen-tab *ngIf="(access.checkModuleIsActive(module.RiskAssessment) | async)"
+        [tabIcon]="'fa-pie-chart'" [meta]="metaDataLinker('INPtpgRiskAnalysis')" [modelData]="clientModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgRiskAnalysis'}" (click)="clientTabClick('INPtpgRiskAnalysis')">
+      </dps-edit-screen-tab>
+    </mat-nav-list>
+    <!-- </mat-sidenav> -->
+
+    <div class="dps-client-creation-tab-content dps-white-gray-scroll">
+      <!-- Client Tab Content -->
+      <div class="dps-client-creation-tab-content-inner client dps-white-gray-scroll"
+        [hidden]="selectedTab!='INPtpgClient'">
+        <mat-tab-group class="dps-client-tab-group dps-white-gray-scroll"
+          (selectedIndexChange)="showStatmentnAddress = $event === 1 ? true : false ">
+          <!-- Correspondance Tab Content -->
+          <mat-tab *ngIf="metaDataLinker('INPtpgAddrHome')?.scL_Visible"
+            label="{{metaDataLinker('INPtpgAddrHome')?.scL_Caption || metaDataLinker('INPtpgAddrHome')?.scL_DefaultCaption}}">
+            <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPlblHomeAddrBAR')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>location_on</mat-icon>
+                      <span>Contact & Address</span>
+                      <!-- <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblHomeAddrBAR')">
+                      </dps-edit-screen-lable> -->
+
+                      <span fxFlex="0 0 1%"></span>
+                      <dps-address-finder [addressFindId]="'address'" (changeAddress)="autofillAddress($event)"
+                        (click)="stopEventPropagation($event)">
+                      </dps-address-finder>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+
+
+
+                      <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                        <!-- style="width: 70%" -->
+
+                        <div fxLayout="column  wrap">
+                          <dps-edit-screen-lookup-select class="form-row-input" lookupType="SALTITLE"
+                            (lookupClickData)="onLookupClick($event)"
+                            [comboModelData]="initDataModel?.lookupTitleType?.lookupViewModels" showType="luP_Code"
+                            [modelData]="clientModelData?.client?.clientTitle"
+                            [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                            columnName="Name" [meta]="metaDataLinker('INPcboClientTitle')"
+                            (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'clientTitle')">
+                          </dps-edit-screen-lookup-select>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'firstName')"
+                            [modelData]="clientModelData?.client?.firstName"
+                            [meta]="metaDataLinker('INPtxtClientFirstName')"></dps-edit-screen-text-input>
+
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (blur)="onLastNameChanged(ControllerType.input,$event,'lastName')"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'lastName')"
+                            [modelData]="clientModelData?.client?.lastName"
+                            [meta]="metaDataLinker('INPtxtClientLastName')"></dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientTelephoneNo')"
+                            [modelData]="clientModelData?.client?.clientTelephoneNo"
+                            [meta]="metaDataLinker('INPtxtAddressHomeTel')"></dps-edit-screen-text-input>
+
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientEmail')"
+                            [modelData]="clientModelData?.client?.clientEmail"
+                            [meta]="metaDataLinker('INPtxtAddressHomeContactEmail')"></dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientSecondEmail')"
+                            [modelData]="clientModelData?.client?.clientSecondEmail"
+                            [meta]="metaDataLinker('INPtxtAddressHomeContactEmail2')">
+                          </dps-edit-screen-text-input>
+
+                        </div>
+
+                        <div fxLayout="column wrap">
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientLetterTitle')"
+                            [modelData]="clientModelData?.client?.clientLetterTitle"
+                            [meta]="metaDataLinker('INPtxtAddressHomeLetterTitle')"></dps-edit-screen-text-input>
+
+
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientAddress1')"
+                            [modelData]="clientModelData?.client?.clientAddress1"
+                            [meta]="metaDataLinker('INPtxtAddressHomeAddr1')">
+                          </dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientAddress2')"
+                            [modelData]="clientModelData?.client?.clientAddress2"
+                            [meta]="metaDataLinker('INPtxtAddressHomeAddr2')">
+                          </dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientTown')"
+                            [modelData]="clientModelData?.client?.clientTown"
+                            [meta]="metaDataLinker('INPtxtAddressHomeTown')">
+                          </dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientCountry')"
+                            [modelData]="clientModelData?.client?.clientCountry"
+                            [meta]="metaDataLinker('INPtxtAddressHomeCountry')">
+                          </dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientPostCode')"
+                            [modelData]="clientModelData?.client?.clientPostCode"
+                            [meta]="metaDataLinker('INPtxtAddressHomePostcode')">
+                          </dps-edit-screen-text-input>
+                        </div>
+
+
+                        <div fxLayout="column wrap">
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientContactName')"
+                            [modelData]="clientModelData?.client?.clientContactName"
+                            [meta]="metaDataLinker('INPtxtAddressHomeContactName')">
+                          </dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientMobileTelephoneNo')"
+                            [modelData]="clientModelData?.client?.clientMobileTelephoneNo"
+                            [meta]="metaDataLinker('INPtxtAddressMobileTel')"></dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientWorkTelephoneNo')"
+                            [modelData]="clientModelData?.client?.clientWorkTelephoneNo"
+                            [meta]="metaDataLinker('INPtxtAddressWorkTel')"></dps-edit-screen-text-input>
+
+                          <dps-edit-screen-text-input class="form-row-input"
+                            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientFaxNo')"
+                            [modelData]="clientModelData?.client?.clientFaxNo"
+                            [meta]="metaDataLinker('INPtxtAddressFaxTel')"></dps-edit-screen-text-input>
+
+                          <dps-edit-screen-lookup-select class="form-row-input" lookupType="SALINTRO"
+                            (lookupClickData)="onLookupClick($event)"
+                            [comboModelData]="initDataModel?.lookupIntroductionType?.lookupViewModels"
+                            showType="luP_Code" [modelData]="clientModelData?.client?.clientIntroduction"
+                            [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                            columnName="Name" [meta]="metaDataLinker('INPcboClientIntro')"
+                            (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'clientIntroduction')">
+                          </dps-edit-screen-lookup-select>
+                        </div>
+
+
+                        <!-- <dps-edit-screen-find-address-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientAddress1')"
+                          [modelData]="clientModelData?.client?.clientAddress1"
+                          [meta]="metaDataLinker('INPtxtAddressHomeAddr1')" (changeAddress)=autofillAddress($event)>
+                        </dps-edit-screen-find-address-input> -->
+
+
+                        <!--
+                      <dps-edit-screen-text-input class="form-row-input"
+                      (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientContactName')"
+                      [modelData]="clientModelData?.client?.clientContactName"
+                      [meta]="metaDataLinker('INPtxtAddressHomeContactName')"></dps-edit-screen-text-input>
+ -->
+
+
+
+                        <!-- <dps-edit-screen-find-address-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientPostCode')"
+                          [modelData]="clientModelData?.client?.clientPostCode"
+                          [meta]="metaDataLinker('INPtxtAddressHomePostcode')" (changeAddress)=autofillAddress($event)>
+                        </dps-edit-screen-find-address-input> -->
+
+
+                        <!-- <dps-edit-screen-single-column-select [comboModelData]="initDataModel?.clientTypeList"
+                            showType="value" [modelData]="clientModelData?.client?.clientType" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                            [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientType')"
+                            (selectionchangedData)="onClientTypeChange(ControllerType.cmb,$event,'clientType')">
+                          </dps-edit-screen-single-column-select> -->
+
+                      </div>
+
+                      <!-- <div fxLayout="column wrap"
+                        *ngIf="clientModelData?.client?.clientId && clientModelData?.client?.clientId != -1 && initDataModel?.isAMLShow"
+                        fxLayoutAlign="space-between end" style="width: 30%">
+                        <div fxLayout="column wrap" class="client-AML-Check">
+                          <label>Client AML Check</label>
+                          <div class="{{amlColorClass}}">
+                            <span class="aml-lbl">
+                              <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-check-circle"></mat-icon>
+                              {{amlResultString}}
+                            </span>
+
+                          </div>
+                          <div fxLayout="column">
+
+                            <dps-edit-screen-datepicker lableName="Last Search"
+                              (dateChange)="onValueChanged(ControllerType.dtp,$event,'amLLastSearch')"
+                              [modelData]="clientModelData?.client?.amlLastSearch" [meta]="metaDataLinker('')">
+                            </dps-edit-screen-datepicker>
+
+                            <dps-edit-screen-single-column-select [lableName]="'Risk Level'"
+                              [comboModelData]="initDataModel?.amlRiskLevelResponceList" showType="value"
+                              [modelData]="clientModelData?.client?.aMLRiskLevel"
+                              [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                              columnName="Name" [meta]="metaDataLinker('INPcboAMLRiskLevel')"
+                              (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'aMLRiskLevel')">
+                            </dps-edit-screen-single-column-select>
+
+                            <button mat-button matTooltip="Submit AML Check" matTooltipPosition="above"
+                              (click)="aMLSave()">
+                              <mat-icon class="mat-18">playlist_add_check</mat-icon>
+                              <span> Submit</span>
+                            </button>
+
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+
+                    <!-- <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between start">
+                        <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                          <dps-edit-screen-datepicker class="form-row-input" (dateChange)="onValueChanged(ControllerType.dtp,$event,'startDate')"
+                            [modelData]="clientModelData?.client?.startDate" [meta]="metaDataLinker('INPdteClientStartDate')"></dps-edit-screen-datepicker>
+
+                          <dps-edit-screen-checkbox class="form-row-input" (valueChange)="onValueChanged(ControllerType.chb,$event,'clientNotoMarketing')"
+                            [modelData]="clientModelData?.client?.clientNotoMarketing" [lableName]="'No to Marketing'"
+                            [meta]="metaDataLinker('INPchkNoToMarketing')"></dps-edit-screen-checkbox>
+                        </div>
+                      </div> -->
+
+                  </div>
+                </mat-expansion-panel>
+
+
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true"
+                  *ngIf="!(clientModelData?.client?.clientType === 1 || clientModelData?.client?.clientType === 6)">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPlblClientDetailsBAR')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>how_to_reg</mat-icon>
+                      <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblClientDetailsBAR')">
+                      </dps-edit-screen-lable>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                      <div fxLayout="column wrap">
+
+
+                        <dps-edit-screen-datepicker class="form-row-input"
+                          (dateChange)="onValueChanged(ControllerType.dtp,$event,'dateOfBirth')"
+                          [modelData]="clientModelData?.client?.dateOfBirth" [meta]="metaDataLinker('INPdteClientDOB')">
+                        </dps-edit-screen-datepicker>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'nameAtBirth')"
+                          [modelData]="clientModelData?.client?.nameAtBirth"
+                          [meta]="metaDataLinker('INPtxtClientNameAtBirth')"></dps-edit-screen-text-input>
+
+
+
+                        <dps-edit-screen-single-column-select class="form-row-input"
+                          [comboModelData]="initDataModel?.ethnicOriginCodeAndNameList" showType="value"
+                          [modelData]="clientModelData?.client?.ethnicOrigin"
+                          [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                          columnName="Name" [meta]="metaDataLinker('INPcboClientEthnicOrigin')"
+                          (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'ethnicOrigin')">
+                        </dps-edit-screen-single-column-select>
+                      </div>
+                      <div fxLayout="column wrap">
+
+                        <dps-edit-screen-datepicker class="form-row-input"
+                          (dateChange)="onValueChanged(ControllerType.dtp,$event,'dateOfDeath')"
+                          [modelData]="clientModelData?.client?.dateOfDeath" [meta]="metaDataLinker('INPdteClientDOD')">
+                        </dps-edit-screen-datepicker>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'PlaceOfBirth')"
+                          [modelData]="clientModelData?.client?.placeOfBirth"
+                          [meta]="metaDataLinker('INPtxtClientPlaceOfBirth')"></dps-edit-screen-text-input>
+
+
+                        <dps-edit-screen-single-column-select class="form-row-input"
+                          [comboModelData]="initDataModel?.disabilityCodeAndNameList" showType="value"
+                          [modelData]="clientModelData?.client?.disabilityMonitoring"
+                          [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                          columnName="Name" [meta]="metaDataLinker('INPcboClientDisabilityMonitor')"
+                          (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'disabilityMonitoring')">
+                        </dps-edit-screen-single-column-select>
+                      </div>
+                      <div fxLayout="column wrap">
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'niNumber')"
+                          [modelData]="clientModelData?.client?.niNumber"
+                          [meta]="metaDataLinker('INPtxtClientNINumber')">
+                        </dps-edit-screen-text-input>
+
+                        <dps-edit-screen-single-column-select class="form-row-input"
+                          [comboModelData]="initDataModel?.genderCodeAndNameList" showType="value"
+                          [modelData]="clientModelData?.client?.gender" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                          [placeholderLabel]="placeholderLabel" columnName="Name"
+                          [meta]="metaDataLinker('INPcboClientGender')"
+                          (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'gender')">
+                        </dps-edit-screen-single-column-select>
+
+                        <dps-edit-screen-checkbox class="form-row-input"
+                          (valueChange)="onValueChanged(ControllerType.chb,$event,'clientNotoMarketing')"
+                          [modelData]="clientModelData?.client?.clientNotoMarketing" [lableName]="'No to Marketing'"
+                          [meta]="metaDataLinker('INPchkNoToMarketing')"></dps-edit-screen-checkbox>
+                      </div>
+
+
+
+
+
+                    </div>
+
+                  </div>
+                </mat-expansion-panel>
+
+
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true"
+                  *ngIf="clientModelData?.client?.clientType === 1">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPlblCompanyCompBAR')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>business</mat-icon>
+                      <span>Company Registed Address </span>
+                      <span fxFlex="0 0 1%"></span>
+
+                      <dps-address-finder [addressFindId]="'companyAddress'"
+                        (changeAddress)="autofillCompanyAddress($event)" (click)="stopEventPropagation($event)">
+                      </dps-address-finder>
+                      <!-- <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblCompanyCompBAR')">
+                      </dps-edit-screen-lable> -->
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+
+
+                      <div fxLayout="column wrap">
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          [disabled]="typeChangedControllersModel?.isClientCompanyNameReadOnly"
+                          [customCaption]="typeChangedControllersModel?.clientCompanyNameCaption"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientCompanyName')"
+                          [modelData]="clientModelData?.client?.clientCompanyName"
+                          [meta]="metaDataLinker('INPtxtClientCompanyName')">
+                        </dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyAddress1')"
+                          [modelData]="clientModelData?.client?.companyAddress1"
+                          [meta]="metaDataLinker('INPtxtCompanyRegAddr1')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyAddress2')"
+                          [modelData]="clientModelData?.client?.companyAddress2"
+                          [meta]="metaDataLinker('INPtxtCompanyRegAddr2')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyTown')"
+                          [modelData]="clientModelData?.client?.companyTown"
+                          [meta]="metaDataLinker('INPtxtCompanyRegTown')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyCountry')"
+                          [modelData]="clientModelData?.client?.companyCountry"
+                          [meta]="metaDataLinker('INPtxtCompanyRegCountry')"></dps-edit-screen-text-input>
+
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyPostCode')"
+                          [modelData]="clientModelData?.client?.companyPostCode"
+                          [meta]="metaDataLinker('INPtxtCompanyRegPostcode')"></dps-edit-screen-text-input>
+                      </div>
+                      <div fxLayout="column wrap">
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companySICCode')"
+                          [modelData]="clientModelData?.client?.companySICCode"
+                          [meta]="metaDataLinker('INPtxtCompanySICCode')">
+                        </dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyReg')"
+                          [modelData]="clientModelData?.client?.companyReg"
+                          [meta]="metaDataLinker('INPtxtCompanyRegNo')">
+                        </dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'vatRegNo')"
+                          [modelData]="clientModelData?.client?.vatRegNo" [meta]="metaDataLinker('INPtxtCompanyVATNo')">
+                        </dps-edit-screen-text-input>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+
+
+
+
+                <!-- <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                    <mat-expansion-panel-header collapsedHeight="35px" *ngIf="metaDataLinker('INPlblHomeContactBAR')?.scL_Visible">
+                      <mat-panel-title>
+                        <mat-icon>contacts</mat-icon>
+                        <dps-edit-screen-lable [modelData]="clientModelData?.client?.clientContactName" [meta]="metaDataLinker('INPlblHomeContactBAR')"></dps-edit-screen-lable>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between start">
+                      <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                        <dps-edit-screen-lookup-select class="form-row-input" lookupType="SALTITLE" (lookupClickData)="onLookupClick($event)"
+                          [comboModelData]="initDataModel?.lookupTitleType?.lookupViewModels" showType="luP_Code"
+                          [modelData]="clientModelData?.client?.clientTitle" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                          [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientTitle')"
+                          (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'clientTitle')">
+                        </dps-edit-screen-lookup-select>
+                        <dps-edit-screen-lookup-select class="form-row-input" lookupType="SALINTRO" (lookupClickData)="onLookupClick($event)"
+                          [comboModelData]="initDataModel?.lookupIntroductionType?.lookupViewModels" showType="luP_Code"
+                          [modelData]="clientModelData?.client?.clientIntroduction" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                          [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientIntro')"
+                          (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'clientIntroduction')">
+                        </dps-edit-screen-lookup-select>
+
+                        <dps-edit-screen-datepicker class="form-row-input" (dateChange)="onValueChanged(ControllerType.dtp,$event,'startDate')"
+                          [modelData]="clientModelData?.client?.startDate" [meta]="metaDataLinker('INPdteClientStartDate')"></dps-edit-screen-datepicker>
+                        <dps-edit-screen-checkbox class="form-row-input" (valueChange)="onValueChanged(ControllerType.chb,$event,'clientNotoMarketing')"
+                          [modelData]="clientModelData?.client?.clientNotoMarketing" [lableName]="'No to Marketing'"
+                          [meta]="metaDataLinker('INPchkNoToMarketing')"></dps-edit-screen-checkbox>
+
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'firstName')"
+                          [modelData]="clientModelData?.client?.firstName" [meta]="metaDataLinker('INPtxtClientFirstName')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (blur)="onLastNameChanged(ControllerType.input,$event,'lastName')"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'lastName')" [modelData]="clientModelData?.client?.lastName"
+                          [meta]="metaDataLinker('INPtxtClientLastName')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientLetterTitle')"
+                          [modelData]="clientModelData?.client?.clientLetterTitle" [meta]="metaDataLinker('INPtxtAddressHomeLetterTitle')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientContactName')"
+                          [modelData]="clientModelData?.client?.clientContactName" [meta]="metaDataLinker('INPtxtAddressHomeContactName')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientTelephoneNo')"
+                          [modelData]="clientModelData?.client?.clientTelephoneNo" [meta]="metaDataLinker('INPtxtAddressHomeTel')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientWorkTelephoneNo')"
+                          [modelData]="clientModelData?.client?.clientWorkTelephoneNo" [meta]="metaDataLinker('INPtxtAddressWorkTel')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientMobileTelephoneNo')"
+                          [modelData]="clientModelData?.client?.clientMobileTelephoneNo" [meta]="metaDataLinker('INPtxtAddressMobileTel')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientEmail')"
+                          [modelData]="clientModelData?.client?.clientEmail" [meta]="metaDataLinker('INPtxtAddressHomeContactEmail')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientSecondEmail')"
+                          [modelData]="clientModelData?.client?.clientSecondEmail" [meta]="metaDataLinker('INPtxtAddressHomeContactEmail2')"></dps-edit-screen-text-input>
+
+                        <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientFaxNo')"
+                          [modelData]="clientModelData?.client?.clientFaxNo" [meta]="metaDataLinker('INPtxtAddressFaxTel')"></dps-edit-screen-text-input>
+
+                      </div>
+
+                    </div>
+                  </mat-expansion-panel> -->
+              </mat-accordion>
+            </div>
+          </mat-tab>
+          <!-- Statement Tab Content -->
+
+          <mat-tab *ngIf="metaDataLinker('INPtpgAddrStatement')?.scL_Visible"
+            label="{{metaDataLinker('INPtpgAddrStatement')?.scL_Caption || metaDataLinker('INPtpgAddrStatement')?.scL_DefaultCaption}}">
+            <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel class="mat-elevation-z" *ngIf="isShowStatementGroup" [expanded]="true">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPtpgAddrStatement')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>assignment</mat-icon>
+                      <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPtpgAddrStatement')">
+                      </dps-edit-screen-lable>
+                      <span fxFlex="0 0 1%"></span>
+                      <dps-address-finder *ngIf="showStatmentnAddress" [addressFindId]="'statementAddress'"
+                        (changeAddress)="autofillStatementAddress($event)" (click)="stopEventPropagation($event)">
+                      </dps-address-finder>
+                      <span fxFlex="1 1 auto"></span>
+                      <div class="button-outer-wrapper content">
+                        <button mat-button class="dps-correspondence" (click)="onCopyFromCorrespondence($event)"
+                          (click)="stopEventPropagation($event)">
+                          <mat-icon>file_copy</mat-icon>
+                          <span>Copy From Correspondence</span>
+                        </button>
+                      </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="expanded-content" fxLayout="column wrap" fxLayoutAlign="space-between start">
+                    <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                      <div fxLayout="column wrap">
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementAddress1')"
+                          [modelData]="clientModelData?.client?.statementAddress1"
+                          [meta]="metaDataLinker('INPtxtAddressStatementAddr1')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementAddress2')"
+                          [modelData]="clientModelData?.client?.statementAddress2"
+                          [meta]="metaDataLinker('INPtxtAddressStatementAddr2')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementCounty')"
+                          [modelData]="clientModelData?.client?.statementCounty"
+                          [meta]="metaDataLinker('INPtxtAddressStatementCountry')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementTown')"
+                          [modelData]="clientModelData?.client?.statementTown"
+                          [meta]="metaDataLinker('INPtxtAddressStatementTown')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementPostCode')"
+                          [modelData]="clientModelData?.client?.statementPostCode"
+                          [meta]="metaDataLinker('INPtxtAddressStatementPostcode')"></dps-edit-screen-text-input>
+                      </div>
+                      <div fxLayout="column wrap">
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementContentContactName')"
+                          [modelData]="clientModelData?.client?.statementContentContactName"
+                          [meta]="metaDataLinker('INPtxtAddressStatementContactName')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementContentEmail')"
+                          [modelData]="clientModelData?.client?.statementContentEmail"
+                          [meta]="metaDataLinker('INPtxtAddressStatementContactEmail')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementContentTelephone')"
+                          [modelData]="clientModelData?.client?.statementContentTelephone"
+                          [meta]="metaDataLinker('INPtxtAddressStatementContactTel')"></dps-edit-screen-text-input>
+                        <dps-edit-screen-text-input class="form-row-input"
+                          (inputValueChange)="onValueChanged(ControllerType.input,$event,'statementContentFacsimile')"
+                          [modelData]="clientModelData?.client?.statementContentFacsimile"
+                          [meta]="metaDataLinker('INPtxtAddressStatementContactFax')"></dps-edit-screen-text-input>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+
+                <!-- <mat-expansion-panel class="mat-elevation-z" [expanded]="true" *ngIf="isShowContactGroup">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPlblHomeContactBAR')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>contacts</mat-icon>
+                      <dps-edit-screen-lable [modelData]="clientModelData?.client?.statementTown"
+                        [meta]="metaDataLinker('INPlblHomeContactBAR')"></dps-edit-screen-lable>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                </mat-expansion-panel> -->
+
+
+              </mat-accordion>
+            </div>
+          </mat-tab>
+          <!-- Other Names Tab Content -->
+          <mat-tab *ngIf="isShowOtherNameTab"
+            label="{{metaDataLinker('INPtpgAddrOtherNames')?.scL_Caption || metaDataLinker('INPtpgAddrOtherNames')?.scL_DefaultCaption}}">
+            <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                  <mat-expansion-panel-header collapsedHeight="35px"
+                    *ngIf="metaDataLinker('INPtpgAddrOtherNames')?.scL_Visible">
+                    <mat-panel-title>
+                      <mat-icon>person</mat-icon>
+                      <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPtpgAddrOtherNames')">
+                      </dps-edit-screen-lable>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+
+                  <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+
+                    <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+
+                      <dps-edit-screen-text-input class="form-row-input"
+                        (inputValueChange)="onValueChanged(ControllerType.input,$event,'additionalName1')"
+                        [modelData]="clientModelData?.client?.additionalName1"
+                        [meta]="metaDataLinker('INPtxtAdditionalName1')"></dps-edit-screen-text-input>
+
+                      <dps-edit-screen-text-input class="form-row-input"
+                        (inputValueChange)="onValueChanged(ControllerType.input,$event,'additionalName2')"
+                        [modelData]="clientModelData?.client?.additionalName2"
+                        [meta]="metaDataLinker('INPtxtAdditionalName2')"></dps-edit-screen-text-input>
+
+                      <dps-edit-screen-text-input class="form-row-input"
+                        (inputValueChange)="onValueChanged(ControllerType.input,$event,'additionalName3')"
+                        [modelData]="clientModelData?.client?.additionalName3"
+                        [meta]="metaDataLinker('INPtxtAdditionalName3')"></dps-edit-screen-text-input>
+
+                    </div>
+
+                  </div>
+
+                </mat-expansion-panel>
+
+              </mat-accordion>
+
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+      <!-- Credit Defaults Tab Content -->
+      <div class="dps-client-creation-tab-content-inner credit-defaults" [hidden]="selectedTab!='INPtpgCreditDefaults'">
+        <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+          <mat-accordion [multi]="true">
+
+            <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+              <mat-expansion-panel-header collapsedHeight="35px"
+                *ngIf="metaDataLinker('INPlblCredDbtLimitBAR')?.scL_Visible">
+                <mat-panel-title>
+                  <mat-icon>credit_card</mat-icon>
+                  <dps-edit-screen-lable [meta]="metaDataLinker('INPlblCredDbtLimitBAR')"></dps-edit-screen-lable>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                  <dps-edit-screen-number-input [currencySymbols]="(homeCurrency | currencySymbols)"
+                    class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'creditLimit')"
+                    [modelData]="clientModelData?.client?.creditLimit"
+                    [meta]="metaDataLinker('INPtxtCreditDebitLimit')"></dps-edit-screen-number-input>
+
+                  <dps-edit-screen-number-input [currencySymbols]="(homeCurrency | currencySymbols)" [disabled]="true"
+                    class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'balance')"
+                    [modelData]="clientModelData?.client?.balance" [meta]="metaDataLinker('INPlblCreditDebitBalEDT')">
+                  </dps-edit-screen-number-input>
+
+                  <dps-edit-screen-lookup-select class="form-row-input" lookupType="SALTERMS"
+                    (lookupClickData)="onLookupClick($event)"
+                    [comboModelData]="initDataModel?.lookupTermsType?.lookupViewModels" showType="luP_Code"
+                    [modelData]="terms" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditDebitTerms')"
+                    (lableLinkClickData)="onLableLinkClickData($event)"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'terms')">
+                  </dps-edit-screen-lookup-select>
+
+                  <dps-edit-screen-checkbox class="form-row-input"
+                    (valueChange)="onValueChanged(ControllerType.chb,$event,'onHold')"
+                    [modelData]="clientModelData?.client?.onHold" [meta]="metaDataLinker('INPchkCreditDebitOnHold')">
+                  </dps-edit-screen-checkbox>
+
+                  <dps-edit-screen-single-column-select [comboModelData]="initDataModel?.creditControlStageList"
+                    showType="value" [modelData]="clientModelData?.client?.creditControlStage"
+                    [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditControlStage')"
+                    (selectionchangedData)="onCrediteConrtolStageChanged(ControllerType.cmb,$event,'creditControlStage')"
+                    class="dps-creditControlStage">
+                  </dps-edit-screen-single-column-select>
+                  <dps-edit-screen-text-input [lableName]="'Date Stage Set'" [disabled]="true" class="form-row-input"
+                    [modelData]="clientModelData?.client?.dateStageSet |date:'dd/MM/yyyy'"
+                    [meta]="metaDataLinker('INPlblDateStageSet')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-checkbox class="form-row-input"
+                    (valueChange)="onValueChanged(ControllerType.chb,$event,'suspendCreditControl')"
+                    [modelData]="clientModelData?.client?.suspendCreditControl" [lableName]="'Suspend Credit Control'"
+                    [meta]="metaDataLinker('INPchkSuspendCreditControl')"></dps-edit-screen-checkbox>
+
+                  <dps-edit-screen-text-input [maxlength]="150" class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'reasonToSuspend')"
+                    [modelData]="clientModelData?.client?.reasonToSuspend"
+                    [meta]="metaDataLinker('INPtxtSuspendReason')"></dps-edit-screen-text-input>
+                </div>
+                <!-- <dps-edit-screen-single-column-select [comboModelData]="branchList" showType="value" [modelData]="clientModelData?.client?.branchID"
+                      [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientBranch')"
+                      (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'branchID')">
+                    </dps-edit-screen-single-column-select> -->
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="mat-elevation-z" [expanded]="true" *ngIf="isShowPaymeantBankGroup">
+              <mat-expansion-panel-header collapsedHeight="35px">
+                <mat-panel-title>
+                  <mat-icon>store</mat-icon>
+                  <label>
+                    Payment Bank
+                  </label>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                  <dps-edit-screen-checkbox class="form-row-input"
+                    (valueChange)="onValueChanged(ControllerType.chb,$event,'bacsPayment')"
+                    [modelData]="clientModelData?.client?.bacsPayment" [lableName]="'BACS Payment'"
+                    [meta]="metaDataLinker('INPchkBACSPayment')"></dps-edit-screen-checkbox>
+
+                  <dps-edit-screen-text-input [maxlength]="15" class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'bacsCode')"
+                    [modelData]="clientModelData?.client?.bacsCode" [meta]="metaDataLinker('INPtxtBACSCode')">
+                  </dps-edit-screen-text-input>
+
+                  <dps-edit-screen-single-column-select class="form-row-input"
+                    [comboModelData]="initDataModel?.creditAccountTypeList" showType="value"
+                    [modelData]="clientModelData?.client?.accountType" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditDebitAccountType')" (selectionchangedData)="onValueChanged(ControllerType.cmb,
+                      $event,'accountType')">
+                  </dps-edit-screen-single-column-select>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'accountName')" [maxlength]="40"
+                    [modelData]="clientModelData?.client?.accountName"
+                    [meta]="metaDataLinker('INPtxtCompanyAccountName')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'accountNo')" [maxlength]="30"
+                    [modelData]="clientModelData?.client?.accountNo" [meta]="metaDataLinker('INPtxtCompanyAccountNo')">
+                  </dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input [maxlength]="8" class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'paymentSortCode')"
+                    [modelData]="clientModelData?.client?.paymentSortCode"
+                    [meta]="metaDataLinker('INPtxtCompanyAccountSortcode')"></dps-edit-screen-text-input>
+
+                </div>
+
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+              <mat-expansion-panel-header collapsedHeight="35px"
+                *ngIf="metaDataLinker('INPlblCredDbtDefCodesBAR')?.scL_Visible">
+                <mat-panel-title>
+                  <!-- <mat-icon>bookmark_border</mat-icon> -->
+                  <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-gg-circle"></mat-icon>
+                  <dps-edit-screen-lable [meta]="metaDataLinker('INPlblCredDbtDefCodesBAR')"></dps-edit-screen-lable>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+
+                <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                  <dps-edit-screen-single-column-select class="form-row-input"
+                    [comboModelData]="initDataModel?.vatCodeAndDescriptionList" showType="value" [modelData]="vatCode"
+                    [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditDebitVATCode')"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'vatCode')">
+                  </dps-edit-screen-single-column-select>
+
+                  <dps-edit-screen-single-column-select class="form-row-input"
+                    [comboModelData]="initDataModel?.currencyCodeAndNameList" showType="value"
+                    [modelData]="clientModelData?.client?.currencyCode" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditDebitCCYCode')"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'currencyCode')">
+                  </dps-edit-screen-single-column-select>
+
+                  <dps-edit-screen-single-column-select class="form-row-input"
+                    [comboModelData]="initDataModel?.feeEarnerCodeAndNameList" showType=""
+                    [modelData]="clientModelData?.client?.feeEarner" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboCreditDebitFeeEarner')"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'feeEarner')">
+                  </dps-edit-screen-single-column-select>
+
+                </div>
+
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <!-- Personal Tab Content -->
+      <div class="dps-client-creation-tab-content-inner personal" [hidden]="selectedTab!='INPtpgPersonal'">
+        <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+          <mat-accordion [multi]="true">
+            <!--
+              <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                <mat-expansion-panel-header collapsedHeight="35px" *ngIf="metaDataLinker('INPlblClientDetailsBAR')?.scL_Visible">
+                  <mat-panel-title>
+                    <mat-icon>how_to_reg</mat-icon>
+                    <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblClientDetailsBAR')"></dps-edit-screen-lable>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                  <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                    <dps-edit-screen-datepicker class="form-row-input" (dateChange)="onValueChanged(ControllerType.dtp,$event,'dateOfBirth')"
+                      [modelData]="clientModelData?.client?.dateOfBirth" [meta]="metaDataLinker('INPdteClientDOB')"></dps-edit-screen-datepicker>
+
+                    <dps-edit-screen-datepicker class="form-row-input" (dateChange)="onValueChanged(ControllerType.dtp,$event,'dateOfDeath')"
+                      [modelData]="clientModelData?.client?.dateOfDeath" [meta]="metaDataLinker('INPdteClientDOD')"></dps-edit-screen-datepicker>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'niNumber')"
+                      [modelData]="clientModelData?.client?.niNumber" [meta]="metaDataLinker('INPtxtClientNINumber')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'nameAtBirth')"
+                      [modelData]="clientModelData?.client?.nameAtBirth" [meta]="metaDataLinker('INPtxtClientNameAtBirth')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'PlaceOfBirth')"
+                      [modelData]="clientModelData?.client?.placeOfBirth" [meta]="metaDataLinker('INPtxtClientPlaceOfBirth')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-single-column-select class="form-row-input" [comboModelData]="initDataModel?.genderCodeAndNameList"
+                      showType="value" [modelData]="clientModelData?.client?.gender" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                      [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientGender')"
+                      (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'gender')">
+                    </dps-edit-screen-single-column-select>
+
+                    <dps-edit-screen-single-column-select class="form-row-input" [comboModelData]="initDataModel?.ethnicOriginCodeAndNameList"
+                      showType="value" [modelData]="clientModelData?.client?.ethnicOrigin" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                      [placeholderLabel]="placeholderLabel" columnName="Name" [meta]="metaDataLinker('INPcboClientEthnicOrigin')"
+                      (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'ethnicOrigin')">
+                    </dps-edit-screen-single-column-select>
+
+
+                    <dps-edit-screen-single-column-select class="form-row-input" [comboModelData]="initDataModel?.disabilityCodeAndNameList"
+                      showType="value" [modelData]="clientModelData?.client?.disabilityMonitoring"
+                      [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                      [meta]="metaDataLinker('INPcboClientDisabilityMonitor')" (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'disabilityMonitoring')">
+                    </dps-edit-screen-single-column-select>
+                  </div>
+
+                </div>
+              </mat-expansion-panel> -->
+          </mat-accordion>
+        </div>
+      </div>
+      <!-- Company Tab Content -->
+      <div class="dps-client-creation-tab-content-inner company" [hidden]="selectedTab!='INPtpgCompany'">
+        <div class="client-tab-content dps-white-gray-scroll" [@.disabled]="true">
+          <mat-accordion [multi]="true">
+            <!-- <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                <mat-expansion-panel-header collapsedHeight="35px" *ngIf="metaDataLinker('INPlblCompanyCompBAR')?.scL_Visible">
+                  <mat-panel-title>
+                    <mat-icon>business</mat-icon>
+                    <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblCompanyCompBAR')"></dps-edit-screen-lable>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                  <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'vatRegNo')"
+                      [modelData]="clientModelData?.client?.vatRegNo" [meta]="metaDataLinker('INPtxtCompanyVATNo')"></dps-edit-screen-text-input>
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companySICCode')"
+                      [modelData]="clientModelData?.client?.companySICCode" [meta]="metaDataLinker('INPtxtCompanySICCode')"></dps-edit-screen-text-input>
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyReg')"
+                      [modelData]="clientModelData?.client?.companyReg" [meta]="metaDataLinker('INPtxtCompanyRegNo')"></dps-edit-screen-text-input>
+                  </div>
+                </div>
+              </mat-expansion-panel> -->
+
+            <!-- <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                <mat-expansion-panel-header collapsedHeight="35px" *ngIf="metaDataLinker('INPlblCompanyRegAddrBAR')?.scL_Visible">
+                  <mat-panel-title>
+                    <mat-icon>edit_location</mat-icon>
+                    <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblCompanyRegAddrBAR')"></dps-edit-screen-lable>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                  <div class="form-row" fxLayout="row  wrap" fxLayoutGap="2rem">
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyAddress1')"
+                      [modelData]="clientModelData?.client?.companyAddress1" [meta]="metaDataLinker('INPtxtCompanyRegAddr1')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyAddress2')"
+                      [modelData]="clientModelData?.client?.companyAddress2" [meta]="metaDataLinker('INPtxtCompanyRegAddr2')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyTown')"
+                      [modelData]="clientModelData?.client?.companyTown" [meta]="metaDataLinker('INPtxtCompanyRegTown')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyCountry')"
+                      [modelData]="clientModelData?.client?.companyCountry" [meta]="metaDataLinker('INPtxtCompanyRegCountry')"></dps-edit-screen-text-input>
+
+                    <dps-edit-screen-text-input class="form-row-input" (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyPostCode')"
+                      [modelData]="clientModelData?.client?.companyPostCode" [meta]="metaDataLinker('INPtxtCompanyRegPostcode')"></dps-edit-screen-text-input>
+                  </div>
+                </div>
+              </mat-expansion-panel> -->
+          </mat-accordion>
+        </div>
+      </div>
+      <!-- Crime Tab Content -->
+      <div class="dps-client-creation-tab-content-inner dps-white-gray-scroll crime"
+        [hidden]="selectedTab!='INPtpgCrime' || !isCrimeTabVisibility">
+        <div class="crime-inner dps-white-gray-scroll">
+          <div class="calc-length">
+            <dps-grid-container [gridColoumn]="crimeGridColumn" [pageEvent]="">
+              <!-- clientAllGridPageEvent  (page)="onGridPageChange($event)" -->
+              <dps-crime-view-data [gridColoumn]="crimeGridColumn" [gridData]="clientModelData?.matterBailConditions"
+                (rowClick)="onRowClick($event)">
+              </dps-crime-view-data>
+            </dps-grid-container>
+          </div>
+        </div>
+
+      </div>
+      <!-- Matters Tab Content -->
+      <div class="dps-client-creation-tab-content-inner matter" [hidden]="selectedTab!='INPtpgMatters'">
+        <div class="matter-inner dps-white-gray-scroll">
+
+          <div class="calc-length">
+            <dps-grid-container [gridColoumn]="matterGridColumn" [pageEvent]="matterPageEvent"
+              (page)="onNextPage($event)">
+              <dps-matter-view-data [gridColoumn]="matterGridColumn" [gridData]="clientModelData?.clientMatters"
+                (rowDblClick)="matterGridRowDoubleClick($event)" (rowClick)="onMaterGridRowClick($event)">
+              </dps-matter-view-data>
+            </dps-grid-container>
+          </div>
+        </div>
+
+      </div>
+      <!-- Notes Tab Content -->
+      <div class="dps-client-creation-tab-content-inner note" *ngIf="selectedTab=='INPtpgNotes'">
+        <dps-client-creation-notes [rowData]="clientModelData?.clientNotes"
+          [isEnable]="clientModelData?.client?.clientId ? true : false"
+          [feeEarnerList]="initDataModel?.feeEarnerCodeAndNameList" (addNewNote)="onAddNewNote()"
+          (changeNote)="onChangeNote($event)" (deleteNote)="onDeleteNote($event)" (popupCancel)="onPopupCancel()"
+          (cancelChanges)="onCancelChanges()">
+        </dps-client-creation-notes>
+      </div>
+      <!-- Doc Register Tab Content -->
+      <div class="dps-client-creation-tab-content-inner docRegister" [hidden]="selectedTab!='INPtpgDocRegister'">
+        <div class="docRegister-inner dps-white-gray-scroll">
+          <div class="calc-length">
+            <dps-grid-container [gridColoumn]="docRegisterGridColumn" [pageEvent]="">
+              <dps-client-doc-register-grid [gridColoumn]="docRegisterGridColumn"
+                [gridData]="clientModelData?.clientDocumentRegistries" (rowClick)="onRowClick($event)"
+                (rowDeleteClick)="onRowDeleteClick($event)">
+              </dps-client-doc-register-grid>
+            </dps-grid-container>
+          </div>
+        </div>
+
+      </div>
+      <!-- ID Check Tab Content -->
+      <div class="dps-client-creation-tab-content-inner IDCheck dps-white-gray-scroll"
+        [hidden]="selectedTab!='INPtpgIDCheck'">
+        <mat-tab-group class="dps-client-tab-group">
+          <!-- Company Tab Content -->
+          <mat-tab
+            *ngIf="typeChangedControllersModel?.isIDCheckCompanyVisibility && metaDataLinker('INPtpgIDCheckCompany')?.scL_Visible"
+            label="{{metaDataLinker('INPtpgIDCheckCompany')?.scL_Caption || metaDataLinker('INPtpgIDCheckCompany')?.scL_DefaultCaption}}">
+            <div class="client-tab-content" fxLayout="column">
+              <span class="privateindu-lable"
+                [hidden]="!typeChangedControllersModel?.idCheckPrivateInduLable">{{typeChangedControllersModel?.idCheckPrivateInduLable}}</span>
+              <dps-edit-screen-checkbox style="padding: 5px 24px 5px;"
+                [hidden]="!typeChangedControllersModel?.isProofPrivateIndvVisibility"
+                (valueChange)="onPrivateIndividualValueChanged(ControllerType.chb,$event,'privetIndividual')"
+                [modelData]="clientModelData?.client?.privetIndividual"
+                [meta]="metaDataLinker('INPchkSundryProofPrivateIndv')"></dps-edit-screen-checkbox>
+              <div class="expanded-content" fxLayout="column wrap" fxLayoutAlign="space-between">
+                <div class="form-row lookup-file-upload-select" fxLayout="row  wrap" fxLayoutGap="2rem">
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyName')"
+                    [modelData]="clientModelData?.client?.companyName"
+                    [meta]="metaDataLinker('INPtxtSundryProofCompanyName')"></dps-edit-screen-text-input>
+                  <dps-edit-screen-lookup-file-upload-select
+                    [isUploadDisable]="!clientModelData?.client?.clientReference" class="form-row-input"
+                    [isKeyValue]="true" lableName="Company Proof 1" isLookupLinkDisable="true"
+                    lookupType="INPcboSundryCompanyProof1" (lookupClickData)="onLookupClick($event)"
+                    [comboModelData]="initDataModel?.companyProofsList" showType="value"
+                    [modelData]="clientModelData?.client?.companyProof1" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboSundryCompanyProof1')"
+                    (fileUploadChangeData)="uploadProofOfIdProof1($event)" [uploaded]="isCompanyProof1Upload"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'companyProof1')">
+                  </dps-edit-screen-lookup-file-upload-select>
+
+                  <dps-edit-screen-lookup-file-upload-select
+                    [isUploadDisable]="!clientModelData?.client?.clientReference" class="form-row-input"
+                    [isKeyValue]="true" lableName="Company Proof 2" isLookupLinkDisable="true"
+                    (lookupClickData)="onLookupClick($event)" lookupType="INPcboSundryCompanyProof2"
+                    [uploaded]="isCompanyProof2Upload" [comboModelData]="initDataModel?.companyProofsList"
+                    showType="value" [modelData]="clientModelData?.client?.companyProof2"
+                    [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboSundryCompanyProof2')"
+                    (fileUploadChangeData)="uploadProofOfIdProof2($event)"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'companyProof2')">
+                  </dps-edit-screen-lookup-file-upload-select>
+
+                  <dps-edit-screen-text-input class="form-row-input" [lableName]="'Details'"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'companyDetail')"
+                    [modelData]="clientModelData?.client?.companyDetail"
+                    [meta]="metaDataLinker('INPtxtSundryProofCompanyProofDetails')"></dps-edit-screen-text-input>
+
+                </div>
+
+                <div *ngIf="clientModelData?.client?.clientId && clientModelData?.client?.clientId != -1 &&
+                  initDataModel?.isAMLShow && (clientModelData?.client?.clientType === 1 ||
+                  clientModelData?.client?.clientType === 4)" fxLayoutAlign="space-between end"
+                  class="dps-aml-outer-wrapper">
+                  <div fxLayout="column wrap" class="client-AML-Check">
+                    <label>AML Check</label>
+                    <div class="{{amlColorClass}} dps-indicator">
+                      <span class="aml-lbl">
+                        <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-check-circle"></mat-icon>
+                        <span>{{amlResultString}}</span>
+                      </span>
+                      <!-- <span class="aml-lbl" ng-class="{'fa fa-check-circle': amlColorClass=='aml-passed' , 'fa fa-exclamation-circle': amlColorClass=='aml-carried-out' , 'fa fa-minus-circle': amlColorClass=='aml-not-passed' }"></span> -->
+                    </div>
+                    <div fxLayout="column">
+                      <mat-form-field class="dps-aml-date-input" appearance="fill">
+                        <mat-label floatLabel="never">Last Search</mat-label>
+                        <input readonly matInput [value]="clientModelData?.client?.amlLastSearch | date:'dd/MM/yyyy'"
+                          placeholder="">
+                        <mat-icon matSuffix>date_range</mat-icon>
+                      </mat-form-field>
+                      <dps-edit-screen-single-column-select class="dps-aml-risk-level" [lableName]="'Risk Level'"
+                        [comboModelData]="initDataModel?.amlRiskLevelResponceList" showType="value"
+                        [modelData]="clientModelData?.client?.amlRiskLevel" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                        [placeholderLabel]="placeholderLabel" columnName="Name"
+                        [meta]="metaDataLinker('INPcboAMLRiskLevel')"
+                        (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'amlRiskLevel')">
+                      </dps-edit-screen-single-column-select>
+                      <button mat-button matTooltip="Submit AML Check" matTooltipPosition="above" (click)="aMLSave()">
+                        <mat-icon class="mat-18">playlist_add_check</mat-icon>
+                        <span> Submit</span>
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </mat-tab>
+          <!-- Direct ID Tab Content -->
+          <mat-tab *ngIf="metaDataLinker('INPtpgIDCheckIndividual')?.scL_Visible"
+            label="{{typeChangedControllersModel?.idCheckIndividual || metaDataLinker('INPtpgIDCheckIndividual')?.scL_Caption || metaDataLinker('INPtpgIDCheckIndividual')?.scL_DefaultCaption}}">
+            <div class="client-tab-content director-id " fxLayout="column">
+              <span class="privateindu-lable"
+                [hidden]="!typeChangedControllersModel?.idCheckPrivateInduLable">{{typeChangedControllersModel?.idCheckPrivateInduLable}}</span>
+              <dps-edit-screen-checkbox [hidden]="!typeChangedControllersModel?.isProofPrivateIndvVisibility"
+                (valueChange)="onPrivateIndividualValueChanged(ControllerType.chb,$event,'privetIndividual')"
+                [modelData]="clientModelData?.client?.privetIndividual"
+                [meta]="metaDataLinker('INPchkSundryProofPrivateIndv')"></dps-edit-screen-checkbox>
+
+              <div class="expanded-content" fxLayout="column wrap" fxLayoutAlign="space-between">
+
+                <div class="form-row lookup-file-upload-select" fxLayout="row wrap" fxLayoutGap="2rem">
+
+                  <dps-edit-screen-text-input class="form-row-input lookup-file-upload-select"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'directorForename')"
+                    [modelData]="clientModelData?.client?.directorForename"
+                    [meta]="metaDataLinker('INPtxtSundryProofIndvForename')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input lookup-file-upload-select"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'directorSurname')"
+                    [modelData]="clientModelData?.client?.directorSurname"
+                    [meta]="metaDataLinker('INPtxtSundryProofIndvSurname')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker class="form-row-input lookup-file-upload-select"
+                    (dateChange)="onValueChanged(ControllerType.dtp,$event,'directorDOB')"
+                    [modelData]="clientModelData?.client?.directorDOB"
+                    [meta]="metaDataLinker('INPdteSundryProofIndvDOB')"></dps-edit-screen-datepicker>
+
+                  <dps-edit-screen-lookup-file-upload-select
+                    [isUploadDisable]="!clientModelData?.client?.clientReference"
+                    class="form-row-input lookup-file-upload-select" [uploaded]="isProofOfIDUpload"
+                    lookupType="MATPROOFOFID" (lookupClickData)="onLookupClick($event)"
+                    [comboModelData]="initDataModel?.lookupProofIDType?.lookupViewModels" showType="luP_Code"
+                    [modelData]="clientModelData?.client?.directorProofofID" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                    [placeholderLabel]="placeholderLabel" columnName="Name"
+                    [meta]="metaDataLinker('INPcboSundryProofOfID')" (fileUploadChangeData)="uploadProofOfId($event)"
+                    (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'directorProofofID')">
+                  </dps-edit-screen-lookup-file-upload-select>
+
+                  <dps-edit-screen-text-input class="form-row-input lookup-file-upload-select"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'directorProofIDinfo')"
+                    [modelData]="clientModelData?.client?.directorProofIDinfo"
+                    [meta]="metaDataLinker('INPtxtSundryProofOfIDInfo')"></dps-edit-screen-text-input>
+
+                  <!-- <mat-form-field *ngIf="metaDataLinker('INPcboSundryProofOfID').scL_Visible">
+                    <mat-placeholder> {{metaDataLinker('INPcboSundryProofOfID').scL_Caption}} info date added
+                    </mat-placeholder>
+                    <input matInput readonly [value]="clientModelData?.client?.proofIdInfoDateAdded |date:'dd/MM/yyyy'">
+                  </mat-form-field> -->
+
+                  <div fxLayout="row wrap" fxLayoutGap="2rem">
+
+                    <dps-edit-screen-lookup-file-upload-select
+                      [isUploadDisable]="!clientModelData?.client?.clientReference"
+                      class="form-row-input lookup-file-upload-select" [uploaded]="isProofOfAddressUpload"
+                      lookupType="MATPROOFOFADDR" (lookupClickData)="onLookupClick($event)"
+                      [comboModelData]="initDataModel?.lookupProofAddressType?.lookupViewModels" showType="luP_Code"
+                      [modelData]="clientModelData?.client?.directorAddressProof"
+                      [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                      columnName="Name" [meta]="metaDataLinker('INPcboSundryProofOfAddr')"
+                      (fileUploadChangeData)="uploadProofOfAddress($event)"
+                      (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'directorAddressProof')">
+                    </dps-edit-screen-lookup-file-upload-select>
+
+                    <dps-edit-screen-text-input class="form-row-input lookup-file-upload-select"
+                      (inputValueChange)="onValueChanged(ControllerType.input,$event,'directorAddressinfo')"
+                      [modelData]="clientModelData?.client?.directorAddressinfo" [lableName]="'Address Info'"
+                      [meta]="metaDataLinker('INPxtSundryProofOfAddrInfo')"></dps-edit-screen-text-input>
+
+                    <!-- <mat-form-field *ngIf="metaDataLinker('INPcboSundryProofOfAddr').scL_Visible">
+                      <mat-placeholder> {{metaDataLinker('INPcboSundryProofOfAddr').scL_Caption}} info date added
+                      </mat-placeholder>
+                      <input matInput readonly
+                        [value]="clientModelData?.client?.proofAddrsInfoDateAdded |date:'dd/MM/yyyy'">
+                    </mat-form-field> -->
+
+                    <!-- <mat-form-field *ngIf="metaDataLinker('INPcboSundryProofOfID').scL_Visible">
+                      <mat-placeholder> {{metaDataLinker('INPcboSundryProofOfID').scL_Caption}} expiry
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="sALProofIDExpiry"
+                        [ngModel]="clientModelData?.client?.proofIdExpiryDate"
+                        (dateChange)="onValueChanged(ControllerType.dtp,$event.value,'proofIdExpiryDate')">
+                      <mat-datepicker-toggle matSuffix [for]="sALProofIDExpiry"></mat-datepicker-toggle>
+                      <mat-datepicker #sALProofIDExpiry></mat-datepicker>
+                    </mat-form-field> -->
+
+
+                  </div>
+                </div>
+                <div *ngIf="clientModelData?.client?.clientId && clientModelData?.client?.clientId != -1 &&
+                  initDataModel?.isAMLShow && (clientModelData?.client?.clientType === 1 ||
+                  clientModelData?.client?.clientType === 4)" fxLayoutAlign="space-between end"
+                  class="dps-aml-outer-wrapper">
+                  <div fxLayout="column wrap" class="client-AML-Check">
+                    <label>AML Check</label>
+                    <div class="{{amlColorClass}} dps-indicator">
+                      <span class="aml-lbl">
+                        <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-check-circle"></mat-icon>
+                        <span>{{amlResultString}}</span>
+                      </span>
+                      <!-- <span class="aml-lbl" ng-class="{'fa fa-check-circle': amlColorClass=='aml-passed' , 'fa fa-exclamation-circle': amlColorClass=='aml-carried-out' , 'fa fa-minus-circle': amlColorClass=='aml-not-passed' }"></span> -->
+                    </div>
+                    <div fxLayout="column">
+                      <mat-form-field class="dps-aml-date-input" appearance="fill">
+                        <mat-label floatLabel="never">Last Search</mat-label>
+                        <input readonly matInput [value]="clientModelData?.client?.amlLastSearch | date:'dd/MM/yyyy'"
+                          placeholder="">
+                        <mat-icon matSuffix>date_range</mat-icon>
+                      </mat-form-field>
+                      <dps-edit-screen-single-column-select class="dps-aml-risk-level" [lableName]="'Risk Level'"
+                        [comboModelData]="initDataModel?.amlRiskLevelResponceList" showType="value"
+                        [modelData]="clientModelData?.client?.amlRiskLevel" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                        [placeholderLabel]="placeholderLabel" columnName="Name"
+                        [meta]="metaDataLinker('INPcboAMLRiskLevel')"
+                        (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'amlRiskLevel')">
+                      </dps-edit-screen-single-column-select>
+                      <button mat-button matTooltip="Submit AML Check" matTooltipPosition="above" (click)="aMLSave()">
+                        <mat-icon class="mat-18">playlist_add_check</mat-icon>
+                        <span> Submit</span>
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </mat-tab>
+          <!-- Benefical Tab Content -->
+          <mat-tab
+            *ngIf="typeChangedControllersModel?.isBeneficalOwnerVisibility && metaDataLinker('INPtpgIDCheckBeneficalOwner')?.scL_Visible"
+            label="{{metaDataLinker('INPtpgIDCheckBeneficalOwner')?.scL_Caption || metaDataLinker('INPtpgIDCheckBeneficalOwner')?.scL_DefaultCaption}}">
+            <div class="client-tab-content benefical-owner dps-white-gray-scroll" fxLayout="column">
+              <span class="privateindu-lable"
+                [hidden]="!typeChangedControllersModel?.idCheckPrivateInduLable">{{typeChangedControllersModel?.idCheckPrivateInduLable}}</span>
+              <dps-edit-screen-checkbox [hidden]="!typeChangedControllersModel?.isProofPrivateIndvVisibility"
+                (valueChange)="onPrivateIndividualValueChanged(ControllerType.chb,$event,'privetIndividual')"
+                [modelData]="clientModelData?.client?.privetIndividual"
+                [meta]="metaDataLinker('INPchkSundryProofPrivateIndv')"></dps-edit-screen-checkbox>
+              <dps-edit-screen-checkbox
+                (valueChange)="onFirstNameasdirectorChange(ControllerType.chb,$event,'firstNameasdirector')"
+                [modelData]="clientModelData?.client?.firstNameasdirector"
+                [meta]="metaDataLinker('INPchkSundryProofSameAsDirector')"></dps-edit-screen-checkbox>
+              <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                <div class="form-row lookup-file-upload-select" fxLayout="row  wrap" fxLayoutGap="2rem">
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'forename1')"
+                    [modelData]="clientModelData?.client?.forename1"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerForename')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'surname1')"
+                    [modelData]="clientModelData?.client?.surname1"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerSurname')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker class="form-row-input"
+                    (dateChange)="onValueChanged(ControllerType.dtp,$event,'doB1')"
+                    [modelData]="clientModelData?.client?.doB1" [meta]="metaDataLinker('INPdteSundryProofOwnerDOB')">
+                  </dps-edit-screen-datepicker>
+
+                  <dps-edit-screen-number-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'percentageHeld1')"
+                    [modelData]="clientModelData?.client?.percentageHeld1"
+                    [meta]="metaDataLinker('INPtxtSundryProofPcntHeld')"></dps-edit-screen-number-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'forename2')"
+                    [modelData]="clientModelData?.client?.forename2"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerForename2')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'surname2')"
+                    [modelData]="clientModelData?.client?.surname2"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerSurname2')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker class="form-row-input"
+                    (dateChange)="onValueChanged(ControllerType.dtp,$event,'doB2')"
+                    [modelData]="clientModelData?.client?.doB2" [meta]="metaDataLinker('INPdteSundryProofOwnerDOB2')">
+                  </dps-edit-screen-datepicker>
+
+                  <dps-edit-screen-number-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'percentageHeld2')"
+                    [modelData]="clientModelData?.client?.percentageHeld2"
+                    [meta]="metaDataLinker('INPtxtSundryProofPcntHeld2')"></dps-edit-screen-number-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'forename3')"
+                    [modelData]="clientModelData?.client?.forename3"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerForename3')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'surname3')"
+                    [modelData]="clientModelData?.client?.surname3"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerSurname3')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker class="form-row-input"
+                    (dateChange)="onValueChanged(ControllerType.dtp,$event,'doB3')"
+                    [modelData]="clientModelData?.client?.doB3" [meta]="metaDataLinker('INPdteSundryProofOwnerDOB3')">
+                  </dps-edit-screen-datepicker>
+
+                  <dps-edit-screen-number-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'percentageHeld3')"
+                    [modelData]="clientModelData?.client?.percentageHeld3"
+                    [meta]="metaDataLinker('INPtxtSundryProofPcntHeld3')"></dps-edit-screen-number-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'forename4')"
+                    [modelData]="clientModelData?.client?.forename4"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerForename4')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-text-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'surname4')"
+                    [modelData]="clientModelData?.client?.surname4"
+                    [meta]="metaDataLinker('INPtxtSundryProofOwnerSurname4')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker class="form-row-input"
+                    (dateChange)="onValueChanged(ControllerType.dtp,$event,'doB4')"
+                    [modelData]="clientModelData?.client?.doB4" [meta]="metaDataLinker('INPdteSundryProofOwnerDOB4')">
+                  </dps-edit-screen-datepicker>
+
+                  <dps-edit-screen-number-input class="form-row-input"
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'percentageHeld4')"
+                    [modelData]="clientModelData?.client?.percentageHeld4"
+                    [meta]="metaDataLinker('INPtxtSundryProofPcntHeld4')"></dps-edit-screen-number-input>
+                </div>
+
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <!-- Documents Tab Content -->
+      <div [hidden]="selectedTab!='INPtpgDocuments'" class="dps-client-creation-tab-content-inner documents">
+        <div class="documents-inner dps-white-gray-scroll">
+          <div class="calc-length">
+            <div fxLayout="column" class="dps-documents-tab-content">
+              <div class="button-outer-wrapper grid" fxLayout="row wrap">
+                <button class="dps-doc-file-select" mat-button matTooltip="Attach files" matTooltipPosition="below"
+                  (click)="fileUploader.onFileUploadBtnClick()"
+                  [disabled]="isDocumentUploading || !clientModelData?.client?.clientId || clientModelData?.client?.clientId == -1">
+                  <mat-icon>attach_file</mat-icon>
+                  <span>Select file </span>
+                  <dps-file-uploader #fileUploader inputId="'client_Creation_Doc_Tab'"
+                    (fileUpload)="onFileUploadChange($event)" [multiple]="false"></dps-file-uploader>
+                </button>
+                <div class="status-wrapper">
+                  <div class="done" *ngIf="!isDocumentUploading && isHideUploadBtn">
+                    <span>Done</span>
+                    <mat-icon>done_all</mat-icon>
+                  </div>
+                  <span *ngIf="isDocumentUploading" class="uploading">Uploading...</span>
+                </div>
+              </div>
+              <!-- $${{clientModelData?.clientEvents |json}} -->
+              <dps-grid-container fxFlex="calc(100%-37px)" [gridColoumn]="documentGridColumn" [pageEvent]="">
+                <dps-client-document-grid [gridColoumn]="documentGridColumn" [gridData]="clientModelData?.clientEvents"
+                  (rowClick)="onDocumentRowClick($event)" (rowDeleteClick)="onRowDeleteClick($event)">
+                </dps-client-document-grid>
+              </dps-grid-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Risk Assessment Content -->
+      <div [hidden]="selectedTab!='INPtpgRiskAnalysis'" class="dps-client-creation-tab-content-inner risk_assessment">
+        <div class="dps-white-gray-scroll">
+          <div class="calc-length">
+            <dps-client-risk-assessment [client]="clientModelData?.client"
+              [data]="clientModelData?.riskAssessment ? clientModelData?.riskAssessment : initDataModel?.defuiltRiskAssesmentData"
+              (changeQuation)="onChangeRiskAssestmentQuation($event)" (submitRiskAsse)="onSumbimtSRiskAsse()">
+            </dps-client-risk-assessment>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </mat-sidenav-container> -->
+  </div>
+</div>

@@ -1,0 +1,76 @@
+@import '~styles/variables.scss';
+
+
+::ng-deep .dps-drive-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
+.dps-drive-popup {
+  height: 100%;
+  font-family: $primary-font-stack;
+
+  mat-toolbar {
+    background: #006cc1;
+    height: 40px;
+
+    mat-icon {
+      color: $primary;
+    }
+
+    span {
+      padding-left: 16px;
+      color: $primary;
+      font-size: $primary-font-size + 2;
+    }
+  }
+
+  .dps-drive-file-path {
+    padding: 6px 18px 5px 5px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2);
+  }
+
+  .dps-drive-folder-content {
+    &.spline {
+      border-left: 1px solid #e4e4e4;
+    }
+
+    .dps-white-gray-scroll {
+      overflow-y: auto;
+    }
+
+    ::ng-deep .dps-file-select {
+      background-color: #ddefff;
+      box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9;
+    }
+
+    .dps-footer {
+      box-shadow: 0px -3px 1px -2px rgba(0, 0, 0, 0.2);
+      margin-right: 15px;
+      button {
+        margin-right: 3px;
+        font-size: $primary-font-size - 2;
+        color: $primary;
+        border-radius: 0px;
+      }
+
+      .dps-attch {
+        background: #006cc1;
+      }
+
+      .dps-cancel {
+        background: none;
+        box-shadow: 0px 0px 1px #939393;
+        color: #016cc1;
+        border: 1px solid #016cc1;
+        line-height: 33px;
+        margin-left: 2px;
+        padding: 0 17px;
+        border-radius: 0px;
+        cursor: pointer;
+      }
+
+    }
+  }
+}

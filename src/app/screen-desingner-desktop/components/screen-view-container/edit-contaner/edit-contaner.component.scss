@@ -1,0 +1,37 @@
+@import '~styles/variables.scss';
+.screen-edit-overlay
+{
+    position: absolute;
+    z-index: 1000;
+    /* background: #00609e; */
+    /* opacity: 0.5; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    outline: none;
+}
+/*
+.screen-edit-overlay
+{
+    background: #eaa400;
+} */
+
+.sequence
+{
+    background: #1e7eb9;
+    padding: 5px 3px 5px 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    min-height: 9px;
+    font-size: 9px;
+    position: absolute;
+    left: -14px;
+    top: 0px;
+    font-family: $primary-font-stack;
+    color: $primary;
+    text-align: right;
+    min-width: 8px;
+    z-index: 100;
+
+
+}

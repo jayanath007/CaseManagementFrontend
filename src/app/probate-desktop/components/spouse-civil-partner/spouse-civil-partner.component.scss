@@ -1,0 +1,89 @@
+@import '~styles/variables.scss';
+
+.dps-input-container {
+  padding: 0px 38px;
+  width: 100%;
+  position: relative;
+}
+
+.dps-input-lbl {
+  justify-content: space-around;
+  font-family: Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  font-size: 12px;
+  padding: 10px;
+
+  mat-icon {
+    font-size: 17px;
+    position: absolute;
+    left: 38px;
+    background: #f7a450;
+    padding: 8px 0px 8px 10px;
+    margin: -10px 0px 14px;
+    font-family: Roboto,
+      "Helvetica Neue",
+      sans-serif;
+  }
+
+  label {
+    color: #00233f;
+    font-weight: 500;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+    margin-top: 5px;
+
+  }
+
+  input {
+    text-align: right;
+    color: #215a88;
+    padding: 3px 2px;
+    border-radius: 4px;
+    border: 1px solid #92a6bb;
+
+  }
+
+}
+
+// .dps-input-lbl:nth-child(2n) {
+//   background-color: #eff0f1;
+
+
+// }
+
+.dps-input-lbl:nth-child(2n+1) {
+  background-color: #c1d3e285;
+
+}
+
+mat-checkbox,
+mat-form-field {
+  font-size: 12px;
+}
+
+.blue {
+  height: 40px;
+  margin-top: 4px;
+}
+
+.dps-primary-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgb(211, 220, 233);
+  border-bottom: 1px solid #c1c5c7;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+
+}

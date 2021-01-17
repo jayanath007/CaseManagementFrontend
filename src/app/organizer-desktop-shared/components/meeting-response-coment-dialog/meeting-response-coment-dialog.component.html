@@ -1,0 +1,13 @@
+<diV class="organizer-alert general">
+    <h2 mat-dialog-title><i class="fa fa-calendar-o" aria-hidden="true"></i>{{data.title}}</h2>
+    <mat-dialog-content class="dps-white-gray-scroll">
+      <mat-form-field floatLabel="never">
+        <textarea #coment matInput matTextareaAutosize placeholder="Comments" matAutosizeMinRows="5"></textarea>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-raised-button [mat-dialog-close]="{value:coment.value}"  class="dps-event-send-btn">Send</button>
+      <button mat-raised-button mat-dialog-close>Discard</button>
+    </mat-dialog-actions>
+</diV>

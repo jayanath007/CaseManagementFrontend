@@ -1,0 +1,84 @@
+<div class="post-office-grid-container">
+  <mat-list-item [ngClass]="{'is-selected': item.isChecked}" disableRipple
+    *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even">
+    <div fxLayout class="grid-data" (click)="clickRow(item,$event)"
+      [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+
+
+
+      <div class="row-data detail" *ngIf="getHiddenProperty(0)" [fxFlex]="getFxFlexProperty(0)">
+        <span>
+          <mat-checkbox color="primary" class="select-row" (click)="changeCheckbox($event, item)"
+            [ngModel]="item.isChecked"></mat-checkbox>
+        </span>
+      </div>
+
+
+      <div class="row-data post-action" [fxFlex]="getFxFlexProperty(1)">
+
+        <span class="row-field">
+          <span id="menue" class="edit material-icons" (click)="clickMenuTrigge($event, item)">more_horiz</span>
+        </span>
+
+      </div>
+
+      <div class="row-data post_office_date" [fxFlex]="getFxFlexProperty(2)"
+        innerHTML="{{item?.inboxDateCreated | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}">
+      </div>
+      <div class="row-data post_office_type" [fxFlex]="getFxFlexProperty(3)">
+        <div (click)="onOpenDocument($event,item)"  fxLayout="row">
+          <mat-icon class="wrkdone_type_file" matTooltipPosition="right" matTooltip="{{item?.inboxDocPath}}">
+            <i [ngClass]="item?.inboxDocPath | attachmentIcon"><span></span></i>
+          </mat-icon>
+          <div style="padding: 4px 10px" innerHTML="{{item?.inboxNote | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+        </div>
+      </div>
+      <div class="row-data post_office_status" [fxFlex]="getFxFlexProperty(4)"
+        innerHTML="{{item?.inboxStatusName | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+      <div class="row-data post_office_email" [fxFlex]="getFxFlexProperty(5)" *ngIf="getHiddenProperty(4)"
+        innerHTML="{{item?.inboxGroupName | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+      <div class="row-data post_office_to" [fxFlex]="getFxFlexProperty(6)"
+        innerHTML="{{item?.inboxLastMovedTo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+      <div class="row-data post_office_date" [fxFlex]="getFxFlexProperty(7)"
+        innerHTML="{{item?.inboxLastMoveDate | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}">
+      </div>
+      <!-- <div class="row-data post_office_datedone" [fxFlex]="getFxFlexProperty(6)"> {{item.isChecked }} </div> -->
+
+    </div>
+  </mat-list-item>
+
+
+
+
+
+  <span #menu class="dps-menu-trigger" [matMenuTriggerFor]="contextMenu" [style.top.px]="menuClientY"
+    [style.left.px]="menuClientX"></span>
+
+
+  <mat-menu #contextMenu="matMenu" class="dps-post-office-options">
+
+    <mat-nav-list dense class="dps-action-menu">
+      <mat-list-item class="new-version item" (click)="itemAction($event)">
+        <mat-icon matListIcon>playlist_add</mat-icon>
+        <span> Action this items</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <mat-list-item class="delete item" (click)="delete($event)">
+        <mat-icon matListIcon>delete</mat-icon>
+        <span>Delete</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <mat-list-item class="xdraft_item item" (click)="attacheToDpsFile($event)">
+        <mat-icon matListIcon>file_copy</mat-icon>
+        <span> Attach to Dps file... </span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-nav-list>
+
+
+  </mat-menu>
+
+
+</div>

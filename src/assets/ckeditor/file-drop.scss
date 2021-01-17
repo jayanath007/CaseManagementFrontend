@@ -1,0 +1,36 @@
+.dps-file-dragover {
+	position: relative;
+}
+
+.dps-file-dragover * {
+	pointer-events: none;
+}
+
+.dps-file-dragover::before {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-top: 96px;
+	content: "Drop to upload";
+	text-align: center;
+	font-size: 48px;
+	color: #CCC;
+	background: white;
+	opacity: 0.9;
+	border: 3px dashed #DDD;
+	vertical-align: middle;
+
+}
+
+.dps-file-dragover::after {
+	content: "";
+	display: inline-block;
+	height:100%;
+	vertical-align: middle;
+}
+
+.placeholder {
+	opacity: 0.5;
+}

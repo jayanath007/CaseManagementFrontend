@@ -1,0 +1,29 @@
+@import '~styles/variables.scss';
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  mat-form-field {
+    font-size: $primary-font-size - 1;
+    
+    input {
+      color: $primary;
+    }
+
+    mat-icon {
+      font-size: $primary-font-size + 8 !important;
+      color: $primary;
+    }
+  }
+    
+  .dps-client-search{
+    ::ng-deep .mat-form-field-label {
+      color: $primary;
+    }
+  
+  }
+
+ 
+  

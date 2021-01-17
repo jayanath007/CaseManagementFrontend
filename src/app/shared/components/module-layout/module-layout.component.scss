@@ -1,0 +1,75 @@
+@import '~styles/variables.scss';
+
+.dps-module-layout {
+  height: 100%;
+  width: 100%;
+  background-color: $content-background;
+
+  .dps-module-layout-header,
+  .dps-module-layout-background {
+    background-color: $primary-blue;
+  }
+
+  .dps-module-layout-background {
+    width: 100%;
+    z-index: 0;
+    position: absolute;
+    height: 60px;
+  }
+
+  .dps-module-layout-forground {
+    padding: 0px 20px 20px 20px;
+    z-index: 1;
+    height: 100%;
+
+    mat-card {
+      padding: 0px;
+      height: 100%;
+    }
+  }
+
+  // .crime-primary {
+  //   background-color: $crime-primary;
+  // }
+  .mail-primary {
+    background-color: $mail-primary;
+  }
+
+  .calender-primary {
+    background-color: $calender-primary;
+  }
+
+  .client-search-primary {
+    background-color: $client-search-primary;
+  }
+
+  .matter-search-primaty {
+    background-color: $matter-search-primaty;
+  }
+
+  .my-task-primary {
+    background-color: $my-task-primary;
+  }
+
+  .workdone-primary {
+    background-color: $workdone-primary;
+  }
+
+  .time-record-primary {
+    background-color: $time-record-primary;
+  }
+
+  .ledger-card-primary {
+    background-color: $ledger-card-primary;
+  }
+  .dps-team-primary {
+    background-color: $dps-team-primary;
+  }
+  .dps-dictation-primary {
+    background-color: $dps-dictation-primary;
+  }
+  .safe-box-primary{
+    background-color: $dps-safe-box-primary;
+  }
+ 
+}

@@ -1,0 +1,57 @@
+<div class="safe-box-detail-view dps-white-gray-scroll" fxLayout="column">
+
+  <table class="rwd-table">
+    <tr class="table-header">
+      <th class="file">File</th>
+      <th class="date">Date Modified</th>
+      <th class="date">Type</th>
+      <th class="date">Size</th>
+
+    </tr>
+    <tr [title]="blob.displayName" class="table-content" [ngClass]="{'dps-file-select':isSelected(blob,selectedBlobData),'dps-cut-file':isCutItem(blob)}" *ngFor="let blob of treeNodeItem?.data?.Blobs?.Blob"
+      (click)="onSelectedBlob($event,blob)" (contextmenu)="contextmenuOpen($event,safeboxContextMenue,blob)" [dpsDraggable]="true"
+      [dragData]="blob" [dragElement]="dragElement" dragDataType="safeBoxFile" [dropZones]="['safeBoxDragFolder']" (onDragStart)="onDragStart($event, blob)">
+      <td class="file" data-th="File">
+        <mat-icon>
+          <i [ngClass]="blob.displayName | attachmentIcon" aria-hidden="true">
+            <span></span>
+          </i>
+        </mat-icon>
+        <span>{{blob?.displayName}}</span>
+        <dps-safebox-context-menue #safeboxContextMenue [id]="blob?.Name" [isMultiSelect]="selectedBlobData?.length>1" (download)="onDownloadFile()"
+          [copyItems]="copyItems" (cut)="onCut()" (copy)="onCopy()" (share)="onShareFile()" (delete)="onDeleteFile()" (rename)="onRenameFile()">
+        </dps-safebox-context-menue>
+      </td>
+      <td class="date" data-th="Date Modified">{{blob?.Properties['Last-Modified']|date:'dd/MM/yyyy h:mm a'}}</td>
+      <td class="date" data-th="Type">{{blob?.displayName | attachmentIcon:'type' | titlecase }} File</td>
+      <td class="date">{{blob?.Properties['Content-Length'] | attachmentsSize }}</td>
+
+    </tr>
+
+    <tr [title]="item.name" *ngFor="let item of treeNodeItem?.nodes" [ngClass]="selectedFolder === item.prefix?'dps-folder-select':''" (dblclick)="expand(item)" (dpsClick)="selectFolder(item)" class="drive-file" dpsFileDroppable
+      dpsDroppable (onDrop)="onDrop($event, item)" dropZone="safeBoxDragFolder" (contextmenu)="contextmenuFolderOpen($event,safeboxContextFolderMenue,item)">
+      <td>
+
+        <mat-icon>folder</mat-icon>
+        <span class="name">{{item?.name}}</span>
+      </td>
+      <td></td>
+      <td class="date">Folder</td>
+      <td></td>
+      <dps-safebox-context-menue #safeboxContextFolderMenue [id]="item?.prefix" [isMultiSelect]="selectedBlobData?.length>1" [copyItems]="copyItems"
+        [isFolder]="true" (paste)="onPaste(item)">
+      </dps-safebox-context-menue>
+    </tr>
+  </table>
+  <div id="dragPreView">
+    <div *ngIf="selectedBlobData?.length > 1">
+      <mat-icon class="mat-18">file_copy</mat-icon>
+      <span class="name">{{selectedBlobData?.length}}</span>
+    </div>
+    <span *ngIf="selectedBlobData?.length === 1">
+      <i [ngClass]="selectedBlobData[0]?.Name | attachmentIcon"><span></span></i>
+      <span class="name">{{selectedBlobData[0]?.Name}}</span>
+    </span>
+  </div>
+
+</div>

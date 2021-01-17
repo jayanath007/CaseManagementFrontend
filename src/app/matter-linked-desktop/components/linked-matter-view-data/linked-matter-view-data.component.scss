@@ -1,0 +1,32 @@
+.open_matter {
+  cursor: pointer;
+  position: relative;
+  top: 0px;
+  height: 0px !important;
+  line-height: 0px !important;
+  color: #456f87;
+}
+
+.parent-matter-active,
+.parent-matter-active:hover {
+  background: #5c97b9;
+
+  .grid-data {
+    color: #ddedfb;
+
+    mat-icon {
+      color: #ddedfb;
+    }
+  }
+
+}
+
+.multi-select-matter-active,
+.multi-select-matter-active:hover {
+  background: #a5d1f9 !important;
+  color: #386084;
+}
+
+.checkbox {
+  text-align: center;
+}

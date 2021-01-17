@@ -1,0 +1,64 @@
+@import '~styles/variables.scss';
+
+mat-toolbar {
+  height: 50px;
+}
+
+.dps-meeting-accept-btn mat-icon {
+  color: $calendar-accept-btn;
+}
+
+.dps-meeting-tentative-btn mat-icon {
+  color: $calendar-tentative-btn;
+}
+
+.dps-meeting-decline-btn mat-icon {
+  color: $calendar-decline-btn;
+}
+
+.dps-remove-calendar-btn mat-icon {
+  color: $calendar-remove-btn;
+}
+
+.dps-menu-item {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+.dps-open-series mat-icon {
+  color: $calendar-open-series;
+}
+
+.mat-toolbar {
+  background: $calender-primary;
+  color: $calendar-open-toolbar;
+}
+
+button.calendar-event-btn {
+  color: $calendar-event-btn;
+}
+
+button.dps-online-meeting {
+  mat-icon {
+    font-size: 20px;
+  }
+
+  &.skypeForBusiness {
+    background-color: #3497db;
+    color: #ffffff;
+
+    mat-icon {
+      color: #ffffff;
+    }
+  }
+
+  &.teamsForBusiness {
+    background-color: #5d64d2;
+    color: #ffffff;
+
+    mat-icon {
+      color: #ffffff;
+    }
+  }
+}

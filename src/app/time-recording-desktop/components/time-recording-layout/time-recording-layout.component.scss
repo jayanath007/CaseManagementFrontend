@@ -1,0 +1,228 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-time-recording-popup-panel {
+  .mat-dialog-container {
+
+    border-radius: 0px;
+  }
+}
+
+.dps-client-name {
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-time-recorded-outer {
+  padding: 0px 12px;
+}
+
+.mat-dialog-content {
+  display: block;
+  max-height: 65vh;
+  min-height: 40vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.play {
+  color: #d9ad6f;
+}
+
+.pause {
+  color: #8c5d1a;
+}
+
+.client-details-txt {
+  white-space: nowrap;
+  width: calc(100% - 200px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-client-name {
+  background: #cfdde8;
+  padding: 5px;
+  font-family: roboto;
+  font-size: 12px;
+  font-weight: 500;
+  color: #597286;
+  margin-top: 4px;
+  margin: 0px -10px;
+
+}
+
+.dps-drop-down {
+  font-size: 12px;
+}
+
+.dps-time-recording-primary-header {
+  // border: 1px solid red;
+  padding-bottom: 12px;
+}
+
+.dps-time-recording-primary-header {
+  ::ng-deep .mat-raised-button.mat-primary {
+    background-color: #295e7d;
+  }
+}
+
+.dps-record-time {
+
+  position: relative;
+  top: 5px;
+
+}
+
+.dps-date-field {
+  width: 175px;
+}
+
+mat-toolbar {
+  background: $dps-popup-matbar;
+  height: 40px;
+  color: $primary;
+
+  mat-icon.icon {
+    // border: 2px solid $primary;
+    vertical-align: middle;
+    border-radius: 100%;
+    padding: 5px;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+  }
+
+  span {
+    padding-left: 1px;
+    font-size: 13px;
+
+  }
+}
+
+.mpu {
+  width: 75px;
+}
+
+.unit {
+  width: 75px;
+}
+
+.hourlyrate {
+  width: 100px;
+}
+
+.amount {
+  width: 120px;
+}
+
+.ref-field {
+  padding: 0px 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ref {
+  font-weight: bold;
+  font-size: 12px;
+  font-family: $primary-font-stack;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.ref strong {
+  color: #ffbe00;
+}
+
+.dps-matter-ref-outer {
+  justify-content: flex-end;
+  display: flex;
+  position: relative;
+  top: 3px;
+}
+
+mat-option,
+mat-checkbox,
+button {
+  font-size: 12px !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #006cc1;
+  background: #d9eeff;
+}
+
+.dps-time-submit {
+  background: #32434d;
+  color: $primary;
+}
+
+.dps-can-not-edit-label {
+  color: red;
+  padding-left: 16px;
+}
+
+.dps-delete-btn {
+  background-color: #ff5200;
+  color: white;
+}
+
+.dps-time-recorded-tab {
+  ::ng-deep.mat-tab-body-wrapper {
+    min-height: 400px;
+
+    ::ng-deep.cke_contents {
+      max-height: 290px !important;
+      height: 290px !important;
+      // overflow-y: auto !important;
+    }
+  }
+
+  .dps-time-recorded-tab-content {
+    padding-top: 12px;
+  }
+
+  ::ng-deep.mat-tab-header {
+    background-color: #5c738657;
+    padding-top: 12px;
+    padding-left: 10px;
+  }
+
+  ::ng-deep.mat-tab-label {
+
+    // padding: 5px;
+    background-color: #15272d;
+    color: #cbd1dc;
+    font-weight: 400;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  /* Styles for the active tab label */
+  ::ng-deep.mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    // padding: 5px;
+    background-color: #ffffff;
+    color: #1c2c39;
+    font-weight: 700;
+  }
+
+  /* Styles for the ink bar */
+  ::ng-deep.mat-ink-bar {
+    background-color: #ffffff;
+  }
+
+
+  ::ng-deep.mat-tab-labels {
+    height: 35px;
+    line-height: 35px;
+  }
+
+
+
+
+}

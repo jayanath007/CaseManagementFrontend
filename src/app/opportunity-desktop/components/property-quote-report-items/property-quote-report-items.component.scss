@@ -1,0 +1,10 @@
+@import '~styles/variables.scss';
+
+h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: $primary-font-size + 8;
+    font-family: $primary-font-stack;
+    color: #4b7138;
+    font-weight: 600;
+}

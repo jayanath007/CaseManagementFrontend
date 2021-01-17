@@ -1,0 +1,35 @@
+<div class="dps-client-search-main-contentainer" fxLayout="column">
+
+  <mat-card class="dps-client-search-main-header">
+    <mat-card-content>
+      <div class="dps-profile">
+        <dps-user-profile-detail [selectedDepartment]="" [selectedTeamMember]="allUserInfo"></dps-user-profile-detail>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+    <div class="grid-wrapper-main" fxLayout="column">
+
+      <dps-client-search-views (fontSizeClassChangeValue)="onFontSizeClassChange($event)"
+        class="client-search-result-views" [searchText]="searchText" [totalItems]="totalItems"
+        [showSearchHint]="showSearchHint" [clientCreationTitle]="clientCreationTitle"
+        (updateSelectedSearchTextChange)="onSearchTextChanged($event)" [clientDisplyName]="resoleModuleName('client_search')|async"
+        (updateSelectedSearchTextClick)="onSearchTextClick($event)"
+        (updateSelectedSearchTextClear)="onSearchTextClear($event)" (refresh)="onRefresh()"
+        (clickClientMenu)="onClickClientMenu($event)">
+      </dps-client-search-views>
+
+      <dps-client-grid fxFlex="calc(100%-80px)" class="" [clientColumnDef]="clientColumnDef" [menuItem]="menuItem"
+        [clientPaginatorDef]="clientPaginatorDef" [ClientData]="clientSearchGridData" [totalItems]="totalItems"
+        [searchText]="searchText" (toggleClientGridExpand)="ontoggleClientGridExpand($event)"
+        (toggleMatterGridExpand)="ontoggleMatterGridExpand($event)" (clientSearchSubmit)="onSearchTextClick($event)"
+        [isGridLoading]="gridLoading" [matterColumnDef]="matterColumnDef"
+        (updateOpenCaseClick)="onOpenCaseClick($event)" (updateTimeRecordingClick)="onTimeRecordingClick($event)"
+        (updateNewMailClick)="onNewMailClick($event)" (updateLedgerCardClick)="onLedgerCardClick($event)"
+        [fontSizeClass]="fontSizeClass" (openEchitPopup)="onOpenEchitPopup($event)"
+        (updateMatterCreationClick)="onUpdateMatterCreationClick($event)" [isPlotUser]="isPlotUser" 
+        (matterGridPageChange)="onMatterGridPageChange($event)">
+      </dps-client-grid>
+    </div>
+  </mat-card>
+</div>

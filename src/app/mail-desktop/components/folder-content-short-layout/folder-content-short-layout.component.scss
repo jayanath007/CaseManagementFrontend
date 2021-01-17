@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+
+.dps-mail-list {
+  margin: 0;
+  height: 100%;
+}
+
+.dps-folder-content {
+  width: 100%;
+  height: 100%;
+}
+.dps-folder-content-hidden{
+  display: none !important;
+}
+.dps-empty-folder {
+
+  font-weight: 100;
+  color: #666666;
+  line-height: 14px;
+
+}
+
+dps-mail-short-list-view,
+.dps-foldercontent {
+  border-right: 1px solid #dcdcdc;
+}
+
+.dps-mail-folder-empty i {
+  font-size: 45px;
+  color: #8c8c8c;
+}
+
+
+.dps-empty-folder h2 {
+  font-size: 44px;
+  text-align: center;
+  margin: 0px;
+}
+
+.dps-empty-folder h3 {
+  text-align: center;
+  font-family: $primary-font-stack;
+  font-weight: 400;
+  font-size: $primary-font-size - 2;
+}

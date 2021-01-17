@@ -1,0 +1,53 @@
+@import '~styles/variables.scss';
+
+// .header {
+//   // background: transparent;
+//   background: $team-efficiency-primary;
+// }
+
+mat-toolbar {
+  background: unset;
+}
+
+.header-icon {
+  vertical-align: middle;
+
+}
+
+  
+.option-btn {
+  background: #5c97d4;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.wrong-massage {
+  text-align: center;
+  color: #a4afab;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: $primary-font-size - 2;
+}
+
+// .empty-view {
+//   position: absolute;
+//   // background: #b3d1ea;
+//   top: 64px;
+//   border-bottom: 0;
+//   height: calc(100% - 64px);
+//   width: 100%;
+// }
+
+.dps-bar-chart {
+  height: 250px;
+}
+
+.mat-progress-bar
+{
+  height: 2px;
+}

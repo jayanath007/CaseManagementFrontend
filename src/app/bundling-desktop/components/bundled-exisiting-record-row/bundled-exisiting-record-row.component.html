@@ -1,0 +1,14 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+  <mat-list-item class="dps-grid-list-item" *ngFor="let rowData of generalPopupRowData; let isOdd=odd;" dpsClick
+    (dpsDblClick)="onRowSelect(rowData)" [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': rowData.selected}">
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData?.pbH_Name}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData?.pbH_TotalDocuments}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)"
+        innerHTML="{{rowData?.pbH_CreatedDate | date :'dd/MM/yyyy' }}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+        innerHTML="{{rowData?.pbH_LastSubmitDate | date :'dd/MM/yyyy HH:mm:ss'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{rowData?.pbH_CreateUser}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

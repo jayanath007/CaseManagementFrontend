@@ -1,0 +1,31 @@
+<h3><i class="fa fa-shield" aria-hidden="true"></i> Police station information</h3>
+
+<div class="police-station-information">
+  <mat-form-field floatLabel="always" class="police-station-id">
+    <input [disabled]="isRecursive" #policeStIdInput matInput placeholder="Police Station ID"
+      [ngModel]="infomationModel[modelProperty?.policeStId]"
+      (focusout)="onChangeUserInput(modelProperty?.policeStId, policeStIdInput.value)">
+    <span matSuffix>
+      <mat-icon (click)="onOpenPoliceStationSearch($event, policeStIdInput.value)">search</mat-icon>
+    </span>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always" class="advice-calls-responce-time">
+    <input [disabled]="isRecursive" #policeStNameInput matInput placeholder="Police Station Name"
+      [ngModel]="infomationModel[modelProperty?.policeStName]"
+      (focusout)="onChangeUserInput(modelProperty?.policeStName, policeStNameInput.value)">
+    <span matSuffix>
+      <mat-icon (click)="onOpenPoliceStationSearch($event, policeStNameInput.value)">search</mat-icon>
+    </span>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always" class="scheme-id">
+    <input readonly matInput placeholder="Scheme ID" [ngModel]="infomationModel[modelProperty?.schemeId]">
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always" class="scheme-name">
+    <input readonly matInput placeholder="Scheme Name" [ngModel]="infomationModel[modelProperty?.schemeName]">
+  </mat-form-field>
+
+</div>
+`

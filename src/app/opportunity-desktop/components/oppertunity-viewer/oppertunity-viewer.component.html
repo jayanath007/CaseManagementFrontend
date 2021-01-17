@@ -1,0 +1,289 @@
+<div fxLayout="column" class="dps-Opportunity-outer">
+  <div fxLayout="row" class="dps-bottom-line">
+    <div>
+      <mat-chip-list *ngIf="clientDataModel?.enquiryId > 0">
+        <mat-chip color="primary" selected="true">
+          <span> {{clientDataModel?.opportunityNumber}} </span>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div fxLayoutGap="8px" *ngIf="isNew">
+      <button class="btn-speed-dial clear_all"
+        [ngClass]="{'dps_opportunity-btn-disable':isLoading?.sendSaveQuoteLoading}"
+        [disabled]="isLoading?.sendSaveQuoteLoading" mat-raised-button (click)="onClearInputData()">
+        <mat-icon class="material-icons">clear_all</mat-icon>
+        <span>Clear</span>
+      </button>
+      <button class="btn-speed-dial send" [ngClass]="{'dps_opportunity-btn-disable':isLoading?.sendSaveQuoteLoading}"
+        [disabled]="isLoading?.sendSaveQuoteLoading" mat-raised-button (click)="onSaveAndSend()">
+        <mat-icon>playlist_add</mat-icon>
+        <span>Save and Send</span>
+      </button>
+      <button class="btn-speed-dial quote" [ngClass]="{'dps_opportunity-btn-disable':isLoading?.sendSaveQuoteLoading}"
+        [disabled]="isLoading?.sendSaveQuoteLoading" mat-raised-button (click)="onSaveAndQuote()">
+        <mat-icon>file_copy</mat-icon>
+        <span>Save and Quote</span>
+      </button>
+    </div>
+    <div fxLayoutGap="20px" *ngIf="!isNew">
+      <button class="btn-speed-dial clear_all" mat-raised-button [ngClass]="{'dps_opportunity-btn-disable':disbleBTN}"
+        mat-raised-button [disabled]="disbleBTN || isLoading?.sendSaveQuoteLoading"
+        *ngIf="selectedStatus?.key === 1 || selectedStatus?.key === 2" (click)="onRunConflict()">
+        <mat-icon class="material-icons">loop</mat-icon>
+        <span>Conflict Run</span>
+      </button>
+      <button class="btn-speed-dial send" [ngClass]="{'dps_opportunity-btn-disable':disbleBTN}" mat-raised-button
+        [disabled]="disbleBTN || isLoading?.sendSaveQuoteLoading"
+        *ngIf="selectedStatus?.key === 1 || selectedStatus?.key === 2" (click)="onRunQuote()">
+        <mat-icon>playlist_play</mat-icon>
+        <span>{{(selectedStatus?.key === 2 || clientDataModel.opportunityType === oType.WebQuote) ? 'Edit Quote' : 'Quote Run'}}</span>
+      </button>
+      <button class="btn-speed-dial quote" mat-raised-button [ngClass]="{'dps_opportunity-btn-disable':disbleBTN}"
+        mat-raised-button [disabled]="disbleBTN || isLoading?.sendSaveQuoteLoading"
+        *ngIf="selectedStatus?.key === 1 || selectedStatus?.key === 2" (click)="onCloseOpertunity()">
+        <mat-icon>view_carousel</mat-icon>
+        <span>Close Opportunity</span>
+      </button>
+      <button class="btn-speed-dial quote" mat-raised-button [disabled]="disbleBTN || isLoading?.sendSaveQuoteLoading"
+        *ngIf="(selectedStatus?.key === 3) && !clientDataModel?.matterRef" (click)="onCreateCaseFile()">
+        <mat-icon>file_copy</mat-icon>
+        <span>Create Case File</span>
+      </button>
+    </div>
+  </div>
+  <mat-accordion [multi]="true" class="dps-mat-accordion dps-white-gray-scroll" fxLayout="row wrap" style="width:100%">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading?.sendSaveQuoteLoading"></mat-progress-bar>
+    <div fxLayout="row">
+      <div fxLayout="column" class="dps-Opportunity-content" style="width: 50%;">
+        <mat-expansion-panel [expanded]="true" class="dps-Opportunity-inner mat-elevation-z" l>
+          <mat-expansion-panel-header expandedHeight="34px" collapsedHeight="34px">
+            <mat-panel-title>
+              <mat-icon>account_circle</mat-icon>
+              <span>Client Information</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="dps-Opportunity-in-content">
+            <div fxLayout="column">
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field class="dps-input-outer" *ngIf="!isNew">
+                  <mat-placeholder>Reference</mat-placeholder>
+                  <input matInput #reference [value]="clientDataModel?.clientRef" [disabled]="!isNew">
+                </mat-form-field>
+
+
+                <mat-form-field class="dps-input-outer">
+                  <mat-select placeholder="Title" [ngModel]="clientDataModel?.title"
+                    (selectionChange)="onInputChangeData(InputNameList.Title, $event.value)"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                    <mat-option *ngFor="let item of salTitle" [value]="item.luP_ID">
+                      {{ item.luP_Code }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Last Name</mat-placeholder>
+                  <input matInput #lastName
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    [value]="clientDataModel?.lastName"
+                    (keyup)="onInputChangeData(InputNameList.LastName, lastName.value)">
+                  <button class="dps-btn-search" matSuffix mat-button
+                    (click)="onClientSearch(lastName.value, firstName.value, companyName.value)"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>First Name</mat-placeholder>
+                  <input matInput #firstName [value]="clientDataModel?.firstName"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    (keyup)="onInputChangeData(InputNameList.FirstName, firstName.value)">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Company Name</mat-placeholder>
+                  <input matInput #companyName [value]="clientDataModel?.companyName" [disabled]="!isNew"
+                    (focusout)="onInputChangeData(InputNameList.CompanyName, companyName.value)">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true" fxFlex="50" class="mat-elevation-z">
+          <mat-expansion-panel-header expandedHeight="34px" collapsedHeight="34px">
+            <mat-panel-title>
+              <mat-icon>date_range</mat-icon>
+              <span> Client Address</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="dps-Opportunity-inner">
+            <div fxLayout="column">
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+                <!-- <mat-form-field class="dps-input-outer" *ngIf="isNew">
+                  <mat-placeholder>House No</mat-placeholder>
+                  <input matInput #houseNo [value]="clientDataModel?.houseNumber"
+                    (keyup)="onInputChangeData(InputNameList.HouseNo, houseNo.value)">
+                </mat-form-field> -->
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Address 1</mat-placeholder>
+                  <input matInput #address1 [value]="clientDataModel?.address1"
+                    (keyup)="onInputChangeData(InputNameList.Address1, address1.value)" dpsAddressFinder country="uk"
+                    (changeAddress)="autofillAddress($event)" [id]="'oppertunityAdd1'"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Address 2</mat-placeholder>
+                  <input matInput #address2 [value]="clientDataModel?.address2"
+                    (keyup)="onInputChangeData(InputNameList.Address2, address2.value)"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Town</mat-placeholder>
+                  <input matInput #town [value]="clientDataModel?.town"
+                    (keyup)="onInputChangeData(InputNameList.Town, town.value)"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Country</mat-placeholder>
+                  <input matInput #country [value]="clientDataModel?.country"
+                    (keyup)="onInputChangeData(InputNameList.County, country.value)"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Post Code</mat-placeholder>
+                  <input matInput #postCode [value]="clientDataModel?.postCode"
+                    (keyup)="onInputChangeData(InputNameList.PostCode, postCode.value)" dpsAddressFinder country="uk"
+                    (changeAddress)="autofillAddress($event)" [id]="'oppertunityPostCode'"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Email 1</mat-placeholder>
+                  <input matInput #email1 [value]="clientDataModel?.email1"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    (keyup)="onInputChangeData(InputNameList.Email1, email1.value)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Email 2</mat-placeholder>
+                  <input matInput #email2 [value]="clientDataModel?.email2"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    (keyup)="onInputChangeData(InputNameList.Email2, email2.value)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Mobile Telephone No</mat-placeholder>
+                  <input matInput #mobileNoInp [value]="clientDataModel?.mobileNo"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    (keyup)="onInputChangeData(InputNameList.Mobileno, mobileNoInp.value)">
+                </mat-form-field>
+                <mat-form-field class="dps-input-outer">
+                  <mat-placeholder>Work Telephone No</mat-placeholder>
+                  <input matInput #WorktelNoInp [value]="clientDataModel?.workTelNo"
+                    [disabled]="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)"
+                    (keyup)="onInputChangeData(InputNameList.WorkTelNo, WorktelNoInp.value)">
+                </mat-form-field>
+                <dps-editable-dropdown [options]="options"
+                  [value]="selectedIntroducer ? selectedIntroducer.luP_Code : '#Clear#'" [placeholder]="'Introducer'"
+                  (changeValue)=" onChangeIntroducer($event)"
+                  *ngIf="!!isNew || selectedStatus?.key === 1 || selectedStatus?.key === 2">
+                </dps-editable-dropdown>
+                <mat-form-field class="dps-input-outer"
+                  *ngIf="!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)">
+                  <mat-placeholder>Introducer</mat-placeholder>
+                  <input matInput [value]="selectedIntroducer?.luP_Code" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <mat-expansion-panel style="width: 50%;" [expanded]="true" class="dps-Opportunity-inner mat-elevation-z">
+        <mat-expansion-panel-header expandedHeight="34px" collapsedHeight="34px">
+          <mat-panel-title>
+            <mat-icon>map</mat-icon>
+            <span>Opportunity Details</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="dps-form-outer">
+          <div fxLayout="column">
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+              <mat-form-field class="dps-input-outer" *ngIf="!isNew">
+                <mat-placeholder>Date</mat-placeholder>
+                <input matInput #opportunityDate [value]="clientDataModel?.enquiryDateOn | date:'dd-MM-yyyy'"
+                  [disabled]="!isNew">
+              </mat-form-field>
+              <mat-form-field class="dps-input-outer">
+                <mat-spinner matPrefix *ngIf="departmentList?.isLoading" class="spinner" diameter="20"></mat-spinner>
+                <mat-select placeholder="Department" [ngModel]="selectedDepartment"
+                  (selectionChange)="onChangeDepartmen($event.value)"
+                  [disabled]="isLoading?.sendSaveQuoteLoading ||  (!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4)) || (!isNew && !!clientDataModel.appCode && !clientDataModel.isWebQuoteOpportunity)">
+                  <mat-option *ngFor="let departmenItem of filterDepartmentList" [value]="departmenItem">
+                    {{ departmenItem.departmentName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="dps-input-outer">
+                <mat-select placeholder="Work Type" [ngModel]="selectedWorkType"
+                  (selectionChange)="onChangeWorkType($event.value)"
+                  [disabled]="!selectedDepartment || isLoading?.sendSaveQuoteLoading  ||  (!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4))">
+                  <mat-option *ngFor="let workTypeItem of getMatterCategory" [value]="workTypeItem">
+                    {{ workTypeItem.matCategoryDescription }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-chip-list *ngIf="isNew && selectedDepartment">
+                <mat-chip color="primary" selected="true" style="margin-top: 13px; margin-bottom: 23px;">
+                  <span> App:
+                    {{selectedWorkType && selectedWorkType.matCategoryAppCode ? selectedWorkType?.matCategoryAppCode : selectedDepartment?.deptAppCode}}
+                  </span>
+                </mat-chip>
+              </mat-chip-list>
+              <!-- <mat-form-field class="dps-input-outer" *ngIf="!isNew">
+                <mat-placeholder>Work Type</mat-placeholder>
+                <input matInput #opportunityWorkType [value]="clientDataModel?.workType" disabled>
+              </mat-form-field> -->
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+              <mat-form-field class="dps-input-outer">
+                <mat-select placeholder="Fee Earner" [ngModel]="selectedFeeEarner"
+                  (selectionChange)="onChangeFeeEarner($event)"
+                  [disabled]="isLoading?.sendSaveQuoteLoading ||  (!isNew && (selectedStatus?.key === 3 || selectedStatus?.key === 4))">
+                  <mat-option *ngFor="let feeEarnerItem of feeEarnerList" [value]="feeEarnerItem">
+                    {{feeEarnerItem.key}} - {{ feeEarnerItem.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="dps-input-outer" *ngIf="!isNew">
+              <mat-placeholder>Matter Details 1</mat-placeholder>
+              <input matInput #MatterDetails1 [value]="clientDataModel?.matterDetails1"
+                (keyup)="onInputChangeData(InputNameList.MatterDetails1, MatterDetails1.value)">
+            </mat-form-field>
+            <mat-form-field class="dps-input-outer" *ngIf="(!isNew && clientDataModel?.isVisibleMatDetails2)">
+              <mat-placeholder>Matter Details 2</mat-placeholder>
+              <input matInput #MatterDetails2 [value]="clientDataModel?.matterDetails2"
+                (keyup)="onInputChangeData(InputNameList.MatterDetails2, MatterDetails2.value)">
+            </mat-form-field>
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+              <mat-form-field style="width:100%" class="dps-input-outer">
+                <mat-placeholder>Notes</mat-placeholder>
+                <textarea matInput #note
+                  [value]="(isNew && !clientDataModel?.note) ? defuiltNote : clientDataModel?.note"
+                  (keyup)="onInputChangeData(InputNameList.Note, note.value)" rows="20" cols="20"
+                  maxlength="350"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+    </div>
+
+  </mat-accordion>
+
+</div>

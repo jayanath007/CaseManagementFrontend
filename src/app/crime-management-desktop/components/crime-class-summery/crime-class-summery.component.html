@@ -1,0 +1,19 @@
+<div fxLayout="row" class="inner-data" *ngIf="!!summery">
+  <div fxLayout="column" *ngIf="summery?.isFixedClassTotalVisible">
+    <span>{{summery?.fixedClassTotal | number : '1.2-2'}}</span>
+    <label>Class Total(fixed)</label>
+  </div>
+  <div fxLayout="column">
+    <span>{{summery?.classTotal | number : '1.2-2'}}</span>
+    <label>Class Total</label>
+  </div>
+  <div fxLayout="column">
+    <span>{{(summery?.disbursementsTotal ? summery?.disbursementsTotal : summery?.disbursements )| number : '1.2-2'}}</span>
+    <label>Disbursements</label>
+  </div>
+  <div fxLayout="column" style="border-right: 0">
+    <span>{{summery?.total | number : '1.2-2'}}</span>
+    <label>Total</label>
+  </div>
+</div>
+<mat-spinner style="color: #e6f0f8;" [diameter]="15" [strokeWidth]="3" *ngIf="!summery"></mat-spinner>

@@ -1,0 +1,46 @@
+<div class="dps-notification-wrap general">
+
+
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <span> Jobs in Batch </span>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- general-notification end -->
+
+
+  <mat-dialog-content class="notification-body dps-white-gray-scroll dps-blue-scroll">
+    <table class="jobs-data-grid">
+      <tr>
+        <th> Step </th>
+        <th> Do </th>
+        <th> Done </th>
+        <th> By </th>
+        <th> Date </th>
+      </tr>
+      <tr *ngFor="let item of tableFields" (click)="onSelectItem(item)" [ngClass]="{'dps_selected_item': selectedItem == item}">
+        <td>{{ item.step }} </td>
+        <td>
+          <mat-checkbox [checked]="item.do" (change)="onChangeDo(item,$event)"></mat-checkbox>
+        </td>
+        <td>
+          <mat-checkbox [checked]="item.done" disabled></mat-checkbox>
+        </td>
+        <td>{{ item.by }} </td>
+        <td>
+          <span *ngIf="item.done===true">{{ item.date | date :'dd/MM/yyyy' }}</span>
+        </td>
+      </tr>
+    </table>
+  </mat-dialog-content>
+  <!-- general-notification body end -->
+  <div class="bottom-controllers">
+
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onAction()"> {{okButtonLabel}} </button>
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onClose()"> Cancel </button>
+  </div>
+  <!-- general-bottom controller end -->
+</div>

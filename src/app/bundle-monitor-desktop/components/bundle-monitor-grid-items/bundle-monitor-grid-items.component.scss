@@ -1,0 +1,82 @@
+@import '~styles/variables.scss';
+
+.dps-bundle-monitor-grid-works {
+  height: 38px;
+
+  button {
+    font-size: $primary-font-size - 2;
+    line-height: 24px;
+
+  }
+
+  .id {
+    text-align: center;
+  }
+
+  .dps-Completed {
+    color: #00a041;
+    font-weight: 500;
+  }
+
+  .dps-Waiting {
+    color: #000;
+    font-weight: 500;
+  }
+
+  .dps-InProgress {
+    color: #2344fd;
+    font-weight: 500;
+  }
+
+  .dps-Saved {
+    color: #7152ce;
+    font-weight: 500;
+  }
+
+  .dps-Failed {
+    color: #f13838;
+    font-weight: 500;
+  }
+
+  .dps-Completed {
+    ::ng-deep .mat-progress-bar-fill:after {
+      background: #00a041;
+    }
+  }
+
+  .dps-Waiting {
+    ::ng-deep .mat-progress-bar-fill:after {
+      background: #000;
+    }
+
+  }
+
+  .dps-InProgress {
+    ::ng-deep .mat-progress-bar-fill:after {
+      background: #2344fd;
+    }
+  }
+
+  .dps-Saved {
+    ::ng-deep .mat-progress-bar-fill:after {
+      background: #7152ce;
+    }
+  }
+
+  .dps-Failed {
+    ::ng-deep .mat-progress-bar-fill:after {
+      background: #f13838;
+    }
+  }
+
+}
+
+.row-data {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-data .delete-record {
+  margin: 3px;
+}

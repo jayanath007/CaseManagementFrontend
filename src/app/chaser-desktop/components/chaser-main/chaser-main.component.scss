@@ -1,0 +1,60 @@
+@import '~styles/variables.scss';
+.mat-dialog-content {
+  display: block;
+  height: auto !important;
+  /* max-height: 65vh; */
+  max-height: 60vh;
+  min-height: 60vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  // height: 44vh;
+}
+.dps-chaser-layout{
+  height: 100%;
+}
+.dps-chaser-matlist {
+  width:100%;
+  padding-top: 0px
+}
+
+.chaser-scroll {
+  overflow-y: auto;
+}
+
+// mat-icon {
+//   padding: 7px 8px 3px;
+//    font-size: $primary-font-size + 5;
+// }
+
+  
+  mat-toolbar-row  {
+    height: 53px;
+    background: #274e8a; 
+    mat-icon{
+      vertical-align: middle;
+      border-radius: 100%;
+      border: 2px solid $primary;
+      padding: 5px !important;
+      color:$primary;
+    }
+  }
+  
+  mat-toolbar mat-list-item{    
+    color: $primary;
+    
+  }
+
+  .dps-chaser-send-btn {
+    background: #274e8a; 
+    color: $primary;
+  }
+  .mat-dialog-actions:last-child {
+    margin-bottom: unset;
+    padding-right: 15px;
+}
+
+  

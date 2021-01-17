@@ -1,0 +1,145 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-bundle-name-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
+.dps-bundling-option-layout {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  mat-toolbar {
+    min-height: 45px;
+    mat-toolbar-row.dps-bundling-header {
+      background:  $header-primary;
+      color: #fff;
+      font-size: $primary-font-size;
+      height: 45px;
+      .dps-header {
+        mat-icon {
+          vertical-align: middle;
+          border-radius: 100%;
+          border: 2px solid #d0edff;
+          padding: 2px;
+          color: #d0edff;
+          font-size: $primary-font-size + 6;
+          text-align: center;
+          line-height: 24px;
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+
+  .dps-bundling-options-wrapper {
+    padding: 20px 20px 0px 20px;
+
+    .dps-bundling-forms {
+      margin-bottom: 30px;
+    }
+
+    ::ng-deep .mat-form-field-infix {
+      width: 150px;
+    }
+
+    mat-checkbox.seperate-attach {
+      ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        line-height: 17px;
+    }
+    }
+
+    .dps-option-buttons {
+      margin: 2px 0 0 0;
+    }
+
+  }
+  mat-checkbox , mat-form-field {
+    font-size: $primary-font-size - 2;
+   
+  }
+
+  mat-form-field {
+    margin-top: 7px;
+  }
+
+ 
+
+
+
+  mat-divider {
+    margin-bottom: 12px;
+  }
+
+  button {
+    font-size: $primary-font-size - 2;
+    margin-right: 2px;
+    color: $primary;
+    border-radius: 0px;
+  
+  }
+
+  button.submit {
+    background: $header-primary;
+    &:hover {
+      background: darken($header-primary, 5%)
+    }
+  }
+  button.close {
+    background: $primary;
+    color: #016cc1;
+    border: 1px solid #016cc1;
+    line-height: 34px;
+    margin-left: 8px;
+ 
+  }
+
+  label {
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size;
+    color: #0072bb;
+    
+  }
+
+  span.dps-bundling-txt {
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 3;
+    // color: #0072bb;
+    
+    color: #909090;
+  }
+
+  .label-controller {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .dps-bundling-controller {
+    margin-bottom: 15px;
+    min-height: 140px;
+  }
+
+  .bundling-upload {
+    border: 1px solid #e6e6e6;
+    margin: 5px 0px 5px 0;
+    &:hover {
+      background: #b2e1ff;
+    }
+    mat-icon {
+      color: #0072bb;
+    }
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background , ::ng-deep .mat-form-field-ripple{
+    background-color: #0072bb;
+  }
+
+
+  
+
+} /* End - bundling -option - SCSS */
+

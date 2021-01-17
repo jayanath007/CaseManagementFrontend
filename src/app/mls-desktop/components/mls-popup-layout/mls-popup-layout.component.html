@@ -1,0 +1,22 @@
+<div class="dps-mls-popup-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row>
+
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon>message</mat-icon>
+        <span>MyLegalSpace</span>
+      </div>
+
+      <div class="dps-mls-exit">
+        <button mat-icon-button (click)="onClose()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxFlex="calc(100%-45px)">
+    <dps-mls-manager #mlsManager [showContent]="'true'" [matterInfo]="matterInfo">
+
+    </dps-mls-manager>
+  </div>
+</div>

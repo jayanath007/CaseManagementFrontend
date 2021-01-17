@@ -1,0 +1,10 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible"
+  class="label-with-inputtext input-wrapper">
+  <mat-form-field>
+    <mat-placeholder>{{customCaption || meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+    </mat-placeholder>
+    <input matInput maxlength="{{maxlength}}" [id]="meta?.scL_Name" dpsAddressFinder country="uk"
+      (changeAddress)=autofillAddress($event) (blur)="onblurInputData(modelData)" [formControl]="inputCtrl">
+  </mat-form-field>
+</div>

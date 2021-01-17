@@ -1,0 +1,20 @@
+<div class="dps-user-profile-detail" *ngIf="selectedTeamMember || selectedDepartment">
+  <mat-list>
+    <mat-list-item>
+      <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-team-member-avatar"
+        [ngStyle]="{'background-color': userEmail | recipientColorCode}">
+        <span>{{userNameOrDepartment | nameInitials}}</span>
+      </button>
+      <!-- <img matListAvatar [hidden]="showProfileImg" src="no-profile-img.png" alt="..."> -->
+      <img matListAvatar [hidden]="!showProfileImg" src="{{imgPath | dpsUserImage | async}}" alt="..."
+        (load)="showProfileImg=true">
+      <span matLine>{{userNameOrDepartment}}
+        <span class="user-contact" *ngIf="userEmail || userPhoneNo">
+          <label *ngIf="userPhoneNo">{{userPhoneNo}}</label>
+          <i matTooltip="{{userEmail}}" class="material-icons mail" *ngIf="userEmail && userPhoneNo">email</i>
+          <label matTooltip="{{userEmail}}" class="user-mail-text" *ngIf="!userPhoneNo">{{userEmail}}</label>
+        </span>
+      </span>
+    </mat-list-item>
+  </mat-list>
+</div>

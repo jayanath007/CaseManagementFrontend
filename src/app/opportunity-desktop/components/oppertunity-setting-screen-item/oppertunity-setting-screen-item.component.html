@@ -1,0 +1,49 @@
+<div fxLayout="row" class="dps-opportunity-setting-menu" fxLayoutGap="10px grid">
+
+  <dps-edit-screen-single-column-select [disabled]="settingIsLoading" class="app-id" [comboModelData]="appCodes" fxFlex="200px"
+    showType="valueANDdescription1" [modelData]="!!isNew ? newSelectAppId : selectAppId"
+    [noEntriesFoundLabel]="'Not found'" [placeholderLabel]="'Select App'" columnName="Name"
+    (selectionchangedData)="onAppCodeChanged($event)" [hidden]="false" [hiddenEmptyValue]="true">
+  </dps-edit-screen-single-column-select>
+
+  <dps-edit-screen-single-column-select [disabled]="settingIsLoading" class="screen-id" fxFlex="125px"
+    *ngIf="(getDisplayScreenList(!!isNew ? newSelectAppId :selectAppId).length > 0) ? true : !!screenFilterText "
+    [comboModelData]="getDisplayScreenList(!!isNew ? newSelectAppId :selectAppId)" showType="key"
+    [modelData]="isNew ? newScreenName : screenName" [noEntriesFoundLabel]="'Not found'"
+    [placeholderLabel]="'Select Screen'" filterFromPerent="true" columnName="Name"
+    (selectionchangedData)="onScreenChanged($event)" [hidden]="false" (changeSearchKey)="onFilterScreen($event)"
+    [hiddenEmptyValue]="true">
+  </dps-edit-screen-single-column-select>
+
+  <mat-form-field  class="screen-id"  fxFlex="125px" *ngIf="!screenFilterText && getDisplayScreenList(!!isNew ? newSelectAppId :selectAppId).length < 1 "
+    (click)="clickOnScreenList(isNew ? newSelectAppId : selectAppId, $event)">
+    <input matInput placeholder="" [value]="isNew ? newScreenName :screenName">
+  </mat-form-field>
+
+
+
+  <mat-form-field  class="note"  fxFlex="1 1 100%">
+    <input matInput placeholder="" [value]="isNew ? newNote :note" (change)="changeNote($event.target)">
+  </mat-form-field>
+
+ 
+  <button class="dps-opportunity-add" *ngIf="isNew" mat-mini-fab (click)="onAddItem()"
+    [disabled]="settingIsLoading || !newScreenName">
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+  <button class="dps-opportunity-clear" *ngIf="isNew" mat-mini-fab (click)="onClearAddItem()"
+    [disabled]="settingIsLoading || !newSelectAppId">
+    <mat-icon>format_clear</mat-icon>
+  </button>
+  
+
+
+  <button class="dps-opportunity-remove" *ngIf="!isNew" mat-mini-fab (click)="onRemoveItem()"
+    [disabled]="settingIsLoading">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+
+
+
+
+</div>

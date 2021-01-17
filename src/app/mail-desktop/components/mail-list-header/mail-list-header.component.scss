@@ -1,0 +1,80 @@
+@import '~styles/variables.scss';
+.dps-mail-list-header .dps-folder-name{
+    font-size: 20px
+}
+.dps-mail-list-header button {
+    color: #0079c4;
+    margin-right: 12px;
+}
+.dps-mail-list-header button:disabled{
+    color: #bdbdbd;
+    margin-right: 12px;
+}
+.dps-mail-filter-btn{
+    margin-right: 0px !important;
+}
+.dps-mail-list-header{
+    padding-top:0px; 
+    height: 50px;
+
+    mat-button-toggle-group {
+        ::ng-deep .mat-button-toggle-checked {
+            background-color: transparent;
+        }
+    }
+
+}
+.icon-folder-open{
+    font-size: 25px;
+    line-height: 25px;
+}
+.btn-sortmenu{
+    height: 40px;
+     line-height: 40px; 
+    font-size: 12px;
+}
+.btn-item{
+    height: 40px;
+     line-height: 40px;
+      width: 140px; 
+    font-size: 12px;
+}
+.icon-long-arrow-down{
+    padding-top: 10px;
+     padding-left: 10px;
+}
+.icon-item{
+    font-size: 20px;
+}
+.icon-forward{
+    position: absolute;
+    font-size: 15px;
+    line-height: 45px;
+    margin-left: -22px;
+}
+.mat-toolbar
+{
+    background: $primary;
+    border-bottom: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+}
+mat-button-toggle-group.mat-button-toggle-group{
+    margin-right: 10px;
+    box-shadow: none !important;
+}
+
+
+
+
+.dps-mail-searching {
+    font-size: 13px;
+    font-weight: 400;
+    color: #2563c3;
+}
+
+mat-paginator{
+    height: 48px;
+}
+mat-paginator::ng-deep .mat-paginator-page-size{
+    display:none;
+}

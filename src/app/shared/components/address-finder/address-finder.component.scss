@@ -1,0 +1,53 @@
+.postal-search {
+  padding-top: 7px;
+  color: #ffa000;  
+  }
+  
+
+  .input-section.postal-search .general-input-type-text .input-wrapper input {
+    color: #d48400;
+    /* border-bottom: 1px solid #ffb21d; */
+  }
+  
+  #sourceOption:focus {
+      background: #e8e8e8;
+  }
+  
+.postal-search .input-head-line
+{
+  float: left;
+
+}
+.postal-search .input-wrapper
+{
+  float: left;
+  width: calc(100% - 140px);
+  margin-left: 24px;
+
+}
+
+.dps-address-find-input {
+  border: none;
+  background: 0 0;
+  outline: 0;
+  font-size: 17px;
+  color: #616971;
+  padding: 0;
+  height: 28px;
+  line-height: 28px;
+  width: 100%;
+  border-bottom: 1px solid #c3c3c3;
+}
+.add-form{
+  width:300px;
+}
+.dps-sddress-search {
+  position: relative;
+  top: 10px;
+  mat-placeholder{
+    font-weight:600;
+    font-size:15px;
+  
+  }
+  
+}

@@ -1,0 +1,146 @@
+@import '~styles/variables.scss';
+
+.matter-search-grid {
+  height: 100%;
+}
+
+.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+.lenth-calc {
+  min-width: 1000px;
+  height: 100%
+}
+
+.row-highlight-inner {
+  height: 40px;
+  width: 100%;
+}
+
+.grid-sub-options {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.matter-search-grid-outer-wrapper {
+  height: 100%;
+}
+
+mat-panel-title {
+  width: 100%;
+}
+
+dps-matter-grid-fix-row {
+  width: 100%;
+}
+
+.mat-expansion-panel-content {
+  margin: 0px;
+  padding: 0 13px 10px;
+}
+
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+.row-highlight {
+  background-color: $primary;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  width: calc(100% - 15px);
+}
+
+mat-expansion-panel {
+  border-bottom: 1px solid #f1f2f4;
+}
+
+.expansion-panelgrid-header {
+  height: auto !important;
+}
+
+.mat-expansion-panel-header {
+  font-size: 12px;
+  padding: 0px 0px;
+}
+
+
+.dps-matter-button {
+  align-items: center;
+  padding-right: 18px;
+}
+
+.dps-matter-button span {
+  padding: 5px 0px 7px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #2b475a;
+}
+
+.dps-matter-button label {
+  font-weight: 500;
+  font-size: $secondary-font-size;
+  line-height: 12px;
+
+}
+
+.footer-shadow {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+
+.closed-matters {
+  background: #dab3b3;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.closed-matters:not([aria-disabled=true]):hover {
+  background: #dab3b3;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.closed-matters:hover {
+  background: #dab3b3;
+}
+
+.complete-matter {
+  background: #ced849;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.complete-matter:not([aria-disabled=true]):hover {
+  background: #ced849;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.complete-matter:hover {
+  background: #ced849;
+}
+
+// .mat-expansion-panel {
+//   transition: 0ms !important;
+// }
+.grid-sub-options {
+  overflow-y: scroll;
+}
+
+.grid-sub-options mat-expansion-panel {
+  box-shadow: none;
+}
+
+.grid-sub-options .mat-expansion-panel-spacing {
+  margin: 0;
+  background: #f6fffc !important;
+
+
+}
+
+.grid-sub-options .mat-expansion-panel-spacing .mat-expansion-panel-header {
+  background: #9edcc9;
+  margin-bottom: 8px;
+  border-top: 2px solid #58c5a3;
+
+
+}
+
+.grid-sub-options .mat-expansion-panel-header .mat-icon-button {
+  box-shadow: none;
+
+}

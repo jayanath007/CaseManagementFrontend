@@ -1,0 +1,48 @@
+@import '~styles/variables.scss';
+// mat-toolbar {
+  
+//   height: 42px !important;
+//   min-height: 42px;
+//   mat-list {
+//     width: 100%;
+//     padding-top: 0px
+//   }
+// }
+
+// mat-toolbar-row {
+//   height: 42px;
+// }
+
+// mat-toolbar mat-list-item {
+//   color: $toolbar-title;
+// }
+
+
+mat-toolbar {
+  background: $dps-primary-view;
+  height: 42px !important;
+  min-height: 42px;
+  color: $primary;
+
+  mat-icon.icon {
+    border: 2px solid $primary;
+    vertical-align: middle;
+    border-radius: 100%;
+    padding: 5px;
+  }
+
+  span {
+    padding-left: 10px;
+    font-size: 13px;
+  }
+}
+
+.dps-task-submit {
+  background: $dps-primary-view;
+  color: $primary;
+}
+
+button {
+  font-size: $primary-font-size - 2;
+  border-radius: 0px;
+}

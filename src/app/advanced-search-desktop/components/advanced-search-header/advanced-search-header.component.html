@@ -1,0 +1,140 @@
+<div class="advanced-search-header-layout" fxLayout="row" fxLayoutAlign="end end">
+  <div>
+    <dps-editable-dropdown [options]="clientList" [value]="advancedSearchViewMode?.searchClients"
+      placeholder="Search {{clientDisplyName}}" (changeValue)="onChangeClient($event)">
+    </dps-editable-dropdown>
+  </div>
+
+  <div class="dps-header-field">
+    <mat-form-field>
+      <mat-select placeholder="Application" floatPlaceholder="never" [ngModel]="advancedSearchViewMode?.appId"
+        (selectionChange)="onChangeAppCode($event)">
+        <mat-option *ngFor="let appCode of appCodeList" [value]="appCode.key">
+          {{ appCode.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="dps-header-field">
+    <mat-form-field>
+      <input matInput placeholder="Search {{matterDisplyName}}" #searchMatter (keyup)="onChangeMatter(searchMatter)">
+    </mat-form-field>
+    <button mat-icon-button (click)="onAdvancedSearchClick()">
+      <mat-icon class="add">search</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="onAdvancedSearchHelp()">
+      <mat-icon class="add">help</mat-icon>
+    </button>
+  </div>
+
+
+  <div class="dps-advanced-controller" fxLayout="row" fxLayoutAlign="center center">
+    <div class="dps-controller dps-header-field">
+      <button mat-raised-button (click)="advancedClick(advanced)">Advanced
+        <i class="material-icons">
+          keyboard_arrow_right</i>
+      </button>
+    </div>
+
+    <div *ngIf="advanced" class="dps-grid-action" fxLayout="row" fxLayoutAlign="center center">
+
+      <div class="dps-action-btn dps-header-btn" fxLayout="row">
+        <div class="dps-search-btn">
+
+          <button mat-stroked-button matTooltip="Speed Search - Key Fields only,Index Search ('Begins With')"
+            [ngClass]="{'dps-search-speed': advancedSearchViewMode.searchColumnOption === 'Speed'}"
+            (click)="findAllClick()">
+            <i class="material-icons">
+              flash_on
+            </i>
+            ABC
+          </button>
+        </div>
+        <div class="dps-all-btn">
+
+          <button mat-stroked-button matTooltip="Full Search - All Fields ,In - String Search ('AnyWhere in field')"
+            [ngClass]="{'dps-search-all': advancedSearchViewMode.searchColumnOption === 'All'}"
+            (click)="speedSearchCLick()">
+            <i class="material-icons">autorenew</i>abc
+          </button>
+        </div>
+        <button mat-icon-button (click)="onAdvancedSearchTypeHelp()">
+          <mat-icon class="dps-advanced-help">help</mat-icon>
+        </button>
+
+
+      </div>
+
+      <div class="dps-header-field">
+        <mat-form-field>
+          <mat-select placeholder="Branch" [disabled]="branchList.length === 1" floatPlaceholder="never"
+            [ngModel]="advancedSearchViewMode?.branchId" (selectionChange)="onChangeBranch($event)">
+            <mat-option *ngFor="let branch of branchList" [value]="branch.branchId">
+              {{ branch.branchName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div class="dps-header-field">
+        <mat-checkbox (change)="onIsMatterClosed($event)" color="primary">Closed</mat-checkbox>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id='AdvancedSearchHelpText' hidden>
+  <h4>Search</h4>
+  <h5>{{ matterDisplyName }} Search</h5>
+  <p>
+    By default, the search tool will search for the text you type
+    in this box anywhere in any of the search fields.
+    The default search fields are {{ matterDisplyName }} Reference (Ref),
+    {{ matterDisplyName }} Details, {{ clientDisplyName }} Name, and all Application Search Fields for the selected
+    application.
+    If you have selected 'All' for the DPS application, all Application Search Fields will
+    be joined into a single field called 'Application Vars'.
+    This is the most comprehensive search, it might take a while depending on your system.
+    Right click search field headers to add or remove them to the search
+    (note colour change of header).
+    If this search is too slow, consider using the Speed Search option,
+    or switch to Index Search, see Help in the Advanced box for more details. </p>
+  <h5>Date Search</h5>
+  <p>Enter a recognisable date format (01012017, 1/1/2017, 1/1/17) into
+    the {{ matterDisplyName }} Search box to search on '{{ matterDisplyName }} Opened' only.
+    Greater than, less than and equals operators
+    are recognised before the date. So for example <= 31/12/2015 returns all ${{ matterDisplyName }} opened on or before
+      31st December 2015.</p> <h5>{{ clientDisplyName }} Search</h5>
+      <p>Tab into or select this box for a fast search of {{ matterDisplyName }} by {{ clientDisplyName }} name. The box is preloaded
+        with all {{ clientDisplyName }}s on your system. Start typing, and any matching {{ clientDisplyName }} will
+        appear in the drop down box. Use the down arrow to select the {{ clientDisplyName }} you are interested in, then return to
+        select, return again to search.</p>
+</div>
+
+<div id='AdvancedSearchTypeHelp' hidden>
+  <h4>{{ matterDisplyName }} Search</h4>
+  <h4> Speed Search (default)</h4>
+
+  <p> Only the {{ matterDisplyName }} and {{ clientDisplyName }} key fields will be searched. Search will be 'Begins with',
+    which allows database indexes to be used,
+    which can be significantly faster.</p>
+  <p> But if the text occurs in the middle of a field, it will not be found. Headers of columns being searched are shown
+    blue.</p>
+
+  <h4> Full Search</h4>
+  <p>This is the most comprehensive search, it might take a while depending on your system.
+    Key {{ matterDisplyName }} and {{ clientDisplyName }} fields will be searched, as well as all application search
+    variables.&lt;br/&gt;Search will be
+    'In-String', which means the search will look for the text anywhere within the fields - all records will need to be
+    searched.
+    Headers of columns being searched are shown orange.</p>
+  <h4>Adding or removing columns to be searched</h4>
+  <p> Columns can be included or excluded from the search by right clicking on the column header.</p>
+  <p>If the column is being included, it will be coloured blue or orange</p>
+  <p> depending on whether Speed Search or Full Search mode has been selected.</p>
+</div>

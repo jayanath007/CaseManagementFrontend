@@ -1,0 +1,236 @@
+@import '~styles/variables.scss';
+.close-screen-editor
+{
+    color: red;
+    background: #a4d0ea;
+    border-radius: 3px;
+    float: right;
+}
+.left-buttons
+{
+    display: flex;
+    float: left;
+    padding-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+}
+.screen-title
+{   
+    width: 100%;
+    clear: both;
+    font-family: $primary-font-stack;
+    color: #1f2a3a;
+    padding: 8px 0 0;
+    height: 24px;
+    font-size: 13px;
+    overflow: hidden;
+    text-align: center;
+    background: #85c2ea;
+}
+.right-buttons
+{
+        width: 255px;
+        float: right;
+        padding-bottom: 10px;
+        cursor: pointer;
+}
+
+.right-buttons button
+{
+    float: right;
+
+}
+
+.clear
+{
+    clear: both;
+}
+.screen-views-button-wrapper .right-buttons
+{
+    text-align: right;
+
+}
+
+.save-canvas
+{
+    line-height: 31px;
+    font-size: 12px;
+    color: $primary;
+    background: #066306;
+    margin:0 11px 0 3px;
+    border: 2px solid #70afd8;
+}
+.export-xml
+{
+    font-size: 16px;
+    background: #2d7708;
+    margin: 0 2px 0 3px;
+    border: 2px solid #7fbf5e;
+}
+.export-xml .fa
+{
+    margin-top: -6px;
+    margin-left: 2px;
+}
+.file-based
+{
+    font-size: 16px;
+    background: #239dec;
+    margin: 0 2px 0 3px;
+    border: 2px solid #81c5f3;
+	-webkit-animation: rotate-center 1.6s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+    animation: rotate-center 1.6s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+    z-index: 1;
+}
+
+
+.file-based .fa
+{
+    margin-top: -6px;
+    margin-left: 2px;
+}
+
+@-webkit-keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+
+.logic-button
+{
+    background: #21539a;
+    border: 2px solid #70afd8;
+
+    span {
+        font-size: $primary-font-size - 2px;
+        color: #fff;
+    }
+}
+
+::ng-deep .mat-flat-button  {
+    line-height: 28px;
+    
+}
+
+.logic-button-left {
+    display: flex;
+    margin: 0px 5px 0px 0;
+    i {
+        vertical-align: sub;
+    }
+
+    ::ng-deep .mat-progress-spinner svg 
+         {
+            width: 38px !important;
+            height: 38px !important;
+        }
+
+        ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+            // stroke: #a9ffad;
+        }
+
+        button.is-checkout-file {
+            background: #2d7708;
+            border: 2px solid #74b752;
+        }
+    }
+
+
+.panel-controller
+{
+    line-height: 26px;
+    background: none;
+    border: 0;
+    color: #005792; 
+    cursor: pointer;
+
+}
+.panel-controller.left
+{
+    float: left;
+    padding: 0 5px 0 0;
+    margin-top: 4px;
+}
+.panel-controller.right
+{
+    float: right;
+    padding:1px 0 0 5px;
+    margin-left: 14px;
+    margin-top: 4px;
+        
+}
+
+
+
+.panel-controller i
+{
+    display: none;
+    padding: 8px 9px 9px 9px;
+
+}
+.panel-controller.left i
+{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background: #a4cfea;
+}
+.panel-controller.right i
+{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background: #a4d0ea;
+}
+.panel-controller i.active
+{
+    display: block;
+}
+
+
+.screen-navigation
+{
+    float: right;
+    padding-right: 9px;
+}
+.screen-navigation .mat-mini-fab
+{
+    background: #22529a;
+    margin-left: 7px;
+}
+.screen-navigation .mat-mini-fab:disabled
+{
+    opacity: 0.3;
+    color: $primary;
+}
+.blink{
+    color: rgb(192, 25, 19);
+     -webkit-animation-name: example; 
+     -webkit-animation-duration: .5s; 
+     animation-name: example;
+     animation-duration: .5s;
+     animation-iteration-count: infinite;
+   }
+.file-access{
+    color: #60eab5;   
+}
+
+mat-spinner {
+    height: 38px !important;
+    width: 38px !important;
+    position: absolute;
+    z-index: 5;
+}

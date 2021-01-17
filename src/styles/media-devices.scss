@@ -1,0 +1,412 @@
+
+ 
+  /* start_Media Tag for Macbook */
+  @import 'variables.scss';
+ @media screen and (min-width: 1280px)  {
+
+    dps-time-recorded-views {
+      .grid-font-controller {
+            padding-right: 0px !important;
+      }
+  
+  
+  
+    }
+  
+    dps-work-done-views {
+      .grid-controller-set {
+        flex-flow: row !important;
+        
+      }
+  
+      .grid-font-controller {
+        padding-right: 0px !important;
+  }
+    }
+  
+    .workflow-btn .mat-raised-button .mat-button-wrapper , .workflow-btn .mat-raised-button .mat-button-wrapper.material-icons {
+      font-size: 12px !important;
+  }
+  
+    
+  
+  }  
+
+
+  /* Start_Media Tag for standard iPads */
+
+@media only screen and (min-width: 1366px) and (max-height: 1024px) {
+
+  
+    dps-time-recorded-header {
+  
+      .total-bill-outstanding-count {
+        
+        margin-top: 0px !important;
+        
+    }
+  
+    }
+  
+    dps-time-recorded-views {
+      .grid-font-controller {
+            padding-right: 0px !important;
+      }
+    }
+  
+    dps-work-done-views {
+      .grid-controller-set {
+        flex-flow: row !important;
+        
+      }
+  
+      .grid-font-controller {
+        padding-right: 0px !important;
+  }
+    }
+
+    .workflow-btn .mat-raised-button .mat-button-wrapper , .workflow-btn .mat-raised-button .mat-button-wrapper.material-icons {
+      font-size: 12px !important;
+  }
+  
+  }
+
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+    dps-matter-search-layout {
+
+        .total-matter-count-wrap {
+            font-size:  $primary-font-size + 6 !important;
+        }
+
+        .total-matter-count label {
+            font-size: $primary-font-size + 1 !important;
+        }
+
+        .matter-filter-grid-controllers {
+            
+            margin-top: 11px !important;
+        }
+
+       
+
+      .grid-wrapper-main {
+        margin-top: -84px !important;
+      }
+  
+      dps-matter-search-views {
+        .mat-form-field-infix {
+          width: 100px !important;
+        }
+  
+        .grid-font-controller .mat-mini-fab {
+          margin: 0px 1px !important;
+        }
+  
+        .dps-grid-refresh-button {
+        
+          display: none;
+      }
+      .grid-font-controller  {
+        display: none;
+        
+      }
+  
+      }
+
+      dps-matter-search-dapartments {
+        mat-form-field  {
+          .mat-form-field-wrapper {
+            width:150px;
+        }
+        }
+      }
+  
+    }
+
+
+    dps-work-done-layout {
+        dps-work-done-views {
+            // .dps-grid-refresh-button {
+               
+            //       display: none;
+            //   }
+            //   .grid-font-controller  {
+            //     display: none;
+               
+            //   }
+
+              mat-form-field  {
+                  .mat-form-field-wrapper {
+                      width:100px;
+                  }
+              }
+
+           
+        }
+
+        dps-work-done-grid-filter {
+          mat-form-field  {
+            .mat-form-field-wrapper {
+              width:140px;
+          }
+          }
+        
+        }
+    }
+
+    dps-file-history-layout {
+      .dps_file_attached {
+        left: 50% !important;
+      }
+    }
+
+    // dps-my-tasks-layout  , dps-client-search-layout , dps-time-recorded-layout , dps-open-case-layout {
+
+    //     dps-my-tasks-views , dps-client-search-views , dps-time-recorded-views , dps-open-case-tabs {
+
+    //         // .dps-grid-refresh-button {
+        
+    //         //     display: none;
+    //         // }
+    //         // .grid-font-controller  {
+    //         //   display: none;
+              
+    //         // }
+
+    //     }
+
+    // }
+
+
+    dps-document-view-page {
+     
+      .dps-document-view img {
+        overflow: scroll;
+      }
+    }
+
+    dps-open-case-tabs {
+      mat-list-item {
+        font-size:  $primary-font-size - 1 !important;
+      }
+
+      .opened-case-main-nav .mat-list-item.active {
+        padding-bottom: 0px !important;
+        border-bottom: 2px solid #80daff !important;
+    }
+
+    }
+
+    dps-open-case-header {
+      .file-history-summary-upper {
+        min-width: 16% !important;
+      }
+    }
+
+    .dps_file_attached span.mat-button-wrapper {
+      font-size:  $primary-font-size - 2 !important;
+    }
+
+    dps-times-financial-figures {
+      .total-amount-wrap span {
+        font-size: $primary-font-size + 4 !important;
+      }
+    }
+
+    dps-my-tasks-header {
+      mat-form-field  {
+        .mat-form-field-wrapper {
+          width:150px;
+      }
+      }
+    }
+
+
+    dps-time-recorded-layout {
+
+
+      dps-time-recorded-header {
+        .total-matter-count-wrap {
+          font-size:  $primary-font-size + 4 !important;
+          margin-left: -25px;
+        }
+
+        .total-matter-count {
+          padding-right: 0px !important;
+        }
+      }
+
+
+        dps-time-recorded-views {
+
+            mat-form-field {
+                .mat-form-field-wrapper {
+                    width: 100px;
+                }
+            }
+
+                .time-recorded-input.from,
+                .time-recorded-input.to,
+                .time-recorded-input.custom
+                {
+                
+                margin-right: 25px;
+
+                }
+        }
+
+        dps-time-recorded-grid-filter {
+
+          display: flex;
+          flex-direction: row;
+
+          mat-form-field  {
+            margin-right: 10px;
+
+            .mat-form-field-wrapper {
+              width:150px;
+          }
+
+          .dps-time-type-filter  .mat-form-field-wrapper {
+              width:100px;
+          }
+
+          }
+       }
+          
+        
+
+    }
+
+    
+
+
+
+    .workflow-btn .mat-raised-button .mat-button-wrapper , .workflow-btn .mat-raised-button .mat-button-wrapper.material-icons {
+      font-size: 12px !important;
+  }
+
+  dps-workflow-menu-main-layout {
+
+    .detail.command-active  {
+      // width: calc(100% - -20px) !important;
+      width:50%;
+  }
+  
+
+  }
+
+
+  //search-view in grids
+
+
+  dps-client-search-views {
+
+    mat-form-field.matter-general-search {
+      .mat-hint {
+        padding: 4%;
+        color: $primary;
+        background: #32434d;
+        border-radius: 10px;
+    }
+    }
+
+  }
+  
+ 
+  //dps-ledger-card-data-content
+ 
+  dps-ledger-card-data-content {
+
+  //   .dps-is-mobile.indicator-header{
+  //     padding: 10px 17px !important;
+      
+  // }
+  
+  .value-field.app-ref {
+      display: block;
+      width: 140px;
+      max-width: 150px;
+  }
+  
+  .indicator-header  {
+    padding: 2px 17px !important; 
+  }
+  
+
+  }
+
+ 
+  dps-add-note-layout {
+    mat-dialog-content {
+      min-height: 46vh !important;
+      max-height: 46vh !important;
+    }
+  }
+
+
+
+  
+  } /* End_Media Tag for standard iPads */
+
+
+
+  @media only screen and (max-width: 1366px) {
+
+    dps-selected-calendar-list {
+    
+    .mat-chip-list-wrapper {
+        zoom:75%;
+    }
+  }
+
+
+  
+  }
+
+
+
+
+
+  /* opportunity height scroll fix for the quotations */
+
+  
+
+@media screen and ( max-width: 900px ) {
+
+  .dps-property-quote-popup-panel .mat-dialog-container {
+  
+      height: 650px;
+    }
+
+    .dps-property-quote-main .mat-horizontal-content-container
+    {
+      height: 450px;
+      overflow: auto;
+    }
+  }
+  
+  /* opportunity height scroll fix for the quotations */
+
+  
+
+@media screen and ( max-width: 900px ) {
+
+  .dps-property-quote-popup-panel .mat-dialog-container {
+  
+      height: 650px;
+    }
+
+    .dps-property-quote-main .mat-horizontal-content-container
+    {
+      height: 450px;
+      overflow: auto;
+    }
+  }
+  
+
+

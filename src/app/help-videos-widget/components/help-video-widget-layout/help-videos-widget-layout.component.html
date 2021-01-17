@@ -1,0 +1,35 @@
+<div class="dps-helping-vdo-widget-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="header">
+      <mat-icon class="header-icon">video_library</mat-icon>
+      <span (click)="onOpenModule()">Help Video(s)</span>
+      <span class="spacer"></span>
+      <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #mainmenu="matMenu">
+        <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+          Remove
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading && !urlList?.length" mode="indeterminate"></mat-progress-bar>
+
+  <div class="dps-white-gray-scroll dps-helping-vdo-widget-content">
+    <mat-card fxLayout="row" class=" dps-info-list mat-elevation-z" *ngFor="let urlDetail of urlList">
+      <a href="{{urlDetail.url}}" target="_blank">
+        <mat-card-header>
+
+          <mat-icon mat-card-avatar height="40px" class="dps-favicon dps-bbc-logo" matListIcon
+            [svgIcon]="linkIcon(urlDetail.newsType)"></mat-icon>
+          <mat-card-title>{{ urlDetail.newsTitle}}</mat-card-title>
+          <mat-card-subtitle [title]="urlDetail?.description||''">{{urlDetail?.description}}</mat-card-subtitle>
+        </mat-card-header>
+      </a>
+
+    </mat-card>
+  </div>
+
+
+</div>

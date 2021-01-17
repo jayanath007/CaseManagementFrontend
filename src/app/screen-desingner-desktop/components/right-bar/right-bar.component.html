@@ -1,0 +1,23 @@
+
+<mat-tab-group class="tab-arrangement-parameters" [selectedIndex]="activeTab" (selectedTabChange)="onChangeTap($event)">
+  <mat-tab label="Screen Parameters" >
+    <dps-screen-parameters [screenDefinition]="screenDefinition" (onScreenDefinitionChange)="onScreenTitleChange($event)"></dps-screen-parameters>
+  </mat-tab>
+  <mat-tab label="Field Properties" >
+    <dps-field-properties (onComponentChange)="onItemChange($event)" [screenComponentList]="screenComponentList" (onCreateLookup)="createLookup($event)"   (onGetlookUpData)="onlookUpData($event)"
+      [screenDefinition]="screenDefinition" [selectedContanerComponent]="selectedContanerComponent[0]" [lookupFiles]="lookupFiles"
+       
+      *ngIf="selectedContanerComponent?.length === 1">
+    </dps-field-properties>
+    <dps-align-fields (onComponentChange)="onItemChange($event)" 
+    [screenDesingnerState]="screenDesingnerState"
+    [masageCount]="masageCount"
+    
+    [selectedContanerComponent]="selectedContanerComponent" *ngIf="selectedContanerComponent?.length > 1">
+    </dps-align-fields>
+  </mat-tab>
+
+  <button (click)="save()" color="warn" mat-icon-button>
+    <i class="material-icons">save</i>
+  </button>
+</mat-tab-group>

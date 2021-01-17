@@ -1,0 +1,74 @@
+@import '~styles/variables.scss';
+.componenet-drag{
+    cursor: move;
+}
+.components
+{
+    font-size: 12px;
+    font-family: $primary-font-stack;
+    border-bottom: 1px solid #9fc6de;
+}
+.components.used
+{
+    border-bottom: 1px solid #efa821;
+    background-image:url(highlighted.png);
+    color: #9c6700;
+}
+.components.used .var
+{
+    background-color: #ffb629;
+}
+.components.used .var-lbl
+{
+    background-color: #fdcb6d;
+}
+
+.components .var
+{
+    float: left;
+    width: 50px;
+    padding: 8px 0 8px 5px;
+}
+
+.components .type
+{
+    float: left;
+    width: 35px;
+    padding: 8px 0px 5px;
+    text-align: center;
+    font-size: $primary-font-size;
+}
+.components .var-lbl
+{
+    float: left;
+    width: calc(95% - 109px);
+    padding: 8px 0 8px 5px;
+}
+.components .field-usage
+{
+    float: left;
+    width: 24px;
+    padding: 5px 1px 5px 5px;
+}
+
+.type i.fa-paperclip , .type i.fa-map-marker {
+    font-size: 16px;
+}
+
+  
+.componenet-drag-space {
+    background: repeating-linear-gradient( 45deg, #ffebc3, #ffebc3 5px, #ffcc68 4px, #ffc3c3 9px );
+    height: 8px;
+    display: block;
+    clear: both
+}
+
+.dps-dragover {
+    height: 18px;
+    background-image: repeating-linear-gradient( 45deg, #ffebc3, #ffebc3 5px, #ffcc68 4px, #ffc3c3 9px );
+    -webkit-animation: progress 2s linear infinite;
+    -moz-animation: progress 2s linear infinite;
+    -ms-animation: progress 2s linear infinite;
+    animation: progress 2s linear infinite;
+}
+

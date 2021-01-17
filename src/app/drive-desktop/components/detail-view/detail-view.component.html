@@ -1,0 +1,109 @@
+<div class="drive-detail-view dps-white-gray-scroll" fxLayout="column" dpsFileDroppable dropClass="drive-content-drop"
+  (onDrop)="onDrop($event,activeView.owner)">
+
+  <table class="rwd-table">
+    <tr class="table-header">
+      <th class="file" (click)="onHeaderClick('name')">
+        File
+        <i class="fa"
+          [ngClass]="{'fa-sort-alpha-desc': sortOrder.orderBy==='desc', 'fa-sort-alpha-asc':sortOrder.orderBy==='asc'}"
+          *ngIf="sortOrder?.sortBy==='name'" aria-hidden="true"></i>
+      </th>
+      <th class="date">
+        Date Modified
+        <!-- (click)="onHeaderClick('lastModifiedDateTime')"
+        <i class="fa"
+          [ngClass]="{'fa-sort-alpha-desc': sortOrder.orderBy==='desc', 'fa-sort-alpha-asc':sortOrder.orderBy==='asc'}"
+          *ngIf="sortOrder?.sortBy==='lastModifiedDateTime'" aria-hidden="true"></i> -->
+      </th>
+      <th class="date">
+        Type
+        <!-- (click)="onHeaderClick('package/type')"
+        <i class="fa"
+          [ngClass]="{'fa-sort-alpha-desc': sortOrder.orderBy==='desc', 'fa-sort-alpha-asc':sortOrder.orderBy==='asc'}"
+          *ngIf="sortOrder?.sortBy==='package/type'" aria-hidden="true"></i> -->
+      </th>
+      <th class="date">
+        Size
+        <!-- (click)="onHeaderClick('size')"
+        <i class="fa"
+          [ngClass]="{'fa-sort-alpha-desc': sortOrder.orderBy==='desc', 'fa-sort-alpha-asc':sortOrder.orderBy==='asc'}"
+          *ngIf="sortOrder?.sortBy==='size'" aria-hidden="true"></i> -->
+      </th>
+    </tr>
+    <ng-container *ngFor="let item of items; trackBy: trackByFn">
+      <tr [title]="item.data.name" *ngIf="item.data.file || item.data.package" class="table-content"
+        [ngClass]="{'dps-file-select':item.selected,'dps-cut-file':isCutItem(item)}" (dblclick)="onOpen(item)"
+        (dpsClick)="onSelect($event,item)" (contextmenu)="contextmenuOpen($event,driveContextMenue,item)"
+        [debounceTime]="100" [dpsDraggable]="true" [dragData]="item.selected? selectedItems:[item]"
+        [dragElement]="dragElement" dragDataType="driveFile" [dropZones]="['driveDropFolder','openCaseTab']"
+        (onDragStart)="onDragStart($event, item)">
+        <td class="file" data-th="File">
+          <div fxLayout="row">
+            <div>
+              <mat-icon *ngIf="item.data.file">
+                <i [ngClass]="item.data.name | attachmentIcon" aria-hidden="true">
+                  <span></span>
+                </i>
+              </mat-icon>
+              <mat-icon *ngIf="item.data.package">
+                <i [ngClass]="{'fa fa-file-text':item.data.package.type==='oneNote'}" aria-hidden="true">
+                </i>
+              </mat-icon>
+            </div>
+            <div style="display: flex;align-items: center;">
+              <span>{{item.data.name}}</span>
+            </div>
+          </div>
+        </td>
+        <td class="date" data-th="Date Modified">{{item.data.lastModifiedDateTime|date:'dd/MM/yyyy h:mm a'}}</td>
+        <td class="date" data-th="Type" *ngIf="item.data.file">{{item.data.name | attachmentIcon:'type' | titlecase }}
+          File</td>
+        <td *ngIf="item.data.package" class="date" data-th="Type">{{item.data.package.type==='oneNote'?'One
+          Note':item.data.package.type}}</td>
+        <td class="date">{{item.data.size | attachmentsSize }}</td>
+      </tr>
+
+      <tr [title]="item.data.name" *ngIf="item.data.folder"
+        [ngClass]="{'dps-file-select':item.selected,'dps-cut-file':isCutItem(item)}" (dblclick)="onOpen(item)"
+        (dpsClick)="onSelect($event,item)" class="drive-file" dpsFileDroppable dpsDroppable
+        (onDrop)="onDrop($event, item.data)" dropZone="driveDropFolder"
+        (contextmenu)="contextmenuOpen($event,driveContextMenue,item)" [dpsDraggable]="true" [dragData]="item"
+        [dragElement]="dragElement" dragDataType="driveFile" [dropZones]="['driveDropFolder']" [debounceTime]="100"
+        (onDragStart)="onDragStart($event, item)">
+        <td>
+          <mat-icon>folder</mat-icon>
+          <span>{{item.data.name}}</span>
+        </td>
+        <td class="date" data-th="Date Modified">{{item.data.lastModifiedDateTime|date:'dd/MM/yyyy h:mm a'}}</td>
+        <td class="date">Folder</td>
+        <td class="date">{{item.data.size | attachmentsSize }}</td>
+        <!-- <dps-drive-context-menue #driveContextFolderMenue [id]="item?.prefix" [isMultiSelect]="selectedBlobData?.length>1"
+          [copyItems]="copyItems" [isFolder]="true" (paste)="onPaste(item)">
+        </dps-drive-context-menue> -->
+      </tr>
+      <dps-drive-context-menue #driveContextMenue [id]="item.data.id" [isMultiSelect]="selectedItems?.length>1"
+        (download)="onDownloadFile()" [cutCopyItems]="copyItems" (cut)="onCut()" (copy)="onCopy()"
+        (share)="onShareFile()" (delete)="onDeleteFile()" (rename)="onRenameFile()" [item]="item.data"
+        (paste)="onPaste(item)" (attachToDPSFile)="onAttachToDPSFile()">
+      </dps-drive-context-menue>
+    </ng-container>
+
+  </table>
+  <div id="dragPreView">
+    <div *ngIf="selectedItems?.length > 1">
+      <mat-icon class="mat-18">file_copy</mat-icon>
+      <span class="name">{{selectedItems?.length}}</span>
+    </div>
+    <span *ngIf="selectedItems?.length === 1">
+      <i [ngClass]="selectedItems[0]?.data.name | attachmentIcon" *ngIf="selectedItems[0]?.data.file"><span></span></i>
+      <mat-icon class="mat-18" *ngIf="selectedItems[0]?.data.folder">folder</mat-icon>
+      <span class="name">{{selectedItems[0]?.data.name}}</span>
+    </span>
+  </div>
+  <mat-nav-list dense *ngIf="activeView.skipToken && !isSearching" class="dps-load-more">
+    <mat-list-item (click)="onLoadMore()">
+      <span>Load More...</span>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

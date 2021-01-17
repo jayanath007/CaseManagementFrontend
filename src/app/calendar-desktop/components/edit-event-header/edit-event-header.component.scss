@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+
+mat-toolbar {
+  height: 50px
+}
+
+mat-icon {
+  color: #e8f6ff;
+}
+
+.mat-toolbar {
+  background: $calender-primary !important;
+  color: #e8f6ff;
+}
+
+.dps-menu-item {
+  height: 40px;
+  line-height: 40px;
+  font-size: $primary-font-size - 2;
+}
+
+.dps-open-series mat-icon {
+  color: #73b8ef;
+}
+
+mat-toolbar button:disabled,
+mat-toolbar button:disabled mat-icon {
+  color: #afafaf;
+
+}
+
+button.calendar-event-btn {
+  color: #116FA0;
+}
+
+button.dps-online-meeting {
+  mat-icon {
+    font-size: 20px;
+  }
+
+  &.skypeForBusiness {
+    background-color: #3497db;
+    color: #ffffff;
+
+    mat-icon {
+      color: #ffffff;
+    }
+  }
+
+  &.teamsForBusiness {
+    background-color: #5d64d2;
+    color: #ffffff;
+
+    mat-icon {
+      color: #ffffff;
+    }
+  }
+}

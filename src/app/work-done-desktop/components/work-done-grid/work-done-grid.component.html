@@ -1,0 +1,76 @@
+<div class="work-done-grid">
+  <mat-sidenav-container class="work-done-scrolle">
+    <mat-sidenav position="end" mode="side" [disableClose]="true" [opened]="docPrivewRow" fxLayout="column">
+      <div class="wrkdone-actions">
+        <button mat-icon-button (click)="onCloseViewer()" color="primary"
+          [ngClass]="{'dps-doc-viwer-close-btn':docPrivewRow?.docUrl,'dps-email-viwer-close-btn':docPrivewRow?.emailItem}">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button class="doc-row" mat-icon-button *ngIf="docPrivewRow?.emailItem" (click)="openMsgFile()">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+
+
+
+      </div>
+      <dps-document-view-page class="dps-doc-view dps-white-gray-scroll" fxFlex="calc(100%-41px)"
+        *ngIf="docPrivewRow?.docUrl" (editDocument)="onCloseViewer()" [documentUrl]="docPrivewRow?.docUrl"
+        [fileItem]="{data:docPrivewRow}" [documentUrlLoadSuccess]="documentUrlLoadSuccess"
+        [documentUrlIsLoading]="documentUrlIsLoading" [extension]="docPrivewRow?.letter_icon" [isSignDoc]="false"
+        [showDocumentEdit]="false">
+      </dps-document-view-page>
+      <dps-msg-viewer fxFlex="calc(100%-41px)" *ngIf="docPrivewRow?.emailItem" [input]="{
+            viewerFrom: 'diary',
+            diaryInput: {appCode: docPrivewRow.appCode, branchId: docPrivewRow.branchID, fileId:
+            docPrivewRow.fileNumber,
+            itemRef: docPrivewRow.diary_UID, attachmentName: docPrivewRow.letter_name}
+        }"></dps-msg-viewer>
+      <!-- <dps-mail-view-content fxFlex="calc(100%-41px)" *ngIf="docPrivewRow?.emailItem" [item]="docPrivewRow?.emailItem"
+        [timeZone]="timeZone" [companyCode]="companyCode" (openAttachement)="onOpenAttachement($event)"
+        (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+        (viewDpsFile)="onViewDpsFile($event)" [isItemAttachment]="true" openFrom="workDone">
+      </dps-mail-view-content> -->
+    </mat-sidenav>
+
+    <div class="work-done-controller" fxLayout="column">
+      <div fxFlex="calc(100%-50px)" fxLayout="column">
+        <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+          <div fxLayout="column" class="workdone-controller">
+            <div class="row-highlight" dpsIsMobile>
+              <div class="dps-columnheader"
+                [ngClass]="{'group-level-one': (groupMode === GroupMode.ByUser ||  groupMode === GroupMode.Date) ,'group-level-two':( groupMode === GroupMode.ByUserDate ||  groupMode === GroupMode.DateByUser)}">
+                <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+                  (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                  (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+                </dps-column-header>
+              </div>
+              <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            </div>
+            <div class="work-done-group dps-white-gray-scroll">
+
+              <div *ngIf="( groupMode === GroupMode.Default)">
+                <dps-work-done-grid-row [gridData]="gridData" [homeCurrancy]="homeCurrancy" [columnDef]="columnDef"
+                  [searchText]="searchText" [selectedInfo]="selectedInfo" [expandedRow]="expandedRow"
+                  [selectedGroup]="groupMode" (rowExpand)="gridRowExpan($event)"
+                  (clickGridButton)="onClickGridButton($event)">
+                </dps-work-done-grid-row>
+              </div>
+
+              <dps-workdone-group *ngFor="let group of groupData" [selectGroupHash]="selectGroupHash"
+                [gridData]="gridData" [group]="group" [homeCurrancy]="homeCurrancy" [columnDef]="columnDef"
+                (selectGroup)="onSelectGroup($event)" [searchText]="searchText" [selectedInfo]="selectedInfo"
+                [expandedRow]="expandedRow" [selectedGroup]="groupMode" (loadMoreData)="loadMore($event)"
+                (rowExpand)="gridRowExpan($event)" (clickGridButton)="onClickGridButton($event)">
+              </dps-workdone-group>
+            </div>
+            <!-- <dps-workdone-two-group *ngIf="( groupMode === 'ByUserDate' ||  groupMode === 'DateByUser') "></dps-workdone-two-group> -->
+          </div>
+        </div>
+      </div>
+      <mat-paginator *ngIf="groupMode === GroupMode.Default" fxFlex="50px" [length]="totalItem"
+        [pageIndex]="paginatorDef?.currentPage" [pageSize]="paginatorDef?.itemPerPage"
+        [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="footer-shadow">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-container>
+</div>

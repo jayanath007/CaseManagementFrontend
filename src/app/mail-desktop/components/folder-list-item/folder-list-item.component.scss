@@ -1,0 +1,79 @@
+@import '~styles/variables.scss';
+.mat-list-item {
+  margin-bottom: 0px;
+  height: 45px !important;
+}
+
+/* .dps-folder-list-item{
+
+    border-bottom: 1px solid #e0e0e0;
+} */
+
+.dps-folder-list-item.dps-folder-item-selected {
+  background-color: #dcdbdb;
+}
+
+.dps-folder-list-item .dps-folder-item-toggle {
+  color: #596469;
+  padding: 16px 10px 15px 0px;
+  font-size: 19px;
+}
+
+.dps-folder-list-item .dps-folder-item-name {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  font-size: $primary-font-size - 2;
+  font-weight: 500;
+  color: #596469;
+}
+
+.dps-folder-list-item .dps-folder-item-totalitemcount {
+  float: right;
+  font-size: $primary-font-size - 2;
+  font-weight: 400;
+  color: #596469;
+}
+
+.dps-folder-list-item .dps-folder-item-unreaditemcount {
+  float: right;
+  font-size: $primary-font-size - 2;
+  font-weight: 600;
+  color: #0D557C;
+}
+
+.dps-folder-list-item .mat-list-item-content {
+  padding-bottom: 10px;
+}
+
+.dps-folder-item-selected .dps-folder-item-name {
+  color: #0D557C;
+  font-weight: 500;
+}
+
+.dps-folder-item-selected .dps-folder-item-totalitemcount {
+  font-weight: 600;
+}
+
+.dps-dragover,
+.dps-dragover.dps-folder-list-item.dps-folder-item-selected {
+  background: #274e8a;
+}
+
+.dps-dragover .dps-folder-item-name,
+.dps-dragover .dps-folder-item-unreaditemcount,
+.dps-dragover .dps-folder-item-totalitemcount,
+.dps-dragover .dps-folder-item-toggle {
+  color: $primary;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+input {
+  width: 100%;
+}

@@ -1,0 +1,21 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false" class="dps-folder-menu-list">
+  <span *ngFor="let folder of filtedFolders">
+    <!-- Handle branch node menu items -->
+    <span class="folder-menu" *ngIf="folder.data.childFolderCount && folder.data.childFolderCount > 0" >
+      <mat-checkbox (click)="onCheckFolder(folder,$event)"></mat-checkbox>
+      <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu" (click)="onClickFolder(folder,$event)">
+        <mat-icon>{{getIcon(folder.data.wellKnownName)}}</mat-icon>
+        <span>{{folder.data.displayName}}</span>
+      </button>
+      <dps-folder-menu-item-list #menu (selectFolder)="onSelectFolder($event)" [folders]="folders" [parentFolderId]="folder.data.id"></dps-folder-menu-item-list>
+    </span>
+    <!-- Handle leaf node menu items -->
+    <span class="folder-menu"  *ngIf="!(folder.data.childFolderCount && folder.data.childFolderCount > 0)" >
+      <mat-checkbox (click)="onCheckFolder(folder,$event)"></mat-checkbox>
+      <button mat-menu-item (click)="onClickFolder(folder,$event)">
+        <mat-icon>{{getIcon(folder.data.wellKnownName)}}</mat-icon>
+        <span>{{folder.data.displayName}}</span>
+      </button>
+    </span>
+  </span>
+</mat-menu>

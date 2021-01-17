@@ -1,0 +1,86 @@
+@import '~styles/variables.scss';
+
+.workspace {
+    .approvals {
+        padding: 20px 15px 0 0;
+        text-align: right;
+
+        button {
+        background: #5e7890;
+        color: $primary;
+        font-size: $primary-font-size - 2;
+        border-radius: 1px;
+        }
+    }
+}
+
+#reportDiv
+{
+							
+    max-height: 600px;
+	 
+}
+
+@media screen and ( max-height: 800px ) {
+							
+								 
+	 
+ 
+
+    .dps-property-quote-popup-panel .mat-dialog-container {
+    
+      height: 585px;
+      min-height: auto !important;
+      }
+  
+      .dps-property-quote-main .mat-horizontal-content-container
+      {
+        height: 450px;
+        overflow: auto;
+      }
+  
+  //     .dps-property-quote-main .mat-horizontal-content-container::-webkit-scrollbar {
+  //       width: 5px !important;
+  //       -webkit-box-shadow: inset 0 0 6px rgba(94, 94, 94, 0.5); 
+  //   }
+  //   .dps-property-quote-main .mat-horizontal-content-container::-webkit-scrollbar-thumb {
+  //     background: #a8a8a8;
+  //     border-radius: 3px;
+  // }
+  
+      // dps-property-quote-report .workspace .approvals
+      // {
+      //   padding-bottom: 25px !important;
+      // }
+      .dps-white-gray-scroll {
+        height: 370px !important;
+    }
+  
+  
+      .dps-property-quote-main
+      {
+        padding-bottom: 50px;
+      }
+    }
+
+
+
+
+
+// @media only screen and (min-width: 1366px) and (max-height: 768px) {
+//     .dps-white-gray-scroll {
+//         height: 500px !important;
+//     }
+// }
+
+// @media  screen and (max-width: 1280px) {
+//     .dps-white-gray-scroll {
+//         height: 520px !important;
+//     }
+// }
+
+// @media only screen and (min-width: 1440px) and (max-height: 900px) {
+//     .dps-white-gray-scroll {
+//         height: 600px !important;
+//     }
+// }

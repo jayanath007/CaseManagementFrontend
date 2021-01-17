@@ -1,0 +1,155 @@
+@import '~styles/variables.scss';
+
+
+.dps-tab-menu-active {
+  background: #CE8926;
+  border-radius: unset;
+  color: #fff;
+  padding: 0px 4px;
+
+  i{
+    position: relative;
+    top: 5px;
+  }
+}
+.play{
+  color: #bf730a;
+}
+.pause{
+  color: #8c5d1a;
+
+ 
+}
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+.dps-time-play-section {
+  // justify-items: flex-start;
+  display: -webkit-box;
+  width: calc(100% - 510px);
+}
+
+.dps-mat-paginator {
+  justify-self: flex-end;
+}
+
+.dps-time-footer-btn {
+  justify-content: space-between;
+  width: 150px;
+  font-size: 12px;
+  background: #fffaf7;
+  border-bottom: 1px solid rgb(238, 238, 238);
+
+  .dps-time-play-btn {
+    align-self: flex-end;
+    background: #D3BCA5;
+    padding: 5px 0px 3px 3px;
+    line-height: 20px;
+    border: 1px solid #d3bca5;
+    border-right: 2px solid #D3BCA5;
+    color: #fffdfb;
+  }
+
+  .dps-time-text {
+    cursor: pointer;;
+    .dps-time-number {
+      text-align: center;
+    }
+
+    padding-left: 4px;
+    flex-flow: column wrap;
+    box-sizing: border-box;
+    display: flex;
+    padding: 10px 5px 3px;
+    line-height: 16px;
+    width: 100%;
+  }
+}
+
+.dps-group-view-header {
+  padding-left: 30px;
+}
+
+.footer-shadow {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+
+  &.content {
+    justify-content: space-between;
+  }
+}
+
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+.row-highlight {
+  width: calc(100% - 15px);
+  background-color: #fbf6f3;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  height: 40px;
+}
+
+.dps-time-recorded-grid {
+  height: 100%;
+}
+
+.dps-time-recorded-grid-outer {
+  height: 100%;
+}
+
+.dps-white-gray-scroll.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+.row-highlight-inner {
+  height: 40px;
+  width: 100%;
+}
+
+.dps-length-calc {
+  min-width: 1400px;
+  height: 100%;
+}
+
+dps-time-record-grid-group-view {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+mat-tab-group::ng-deep {
+  .mat-tab-label {
+    padding: 0;
+    background: #fff2e9;
+    color: #c15c13;
+    border-right: 1px solid #c15c13;
+  }
+
+  .mat-tab-label-content {
+    padding: 0px;
+    width: 100%;
+  }
+
+  .mat-tab-label-content>div {
+    // padding: 10px 5px 3px;
+    // line-height: 19px;
+    color: #bd170b;
+    font-weight: 600;
+    font-size: $primary-font-size - 1;
+    width: 100%;
+  }
+
+  .mat-ink-bar {
+    background-color: #d88c56 !important;
+  }
+
+  .mat-tab-label.mat-tab-label-active {
+    background: #f3d5bf;
+  }
+
+}
+
+

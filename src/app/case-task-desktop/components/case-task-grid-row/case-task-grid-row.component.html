@@ -1,0 +1,12 @@
+<div fxLayout class="grid-data" >
+    <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+    <div class="row-data do-by mat_line" [fxFlex]="getFxFlexProperty(1)"> {{ rowData.data.dateBy | date :'dd/MM/yyyy'}}  </div>
+    <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(2)"> {{rowData.data.taskFor}} </div>
+    <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(3)"> {{rowData.data.putOnBy}}</div>
+    <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(4)"> {{rowData.data.note}}</div>
+    <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(5)">
+        <mat-checkbox [checked]="rowData.data.action" disabled></mat-checkbox>
+    </div>
+</div>
+
+<!-- [ngClass]="{'run-template-enabale': rowData.data.action}" -->

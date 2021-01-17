@@ -1,0 +1,12 @@
+<mat-menu #contextMenu="matMenu" possitonX [overlapTrigger]="false"
+  *ngIf="mailItemData?.popupType!=='eChitAuthorisations'">
+  <button mat-menu-item (click)="onComputer($event)">
+    <mat-icon>computer</mat-icon>
+    <span>Computer</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="onCloud($event)" *ngIf="!isGoogle">
+    <mat-icon>cloud_queue</mat-icon>
+    <span>Cloud</span>
+  </button>
+</mat-menu>

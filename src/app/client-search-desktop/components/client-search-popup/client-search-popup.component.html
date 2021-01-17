@@ -1,0 +1,53 @@
+<div class="dps-client-search-main" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow dps-client-search-header">
+      <span></span>
+      <mat-icon class="header-icon" matListIcon>person </mat-icon>
+      <span class="header-text"> {{getClientTitle}}</span>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()" [disabled]="gridLoading">
+        <mat-icon class="header-icon-delete">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxLayoutAlign="end center" class="dps-client-search-controller">
+      <dps-client-search-box [isClientSearchPopup]="'true'" [searchText]="searchText" [totalItems]="totalItems"
+        (updateSelectedSearchTextClear)="onSearchTextClear()" (updateSearchTextClick)="onSearchTextChanged($event)"
+        *ngIf="popupInputData?.popupType!==clientPopupType.OpportunityClientSearch">
+      </dps-client-search-box>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="client-popup-inner" fxLayout="column" fxFlex="calc(100%-150px)">
+    <div fxLayout="column" fxFlex="calc(100%-50px)" class="dps-grid-x dps-white-gray-scroll">
+      <div fxLayout="column" class="lenth-calc">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="row-highlight-inner">
+            <dps-column-header class="client-popup-toggle-hide" *ngFor="let header of clientColumnDef"
+              [fxFlex]="header.extras.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+              (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)"
+              [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+          <mat-progress-bar mode="indeterminate" *ngIf="gridLoading"></mat-progress-bar>
+        </div>
+        <div fxFlex="calc(100%-40px)" class="dps-white-gray-scroll dps-client-search-grid dps-popup-content">
+          <mat-nav-list dence class="dps-grid-nav-list">
+            <mat-list-item class="dps-grid-list-item" dpsClick (dpsDblClick)="popupRowdblclick(item)"
+              (dpsClick)="popupRowclick(item)"
+              *ngFor="let item of clientSearchGridData ; let index =index; let isOdd=odd; let isEven=even"
+              [ngClass]="item.data?.closed?'closed-matters':isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+              <dps-client-grid-fix-row-popup [popupInputData]="popupInputData" [isPopup]="true" fxFlex=""
+                [columnDef]="clientColumnDef" [searchText]="searchText" [ClientRowData]="item"
+                [activeView]="activeView">
+              </dps-client-grid-fix-row-popup>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+
+    <mat-paginator class="footer-shadow" fxFlex="nogrow" #paginator [length]="totalItems"
+      [pageIndex]="clientPaginatorDef?.currentPage" [pageSize]="clientPaginatorDef?.itemPerPage"
+      [pageSizeOptions]="activeView=='Recent50'?[50]:pageSizeOptions" (page)="onNextPage($event)">
+    </mat-paginator>
+
+  </div>

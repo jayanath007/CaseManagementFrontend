@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+.active {
+  background-color: lightblue;
+}
+.row-data{
+  padding: 0px 6px 0px;
+  textarea {
+    resize: none;
+  }
+}
+.add-note-action-btn{
+  padding: 12px 3px;
+  margin-left: 12px;
+}
+
+
+button.dps-add-note-btn{
+  background: #d2e3f5;
+  color: $header-primary !important;
+  font-size: $primary-font-size - 2;
+  margin-right: 4px;
+
+  &:hover {
+    background: #90c8f9;
+    color: #123452;
+  } 
+}
+
+button.dps-add-note-cancel-btn{
+  color: #b43314 !important;
+  font-size: 12px;
+  float: right;
+  font-size: $primary-font-size - 2;
+
+  &:hover {
+    background: #d49b9b;
+    color: #6b1804;
+  } 
+  mat-icon
+  {
+    font-size: 21px;
+    margin-top: 1px;
+  }
+
+}
+.dps-client-note-add-container{
+  height: 100%;;
+}
+// input common
+.edit-input.note{
+  width: 100%;
+}
+.edit-input.date{
+  width:100px;
+}
+.icon-delete{
+  color: #a90a0a;
+}

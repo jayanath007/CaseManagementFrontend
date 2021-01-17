@@ -1,0 +1,17 @@
+.team-efficiency-spinner{
+    /* height: 400px; */
+    /* background: #fbfbfbcc; */
+    // position: relative;
+}
+.team-efficiency-spinner mat-spinner{
+    position: absolute;
+    bottom: 0px;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    right: 0px;
+}
+.mat-progress-bar
+{
+  height: 2px;
+}

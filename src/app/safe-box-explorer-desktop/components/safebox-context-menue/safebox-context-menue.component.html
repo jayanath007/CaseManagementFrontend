@@ -1,0 +1,56 @@
+<span [matMenuTriggerFor]="contextMenu"></span>
+
+<mat-menu #contextMenu="matMenu" possitonX class="dps-safebox-option">
+  <div *ngIf="!isFolder">
+    <button class="cut" mat-menu-item (click)="onCut()">
+      <!-- <mat-icon>colorize</mat-icon> -->
+      <mat-icon fontSet="fontawesome" fontIcon="fa-scissors" class="fa"></mat-icon>
+      <span>Cut</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="copy" mat-menu-item (click)="onCopy()">
+      <!-- <mat-icon>file_copy</mat-icon> -->
+      <mat-icon fontSet="fontawesome" fontIcon="fa-files-o" class="fa"></mat-icon>
+      <span>Copy</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="download" mat-menu-item *ngIf="!isMultiSelect" (click)="onDownload()">
+      <!-- <mat-icon>arrow_downward</mat-icon> -->
+      <mat-icon fontSet="fontawesome" fontIcon="fa-download" class="fa"></mat-icon>
+      <span>Download</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="share" mat-menu-item (click)="onShare()" *ngIf="!isTemplate">
+      <mat-icon>share</mat-icon>
+      <span>Share File</span>
+    </button>
+    <mat-divider *ngIf="!isTemplate"></mat-divider>
+    <button class="delete" mat-menu-item (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="edit" mat-menu-item *ngIf="!isMultiSelect" (click)="onRename()">
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+  </div>
+  <div *ngIf="isFolder || isTemplate">
+    <button class="paste" mat-menu-item (click)="onPaste()"
+      *ngIf="(isFolder && copyItems && copyFrom===SafeBoxType.Blob)||(isTemplate && (copyFrom===SafeBoxType.Template || copyFrom===SafeBoxType.Drive) )">
+      <!-- <mat-icon>add_to_photos</mat-icon> -->
+      <mat-icon fontSet="fontawesome" fontIcon="fa-clipboard" class="fa"></mat-icon>
+      <span>Paste</span>
+    </button>
+    <button class="refresh" mat-menu-item (click)="onRefresh()" *ngIf="isRefresh">
+      <mat-icon>refresh</mat-icon>
+      <span>Refresh</span>
+    </button>
+    <button class="add" mat-menu-item (click)="onRefresh()" *ngIf="isTemplate"
+      [matMenuTriggerFor]="addNewMenue.contextMenu">
+      <mat-icon>add</mat-icon>
+      <span>New</span>
+      <dps-add-new-menue #addNewMenue (addNew)="onAdd($event)"></dps-add-new-menue>
+    </button>
+  </div>
+</mat-menu>

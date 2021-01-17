@@ -1,0 +1,76 @@
+<h3>Class Information</h3>
+<div class="cls-inf-main-filters-wrap" fxLayout="row">
+
+  <div class="cls-inf-main-filters drops" fxLayout="column">
+
+    <div class="add-btnAdvoAssi">
+      <mat-form-field floatLabel="always"
+        [matTooltip]="stageReachedList | filter : 'key' : infomationModel[modelProperty?.stageReached]: 'value'"
+        matTooltipPosition="above">
+        <mat-select placeholder="Stage Reached" [ngModel]="infomationModel[modelProperty?.stageReached]"
+          (selectionChange)="onChangeUserInput(modelProperty?.stageReached, $event.value)">
+          <mat-option *ngFor="let item of stageReachedList" [value]="item.key" [matTooltip]="item.value"
+            matTooltipPosition="above">
+            {{ item.key }} {{ item.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="advo-assi-btn" mat-button
+        [disabled]="!controlProperty || !(controlProperty[controler.btnAdvoAssi].enabled)"
+        *ngIf="controlProperty && controlProperty[controler.btnAdvoAssi]?.visible"
+        (click)="onBtnAdvoAssiClick()">Advo-Assi</button>
+    </div>
+
+    <mat-form-field floatLabel="always"
+      [matTooltip]="matterTypeList | filter : 'key' : infomationModel[modelProperty?.matterType]: 'value'"
+      matTooltipPosition="above">
+      <mat-select [disabled]="isRecursive" placeholder="Matter Type"
+        [ngModel]="infomationModel[modelProperty?.matterType]"
+        (selectionChange)="onChangeUserInput(modelProperty?.matterType, $event.value)">
+        <mat-option *ngFor="let item of matterTypeList" [value]="item.key" [matTooltip]="item.value"
+          matTooltipPosition="above">
+          {{ item.key }} {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field floatLabel="always"
+      [matTooltip]="outComeCode | filter : 'key' : infomationModel[modelProperty?.outcomeCode]: 'value'"
+      matTooltipPosition="above">
+      <mat-select [disabled]="isRecursive" placeholder="Outcome Code"
+        [ngModel]="infomationModel[modelProperty?.outcomeCode]"
+        (selectionChange)="onChangeUserInput(modelProperty?.outcomeCode, $event.value)">
+        <mat-option *ngFor="let item of outComeCode" [value]="item.key" [matTooltip]="item.value"
+          matTooltipPosition="above">
+          {{ item.key }} {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="cls-inf-main-filters inputs" fxLayout="column">
+
+    <mat-form-field floatLabel="always">
+      <input [disabled]="isRecursive" #dsccRefInput matInput placeholder="DSCC Ref"
+        [ngModel]="infomationModel[modelProperty?.dsccRef]"
+        (focusout)="onChangeUserInput(modelProperty?.dsccRef, dsccRefInput.value)">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <input [disabled]="isRecursive" #noOfDefendantsInput matInput placeholder="No of Defendants" type="number"
+        [ngModel]="infomationModel[modelProperty?.noOfDefendants]"
+        (focusout)="onChangeUserInput(modelProperty?.noOfDefendants, noOfDefendantsInput.value)">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <input [disabled]="isRecursive" #policeAdvCallsInput matInput placeholder="Police Advice Calls Response time"
+        type="number" [ngModel]="infomationModel[modelProperty?.policeAdvCalls]"
+        (focusout)="onChangeUserInput(modelProperty?.policeAdvCalls, policeAdvCallsInput.value)">
+      <span matSuffix>mins</span>
+    </mat-form-field>
+
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+<mat-form-field floatLabel="never">
+  <span matPrefix>&nbsp;&nbsp;</span>
+  <input #mailSearch matInput type="search" [matAutocomplete]="searchAutocomplete" (keyup.enter)="onSearch(mailSearch.value)">
+  <mat-placeholder>Search mail</mat-placeholder>
+  
+  <mat-autocomplete #searchAutocomplete="matAutocomplete" (optionSelected)="optionSelected($event)">
+    <mat-option class="dps-search-option" [value]="'From:('+mailSearch.value+')'" *ngIf="mailSearch.value && !mailSearch.value.includes(':')">{{'From:('+mailSearch.value+')'}}</mat-option>
+    <mat-option class="dps-search-option" [value]="'Subject:('+mailSearch.value+')'" *ngIf="mailSearch.value && !mailSearch.value.includes(':')">{{'Subject:('+mailSearch.value+')'}}</mat-option>
+    <mat-option class="dps-search-option" [value]="'Attachmentnames:('+mailSearch.value+')'" *ngIf="mailSearch.value && !mailSearch.value.includes(':')">{{'Attachment names:('+mailSearch.value+')'}}</mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<button class="mail-search-button" mat-icon-button (click)="onSearch(mailSearch.value)">
+    <mat-icon class="mat-18">search</mat-icon>
+</button>

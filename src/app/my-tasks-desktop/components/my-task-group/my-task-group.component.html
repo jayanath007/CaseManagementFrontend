@@ -1,0 +1,46 @@
+<mat-list dense>
+  <div *ngFor="let group1 of gridGroupData ; let row = index">
+    <mat-list-item class="dps-clmn-main-group" fxLayout="row" [ngClass]="{cssClass: group1.isExpand}" (click)="onSelectedGroupRowChange(group1)">
+     
+        <i class="material-icons arrow-right-down-btn">
+          {{group1?.isExpand?'keyboard_arrow_down':'keyboard_arrow_right'}}
+        </i>
+        <!-- <mat-icon mat-list-icon>{{group1.groupMode | groupIconByMode}} </mat-icon> -->
+        <h3><i class="material-icons indicator" style="vertical-align: middle">{{group1.groupMode | groupIconByMode}}</i>
+          <span style="vertical-align: middle">{{group1.data.value}} ({{group1.data.count}})</span></h3>
+     
+    </mat-list-item>
+    <mat-accordion [@.disabled]="true" *ngIf="group1.isExpand" [multi]="false">
+      <mat-expansion-panel *ngFor="let item of  getGridDataByGroupId(group1.groupHash); let index =index; let isOdd=odd; let isEven=even"
+        class="my-task-expanded-row mat-elevation-z" [expanded]="item?.expanded" [ngClass]="item?.expanded?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+        dpsFileDroppable>
+        <mat-expansion-panel-header class="expansion-panelgrid-header" (click)="gridRowExpan(item)" collapsedHeight="35px"
+          expandedHeight="35px">
+          <mat-panel-title class="grid-panel-title">
+            <div fxLayout class="grid-data">
+              <div class="row-data" *ngIf="getHiddenProperty(0)" [fxFlex]="getFxFlexProperty(0)"></div>
+              <div class="row-data wrk_done_date" *ngIf="getHiddenProperty(1)" [fxFlex]="getFxFlexProperty(1)"
+                innerHTML="{{item?.dateBy | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data wrk_done_for" *ngIf="getHiddenProperty(2)" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item?.taskFor | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_task_client" *ngIf="getHiddenProperty(3)" [fxFlex]="getFxFlexProperty(3)"
+                innerHTML="{{item?.client | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_task_ref" *ngIf="getHiddenProperty(4)" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{item?.matterReferenceNo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_task_details" *ngIf="getHiddenProperty(5)" [fxFlex]="getFxFlexProperty(5)"
+                innerHTML="{{item?.note | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_task_details" *ngIf="getHiddenProperty(6)" [fxFlex]="getFxFlexProperty(6)"
+                innerHTML="{{item?.matterDetails | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_task_action" *ngIf="getHiddenProperty(7)" [fxFlex]="getFxFlexProperty(7)">
+                <mat-checkbox [checked]="item?.action" disabled></mat-checkbox>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" *ngIf="item?.expanded">
+          <dps-my-tasks-grid-button-details [selectedTaskData]="item" (clickGridButton)="onClickGridButton($event)"></dps-my-tasks-grid-button-details>
+          <span fxFlex="1 1 auto"></span>
+        </div>
+      </mat-expansion-panel>
+      <button class="dps-load-more" mat-flat-button *ngIf="group1.currentItems <  group1.totalItems" (click)="onLoadMore(group1)">Load More</button>
+    </mat-accordion>
+  </div>
+</mat-list>

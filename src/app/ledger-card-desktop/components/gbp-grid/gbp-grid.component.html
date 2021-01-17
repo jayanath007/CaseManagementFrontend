@@ -1,0 +1,37 @@
+<div fxLayout="column"  class="dps-grid-content">
+  <div fxFlex="calc(100%-50px)" fxLayout="column" class="dps-white-gray-scroll dps-grid-scroll" >
+    <div fxLayout="column"  class="dps-white-gray-scroll dps-grid">
+      <div fxLayout="column" class="dps-grid-controller">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="dps-columnheader">
+            <dps-column-header *ngFor="let header of gbpGridData?.gridColumns" [fxFlex]="header.extras.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+              (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex="calc(100%-40px)"  class="dps-white-gray-scroll dbp-grid-scroll">
+          <mat-nav-list>
+            <div *ngFor="let item of gbpGridData?.gbpGridPage?.data;let isOdd=odd; let isEven=even" [ngClass]="item == selectRow?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+              (click)="onSelectRow(item)">
+              <mat-list-item disableRipple class="dps-grid-list-item">
+                <div fxLayout class="grid-data" >
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item.date | date :'dd/MM/yyyy'}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item.type}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item.ref}}"></div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{item.details}}"></div>
+                  <div class="row-data mat_line debit dps-ledgerCard-balances-color-palegreen" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{item.debit | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line credit dps-ledgerCard-balances-color-palegreen" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{item.credit | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line balance dps-ledgerCard-balances-color-palegreen" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{item.balance | number : '1.2-2'}}"></div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator fxFlex="50px" #paginator [length]="gbpGridData?.gbpGridPage?.total" [pageIndex]="gbpGridData?.PaginatorDef?.currentPage"
+    [pageSize]="gbpGridData?.PaginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="footer-shadow">
+  </mat-paginator>
+</div>

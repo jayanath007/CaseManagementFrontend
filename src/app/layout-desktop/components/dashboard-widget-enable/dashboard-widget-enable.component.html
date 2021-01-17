@@ -1,0 +1,25 @@
+<mat-accordion>
+
+  <mat-expansion-panel class="dps-dashboard-widget-list mat-elevation-z" (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+    <mat-expansion-panel-header expandedHeight="48px" collapsedHeight="48px" class="dps-panel-header">
+      <mat-panel-title>
+        <mat-icon>view_compact</mat-icon>
+        <span class="dps-text-hd">Dashboard Widget list</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-panel-description class="dps-white-gray-scroll">
+      <mat-list>
+        <div *ngFor="let item of (widgetList$ | async)">
+
+          <mat-list-item class="dps-widget-add-list" *ngIf="!( ((data$|async)?.length < 1) && item.id==='mls' ) && !( ((helpData$|async)===null) &&
+              item.id==='help' )">
+            <mat-checkbox color="primary" [checked]='item.active' (change)="onChange(item, $event)">{{item.name}}
+            </mat-checkbox>
+          </mat-list-item>
+        </div>
+      </mat-list>
+    </mat-panel-description>
+  </mat-expansion-panel>
+</mat-accordion>

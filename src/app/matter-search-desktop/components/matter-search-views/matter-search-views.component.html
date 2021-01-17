@@ -1,0 +1,94 @@
+<mat-list class="grid-controller-set" fxLayout="row">
+  <div fxLayoutAlign="start center" class="grid_controller_wrapper">
+    <mat-list-item>
+      <mat-radio-group #group (change)="changeMatterView($event)">
+        <mat-radio-button [value]="MatterViews.Recent">
+          <span matLine>Recent 50 {{matterDisplyName}}</span>
+        </mat-radio-button>
+        <mat-radio-button [value]="MatterViews.MyMatter">
+          <span matLine>My {{matterDisplyName}}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="mattersearch_grid_checkbox" fxlayout="column">
+        <mat-checkbox color="primary" [ngModel]="isClosedMatters" (change)="onClosedMattersChange($event.checked)">
+          <span>Include Closed {{matterDisplyName}} </span>
+        </mat-checkbox>
+        <mat-checkbox color="primary" [ngModel]="isCompletedMatters"
+          (change)="onCompletedMattersChange($event.checked)">
+          <span>Include Completed {{matterDisplyName}} </span>
+        </mat-checkbox>
+      </div>
+      <div class="mattersearch_grid_checkbox" fxlayout="column">
+        <mat-checkbox [ngModel]="isInactiveFeeEarner" [disabled]="!selectedDepartment?.groupId"
+          (change)="onInactiveFeeEarnersChange($event.checked)">
+          <span>Include Inactive Fee-earners</span>
+        </mat-checkbox>
+        <mat-checkbox [ngModel]="isMLSEnableMatter" [disabled]="activeView !== MatterViews.MyMatter"
+          (change)="onMLSEnableChange($event.checked)">
+          <span>MLS Enabled {{matterDisplyName}}</span>
+        </mat-checkbox>
+      </div>
+    </mat-list-item>
+
+  </div>
+  <span fxFlex="1 1 auto"></span>
+
+
+
+  <mat-list-item class="general-matter-search-box">
+
+    <span fxFlex="1 1 auto"></span>
+    <dps-matter-search-box [searchText]="searchText" [totalItems]="totalItems" [matterDisplyName]="matterDisplyName"
+      (updateSelectedSearchText)="onSearchTextChanged($event)">
+
+    </dps-matter-search-box>
+    <span fxFlex="1 1 auto"></span>
+  </mat-list-item>
+  <button mat-button [matMenuTriggerFor]="matter">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #matter="matMenu">
+    <mat-nav-list dense class="dps-action-menu">
+      <mat-list-item (click)="onClickMatterMenu(matterMenu.LedgerCard)" class="ledger-card"
+        *ngIf="moduleIsActive(module.LedgerCard) | async">
+        <mat-icon matListIcon>credit_card</mat-icon>
+        <span>{{matterMenu.LedgerCard}}</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item (click)="onClickMatterMenu(matterMenu.eChit)" class="e-chit"
+        *ngIf="moduleIsActive(module.ChequeRequest) | async">
+        <mat-icon matListIcon>library_books</mat-icon>
+        <span>{{matterMenu.eChit}}</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item (click)="onClickMatterMenu(matterMenu.AddvanceSearch)" class="addvance-srch">
+        <mat-icon matListIcon>find_in_page</mat-icon>
+        <span>{{matterMenu.AddvanceSearch}}</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item class="echit-authorisations" (click)="openEChitAuthorisationsPopup()"
+        *ngIf="(moduleIsActive(module.EchitAuthorisation) | async ) && (moduleIsActive(module.ChequeRequest) | async)">
+        <mat-icon matListIcon>description</mat-icon>
+        <span>Authorisation(s)</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-menu>
+
+  <button mat-icon-button (click)="onClickMatterMenu(matterMenu.AddMatter)" [matTooltip]="matterDisplyName"
+    matTooltipPosition="below" *ngIf="moduleIsActive(module.Matter) | async">
+    <mat-icon>library_add</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onPrint()" matTooltip="Print" matTooltipPosition="below"
+    [disabled]="isGridLoading || isDepartmentLoading">
+    <mat-icon>print</mat-icon>
+  </button>
+  <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+    (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+    (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()" class="drid_controller_custom">
+  </dps-grid-font-controller>
+
+
+
+</mat-list>

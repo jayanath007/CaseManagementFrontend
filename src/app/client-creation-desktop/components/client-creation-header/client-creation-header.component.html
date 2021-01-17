@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <mat-toolbar-row class="dps-toolbar-box-shadow header-toolbar dps-client-creation-header">
+    <div fxFlexAlign="center" class="dps-header">
+      <mat-icon matListIcon class="dps-header-icon">{{isPlotUser  ? 'post_add' : 'person_add'}}</mat-icon>
+      <span class="dps-header-text">{{clientTitle}} <label> {{mode?'- '+mode:''}}</label></span>
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon class="close-btn">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+  <mat-toolbar-row fxLayoutAlign="left center" class="dps-primary-action-btn">
+    <div class="dps-primary-action-btn-inner" fxLayoutAlign="left center" fxLayout="row" fxFlex="100%">
+      <button mat-button (click)="onClientAdd()" [disabled]="!permission?.addClients || mode === Mode.AddMode">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span> Add</span>
+      </button>
+      <button mat-button (click)="onClientSave()" class="icon-btn" [disabled]="mode===Mode.SearchMode || !isModelDirty">
+        <mat-icon>save</mat-icon>
+        <span> Save </span>
+      </button>
+      <button mat-button (click)="onClientSearch()" [disabled]="mode === Mode.AddMode">
+        <mat-icon>search</mat-icon>
+        <span> Search</span>
+      </button>
+      <button mat-button (click)="onClientClear()">
+        <mat-icon class="mat-18">insert_drive_file</mat-icon>
+        <span> Clear</span>
+      </button>
+      <button mat-button (click)="onClientDelete()" [disabled]="!permission?.deleteClients || mode!==Mode.EditMode">
+        <mat-icon>clear</mat-icon>
+        <span> Delete</span>
+      </button>
+      <button mat-button disabled="true" (click)="onClientPrint()">
+        <mat-icon>print</mat-icon>
+        <span> Print </span>
+      </button>
+      <button mat-button (click)="onClientOpenMatter()" [disabled]="!permission?.addMatters || mode!==Mode.EditMode">
+        <mat-icon>business_center</mat-icon>
+        <span> {{ isPlotUser ? 'Master ' : ''}}{{matterDisplyName}} </span>
+      </button>
+      <button *ngIf="(amendScreensWorkflow$ |async)" mat-button (click)="onScreenEdit()"
+        [disabled]="mode === Mode.AddMode">
+        <mat-icon>widgets</mat-icon>
+        <span> Screen Edit</span>
+      </button>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-button (click)="onClientOk()" [disabled]="mode!==Mode.EditMode">
+        <mat-icon>done_all</mat-icon>
+        <span> OK</span>
+      </button>
+      <button mat-button (click)="onCancel()">
+        <mat-icon class="mat-18">exit_to_app</mat-icon>
+        <span> Cancel</span>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

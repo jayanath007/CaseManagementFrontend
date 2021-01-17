@@ -1,0 +1,25 @@
+<div class="dps-screen-view-container">
+  <div *ngIf="screenDesingner?.isLoading">
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </div>
+  <div class="screen-view-wrapper" *ngIf="!screenDesingner?.isLoading">
+    <div class="general-loader-light" *ngIf="screenDesingner?.isFormDataLoading" ></div>
+    <dps-dynamic-form-desingner 
+       (onLogicDodumentView)="logicDodumentViewOpen($event)"
+       (onAxisChange)="axisChange($event)" 
+       [formContainerWidth]="formView?.formContainerWidth"
+       [formContainerHeight]="formView?.formContainerHeight"
+       [curentIndex]="curentIndex" [screenComponentList]="formView?.screenContanerComponentList"
+      [screenDefinition]="formView?.screenDefinition" (editorContanerEventOutput)=onItemChange($event);
+      (ondisplayTabOnRightBar)=displayTabOnRightBar($event) #form="dynamicForm">
+    </dps-dynamic-form-desingner>
+  
+  </div>
+  <!-- <span [matMenuTriggerFor]="contextMenu"></span> -->
+</div>
+    <!-- <mat-menu #contextMenu="matMenu">
+        <button mat-menu-item >Entry Logic</button>
+        <button mat-menu-item >Tab Logic</button>
+        <button mat-menu-item >Exit Logic</button>
+    </mat-menu> -->

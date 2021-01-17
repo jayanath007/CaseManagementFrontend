@@ -1,0 +1,34 @@
+<div class="dps-case-contact dps-contact-grid" fxLayout="column">
+  <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+    <div fxLayout="column" class="dps-case-layout">
+      <div class="row-highlight" dpsIsMobile>
+        <div class="dps-row-column-header">
+          <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+            (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+            (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+          </dps-column-header>
+        </div>
+        <mat-progress-bar *ngIf="caseContactData?.loading" mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div fxLayout="column" fxFlex="calc(100%-40px)" class="dps-white-gray-scroll dps-case-nav">
+        <mat-nav-list>
+          <div *ngFor="let item of getCaseContactData; let i = index; let isOdd=odd; let isEven=even"
+            [ngClass]="i === selctedIndex ? 'dps_row_select' : isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+            (click)="selctedIndex = i">
+            <mat-list-item class="case-contact-grid" disableRipple
+              [ngClass]="{'dps-selected-row': item === selectRowItem}">
+              <div fxLayout="row" class="dps-grid-row">
+                <dps-case-contact-grid-row [columnDef]="columnDef" (openContact)="onOpenContact($event)"
+                  (selectRow)="onSelectRowForSearch($event, i)" [rowData]="item"
+                  (requestComposeMail)="onRquestComposeMail($event)">
+                </dps-case-contact-grid-row>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-nav-list>
+      </div>
+    </div>
+  </div>
+
+</div>

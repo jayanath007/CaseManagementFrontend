@@ -1,0 +1,5 @@
+<div class="dps-time-home" fxLayout="column">
+  <dps-time-grid fxFlex="100%" (IsExpandSelection)="IsExpand($event)" (PageEvent)="PageChangeEvent($event)" [TimeData]="timeData$ | async"
+    [PageInfo]="pageInfo$ | async">
+  </dps-time-grid>
+</div>

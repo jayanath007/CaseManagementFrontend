@@ -1,0 +1,106 @@
+@import '~styles/variables.scss';
+
+mat-accordion {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  padding: 0 24px !important;
+  border-radius: 0px;
+  border: none !important;
+  border-radius: unset;
+}
+
+mat-expansion-panel-header {
+  border-radius: 0px;
+
+  &:hover {
+    color: $clementine;
+  }
+}
+
+mat-panel-title {
+  padding: 6px 0px 0px 0;
+  font-size: 13px;
+  color: #105690;
+  font-weight: bold;
+  line-height: 16px;
+
+  mat-icon {
+    margin-top: -5px;
+  }
+
+  span {
+    margin-left: 9px;
+  }
+}
+
+
+
+.dps-input-container {
+
+  width: 100%;
+}
+
+.dps-input-lbl {
+  // justify-content: space-around;
+  font-family: Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  font-size: 12px;
+  padding: 10px;
+
+  label {
+    color: #00233f;
+    font-weight: 500;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+    margin-top: 5px;
+
+  }
+
+  input {
+    text-align: right;
+    color: #215a88;
+
+  }
+
+}
+
+.dps-input-lbl:nth-child(2n) {
+  background-color: #eff0f1;
+
+
+}
+
+.dps-input-lbl:nth-child(2n+1) {
+  background-color: #c1d3e285;
+
+}
+
+::ng-deep.mat-expansion-panel-spacing {
+  margin: 0px 0 !important;
+}
+
+.dps-update-btn {
+  height: 35px;
+  font-size: 12px;
+  background: #86a7d8;
+  margin: 5px 0px;
+  padding: 0px 0px 0px;
+  position: relative;
+  left: 64px;
+  font-weight: bolder;
+}
+
+nput::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+
+}

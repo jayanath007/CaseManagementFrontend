@@ -1,0 +1,86 @@
+.dps-general-popup {
+  height: 100%;
+}
+
+mat-toolbar {
+  background: #dbf1ff;
+  height: 50px;
+
+  .dps-header {
+    .header-icon {
+      vertical-align: middle;
+      padding-right: 8px;
+      font-size: 20px;
+      color: #0f5b9c;
+    }
+
+    .header-text {
+      font-size: 15px;
+      color: #06467d;
+      vertical-align: middle;
+    }
+
+  }
+}
+
+
+.dps-opportunity-q-run {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 18px;
+  .dps-opportunity-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .content-outer {
+    height: calc(100% - 50px);
+
+    .content {
+      height: calc(100% - 50px);
+      overflow-y: scroll;
+    }
+
+    .btm-btn{
+      background: #78a4cb;
+      .mat-icon{
+        color: #183a58;
+    font-size: 21px;
+      }
+      span{
+        color: #183a58;
+      }
+
+    }
+  }
+
+  .primary-header {
+    padding: 0px 0px 20px;
+    justify-content: center;
+
+
+    .icon {
+      vertical-align: middle;
+      color: #528bbb;
+      padding: 0px 0px;
+      font-size: 16px;
+
+    }
+
+    span {
+      vertical-align: middle;
+      font-family: roboto;
+      padding: 0px 0px;
+      color: #275780;
+      font-size: 13px;
+
+    }
+  
+  }
+}
+
+mat-form-field,
+mat-select,
+mat-option {
+  font-size: 12px;
+}

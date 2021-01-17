@@ -1,0 +1,83 @@
+@import '~styles/variables.scss';
+
+.dps-wrkflow-rule {
+  height: 100%; 
+  width:100%;
+
+  .dps-columnheader {
+    height: 40px;
+  }
+
+}
+
+.row-highlight.dps-is-mobile{
+    width: 100%;
+  }
+  .row-highlight {
+    width: calc(100% - 15px);
+    background-color:$primary;
+    box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+    z-index: 2; 
+    height: 40px; 
+    font-family: $primary-font-stack; 
+  }
+  
+  dps-column-header:last-child{
+    background-image: none;
+  }
+
+  .mat-dialog-content {
+    display: block;    
+    margin: 0 0px;
+    padding: 0 0px;
+    max-height: unset;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+  dps-column-header{
+    font-size: $primary-font-size - 2;
+    font-weight: 700;
+    padding: 0px 4px;
+    text-align: left;
+    color: #1959a2;
+    line-height: 40px;
+  }
+  
+  dps-case-time-grid-row{
+    font-size: $primary-font-size - 2;
+  }
+
+  mat-nav-list{
+    padding-top: 0px;
+  }
+  .wrkflow_list {
+    outline: none !important;
+    
+
+  }
+
+  mat-list-item.list-item {
+    height:38px;
+  }
+
+  dps-rule-grid-fix-row {
+    width:100%; 
+  }
+
+  .workflow-scroll {
+    width:100%;overflow-y: 
+    scroll;height: 100%;
+  } 
+
+  @media only screen and (min-width: 1366px) and (max-height: 768px) {
+
+    .mat-dialog-content.workflow-rule_full_screen {
+      max-height: 78vh;
+    min-height: 78vh;
+    }
+
+  }

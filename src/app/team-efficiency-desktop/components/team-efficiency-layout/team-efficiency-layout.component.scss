@@ -1,0 +1,193 @@
+@import '~styles/variables.scss';
+.dps-team-efficency-main-header {
+  background: $team-efficiency-primary;
+  padding: 10px 16px 0px 0px;
+  box-shadow: none;
+}
+
+.dps-team-efficency-main-contentainer {
+  height: 100%;
+  min-width: 740px;
+}
+
+.dps-team-member-sidenav {
+  background: #40657e;
+  width: 225px;
+  height: 100%;
+}
+
+.dps-team-member-sidenav .mat-card {
+  padding: 0 10px 10px 10px;
+}
+
+.dps-chart-contents {
+  background-color: $content-background;
+  width: 100%;
+  overflow: auto;
+}
+
+.dps-chart-contents.mat-card:not {
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+
+.team-members-side-nav-controller {
+  height: 45px;
+  font-size: 18px;
+  color: #33434c;
+  width: 45px;
+  margin-top: 14px;
+  margin-left: 15px;
+  background: #a2bdb3;
+  margin-right: 11px;
+}
+
+.team-members-side-nav-controller .fa-chevron-left {
+  font-size: 10px;
+  background: #34434b;
+  border-radius: 100%;
+  position: absolute;
+  width: 15px;
+  height: 17px;
+  line-height: 17px;
+  padding-left: 1px;
+  color: #bedad1;
+  top: 4px;
+  right: -6px;
+  padding-right: 1px;
+}
+
+.team-members-side-nav-controller:hover .fa-chevron-left {
+  background: #bedad1;
+  color: #34434b;
+}
+
+.team-member-header .mat-list-item {
+  background: #1b3142;
+  color: $primary;
+  padding: 5px 0px;
+}
+
+.team-member-header {
+  padding-top: 0;
+}
+
+.team-member-header .team-member-lbl {
+  text-align: right;
+}
+
+.team-member-header .team-member-count {
+  margin-left: 10px;
+  margin-top: 4px;
+}
+
+.dps_te_card {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  /* height: 40px; */
+}
+
+.dps_te_card.last {
+  padding-bottom: 20px;
+}
+
+.dps_te_card mat-card-title {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+  color: #4a3d5a;
+  text-transform: uppercase;
+}
+
+.dps-button-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dps-chart {
+  height: 400px;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #4d3b65;
+  background: #f1e6ff;
+}
+
+.mat-form-field-autofill-control {
+  font-size: 12px;
+}
+
+mat-option {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+.dps_teamefficiency_controllers {
+  margin-right: 4px;
+
+  ::ng-deep .mat-select-trigger {
+    height: 0px;
+}
+
+}
+
+.dps-teamefficiency-month {
+  width: 100px;
+}
+
+.tm_effy_selector {
+  color: $primary;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.team-member-remove {
+  position: relative;
+  top: 32px;
+  left: 5px;
+  color: #ceb9e6;
+}
+
+
+
+
+  .dps-calender-btn {
+    // padding: 10px 0px 10px 10px;
+
+    .dps-cal-text {
+      padding: 0px 16px 0px 0px;
+      color: #646c75;
+    }
+
+    .dps-cal-btn {
+      background: #2a89d6;
+      border-radius: 0px;
+
+      mat-icon {
+        color: #d3e7f6;
+        font-size: 22px;
+      }
+    }
+  }
+
+
+  .dps-empty-timeline{
+    padding: 10px;
+    background: #f3faff;
+    text-align: center;
+    .dps-mat-icon{
+      font-size: 18px;
+      color: #087bc4;
+      background: #aedaf6;
+      border-radius: 100%;
+      padding: 10px;
+      vertical-align: middle;
+    }
+    .dps-text{
+      color: #6f9fbd;
+      vertical-align: middle;
+      padding-left: 6px;
+    }
+}

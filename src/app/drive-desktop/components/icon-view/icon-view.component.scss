@@ -1,0 +1,109 @@
+@import '~styles/variables.scss';
+
+.drive-content {
+  height: 100%;
+
+  .drive-content-view {
+    dps-drive-context-menue {
+      position: fixed;
+    }
+
+    flex-wrap: wrap;
+    padding: 5px;
+
+    .folder-content-view {
+      width: 150px;
+      padding-top: 14px;
+      margin: 2px;
+      padding: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ddefff;
+        box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9; // border: 1px solid #b7daf9;
+      }
+
+      .file-type {
+        text-align: center;
+
+        mat-icon {
+          font-size: $primary-font-size + 22;
+          height: 36px;
+          width: 36px;
+          color: #155186;
+
+          i {
+            font-size: $primary-font-size + 20;
+            cursor: pointer;
+          }
+
+          .fa-file-text {
+            color: #8028b0;
+          }
+        }
+      }
+
+      .folder-view {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+        line-height: 16px;
+        max-height: 32px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-align: center;
+        height: 35px;
+        font-size: 12px;
+        cursor: pointer;
+        padding-top: 3px;
+        word-break: break-all;
+        font-weight: 500;
+      }
+
+      h4 {
+        text-align: center;
+        font-weight: 400;
+        margin: 10px 0 0 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+
+  #dragPreView {
+    background: #658db1;
+    padding: 3px 9px 3px;
+    -webkit-box-shadow: 2px -1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -1px 5px 0px #51677b;
+    border: 1px solid #658db1;
+    border-radius: 3px;
+    max-width: 95px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: -100;
+
+    mat-icon {
+      color: #1161ab;
+      border-right: 1px solid #4979;
+      vertical-align: middle;
+    }
+
+    span.name {
+      color: #1d3b54;
+      font-size: 13px;
+      padding-left: 2px;
+    }
+  }
+
+  .dps-load-more {
+    width: 100%;
+
+    span {
+      text-align: center;
+      width: 100%;
+    }
+
+  }
+}

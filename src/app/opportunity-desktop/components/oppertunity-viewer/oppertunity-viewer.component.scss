@@ -1,0 +1,211 @@
+@import '~styles/variables.scss';
+
+mat-expansion-panel-header {
+  background: #e7f4fd !important;
+}
+
+.dps-btn-search {
+  line-height: unset !important;
+}
+
+.dps-mat-accordion {
+  display: block !important;
+  height: 100%;
+  display: block !important;
+  height: 100%;
+  overflow-y: auto;
+
+}
+
+mat-panel-title {
+  color: #293d6f;
+
+  mat-icon {
+    vertical-align: middle;
+  }
+
+  span {
+    padding: 3px 10px;
+  }
+}
+
+.dps-Opportunity-outer {
+  height: 100%;
+  flex-direction: column;
+
+  ::ng-deep .mat-expansion-panel-spacing,
+  .mat-expansion-panel {
+    margin: 6px 6px;
+  }
+
+  ::ng-deep.mat-expansion-panel {
+    border-bottom: unset !important;
+  }
+
+  button {
+    font-size: $primary-font-size - 2;
+    border-radius: 0px;
+  }
+
+  mat-form-field {
+    width: 250px;
+    line-height: unset;
+    font-size: $primary-font-size - 2;
+  }
+
+  ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #2e3c69;
+  }
+}
+
+.dps-Opportunity-inner {
+  padding-top: 8px;
+
+}
+
+.dps-Opportunity-content {
+  width: 100%;
+  height: 100%;
+
+  .dps-Opportunity-in-content {
+    padding-top: 5px;
+  }
+}
+
+.dps-bottom-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 8px;
+}
+
+.btn-speed-dial {
+  &.dps_opportunity-btn-disable {
+    background: rgba(0, 0, 0, .12) !important;
+
+    span {
+      color: rgba(0, 0, 0, .26) !important;
+    }
+
+    mat-icon {
+      color: rgba(0, 0, 0, 0.13) !important;
+    }
+  }
+
+  &.dps_opportunity-btn-disable:hover {
+    background: rgba(0, 0, 0, .12) !important;
+
+    span {
+      color: rgba(0, 0, 0, .26) !important;
+    }
+
+    mat-icon {
+      color: rgba(0, 0, 0, 0.13) !important;
+    }
+  }
+}
+
+.btn-speed-dial {
+
+  &.clear_all:hover {
+    background: #bf3b1e;
+
+    span {
+      color: #ffe5e5;
+    }
+
+    mat-icon {
+      color: #ffccc7;
+    }
+  }
+
+  &.send:hover {
+    background: #3a84c3;
+
+    span {
+      color: #e1ecf1;
+    }
+
+    mat-icon {
+      color: #c8e8ff;
+    }
+  }
+
+  &.quote:hover {
+    background-color: #d8914e;
+
+    span {
+      color: #f9f1ea;
+
+    }
+
+    mat-icon {
+      color: #f3eae2;
+
+    }
+  }
+
+  background-color: #2F9ADE;
+
+  span {
+    color: #c6dce6;
+    font-size: $primary-font-size - 2;
+  }
+
+  mat-icon {
+    color: #f0f6fb;
+    padding-right: 6px;
+  }
+}
+
+.dps-opportunity-icon {
+  background: #1e7ebb;
+  color: #fff;
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.dps-opportunity-list-menu {
+  width: 100%;
+}
+
+.dps-opportunity-setting-header {
+  background-color: #0e4e7f;
+  font-size: 15px;
+  font-weight: normal;
+  height: 40px;
+
+  .dps-icon.fa {
+    line-height: 24px;
+  }
+}
+
+.dps-opportunity-setting-menu {
+  min-width: 200px;
+  padding: 7px;
+
+  font-size: 12px;
+  color: #094d6d;
+
+  .dps-opportunity-setting-menu-screen-items {
+    height: 140px;
+    overflow-x: auto;
+    margin-left: 12px;
+  }
+
+
+
+  mat-icon {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 21px;
+  }
+
+  button {
+    margin-top: 7px;
+    background: #0e3b59b8;
+  }
+
+}

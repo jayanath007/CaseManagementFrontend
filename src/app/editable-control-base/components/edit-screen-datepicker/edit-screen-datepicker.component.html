@@ -1,0 +1,6 @@
+<mat-form-field [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible">
+  <input matInput [ngModel]="modelData" [matDatepicker]="picker" [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly"
+    [readonly]="readonly===true" placeholder="{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}" (dateChange)="onChangeDateTime($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

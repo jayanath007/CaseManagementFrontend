@@ -1,0 +1,64 @@
+@import '~styles/variables.scss'; 
+
+
+.ledger-cd-matter-bal-panel {
+    box-shadow: none;
+}
+
+.ledger-cd-matter-bal-panel-header {
+    border-bottom: 1px solid #9aafd0;
+    border-radius: 0;
+    background: #f1fbff;
+    padding: 0 2px;
+}
+
+ .dps-is-mobile .ledger-cd-matter-bal-panel-header{
+    overflow-x: auto;
+    
+}
+.dps-is-mobile .dps-ledger-card-matter-details{
+    overflow-x: auto;
+    min-width: 1000px !important;
+    
+}
+.dps-ledger-card-matter-details
+{
+    font-size: 12px;
+}
+
+.dps-ledger-card {
+    height: 100px;
+}
+
+
+
+.indicator-header{
+    padding: 6px 14px;
+    color: #3d455d;
+}
+.indicator-header.ref{
+    background: #aacaef;
+    border-radius: 2px;
+}
+ 
+
+.indicator-header span , .ledger_card_matters {
+    font-size: 12px;
+    font-weight: 500;
+    color: #3d455d;
+}
+.ledger_card_matters{
+    position: relative;
+    /* top: 10px; */
+    top: 11px;
+    color: #2665ad;
+    font-weight: 700;
+}
+.indicator-header span.value-field{
+    color: #1a5590;
+    font-weight: 700;
+}
+.indicator-header span.value-field.app-ref{
+    color: #1a5590;
+}
+

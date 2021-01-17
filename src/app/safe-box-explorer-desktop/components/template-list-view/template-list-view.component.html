@@ -1,0 +1,49 @@
+<mat-progress-bar mode="indeterminate" *ngIf="appView?.isLoading"></mat-progress-bar>
+<dps-virtual-scroll class="dps-white-gray-scroll" #virtualScroll [items]="templateList"
+  (update)="viewPortItems = $event" (end)="onListChange($event)" [bufferAmount]="50" [childHeight]="48"
+  (contextmenu)="contextMenu2Open($event,templateContextMenue2)" dpsFileDroppable dropClass="drive-content-drop"
+  (onDrop)="onDrop($event)">
+  <div *ngFor="let template of viewPortItems"
+    [ngClass]="{'dps-file-select':template.selected,'dps-cut-file':isCutItem(template)}">
+    <mat-list-item (dblclick)="onEditeOrView(template,$event,true)" (dpsClick)="onSelectTemplate(template,$event)"
+      (contextmenu)="contextMenuOpen($event,templateContextMenue,template)">
+      <mat-icon class="dps-file-indicator" mat-list-icon fontSet="fontawesome">
+        <i [ngClass]="template.name | attachmentIcon" aria-hidden="true">
+          <span></span>
+        </i>
+      </mat-icon>
+      <span mat-line> <span innerHTML="{{template.name | seacrhTextHighligh : searchText}}"></span>
+        <mat-icon class="dps-indicator"
+          *ngIf="template.checkedOutHashKey ||template.checkedOutByUser || template.editingBusy == true"
+          matTooltip="Checkout by {{template.checkedOutHashKey?'you':template.checkedOutByUser}}"
+          [ngClass]="{'file-access': !!template.checkedOutHashKey, 'file-abord': !template.checkedOutHashKey, 'blink': template.editingBusy}">
+          person</mat-icon>
+      </span>
+      <button mat-icon-button class="dps-edit-view-btn" (click)="onEditeOrView(template,$event)" [disabled]="template.editingBusy"
+        *ngIf="template.canView||template.canEdit"
+        [matTooltip]="(template.checkedOutByUser && !template.checkedOutHashKey )||!template.canEdit ?'View':'Edit'">
+        <mat-icon>
+          {{(template.checkedOutByUser && !template.checkedOutHashKey )||!template.canEdit  ?'remove_red_eye':'edit'}}
+        </mat-icon>
+      </button>
+      <button mat-icon-button class="dps-check-in-btn" (click)="onCheckIn(template,$event)"
+        *ngIf="!!template.checkedOutHashKey" matTooltip="Check-In" [disabled]="template.editingBusy">
+        <mat-icon>assignment_turned_in</mat-icon>
+      </button>
+      <button mat-icon-button class="dps-abort-btn" (click)="onAbort(template,$event)"
+        *ngIf="!!template.checkedOutHashKey" matTooltip="Abort" [disabled]="template.editingBusy">
+        <mat-icon>assignment_return</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</dps-virtual-scroll>
+<dps-safebox-context-menue #templateContextMenue id="templateContextMenue" [isMultiSelect]="selectedTemplates.length>1"
+  [copyFrom]="copyFrom" [isTemplate]="true" [isRefresh]="true" [copyItems]="false" (cut)="onCut()" (copy)="onCopy()"
+  (download)="onDownloadFile()" (delete)="onDeleteFile()" (rename)="onRenameFile()" (refresh)="onRefresh()"
+  (paste)="onPaste()" (addNew)="onAddNewItem($event)">
+</dps-safebox-context-menue>
+<dps-safebox-context-menue id="templateContextMenue2" #templateContextMenue2
+  [isMultiSelect]="selectedTemplates.length>1" [copyItems]="false" [isRefresh]="true" [isFolder]="true"
+  [isTemplate]="true" [copyFrom]="copyFrom" (paste)="onPaste()" (refresh)="onRefresh()" (addNew)="onAddNewItem($event)">
+</dps-safebox-context-menue>

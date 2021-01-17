@@ -1,0 +1,46 @@
+<div>
+  
+<div class="dps_calendar_folder_header">
+  <button mat-button (click)="onLoadList()">
+    Get Calendar Folders
+  </button>
+ 
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-evenly"  class="dps_calendar_width" >
+
+  <div class="dps_from_calendar_back">
+    <h4>From Backend</h4>
+    <mat-progress-bar *ngIf="!calendarList2 " mode="indeterminate"></mat-progress-bar>
+    
+    <div class="dps-white-gray-scroll dps_calendar_Backend" >
+
+        <mat-list role="list" >
+            <mat-list-item role="listitem" *ngFor="let item1 of calendarList2; let i = index">{{item1.name}}</mat-list-item>
+          </mat-list>
+
+    </div>
+    
+
+  </div>
+  
+  <div class="dps_from_calendar_graph">
+    <h4>Direct from Graph API</h4>
+    <mat-progress-bar *ngIf="!calendarList1" mode="indeterminate"></mat-progress-bar>
+    
+    <div class="dps-white-gray-scroll dps_calendar_graph" >
+
+        <mat-list role="list">  
+            <mat-list-item role="listitem" *ngFor="let item of calendarList1; let i = index">{{item.name}}</mat-list-item>
+          </mat-list>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+</div>

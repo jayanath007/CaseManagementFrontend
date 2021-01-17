@@ -1,0 +1,104 @@
+<!-- {{masageCount}} -->
+
+<span class="helper">
+  Please select the field to align against <u>first</u> before you select others.
+</span>
+
+<div class="field-align-controller-set">
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="leftalignControl()">
+      <span class="field-update-controller align-inputs">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <span class="custom-add">|</span>
+        <span class="custom-add input-rectangle"> ▭</span>
+      </span>
+      <span class="movement-label">Align by Field Inputs</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="leftalign()">
+      <span class="field-update-controller move-left">
+        <span class="custom-add">|</span>
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </span>
+      <span class="movement-label"> Align by 'Left' of Field name</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="rightalign()">
+      <span class="field-update-controller move-right">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <span class="custom-add">|</span>
+      </span>
+      <span class="movement-label">Align by 'Right' of Field name</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="topAign()">
+      <span class="field-update-controller move-top">
+        <span class="custom-add">_</span>
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+      </span>
+      <span class="movement-label">Align fields by 'Top' selected Field</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="bottomAlign()">
+      <span class="field-update-controller move-bottom">
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        <span class="custom-add">_</span>
+      </span>
+      <span class="movement-label">Align fields by 'Bottom' selected Field</span>
+    </div>
+  </div>
+
+<!--   
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="centeralign()">
+      <span class="field-update-controller move-top">
+        <span class="custom-add">_</span>
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+      </span>
+      <span class="movement-label">Align by 'Center' of field description</span>
+    </div>
+  </div> -->
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="arrangeSpaces()">
+      <span class="field-update-controller move-top">
+        <span class="custom-add">_</span>
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+      </span>
+      <span class="movement-label">Set even space between fields</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="increaseSpace()">
+      <span class="field-update-controller increase-space ">
+        <i class="fa fa-chevron-up" aria-hidden="true">
+          <span class="fa fa-chevron-down"></span>
+        </i>
+      </span>
+      <span class="movement-label">Increase space between fields</span>
+    </div>
+  </div>
+
+  <div class="controller-movement-button-wrap">
+    <div tabindex="-1" (click)="decreesSpace()">
+      <span class="field-update-controller decrees-space">
+        <i class="fa fa-chevron-down" aria-hidden="true">
+          <span class="fa fa-chevron-up"></span>
+        </i>
+      </span>
+      <span class="movement-label">Decrees space between fields</span>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>

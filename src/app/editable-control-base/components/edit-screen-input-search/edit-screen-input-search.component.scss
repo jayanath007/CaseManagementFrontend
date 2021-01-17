@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+
+mat-form-field {
+    font-family: $primary-font-stack;
+    color: $header-primary;
+    font-size: $primary-font-size - 2;
+    
+
+    ::ng-deep .mat-button-wrapper .mat-icon {
+        font-size: $primary-font-size + 8;
+      
+    }
+}

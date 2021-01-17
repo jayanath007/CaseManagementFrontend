@@ -1,0 +1,44 @@
+@import '~styles/variables.scss';
+
+// .header {
+//   background: $team-efficiency-primary;
+// }
+
+.header-icon {
+  vertical-align: middle;
+
+  /* border: 1px solid #926bbf; */
+}
+
+  
+.option-btn {
+  background: #5c97d4;
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+// .empty-view {
+//   position: absolute;
+//   // background: #b3d1ea;
+//   top: 64px;
+//   border-bottom: 0;
+//   height: calc(100% - 64px);
+//   width: 100%;
+// }
+
+.mat-toolbar {
+  background: unset;
+}
+.mat-progress-bar
+{
+  height: 2px;
+}

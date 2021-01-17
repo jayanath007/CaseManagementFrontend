@@ -1,0 +1,21 @@
+<div class="dps-matter-search-layout" fxLayout="column">
+  <div class="general-loader-light" mode="indeterminate" *ngIf="!metaData"></div>
+  <div class="dps-matter-search-header">
+    <dps-matter-creation-header (popupClosed)="onPopupClosed($event)" (popupCancel)="onPopupCancel($event)" (openMatterSearch)="onMatterSearch()">
+    </dps-matter-creation-header>
+    <h1> abc </h1>
+    {{relatedDocumentsPageEvent | json}} 
+    <h1> abc </h1>
+    {{documentRegistriesGridData | json }}
+
+    <h1> abc </h1>
+
+    <div>
+      <dps-grid-container [gridColoumn]="docRegisterGridColumn" [pageEvent]="relatedDocumentsPageEvent" (page)="onPageChange($event)">
+        <dps-doc-register-view-data [gridColoumn]="docRegisterGridColumn" [gridData]="documentRegistriesGridData" (rowClick)="onDocRegisterRowClick($event)">
+        </dps-doc-register-view-data>
+      </dps-grid-container>
+    </div>
+
+  </div>
+</div>

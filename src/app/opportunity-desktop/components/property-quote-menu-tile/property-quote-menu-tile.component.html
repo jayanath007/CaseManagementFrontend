@@ -1,0 +1,7 @@
+<div class="item {{item.appId}} " *ngFor="let item of propertyQuoteType" (click)="onSelectPropertyQuoteType(item)">
+  <div *ngIf="!!item?.enabled && !!item.icon">
+    <img [src]="item?.icon">
+    <h3 [ngStyle]="{'color':item.fontCollor}">{{item.appDesc}}</h3>
+    <p>{{item.info}}</p>
+  </div>
+</div>

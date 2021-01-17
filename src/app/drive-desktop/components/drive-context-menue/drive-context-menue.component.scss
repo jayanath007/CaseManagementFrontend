@@ -1,0 +1,107 @@
+@import '~styles/variables.scss';
+button.mat-menu-item {
+  line-height: 30px;
+  height: 40px;
+  color: #155186;
+  font-size: $primary-font-size - 2;
+  padding: 0px 20px 0 0;
+  mat-icon {
+    color: #155186;
+    background: #e5f3ff;
+    padding: 8px;
+  }
+}
+
+mat-icon.fa {
+  font-size: 24px;
+}
+
+button.mat-menu-item.download {
+  mat-icon {
+    color: #199418;
+    background: #def9de;
+  }
+  span {
+    color: #016f00;
+  }
+}
+
+button.mat-menu-item.cut {
+  mat-icon {
+    color: #f96003;
+    background: #ffd3b9;
+  }
+  span {
+    color: #f96003;
+  }
+}
+
+button.mat-menu-item.copy {
+  mat-icon {
+    color: #155186;
+    background: #d1e9ff;
+  }
+  span {
+    color: #155186;
+  }
+}
+
+button.mat-menu-item.delete {
+  mat-icon {
+    color: #c13434;
+    background: #f1dada;
+  }
+  span {
+    color: #441616;
+  }
+}
+
+button.mat-menu-item.edit {
+  mat-icon {
+    color: #3392cc;
+    background: #d1dde4;
+  }
+  span {
+    color: #103b54;
+  }
+}
+button.mat-menu-item.attach {
+  mat-icon {
+    color: #158682;
+    background: #b3e4e3;
+  }
+
+  span {
+    color: #0a6d6a;
+  }
+}
+
+button.mat-menu-item.share {
+  mat-icon {
+    color: #596369;
+    background: #e8e8e8;
+  }
+  span {
+    color: #33434c;
+  }
+}
+
+button.mat-menu-item.paste {
+  mat-icon {
+    color: #135c9e;
+    background: #cae6ff;
+  }
+  span {
+    color: #135c9e;
+  }
+}
+
+button.mat-menu-item.refresh {
+  mat-icon {
+    color: #585858;
+    background: #ece9e9;
+  }
+  span {
+    color: #585858;
+  }
+}

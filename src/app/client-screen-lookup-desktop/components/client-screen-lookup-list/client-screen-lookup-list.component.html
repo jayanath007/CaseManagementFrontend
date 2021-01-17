@@ -1,0 +1,24 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
+<div class="dps-lookup-main" fxLayout="column">
+  <div class="row-highlight " dpsIsMobile>
+    <div class="dps-columnheader">
+      <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header">
+      </dps-column-header>
+      <!-- [filterAnchor]="clientHeader.extras.filterAnchor" -->
+    </div>
+  </div>
+  <div tabindex="0" fxLayout="column" class="dps-white-gray-scroll screenLookup-scroll" fxFlex="calc(100%-40px)">
+
+    <mat-nav-list class="lookup-main-list" *ngIf="screenLookupList && screenLookupList.lookupViewModels">
+      <div (click)="rowClick(item)" *ngFor="let item of screenLookupList.lookupViewModels; let index = index; let isOdd=odd; let isEven=even"
+        [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+        <mat-list-item class="list-item" [ngClass]="{'row-selected':selectedRow===item}">
+          <dps-screen-lookup-grid-fix-row (btnDelete)="onBtnDelete($event)" [lookupRowData]="item"(lookupItemChange)="onLookupItemChange($event)" [columnDef]="columnDef">
+       
+          </dps-screen-lookup-grid-fix-row>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-nav-list>
+  </div>
+</div>

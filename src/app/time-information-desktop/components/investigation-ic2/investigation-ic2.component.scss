@@ -1,0 +1,29 @@
+@import '../../styles/time-information-layout.scss';
+
+
+.dps-crime-investigation {
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #0178c4;
+}
+
+}
+
+.filter-set-02
+{
+ height: 55px;
+  padding-top: 15px;
+}
+
+.general-error-wrap 
+{
+  p
+  {
+    width: 290px;
+
+  }
+}
+
+
+.attendance-note-txt {
+  font-size: $primary-font-size - 2;
+}

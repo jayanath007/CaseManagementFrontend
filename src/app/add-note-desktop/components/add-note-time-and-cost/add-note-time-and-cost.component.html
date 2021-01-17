@@ -1,0 +1,196 @@
+<div fxLayout="column" class="dps-white-gray-scroll dps-addnotecost" fxFlex="1 1 auto">
+
+  <!-- <span class="legal-aid" *ngIf="timeRecordTypes.CrimeTime === timeRecordType">LegalAid Details</span> -->
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-checkbox class="example-margin" [ngModel]="uncharged" (change)="onChangeuncharged($event)" color="primary">
+      Uncharged
+    </mat-checkbox>
+    <mat-form-field class="dps-matform-always" floatLabel="always" *ngIf="timeRecordTypes.CivilTime === timeRecordType">
+      <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+      <input readonly matInput [disabled]="uncharged" [placeholder]="selectedDiaryType?.text+ ' value'" [value]="rate | number : '1.2-2'">
+    </mat-form-field>
+  </div>
+  <div
+    *ngIf="timeRecordTypes.GenaralTime === timeRecordType || timeRecordTypes.PrecedentH === timeRecordType || timeRecordTypes.PrecedentS === timeRecordType">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+      <mat-form-field class="dps-matform-always" floatLabel="always">
+        <input [dpsNumberOnly]=8 type="number" #selectedUnit matInput placeholder="Units" min="1" maxlength="8"
+          [ngModel]="unit" (focusout)="onChangeUnit($event)" [readonly]="isBilled">
+      </mat-form-field>
+      <mat-form-field class="dps-matform-currency" floatLabel="always">
+        <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+        <input type="number" class="dps-remove-arrow rate" #selectedRate matInput placeholder="Rate" min="0"
+          maxlength="11" step="0.01" [ngModel]="rate" (focusout)="onChangeRate(selectedRate)" [readonly]="isBilled">
+      </mat-form-field>
+      <mat-form-field *ngIf="!timeUseFeeEarnerRatesValueDisable">
+        <mat-select placeholder="FE Grade" [ngModel]="selectedUserGrade"
+          (selectionChange)="onUserGradeChange($event.value)">
+          <mat-option *ngFor="let Grade of userGradeList" [value]="Grade">
+            {{ Grade.text }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field floatLabel="always" class="dps-matform-home">
+        <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+        <input class="value" matInput placeholder="{{selectedDiaryType?.text}} Value" disabled
+          [ngModel]="fileNoteValue | number : '1.2-2'">
+      </mat-form-field>
+    </div>
+    <div *ngIf="isExtraTimeCostEnable">
+      <span mat-subheader *ngIf="!isEdit" class="addnote-extra-time"> Extra Time and Cost</span>
+      <mat-divider></mat-divider>
+      <div *ngIf="!isEdit" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+        <mat-form-field class="dps-matform-always" floatLabel="always">
+          <input type="number" [dpsNumberOnly]=8 #selectedExtraUnit matInput placeholder="Units" step="1" min="0"
+            maxlength="8" [ngModel]="extraUnit" (focusout)="onChangeExtraUnit(selectedExtraUnit)">
+        </mat-form-field>
+        <mat-form-field floatLabel="always" class="dps-matform-always">
+          <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+          <input type="number" [disabled]="extraUnit <= 0" class="dps-remove-arrow rate" #selectedExtraRate matInput
+            placeholder="Rate" min="0" maxlength="11" step="0.01" [ngModel]="extraRate"
+            (focusout)="onChangeExtraRate(selectedExtraRate)">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Type" floatPlaceholder="always" [disabled]="extraUnit === 0 "
+            [ngModel]="selectedExtraTime" (selectionChange)="onExtraTimeChange($event.value)">
+            <mat-option *ngFor="let type of extraTimeType" [value]="type">
+              {{ type.dtL_Label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" class="dps-matform-home">
+          <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+          <input class="value" matInput placeholder="Value" disabled [ngModel]="extraValue | number : '1.2-2'">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- eBilling Comment - phase,task,activity -->
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="strat center">
+    <mat-form-field floatLabel="always" *ngIf="pageLoadType===eBillingType.PrecedentH">
+      <mat-select placeholder="Work Type" [ngModel]="selectedWorkType"
+        (selectionChange)="onPrecedentHChangeWorkType($event)" [disabled]="loading">
+        <mat-option *ngFor="let workTypeItem of worktypeList" [value]="workTypeItem">
+          {{ workTypeItem.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="34px" *ngIf="pageLoadType===eBillingType.PrecedentS">
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Phase" [ngModel]="selectedPhase" (selectionChange)="onChangePhase($event)"
+          [disabled]="loading">
+          <mat-option *ngFor="let phaseItem of phaseList" [value]="phaseItem">
+            {{ phaseItem.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Task" [ngModel]="selectedTask" (selectionChange)="onChangeTask($event)"
+          [disabled]="loading">
+          <mat-option *ngFor="let taskItem of phaseWiseTaskList" [value]="taskItem">
+            {{ taskItem.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Activity" [ngModel]="selectedActivity" (selectionChange)="onChangeActivity($event)"
+          [disabled]="loading">
+          <mat-option *ngFor="let activitiItem of activitiList" [value]="activitiItem">
+            {{ activitiItem.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- <div class="full-width" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field floatPlaceholder="always" class="add-note-editor">
+              <textarea matInput placeholder="Note" rows="3" maxlength="250" [(ngModel)]="note" (focusout)="onNoteChange($event)"></textarea>
+            </mat-form-field>
+          </div> -->
+    <!-- eBilling end -->
+  </div>
+
+  <div fxLayout="column" class="dps-crime-inputs" *ngIf="timeRecordTypes.CrimeTime === timeRecordType">
+
+    <div fxLayoutAlign="strat center" fxLayout="row wrap" fxLayoutGap="2em">
+
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Class" [ngModel]="selectedClassType"
+          (selectionChange)="onChangeClassType($event.value)">
+          <mat-option *ngFor="let class of filterClassType" [value]="class">
+            ({{ class.rectype }}) {{ class.classname }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Work Type" [ngModel]="selectedAttType"
+          (selectionChange)="onChangeWorkType($event.value)">
+          <mat-option *ngFor="let type of filterAttTypeList" [value]="type">
+            {{ type.attDescription }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox *ngIf="isShowTelephoneAdv" class="dps-signature" labelPosition="after" [checked]="isTelephoneAdv"
+        (change)="onChangeTelephoneAdv($event.checked)" color="primary">
+        Telephone Advice?
+      </mat-checkbox>
+      <!-- <mat-checkbox class="dps-signature" *ngIf="isShowSection51" labelPosition="after" [checked]="section51" (change)="onChangeSection51($event.checked)"
+        color="primary">
+        Section 51?
+      </mat-checkbox> -->
+
+      <!-- <mat-checkbox class="dps-signature" labelPosition="after" [checked]="isBulkEntry" disabled (change)="onChangeIsBulkEntry($event.checked)"
+        color="primary">
+        Bulk Entry?
+      </mat-checkbox> -->
+      <!-- <mat-form-field>
+        <input type="number" placeholder="Num. of Entries" matInput min="1" [disabled]="!isBulkEntry" step="1"
+          [ngModel]="noOfEntryBy" #NumOfEntries (focusout)="onChangeNumOfEntries(NumOfEntries.value)">
+      </mat-form-field> -->
+    </div>
+  </div>
+
+  <div fxLayout="column" class="dps-crime-inputs" *ngIf="timeRecordTypes.CivilTime === timeRecordType">
+
+    <div fxLayoutAlign="strat center" fxLayout="row wrap" fxLayoutGap="2em">
+
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Class" [ngModel]="selectedCivilClassType"
+          (selectionChange)="onChangeCivilClass($event.value)" [disabled]="uncharged || loading">
+          <mat-option *ngFor="let class of civilClassList" [value]="class">
+            {{ class.className }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="always">
+        <mat-select placeholder="Founding Level" [ngModel]="selectedCivilLevel"
+          (selectionChange)="onChangeCivilLevel($event.value)" [disabled]="uncharged || loading">
+          <mat-option *ngFor="let level of civilLevelList" [value]="level">
+            {{ level.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field floatLabel="always" *ngIf="selectedCivilClassType?.className === 'Certificated'">
+        <mat-select placeholder="Court" [ngModel]="selectedCourt" (selectionChange)="onChangeCivilCourt($event.value)"
+          [disabled]="uncharged || loading">
+          <mat-option *ngFor="let court of civilCourtList" [value]="court">
+            {{ court.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox class="dps-signature" labelPosition="after" [checked]="isTelephoneAdv"
+        (change)="onChangeTelephoneAdv($event.checked)" color="primary">
+        Telephone Advice?
+      </mat-checkbox>
+      <!-- <mat-checkbox class="dps-signature" labelPosition="after" [checked]="isBulkEntry"
+        (change)="onChangeIsBulkEntry($event.checked)" color="primary">
+        Bulk Entry?
+      </mat-checkbox>
+      <mat-form-field floatLabel="always">
+        <input matInput dpsNumberOnly placeholder="How Many?" />
+      </mat-form-field> -->
+    </div>
+  </div>
+</div>

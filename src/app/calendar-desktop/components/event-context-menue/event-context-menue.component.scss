@@ -1,0 +1,46 @@
+
+@import '~styles/variables.scss';
+
+.dps-menu-item{
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+}
+.fa-check{
+    padding-left: 5px;
+    float: right;
+    margin-top: 14px;
+}
+
+.dps-calender-day-event {
+
+    .busy {
+        border-left: 5px solid $calendar-day-busy;
+    }
+    .free {
+        border-left: 5px solid $calendar-day-free;
+    }
+
+    .tentative {
+        border-left: 5px solid $calendar-day-tentative;
+    }
+
+    .oof {
+        border-left: 5px solid $calendar-day-oof;
+    }
+
+    .workingElsewhere {
+        border-left: 5px solid $calendar-day-workingElsewhere;
+    }
+
+    .unknown {
+        border-left: 5px solid $calendar-day-unknown;
+    }
+
+}
+
+
+
+.calendar-event-btn {
+    color: $calendar-event-btn;
+}

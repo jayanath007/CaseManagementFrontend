@@ -1,0 +1,101 @@
+@import '~styles/variables.scss';
+.screen-views-top-header-wrapper
+{
+    background: #205e84;
+    width: 100%;
+    padding-bottom: 2px;
+}
+
+.screens-navigation-buttons
+{
+    min-width: 100px;
+}
+
+.screen-views-button-wrapper
+{
+    background: #7b9dd0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-width: 100px;
+    
+}
+.screens-navigation-buttons .mat-icon-button
+{
+    color: $primary;
+
+}
+.screens-navigation-buttons .mat-icon-button[disabled]
+{
+    color: #758c9a;
+
+}
+.save-screen
+{
+    background: #6aaf40;
+    color: $primary;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 17px;
+    padding: 5px;
+    min-width: 41px;
+}
+.close-screen
+{
+    background: rgb(197, 47, 47);
+    color: $primary;
+    font-size: $secondary-font-size;
+    font-weight: bold;
+    border-radius: 100%;
+    border: 0;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.screen-title
+{
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    padding: 13px 15px 10px;
+    color: $primary;
+}
+
+.controller-buttons
+{
+    text-align: right;
+    min-width: 90px;
+    margin-top: -1px;
+
+}
+
+.screen-view-tab-logic-controller
+{
+    font-size: 12px;
+    padding: 5px 0px 0 13px;
+    height: 32px;
+    font-family: $primary-font-stack;
+    white-space: nowrap;
+    color: $primary;
+    font-weight: 500;
+    background: #0d486d;
+}
+.run-tab-logic
+{
+    font-size: 12px;
+    background: #e6833b;
+    padding: 5px;
+    line-height: 17px;
+    font-weight: normal;
+    min-width: 45px;
+    color: $primary;
+}
+
+
+.screen-view-tab-logic-controller .mat-checkbox
+{
+    margin-right: 10px;
+    margin-left: 5px;
+}

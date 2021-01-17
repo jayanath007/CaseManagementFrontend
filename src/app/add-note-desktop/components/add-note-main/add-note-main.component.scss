@@ -1,0 +1,55 @@
+
+div[fxLayoutAlign] {padding-top:8px;}
+.signature-hide{
+  display: none !important;
+}
+
+.md-input-has-value.bigClass > input {
+  font-size: 30px;
+}
+dps-add-note-file-upload{
+  /* width: 28%; */
+}
+
+.dps-addnote-diary-type {
+  overflow-x: auto;
+}
+
+mat-form-field.add-note-editor {
+  width: 100%; 
+  height: 100px;
+  margin-top: 10px;
+}
+.dps-signature{
+  margin-top: 15px;
+}
+mat-option ,mat-checkbox {
+ 
+  font-size: 12px !important;
+}
+
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #006cc1;
+  background: #d9eeff;
+}
+
+textarea.mat-input-element {
+  font-size: 12px !important;
+}
+
+.addnote-master-folder
+{
+  margin-right: 40px;
+  background: #ffd155;
+  font-size: 12px;
+  line-height: 38px;
+  color: #0f161b;
+
+    .tree-folder-ico
+    {
+      font-size: 16px;
+      margin-right: 6px;
+      line-height: 37px;
+    }
+}
+

@@ -1,0 +1,75 @@
+
+
+.dps-opportunity-setting-menu{
+    font-size: 12px;
+    justify-content: space-around;
+    padding: 0 10px;
+}
+.dps-opportunity-add ,
+.dps-opportunity-clear
+{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 13px;
+    background: #629a61;
+    color: #ecf4f9;
+    margin-right: 5px;
+    box-shadow: none;
+    padding: 0px 0px 0px 0px !important;
+    
+    mat-icon{
+        font-size: 17px;
+        width: 19px;
+        height: 14px;
+        line-height: 0px;  
+    }
+}
+
+.dps-opportunity-clear[disabled]
+{
+    background: #ecf4f9;
+}
+
+.dps-opportunity-clear
+{
+        background: #ecf4f9;
+        color: #af7b6c;
+}
+.button-container-remove{
+    
+}
+.dps-opportunity-remove{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 13px;
+    color: #ffffff;
+    background: #9c3417;
+    box-shadow: none;
+    padding: 0px 0px 0px 0px !important;
+    margin: 0 17px 0px 0px;
+    
+
+    mat-icon{
+        font-size: 17px;
+        width: 19px;
+        height: 16px;
+        line-height: 0px;  
+    }
+}
+
+
+
+/* inputs override due to 180px default width given globally which should be removed!!  - Dilantha */
+
+
+
+::ng-deep
+{
+    .mat-form-field-infix,
+    .mat-form-field
+    {
+        width: 100%;
+    }
+}

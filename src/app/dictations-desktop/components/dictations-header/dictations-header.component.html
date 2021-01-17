@@ -1,0 +1,20 @@
+<button mat-button color="primary">Import Recording</button>
+
+<mat-form-field>
+  <mat-select placeholder="My Job" [ngModel]=""
+    (selectionChange)="onMyJobChange($event.value)">
+    <mat-option *ngFor="let Job of myJobList" [value]="Job">
+      {{ Job.text }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<mat-form-field>
+  <mat-select placeholder="Job Stage" [ngModel]=""
+    (selectionChange)="onJobStageChange($event.value)">
+    <mat-option *ngFor="let Stage of jobStageList" [value]="Stage">
+      {{ Stage.text }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

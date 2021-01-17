@@ -1,0 +1,35 @@
+<mat-drawer-container class="dps-team-container" autosize>
+
+  <mat-drawer style="overflow: unset" [opened]="true" mode="side" [disableClose]="true" position="start"
+    class="dps-team-sidenav" mode="side">
+    <mat-nav-list>
+
+      <dps-team-user-profile [loginUser]="loginUser" class="dps-user-profile"> </dps-team-user-profile>
+
+
+
+
+      <dps-team-users-list [teamUsersLoading]="teamUsersLoading" [selectedTeamUser]="selectedTeamUser"
+        [teamUsersList]="teamUsersList" [departmentList]="departmentList" (teamUserChange)="onTeamUserChange($event)"
+        (changeDepartment)="onChangeDepartment($event)" (searchTextcahange)="onSearchTextcahange($event)">
+      </dps-team-users-list>
+
+    </mat-nav-list>
+
+  </mat-drawer>
+
+  <dps-module-layout class="dps-team-primary-header" moduleColor="dps-team-primary" layoutHeaderHeight="82px"
+    contentHeaderHeight="53px">
+    <dps-team-primary-header (addMovement)="onAddMovement()" [teamUsersLoading]="teamUsersLoading"
+      [selectedTeamUser]="selectedTeamUser" [selectYearAndMonth]="selectYearAndMonth"
+      (selectYearAndMonthClick)="onSelectYearAndMonth($event)" [selectedViewType]="selectedViewType"
+      (changeViewType)="onChangeViewType($event)" dps-layout-header moduleColor="dps-primary-header">
+    </dps-team-primary-header>
+    <dps-team-layout-content [selectedViewType]="selectedViewType" [loading]="loading"
+      (selectedDay)="onSelectedDay($event)" (selectYearAndMonthClick)="onSelectYearAndMonth($event)"
+      (addMovement)="onAddMovement()" [eventYearSummery]="eventYearSummery" [activityListByDay]="activityListByDay"
+      [monthActivityList]="monthActivityList" [selectYearAndMonth]="selectYearAndMonth" dps-layout-content
+      (changeViewType)="onChangeViewType($event)"></dps-team-layout-content>
+  </dps-module-layout>
+
+</mat-drawer-container>

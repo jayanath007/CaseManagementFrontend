@@ -1,0 +1,10 @@
+<div class="dps-calendar-list">
+  <mat-chip-list class="mat-typography">
+    <mat-chip class="dps-calendareviewList" *ngFor="let calendar of calendareViewList" [ngStyle]="{'background-color': calendar.color}"
+      [selectable]="selectable" [removable]="removable" (removed)="onRemoveCalendar(calendar.calendarId, calendar.groupId)">
+      <span>{{calendar.name}}</span>
+      <mat-icon *ngIf="!calendar.loading" matChipRemove>cancel</mat-icon>
+      <i class="fa fa-circle-o-notch fa-spin" *ngIf="calendar.loading"></i>
+    </mat-chip>
+  </mat-chip-list>
+</div>

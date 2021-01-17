@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+.row-data {
+	  border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    padding: 6px 6px 6px;
+    font-size: $primary-font-size - 2;
+    line-height: 18px;
+}
+.grid-data{
+  display: table-row;
+  word-break: break-word;
+}
+.highlightoggle {
+  background: #a1cef1;
+  background-color: #b4d6f1;
+}
+
+.dps_client_dob {
+  text-align: center;
+}
+.row-data:last-child {
+  border-right: none;
+}
+.dps_client_dob,.ref,.telephone{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

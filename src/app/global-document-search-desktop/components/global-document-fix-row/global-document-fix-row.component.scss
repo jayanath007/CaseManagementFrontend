@@ -1,0 +1,46 @@
+@import '~styles/variables.scss';
+
+.row-data{
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    
+    padding: 6px 6px 6px;
+    font-size: 12px;
+    line-height: 18px;
+}
+.row-data:last-child{
+    border-right: none;
+}
+
+.grid-data{
+    font-size: 12px;
+    display: table-row;
+    word-break: break-word;
+  }
+
+  .row-data.action-column {
+      text-align: center;
+      
+      mat-icon {
+        font-size: 17px;
+      }
+  }
+
+  .row-data.open_case {
+    text-align: center;
+      
+    mat-icon {
+      
+      color: #3d77d6;
+    }
+  }
+
+
+  .dps-selected-row {
+    // background: #d4e5ff;
+
+    &:hover{
+        background: #d4e5ff;
+       }
+   }
+   

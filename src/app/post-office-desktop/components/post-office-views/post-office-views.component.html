@@ -1,0 +1,42 @@
+<mat-list class="grid-controller-set" fxLayout="row" fxLayoutAlign="end center">
+
+  <button class="dps-grouping-cntxt-menu" [matMenuTriggerFor]="menu" mat-flat-button>
+    <mat-icon class="mat-18">{{groupMode | groupIconByMode}}</mat-icon>
+    <span *ngIf="groupMode === postOfficeGroupMode.Default">View</span>
+    <span *ngIf="groupMode === postOfficeGroupMode.ByGroup">By Group</span>
+    <span *ngIf="groupMode === postOfficeGroupMode.Date">Date</span>
+    <span *ngIf="groupMode === postOfficeGroupMode.ByGroupDate">By Date</span>
+    <span *ngIf="groupMode === postOfficeGroupMode.DateByGroup">Date By</span>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(postOfficeGroupMode.Default)">
+      <mat-icon class="material-icons">insert_drive_file</mat-icon>Default
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(postOfficeGroupMode.ByGroup)">
+      <mat-icon class="material-icons">person</mat-icon>By Group
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(postOfficeGroupMode.Date)">
+      <mat-icon class="material-icons">calendar_today</mat-icon>Date
+    </button>    
+    <!-- <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(postOfficeGroupMode.ByGroupDate)">
+      <mat-icon class="material-icons">ballot</mat-icon>By Group Date
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(postOfficeGroupMode.DateByGroup)">
+      <mat-icon class="material-icons">event</mat-icon>Date By Group
+    </button>
+    <mat-divider></mat-divider> -->
+  </mat-menu>
+
+
+  <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true" (fontSizeMin)="onFontSizeMinusClick()"
+    (fontSizeReset)="onFontSizeResetClick()" (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()">
+  </dps-grid-font-controller>
+
+
+
+</mat-list>

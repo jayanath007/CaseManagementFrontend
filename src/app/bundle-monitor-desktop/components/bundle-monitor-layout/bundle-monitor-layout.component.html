@@ -1,0 +1,70 @@
+<div style="width: 100%; height: 100%;" *ngIf="!showContent"></div>
+<div fxLayout="column" class="dps-bundle-monitor-layout" style="height: 100%;">
+  <div>
+    <mat-toolbar>
+      <mat-toolbar-row fxLayoutAlign="center center">
+        <mat-list matLine fxLayout="row">
+          <span fxFlex="1 1 auto"></span>
+          <mat-list-item fxLayoutAlign="center center">
+            <mat-icon matListIcon>
+              <span>picture_as_pdf</span>
+            </mat-icon>
+            <span matLine>DPS PDF Bundle Queue Monitor</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="dps-monitor-controllers" fxLayoutAlign="end end">
+    <mat-toolbar>
+      <button mat-stroked-button (click)="onDelete()" color="warn">
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+      <span fxFlex="1 1 auto"></span>
+      <mat-form-field floatPlaceholder="always">
+        <mat-select placeholder="Show Items for" [ngModel]="selectedItem"
+          (selectionChange)="onItemsForChange($event.value)">
+          <mat-option *ngFor="let item of itemsForList" [value]="item.value">
+            {{item.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field floatPlaceholder="never">
+        <span matPrefix>&nbsp;&nbsp;</span>
+        <mat-placeholder>Bundle Id</mat-placeholder>
+        <input type="search" #bundleId matInput [formControl]="inputCtrl" [value]="searchBundleId" />
+      </mat-form-field>
+      <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+        (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+        (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()">
+      </dps-grid-font-controller>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+  </div>
+  <div fxLayout="column" style="overflow-x: auto;" class="dps-white-gray-scroll dps-grid-x">
+    <div fxLayout="column" fxFlex="calc(100%-87px)" style="min-width:1000px;">
+
+      <div class="row-highlight" dpsIsMobile>
+        <div class="row-highlight-inner">
+          <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+            [filterAnchor]="header.extras.filterAnchor">
+          </dps-column-header>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="calc(100%-40px)" class="dps-grid-scroll dps-white-gray-scroll {{fontSizeClass}}">
+
+        <mat-list dence class="dps-grid-nav-list ">
+          <mat-list-item class="dps-grid-list-item" *ngFor="let item of gridItems; let isOdd=odd;">
+            <dps-bundle-monitor-grid-items [columnDef]="columnDef" [row]="item" [isOdd]="isOdd"
+              (openLog)="onOpenLog($event)" (selectRow)="onSelectRow($event)">
+
+            </dps-bundle-monitor-grid-items>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+
+</div>

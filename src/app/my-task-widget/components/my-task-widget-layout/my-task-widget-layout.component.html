@@ -1,0 +1,35 @@
+<div class="dps-my-task-widget-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="header my-task">
+      <mat-icon class="header-icon">assignment_ind</mat-icon>
+      <span class="header-name" (click)="goToMyTaskView()">Task</span>
+      <span class="spacer"></span>
+      <button mat-icon-button class="option-btn" (click)="onRefreshData()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #mainmenu="matMenu">
+        <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+          Remove
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-progress-bar *ngIf="isLoading && layout===1" mode="indeterminate"></mat-progress-bar>
+  <mat-spinner mode="indeterminate" *ngIf="isLoading && layout===2" diameter="35" strokeWidth="3"></mat-spinner>
+  <!-- <div *ngIf="!isLoading && layout===1">
+    <div class="empty-view" *ngIf="data?.length === 0 || !data">
+      <p class="wrong-massage" *ngIf="data?.length === 0"> No item to preview</p>
+      <p class="wrong-massage" *ngIf="!data"> Something went wrong </p>
+    </div>
+  </div> -->
+  <mat-nav-list dense class="widget-item-list dps-white-gray-scroll" fxFlex="calc(100%-66px)">
+    <dps-my-task-widget-item *ngFor="let item of data ; let isOdd=odd; let isEven=even"
+      [ngClass]="isOdd?'separator-0':'separator-1'" [item]="item" [item]="item"
+      (clickOptionBtn)="onClickOptionBtn($event)"></dps-my-task-widget-item>
+    <dps-epmty-widget-item *ngFor="let item of emptyList"></dps-epmty-widget-item>
+  </mat-nav-list>
+</div>

@@ -1,0 +1,64 @@
+<div class="dps-chaser-form" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="34px">
+    <mat-form-field>
+      <mat-select [disabled]="addEditTaskLoading" placeholder="For User" [ngModel]="selectedFeeEarner"
+        floatPlaceholder="never" (selectionChange)="onFeeEarnerChanged($event.value)">
+        <mat-option *ngFor="let feeEarner of feeEarnerList" [value]="feeEarner">
+          {{ feeEarner.user_ID }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatLabel="always">
+      <input matInput [matDatepicker]="picker" placeholder="Date By" [ngModel]="taskDate | date:'yyyy-MM-dd'"
+        (dateChange)="onDateChange($event)" [disabled]="addEditTaskLoading">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+  </div>
+  <div fxLayout="row" class="dps-folder-select" fxLayoutAlign="strat center">
+    <mat-form-field>
+      <mat-select placeholder=Folder [ngModel]="selectedFolder" floatPlaceholder="never"
+        (selectionChange)="onFolderChanged($event.value)">
+        <mat-option *ngFor="let folder of folderList" [value]="folder">
+          {{folder.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="strat center">
+    <mat-form-field floatLabel="always">
+      <mat-select [disabled]="taskHeaderName!=='Edit Task'" placeholder="Action" [ngModel]="selectedAction"
+        (selectionChange)="onActionTypeChanged($event.value)">
+        <mat-option *ngFor="let Actions of actionTypeList" [value]="Actions">
+          {{ Actions.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="taskHeaderName!=='Edit Task'" class="dps-select-matter-btn">
+      <button mat-button (click)="onMatterSearch()" tabindex="-1" mat-raised-button>
+        <mat-icon class="mat-18">pageview</mat-icon>
+        Select {{matterLabel}}
+      </button>
+      <span class="selected-matter-indicator" matListIcon *ngIf="matterInfo?.appCode">
+        {{matterInfo?.client}}-{{matterInfo?.appCode}}:{{matterInfo?.matterReferenceNo}}
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <dps-add-edit-task-file-upload [fileUploadDisable]="fileUploadDisable" [hasPassword]="hasPassword"
+      [password]="password" [fileData]="fileData" (uploadedFile)="onUploadeFile($event)"
+      (updatePassword)="onUpdatePassword($event)" (unLockPassword)="onUnLockPassword($event)">
+    </dps-add-edit-task-file-upload>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="dps-note-for-diary">
+    <mat-form-field floatLabel="always">
+      <textarea matInput placeholder="Note for Diary" rows="3" maxlength="250" [(ngModel)]="taskNote"
+        (focusout)="onNoteChange($event)"></textarea>
+    </mat-form-field>
+  </div>
+</div>

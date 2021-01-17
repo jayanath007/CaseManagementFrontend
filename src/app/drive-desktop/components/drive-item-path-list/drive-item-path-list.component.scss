@@ -1,0 +1,93 @@
+@import '~styles/variables.scss';
+
+.dps-drive-file-path-list {
+  color: #155186;
+
+  .dps-search-text {
+    font-size: 16px;
+    line-height: 34px;
+    padding-left: 6px;
+  }
+
+  .dps-safe-box-path {
+    width: calc(100% - 40px);
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+
+  .dps-folder-indicator {
+    padding-right: 15px;
+  }
+
+  mat-icon {
+    font-size: $primary-font-size + 5;
+    height: 23px;
+    width: 7px;
+    padding: 0px 5px;
+  }
+
+  span {
+    font-size: $primary-font-size - 1;
+    vertical-align: super;
+    cursor: pointer;
+
+    &.dps-path-name {
+      padding: 8px 5px 8px;
+    }
+
+    &:hover {
+      background-color: #f3f3f3;
+      color: #155186;
+    }
+  }
+
+  .dps-drive-refresh {
+    button[mat-icon-button] {
+      background: #1972c3;
+      color: white;
+      width: 34px;
+      height: 34px;
+
+      mat-icon {
+        font-size: $primary-font-size + 8;
+        height: 30px;
+        width: 22px;
+        padding: 0px;
+      }
+    }
+
+    button[mat-button] {
+      height: 32px;
+
+      span {
+        line-height: 32px;
+      }
+    }
+  }
+
+}
+
+div.copying-item {
+  width: 250px;
+
+  mat-icon {
+    color: $calendar-accept-btn;
+  }
+
+  span,
+  div {
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  span {
+    font-weight: 400;
+    font-size: $primary-font-size - 2;
+    margin: -16px 0px 8px 0px;
+    height: 30px;
+  }
+}

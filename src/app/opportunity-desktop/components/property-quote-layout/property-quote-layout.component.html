@@ -1,0 +1,31 @@
+<div class="dps-property-quote-main">
+  <dps-common-popup-header icon="home_work" [title]="'Property Quote'" buttons="close"
+    [loading]="isLoading?.sendSaveQuoteLoading" iconColor="#db9c57" titleColor="#a9c0f6" (buttonClick)="onClose()">
+  </dps-common-popup-header>
+  <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedStep" (selectionChange)="changeSelectedStep($event)"
+    class="dps-white-gray-scroll">
+    <mat-step label="Select a type" *ngIf="!isEditQuote">
+      <dps-property-quote-menu-tile [propertyQuoteType]="propertyQuoteType"
+        (selectPropQuotetype)="onChnageProQuoteRequest($event)">
+      </dps-property-quote-menu-tile>
+    </mat-step>
+    <mat-step label="Fill out {{app?.appDesc}} details">
+      <dps-property-quote-details [hidden]="!app" [selectedQuoteType]="app" [propertyQuRequest]="propertyQuRequest"
+        [currency]="currency" [webQuoteData]="webQuoteData" [isLoading]="isLoading?.sendSaveQuoteLoading"
+        [useBranch]="webQuoteCompany?.branches" (chnageProQuoteRequest)="onChnageProQuoteRequest($event)"
+        (next)="onRequestReport()">
+      </dps-property-quote-details>
+      <span [hidden]="app">Please select a type</span>
+    </mat-step>
+    <mat-step label="Report">
+      <dps-property-quote-report
+        *ngIf="!!propertyQuReport && (!propertyQuReport.hData||!propertyQuReport.pData||!propertyQuReport.sData)"
+        [isLoading]="isLoading?.sendSaveQuoteLoading" [propertyQuReport]="propertyQuReport" [currency]="currency"
+        [selectedQuoteType]="app" [propertyQuRequest]="propertyQuRequest" (sendQuote)="onSendQuote($event)"
+        (chnageProQuoteRequest)="onChnageProQuoteRequest($event)" (changeReportData)="onChangeReport($event)">
+      </dps-property-quote-report>
+      <span [hidden]="app">Please select a type</span>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <!-- <a style="padding-left: 20px;" target="new" href="http://{{webQuoteCompany?.domain}}">{{webQuoteCompany?.domain}}</a> -->
+</div>

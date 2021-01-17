@@ -1,0 +1,80 @@
+<div class="dps-white-gray-scroll dps-add-note-attachments" fxFlex="1 1 auto">
+  <mat-table #table [dataSource]="dataSource" id=AttachmentsTable>
+    <!-- Attach Column -->
+    <ng-container matColumnDef="attach">
+      <mat-header-cell *matHeaderCellDef style="padding-right: 2em;">
+        <mat-checkbox color="primary" [checked]="checkUncheckAllAttach"
+          (change)="OnChangeIsAttach($event.checked,null,CheckedType.All)">Attach ?</mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments" style="padding-right: 2em;">
+        <mat-checkbox color="primary" [checked]='Attachments.isSelected'
+          (change)="OnChangeIsAttach($event.checked,Attachments.reference,CheckedType.Single)"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments">
+        <span *ngIf="Attachments.attachmentType=='Item'">EML</span>
+        <span *ngIf="Attachments.attachmentType=='File'">LTR</span>
+      </mat-cell>
+    </ng-container>
+    <!-- contentType Column -->
+    <ng-container matColumnDef="folder">
+      <mat-header-cell *matHeaderCellDef> Folder </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments">
+        <mat-select floatPlaceholder="never" [ngModel]="selectedFolder(Attachments.diaryFolderId)"
+          (selectionChange)="OnFolderChanged($event.value,Attachments.reference)">
+          <mat-option *ngFor="let folder of folderList" [value]="folder">
+            {{folder.folderName}}
+          </mat-option>
+        </mat-select>
+      </mat-cell>
+    </ng-container>
+    <!-- FillNote Column -->
+    <ng-container matColumnDef="fileNote">
+      <mat-header-cell *matHeaderCellDef> File Note </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments">
+        <input #fileNoteInput matInput [value]="Attachments.fileNote"
+          (focusout)="OnAttachmentFileNoteChange(fileNoteInput.value,Attachments.reference)">
+      </mat-cell>
+    </ng-container>
+    <!-- UC Column -->
+    <ng-container matColumnDef="UC">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox color="primary" [checked]="checkUncheckAllUN"
+          (change)="OnChangeIsUncharge($event.checked,null,CheckedType.All)"> U/C ?</mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments">
+        <mat-checkbox color="primary" [checked]='Attachments.isUncharge'
+          (change)="OnChangeIsUncharge($event.checked,Attachments.reference,CheckedType.Single)"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- Icon Column -->
+    <ng-container matColumnDef="View">
+      <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+      <mat-cell *matCellDef="let Attachments">
+        <a (click)="onOpenAttachment(Attachments.reference)" [ngClass]="{'dps-disable-a': !Attachments?.viewReferance}">
+          <!--onclick-->
+          <i class=" {{ Attachments.name | attachmentIcon }}"><span></span></i>
+        </a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-progress-bar *ngIf="viewingInlineAttachement?.loading" mode="indeterminate">
+  </mat-progress-bar>
+  <div id="docoment-view" class="dps-addnote-attachment"
+    [hidden]="viewingInlineAttachement?.loading || !(viewingInlineAttachement?.url || viewingInlineAttachement?.msg)">
+    <div class="dps-attachment-docview"></div>
+    <dps-document-view-page *ngIf="viewingInlineAttachement?.url" [documentUrl]="viewingInlineAttachement?.url"
+      [extension]="viewingInlineAttachement?.extension">
+    </dps-document-view-page>
+    <dps-mail-view-content *ngIf="viewingInlineAttachement?.msg" [item]="{ data: viewingInlineAttachement.msg }"
+      [timeZone]="timeZone" [companyCode]="companyCode" [isItemAttachment]="true" openFrom=""
+      [isComputerDownloadOnly]="true" (openAttachement)="onOpenEmailAttachement($event)"
+      (downloardFileAttachment)="onDownloardFileAttachment($event)" [isComputerDownloadOnly]="true">
+    </dps-mail-view-content>
+  </div>
+</div>

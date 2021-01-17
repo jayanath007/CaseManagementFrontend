@@ -1,0 +1,46 @@
+<div class="workspace">
+
+  <!-- <p innerHTML={{topTest}}></p> -->
+  <div id="reportDiv" class="dps-white-gray-scroll" style="overflow-y: scroll;height: 640px;">
+    <div class="quote-data"
+      style="font-family: 'exo 2', sans-serif, arial; border: 1px dashed #8ea7bd; padding: 10px 25px 30px; font-size: 14px;"
+      *ngIf="propertyQuReport?.pData">
+      <dps-property-quote-report-items [data]="propertyQuReport?.pData" [currency]="currency" [type]="'Purchase'"
+        [valueHeader]="propertyQuRequest?.buyLeasehold === leaseHold.Yes ? 'Leasehold' : 'Freehold'"
+        [profCostDiscount]="propertyQuRequest?.purchesProfCostDis"
+        (changeProfCostDiscount)="onChnageProQuoteRequest(key.purchesProfCostDis, $event)" 
+        (changeReportData)="onChangeReport($event, 'pData')">
+      </dps-property-quote-report-items>
+      <div class="clear"></div>
+    </div>
+    <div class="quote-data"
+      style="font-family: 'exo 2', sans-serif, arial; border: 1px dashed #8ea7bd; padding: 10px 25px 30px; font-size: 14px;"
+      *ngIf="propertyQuReport?.sData">
+      <dps-property-quote-report-items [data]="propertyQuReport?.sData" [currency]="currency" [type]="'Sale'"
+        [valueHeader]="propertyQuRequest?.saleleasehold === leaseHold.Yes ? 'Leasehold' : 'Freehold'"
+        [profCostDiscount]="propertyQuRequest?.saleProfCostDis"
+        (changeProfCostDiscount)="onChnageProQuoteRequest(key.saleProfCostDis, $event)"
+        (changeReportData)="onChangeReport($event, 'sData')">
+      </dps-property-quote-report-items>
+      <div class="clear"></div>
+    </div>
+
+    <div class="quote-data"
+      style="font-family: 'exo 2', sans-serif, arial; border: 1px dashed #8ea7bd; padding: 10px 25px 30px; font-size: 14px;"
+      *ngIf="propertyQuReport?.hData">
+      <dps-property-quote-report-items [data]="propertyQuReport?.hData" [currency]="currency"
+        [type]="selectedQuoteType?.appDesc"
+        [valueHeader]="propertyQuRequest.hipsLeasehold === leaseHold.Yes ? 'Leasehold' : 'Freehold'"
+        [profCostDiscount]="propertyQuRequest?.hipsProfCostDis"
+        (changeProfCostDiscount)="onChnageProQuoteRequest(key.hipsProfCostDis, $event)"
+        (changeReportData)="onChangeReport($event, 'hData')">
+      </dps-property-quote-report-items>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="approvals">
+    <button [disabled]="isLoading" mat-button class="general-button" (click)="onSendQuote()"> Send Quote
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>

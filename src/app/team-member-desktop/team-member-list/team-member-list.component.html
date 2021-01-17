@@ -1,0 +1,15 @@
+<div class="dps-team-members-container" fxLayout="column">
+  <mat-form-field floatLabel="never" class="dps-team-members-search">
+    <input matInput type="search" #TeamMemberSearchText [formControl]="inputCtrl" [value]="searchKey">
+    <mat-placeholder>Search members</mat-placeholder>
+    <button matSuffix mat-icon-button (click)="onSearchTextChanged(TeamMemberSearchText.value)">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-progress-bar *ngIf="teamMemberListLoading" mode="indeterminate"></mat-progress-bar>
+  <mat-nav-list class="dps-team-member-nav-list dps-white-gray-scroll" dense fxFlex="1 1 auto">
+    <dps-team-member-item *ngFor="let member of teamMemberList; let i = index" [attr.tabindex]="i" (click)="onTeamMemberChange(member)"
+      (keydown)="onKeyDown($event, member)" [selected]="selected" [member]="member">
+    </dps-team-member-item>
+  </mat-nav-list>
+</div>

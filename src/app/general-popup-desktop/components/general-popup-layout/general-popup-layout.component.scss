@@ -1,0 +1,78 @@
+@import '~styles/variables.scss';
+
+
+
+::ng-deep .dps-core-bundle-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}
+
+.dps-echit-general-popup {
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  mat-toolbar {
+    min-height: 40px;
+  }
+
+  mat-toolbar-row {
+    height: 40px;
+
+    & .primary-section {
+      background: #d4e5f5;
+    }
+  }
+
+  .dps-general-popup-header {
+    background: $header-primary;
+    color: #dfeaff;
+    font-size: $primary-font-size;
+
+    .dps-header {
+      mat-icon {
+        // vertical-align: middle;
+        // border-radius: 100%;
+        // border: 2px solid #859ece;
+        // color: #a9c6fd;
+        // height: 14px;
+        // width: 18px;
+        // font-size: 18px;
+        // line-height: 9px;
+        // padding: 5px 1px 1px 1px;
+        // margin: -2px 0 0 0;
+
+        vertical-align: middle;
+        color: #a9c6fd;
+        height: 14px;
+        width: 18px;
+        font-size: 22px;
+        line-height: 9px;
+        padding: 5px 13px 1px 1px;
+        margin: -2px 0 0 0;
+      }
+    }
+  }
+}
+
+.general-close {
+
+  height: 23px;
+  width: 24px;
+
+  span {
+    line-height: 15px;
+
+
+  }
+
+  .mat-icon {
+    float: left;
+    font-size: 16px;
+  }
+
+}

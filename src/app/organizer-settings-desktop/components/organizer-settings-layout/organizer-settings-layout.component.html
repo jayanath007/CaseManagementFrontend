@@ -1,0 +1,386 @@
+<div fxLayout="column" class="organizer-settings-layout">
+  <mat-progress-bar *ngIf="isLoading || saving" mode="query"></mat-progress-bar>
+  <mat-tab-group fxFlex="1 1 auto" #matTabGroup>
+    <mat-tab label="General">
+      <div class="dps-general-settings">
+        <div fxFlex="1 1 auto" class="dps-white-gray-scroll" fxLayout="column">
+          <div class="dps-signature-setting" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-list-item class="dps_global_sig_chk">
+                <mat-checkbox labelPosition="before" color="primary" [checked]="useGlobalSignature"
+                  (change)="onUseGlobalSignatureChange($event)">Use Global Signature </mat-checkbox>
+              </mat-list-item>
+              <button class="dps-signature-creator" mat-button (click)="onGlobalSignatureCreatorBtnClicked()"
+                *ngIf="IsLoginUserSupervisor$|async"
+                [disabled]="(!!useGlobalSignature && !!(globalSignatureTempleteIsLoading$|async))">
+                <mat-icon>edit_road </mat-icon>
+                Global Signature
+              </button>
+              <mat-divider *ngIf="IsLoginUserSupervisor$|async"></mat-divider>
+              <button class="dps-signature-creator" mat-button (click)="onSignatureCreatorBtnClicked()"
+                [disabled]="!userInfo" *ngIf="!useGlobalSignature">
+                <mat-icon>mode_edit </mat-icon>
+                Signature Creator
+              </button>
+            </div>
+
+          </div>
+          <h3 mdSubheader fxFlex="1 1 auto">Signature Setting</h3>
+          <div fxLayout="column" fxLayoutGap="1em">
+            <div *ngIf="matTabGroup.selectedIndex===0" class="left-pading">
+              <dps-ck-editor *ngIf="!useGlobalSignature" [dpsCkEditorImg]="signature" [debounceTime]="500"
+                [(ngModel)]="signature" (change)="onSignatureChange(signature)" [config]="{}" (ready)="ckReady()">
+              </dps-ck-editor>
+              <div *ngIf="!!useGlobalSignature && !(globalSignatureTempleteIsLoading$|async)"
+                class="dps-white-gray-scroll dps_global_sign_preview"
+                [innerHTML]="(globalSignatureHtml$|async)|safeHtml">
+              </div>
+              <div *ngIf="(!!useGlobalSignature && !!(globalSignatureTempleteIsLoading$|async))"
+                class="dps-white-gray-scroll dps_global_sign_preview">
+                <mat-spinner *ngIf="loading" class="loading" diameter="50"></mat-spinner>
+              </div>
+
+            </div>
+            <mat-list-item>
+              <mat-checkbox color="primary" [checked]="isSignatureAutoAdd" (change)="onSignatureAutoAddChange($event)"
+                class="DPS_signature_auto_add left-pading">Automatically
+                include my signature on messages I send</mat-checkbox>
+            </mat-list-item>
+
+          </div>
+
+          <h3 mdSubheader>Message format</h3>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <div class="dps-messages-format left-pading" fxLayout="row" fxLayoutAlign=" center">
+              <mat-form-field appearance="outline" class="dps-font-famly">
+                <mat-label>{{messageFormat?.fontFamily ?'Font famly':''}}</mat-label>
+                <mat-select #fontFamily [value]="messageFormat?.fontFamily"
+                  [style.font-family]="messageFormat?.fontFamily" (selectionChange)="onFontFamilyChange($event.value)">
+                  <mat-option value="Arial" style="font-family: Arial;">
+                    Arial</mat-option>
+                  <mat-option value="Comic Sans MS" style="font-family: Comic Sans MS;">Comic Sans MS
+                  </mat-option>
+                  <mat-option value="Courier New" style="font-family: Courier New;">
+                    Courier New</mat-option>
+                  <mat-option value="Georgia" style="font-family: Georgia;">Georgia</mat-option>
+                  <mat-option value="Lucida Sans Unicode" style="font-family: Lucida Sans Unicode;">Lucida Sans Unicode
+                  </mat-option>
+                  <mat-option value="Tahoma" style="font-family: Tahoma;">Tahoma
+                  </mat-option>
+                  <mat-option value="Times New Roman" style="font-family: Times New Roman;">
+                    Times New Roman</mat-option>
+                  <mat-option value="Trebuchet MS" style="font-family: Trebuchet MS;">
+                    Trebuchet MS</mat-option>
+                  <mat-option value="Calibri" style="font-family: Calibri;">
+                    Calibri</mat-option>
+                  <mat-option value="Mangal" style="font-family: Mangal;">Mangal</mat-option>
+                  <mat-option value="Fascinate" style="font-family: Fascinate;">Fascinate</mat-option>
+                  <mat-option value="Fjalla One" style="font-family: Fjalla One;">Fjalla One
+                  </mat-option>
+                  <mat-option value="Griffy" style="font-family: Griffy;">Griffy</mat-option>
+                  <mat-option value="Monospace" style="font-family: Monospace;">Monospace</mat-option>
+                  <mat-option value="Cambria" style="font-family: Cambria;">Cambria</mat-option>
+                  <mat-option value="Kalinga" style="font-family: Kalinga;">Kalinga</mat-option>
+                  <mat-option value="Candara" style="font-family: Candara;">Candara</mat-option>
+                  <mat-option value="DaunPenh" style="font-family: DaunPenh;">DaunPenh</mat-option>
+                  <mat-option value="Lucida Console" style="font-family: Lucida Console;">Lucida Console</mat-option>
+                  <mat-option value="Helvetica" style="font-family: Helvetica;">Helvetica</mat-option>
+                  <mat-option value="Gungsuh" style="font-family: Gungsuh;">Gungsuh</mat-option>
+                  <mat-option value="Verdana" style="font-family: Verdana;">
+                    Verdana</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="dps-font-size">
+                <mat-label>{{messageFormat?.fontSize ?'Font size':''}}</mat-label>
+                <mat-select [value]="messageFormat?.fontSize" (selectionChange)="onFontSizeChange($event.value)">
+                  <mat-option value="8pt">8</mat-option>
+                  <mat-option value="9pt">9</mat-option>
+                  <mat-option value="10pt">10</mat-option>
+                  <mat-option value="11pt">11</mat-option>
+                  <mat-option value="12pt">12</mat-option>
+                  <mat-option value="14pt">14</mat-option>
+                  <mat-option value="16pt">16</mat-option>
+                  <mat-option value="18pt">18</mat-option>
+                  <mat-option value="20pt">20</mat-option>
+                  <mat-option value="22pt">22</mat-option>
+                  <mat-option value="24pt">24</mat-option>
+                  <mat-option value="26pt">26</mat-option>
+                  <mat-option value="28pt">28</mat-option>
+                  <mat-option value="36pt">36</mat-option>
+                  <mat-option value="48pt">48</mat-option>
+                  <mat-option value="72pt">72</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-button-toggle-group appearance="legacy" multiple>
+                <mat-button-toggle [checked]="messageFormat?.isBold" (change)="onIsBoldChange()">
+                  <mat-icon class="dps-font-icon">format_bold</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle [checked]="messageFormat?.isItalic" (change)="onIsItalicChange()">
+                  <mat-icon class="dps-font-icon">format_italic</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle [checked]="messageFormat?.isUnderline" (change)="onIsUnderlineChange()">
+                  <mat-icon class="dps-font-icon">format_underlined</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle [checked]="!!messageFormat?.fontColor" [matMenuTriggerFor]="colorMenu"
+                  class="dps-font-color">
+                  <mat-icon class="dps-font-icon">text_format</mat-icon>
+                  <mat-menu #colorMenu="matMenu">
+                    <button class="dps-folder-action" mat-menu-item (click)="onFontColorChange('')">Automatic <i
+                        *ngIf="!messageFormat?.fontColor" class="fa fa-check" aria-hidden="true"></i></button>
+                    <div class="dps-calendar-color-palet">
+                      <div fxLayout="row">
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#1abc9c'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#1abc9c'}"
+                            (click)="onFontColorChange('#1abc9c')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#2ecc71'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#2ecc71'}"
+                            (click)="onFontColorChange('#2ecc71')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#3498db'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#3498db'}"
+                            (click)="onFontColorChange('#3498db')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#9b59b6'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#9b59b6'}"
+                            (click)="onFontColorChange('#9b59b6')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#4e5f70'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#4e5f70'}"
+                            (click)="onFontColorChange('#4e5f70')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#f1c40f'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#f1c40f'}"
+                            (click)="onFontColorChange('#f1c40f')"></button>
+                        </div>
+                      </div>
+                      <div fxLayout="row">
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#16a085'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#16a085'}"
+                            (click)="onFontColorChange('#16a085')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#27ae60'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#27ae60'}"
+                            (click)="onFontColorChange('#27ae60')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#2980b9'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#2980b9'}"
+                            (click)="onFontColorChange('#2980b9')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#8e44ad'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#8e44ad'}"
+                            (click)="onFontColorChange('#8e44ad')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#2c3e50'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#2c3e50'}"
+                            (click)="onFontColorChange('#2c3e50')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#f39c12'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#f39c12'}"
+                            (click)="onFontColorChange('#f39c12')"></button>
+                        </div>
+                      </div>
+                      <div fxLayout="row">
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#e67e22'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#e67e22'}"
+                            (click)="onFontColorChange('#e67e22')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#e74c3c'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#e74c3c'}"
+                            (click)="onFontColorChange('#e74c3c')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#ecf0f1'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#ecf0f1'}"
+                            (click)="onFontColorChange('#ecf0f1')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#95a5a6'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#95a5a6'}"
+                            (click)="onFontColorChange('#95a5a6')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#dddddd'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#dddddd'}"
+                            (click)="onFontColorChange('#dddddd')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#ffffff'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#ffffff'}"
+                            (click)="onFontColorChange('#ffffff')"></button>
+                        </div>
+                      </div>
+                      <div fxLayout="row">
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#d35400'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#d35400'}"
+                            (click)="onFontColorChange('#d35400')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#c0392b'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#c0392b'}"
+                            (click)="onFontColorChange('#c0392b')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#bdc3c7'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#bdc3c7'}"
+                            (click)="onFontColorChange('#bdc3c7')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#7f8c8d'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#7f8c8d'}"
+                            (click)="onFontColorChange('#7f8c8d')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#999999'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#999999'}"
+                            (click)="onFontColorChange('#999999')"></button>
+                        </div>
+                        <div>
+                          <button class="dps-folder-action" mat-menu-item [style.background-color]="'#000000'"
+                            [ngClass]="{'dps-selected-color': messageFormat?.fontColor==='#000000'}"
+                            (click)="onFontColorChange('#000000')"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-menu>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+            <div class="format-prevew" [style.font-size]="messageFormat?.fontSize"
+              [style.color]="messageFormat?.fontColor" [style.font-family]="messageFormat?.fontFamily"
+              [style.font-weight]="messageFormat?.isBold ? 'bold' : ''"
+              [style.font-style]="messageFormat?.isItalic ? 'italic' : ''"
+              [style.text-decoration]="messageFormat?.isUnderline ? 'underline' : ''">
+              <p>Messages you write will look like this by default.</p>
+              <p>You can also change the format of your messages in compose.</p>
+            </div>
+          </div>
+
+
+          <h3 mdSubheader>Regional Setting</h3>
+
+
+          <!-- <span mdPrefix>Current time zone: &nbsp;</span> -->
+
+          <mat-form-field style="font-size: 12px;" class="left-pading dps-regional-setting">
+            <mat-select placeholder="Current time zone" [ngModel]="userTimeZone"
+              (selectionChange)="onTimeZoneChange($event.value)">
+              <mat-option *ngFor="let timeZone of timeZones" [value]="timeZone.alias">
+                {{timeZone.displayName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+
+
+          <h3 mdSubheader>Chaser Setting</h3>
+          <mat-list-item>
+            <mat-slide-toggle color="primary" [checked]="isChaserEnable" (change)="onChaserEnableChange($event)"
+              labelPosition="before" class="chaser_event left-pading">Enable chaser : </mat-slide-toggle>
+          </mat-list-item>
+
+          <h3 mdSubheader>Notifications</h3>
+          <mat-list-item>
+            <mat-slide-toggle color="primary" [checked]="reminderSoundEnable"
+              (change)="onReminderSoundEnableChange($event)" labelPosition="before" class="chaser_event left-pading">
+              Reminder sound
+              : </mat-slide-toggle>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-slide-toggle color="primary" [checked]="newMailSoundEnable"
+              (change)="onNewMailSoundEnableChange($event)" labelPosition="before" class="chaser_event left-pading">New
+              mail sound :
+            </mat-slide-toggle>
+          </mat-list-item>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Automatic replies" [disabled]="!enableAutoReplies">
+      <div *ngIf="matTabGroup.selectedIndex===1" class="dps-general-settings">
+        <div class="dps-white-gray-scroll" fxFlex="1 1 auto">
+          <dps-automatic-replies-settings [automaticRepliesSetting]="automaticRepliesSetting" [timeZone]="userTimeZone"
+            (changeAutomaticRepliesSetting)="onChangeAutomaticRepliesSetting($event)"></dps-automatic-replies-settings>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="end center" class="dps-mail-setting-actions">
+    <button class="dps-stting-sve" [disabled]="isLoading || saving" mat-raised-button (click)="onSubmitBtnClick()">
+      Save
+    </button>
+    <button class="dps-stting-cancel" mat-raised-button (click)="onCancelBtnClicked()">
+      Cancel
+    </button>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div>
+ 
+  <mat-progress-bar *ngIf="isLoading || saving" mode="query"></mat-progress-bar>
+  <mat-chip-list>
+  <mat-chip *ngIf="isSaveSuccess"  color="primary" selected="true">Successfully Saved...</mat-chip>
+  </mat-chip-list>
+  <mat-list>
+    <h3 mdSubheader>Signature Setting
+    </h3>
+   
+   
+
+    <dps-ck-editor [dpsCkEditorImg]="signature" [debounceTime]="500" [(ngModel)]="signature" (change)="onSignatureChange(signature)" [config]="{}"> </dps-ck-editor>
+  <mat-list-item>
+    <mat-checkbox [checked]="isSignatureAutoAdd" (change)="onSignatureAutoAddChange($event)">Automatically include my signature on messages I send</mat-checkbox>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mdSubheader>Regional Setting</h3>
+  <mat-list-item>
+    
+    <mat-form-field style="width: 100%">
+      <mat-select placeholder="Current time zone" [ngModel]="userTimeZone" (selectionChange)="onTimeZoneChange($event.value)">
+        <mat-option *ngFor="let timeZone of timeZones" [value]="timeZone.alias">
+          {{timeZone.displayName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mdSubheader>Chaser Setting</h3>
+  <mat-list-item>
+    <mat-slide-toggle [checked]="isChaserEnable" (change)="onChaserEnableChange($event)" labelPosition="before">Enable chaser : </mat-slide-toggle>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span></span>
+    <button [disabled]= "isLoading || saving" mat-raised-button (click)="onSubmitBtnClick()">
+      Save
+    </button>
+    <button mat-raised-button (click)="onCancelBtnClicked()">
+      Cancel
+    </button>
+  </mat-list-item>
+</mat-list>
+</div> -->

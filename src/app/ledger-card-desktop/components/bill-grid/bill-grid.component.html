@@ -1,0 +1,57 @@
+<div fxLayout="column" class="dps-grid-content">
+  <div fxFlex="calc(100%-50px)" fxLayout="column" class="dps-white-gray-scroll dps-grid-scroll" >
+    <div fxLayout="column" class="dps-white-gray-scroll dps-grid">
+      <div class="dps-grid-controller" fxLayout="column" >
+        <div class="row-highlight" dpsIsMobile>
+          <div class="dps-columnheader" >
+            <dps-column-header *ngFor="let header of billGridData?.gridColumns" [fxFlex]="header.extras.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+              (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex="calc(100%-85px)" class="dps-white-gray-scroll bill-grid-scroll">
+          <mat-nav-list>
+            <div *ngFor="let item of billGridData?.billGridPage?.data;let isOdd=odd; let isEven=even" [ngClass]="item == selectRow?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+              (click)="onSelectRow(item)">
+              <mat-list-item disableRipple class="dps-grid-list-item">
+                <div fxLayout class="grid-data" >
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item.date | date :'dd/MM/yyyy'}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item.type}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item.ref}}"></div>
+                  <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{item.details}}"></div>
+                  <div class="row-data mat_line vat" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{item.vat | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line pc dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{item.pc | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line expenses dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{item.expenses | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line disbs dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{item.disbs | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line gross dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{item.gross | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line paida-mount dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{item.paidAmount | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line outstandig-amount dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="getFxFlexProperty(10)"
+                    innerHTML="{{item.outstandigAmount | number : '1.2-2'}}"></div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-nav-list>
+        </div>
+        <!-- grid Total -->
+        <mat-divider></mat-divider>
+        <div dpsIsMobile class="footer-shadow ">
+          <div class="footer-property">
+              <div [fxFlex]="getFxFlexProperty(0)" innerHTML=""></div>
+              <div [fxFlex]="getFxFlexProperty(1)" innerHTML=""></div>
+              <div [fxFlex]="getFxFlexProperty(2)" innerHTML=""></div>
+              <div class="row-data total-attribute" [fxFlex]="getFxFlexProperty(3)" >Total</div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{billGridData?.total?.vatTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{billGridData?.total?.pcTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{billGridData?.total?.expeTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{billGridData?.total?.disbsTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{billGridData?.total?.grossTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{billGridData?.total?.paidTotal | number : '1.2-2'}}"></div>
+              <div class="row-data total" [fxFlex]="getFxFlexProperty(10)" innerHTML="{{billGridData?.total?.outsTotal | number : '1.2-2'}}"></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

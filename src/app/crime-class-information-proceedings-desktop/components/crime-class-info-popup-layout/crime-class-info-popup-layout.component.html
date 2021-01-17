@@ -1,0 +1,108 @@
+<dps-common-popup-header icon="work" title="Proceeding Class Information" buttons="close" [loading]="isLoading"
+  iconColor="#ffffff" titleColor="#ffffff" toolbarColor="#1b6ebe" (buttonClick)="onClose()">
+</dps-common-popup-header>
+
+<div *ngIf="!!infomationModel" class="dps-white-gray-scroll">
+  <div class="dps-total-and-info-header" *ngIf="!selectSummeryType">
+    <dps-class-information fxLayout="column" [stageReachedList]="stageReachedList" [matterTypeList]="matterTypeList"
+      [outComeCode]="outComeCode" [caseTypes]="caseTypes" [infomationModel]="infomationModel"
+      (changeModel)="onChangeUserInput($event.key, $event.value)">
+    </dps-class-information>
+    <dps-additional-class-information fxLayout="column" [infomationModel]="infomationModel"
+      (changeModel)="onChangeUserInput($event.key, $event.value)" (openLocationSearch)="onOpenLocationSearch($event)">
+    </dps-additional-class-information>
+  </div>
+  <div *ngIf="!!selectSummeryType" style="width: 97%; padding: 15px;">
+    <dps-total-description [selectType]="selectSummeryType" [currenySymbol]="(homeCurrency | currencySymbols)"
+      [data]="totalViewData.classTotalSummary" [height]="294" (unpinTotal)="onHideTotal()"> </dps-total-description>
+  </div>
+  <div fxLayout="row" class="rate-types">
+    <mat-checkbox [ngModel]="infomationModel[modelProperty?.committedToCrownCourt]"
+      (change)="onChangeUserInput(modelProperty?.committedToCrownCourt, $event.checked)" color="primary">Committed to
+      the crown
+      court
+    </mat-checkbox>
+    <mat-radio-group style="margin-left: 25px;" [disabled]="!infomationModel[modelProperty?.committedToCrownCourt]"
+      (change)="onChangeUserInput(modelProperty?.committedToCrownCourtType, $event.value)"
+      [ngModel]="infomationModel[modelProperty?.committedToCrownCourtType]">
+      <mat-radio-button [value]="committedToCrownCourtType.elected" style="margin-left: 20px;">
+        Elected</mat-radio-button>
+      <mat-radio-button [value]="committedToCrownCourtType.indictable" style="margin-left: 20px;">
+        Indictable</mat-radio-button>
+      <mat-radio-button [value]="committedToCrownCourtType.transferred" style="margin-left: 20px;">
+        Transferred / Directed</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div fxLayout="row" class="rate-types">
+    <div fxFlex="row" class="claims-check">
+      <mat-checkbox [disabled]="infomationModel[modelProperty?.seriousFraudCase]" fxFlex="1 1 auto"
+        [ngModel]="infomationModel[modelProperty?.isEnhancedRates]"
+        (change)="onChangeUserInput(modelProperty?.isEnhancedRates, $event.checked)" color="primary">Enhanced Rates
+        claimed
+      </mat-checkbox>
+      <mat-checkbox [disabled]="!infomationModel[modelProperty?.isEnhancedRates]" style="margin-left: 20px;"
+        [ngModel]="infomationModel[modelProperty?.seriousFraudCase]"
+        (change)="onChangeUserInput(modelProperty?.seriousFraudCase, $event.checked)" color="primary">
+        Is this a Serious Fraud Case or are there elements of Serious Fraud?
+      </mat-checkbox>
+    </div>
+    <div fxLayout="row" class="drop-edits" fxLayoutGap="15px grid">
+      <dps-editable-dropdown style="width: 48px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.travUplifts]" [placeholder]="'Travel'"
+        (changeValue)="onChangeUserInput(modelProperty?.travUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 55px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.waitUplifts]" [placeholder]="'waiting'"
+        (changeValue)="onChangeUserInput(modelProperty?.waitUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 78px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.attUplifts]" [placeholder]="'Attendanes'"
+        (changeValue)="onChangeUserInput(modelProperty?.attUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 78px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.prepUplifts]" [placeholder]="'Preparation'"
+        (changeValue)="onChangeUserInput(modelProperty?.prepUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 68px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.advoUplifts]" [placeholder]="'Advocacy'"
+        (changeValue)="onChangeUserInput(modelProperty?.advoUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 55px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.letterUplifts]" [placeholder]="'Letters'"
+        (changeValue)="onChangeUserInput(modelProperty?.letterUplifts, $event)">
+      </dps-editable-dropdown>
+      <dps-editable-dropdown style="width: 43px;" [numberOnly]="true" [options]="enhanceRateOption"
+        [value]="infomationModel[modelProperty?.callsUplifts]" [placeholder]="'Calls'"
+        (changeValue)="onChangeUserInput(modelProperty?.callsUplifts, $event)">
+      </dps-editable-dropdown>
+    </div>
+  </div>
+
+
+
+
+  <div fxLayout="row" class="bottom-contents-wrapper">
+    <div class="information-bottom-left" fxLayout="row" fxFlex="43">
+
+      <dps-representation-order-details [infomationModel]="infomationModel" fxFlex="52"
+        (changeModel)="onChangeUserInput($event.key, $event.value)">
+      </dps-representation-order-details>
+      <div class="status-information" fxFlex="48">
+        <dps-class-statues-information fxLayout="column" [infomationModel]="infomationModel"
+          [controlProperty]="controlProperty" (changeModel)="onChangeUserInput($event.key, $event.value)">
+        </dps-class-statues-information>
+        <div class="status-information-button-set">
+          <button class="st-inf-close" mat-button (click)="onSave()">Save</button>
+          <button class="st-inf-re-open" mat-button (click)="onCloseReopenClass()">
+            {{!!(infomationModel[modelProperty.closedDate]) ? 'Re-Open Class' : 'Close Class'}}</button>
+        </div>
+      </div>
+    </div>
+    <dps-current-total [total]="totalViewData" [selectType]="selectSummeryType" [isPinItem]="ispinSummery" fxFlex="57"
+      [isLoading]="isLoading" [committedToCrownCourt]="infomationModel[modelProperty.committedToCrownCourt]"
+      [leadUfnTotalSummary]="leadUfnTotalSummary" (viewTotalSummery)="onViewTotalSummery($event)"
+      (hideTotal)="onHideTotal()" (pinUnpin)="ispinSummery = !ispinSummery">
+    </dps-current-total>
+  </div>
+
+</div>

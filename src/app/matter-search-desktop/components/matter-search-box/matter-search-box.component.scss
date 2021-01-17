@@ -1,0 +1,37 @@
+@import '~styles/variables.scss';
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .search-number{
+    background: #ff9400;
+  }
+
+  .search-number{
+    background: #ff9400;
+    padding: 1px 4px;
+    border-radius: 5px;
+  }
+
+  .mat-hint
+  {
+    padding: 2%;
+    color: $primary;
+  }
+  .mat-input-element
+  {
+    color: $primary;
+    font-size: 12px;
+  }
+  .mat-list-item-content
+  {
+    border-bottom: 1px solid #8397a9;
+  }
+  .matter-general-search .mat-form-field-subscript-wrapper{
+    top: -24px;
+  }

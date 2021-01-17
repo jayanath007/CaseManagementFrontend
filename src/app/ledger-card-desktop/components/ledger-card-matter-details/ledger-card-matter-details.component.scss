@@ -1,0 +1,26 @@
+@import '~styles/variables.scss';
+mat-divider {
+    border-top-color: $dsp-ledgaer-card;
+}
+
+.ledger-card-details {
+    margin-bottom: 7px;
+}
+
+.lbl{
+    background: #e5f9ff;
+    padding: 8px 8px;
+    color: #3d455d;
+    font-weight: 500;
+    font-size: $primary-font-size - 2;
+    border-bottom: 1px solid #9dd5ea;
+}
+.value-lbl{
+    background: $sky-blue;
+    padding: 8px 0px;
+    color: #084b88;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 0;
+}

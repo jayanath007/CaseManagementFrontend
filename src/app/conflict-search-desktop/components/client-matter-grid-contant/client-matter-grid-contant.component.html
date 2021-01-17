@@ -1,0 +1,14 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+  <mat-list-item [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" class="dps-grid-list-item"
+    *ngFor="let rowData of gridData; let isOdd=odd;">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': rowData.selected}">
+      <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData.data?.matterRef}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.data?.matterDetails}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData.data?.matterFeeEarner}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+        innerHTML="{{rowData.data?.isClosedMatter ? 'Closed ' : 'Open'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+        innerHTML="{{rowData.data?.matterStartDate | date :'dd/MM/yyyy' }}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

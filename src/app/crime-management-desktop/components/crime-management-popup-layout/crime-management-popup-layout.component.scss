@@ -1,0 +1,71 @@
+@import '~styles/variables.scss';
+
+::ng-deep .crime-class-information {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}
+
+mat-toolbar.top {
+  background: #006cc1;
+  height: 38px;
+  color: #fff;
+  font-size: 14px;
+  display: block;
+  padding: 7px 18px 0;
+
+    .time-rc-head-icon {
+      color: #fff;
+      font-size: 21px;
+      float: left;
+      margin-top: 4px;
+      margin-right: 5px;
+    }
+    .time-rc-close
+  {
+    float: right;
+    width: 21px;
+    height: 22px;
+    margin-top: -5px;
+    text-align: center;
+
+    i
+    {
+      font-size: 17px;
+      float: right;
+    }
+  }
+  }
+
+  
+.header-lbl
+{
+  font-family: $primary-font-stack;
+  font-size: 13px;
+  margin-right: 7px;
+}
+
+  mat-toolbar.body {
+    height: 38px;
+    color: #165d96;
+    font-size: 14px;
+    padding: 0;
+    background: none;
+  }
+  mat-toolbar.body-sub
+  {
+    height: 38px;
+    color: #666;
+    font-size: 12px;
+    padding: 0;
+    background: none;
+
+  }
+
+.crime-information-general .mat-dialog-content
+  {
+    padding: 0;
+    margin: 0 0;
+    
+  }

@@ -1,0 +1,14 @@
+<div fxLayout="column" class="dps-msg-viewer">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <div fxFlex="calc(100%-5px)">
+    <div class="no-attachment" *ngIf="errorMessage">
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> &nbsp; {{errorMessage}} </div>
+    <dps-mail-view-content [item]="{data:item$.asObservable()|async}" *ngIf="item$.asObservable()|async"
+      (meetingResponse)="onMeetingResponse($event)" [timeZone]="timeZone" [companyCode]="companyCode"
+      (replyForward)="onReplyForward($event)" (openAttachement)="onOpenAttachement($event)"
+      (downloardFileAttachment)="onDownloardFileAttachment($event)" (viewDpsFile)="onViewDpsFile($event)"
+      [isItemAttachment]="true" [openFrom]="(this.input.diaryInput?.attachmentRef||!isItemRefNumber)?'':'openCase'"
+      [isComputerDownloadOnly]="(this.input.diaryInput?.attachmentRef || !isItemRefNumber )">
+    </dps-mail-view-content>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="dps-file-grid">
+  <mat-sidenav-container class="work-done-scrolle">
+    <mat-sidenav position="end" [ngClass]="{'dps-sign-doc': openedFile?.signAndSendUrl}" [disableClose]="true"
+      mode="side" [opened]="documentViewOpened && !isMobileDevice" fxLayout="column">
+      <div class="dps-documentview" fxLayout="column">
+        <div class="dps-documentview-action">
+          <button mat-icon-button (click)="onCloseViewer(openedFile)" color="primary"
+            [ngClass]="{'dps-doc-viwer-close-btn':openedFile?.documentUrl,'dps-email-viwer-close-btn':openedFile?.emailItem}">
+            <mat-icon>close</mat-icon>
+          </button>
+          <button class="open-in-view" mat-icon-button *ngIf="openedFile?.emailItem" color="primary"
+            (click)="openMsgFile()">
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </div>
+
+        <mat-progress-bar
+          *ngIf="!(!openedFile?.data?.letter_icon && documentViewOpened) && !openedFile?.documentUrl && openedFile?.documentUrlLoadSuccess!==false"
+          mode="indeterminate"></mat-progress-bar>
+        <dps-document-view-page [fxFlex]="openedFile?.documentUrl?'calc(100%-41px)':'0 0 0'"
+          (editDocument)="onEditDocument($event)" [documentUrl]="openedFile?.documentUrl" [fileItem]="openedFile"
+          [matterInfo]="matterInfo" [documentUrlLoadSuccess]="openedFile?.documentUrlLoadSuccess"
+          [documentUrlIsLoading]="false" *ngIf="openedFile?.data?.letter_icon" [isSignDoc]="false"
+          [signandSendToken]="null" [extension]="openedFile?.data?.letter_icon"
+          [showDocumentEdit]="(isDocumentVersioning && openedFile?.data?.auditParentId>0) ?false:true">
+          <!-- added "dps-file-history-fix-row => <i>new_releases</i>" Logic for showDocumentEdit -->
+        </dps-document-view-page>
+        <dps-msg-viewer fxFlex="calc(100%-40px)" *ngIf="openedFile?.emailItem" [input]="{
+            viewerFrom: 'diary',
+            diaryInput: {appCode: matterInfo.AppCode, branchId: matterInfo.BranchId, fileId:
+            matterInfo.FileId,
+            itemRef: openedFile.data.diary_UID, attachmentName: openedFile.data.letter_name}
+        }"></dps-msg-viewer>
+        <span class="no-attachment" *ngIf="(!openedFile?.data?.letter_icon && documentViewOpened)">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> &nbsp; No attachment found </span>
+        <span class="no-attachment" *ngIf="openedFile?.documentUrlLoadSuccess===false">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> &nbsp; Browser doesn’t support viewing the
+          file.
+        </span>
+        <!-- <dps-mail-view-content fxFlex="calc(100%-40px)" *ngIf="openedFile?.emailItem" [item]="openedFile?.emailItem"
+          [timeZone]="timeZone" [companyCode]="companyCode" [isItemAttachment]="true" openFrom="openCase"
+          (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+          (replyForward)="replyToMail($event, openedFile.data.diary_UID, openedFile.password)"
+          (viewDpsFile)="onViewDpsFile($event)">
+        </dps-mail-view-content> -->
+      </div>
+
+    </mat-sidenav>
+
+    <div class="dps-file-history" fxLayout="column">
+      <div fxFlex="calc(100%-50px)" fxLayout="column">
+        <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+
+          <div class="dps-file-layout-controller" fxLayout="column">
+            <div class="row-highlight" dpsIsMobile>
+              <div class="inner-highlight"
+                [ngClass]="{'group-level-one': (groupMode === fileHistoryGroupMode.Folder || groupMode ===
+                fileHistoryGroupMode.Date || groupMode === fileHistoryGroupMode.Note || groupMode ===
+                fileHistoryGroupMode.Type ) ,
+              'group-level-two':( groupMode === fileHistoryGroupMode.FolderDate ||  groupMode === fileHistoryGroupMode.DateFolder)}">
+                <dps-column-header *ngFor="let header of columnDefVisibale" [fxFlex]="headerFlex(header)" [def]="header"
+                  (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                  (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+                </dps-column-header>
+              </div>
+              <mat-progress-bar *ngIf="fileHistorData?.loading || signIsLoading" mode="indeterminate">
+              </mat-progress-bar>
+            </div>
+            <div fxLayout="column" fxFlex="calc(100%-40px)" class="dps-white-gray-scroll dps-grid-scroll"
+              dpsFileDroppable (onDrop)="onDrop($event)" [maxSize]="1000000">
+              <div #fileHistorGridContent class="dps-file-history-grid-content">
+                <dps-file-history-default [folderList]="folderList" *ngIf="groupMode === fileHistoryGroupMode.Default"
+                  [fileHistorData]="fileHistorData" [checkedItems]="checkedItems" (onDeleteRow)="deleteRow($event)"
+                  (moveSelectedFolder)="onMoveSelectedFolder($event)" (onEditRow)="editRow($event)"
+                  (onCheckedRow)="checkedRow($event)" (signDoc)="onSignDoc($event)" (xdraftItem)="onXdraftItem($event)"
+                  (newVersion)="onNewVersion($event)" (share)="onShare($event)" (expand)="onExpand($event)"
+                  (groupRowChange)="onGroupRowChange($event)" (pageChange)="onPageChange($event)"
+                  [columnDef]="columnDef" [deleteEntrySecurityInfo]="deleteEntrySecurityInfo"
+                  [isDocumentVersioning]="isDocumentVersioning" [pageInfo]="pageInfo"
+                  [pageSizeOptions]="pageSizeOptions" [isMuiltySelect]="getIsMuiltySelect" [matterInfo]="matterInfo"
+                  (onCheckin)="doCheckin($event)" (onDiscardCheckin)="doDiscardCheckin($event)">
+                </dps-file-history-default>
+
+                <dps-file-history-group (moveSelectedFolder)="onMoveSelectedFolder($event)"
+                  (loadMore)="onLoadMore($event)" [folderList]="folderList" *ngIf=" ( groupMode === fileHistoryGroupMode.Folder || groupMode === fileHistoryGroupMode.Date ||
+                  groupMode === fileHistoryGroupMode.Note || groupMode === fileHistoryGroupMode.Type)"
+                  [fileHistorData]="fileHistorData" [checkedItems]="checkedItems" (onDeleteRow)="deleteRow($event)"
+                  (onEditRow)="editRow($event)" (onCheckedRow)="checkedRow($event)" (signDoc)="onSignDoc($event)"
+                  (xdraftItem)="onXdraftItem($event)" (newVersion)="onNewVersion($event)" (share)="onShare($event)"
+                  (expand)="onExpand($event)" (groupRowChange)="onGroupRowChange($event)" [columnDef]="columnDef"
+                  [matterInfo]="matterInfo" [deleteEntrySecurityInfo]="deleteEntrySecurityInfo"
+                  [isDocumentVersioning]="isDocumentVersioning" [isMuiltySelect]="getIsMuiltySelect"
+                  (onCheckin)="doCheckin($event)" (onDiscardCheckin)="doDiscardCheckin($event)">
+                </dps-file-history-group>
+
+                <dps-file-history-two-group (loadMore)="onLoadMore($event)"
+                  (moveSelectedFolder)="onMoveSelectedFolder($event)" [folderList]="folderList"
+                  *ngIf=" ( groupMode === fileHistoryGroupMode.FolderDate ||  groupMode === fileHistoryGroupMode.DateFolder)"
+                  [fileHistorData]="fileHistorData" [checkedItems]="checkedItems" (onDeleteRow)="deleteRow($event)"
+                  (onEditRow)="editRow($event)" (onCheckedRow)="checkedRow($event)" (signDoc)="onSignDoc($event)"
+                  (xdraftItem)="onXdraftItem($event)" (newVersion)="onNewVersion($event)" (share)="onShare($event)"
+                  (expand)="onExpand($event)" (groupRowChange)="onGroupRowChange($event)" [columnDef]="columnDef"
+                  [matterInfo]="matterInfo" [deleteEntrySecurityInfo]="deleteEntrySecurityInfo"
+                  [isDocumentVersioning]="isDocumentVersioning" [isMuiltySelect]="getIsMuiltySelect"
+                  (onCheckin)="doCheckin($event)" (onDiscardCheckin)="doDiscardCheckin($event)">
+                </dps-file-history-two-group>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <mat-paginator *ngIf="groupMode === fileHistoryGroupMode.Default" class="footer-shadow"
+        [pageIndex]="pageInfo?.pageIndex" fxFlex="50px" [length]="fileHistorData?.total" [pageSize]="pageInfo.pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,18 @@
+@import '~styles/variables.scss';
+h3{
+    background: #04588d;
+    margin: 0;
+    color: $primary;
+    font-family: $primary-font-stack;
+    font-size: 15px;
+    font-weight: normal;
+    padding: 14px;
+
+}
+
+.general-controllers .save
+{
+    background: #037906;
+    color: $primary;
+
+}

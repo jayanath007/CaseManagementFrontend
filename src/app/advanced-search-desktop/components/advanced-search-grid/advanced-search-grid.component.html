@@ -1,0 +1,45 @@
+<div class="dps-advanced-search-grid" fxLayout="column">
+  <div fxFlex="calc(100%-50px)" fxLayout="column">
+    <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+      <div class="dps-file-layout-controller" fxLayout="column">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="inner-highlight">
+
+            <dps-column-header *ngFor="let header of columnDef" [ngClass]="setColColor(header.fieldName)"
+              [fxFlex]="header.extras.fxFlex" (contextmenu)="onColoumnRightClick($event,header)" [def]="header"
+              [filterAnchor]="header.extras.filterAnchor" (toggleSorting)="onToggleSorting($event)">
+            </dps-column-header>
+            <!--  -->
+
+
+          </div>
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+        </div>
+
+        <div fxLayout="column" fxFlex="calc(100%-45px)" class="dps-white-gray-scroll dps-grid-scroll">
+
+
+          <div (dblclick)="onOpenCaseClick(gridRowData)"
+            *ngFor="let gridRowData of gridDataList; let index =index; let isOdd=odd; let isEven=even"
+            [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+
+            <dps-advanced-search-grid-fix-row [gridDataList]="gridDataList" [coloumnArray]="coloumnArray"
+              [gridRowData]="gridRowData" [columnDef]="columnDef">
+
+            </dps-advanced-search-grid-fix-row>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <mat-paginator class="footer-shadow" [pageIndex]="paginatorDef?.currentPage" fxFlex="50px" [length]="totalItem"
+    [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"
+    fxFlex="50px">
+  </mat-paginator>
+</div>

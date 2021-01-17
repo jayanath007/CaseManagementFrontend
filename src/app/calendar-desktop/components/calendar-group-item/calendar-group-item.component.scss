@@ -1,0 +1,40 @@
+@import '~styles/variables.scss';
+.dps-folder-action{
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+}
+.dps-calendar-group-name{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    color: $calender-primary;
+    font-weight: 500;
+}
+
+mat-nav-list {
+    padding-top: 0px;
+}
+
+div.nav-list-item {
+    background-color: $primary;
+}
+
+mat-icon  {
+    margin-left: -11px;
+}
+
+span.dps-calendar-group {
+    margin-left: -11px;
+}
+
+input.dps-cal-group-input {
+    width: 100%; 
+    margin-left: 40px;
+}
+
+input {
+    width: 100%;
+}

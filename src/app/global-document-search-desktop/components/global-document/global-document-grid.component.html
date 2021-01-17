@@ -1,0 +1,80 @@
+<div class="dps-file-grid dps-global-doc-search">
+
+  <mat-drawer-container class="global-search-scroll">
+    <mat-drawer position="end" [disableClose]="true" mode="side" [opened]="documentViewOpened" fxLayout="column">
+
+      <div class="dps-documentview" fxLayout="column">
+        <div class="dps-documentview-action">
+          <button mat-icon-button (click)="onCloseViewer($event)" color="primary">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="onOpenInPopup()" color="primary">
+            <mat-icon> open_in_new</mat-icon>
+          </button>
+        </div>
+        <span class="no-attachment" *ngIf="(docUrl === null && documentViewOpened)">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> &nbsp; No attachment found </span>
+
+        <dps-global-document-view-page [docUrl]="docUrl" [documentViewOpened]="documentViewOpened">
+        </dps-global-document-view-page>
+
+      </div>
+
+    </mat-drawer>
+
+    <mat-drawer-content class="dps-file-history" fxLayout="column">
+      <div fxFlex="calc(100%-50px)" fxLayout="column">
+        <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+
+          <div class="dps-file-layout-controller" fxLayout="column">
+            <div class="row-highlight" dpsIsMobile>
+              <div class="inner-highlight">
+
+
+                <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+                  (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                  [filterAnchor]="header.extras.filterAnchor">
+                </dps-column-header>
+
+
+              </div>
+              <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+            </div>
+
+            <div fxLayout="column" fxFlex="calc(100%-45px)" class="dps-white-gray-scroll dps-grid-scroll">
+              <div [@.disabled]="true" #fileHistorGridContent class="dps-file-history-grid-content">
+
+                <mat-accordion [multi]="false">
+                  <mat-expansion-panel [expanded]="rowData.selected" *ngFor="let rowData of gridData; let isOdd=odd"
+                    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+                    <mat-expansion-panel-header collapsedHeight="35px" expandedHeight="35px">
+                      <mat-panel-title fxLayout="row">
+                        <dps-global-document-fix-row [rowData]="rowData" [columnDef]="columnDef">
+                        </dps-global-document-fix-row>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div fxLayout="row">
+                      <dps-global-grid-button-details [rowData]="rowData" (clickGridRow)="onClickGridRow(rowData)"
+                        (share)="onShare($event)" (openCase)="onOpenCaseClick(rowData)">
+                      </dps-global-grid-button-details>
+
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <mat-paginator class="footer-shadow" [pageIndex]="paginatorDef?.currentPage" fxFlex="50px" [length]="totalItem"
+        [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"
+        fxFlex="50px">
+      </mat-paginator>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

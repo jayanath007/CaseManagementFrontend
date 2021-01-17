@@ -1,0 +1,109 @@
+<mat-toolbar> Edit Report</mat-toolbar>
+
+
+<table class="dps-edit-list dps-white-gray-scroll">
+  <tr *ngIf="data.costType === 'extraCostItems'">
+    <td style="line-height: 48px;"><span>Professional Costs</span></td>
+    <td>
+      <mat-form-field style="width:200px">
+        <input matInput type="number" dpsNumbersOnlyWithDecimals step="01" #proCostInput [value]="report.profCosts "
+          (focusout)="changeFixCost(proCostInput.value, 'profCosts')"
+          (keyup)="changeFixCost(proCostInput.value, 'profCosts')">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr *ngFor="let item of costList; let index = index">
+    <td class="name">
+      {{itemDesplayName(item)}}&nbsp;&nbsp;
+      <span *ngIf="item.description && data.costType !== 'extraCostItems'" title="{{item.description}}">(?)</span></td>
+    <td>
+
+      <mat-form-field style="width:200px">
+        <input matInput type="number" dpsNumbersOnlyWithDecimals step="01" [value]="item.price "
+          (focusout)="changeCostItem(index, $event.target.value)">
+        <mat-icon class="dps-close-icon" (click)="removeItem(index)" matSuffix>cancel</mat-icon>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr *ngIf="data.costType === 'repNonVatItem' && report && (report.lasRate > 0)">
+    <td>Local Search</td>
+    <td>
+      <mat-form-field>
+        <input matInput type="number" dpsNumbersOnlyWithDecimals step="01" [value]="report.lasRate "
+          (focusout)="changeFixCost($event.target.value, 'lasRate')">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr *ngIf="data.costType === 'repNonVatItem' && report && (report.landRegFee > 0)">
+    <td>Land Registry Fee</td>
+    <td>
+      <mat-form-field>
+        <input matInput type="number" dpsNumbersOnlyWithDecimals step="01" [value]="report.landRegFee "
+          (focusout)="changeFixCost($event.target.value, 'landRegFee')">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr *ngIf="data.costType === 'repNonVatItem' && report && (report.stampDuty > 0)">
+    <td>Stamp Duty</td>
+    <td>
+      <mat-form-field>
+        <input matInput type="number" dpsNumbersOnlyWithDecimals step="01" [value]="report.stampDuty "
+          (focusout)="changeFixCost($event.target.value, 'stampDuty')">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr class="dps-add-field">
+    <td fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field style="width:115px">
+        <input id="newItemNameInput" matInput tabindex="1" #newItemNameInput>
+      </mat-form-field>
+      <mat-form-field style="width:200px">
+        <input id="newItemPriceInput" matInput type="number" #newItemPriceInput dpsNumbersOnlyWithDecimals step="01"
+          tabindex="2">
+      </mat-form-field>
+    </td>
+    <td>
+      <button mat-button (click)="addNewItem(newItemNameInput.value, newItemPriceInput.value)">
+        <mat-icon>add</mat-icon>ADD
+      </button>
+    </td>
+
+  </tr>
+  <tr fxLayout="column" *ngIf="data.costType === 'extraCostItems'">
+    <td>Discount allowance from professional fees</td>
+    <td class="dps-allowence" fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field>
+        <mat-placeholder floatPlaceholder="never">Discount %</mat-placeholder>
+        <input style="text-align:left;" #DiscountPerEl matInput type="number" dpsNumbersOnlyWithDecimals [maxlength]="2"
+          max="100" min="0" step="0.01" [value]="tempDiscountInfo.discountPer"
+          (keyup)="changeDiscountPer(DiscountPerEl.value)" (change)="changeDiscountPer(DiscountPerEl.value)">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder floatPlaceholder="never">Discount {{data.currency}}</mat-placeholder>
+        <input #DiscountAmtEl matInput type="number" dpsNumbersOnlyWithDecimals
+          [maxlength]="(report?.profCosts | propertyLength)" [max]="report.profCosts" step="01"
+          [value]="tempDiscountInfo.discountAmount" (keyup)="changeDiscountAmt(DiscountAmtEl.value)"
+          (change)="changeDiscountAmt(DiscountAmtEl.value)">
+      </mat-form-field>
+    </td>
+
+    <td class="text-area">
+      <mat-placeholder>
+        <mat-placeholder floatPlaceholder="never">Allowance text </mat-placeholder>
+        <input class="text-area" #AllowanceTextEl type="text" matInput [value]="tempDiscountInfo.allowanceText"
+          (change)="tempDiscountInfo.allowanceText = AllowanceTextEl.value">
+      </mat-placeholder>
+    </td>
+  </tr>
+
+</table>
+
+<mat-divider></mat-divider>
+<div fxLayout="row" fxLayoutAlign="end center" class="dps-mail-setting-actions">
+  <button class="dps-stting-sve" mat-raised-button (click)="onclaculateReport()">
+    Ok
+  </button>
+  <button class="dps-stting-cancel" mat-raised-button (click)="onCloseDialog()">
+    Cancel
+  </button>
+</div>

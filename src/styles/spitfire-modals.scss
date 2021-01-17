@@ -1,0 +1,95 @@
+
+@import 'variables.scss';
+.cdk-overlay-pane.dps-time-recording-popup-panel, 
+.cdk-overlay-pane.dps-add-note-popup-panel,
+.cdk-overlay-pane.dps-billing-guide-popup-panel {
+.mat-dialog-container {
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+mat-form-field {
+span.mat-select-value-text {
+    font-size: $primary-font-size - 2;
+}
+
+.mat-select-arrow {
+    color: $secondary !important;
+}
+
+input {
+    font-size: 12px;
+}
+
+}
+
+.mat-form-field-ripple
+{
+    background-color:$secondary !important;
+}
+
+.mat-chip.mat-chip-selected.mat-primary {
+    background-color: $secondary !important;
+}
+
+}
+
+
+.cdk-overlay-pane.dps-add-note-popup-panel {
+mat-form-field {
+
+    .mat-option {
+    font-size: $primary-font-size - 2 !important;
+    }
+}
+
+}
+
+
+.cdk-overlay-pane.dps-add-new-task-panel {
+    mat-form-field {
+
+       input , .mat-select-value-text {
+            font-size: 12px;
+        }
+
+      
+
+    }
+
+    
+        .mat-dialog-actions:last-child {
+            margin-bottom: 0px !important;
+            padding-right: 24px;
+        }
+        
+    
+}
+
+.dps-open-msg-modal {
+    dps-msg-popup-view {
+        div.mail-preview {
+            overflow: hidden;
+        }
+    }
+}
+
+.dps-Chaser-popup-panel {
+
+    .mat-dialog-actions:last-child {
+        margin-bottom: 0px !important;
+        margin-right: 15px;
+    }
+}
+
+
+.cdk-overlay-pane.dps-ledger-card-modal , 
+.cdk-overlay-pane.workFlowMenu-popup , .cdk-overlay-pane.dps-add-new-task-panel , 
+.cdk-overlay-pane.dps-open-msg-modal , .cdk-overlay-pane.dps-chaser-popup-panel,
+.dps-contacts-create-popup-panel,.dps-opportunity-view-popup-panel{
+    .mat-dialog-container {
+        padding: 0px !important;
+        overflow: hidden !important;
+    }
+}
+

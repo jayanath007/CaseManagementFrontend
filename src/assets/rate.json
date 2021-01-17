@@ -1,0 +1,123 @@
+{
+    "01.04.2016": [
+        {
+            "attendanceType": "IC1-Lon",
+            "timeTypeWithRate": {
+                "ADVICE": "0",
+                "TRAVELLING": "25",
+                "WAITING": "24",
+                "PREP/ATT": "45.35",
+                "ADVOCACY": "0",
+                "MILEAGERATE1": "0.45",
+                "CALLSIN": "3.51",
+                "CALLSOUT": "3.51",
+                "LETIN": "0",
+                "LETOUT": "3.51",
+                "TELADVICE": "0",
+                "ADVICE-US": "63.01",
+                "TRAVELLING-US": "63.01",
+                "WAITING-US": "63.01"
+            }
+        },
+        {
+            "attendanceType": "IC1-Non-Lon",
+            "timeTypeWithRate": {
+                "ADVICE": "0",
+                "TRAVELLING": "24",
+                "WAITING": "24",
+                "PREP/ATT": "42.8",
+                "ADVOCACY": "0",
+                "MILEAGERATE1": "0.45",
+                "CALLSIN": "3.38",
+                "CALLSOUT": "3.38",
+                "LETIN": "0",
+                "LETOUT": "3.38",
+                "TELADVICE": "0",
+                "ADVICE-US": "63.01",
+                "TRAVELLING-US": "63.01",
+                "WAITING-US": "63.01"
+            }
+        },
+        {
+            "attendanceType": "IC2-Lon-DS",
+            "timeTypeWithRate": {
+                "ADVICE": "0",
+                "TRAVELLING": "100",
+                "TRAVELLINGTOUS": "100",
+                "WAITING": "100",
+                "PREP/ATT": "42.8",
+                "ADVOCACY": "0",
+                "MILEAGERATE1": "0.45",
+                "CALLSIN": "3.38",
+                "CALLSOUT": "3.38",
+                "LETIN": "0",
+                "LETOUT": "3.38",
+                "TELADVICE": "0",
+                "ADVICE-US": "63.01",
+                "TRAVELLING-US": "63.01",
+                "WAITING-US": "63.01"
+            }
+        },
+        {
+                "attendanceType": "IC2-Lon-OS",
+                "timeTypeWithRate": {
+                    "ADVICE": "0",
+                    "TRAVELLING": "200",                    
+                    "TRAVELLINGTOUS": "200",
+                    "WAITING": "100",
+                    "PREP/ATT": "42.8",
+                    "ADVOCACY": "0",
+                    "MILEAGERATE1": "0.45",
+                    "CALLSIN": "3.38",
+                    "CALLSOUT": "3.38",
+                    "LETIN": "0",
+                    "LETOUT": "3.38",
+                    "TELADVICE": "0",
+                    "ADVICE-US": "63.01",
+                    "TRAVELLING-US": "63.01",
+                    "WAITING-US": "63.01"
+                }
+        },
+        {
+            "attendanceType": "IC2-Non-Lon-DS",
+            "timeTypeWithRate": {
+                "ADVICE": "0",
+                "TRAVELLING": "300",                
+                "TRAVELLINGTOUS": "300",
+                "WAITING": "100",
+                "PREP/ATT": "42.8",
+                "ADVOCACY": "0",
+                "MILEAGERATE1": "0.45",
+                "CALLSIN": "3.38",
+                "CALLSOUT": "3.38",
+                "LETIN": "0",
+                "LETOUT": "3.38",
+                "TELADVICE": "0",
+                "ADVICE-US": "63.01",
+                "TRAVELLING-US": "63.01",
+                "WAITING-US": "63.01"
+            }
+        },
+        {
+                "attendanceType": "IC2-Non-Lon-OS",
+                "timeTypeWithRate": {
+                    "ADVICE": "0",
+                    "TRAVELLING": "400",                    
+                    "TRAVELLINGTOUS": "400",
+                    "WAITING": "100",
+                    "PREP/ATT": "42.8",
+                    "ADVOCACY": "0",
+                    "MILEAGERATE1": "0.45",
+                    "CALLSIN": "3.38",
+                    "CALLSOUT": "3.38",
+                    "LETIN": "0",
+                    "LETOUT": "3.38",
+                    "TELADVICE": "0",
+                    "ADVICE-US": "63.01",
+                    "TRAVELLING-US": "63.01",
+                    "WAITING-US": "63.01"
+                }
+        }
+
+    ]
+}

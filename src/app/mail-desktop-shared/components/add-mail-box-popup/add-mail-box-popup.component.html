@@ -1,0 +1,58 @@
+<div class="organizer-alert general" fxLayout="column">
+  <h2 mat-dialog-title>
+    <mat-icon>{{data.icon}}</mat-icon>
+    <span>{{data.title}}</span>
+  </h2>
+
+  <mat-dialog-content fxFlex="calc(100%-110px)" class="dps-white-gray-scroll">
+    <div *ngIf="!selectedUser">{{data.message}}</div>
+    <dps-search-mail-from-list-manager></dps-search-mail-from-list-manager>
+    <mat-form-field class="always" floatLabel="always" *ngIf="!selectedUser">
+      <input #contactInput [matAutocomplete]="fromAutocomplete" matInput type="text" [formControl]="inputCtrl">
+      <mat-autocomplete #fromAutocomplete="matAutocomplete" (optionSelected)="optionSelected($event)">
+        <div [hidden]="!showSearchList">
+          <mat-option *ngFor="let person of searchedPeople.people" [value]="person.id" fxLayout="row">
+            <div class="dps_recipient" [ngStyle]="{'background-color': person.mail|recipientColorCode}">
+              <span class="dps_recipient_name">
+                {{person.displayName|nameInitials}}
+              </span>
+            </div>
+            <img #img [hidden]="!img.showProfileImg" src="{{person.mail | dpsUserImage | async}}" class="dps_recipient"
+              alt="..." (load)="img.showProfileImg=true">
+            <span class="dps-display-name">{{person.displayName}}</span> |
+            <small>{{ person.mail}}</small>
+          </mat-option>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-option disabled *ngIf="showLoader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching
+        </mat-option>
+        <mat-option disabled *ngIf="showSearchList && !(searchedPeople?.people.length > 0)">
+          No match was found.
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-list>
+      <mat-list-item *ngIf="selectedUser" dense class="dps-search-mail-from" disableRipple>
+        <button matListAvatar mat-icon-button class="dps-mail-item-avatar" *ngIf="!showProfileImg"
+          [ngStyle]="{'background-color': selectedUser.mail|recipientColorCode}">
+          <span>{{selectedUser.displayName|nameInitials}}</span>
+        </button>
+        <img matListAvatar [hidden]="!showProfileImg" src="{{selectedUser.mail | dpsUserImage | async}}" alt="..."
+          (load)="showProfileImg=true">
+        <span matLine>{{selectedUser.displayName}}</span>
+        <span matLine>{{selectedUser.mail}}</span>
+        <button mat-icon-button (click)="removeFrom()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-raised-button [mat-dialog-close]="selectedUser" color="primary"
+      [disabled]="!selectedUser">{{data.sender===undefined?'Add':'Send'}}</button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

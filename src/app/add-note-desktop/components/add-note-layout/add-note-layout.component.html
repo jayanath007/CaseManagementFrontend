@@ -1,0 +1,110 @@
+<div class="addnote-form" fxLayout="column">
+
+  <div fxFlex="42px" class="dps-toolbar-box-shadow">
+    <mat-toolbar [title]="addNodeHeaderText">
+      <mat-icon>note_add</mat-icon>
+      <mat-list class="dps-addnote-matlist" fxLayout="row">
+        <mat-list-item fxLayoutAlign="center center">
+          <span matLine>{{addNodeHeaderText}}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <mat-dialog-content>
+    <mat-tab-group fxFlex="calc(100%-110px)">
+      <div>
+        <mat-tab label="Main">
+          <dps-add-note-main class="dps-white-gray-scroll dps-addnote-main" [isDiaryTypeDisable]="isDiaryTypeDisable"
+            [fileUploadDisable]="fileUploadDisable" [feeEarnerList]="feeEarnerList"
+            [sendForSignatureToList]="sendForSignatureToList" [folderList]="folderList" [diaryTypes]="diaryTypeList"
+            [actionType]="actionTypeList" (updateSelectedFolder)="onFolderChanged($event)" [note]="note"
+            [itemDataList]="itemDataList" [password]="password" [dateDone]="dateDone" [isEdit]="isEdit"
+            [isLoading]="loading" [itemsLoading]="itemsLoading" [sendForSignature]="sendForSignature"
+            [timeRecordType]="timeRecordType" (updateSelectedAction)="onActionChanged($event)"
+            (uploadedFile)="onFileUpladed($event)" (updateSelectedFeeEarner)="onFeeEarnerChanged($event)"
+            (updateSelectedDiaryType)="onDiaryTypeChange($event)" (upateSelectedDate)="onDateDoneChange($event)"
+            (updateNote)="onChangeNote($event)" (updatePassword)="onUpdatePassword($event)"
+            (sendForSignatureChange)="onSendForSignatureChange($event)"
+            (sendForSignatureToChange)="onSendForSignatureToChange($event)"
+            (changeClassType)="onChangeClassType($event)" (changeAttType)="onChangeWorkType($event)">
+          </dps-add-note-main>
+        </mat-tab>
+        <mat-tab label="{{secondTabName}}" *ngIf="isShowTimeAndCost">
+          <dps-add-note-time-and-cost class="dps-white-gray-scroll dps-addnote-main" [isEdit]="isEdit"
+            [selectedDiaryTypeId]="selectedDiaryTypeId" [homeCurrency]="homeCurrency" [userGradeList]="userGradeList"
+            [uncharged]="uncharged" [rate]="rate" [unit]="unit" [fileNoteValue]="fileNoteValue" [extraRate]="extraRate"
+            [extraUnit]="extraUnit" [extraValue]="extraValue" [extraTimeType]="extraTimeType"
+            [diaryType]="diaryTypeList" [timeUseFeeEarnerRatesValueDisable]="timeUseFeeEarnerRatesValueDisable"
+            [timeRecordType]="timeRecordType" [classType]="classType" [attTypeList]="attTypeList"
+            [section51]="section51" [isBulkEntry]="isBulkEntry" [noOfEntryBy]="noOfEntryBy"
+            [isTelephoneAdv]="isTelephoneAdv" (updateChangeUncharged)="onUpdateUncharged($event)"
+            (updateSelectedUserGrade)="onUpdateSelectedUserGrade($event)" (updateRate)="onUpdateRate($event)"
+            (updateUnit)="onUpdateUnit($event)" (updateExtraRate)="onUpdateExtraRate($event)"
+            (updateExtraUnit)="onUpdateExtraUnit($event)" (updateSelectedExtraTime)="onUpdateSelectedExtraTime($event)"
+            (changeClassType)="onChangeClassType($event)" (changeAttType)="onChangeWorkType($event)"
+            (changeSection51)="onChangeSection51($event)" (changeIsBulkEntry)="onChangeIsBulkEntry($event)"
+            (changeNumOfEntries)="onChangeNumOfEntries($event)" (changeTelephoneAdv)="onChangeTelephoneAdv($event)"
+            [loading]="loading" [pageLoadType]="pageLoadType" [worktypeList]="worktypeList"
+            [activitiList]="activitiList" [phaseList]="phaseList" [phaseWiseTaskList]="phaseWiseTaskList"
+            (changeWorkType)="onPrecedentHChangeWorkType($event)" (changePhase)="onChangePhase($event)"
+            (changeTask)="onChangeTask($event)" (changeActivity)="onChangeActivity($event)" [note]="note"
+            (updateNote)="onChangeNote($event)" [isBilled]="isBilled" (changeCivilClass)="onChangeCivilClass($event)"
+            (changeCivilLevel)="onChangeCivilLevel($event)" (changeCivilCourt)="onChangeCivilCourt($event)" [civilClassList]="civilClassList" [civilCourtList]="civilCourtList"
+            [civilLevelList]="civilLevelList">
+          </dps-add-note-time-and-cost>
+        </mat-tab>
+        <mat-tab label="Attachments"
+          *ngIf="(selectedDiaryTypeId === DiaryRecType.EMAIL_IN || selectedDiaryTypeId === DiaryRecType.EMAIL_OUT)&&  attachments?.length > 0">
+          <dps-add-note-attachments class="dps-white-gray-scroll dps-addnote-main" [folderList]="folderList"
+            [viewingInlineAttachement]="viewingInlineAttachement" [attachments]="attachments"
+            (updateFolderOnAttachment)="onUpdateFolderOnAttachment($event)"
+            (updateNoteOnAttachment)="onUpdateNoteOnAttachment($event)"
+            (updateIsAttcheOnAttachment)="onUpdateIsAttcheOnAttachment($event)"
+            (updateIsUnchargeOnAttachment)="onUpdateIsUnchargeOnAttachment($event)"
+            (openAttacment)="onOpenAttacment($event)" (openEmailAttachment)="onOpenEmailAttachment($event)"
+            (downlodeEmailAttachment)="onDownlodeEmailAttachment($event)">
+          </dps-add-note-attachments>
+        </mat-tab>
+        <mat-tab label="Linked Plots" *ngIf="matterData?.isPlotMasterMatter">
+          <dps-matter-linked-desktop-manager [token]="token" [openFrom]="MatterLinkOpenFrom"
+            [matterRef]="matterData.MatterReferenceNo" #AddNoteMatterLinkedManager>
+            <dps-matter-linked-layout [gridData]="AddNoteMatterLinkedManager.gridData$ | async" [isPopup]="false"
+              [matterData]="matterData" [isLoading]="AddNoteMatterLinkedManager.isLoading$ | async"
+              [coloumnDef]="AddNoteMatterLinkedManager.coloumnDef$ | async" [openFrom]="MatterLinkOpenFrom"
+              [selectedMatterData]="AddNoteMatterLinkedManager.selectedMatter$ | async"
+              [multiSelectItem]="AddNoteMatterLinkedManager.multiSelectItem$ | async" [onlySelectMatter]="true"
+              [plotRange]="AddNoteMatterLinkedManager.plotRange$ | async"
+              (selectedMatter)="AddNoteMatterLinkedManager.onSelectedMatter($event)"
+              (selectAllMatter)="AddNoteMatterLinkedManager.onSelectAllMatter($event)"
+              (changePlotRange)="AddNoteMatterLinkedManager.onChangePlotRange($event)"
+              (multiSelectMatter)="AddNoteMatterLinkedManager.onMultiSelectMatter($event)"
+              (onCreateLinkedMatter)="AddNoteMatterLinkedManager.createLinkedMatter($event)">
+            </dps-matter-linked-layout>
+          </dps-matter-linked-desktop-manager>
+
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+  </mat-dialog-content>
+
+  <mat-divider></mat-divider>
+  <mat-dialog-actions fxFlex="60px">
+    <span fxFlex="1 1 auto"></span>
+    <span class="dps-can-not-edit-label" *ngIf="isBilled">Cannot edit billed time.</span>
+    <button mat-raised-button class="dps-time-submit" tabindex="2" *ngIf="!sendForSignature" (click)="onShare()"
+      [disabled]="!itemDataList || loading || itemsLoading || (this.multipleFileList && this.multipleFileList.length >
+      0) ||
+      selectedLinkMatters?.length > 0">Share</button>
+    <button mat-raised-button class="dps-time-submit" tabindex="2" *ngIf="!sendForSignature" (click)="onSignAndShare()"
+      [disabled]="loading || itemsLoading || !itemDataList || (this.multipleFileList && this.multipleFileList.length >
+      0) ||
+      selectedLinkMatters?.length > 0">Sign
+      and Share</button>
+    <button mat-raised-button class="dps-time-submit" (click)="onSubmit()" tabindex="2"
+      [disabled]="loading || itemsLoading || isBilled">{{sendForSignature?'Ok':'Submit'}}
+    </button>
+    <button class="dps-cancel" (click)="onClose()" tabindex="-1" [disabled]="loading || itemsLoading">Cancel</button>
+  </mat-dialog-actions>
+</div>

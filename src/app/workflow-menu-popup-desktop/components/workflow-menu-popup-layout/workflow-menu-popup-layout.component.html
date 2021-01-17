@@ -1,0 +1,48 @@
+<div fxLayout="column" class="workflow-menus-tree">
+  <div class="menu-tree-popup-header" fxFlex="0 0 42px">
+    <mat-toolbar>
+      <mat-toolbar-row >
+        <div class="menu-tree" fxLayout="row" fxLayoutAlign="center"  matLine >
+            <span fxFlex="1 1 auto"></span>
+            <mat-icon class="header-icon" matListIcon>list</mat-icon>
+            <span matLine class="header-title">Menu Tree</span>
+            <span fxFlex="1 1 auto"></span>
+            <button mat-icon-button (click)="onClose()">
+              <mat-icon class="header-icon-delete">close</mat-icon>
+            </button>
+           </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="title">
+    <p> Workflow Menus</p>
+  </div>
+  <mat-progress-bar  mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <mat-divider></mat-divider>
+
+  <mat-dialog-content>
+
+
+    <div fxLayout="column" fxFlex="calc(100% - 190px)" class="dps-white-gray-scroll ">
+      <div fxLayout="column" class="dps-scroll" >
+
+        <div fxFlex="calc(100% - 52px)" class="dps-white-gray-scroll dps-wrkflw-menu">
+          <mat-nav-list>
+
+            <tree-root class="tree-text" [nodes]="list" [options]="options">
+              <mat-list-item>
+                <ng-template #treeNodeTemplate let-node>
+                  <div dpsClick (dpsDblClick)="onSelectRow(node.data)">
+                    <mat-icon class="{{node.data.atN_Type | workflowMenuIcon}}"></mat-icon>
+                    <span class="data" >{{ node.data.atN_Desc }}</span>
+                  </div>
+                </ng-template>
+              </mat-list-item>
+            </tree-root>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+</div>

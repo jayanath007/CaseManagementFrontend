@@ -1,0 +1,88 @@
+@import '~styles/variables.scss';
+
+mat-expansion-panel-header{
+  padding: 0px 0px;
+}
+
+.dps-task-grid , .dps-grid {
+  height: 100%;
+}
+
+.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+.dps-columnheader {
+  height: 40px;
+}
+
+.dps-grid-layout-controller {
+  min-width: 1000px;
+  height:100%;
+}
+
+.dps-task-panel {
+  width:100%;
+  overflow-y:scroll;
+}
+
+dps-case-task-grid-row {
+  width:100%;
+  height: 100%;
+}
+
+.row-highlight.dps-is-mobile{
+  width: 100%;
+}
+.row-highlight {
+  background-color:#d7ebf3;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  width: calc(100% - 15px);  
+}
+
+
+.mat-expansion-panel-header{
+  font-size: 12px;
+}
+.expansion-panel-case-task{
+  height: auto !important;
+  width:100%;
+}
+/* mat-expansion-panel{
+  border-bottom: 1px solid #f1f2f4;
+}  */
+.dps-tasks-grid-button
+{
+  align-items: center;
+  padding-right: 12px;
+  font-size: 18px;
+  color: #2b475a;
+}
+.dps-tasks-grid-button span{
+  text-align: center;
+  font-size: $secondary-font-size;
+}
+.dps-tasks-grid-button:hover
+{
+color:#ff9b00;
+transition:all 0.2s ease-in-out;
+
+}
+.dps-case-task-grid-row{
+  position: relative;
+}
+.grid-sub-options .mat-expanded.mat-expansion-panel-header
+{
+  background:#6ecbf1;
+}
+.grid-sub-button-container
+{
+  padding-top: 10px;
+
+}
+
+mat-icon {
+  font-size: 22px;
+}

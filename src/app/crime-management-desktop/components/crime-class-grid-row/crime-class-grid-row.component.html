@@ -1,0 +1,11 @@
+<div fxLayout="row" class="grid-data">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+  <!-- <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.rectype}}"></div>   Request by osman -->
+  <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.classtype}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData.classname}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{rowData.feeearn}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{rowData.dateopen | date:'dd/MM/yyyy'}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{rowData.dateclsd | date:'dd/MM/yyyy'}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{rowData.datebill | date:'dd/MM/yyyy'}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{rowData.linkedclassid}}"></div>
+</div>

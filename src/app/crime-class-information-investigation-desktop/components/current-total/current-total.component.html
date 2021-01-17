@@ -1,0 +1,134 @@
+<h3><i class="fa fa-info-circle" aria-hidden="true"></i> Current Totals</h3>
+
+<table class="figure-tbl">
+  <tr>
+    <th>Type</th>
+    <th class="total">Class Totals</th>
+    <th class="total">Claim Totals</th>
+  </tr>
+  <tr>
+    <td>Profit Cost</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.ProfitCost)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.ProfitCost === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.ProfitCost">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+
+        {{data?.profitCost | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{data?.claimProfitCost | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Travel</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Travel)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Travel === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Travel">
+
+            <i class="fa fa-thumb-tack "></i>
+
+        </button>
+        {{data?.travel | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{data?.claimTravel | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Waiting</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Waiting)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Waiting === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Waiting">
+
+            <i class="fa fa-thumb-tack "></i>
+
+        </button>
+        {{data?.waiting | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{data?.claimWaiting | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Disbursements</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Disbursements)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Disbursements === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Disbursements">
+
+            <i class="fa fa-thumb-tack "></i>
+
+        </button>
+        {{data?.disbursements | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{data?.claimDisbursements | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Fee Earner Total</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.FeeEarnerTotal)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.FeeEarnerTotal === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.FeeEarnerTotal">
+
+            <i class="fa fa-thumb-tack "></i>
+
+        </button>
+        {{data?.feeEarnerTotal | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value"></td>
+  </tr>
+</table>
+
+<div class="fixed-fee-total">
+  <h3>Fixed Fee Totals</h3>
+  <div class="primary-fee-wrapper" fxLayout="row" fxLayoutGap="15px">
+    <div>
+      <div class="dps-fee-controller">
+        <span class="fee-txt"  fxFlex="1 1 auto">Fixed Fee</span>
+          <span [ngStyle]="{'color': data.fixedFeeColor}">
+            {{data?.fixedFee !== null ? (data?.fixedFee| number : '1.2-2') : 'N/A'}}
+          </span>
+      </div>
+
+
+      <div class="dps-fee-controller">
+        <span class="fee-txt"  fxFlex="1 1 auto">Fee Claim in Additional to fixed fee</span>
+          <span [ngStyle]="{'color': data.additionalFixFeeColor}">
+            {{ data?.fixedFee !== null  ? (data?.additionalFixFee| number : '1.2-2') : 'N/A'}}
+          </span>
+      </div>
+    </div>
+
+    <div>
+
+      <div class="dps-fee-controller">
+        <span class="fee-txt"  fxFlex="1 1 auto">Escape Amount</span>
+          <span [ngStyle]="{'color': data.escapeAmountColor}">
+            {{data?.fixedFee !== null ? (data?.escapeAmount| number : '1.2-2') : 'N/A'}}
+          </span>
+      </div>
+
+
+
+      <div class="dps-fee-controller">
+        <span class="fee-txt"  fxFlex="1 1 auto">Additional Work required to claim Escape fee</span>
+          <span [ngStyle]="{'color': data.additionalWorkFeeColor}">
+            {{data?.fixedFee !== null  ? (data?.additionalWorkFee| number : '1.2-2') : 'N/A'}}
+          </span>
+      </div>
+
+    </div>
+    
+  </div>
+</div>

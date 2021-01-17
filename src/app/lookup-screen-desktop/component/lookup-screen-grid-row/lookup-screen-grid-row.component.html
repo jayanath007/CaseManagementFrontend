@@ -1,0 +1,70 @@
+
+<div class="dps-lookup-screen" fxLayout="column" >
+<div class="lookup-screen-form sub-header" fxLayout="row">
+  <div class="action-btn">
+    <button mat-button>
+      <mat-icon class="mat-icon material-icons">add_circle_outline</mat-icon>Add new record</button>
+    <button mat-button>
+      <mat-icon class="md-18 mat-icon material-icons">cancel</mat-icon>Cancel changes</button>
+  </div>
+  <span fxFlex="1 1 auto"></span>
+  <div class="type">
+    <span>Type</span>
+    <span class="lut-type">{{'LUT_Type'}}</span>
+  </div>
+  <div class="description">
+    <span>Description</span>
+    <span>
+      <mat-form-field>
+        <input matInput value="{{ 'LUT_Description'}}">
+      </mat-form-field>
+    </span>
+  </div>
+ 
+</div>
+  <mat-dialog-content fxLayout="column" fxFlex="calc(100%-50x)">
+      <div class="row-highlight" dpsIsMobile>
+ 
+          <div fxLayout="row" fxFlex="1 1 auto">
+            <dps-column-header *ngFor="let header of columnDef" [def]="header" [fxFlex]="header.extras.fxFlex" [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+      
+      </div>
+      <div fxFlex="calc(100%-40x)" fxLayout="column"  class="dps-white-gray-scroll lookup-screen-form">
+        <mat-nav-list fxLayout="column" *ngFor="let item of lookupDataModel">
+          <mat-list-item fxFlex="1 1 100%" disableRipple >
+            <div class="grid-data ng-hide" fxFlex="1 1 100%">
+              <!-- <div class="row-data" [fxFlex]="getFxFlexProperty(1)">{{item.LUP_LUTID}}</div> -->
+              <div class="row-data" [fxFlex]="getFxFlexProperty(0)">
+                <div>{{item.LUP_Code}}</div>
+                <mat-form-field >
+                  <input matInput value=" {{item.LUP_Code}}">
+                </mat-form-field>
+              </div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(1)">
+                <div>{{item.LUP_Description}}</div>
+                <mat-form-field >
+                  <input matInput value="{{item.LUP_Description}}">
+                </mat-form-field>
+              </div>
+              <div class="check-box row-data" [fxFlex]="getFxFlexProperty(2)">
+                <!-- <div>{{item.LUP_Hidden}}</div> -->
+                <mat-checkbox></mat-checkbox>
+              </div>
+              <div class="row-data delete" [fxFlex]="getFxFlexProperty(3)">
+                <button mat-icon-button (click)="onClick">
+                  <mat-icon class="mat-18">delete_forever</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-nav-list>  
+      </div>
+  </mat-dialog-content>
+
+  <mat-paginator class="footer-shadow" [pageSize]="25" [pageSizeOptions]="">
+    </mat-paginator>
+
+</div>

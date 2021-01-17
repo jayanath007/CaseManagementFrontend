@@ -1,0 +1,41 @@
+<div style="height: calc(100% - 47px);" fxLayout="column">
+  <dps-common-popup-header icon="alarm_add" [loading]="isLoading" [title]="'Civil Time Recording'" buttons="close"
+    (buttonClick)="onClose()" iconColor="#db9c57" titleColor="#a9c0f6">
+  </dps-common-popup-header>
+
+  <mat-tab-group fxFlex="calc(100% - 47px)" (selectedTabChange)="onChangeTap($event.index)"
+    class="dps-white-gray-scroll">
+
+    <mat-tab label="Time Record">
+      <ng-container>
+        <dps-time-recorded-tab-content [feeEarnerList]="feeEarnerList" [viewData]="viewData" [modelData]="modelData"
+          [classData]="classData" [isLoading]="isLoading" [homeCurrency]="homeCurrency"
+          (selectItemForEdit)="onSelectItemForEdit($event)" (changeModel)="onChangeTimeRecordModel($event)"
+          (userAction)="onUserAction($event)" (changePage)="onPageChange($event)">
+        </dps-time-recorded-tab-content>
+      </ng-container>
+    </mat-tab>
+
+    <mat-tab label="Diary Note">
+      <ng-container>
+        <div fxLayout="column" class="dps-diary-note" fxLayoutGap="2em">
+          <mat-form-field class="attendance-note-txt">
+            <input matInput #civilTimeRecordNote type="text" maxlength="250"
+              (focusout)="onChangeTimeRecordModel({key:'note', value:civilTimeRecordNote.value})" placeholder="Note"
+              [value]="modelData?.note">
+
+          </mat-form-field>
+          <dps-ck-editor [debounceTime]="500" *ngIf="selectedTabIndex === 1" [ngModel]="modelData.detail"
+            (ngModelChange)="onChangeTimeRecordModel({key:'detail', value:$event})">
+          </dps-ck-editor>
+        </div>
+      </ng-container>
+    </mat-tab>
+  </mat-tab-group>
+  <div fxLayout="row" class="dps-action-btn">
+    <button mat-flat-button [disabled]="isLoading" (click)="onUserAction('NewTimeRecord')">New</button>
+    <button class="dps-delete " mat-flat-button [disabled]="isLoading || modelData?.diaryId < 1"
+      (click)="onUserAction('DeleteTimeRecord')">Delete</button>
+    <button mat-flat-button [disabled]="isLoading" (click)="onUserAction('SaveTimeRecord')">Save</button>
+  </div>
+</div>

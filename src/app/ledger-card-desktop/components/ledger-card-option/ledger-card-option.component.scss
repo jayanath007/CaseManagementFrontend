@@ -1,0 +1,80 @@
+@import '~styles/variables.scss';
+.bill-receipts-option {
+  position: relative;
+  top: 18px;
+  right: 5px;
+}
+
+.filter-data {
+  font-size: $primary-font-size - 2;
+}
+
+mat-option mat-checkbox {
+  font-size: $primary-font-size - 2;
+}
+
+.ledger_card_selector {
+  color: $primary;
+  font-weight: 400;
+  font-size: $primary-font-size - 1;
+}
+
+.dps-remove-arrow.rate {
+  color: $primary
+}
+
+.filter-list {
+  color: #e1e2ea;
+  font-size: $primary-font-size - 1;
+  position: relative;
+  right: 20px;
+  cursor: pointer;
+}
+
+.input-controller {
+  font-size: $primary-font-size - 1;
+}
+
+.period {
+  position: relative;
+  top: 12px;
+}
+
+.dps-is-mobile {
+  position: relative;
+}
+
+.dps-is-mobile .dps-ledger-card-grid-header {}
+
+.dps-is-mobile .filter-list {
+  color: #e1e2ea;
+  font-size: $primary-font-size - 1;
+  position: relative;
+  right: -80px;
+  cursor: pointer;
+  top: -40px;
+  bottom: 0px;
+}
+
+.dps-is-mobile .period {
+  top: 10px;
+}
+
+::ng-deep .mat-option .mat-pseudo-checkbox {
+  display: none;
+}
+
+.print-btn {
+  position: relative;
+  top: 7px;
+  left: 15px;
+  color: #dfedf7;
+  
+}
+
+.billing-btn {
+  position: relative;
+  top: 7px;
+  left: 15px;
+  color: #a5dbff;
+}

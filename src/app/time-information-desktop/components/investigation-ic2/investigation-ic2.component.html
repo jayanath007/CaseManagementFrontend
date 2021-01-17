@@ -1,0 +1,318 @@
+<form novalidate [formGroup]="formGroup" class="dps-crime-investigation">
+
+  <mat-tab-group class="main-tabs-rc ic2" (selectedTabChange)="onChangeTap($event)">
+
+    <mat-tab label="Time Record">
+
+      <div class="claim-london-rates">
+
+        <mat-checkbox class="time-information-input" formControlName="londonRate" color="primary">Claim London Rates
+        </mat-checkbox>
+
+        <div class="clear"></div>
+      </div>
+
+      <mat-toolbar class="filter-set-01">
+
+
+        <mat-radio-group formControlName="dutySol">
+          <mat-radio-button class="time-information-input" [value]="true" color="primary"> Duty Solicitor
+          </mat-radio-button>
+          <mat-radio-button class="time-information-input" [value]="false" color="primary"> Own Solicitor
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-checkbox class="time-information-input" color="primary" formControlName="weekEndWork">
+          Weekend Work
+        </mat-checkbox>
+        <mat-checkbox class="time-information-input" color="primary" formControlName="isInitDutyPeriod">
+          Subsequent periods of detention
+        </mat-checkbox>
+        <mat-checkbox [disabled]="!model?.dutySol" class="time-information-input last-child" color="primary"
+          formControlName="initDuty">
+          Initial Duty Period and Serious Matter
+        </mat-checkbox>
+        <div class="clear"></div>
+      </mat-toolbar>
+
+      <mat-toolbar fxLayout="row" class="filter-set-02">
+
+        <mat-form-field class="time-information-input search-police-st">
+          <input type="search" matInput #searchTextInput matInput placeholder="Police Station"
+            formControlName="policeSt" />
+          <button matSuffix mat-icon-button (click)="onSearchPoliceStation(searchTextInput.value)">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div fxLayout="row">
+
+          <div fxLayout="row" fxLayoutAlign="space-between">
+
+            <mat-form-field class="time-information-input short">
+
+
+              <dps-time-input [isUnitDisable]="true" [parentFormGroup]="formGroup" placeholder="Arrival Time"
+                [controllerName]="'arrTime'">
+              </dps-time-input>
+
+
+              <div *ngIf="formGroup.get('arrTime').errors
+                                      && formGroup.get('arrTime').errors['arrTime']"
+                class="form-error general-error-wrap">
+
+                <p class="time--error" id="time-error">
+                  <mat-icon>error_outline</mat-icon> Please enter the correct departure time aligned with
+                  waiting, advice assistance and arrival time.
+                </p>
+              </div>
+
+            </mat-form-field>
+          </div>
+
+
+          <mat-form-field class="time-information-input short">
+
+
+            <dps-time-input [isUnitDisable]="true" [parentFormGroup]="formGroup" placeholder="Departure Time"
+              [controllerName]="'depTime'">
+            </dps-time-input>
+
+
+            <div *ngIf="formGroup.get('depTime').errors
+                                  && formGroup.get('depTime').errors['depTime']" class="form-error general-error-wrap">
+
+              <p class="time--error" id="time-error">
+                <mat-icon>error_outline</mat-icon> Please enter the correct arrival time aligned with
+                waiting, advice assistance and departure time.
+              </p>
+
+            </div>
+          </mat-form-field>
+
+        </div>
+
+
+
+        <mat-checkbox class="time-information-input next-app-date-enable" color="primary"
+          formControlName="nextAppDateCheck" (change)="enableNextAppDate($event.checked)">
+        </mat-checkbox>
+
+
+        <mat-form-field class="time-information-input tc-date sub last-child">
+          <input matInput [matDatepicker]="NADpicker" [disabled]="!model?.nextAppDateCheck"
+            placeholder="Next Appearance Date" formControlName="nextAppDate">
+          <mat-datepicker-toggle matSuffix [for]="NADpicker" [disabled]="!model?.nextAppDateCheck">
+          </mat-datepicker-toggle>
+          <mat-datepicker #NADpicker [disabled]="!model?.nextAppDateCheck"></mat-datepicker>
+        </mat-form-field>
+
+      </mat-toolbar>
+
+
+
+
+      <div class="time-record-input-panel-container">
+
+        <div fxLayout="row" class=" dps-white-gray-scroll time-record-input-panel-container-inner">
+
+          <mat-card class="time-record-input-panel-left">
+            <h5>Time</h5>
+            <div class="body-sub-inputs input-sets">
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span class="time-information-input short">HH:MM</span>
+                <span class="time-information-input sub-2 values">Rate</span>
+                <span class="time-information-input sub-2 values">Value</span>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short">
+
+                  <dps-time-input [mpu]="mpu" [resetCount]="resetCount" [parentFormGroup]="formGroup"
+                    placeholder="Travel To" [controllerName]="'travelTo'">
+                  </dps-time-input>
+
+
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" placeholder="" formControlName="travelToRate" readonly tabindex="-1">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="travToVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short">
+
+                  <dps-time-input [mpu]="mpu" [resetCount]="resetCount" [parentFormGroup]="formGroup"
+                    placeholder="Travel From" [controllerName]="'travelFrom'">
+                  </dps-time-input>
+
+                </mat-form-field>
+
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" placeholder="" formControlName="travelFromRate" readonly tabindex="-1">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="travFromVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short">
+
+                  <dps-time-input [mpu]="mpu" [resetCount]="resetCount" [parentFormGroup]="formGroup"
+                    placeholder="Waiting" [controllerName]="'waitPS'">
+                  </dps-time-input>
+
+
+                  <div *ngIf=" formGroup.get('waitPS').errors
+                                    && formGroup.get('waitPS').errors['waitingTime']"
+                    class="form-error general-error-wrap">
+
+                    <p class="time--error" id="time-error">
+                      <mat-icon>error_outline</mat-icon> Please adjust correct arrival and departure time
+                      before entering the current waiting figure.
+                    </p>
+
+                  </div>
+
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" placeholder="" formControlName="waitRatePS" readonly tabindex="-1">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="waitValPS" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short">
+                  <dps-time-input [isUnitDisable]="true" [parentFormGroup]="formGroup" placeholder="Advice Assist"
+                    [controllerName]="'adviAssi'">
+                  </dps-time-input>
+
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" placeholder="" formControlName="advAssiRate" readonly tabindex="-1">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="advAssiVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card>
+
+          <mat-card class="time-record-input-panel-middle">
+            <h5>Disbursements</h5>
+            <div class="body-sub-inputs input-sets">
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <mat-form-field class="time-information-input milage short">
+                  <input matInput type="number" min="1" placeholder="Mileage" formControlName="mileage">
+                  <label class="milage-rate">{{model.mileageRate}} </label>
+                </mat-form-field>
+
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="mileageVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short values">
+                  <input matInput dpsNumbersOnlyWithDecimals placeholder="Vatable Fares values"
+                    formControlName="vatFares">
+                </mat-form-field>
+
+
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="vatFaresVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short  values">
+                  <input matInput dpsNumbersOnlyWithDecimals placeholder="Non-Vat Fares" formControlName="nonVatFares">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="nonVatFaresVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field class="time-information-input short values">
+                  <input matInput dpsNumbersOnlyWithDecimals placeholder="Parking (Exc Vat)" formControlName="parking">
+                </mat-form-field>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="parkingVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+            </div>
+
+
+          </mat-card>
+
+          <mat-card class="time-record-input-panel-right">
+            <h5>Total</h5>
+            <div class="body-sub-inputs input-sets">
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span class="time-information-input sub-2 values">Total Value <b>LA</b></span>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="totalValueLA" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span class="time-information-input sub-2 values">Disbursements</span>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="disbursements" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span class="time-information-input sub-2 values">Total</span>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="totVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span class="time-information-input sub-2 values">Private</span>
+                <mat-form-field class="time-information-input sub-2 values">
+                  <input matInput type="text" formControlName="feeErnVal" readonly tabindex="-1">
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between">
+              </div>
+
+
+            </div>
+          </mat-card>
+
+
+        </div>
+        <div fxLayout="row" class="bottom-filter-types">
+          <span fxFlex="1 1 auto"></span>
+          <div class="use-custom-template">
+            <mat-checkbox class="time-information-input" formControlName="custTemplates" color="primary">Use Custom
+              Templete For Time Record</mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </mat-tab>
+
+    <mat-tab label="Note">
+      <mat-form-field class="attendance-note-txt">
+        <input matInput type="text" placeholder="Attendance Note" formControlName="diaryNote">
+      </mat-form-field>
+      <div class="clear"></div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+</form>

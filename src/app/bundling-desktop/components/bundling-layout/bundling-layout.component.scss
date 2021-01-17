@@ -1,0 +1,80 @@
+@import '~styles/variables.scss';
+
+.dps-file-grid {
+  height: 100%;
+  background: #ebf7ff;
+  padding: 5px;
+
+  .dps-validating-gropping {
+    
+   font-size: $primary-font-size;
+   font-style: italic;
+   font-weight: 600;
+    color: #c76d06;
+  
+  }
+.dps-bundling-actions{
+ ::ng-deep .mat-drawer-inner-container{
+    flex-direction: column;
+  }
+}
+
+  mat-drawer {
+    // width: 640px;
+    overflow-y: hidden;
+    border-left: 1px solid #e4e5e6;
+    width: 50%;
+  }
+
+  .bundling-search-scroll {
+    position: relative;
+    height: 100%;
+    background-color: $primary;
+  }
+
+  mat-drawer-content {
+    overflow: hidden;
+  }
+
+  .bundling-actions {
+    background: #b1d9fd;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+
+    button {
+      mat-icon {
+        color: #ab382f;
+      }
+    }
+
+    
+
+  }
+
+  as-split-area {
+    overflow: hidden !important;
+  }
+  
+  .no-attachment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: $primary-font-size - 1;
+    color: #d83f36;
+    font-family: $primary-font-stack;
+
+    i {
+      font-size: $primary-font-size + 2;
+    }
+
+  }
+
+}
+
+.dps-disabled-all {
+  pointer-events: none;
+  opacity: 0.4;
+}

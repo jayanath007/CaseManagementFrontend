@@ -1,0 +1,26 @@
+<div fxLayout="row" dpsIsMobile>
+  <div *ngIf="!hideFontControll" class="dps-grid-font-controller grid-font-controller {{activeClass}}">
+    <button (click)="onFontSizeMinusClick()" mat-mini-fab>
+      <mat-icon>
+        <span class="fa fa-minus fa-1"></span>
+      </mat-icon>
+    </button>
+    <button (click)="onFontSizeResetClick()" mat-mini-fab>
+      <mat-icon>
+        <span>A</span>
+      </mat-icon>
+    </button>
+    <button (click)="onFontSizePlusClick()" mat-mini-fab>
+      <mat-icon>
+        <span class="fa fa-plus fa-1"></span>
+      </mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="showRefreshButton?showRefreshButton:false">
+    <div class="dps-grid-refresh-button">
+      <button (click)="onRefresh()" mat-mini-fab>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</div>

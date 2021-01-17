@@ -1,0 +1,15 @@
+<div class="dps-mls-cace-list" fxLayout="column">
+  <div class="dps-mls-case-item">
+    <div class="dps-mls-cases" [ngClass]="{'dps-mls-selected-user': user.id === selectedUser.id}" fxLayout="row">
+      <div>
+          <button matListAvatar mat-icon-button class="dps-sender-avatar" [ngStyle]="{'background-color': user?.emailAddress | recipientColorCode}">
+              <span>{{senderFullName | nameInitials}}</span>
+            </button>
+      </div>
+      <div class="dps-mls-user">
+          <div class="mls-user-info"> {{senderFullName}}</div>
+          <div class="mls-user-mail">{{user?.emailAddress}}</div>
+      </div>
+    </div>
+  </div>
+</div>

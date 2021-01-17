@@ -1,0 +1,15 @@
+<div class="time-rc-data-table dps-white-gray-scroll" fxLayout="column">
+  <div class="dps-length-calc">
+    <div class="row-highlight" dpsIsMobile>
+      <div class="row-highlight-inner">
+        <dps-column-header class="tc-table-head" *ngFor="let header of getGridColumnDef" [fxFlex]="header.extras.fxFlex"
+          [def]="header" [filterAnchor]="header.extras.filterAnchor">
+        </dps-column-header>
+      </div>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="isloading"></mat-progress-bar>
+    <dps-time-record-grid-item class="dps-white-gray-scroll" [rows]="getTimeRecordsGridData"
+      [gridColumnDef]="gridColumnDef" [allData]="allData" (selectItem)="onSelectGridItem($event)">
+    </dps-time-record-grid-item>
+  </div>
+</div>

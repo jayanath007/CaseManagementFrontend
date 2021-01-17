@@ -1,0 +1,81 @@
+<mat-toolbar>
+
+  <button mat-button (click)="onSaveAndSend()" class="dps-edit-save-btn" *ngIf="event?.attendees?.length === 0"
+    [disabled]="isAttachmentLoad">
+    <mat-icon>save</mat-icon> Save
+  </button>
+  <button mat-button (click)="onSaveAndSend()" class="dps-edit-save-send" *ngIf="event?.attendees?.length > 0"
+    [disabled]="isAttachmentLoad">
+    <mat-icon>send</mat-icon> Send
+  </button>
+  <button mat-button (click)="onDelete('Delete')" class="dps-edit-save-dele" *ngIf="!hasAttendees"
+    [disabled]="isAttachmentLoad">
+    <mat-icon>delete_sweep</mat-icon> Delete
+  </button>
+  <button mat-button class="dps-edit-save-dele" *ngIf="hasAttendees" [disabled]="isAttachmentLoad"
+    [matMenuTriggerFor]="contextMenu">
+    <mat-icon>delete_sweep</mat-icon> Cancel
+  </button>
+  <button mat-button (click)="onDelete('Discard')" class="dps-edit-save-dele" *ngIf="isNewEvent"
+    [disabled]="isAttachmentLoad">
+    <mat-icon>delete_sweep</mat-icon> Discard
+  </button>
+
+  <button mat-button class="dps-open-series" (click)="onOpenSeries()" *ngIf="event?.seriesMasterId"
+    class="dps-edit-save-dele" [disabled]="isAttachmentLoad">
+    <mat-icon>sync</mat-icon> Open series
+  </button>
+
+  <button mat-button class="dps-edit-save-attch" [matMenuTriggerFor]="attachmentUploadMenu.contextMenu">
+    <mat-icon>attach_file</mat-icon> Attach
+    <dps-file-uploader #fileUploader inputId="EventEditfileUploader" (fileUpload)="onAddAttachment($event)"
+      [multiple]="true"></dps-file-uploader>
+    <dps-attachment-upload-menu #attachmentUploadMenu (fromComputer)="onFromComputer(fileUploader)"
+      (fromCloud)="onCloud()"></dps-attachment-upload-menu>
+  </button>
+
+  <button mat-button (click)="onLinkWithMatter()" class="dps-edit-save-attch">
+    <mat-icon>link</mat-icon> Link with {{matterDisplyName}}
+  </button>
+  <button mat-button class="dps-online-meeting" [ngClass]="event.onlineMeetingProvider" (click)="hyperlink.click()"
+    *ngIf="event && event.isOnlineMeeting && (event.onlineMeetingUrl || event.onlineMeeting?.joinUrl)">
+    <mat-icon fontSet="fontawesome" [fontIcon]="event.onlineMeetingProvider==='skypeForBusiness'?'fa-skype':'fa-users'"
+      class="fa">
+    </mat-icon> Join
+    {{event.onlineMeetingProvider==='teamsForBusiness'?'Teams':(event.onlineMeetingProvider==='skypeForBusiness'?'Skype':'')}}
+    meeting
+    <a #hyperlink [href]="event.onlineMeetingUrl || event.onlineMeeting?.joinUrl" target="_blank" hidden></a>
+  </button>
+
+  <span fxFlex="1 1 auto"></span>
+  <button mat-icon-button (click)="onClose()" [disabled]="isAttachmentLoad">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #contextMenu="matMenu">
+  <div *ngIf="event && !event.seriesMasterId">
+    <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending()">
+      Edit the cancellation before sending
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow()">
+      Send the cancellation now
+    </button>
+  </div>
+  <div *ngIf="event && event.seriesMasterId">
+    <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Cancel occurrence</button>
+    <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending()">
+      Edit the cancellation before sending
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow()">
+      Send the cancellation now
+    </button>
+    <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Cancel series</button>
+    <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending(true)">
+      Edit the cancellation before sending
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow(true)">
+      Send the cancellation now
+    </button>
+  </div>
+</mat-menu>

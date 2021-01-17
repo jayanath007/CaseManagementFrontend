@@ -1,0 +1,84 @@
+<div fxLayout="column" class="dps-settings-sidenav">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-setting-panel">
+    <div class="dps-user-img">
+      <div *ngIf="!(user?.isLoadingUserImage ===  false)">
+        <img [hidden]="!showProfileImg"
+          src="{{ isGoogle? user.userImage :(user | dpsLoginUserImage:'64x64'  | async) }}" alt="..."
+          (load)="showProfileImg=true">
+        <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-team-member-avatar"
+          [ngStyle]="{'background-color': user?.profile?.upn | recipientColorCode}">
+          <span>{{user?.profile?.name | nameInitials}}</span>
+        </button>
+        <button mat-icon-button class="dps-camera-btn" *ngIf="!isGoogle"
+          [ngStyle]="{'top':showProfileImg?'-54px':'-50px'}" (click)="showUserImgeCropper()">
+          <mat-icon>add_a_photo</mat-icon>
+        </button>
+
+      </div>
+      <mat-spinner [diameter]="50" [strokeWidth]="4" *ngIf="(user?.isLoadingUserImage ===  false)">
+      </mat-spinner>
+    </div>
+
+    <div class="dps-profile-details">
+      <div class="dps-profile-name">{{user?.profile?.name}}</div>
+      <div class="dps-profile-mail">{{user?.profile?.upn}}</div>
+    </div>
+
+  </div>
+
+
+  <div fxFlex="calc(100%-84px)">
+
+    <mat-divider></mat-divider>
+
+    <mat-nav-list fxLayout="column">
+      <div fxFlex="calc(100%-39px)" class="dps-white-gray-scroll">
+        <mat-list-item (click)="onMailSettings()" *ngIf="!isGoogle">
+          <mat-icon mat-list-icon>mail_outline</mat-icon>
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <h2 matLine>Mail settings</h2>
+        </mat-list-item>
+        <mat-list-item (click)="onPostingPeriod()" *ngIf="!isGoogle">
+          <mat-icon mat-list-icon>history</mat-icon>
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <h2 matLine>Posting Period</h2>
+        </mat-list-item>
+        <mat-list-item (click)="onMLSInquiryForm()" *ngIf="IsLoginUserSupervisor$|async">
+          <!--only for supervisor-->
+          <mat-icon mat-list-icon>track_changes</mat-icon>
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <h2 matLine>MLS Inquiry forms</h2>
+        </mat-list-item>
+        <mat-list-item (click)="onPageSetup()" *ngIf="IsLoginUserSupervisor$|async">
+          <mat-icon mat-list-icon>format_align_left</mat-icon>
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <h2 matLine>Document settings</h2>
+        </mat-list-item>
+        <mat-list-item (click)="onOpportunitySettings()">
+          <mat-icon mat-list-icon>home_work</mat-icon>
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <h2 matLine>Opportunity settings</h2>
+        </mat-list-item>
+        <div class="dps-inner-content" fxLayout="column">
+          <dps-document-open></dps-document-open>
+          <dps-database-select></dps-database-select>
+          <!-- <dps-theme></dps-theme> -->
+          <dps-dashboard-widget-enable></dps-dashboard-widget-enable>
+          <!-- <dps-opportunities-settings></dps-opportunities-settings> -->
+        </div>
+      </div>
+      <div class="dps-log-out">
+        <mat-list-item class="dps-log-out" (click)="onLogout()" *ngIf="!isGoogle">
+          <mat-icon mat-list-icon>power_settings_new</mat-icon>
+          <h5 matLine>Logout</h5>
+        </mat-list-item>
+        <mat-list-item class="dps-log-out" *ngIf="isGoogle" disableRipple>
+          <mat-icon mat-list-icon></mat-icon>
+          <h5 matLine>Please use the google to log out</h5>
+        </mat-list-item>
+      </div>
+    </mat-nav-list>
+  </div>
+</div>
+<!-- style="height: calc(100% - 70px);" -->
+<!-- style="height: calc(100% - 38);" -->

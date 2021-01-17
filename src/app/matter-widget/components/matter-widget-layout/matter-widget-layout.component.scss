@@ -1,0 +1,63 @@
+@import '~styles/variables.scss';
+
+.dps-matter-widget-layout {
+  height: 100%;
+}
+
+.header-icon {
+  vertical-align: middle;
+
+}
+
+mat-toolbar {
+  background: unset;
+}
+  
+.option-btn {
+  background: #5c97d4;
+}
+
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.wrong-massage {
+  text-align: center;
+  color: #a4afab;
+}
+
+.widget-item-list {
+  overflow-y: auto;
+}
+.widget-item-list::-webkit-scrollbar
+{
+  width: 4px;
+}
+.widget-item-list::-webkit-scrollbar-thumb {
+  background-color: #5c97d4;
+  border: 0;
+  border-radius: 4px;
+  
+}
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+// .empty-view{
+// 	  position: absolute;
+//     // background: #b3d1ea;
+//     top: 64px;
+//     border-bottom: 0;
+//     height: calc(100% - 64px);
+//     width: 100%;
+// }
+
+
+.mat-progress-bar
+{
+  height: 2px;
+}

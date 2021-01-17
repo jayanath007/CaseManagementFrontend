@@ -1,0 +1,55 @@
+<div class="dps-client-search-grid">
+  <div class="dps-client-grid" fxLayout="column">
+    <div fxLayout="column" fxFlex="calc(100%-50px)">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="dps-client-main-controller" fxLayout="column">
+          <div class="row-highlight" dpsIsMobile>
+            <div class="dps-column-header">
+              <dps-column-header *ngFor="let clientHeader of clientColumnDef" [fxFlex]="clientHeader.extras.fxFlex"
+                [def]="clientHeader" (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                (toggleSorting)="onToggleSorting($event)" [filterAnchor]="clientHeader.extras.filterAnchor">
+              </dps-column-header>
+              <!-- [filterAnchor]="clientHeader.extras.filterAnchor" -->
+            </div>
+            <mat-progress-bar *ngIf="isGridLoading" mode="indeterminate"></mat-progress-bar>
+          </div>
+
+          <div [@.disabled]="true" class="grid-sub-options dps-white-gray-scroll" fxFlex="calc(100%-40px)">
+            <mat-accordion [multi]="false">
+              <mat-expansion-panel class="mat-elevation-z dps-client-search-grid-row" [expanded]="client.expanded"
+                *ngFor="let client of ClientData ; let index =index; let isOdd=odd; let isEven=even"
+                [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+                <mat-expansion-panel-header [ngClass]="{'dps-selected-row' : client.expanded}"
+                  class="client-search-grid-header expansion-panelgrid-header {{fontSizeClass}}"
+                  (click)="clientGridRowExpan(client, $event)">
+                  <mat-panel-title>
+                    <dps-client-grid-fix-row [columnDef]="clientColumnDef" [searchText]="searchText"
+                      [ClientRowData]="client" [isPlotUser]="isPlotUser">
+                    </dps-client-grid-fix-row>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxFlex="calc(100%-35px)">
+                  <dps-matter-grid *ngIf="client.expanded" [clientRowData]="client" [columnDef]="matterColumnDef"
+                    [menuItem]="menuItem" [searchText]="searchText" [isPlotUser]="isPlotUser"
+                    (updateOpenCaseClick)="onUpdateOpenCaseClick($event)"
+                    (updateTimeRecordingClick)="onUpdateTimeRecordingClick($event)"
+                    (updateNewMailClick)="onUpdateNewMailClick($event)"
+                    (toggleMatterGridExpand)="MatterGridRowExpand($event)"
+                    (updateLedgerCardClick)="onUpdateLedgerCardClick($event)" (openEchitPopup)="onOpenEchitPopup($event,
+                    client)" (updateMatterCreationClick)="onUpdateMatterCreationClick($event)"
+                    (matterGridPageChange)="onMatterGridPageChange($event)"></dps-matter-grid>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-paginator fxFlex="50px" [length]="totalItems" [pageIndex]="clientPaginatorDef?.currentPage"
+      [pageSize]="clientPaginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)"
+      class="footer-shadow">
+    </mat-paginator>
+  </div>
+
+
+</div>

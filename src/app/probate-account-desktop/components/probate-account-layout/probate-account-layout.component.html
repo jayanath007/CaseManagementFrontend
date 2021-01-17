@@ -1,0 +1,30 @@
+<div fxLayout="column" class="dps-matter-linked-layout">
+
+  <mat-toolbar *ngIf="isPopup">
+
+    <mat-toolbar-row class="dps-toolbar-box-shadow">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="matter-icon">link</mat-icon>
+        <!-- fa-rotate-90 -->
+        <span class="header-text" matTooltipPosition="after">{{title}} </span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <div class="dps-primary-header" fxLayout="row" fxLayoutAlign="flex-start center ">
+    <mat-divider></mat-divider>
+    <dps-probate-account-content *ngIf="hidePanel" [savedData]="savedData" [probateTransactionId]="probateTransId"
+      [legacyPercentage]="legacyPercentage" [title]="title" [isLoading]="isLoading" [matterData]="matterData"
+      [isPopup]="isPopup" (colsePopup)="onClose()" [editDataPayment]="editDataPayment"
+      [editDataReciept]="editDataReciept" [editDataPecuniary]="editDataPecuniary"
+      [editDataResiduary]="editDataResiduary" [openFrom]="openFrom" [transactionsEditRow]=[editData]
+      [distributionViewItems]="distributionViewItems" (submitSaveData)="onSubmitSaveData($event)" (clear)="onClear()">
+    </dps-probate-account-content>
+
+  </div>
+</div>

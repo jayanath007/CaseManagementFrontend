@@ -1,0 +1,31 @@
+@import '~styles/variables.scss';
+
+mat-toolbar {
+  background-color: $dps-popup-matbar;
+
+  mat-icon {
+    color: $primary;
+    height: 30px;
+  }
+
+  .dps-toolbar-icon {
+    padding-right: 4px;
+    margin: 5px 0 0 0;
+  }
+
+
+  span {
+    font-size: $primary-font-size;
+    color: $toolbar-title;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dps-toolbar-close-icon {
+    font-size: 20px;
+    height: 22px;
+  }
+
+}

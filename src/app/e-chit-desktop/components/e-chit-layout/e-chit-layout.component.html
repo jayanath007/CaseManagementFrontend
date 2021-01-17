@@ -1,0 +1,636 @@
+<div class="dps-echit" fxLayout="column">
+
+  <div class="general-loader-light" [hidden]="!loading" mode="indeterminate"></div>
+
+  <!--===================== Pop_up Header ========== -->
+  <div fxLayout="column">
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-toolbar-box-shadow e-chit-header">
+        <span fxFlex="1 1 auto"></span>
+        <div fxFlexAlign="center" class="dps-header">
+          <mat-icon matListIcon class="matter-icon">library_books</mat-icon>
+          <span class="clients-text">e-Chit </span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button mat-icon-button (click)="onClose($event)">
+          <!-- {{loading}} -->
+          <mat-icon class="close-btn">close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+  <form novalidate [formGroup]="echitForm" (keypress)="echitFormKeypress($event)" class="dps-echit-form-content">
+
+    <div fxFlex="calc(100%-53px)" class="dps-echit-outer-wrapper" fxLayout="column wrap">
+      <div fxFlex="calc(100%-60px)" class="dps-echit-content-outer dps-white-gray-scroll">
+        <div class="indicator-lbl" fxLayout="column wrap">
+          <span>{{matterDetailsName}}</span>
+          <span>{{toMatterDetails}}</span>
+        </div>
+        <div class="dps-echit-inner-wrapper" fxLayout="row wrap">
+          <div fxLayout="row" class="e-chit-type common-detail" fxLayoutAlign="space-between center">
+            <mat-form-field>
+              <mat-placeholder>Type</mat-placeholder>
+              <mat-select (selectionChange)="onChangeEChitType($event)" id="typeValueId" formControlName="typeValue"
+                [disabled]="((eChitOpenType === EChitPopupInputType.Workflow) 
+              && model.typeValue && model.typeValue !== 'Old')">
+                <mat-option *ngFor="let item of formDataModel?.eChitTypeList" [value]="item.key" class="options">
+                  {{ item.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div [hidden]="!(echitForm.value.typeValue || eChitType === chequeRequestType.WidthMatterId)">
+          <div class="dps-echit-inner-wrapper" fxLayout="column wrap">
+            <!--===================== Pop_up grid========== -->
+            <div class="input-with-grid" fxLayout="column wrap">
+              <div *ngIf="formDataModel.matterRefVisible">
+                <mat-form-field>
+                  <mat-placeholder *ngIf="!formDataModel.toMatterRefVisible"> {{matterDisplyName}} Ref</mat-placeholder>
+                  <mat-placeholder *ngIf="formDataModel.toMatterRefVisible"> From {{matterDisplyName}}
+                  </mat-placeholder>
+                  <input matInput (blur)="onFromMatterSearchBlur($event)" id="matterRefId" formControlName="matterRef"
+                    (keypress)="onMatterSearchKeypress($event)">
+                  <button mat-icon-button matSuffix (click)="onMatterSearch($event)"
+                    [disabled]="eChitOpenType === EChitPopupInputType.Workflow">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-form-field>
+                <div *ngIf="formDataModel.matterBalances">
+                  <span class="matter_balances-lbl">{{matterDisplyName}} Balances</span>
+                  <table>
+                    <tr>
+                      <th class="bill-ref"></th>
+                      <th>Bill Bal</th>
+                      <th>Disb Bal</th>
+                      <th>Cli Bal</th>
+                      <th>DDA Bal</th>
+                      <th>TIM Bal</th>
+                    </tr>
+                    <tr *ngFor="let matterBalance of formDataModel.matterBalances; let i = index"
+                      (click)="onOpenLedgerCard()">
+                      <td>{{matterBalance.row}}</td>
+                      <td>{{matterBalance.billBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.disbBal | number : '1.2-2'}}</td>
+                      <td [matTooltip]="( i === 0)?  matterBalance?.clientCellString :'' "> {{matterBalance.cliBal |
+                        number
+                        : '1.2-2'}} </td>
+                      <td>{{matterBalance.ddaBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.timBal | number : '1.2-2'}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div *ngIf="formDataModel.toMatterRefVisible">
+                <mat-form-field>
+                  <mat-placeholder> To {{matterDisplyName}} Ref</mat-placeholder>
+                  <input matInput id="toMatterRefId" (blur)="onToMatterSearchBlur($event)" formControlName="toMatterRef"
+                    (keypress)="onToMatterSearchKeypress($event)">
+                  <button mat-icon-button matSuffix (click)="onToMatterSearch()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-form-field>
+                <div *ngIf="formDataModel.toMatterBalances">
+                  <span class="matter_balances-lbl">{{matterDisplyName}} Balances</span>
+                  <table>
+                    <tr>
+                      <th class="bill-ref"></th>
+                      <th>Bill Bal</th>
+                      <th>Disb Bal</th>
+                      <th>Cli Bal</th>
+                      <th>DDA Bal</th>
+                      <th>TIM Bal</th>
+                    </tr>
+                    <tr *ngFor="let matterBalance of formDataModel.toMatterBalances"
+                      (click)="onOpenLedgerCard(model.toMatterRef)">
+                      <td>{{matterBalance.row}}</td>
+                      <td>{{matterBalance.billBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.disbBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.cliBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.ddaBal | number : '1.2-2'}}</td>
+                      <td>{{matterBalance.timBal | number : '1.2-2'}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="common-detail" fxLayout="row wrap" fxLayoutGap="2rem">
+              <div *ngIf="formDataModel.nominalVisible">
+
+                <dps-edit-screen-single-column-select lableName="Nominal" [modelData]="nominal" [hidden]="false"
+                  [disabled]="false" (selectionchangedData)="onNominalChange($event)"
+                  [comboModelData]="formDataModel.nominalList" placeholderLabel="Search">
+                </dps-edit-screen-single-column-select>
+                <mat-form-field hidden>
+                  <input matInput id="nominalId" formControlName="nominal">
+                </mat-form-field>
+
+
+
+                <!-- <div class="fee-earner" *ngIf="formDataModel.feeEarnerVisible">
+                  <dps-edit-screen-single-column-select lableName="Fee Earner"  [modelData]="feeEarner" [hidden]="false" [disabled]="false"
+                     (selectionchangedData)="onFeeEarnerChange($event)" [comboModelData]="formDataModel.feeEarnerList"
+                    placeholderLabel="Search"  [forceSelectDataItem]="forcefeeEarnerSelectDataItem" ></dps-edit-screen-single-column-select>
+                  <mat-form-field hidden>
+                    <input matInput id="feeEarnerId" formControlName="feeEarner">
+                  </mat-form-field>
+                </div> -->
+
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="dps-echit-inner-wrapper" fxLayout="column wrap" fxLayoutGap="1rem">
+
+            <div class="common-detail" fxLayout="column wrap">
+              <div fxLayout="row wrap" fxLayoutGap="1rem">
+                <mat-form-field *ngIf="formDataModel.invoiceRefVisible">
+                  <mat-placeholder>{{formDataModel.invoiceRefText}}</mat-placeholder>
+                  <input matInput id="invoiceRefId" formControlName="invoiceRef">
+                </mat-form-field>
+              </div>
+
+
+              <div fxLayout="column wrap">
+                <div fxLayout="row wrap" fxLayoutGap="1rem">
+
+                  <mat-form-field *ngIf="formDataModel.supplierVisible">
+                    <mat-placeholder>Supplier</mat-placeholder>
+                    <input id="supplierId" matInput #supplierId formControlName="supplier"
+                      (keypress)="openSupplerKeypress($event)">
+
+                    <button [disabled]="!(echitForm.value.isIncludeSupplier || (eChitType === chequeRequestType.PIN))"
+                      mat-icon-button matSuffix (click)="openSuppler(supplierId.value)">
+                      <mat-icon mat-list-icon>search</mat-icon>
+                    </button>
+                  </mat-form-field>
+
+                  <div *ngIf="formDataModel.isIncludeSupplierVisible">
+                    <mat-checkbox (change)="onIncludeSupplier($event)" class="e-chit-checkbox" id="isIncludeSupplierId"
+                      color="primary" formControlName="isIncludeSupplier">
+                      Include Supplier </mat-checkbox>
+                  </div>
+                </div>
+
+                <div class="fileUploader-wrapper" *ngIf="(echitForm.value.isIncludeSupplier &&  formDataModel.isIncludeSupplierVisible && supplierDocEnables)  
+                || (eChitType === chequeRequestType.PIN)">
+                  <mat-form-field floatLabel="always">
+                    <mat-placeholder>Invoice Doc</mat-placeholder>
+                    <input disable matInput id="pathId" formControlName="path">
+                  </mat-form-field>
+                  <button mat-raised-button (click)="fileUploader.onFileUploadBtnClick()">
+                    <span> Browse</span>
+                    <dps-file-uploader #fileUploader inputId="eChitFileUploader" (fileUpload)="onAddAttachment($event)"
+                      [multiple]="false"></dps-file-uploader>
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="common-detail" fxLayout="row wrap" fxLayoutGap="2rem">
+
+              <!-- <mat-form-field *ngIf="formDataModel.supplierVisible">
+                <mat-placeholder>Supplier</mat-placeholder>
+                <input matInput #supplierId formControlName="supplier">
+
+                <button [disabled]="!(echitForm.value.isIncludeSupplier || (eChitType === chequeRequestType.PIN))" mat-icon-button matSuffix
+                  (click)="openSuppler(supplierId.value)">
+                  <mat-icon mat-list-icon>search</mat-icon>
+                </button>
+              </mat-form-field> -->
+
+              <!-- <mat-form-field *ngIf="formDataModel.referenceVisible">
+                <mat-placeholder>{{formDataModel.referenceText}}</mat-placeholder>
+                <mat-select id="referenceId" formControlName="reference">
+                  <mat-option *ngFor="let item of formDataModel.referencesList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+
+              <dps-editable-dropdown *ngIf="formDataModel.referenceVisible" [options]="referencesList"
+                [parentFormGroup]="echitForm" [placeholder]="formDataModel.referenceText"
+                [controllerName]="'reference'">
+              </dps-editable-dropdown>
+
+              <mat-form-field *ngIf="formDataModel.textRefVisible">
+                <mat-placeholder>{{formDataModel.referenceText}}</mat-placeholder>
+                <input matInput id="textRefId" formControlName="textRef">
+              </mat-form-field>
+
+              <mat-form-field *ngIf="formDataModel.receiptTypeVisible">
+                <mat-placeholder>Receipt Type</mat-placeholder>
+                <mat-select id="receiptTypeId" formControlName="receiptType">
+                  <mat-option *ngFor="let item of formDataModel.clearanceTypesList" [value]="item.value"
+                    class="options">
+                    {{ item.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <!-- <mat-form-field *ngIf="formDataModel.payeeVisible">
+                <mat-placeholder>Payee</mat-placeholder>
+                <mat-select id="payeeId" formControlName="payee">
+                  <mat-option *ngFor="let item of formDataModel.payeeList" [value]="item.sC_Desc">
+                    {{ item.sC_Desc }}
+                  </mat-option>
+                </mat-select> 
+              </mat-form-field> -->
+
+              <dps-editable-dropdown *ngIf="formDataModel.payeeVisible" [options]="payeeList"
+                [parentFormGroup]="echitForm" [placeholder]="'Payee'" [controllerName]="'payee'">
+              </dps-editable-dropdown>
+
+
+
+              <dps-editable-dropdown *ngIf="formDataModel.payerVisible" [options]="payerList"
+                [parentFormGroup]="echitForm" [placeholder]="'Payer'" [controllerName]="'payer'">
+              </dps-editable-dropdown>
+
+
+              <!-- <mat-form-field *ngIf="formDataModel.payerVisible">
+                <mat-placeholder>Payer</mat-placeholder>
+                <mat-select id="payerId" formControlName="payer">
+                  <mat-option *ngFor="let item of formDataModel.payerList" [value]="item.sC_Desc">
+                    {{ item.sC_Desc }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+              <div class="fee-earner" *ngIf="formDataModel.feeEarnerVisible">
+                <dps-edit-screen-single-column-select lableName="Fee Earner"
+                  [forceSelectDataItem]="forcefeeEarnerSelectDataItem" [hidden]="false" [disabled]="false"
+                  [modelData]="feeEarner" (selectionChangedItem)="onFeeEarnerChange($event)"
+                  [comboModelData]="formDataModel.feeEarnerList" placeholderLabel="Search">
+                </dps-edit-screen-single-column-select>
+                <mat-form-field hidden>
+                  <input matInput id="feeEarnerId" formControlName="feeEarner">
+                </mat-form-field>
+              </div>
+
+              <!-- <mat-form-field *ngIf="formDataModel.reasonVisible">
+                <mat-placeholder>Reason</mat-placeholder>
+                <mat-select id="reasonId" formControlName="reason">
+                  <mat-option *ngFor="let item of formDataModel.reasonList" [value]="item.sC_Desc">
+                    {{ item.sC_Desc }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+
+              <dps-editable-dropdown *ngIf="formDataModel.reasonVisible" [options]="reasonList"
+                [parentFormGroup]="echitForm" [placeholder]="'Reason'" [controllerName]="'reason'">
+              </dps-editable-dropdown>
+
+              <mat-form-field *ngIf="formDataModel.dateRequiredVisible">
+                <mat-placeholder> {{ formDataModel.dateRequiredText}} </mat-placeholder>
+                <input matInput [matDatepicker]="picker" id="dateRequiredId" formControlName="dateRequired">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="formDataModel.netVisible && !formDataModel.isVatVisible">
+                <mat-placeholder> Amount</mat-placeholder>
+                <input type="number" matInput id="netId" formControlName="net">
+              </mat-form-field>
+              <div *ngIf="formDataModel.isCouncelFeesVisible">
+                <mat-checkbox class="e-chit-checkbox" id="isCouncelFeesId" color="primary"
+                  formControlName="isCouncelFees">
+                  Counsel Fees</mat-checkbox>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="dps-echit-inner-wrapper" fxLayout="row wrap">
+
+            <div class="common-detail dps-expansion-panel" fxLayout="row wrap">
+
+              <mat-accordion [multi]="true" *ngIf="formDataModel.isVatVisible">
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="topic-line">
+                      <mat-icon mat-line-icon>credit_card</mat-icon>
+                      <label>Balance Details</label>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="dps-expansion-content" fxLayout="column wrap">
+
+
+                    <div class="account-details" fxLayout="column wrap">
+
+
+                      <div fxLayout="row wrap" *ngIf="eChitType!==chequeRequestType.PIN" fxLayoutGap="2rem">
+
+                        <mat-form-field *ngIf="inputData?.matterEBilling === 'PrecedentH'&&(eChitType===chequeRequestType.DPU ||
+                          eChitType===chequeRequestType.DUU)">
+                          <mat-placeholder>Disb. Type</mat-placeholder>
+                          <mat-select (selectionChange)="onChangeDisbType($event)" formControlName="disbType">
+                            <mat-option *ngFor="let item of formDataModel?.precedentHDisbursment?.disbursmentTypeList"
+                              [value]="item.itemValue" class="options">{{item.itemName}}</mat-option>
+                          </mat-select>
+
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="inputData?.matterEBilling === 'PrecedentH'&& (eChitType===chequeRequestType.DPU ||
+                          eChitType===chequeRequestType.DUU)">
+                          <mat-placeholder>Work Type</mat-placeholder>
+                          <mat-select (selectionChange)="onChangeDisbWorkType($event)" formControlName="workType">
+                            <mat-option *ngFor="let item of formDataModel?.precedentHDisbursment?.workTypeList"
+                              [value]="item.workTypeID" class="options">{{item.workType}}</mat-option>
+                          </mat-select>
+
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="row wrap" *ngIf="selectedDisbuType === 100 && 
+                        eChitType!==chequeRequestType.PIN" fxLayoutGap="2rem">
+                        <mat-form-field>
+                          <mat-placeholder>Fee</mat-placeholder>
+                          <!-- <input type="number" min="0" maxlength="11" #feeval [value]="disburcementValu?.feeValue"
+                            (blur)="onChangeDisbValue(feeval.value,'DISB_FEE_VAL')" matInput> -->
+
+                          <input type="number" (blur)="netAmountChange()" matInput id="feeId" formControlName="fee">
+                        </mat-form-field>
+                        <!-- 
+                        <mat-form-field>
+                          <mat-placeholder>V.A.T</mat-placeholder>
+                          <input type="number" #feevat matInput [value]="disburcementValu?.feeVat"
+                            (blur)="onChangeDisbValue(feevat.value,'DISB_FEE_VAT')">
+                        </mat-form-field> -->
+                        <!-- <mat-form-field>
+                          <mat-placeholder>Total</mat-placeholder>
+                          <input type="number" matInput [value]="feeTotal">PIN
+                        </mat-form-field> -->
+
+
+
+                      </div>
+                      <mat-form-field *ngIf="formDataModel.netVisible && formDataModel.isVatVisible">
+                        <mat-placeholder>Net Amount</mat-placeholder>
+                        <input type="number" (blur)="netAmountChange()" matInput id="netId" formControlName="net">
+                      </mat-form-field>
+                      <div fxLayout="row wrap" fxLayoutGap="2rem">
+                        <mat-form-field>
+                          <mat-placeholder>VAT Code</mat-placeholder>
+                          <mat-select class="option-select-content dps-white-gray-scroll"
+                            (selectionChange)="onChangeVATCode($event)" id="vatCodeId" formControlName="vatCode">
+
+                            <div class="option-grid-name">
+                              <span class="code">Code</span>
+                              <span class="description">Description</span>
+                              <span class="rate">Rate</span>
+                            </div>
+                            <div class="dps-white-gray-scroll">
+                              <mat-option class="option-grid" fxLayout="row wrap"
+                                *ngFor="let item of formDataModel.vatCodeList" [value]="item.vatCode">
+                                <div class="option-grid-data">
+                                  <span class="code-data">{{item.vatCode}}</span>
+                                  <span class="description-data">{{item.vatDescription}}</span>
+                                  <span class="rate-data">{{item.vatRate}}</span>
+                                </div>
+                                <mat-divider></mat-divider>
+                              </mat-option>
+                            </div>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-placeholder>Rate</mat-placeholder>
+                          <input type="number" matInput id="rateId" formControlName="rate">
+                          <mat-icon matSuffix>%</mat-icon>
+
+                        </mat-form-field>
+
+                      </div>
+
+                      <div fxLayout="row wrap" fxLayoutGap="2rem">
+
+                        <mat-form-field>
+                          <mat-placeholder>VAT</mat-placeholder>
+                          <input type="number" (blur)="populateGross()" matInput id="vatAmountId"
+                            formControlName="vatAmount">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <mat-placeholder>Gross</mat-placeholder>
+                          <input type="number" matInput id="grossId" formControlName="gross">
+                        </mat-form-field>
+
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </mat-expansion-panel>
+
+                <!-- Crime  -->
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true"
+                  *ngIf="(timeRecordType|async) === timeRecordTypes.CrimeTime && (model.typeValue !== 'DPU' || model.typeValue !== 'DUU')">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="topic-line">
+                      <mat-icon fontSet="fontawesome" fontIcon="fa-gavel" class="fa"></mat-icon>
+                      <label>LegalAid Details</label>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="account-details" fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                      <mat-select placeholder="Class" (selectionChange)="onChangeClassType($event.value)"
+                        formControlName="classId">
+                        <mat-option *ngFor="let class of filterClassType" [value]="class.rectype">
+                          ({{ class.rectype }}) {{ class.classname }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field floatLabel="always">
+                      <mat-select placeholder="Work Type" (selectionChange)="onChangeSubClass($event.value)"
+                        formControlName="subClassId">
+                        <mat-option *ngFor="let type of filterAttTypeList" [value]="type.attId">
+                          {{type.attDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-checkbox *ngIf="isVisibleTelephoneAdvice" class="dps-signature" labelPosition="after"
+                      color="primary" formControlName="telephoneAdvice">
+                      Telephone Advice?
+                    </mat-checkbox>
+                  </div>
+
+
+                </mat-expansion-panel>
+
+
+
+              </mat-accordion>
+
+              <mat-accordion [multi]="true" *ngIf="formDataModel.banckDetailVisible">
+                <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="topic-line">
+                      <mat-icon mat-line-icon>credit_card</mat-icon>
+                      <label>Bank Details</label>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <!-- <div>
+                    <button (click)="onBanckSearch()">
+                      Search
+                    </button>
+                  </div> -->
+                  <div class="dps-expansion-content" fxLayout="column wrap">
+                    <div fxLayout="column wrap" class="bank-details">
+                      <mat-form-field *ngIf="formDataModel.branchVisible">
+                        <mat-placeholder>Branch </mat-placeholder>
+                        <mat-select id="branchId" formControlName="branch">
+                          <mat-option *ngFor="let item of formDataModel.branchList" [value]="item.branchId">
+                            {{ item.branchName }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-placeholder>Bank Acc #</mat-placeholder>
+                        <input matInput id="bankAccId" formControlName="bankAcc">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-placeholder>Sort Code</mat-placeholder>
+                        <input matInput id="bankSortCodeId" formControlName="bankSortCode">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-placeholder>Bank Name</mat-placeholder>
+                        <input matInput id="bankAccountNamelId" formControlName="bankAccountName">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+              <mat-divider></mat-divider>
+              <!-- <div *ngIf="formDataModel.isVatVisible">
+                <span class="matter_balances-lbl" style="margin-top: 10px; display: block;"><strong>Precedent H
+                    Disbursements</strong></span>
+                 new changes by presidenth start 
+                <div fxLayout="row wrap" fxLayoutGap="2rem">
+
+                  <mat-form-field>
+                    <mat-placeholder>Disb. Type</mat-placeholder>
+                    <mat-select (selectionChange)="onChangeDisbType($event)">
+                      <mat-option *ngFor="let item of formDataModel?.precedentHDisbursment?.disbursmentTypeList"
+                        [value]="item.itemValue" class="options">{{item.itemName}}</mat-option>
+                    </mat-select>
+
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-placeholder>Work Type</mat-placeholder>
+                    <mat-select (selectionChange)="onChangeDisbWorkType($event)">
+                      <mat-option *ngFor="let item of formDataModel?.precedentHDisbursment?.workTypeList"
+                        [value]="item.workTypeID" class="options">{{item.workType}}</mat-option>
+                    </mat-select>
+
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="3rem" class="echit-disbursments-inputs">
+
+                  <mat-form-field>
+                    <mat-placeholder>Disbursement</mat-placeholder>
+                    <input type="number" #disbval [value]="disburcementValu?.disbuValue"
+                      (blur)="onChangeDisbValue(disbval.value,'DISB_VAL')" matInput>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-placeholder>V.A.T</mat-placeholder>
+                    <input type="number" #disbvat matInput [value]="disburcementValu?.disbuVat"
+                      (blur)="onChangeDisbValue(disbvat.value,'DISB_VAT')">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-placeholder>Total</mat-placeholder>
+                    <input type="number" matInput [value]="disbTotal">
+                  </mat-form-field>
+
+                  <div class="limits-caption-wrapper">
+                    <span *ngIf="getDisbLable()?.type==='A'" class="echit-warning">{{getDisbLable()?.message}}</span>
+                    <span *ngIf="getDisbLable()?.type ==='B'" class="echit-success">{{getDisbLable()?.message}}</span>
+                  </div>
+
+                   {{incDisbuBreakDown | json}} {{selectedDisbuType}} {{}} 
+                  </div>
+
+                <div fxLayout="row" *ngIf="selectedDisbuType === 100" fxLayoutGap="3rem"
+                  class="echit-disbursments-inputs">
+
+                  <mat-form-field>
+                    <mat-placeholder>Fee</mat-placeholder>
+                    <input type="number" #feeval [value]="disburcementValu?.feeValue"
+                      (blur)="onChangeDisbValue(feeval.value,'DISB_FEE_VAL')" matInput>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-placeholder>V.A.T</mat-placeholder>
+                    <input type="number" #feevat matInput [value]="disburcementValu?.feeVat"
+                      (blur)="onChangeDisbValue(feevat.value,'DISB_FEE_VAT')">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-placeholder>Total</mat-placeholder>
+                    <input type="number" matInput [value]="feeTotal">
+                  </mat-form-field>
+
+                  <div class="limits-caption-wrapper">
+                    <span *ngIf="getFeeLable()?.type==='A'" class="echit-warning">{{getFeeLable()?.message}}</span>
+                    <span *ngIf="getFeeLable()?.type ==='B'" class="echit-success">{{getFeeLable()?.message}}</span>
+
+                  </div>
+
+                </div>
+
+              </div> -->
+
+              <!-- add new changes by presidenth end -->
+
+
+
+              <mat-form-field class="text-area" *ngIf="formDataModel.notesVisible">
+                <mat-placeholder>Note</mat-placeholder>
+                <textarea id="notesId" formControlName="notes" class="textarea-resize" matInput rows="3"
+                  maxlength="250"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- <button class="dps-echit-post" mat-raised-button (click)="openFreeEarner()">freEarner</button> -->
+      </div>
+      <!--===================== Pop_up Footer========== -->
+
+      <div fxLayout="column" *ngIf="echitForm.value.typeValue">
+        <mat-divider></mat-divider>
+        <span fxFlex="1 1 auto"></span>
+        <div class="footer-btn" fxLayout="row" fxLayoutGap="7px">
+          <button class="dps-echit-post" [disabled]="isSavingData" mat-raised-button (click)="onSubmit()">
+            <mat-icon>send</mat-icon>
+            <span> Post</span>
+          </button>
+          <button mat-raised-button [disabled]="isSavingData" (click)="onClose()">
+            <span> Cancel</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</div>

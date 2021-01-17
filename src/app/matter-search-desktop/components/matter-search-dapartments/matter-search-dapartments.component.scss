@@ -1,0 +1,9 @@
+@import '~styles/variables.scss';
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $matter-search-primaty;
+    background: #defff5;
+}
+
+mat-form-field {
+    font-size: 12px !important;
+}

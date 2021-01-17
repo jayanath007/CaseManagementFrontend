@@ -1,0 +1,83 @@
+<div fxLayout="column" class="dps_screen_content_wrapper">
+  <!-- {{treeNodeItem | json}} -->
+  <div class="dps_screen_content_inner dps-white-gray-scroll" *ngIf="selectedNode" fxLayout="column">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Caption" [(ngModel)]="selectedNode.scL_Caption" (focusout)="onChangeCaption()">
+    </mat-form-field>
+    <div *ngIf="selectedNode?.scL_ID > 0" fxLayout="column">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Default Caption" disabled [value]="selectedNode.scL_DefaultCaption">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" disabled [value]="selectedNode.scL_Name">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Is Tab" disabled [value]="selectedNode.scL_IsTab?'True':'False'">
+      </mat-form-field>
+
+
+      <mat-form-field floatLabel>
+        <mat-placeholder>Rule Type</mat-placeholder>
+        <mat-select (selectionChange)="onChangeRuleType($event)" [(ngModel)]="selectedNode.scL_Type">
+
+          <mat-option *ngFor="let ruleType of screenEditRuleListData" [value]="ruleType.key">
+            {{ruleType.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-placeholder>Required</mat-placeholder>
+        <!-- <mat-select [disabled]="selectedNode.scL_System" (selectionChange)="onChangeRequired($event)" [(ngModel)]="selectedNode.scL_Required"> -->
+        <mat-select [disabled]="selectedNode.scL_System" (selectionChange)="onChangeRequired($event)"
+          [(ngModel)]="selectedNode.scL_Required">
+          <mat-option [value]="true">
+            True
+          </mat-option>
+          <mat-option [value]="false">
+            False
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-placeholder>Readonly</mat-placeholder>
+        <mat-select (selectionChange)="onChangeReadonly($event)"
+          [disabled]="selectedNode.scL_System || selectedNode.scL_IsTab || selectedNode.scL_Required"
+          [(ngModel)]="selectedNode.scL_ReadOnly">
+          <mat-option [value]="true">
+            True
+          </mat-option>
+          <mat-option [value]="false">
+            False
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+
+        <mat-placeholder>Visible</mat-placeholder>
+        <mat-select (selectionChange)="onChangeVisible($event)"
+          [disabled]="selectedNode.scL_System || selectedNode.scL_Required" [(ngModel)]="selectedNode.scL_Visible">
+          <mat-option [value]="true">
+            True
+          </mat-option>
+          <mat-option [value]="false">
+            False
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="notification" *ngIf="!selectedNode">
+    Please select a node
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end end" class="dps_action_btn">
+    <button mat-raised-button (click)="onReset()">Reset</button>
+    <button mat-raised-button (click)="onSubmit()">Ok</button>
+    <button mat-raised-button (click)="onClose()" class="dps-cancel">Cancel</button>
+  </div>
+</div>

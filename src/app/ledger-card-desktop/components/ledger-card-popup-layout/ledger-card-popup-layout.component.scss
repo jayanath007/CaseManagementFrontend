@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-ledger-card-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
+.ledgercard-popup-header mat-toolbar {
+  background: #006cc1;
+}
+
+.ledgercard-popup-header mat-toolbar-row mat-icon.header-icon {
+  border: 3px solid $primary;
+}
+
+.header-icon {
+  padding: 7px 8px 3px;
+  font-size: 19px;
+}
+.ledgercard-popup-header mat-list-item {
+  color: $toolbar-title;
+}
+.header-icon-delete {
+  color: $primary;
+  font-size: 15px;
+}
+
+
+.dps-ledger-card-main-contentainer {
+  height: calc(100% - 48px);
+  }
+  
+  .dps-ledger-card-main-header {
+    height: 135px;
+    background: #06aa9c;
+    padding: 0 16px 0 0;
+    box-shadow: none;
+  }
+  
+  .data-contents {
+    height: 100%;
+    position: relative;
+  }
+
+  .dps-ledger-card-data-content {
+    height: 100%;
+  }
+  
+  .data-wrapper-main {
+    box-shadow: 0px 0px 8px 0px #333;
+    background-color: white;
+  }
+
+  .header-icon-delete{
+    color: $primary;
+    font-size:15px;
+  }
+
+  mat-list.dps-matlist {
+    width:100%;
+    padding-top: 0px;
+  }
+
+  .matter-search-popup-header{
+    height: 100%;
+    width:100%;
+  }
+  

@@ -1,0 +1,61 @@
+
+@import '~styles/variables.scss';
+
+h2{
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #d9dbdc;
+}
+
+.dps-preview {
+    overflow-y: auto;
+}
+.dps-popup-bottom-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 8px 0px;
+    }
+  
+    button.dps-stting-sve {
+      background: #2c4e63;
+      color: $primary;
+      margin-right: 10px;
+    }
+  
+    button.dps-stting-sve,
+    button.dps-stting-cancel {
+      font-size: $primary-font-size - 2;
+    }
+  
+    .dps-stting-cancel {
+      background: none;
+      box-shadow: 0px 0px 1px #939393;
+      color: #2c4e63;
+      border: 1px solid #2c4e63;
+      line-height: 34px;
+      cursor: pointer;
+    }
+    .dps-browse{
+        background: #1972c3;
+    color: #fff;
+    padding: 0px 30px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    width: 96px;
+    }
+  
+    ::ng-deep.mat-bottom-sheet-container{
+        padding: 0px 0px !important;
+        padding: 0px 0px !important;
+       max-height: 50vh !important;
+        max-width: 50vw !important;
+        margin-top: 80px !important;
+        min-width: 500px !important;
+        min-height: 500px !important;
+      }
+      .mat-bottom-sheet-container-large {
+        // min-width: 512px;
+        // max-width: calc(100vw - 256px);
+        // min-height: 500px; 
+      }

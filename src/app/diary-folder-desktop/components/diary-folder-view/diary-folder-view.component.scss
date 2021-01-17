@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+
+.dps-ui-tree {
+  height: 100%;
+  flex-direction: column;
+
+  mat-list {
+    padding-top: 0px;
+
+    div.mat-list-wrapper {
+      width: 100%;
+    }
+
+    mat-list-item {
+      width: 100%;
+    }
+  }
+
+  i {
+    padding: 5px;
+    width: 13px;
+    font-size: $primary-font-size + 4;
+    color: #175c79;
+  }
+}
+
+mat-icon {
+  font-size: $primary-font-size + 4;
+}
+
+.edit-tree-row-select {
+  background: #d9edfb;
+}
+
+.dps-menu-tree-inner-wrapper {
+  flex-direction: column;
+}
+
+.dps-folder-list-item .dps-folder-item-name {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  font-size: $primary-font-size - 2;
+  font-weight: 400;
+  color: #596469;
+}
+
+.fa-angle-right:before {
+  margin-left: 5px;
+}
+
+.fa-angle-right:before {
+  margin-left: 5px;
+}
+
+mat-list-item:hover {
+  background: #e9f6ff;
+}
+
+div.menu-item-disable {
+  cursor: default !important;
+  opacity: 0.6;
+  /* pointer-events: none;  */
+}
+
+mat-list-item {
+  font-size: $primary-font-size - 2;
+}

@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+.dps-full-page-loader
+{
+  z-index: 1000;
+  background-color: #a5d0ec;
+  opacity: 0.9;
+}
+
+.dps-dashboard-main-header {
+  height: 100%;
+}
+
+.dps-background-content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  font-family: roboto;
+  color: #fff;
+}
+
+.spitfire {
+  width: 40%;
+}
+
+.right-side {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Questrial', sans-serif;
+
+
+
+}
+
+.dps-login-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 15%;
+  text-align: center;
+  max-width: 650px;
+
+  h1
+  {
+    font-size: 34px;
+    font-weight: normal;
+    line-height: 40px;
+    margin: 0 0px 8px;
+    text-shadow: 1px 1px 1px #4f8dbb;
+    color: #114f86;
+
+  }
+  small
+  {
+    font-size: 16px;
+  color: #cfe8fd;
+  font-weight: 300;
+  letter-spacing: 3px;
+  }
+
+}
+
+
+#spitfire-img {
+  background-image: url("assets/login/pitfire-icon-with-dps-login.png");
+  background-repeat: no-repeat;
+  height: 100%;
+  background-position: 40% 70%;
+  background-size: 55%;
+}
+
+.dps-logo-btn {
+
+  height: 100%;
+  justify-content: space-around;
+}
+.dps-login-container
+{
+  display: flex;
+  flex-direction: row;
+  height: 55%;
+  max-width: 650px;
+  text-align: center;
+
+  a
+  {
+    width: 100%;
+    cursor: pointer;
+
+    &:hover .login-btn
+    {
+      box-shadow: 0px 2px 5px #226192 inset;
+      background: #3373ad96;
+      transform: scale(1.05);
+      transition: .1s linear all;
+    }
+      span
+      {
+        line-height: 17px;
+
+      }
+      i
+      {
+        line-height: 17px;
+      }
+
+    small
+    {
+      color: #9ac2e0;
+      font-size: 11px;
+      letter-spacing: 1px;
+      padding-top: 30px;
+      display: block;
+    }
+      img
+      {
+        max-width: 60%;
+      }
+      
+      .login-btn
+      {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-self: center;
+        margin: 0 auto;
+        width: 85px;
+        background: #1d538496;
+        border-radius: 30px;
+        padding: 12px 9px 9px 18px;
+        box-shadow: 0px 2px 1px #226192;
+        font-size: 15px;
+
+      }
+  }
+  &.dual-login-active 
+  {
+
+    a:first-child
+    {
+      box-shadow: 1px 0px 0px #2577b3;
+    }
+  }
+}
+
+
+
+
+#dps-dashboard-main-header {
+  background-image: url("assets/login/azure-google-Login-Screen-cloud.jpg");
+  background-repeat: no-repeat;
+  background-position: 0% 50%;
+  background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+
+  .dps-background-content {
+    flex-direction: column-reverse;
+  }
+
+  .right-side {
+    width: 100%;
+
+  }
+
+  .spitfire {
+    width: 80%;
+    align-self: center;
+    margin-bottom: 30px;
+  }
+
+  #spitfire-google,
+  #spitfire-microsoft
+  {
+    background-size: 56%;
+  }
+}

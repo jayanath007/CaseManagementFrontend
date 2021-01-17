@@ -1,0 +1,47 @@
+@import '~styles/variables.scss';
+.matter-filter-grid-controllers
+{
+text-align: right;
+margin-top: 16px;
+}
+.total-matter-count-wrap
+{
+    font-size: 24px;
+    color: $primary;
+    font-weight: normal;
+    transition: all 0.1s ease-in-out;
+}
+
+.total-matter-count
+{
+    text-align: center;
+    padding-right: 10px;
+    min-width: 50px;
+   margin-top:22px;
+}
+.total-matter-count label
+{
+    color: #92d0bd;
+    font-size: $primary-font-size + 6;
+    font-weight: 300;
+    padding-left: 5px;
+
+
+}
+.total-bill-outstanding-count
+{
+    text-align: center;
+    padding-left: 10px;
+    min-width: 50px;
+    margin-top: 18px;
+    border-left: 1px solid #549860;
+}
+.total-bill-outstanding-count label
+{
+    font-size: 12px;
+    font-weight: normal;
+    color: #ddd0c7;
+    display:block;
+}
+
+

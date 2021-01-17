@@ -1,0 +1,163 @@
+@import '../../styles/time-information-layout.scss';
+
+
+.dps-crime-investigation {
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #0178c4;
+  }
+
+}
+
+
+.filter-set-02 {
+  height: 55px;
+  padding-top: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.general-error-wrap {
+  p {
+    width: 290px;
+
+  }
+}
+
+.filter-set-03 {
+  height: 55px;
+  background: #c8ddec;
+  border-radius: 0;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  font-size: 12px;
+
+  .time-information-input {
+    margin: 0 5px;
+    width: 33.33%;
+  }
+
+}
+
+.mat-chip-holder {
+  background: #c8ddec;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding: 0 10px;
+  position: relative;
+  margin-bottom: -1px;
+  height: 38px;
+  margin-top: 10px;
+}
+
+.attendees {
+
+  margin: 0 5px;
+
+
+
+
+  label {
+    margin-right: 10px;
+    color: $primary-blue;
+    line-height: 32px;
+    font-size: $primary-font-size - 2;
+  }
+
+  .work-done {
+    margin-right: 10px;
+    font-size: $primary-font-size - 1;
+
+    ::ng-deep .mat-form-field-label {
+      display: none;
+    }
+
+  }
+
+  .attendees-nos {
+    border: 2px solid $primary-blue;
+    padding: 2px 4px 3px 3px;
+    font-size: 11px;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 7px;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .attendees-add {
+    font-size: 12px;
+    cursor: pointer;
+    color: #0079c4;
+    border: 2px solid #539bca;
+    padding: 5px 0px 0px 4px;
+    height: 12px;
+    width: 13px;
+    line-height: 9px;
+    background: #bbe1ff;
+    vertical-align: middle;
+    margin-top: 5px;
+    border-radius: 100%;
+  }
+
+  .added-attendees {
+    mat-chip {
+      padding: 8px 4px 8px 8px;
+      font-size: 12px;
+      min-height: 24px;
+      color: #fff;
+      background: #0178c4;
+      letter-spacing: 1px;
+      margin: 7px 10px 0 0px;
+    }
+
+    mat-icon {
+      margin-left: 4px;
+    }
+  }
+
+  mat-datepicker-toggle {
+
+    ::ng-deep .mat-datepicker-toggle-default-icon {
+      width: 16px;
+    }
+  }
+
+}
+
+
+.private-extra-details {
+  font-size: 11px;
+  color: #b61414;
+  position: relative;
+  margin-top: -12px;
+
+  span {
+    display: block;
+    clear: both;
+    margin-bottom: 5px;
+    padding-right: 16px;
+  }
+
+  label {
+    float: right;
+  }
+
+}
+
+.attendance-note-txt {
+  font-size: $primary-font-size - 2;
+}
+
+.menu-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 14px;
+}
+
+.menu-margin {
+  margin: 0 10px;
+}

@@ -1,0 +1,39 @@
+<button class="dps-filter-btn" dpsIsMobile  mat-icon-button cdk-overlay-origin #trigger="cdkOverlayOrigin" (click)="toggleFilter()">
+  <ng-content select="mat-icon"> </ng-content>
+</button>
+<ng-template cdk-connected-overlay [cdkConnectedOverlayOpen]="(localState$ | async)?.isMenuOpen"
+  [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayWidth]="" [cdkConnectedOverlayPositions]="position"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop" cdkConnectedOverlayHasBackdrop="true"
+  (backdropClick)="toggleFilter()">
+  <mat-card>
+    <mat-card-content class="grid-filters">
+
+      <div fxLayout="column" fxFlex="" *ngIf="getCondition(localState$ | async, 0)?.fieldType !== 'BOOLEN'">
+        <dps-filter-condition [condition]="getCondition(localState$ | async, 0)" (valueChange)="formFieldChange('VALUE', $event, 0)"
+          (operatorChange)="formFieldChange('OPERATOR', $event, 0)" (submit)=onFilter()></dps-filter-condition>
+        <mat-form-field dence class="mat-form-field-flex">
+          <mat-select [ngModel]="getFilterLogic(localState$ | async)" (selectionChange)="formFieldChange('LOGIC', $event.value, null)">
+            <mat-option [value]="Logic.And"> And </mat-option>
+            <mat-option [value]="Logic.Or"> Or </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <dps-filter-condition [condition]="getCondition(localState$ | async, 1)" (valueChange)="formFieldChange('VALUE', $event, 1)"
+          (operatorChange)="formFieldChange('OPERATOR', $event, 1)" (submit)="onFilter()"></dps-filter-condition>
+      </div>
+
+      <div class="dps-task_action" fxLayout="column" fxFlex="" *ngIf="getCondition(localState$ | async, 0)?.fieldType === 'BOOLEN'">
+        <span class="task_action_header">Show items with value that:</span>
+        <mat-radio-group (change)="formFieldChange('VALUE', $event.value, 0)" [ngModel]="getCondition(localState$ | async, 0)?.value" >
+          <mat-radio-button value="true">is true</mat-radio-button>
+          <mat-radio-button value="false">is false</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button (click)="onFilter()" class="filter_btn">Filter</button>
+      <button mat-raised-button (click)="onClear()"  class="filter_btn">Clear</button>
+    </mat-card-actions>
+
+  </mat-card>
+</ng-template>

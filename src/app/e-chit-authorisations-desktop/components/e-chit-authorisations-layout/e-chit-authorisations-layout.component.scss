@@ -1,0 +1,91 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-authorisations-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+    overflow: hidden;
+  }
+}
+
+.dps-authorisations-layout {
+  height: 100%;
+  width: 100%;
+
+
+  .dps-authorisations-inputs {
+    background: #a8d9ff;
+    padding: 5px 8px 2px 0px;
+
+    div {
+      margin-right: 12px;
+    }
+
+    ::ng-deep {
+      mat-form-field {
+        font-size: $primary-font-size - 2;
+      }
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      background: #2872af;
+
+      mat-icon {
+        font-size: 22px;
+        line-height: 14px;
+      }
+
+    }
+
+    button:disabled {
+      background: #e4e4e4;
+      color: #a7a7a7;
+    }
+
+  }
+
+  .dps-authorisations-info {
+    height: calc(100% - 150px);
+    overflow: auto;
+  }
+
+  .dps-authorisations-wrapper {
+    height: 100%;
+
+    .dps-authorisations-action {
+      justify-content: flex-end;
+      text-align: right;
+      margin: 0px 15px 0px 0px;
+
+      button {
+        font-size: $primary-font-size - 2;
+        border-radius: 3px;
+        line-height: 34px;
+      }
+
+      .authorise {
+        background: #1c2c39;
+        color: $primary;
+
+      }
+
+      .authorise:disabled {
+        background: #e4e4e4;
+        color: #a7a7a7;
+      }
+
+      .cancel {
+        background: #e6e6e6;
+        border: 1px solid #cccccc;
+        // margin-left: 5px;
+        width: 83px;
+        line-height: 32px;
+      }
+    }
+
+  }
+
+
+}

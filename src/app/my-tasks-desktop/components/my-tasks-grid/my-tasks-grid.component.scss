@@ -1,0 +1,148 @@
+@import '~styles/variables.scss';
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+dps-column-header {
+  height: 40px;
+}
+
+.row-data.toggle {
+  background: #f1f1f1;
+}
+
+.grid-data {
+  line-height: 36px;
+  font-size: 12px;
+}
+
+.grid-panel-title {
+  display: table;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 100%;
+  margin-right: 0px;
+}
+
+.grid-data,
+.grid-table-row {
+  font-size: 12px;
+  display: table-row;
+  word-break: break-word;
+}
+
+.row-data,
+.grid-table-cell {
+  display: table-cell;
+  font-size: 12px;
+  padding: 6px 6px 6px;
+  line-height: 18px;
+}
+
+.wrk_done_date,
+.wrk_done_for,
+.dps_task_ref {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expansion-panelgrid-header {
+  display: table;
+  width: 100%;
+  height: auto !important;
+  position: relative;
+  padding: 0px 0px;
+}
+
+/* .dps_task_details , .dps_task_client {
+   
+  } */
+
+mat-expansion-panel {
+  border-bottom: 1px solid #f1f2f4;
+}
+
+.grid-data .row-data:last-child {
+  background-image: none;
+}
+
+.footer-shadow {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+
+.row-highlight {
+  width: calc(100% - 15px);
+  background-color: #fff9ea;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  height: 40px;
+}
+
+.dps-selected-row.my-task-expanded-row {
+  background: #f1ca6e;
+}
+
+.my-task-expanded-row {
+  position: relative;
+  margin: 0px 0px;
+}
+
+.dps-selected-row:hover {
+  background: #f1ca6e;
+}
+
+.my-task-grid-content {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.row-highlight-inner {
+  height: 40px;
+  width: 100%;
+}
+
+.length-calc {
+  min-width: 1000px;
+  height: 100%;
+}
+
+.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+dps-column-header:last-child {
+  background-image: none;
+}
+
+.my-task-grid {
+  background: $primary;
+  height: 100%;
+}
+
+.my-task-grid-outer {
+  height: 100%;
+}
+
+.dps_task_action {
+  text-align: center;
+}
+
+.dps_mytask_exapnsion_body {
+  background: #fdeecb;
+}
+
+.dps-dragover {
+  border: 3px dashed #DDD;
+}
+.groupmode-column-header{
+  padding-left: 30px;
+}
+// .dps-clmn-main-group{
+//   ::ng-deep .mat-list-item-content{
+//     padding: 0px 0px !important;
+//   }
+// }

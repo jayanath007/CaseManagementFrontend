@@ -1,0 +1,65 @@
+@import '~styles/variables.scss';
+
+.dps-organizer-signature-layout {
+  height: 100%;
+  width: 100%;
+}
+
+mat-form-field {
+  font-size: $primary-font-size - 2;
+
+  mat-label {
+    display: inline-flex;
+
+    mat-error {
+      padding-left: 5px;
+    }
+  }
+}
+
+
+div.dps-signature-content {
+  padding: 10px 5px;
+
+  mat-icon {
+    font-size: 17px;
+    color: #446f90;
+    position: relative;
+    top: 5px;
+
+    &.fa {
+      position: unset;
+    }
+  }
+
+  mat-form-field {
+    padding: 0px 5px;
+  }
+
+  .dps-signature-preview {
+    padding-top: 10px;
+  }
+}
+
+.dps-white-gray-scroll {
+  overflow: auto;
+}
+
+button {
+  font-size: 12px;
+}
+
+mat-dialog-actions {
+  padding: 10px 10px !important;
+}
+
+button.dps-signature-add {
+  background: #175296;
+  color: $primary;
+}
+
+
+button.dps-signature-discard {
+  color: #175296;
+  background: #d9eaff;
+}

@@ -1,0 +1,90 @@
+<mat-toolbar class="dps-mail-list-header" *ngIf="isShortView!==true">
+  <button mat-icon-button (click)="delete($event)" matTooltip="Delete" matTooltipPosition="below" [disabled]="!selectedItems || selectedItems.length < 1">
+    <mat-icon matListIcon>delete_sweep</mat-icon>
+  </button>
+  <button mat-icon-button (click)="flag($event)" [disabled]="!selectedItems || selectedItems.length < 1" [matTooltip]="(selectedItems && selectedItems.length && selectedItems[0].data.flag.flagStatus === 'flagged')?'Complete':'Flag'"
+    matTooltipPosition="below">
+    <mat-icon matListIcon>{{(selectedItems && selectedItems.length && selectedItems[0].data.flag.flagStatus ===
+      'flagged')?'check':'flag'}}</mat-icon>
+  </button>
+  <button mat-icon-button (click)="readUnread($event)" [disabled]="!selectedItems || selectedItems.length < 1"
+    [matTooltip]="(selectedItems && selectedItems.length && selectedItems[0].data.isRead)?'Mark as unread':'Mark as read'"
+    matTooltip="Attach to DPS file">
+    <mat-icon matListIcon>{{(selectedItems && selectedItems.length &&
+      selectedItems[0].data.isRead)?'mail_outline':'markunread_mailbox'}}</mat-icon>
+  </button>
+  <button mat-icon-button [disabled]="!selectedItems || selectedItems.length < 1" matTooltip="Move to folder"
+    matTooltipPosition="below" [matMenuTriggerFor]="folderMenu.childMenu">
+    <mat-icon class="icon-folder-open">folder_open</mat-icon>
+    <i class="material-icons icon-forward">forward</i>
+    <dps-folder-menu-item-list #folderMenu [folders]="folders" [parentFolderId]="msgRootFolderId" (selectFolder)="onMoveToFolder($event)"></dps-folder-menu-item-list>
+  </button>
+  <button mat-icon-button matTooltip="Attach to DPS file" [disabled]="!selectedItems || selectedItems.length < 1"
+    matTooltipPosition="below" (click)="onAttachToDpsFile()">
+    <mat-icon matListIcon>screen_share</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Attach to new mail" [disabled]="!selectedItems || selectedItems.length < 1"
+    matTooltipPosition="below" (click)="onAttachToNewMail()">
+    <mat-icon matListIcon>attachment</mat-icon>
+  </button>
+  <span class="dps-folder-name" fxFlex="1 1 auto">{{(selectedItems && selectedItems.length > 0) ?
+    '('+selectedItems.length+')':''}}</span>
+  <button mat-button [matMenuTriggerFor]="filterMenu" class="dps-mail-filter-btn" *ngIf="!isSearching">
+    <span>Filter</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+  <mat-menu #filterMenu="matMenu" dense [overlapTrigger]="false">
+    <button class="btn-sortmenu" (click)="onFilterApply(item)" *ngFor="let item of filterMenuData" mat-menu-item>
+      <mat-icon class="icon-item" [ngStyle]="{'color': filter===item.id ? 'rgb(0, 0, 0)': ''}">{{item.icon}}</mat-icon>
+      <span [ngStyle]="{'font-weight': filter===item.id ? '600': ''}"> {{item.label}} </span>
+    </button>
+    <button class="btn-sortmenu" mat-menu-item [matMenuTriggerFor]="sortMenu">
+      <span>Sort by</span>
+    </button>
+  </mat-menu>
+  <!-- <button mat-button [matMenuTriggerFor]="filterMenu" class="dps-mail-filter-btn" *ngIf="!isSearching">
+        <span>{{filterLable}}</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+    </button> -->
+  <!-- <button mat-button [matMenuTriggerFor]="sortMenu" class="dps-mail-sort-btn" *ngIf="!isSearching">
+        <span>Sort by {{getOrderByLabel}}</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+    </button> -->
+  <!-- <button (click)="toggleSortDirection()"  mat-icon-button>
+        <mat-icon *ngIf="sortDir === SortDir.Desc; else upIcon">arrow_downward</mat-icon>
+        <ng-template #upIcon>
+            <mat-icon>arrow_upward</mat-icon>
+        </ng-template>
+    </button> -->
+  <mat-paginator [length]="total" [pageIndex]="pageIndex" [pageSize]="itemPerPage" [pageSizeOptions]="isSearching?[50]:pageSizeOptions"
+    (page)="onPageChang($event)">
+  </mat-paginator>
+  <mat-divider></mat-divider>
+</mat-toolbar>
+
+
+<mat-toolbar class="dps-mail-list-header" *ngIf="isShortView===true">
+  <mat-button-toggle-group #group="matButtonToggleGroup" *ngIf="!isSearching" appearance="legacy">
+    <mat-button-toggle [value]="item.id" [checked]="filter===item.id" (change)="onFilterApply(item)" *ngFor="let item of filterMenuData"
+      [matTooltip]="item.label" matTooltipPosition="below">
+      <mat-icon [ngStyle]="{'color': filter===item.id ? 'rgb(0, 0, 0)': ''}">{{item.icon}}</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <span class="dps-mail-searching" fxFlex="1 1 auto">{{isSearching&&!itemsLoading?'All
+    results':(isSearching&&itemsLoading?'Searching...':'')}}</span>
+  <button mat-button [matMenuTriggerFor]="sortMenu" class="dps-mail-filter-btn" *ngIf="!isSearching">
+    <span>Sort</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+  <mat-divider></mat-divider>
+</mat-toolbar>
+
+
+<mat-menu #sortMenu="matMenu" dense [overlapTrigger]="false">
+  <button class="btn-item" (click)="onSortTypeApply(item)" *ngFor="let item of sortMenuData" mat-menu-item>
+    <span fxFlex="1 1 auto" [ngStyle]="{'font-weight': orderBy===item.id ? '600': ''}">{{item.label}}</span>
+    <i class="fa icon-long-arrow-down" [ngClass]="{'fa-long-arrow-down': sortDir === SortDir.Desc, 'fa-long-arrow-up': sortDir === SortDir.Asc}"
+      *ngIf="orderBy===item.id" aria-hidden="true"></i>
+  </button>
+</mat-menu>
+<mat-progress-bar mode="indeterminate" *ngIf="isShortView!==true && itemsLoading"></mat-progress-bar>

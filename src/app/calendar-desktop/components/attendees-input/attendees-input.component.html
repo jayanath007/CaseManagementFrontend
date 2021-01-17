@@ -1,0 +1,76 @@
+<div class="dps-attendees-wrapper" fxLayout="column">
+  <div fxLayout="row">
+    <mat-form-field class="dps-attendee-form">
+      <mat-select #select value="required">
+        <mat-option value="required">
+          Required
+        </mat-option>
+        <mat-option value="optional">
+          Optional
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="dps-recipient-input" floatLabel="never">
+      <mat-placeholder>Add People</mat-placeholder>
+      <input #contactInput matInput [matAutocomplete]="contactAutocomplete" [formControl]="inputCtrl" />
+      <mat-autocomplete true #contactAutocomplete="matAutocomplete"
+        (optionSelected)="optionSelected($event,contactInput,select)">
+        <div [hidden]="showSearchList">
+          <mat-option *ngFor="let person of filteredPeople | async" [value]="person.id">
+            <div [ngStyle]="{'background-color': person.emailAddresses[0].address|recipientColorCode}"
+              class="dps-person-email" *ngIf="!img.showProfileImg">
+              <span class="dps-person-name">
+                {{person.displayName|nameInitials}}
+              </span>
+            </div>
+            <img #img [hidden]="!img.showProfileImg" src="{{person.emailAddresses[0].address | dpsUserImage | async}}"
+              class="dps-person-email" alt="..." (load)="img.showProfileImg=true">
+            <div class="dps-calendar-attendees">
+              <div>{{person.displayName}}</div>
+              <small>{{ person.emailAddresses[0].address}}</small>
+            </div>
+
+          </mat-option>
+        </div>
+        <div [hidden]="!showSearchList">
+          <mat-option *ngFor="let person of searchedPeople.people" [value]="person.id">
+            <div class="dps-person-mail" [ngStyle]="{'background-color': person.mail|recipientColorCode}">
+              <span class="dps-person-display-name">
+                {{person.displayName|nameInitials}}
+              </span>
+            </div>
+            <span class="person-display-name">{{person.displayName}}</span> |
+            <small>{{ person.mail}}</small>
+          </mat-option>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-option disabled *ngIf="showLoader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching
+        </mat-option>
+        <mat-option disabled *ngIf="showSearchList && !(searchedPeople?.people.length > 0)">
+          No match was found.
+        </mat-option>
+        <!-- <mat-option *ngIf="showSearchBtn" value="">
+              <mat-icon matListIcon style="color: #0D557C">search</mat-icon>
+              Search Directory
+          </mat-option> -->
+        <mat-nav-list *ngIf="showSearchBtn">
+          <a mat-list-item (click)="onSearchDirectory(contactInput.value)">
+            <mat-icon matListIcon>search</mat-icon>
+            Search Directory
+          </a>
+        </mat-nav-list>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-list dense>
+      <h3 mat-subheader *ngIf="requiredAttendees && requiredAttendees.length>0">Required</h3>
+      <dps-attendee-item *ngFor="let attendee of requiredAttendees" [attendee]="attendee" [hasRemove]="true"
+        (remove)="remove($event)"></dps-attendee-item>
+      <h3 mat-subheader *ngIf="optionalAttendees && optionalAttendees.length>0">Optional</h3>
+      <dps-attendee-item *ngFor="let attendee of optionalAttendees" [attendee]="attendee" [hasRemove]="true"
+        (remove)="remove($event)"></dps-attendee-item>
+    </mat-list>
+  </div>
+</div>

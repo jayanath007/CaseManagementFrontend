@@ -1,0 +1,28 @@
+<div fxLayout="column" class="dps-popup-outer">
+  <!-- dps-white-gray-scroll -->
+  <div fxLayout="column" fxFlex="calc(100% - 50px)" class="dps-white-gray-scroll dps-grid-x" style="overflow-x: auto;">
+    <div fxLayout="column" class="dps-inner-controller dps-white-gray-scroll" style="min-width: 1500px;">
+      <div class="row-highlight" dpsIsMobile>
+        <div class="row-highlight-inner">
+          <div>
+            <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header?.extras?.fxFlex" [def]="header"
+              [filterAnchor]="header?.extras?.filterAnchor" (toggleSorting)="onToggleSorting($event)">
+            </dps-column-header>
+          </div>
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+        </div>
+      </div>
+      <div class="dps-white-gray-scroll dps-popup-content {{fontSizeClass}}" fxLayout="column" fxFlex="calc(100%-36px)">
+        <div fxFlex="calc(100% - 52px)" class="dps-white-gray-scroll dps-auth-search-grid">
+          <dps-bank-search-grid-row [columnDef]="columnDef" [gridData]="viewData?.authorisationsGridData" [user]="user"
+            [viewData]="viewData" (selectedRowItem)="onSelectedRow($event)" (checkedChange)="onCheckedChange($event)"
+            (authorisationViewReport)="onViewFile($event)">
+          </dps-bank-search-grid-row>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator fxFlex="50px" #paginator [length]="viewData?.gridRowTotal" [pageIndex]="paginatorDef?.currentPage"
+    [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="[50]" (page)="onChangePage($event)" class="footer-shadow">
+  </mat-paginator>
+</div>

@@ -1,0 +1,24 @@
+<div style="width: 100%; height: 100%" fxLayout="column">
+  <mat-toolbar fxFlex="50px">
+    <button mat-icon-button (click)="onHideRecipientsList()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    <span>Email list</span>
+  </mat-toolbar>
+  <div fxFlex="calc(100%-50px)" class="dps-email-list-contacts-content dps-white-gray-scroll">
+    <mat-list dense>
+      <div *ngFor="let contact of contactList">
+        <mat-list-item>
+          <button matListAvatar mat-icon-button class="dps-mail-item-avatar" [ngStyle]="{'background-color': contact.recipient.emailAddress.address|recipientColorCode}"
+            [dpsDraggable]="true" [dropZones]="['recipientInput','mailCompose']" [dragData]="contact.recipient" dragDataType="recipient">
+            <span>{{contact.recipient.emailAddress.name|nameInitials}}</span>
+          </button>
+          <span class="name" matLine>{{contact.recipient.emailAddress.name}}</span>
+          <span class="email" matLine>{{contact.recipient.emailAddress.address}}</span>
+          <span class="type" matLine>{{contact.contactType}}</span>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </div>
+</div>

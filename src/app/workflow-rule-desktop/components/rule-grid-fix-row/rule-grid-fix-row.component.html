@@ -1,0 +1,113 @@
+<div (click)="rowItemClick(ruleRowData, $event)" fxLayout="row" class="grid-data"
+  [ngClass]="{'workflow-rule-row-selected':checkIsSelected}">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)"> {{ruleRowData.rowOrder}}
+    <span *ngIf="amendScreensWorkflow$ |async" [hidden]="!isDeleteBtnShow" class="wrkflow_rule_row_delete" (click)="onBtnDelete()">
+      <mat-icon class="material-icons mat-18">cancel</mat-icon>
+    </span>
+  </div>
+
+
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(1)">
+    <div class="input-wrapper">
+      <input #wfRTest matInput [value]="ruleRowData.wfR_Test" (focusout)="testVarNoChange(ruleRowData,$event)"
+       *ngIf="(amendScreensWorkflow$ |async)">
+       <span *ngIf="!(amendScreensWorkflow$ |async)">{{ruleRowData.wfR_Test}}</span>
+    </div>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(2)">
+    {{ruleRowData.operatorText}}
+    <span fxFlex="1 1 auto"></span>
+
+    <button class="wrkflow-action-btn" mat-icon-button [matMenuTriggerFor]="menu"
+     *ngIf="amendScreensWorkflow$ |async">
+      <mat-icon class="wrkflow_view_content">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="dps_wrkflow_options">
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.EQ)">
+        <mat-icon class="wrflw_equation">=</mat-icon>
+        <span class="wrflw_equation_content">Equal</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.NE)">
+        <mat-icon class="wrflw_equation">!=</mat-icon>
+        <span class="wrflw_equation_content">Not equal</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.GT)">
+        <mat-icon class="wrflw_equation">></mat-icon>
+        <span class="wrflw_equation_content">Greater than</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.GE)">
+        <mat-icon class="wrflw_equation">>=</mat-icon>
+        <span class="wrflw_equation_content">Greater than or equal</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.LT)">
+        <mat-icon class="wrflw_equation">
+          <</mat-icon> <span class="wrflw_equation_content">Less than</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.LE)">
+        <mat-icon class="wrflw_equation">
+          <=</mat-icon> <span class="wrflw_equation_content">Less than or equal</span>
+      </button>
+      <button mat-menu-item (click)="operatorItemClick(ruleRowData,RuleOperator.IN)">
+        <mat-icon class="wrflw_equation">+</mat-icon>
+        <span class="wrflw_equation_content">Contains</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(3)">
+    <div class="input-wrapper">
+      <input matInput [value]="ruleRowData.wfR_Control" (focusout)="criteriaChange(ruleRowData,$event)"
+      *ngIf="(amendScreensWorkflow$ |async)">
+      <span *ngIf="!(amendScreensWorkflow$ |async)">{{ruleRowData.wfR_Control}}</span>
+    </div>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)">{{ruleRowData.actionText}}
+    <span fxFlex="1 1 auto"></span>
+    <button class="wrkflow-action-btn" mat-icon-button [matMenuTriggerFor]="actionMenu"
+     *ngIf="amendScreensWorkflow$ |async">
+      <mat-icon class="wrkflow_view_content">more_vert</mat-icon>
+    </button>
+    <mat-menu #actionMenu="matMenu" class="dps_wrkflow_options">
+      <button mat-menu-item (click)="actionItemClick(ruleRowData,0)">
+        <!-- <mat-icon class="wrflw_equation wrflw_equation_option">remove_red_eye</mat-icon> -->
+        <mat-icon class="wrflw_equation wrflw_equation_option fa" fontSet="fontawesome" fontIcon="fa-eye-slash">
+        </mat-icon>
+        <span class="wrflw_equation_content">Hide Item</span>
+      </button>
+      <button mat-menu-item (click)="actionItemClick(ruleRowData,1)">
+        <mat-icon class="wrflw_equation wrflw_equation_option">check</mat-icon>
+        <span class="wrflw_equation_content">Enable Item</span>
+      </button>
+      <button mat-menu-item (click)="actionItemClick(ruleRowData,2)">
+        <mat-icon class="wrflw_equation wrflw_equation_option">block</mat-icon>
+        <span class="wrflw_equation_content">Disable Item</span>
+      </button>
+    </mat-menu>
+  </div>
+  <!-- <div class="row-data-wrapper">  </div> -->
+
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(5)">
+    <div class="row-data-inoput">
+      <input class="input-wrapper" matInput [value]="ruleRowData.wfR_Command"
+        (focusout)="itemChange(ruleRowData,$event)"
+        *ngIf="(amendScreensWorkflow$ |async)"/>
+        <span *ngIf="!(amendScreensWorkflow$ |async)">{{ruleRowData.wfR_Command}}</span>
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <div>
+      <button class="wrkflow-action-btn" mat-icon-button (click)="onEditItem(ruleRowData)"
+      *ngIf="amendScreensWorkflow$ |async">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(6)">
+    <div class="input-wrapper">
+      <input maxlength="49" matInput [value]="ruleRowData.wfR_Description"
+        (focusout)="descriptionChange(ruleRowData,$event)"
+        *ngIf="(amendScreensWorkflow$ |async)">
+        <span *ngIf="!(amendScreensWorkflow$ |async)">{{ruleRowData.wfR_Description}}</span>
+    </div>
+  </div>
+</div>

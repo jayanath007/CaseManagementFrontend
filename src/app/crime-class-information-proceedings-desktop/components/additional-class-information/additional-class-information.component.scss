@@ -1,0 +1,118 @@
+@import '~styles/variables.scss';
+// ::ng-deep .mat-expansion-panel
+// {
+//     box-shadow: none !important;
+//     margin-bottom: 15px !important;
+
+//         mat-expansion-panel-header
+//         {
+//             height: 44px !important;
+//             padding: 0 15px;
+//             background: #dfe9f3;
+//             margin-top: 10px;
+
+//             .mat-content
+//             {
+//                 flex: inherit;
+//             }
+//             .mat-expansion-indicator
+//             {
+//                 margin-top: -6px;
+//             }
+//             .mat-expansion-indicator::after
+//             {
+//                 color: #0979d3;
+//             }
+//         }
+
+//         mat-expansion-panel-header.mat-expanded
+//         {
+
+//             background: none;
+            
+//             .mat-expansion-indicator
+//             {
+                
+//                 margin-top: 7px;
+//             }
+//         }
+
+//     .mat-expansion-panel-body
+//         {
+//             padding: 0 15px 16px !important;
+//         }
+// }
+
+h3
+{
+    padding:0;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    margin: 0;
+    color: #0979d3;
+}
+
+.personel-data
+{
+    padding-right: 0 !important;
+    padding-left: 12px !important;
+
+    ::ng-deep mat-form-field
+    {
+        width: 100%;
+    }
+}
+
+.personel-data-chk-bx
+{
+    mat-checkbox
+    {
+        margin-bottom: 9px;
+        display: block;
+
+        .mat-input-element
+        {
+            font-size: 12px;
+        }
+        ::ng-deep span
+        {
+            white-space: normal;
+            font-size: 11px;
+        }
+    }
+
+    ::ng-deep mat-form-field .mat-input-element
+    {
+        font-size: 11px;
+    }
+
+    ::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+        background-color: #1472ce;
+    }
+
+    ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+        background-color: #c8c8c8;
+    }
+
+}
+
+.personel-data-chk-bx.stacked
+{
+    background: #e4edf7;
+    padding: 10px 15px 0px;
+    border: 1px solid #c6dcf5;
+    
+    mat-checkbox
+    {
+        margin-bottom: 10px;
+    }
+}
+
+dps-location
+{
+    background: #cfe3f7;
+    padding: 11px;
+    border-radius: 3px;
+    height: 138px;
+
+}

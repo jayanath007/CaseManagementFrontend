@@ -1,0 +1,26 @@
+
+.grid-data{
+    font-size: 12px;
+    display: table-row;
+    word-break: break-word;
+}
+
+.row-data{
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    font-size: 12px;
+    padding: 6px 6px 6px;
+    line-height: 18px;
+}
+
+.rate,.units{
+    text-align: center;
+}
+.date,.date-billed{
+    text-align: center;
+}
+.amount,.billed-amount{
+    text-align: right;
+}
+
+

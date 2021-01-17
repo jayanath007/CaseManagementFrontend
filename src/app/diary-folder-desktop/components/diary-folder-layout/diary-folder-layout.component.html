@@ -1,0 +1,243 @@
+<div class="dps-diary-folder-layout" fxLayout="column">
+  <mat-toolbar fxFlex="42px" class="dps-toolbar-box-shadow">
+    <mat-icon>folder_special</mat-icon>
+    <span fxFlex="1 1 auto" class="dps-diary-folder-title">Manage Diary Folders</span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+
+
+  <div fxFlex="calc(100%-102px)" class="dps-diary-folder-content dps-white-gray-scroll" fxLayout="column">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading || isSaving"></mat-progress-bar>
+    <!-- {{dataSource.data | json }} -->
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" #tree class="mat-tree-structure">
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-nested-tree-node [ngClass]="{'parent': node.parentId === 0}" matTreeNodePadding
+        *matTreeNodeDef="let node; when: hasChild">
+        <span class="navigator" [ngClass]="{'cover-active': node.parentId === 0}"></span>
+        <li>
+          <div class="mat-tree-node" [ngClass]="{'parent-div-node': node.parentId === 0}">
+
+            <button mat-icon-button class="folder-btn" (click)="changeState(node)"
+              [ngClass]="{'parent-folder': node.parentId === 0}" matTreeNodeToggle
+              [attr.aria-label]="'toggle ' + node.folderName">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{!node.expanded ? 'chevron_right':'expand_more'}}
+              </mat-icon>
+
+              <i class="fa tree-folder-ico"
+                [ngClass]="!node.expanded ? 'fa-folder': 'fa-folder-open active rubberBand' " aria-hidden="true"></i>
+
+              <!-- <mat-icon class="tree-folder-ico" [ngClass]="{'active rubberBand': treeControl.isExpanded(node) == true}"> 
+                
+              </mat-icon> -->
+
+            </button>
+            <!-- <mat-icon>folder</mat-icon> -->
+
+            <mat-form-field [ngClass]="{'new-root-folder': node.folderId === 0 && node.folderName === ''}"
+              fxFlex="1 1 auto">
+              <input matInput #input2 [value]="node.folderName" tabindex="1" maxlength="100"
+                [ngClass]="{'new-empty-folder': node.folderId === 0}"
+                (change)="onChangeChildInput(node,input2.value,'CHILD')"
+                (keyup.enter)="onChangeChildInput(node,input2.value,'CHILD')">
+            </mat-form-field>
+
+            <button class="dps-add-btn" matTooltip="Add New Folder" *ngIf="node.folderId > 0 && !node.isDeleted"
+              mat-icon-button (click)="onAddRootFolder(node,$event)">
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <button class="dps-add-btn confirm pulse" matTooltip="Save"
+              *ngIf="(node.folderId === 0 || node.folderId === -1)  && !node.isDeleted" mat-icon-button
+              (click)="onSave('save')">
+              <mat-icon>add_task</mat-icon>
+            </button>
+
+
+            <mat-checkbox matTooltip="Is Default" [checked]="node.selected" *ngIf="node.parentId === 0" color='primary'
+              (change)="onIsDefault(node, $event)">
+            </mat-checkbox>
+
+            <button class="restore_from_trash" *ngIf="node.isDeleted" mat-icon-button
+              (click)="onDelete(node,'RESTORE')">
+              <mat-icon>restore_from_trash</mat-icon>
+            </button>
+            <button class="delete_forever" *ngIf="!node.isDeleted" (click)="onDelete(node,'DELETE')" mat-icon-button>
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+            <!-- <button class="delete" (click)="onDelete(node)" mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button> -->
+
+          </div>
+          <ul [class.example-tree-invisible]="!node.expanded">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </ul>
+        </li>
+      </mat-nested-tree-node>
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node [ngClass]="{'single-node-wrap': node.parentId === 0}" *matTreeNodeDef="let node" matTreeNodePadding
+        matTreeNodeToggle>
+        <li class="mat-tree-node">
+          <!-- use a disabled button to provide padding for tree leaf -->
+
+          <button mat-icon-button class="single-node">
+
+            <i class="fa tree-folder-ico fa-folder" aria-hidden="true"></i>
+          </button>
+          <mat-form-field fxFlex="1 1 auto"
+            [ngClass]="{'new-root-folder': node.folderId === 0 && node.folderName === ''}">
+            <input matInput #input1 [value]="node.folderName" maxlength="100"
+              (blur)="onChangeParentInput(node,input1.value,'PARENT')"
+              (keyup.enter)="onChangeParentInput(node,input1.value,'PARENT')">
+          </mat-form-field>
+
+          <button class="dps-add-btn" matTooltip="Add New Folder" *ngIf="node.folderId > 0 && !node.isDeleted "
+            mat-icon-button (click)="onAddRootFolder(node,$event)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button class="dps-add-btn confirm pulse" matTooltip="Save"
+            *ngIf="(node.folderId === 0 || node.folderId === -1)  && !node.isDeleted" mat-icon-button
+            (click)="onSave('save')">
+            <mat-icon>add_task</mat-icon>
+          </button>
+          <mat-checkbox matTooltip="Is Default" [checked]="node.selected" *ngIf="node.parentId === 0" color='primary'
+            (change)="onIsDefault(node, $event)">
+          </mat-checkbox>
+          <button class="restore_from_trash" matTooltip="Restore" *ngIf="node.isDeleted" mat-icon-button
+            (click)="onDelete(node,'RESTORE')">
+            <mat-icon>restore_from_trash</mat-icon>
+          </button>
+          <button class="delete_forever" matTooltip="Delete" *ngIf="!node.isDeleted" (click)="onDelete(node,'DELETE')"
+            mat-icon-button>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <!-- <button class="delete" (click)="onDelete(node)" mat-icon-button>
+            <mat-icon>close</mat-icon>
+          </button> -->
+
+        </li>
+      </mat-tree-node>
+
+    </mat-tree>
+
+    <div class="mat-tree-structure add-root-directory">
+      <div class="mat-nested-tree-node parent">
+        <span class="navigator cover-active"></span>
+        <li>
+
+          <div class="mat-tree-node parent-div-node">
+
+            <button mat-icon-button class="mat-icon-button folder-btn parent-folder" (click)="onnewRootFolderForcus()">
+              <mat-icon class="mat-icon-rtl-mirror circle-add" [ngClass]="{'dps-deactive': folderValue === ''}">
+                add_circle_outline
+              </mat-icon>
+
+              <i class="fa tree-folder-ico fa-folder"></i>
+
+
+            </button>
+
+
+            <mat-form-field class="mat-form-field" fxFlex="1 1 auto" floatLabel="never">
+              <!-- <mat-placeholder>Add New Folder</mat-placeholder> -->
+              <input placeholder="Add New Folder" matInput type="text" #newFolder class="mat-input-element"
+                maxlength="100" (keyup)="onAddNewRootFolder(newFolder.value)" [value]="folderValue"
+                (keyup.enter)="onAddFolder(newFolder.value)">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon>close</mat-icon>
+              </button> -->
+            </mat-form-field>
+
+
+
+          </div>
+        </li>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div fxFlex="60px" fxLayout="row" fxLayoutAlign="end center" class="dps-diary-folder-footer footer-shadow">
+    <button mat-raised-button [disabled]="!isDurty" (click)="onSave('save')" class="dps-diary-save">Save</button>
+    <button mat-raised-button [disabled]="!isDurty" (click)="onSave('save_close')" class="dps-diary-save">Save and
+      Close</button>
+    <button mat-raised-button (click)="onClose()" [disabled]="isSaving" class="dps-diary-cancel">Cancel</button>
+  </div>
+
+
+
+  <!--dps-diary-folder-layout end -->
+</div>
+
+
+
+
+<!-- <div fxFlex="calc(100%-102px)" class="dps-diary-folder-content" fxLayout="column">
+    <div fxFlex="35px" fxLayout="row" class="dps-diary-folder-content-header">
+      <div fxFlex="1 1 auto">Folder Name</div>
+      <div fxFlex="102px">Is Default</div>
+      <div fxFlex="102px">Action</div>
+      <div fxFlex="15px"></div>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading || isSaving"></mat-progress-bar>
+    <div fxFlex="calc(100%-40px)" class="dps-white-gray-scroll">
+      <table *ngIf="!isLoading">
+        <tr *ngFor="let folder of notDeletedFolders" class="dps-diary-folders">
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput #input1 [value]="folder.data.text" (blur)="onInputBlur(folder,input1)">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-checkbox [checked]="folder.data.selected" color="primary" (change)="onChangeIsDefault(folder,$event)">
+            </mat-checkbox>
+          </td>
+          <td>
+            <button mat-icon-button (click)="onDelete(folder)" matTooltip="Delete" matTooltipPosition="after"
+              class="dps-diary-delete" [disabled]="notDeletedFolders.length<2">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr class="dps-add-folders">
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput #input>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-checkbox color="primary" #checkbox>
+            </mat-checkbox>
+          </td>
+          <td>
+            <button mat-icon-button (click)="onAdd(input,checkbox)" matTooltip="Add" matTooltipPosition="after">
+              <mat-icon>add</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr *ngFor="let folder of deletedFolders" class="dps-delete-folders">
+          <td>
+            <mat-form-field appearance="outline" disabled>
+              <input matInput [value]="folder.data.text" readonly>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-checkbox [checked]="folder.data.selected" color="primary" disabled></mat-checkbox>
+          </td>
+          <td>
+            <button mat-icon-button (click)="onCancelDeleted(folder)" matTooltip="Cancel Deletion"
+              matTooltipPosition="after">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div> -->

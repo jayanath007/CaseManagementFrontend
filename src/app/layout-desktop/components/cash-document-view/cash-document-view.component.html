@@ -1,0 +1,1 @@
+<iframe  sandbox *ngFor="let item of preloadUrls" (load)="onIFrameLoad($event,item)" [src]="item.url"> </iframe>

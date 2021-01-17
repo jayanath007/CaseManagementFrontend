@@ -1,0 +1,18 @@
+<div class="dps-upload-indictor-item">
+  <mat-list-item>
+    <i matListAvatar [ngClass]="item.fileName | attachmentIcon"><span></span></i>
+    <span matLine>
+      <span class="dps-file-name">{{item.fileName}}</span>
+      <mat-icon *ngIf="item.progress===100">done</mat-icon>
+      <span *ngIf="item.progress<0" class="dps-error" (click)="onShowError()">ERROR</span>
+      <span *ngIf="item.progress<100 && item.progress>=0 && item.uploading===false">{{item.progress}}%</span>
+    </span>
+    <span matLine *ngIf="item.progress<100 && item.progress>=0">
+      <mat-progress-bar [mode]="item.uploading?'indeterminate':'determinate'" [value]="item.progress">
+      </mat-progress-bar>
+    </span>
+  </mat-list-item>
+  <i class="fa fa-times-circle popup-close-circle" aria-hidden="true" (click)="onClose()"
+    *ngIf="item.progress===100 || item.progress<0"></i>
+  <mat-divider></mat-divider>
+</div>

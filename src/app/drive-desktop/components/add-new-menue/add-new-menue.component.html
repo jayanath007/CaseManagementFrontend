@@ -1,0 +1,31 @@
+<mat-menu #contextMenu="matMenu" possitonX [overlapTrigger]="false">
+  <button mat-menu-item (click)="onAdd('Folder')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-folder" class="fa"></mat-icon>
+    <span>Folder</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="onAdd('.docx')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-file-word-o" class="fa"></mat-icon>
+    <span>Word document</span>
+  </button>
+  <button mat-menu-item (click)="onAdd('.xlsx')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-file-excel-o" class="fa"></mat-icon>
+    <span>Excel workbook</span>
+  </button>
+  <!-- <button mat-menu-item (click)="onAdd('PowerPoint')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-file-powerpoint-o" class="fa"></mat-icon>
+    <span>PowerPoint presentation</span>
+  </button>
+  <button mat-menu-item (click)="onAdd('OneNote')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-file-text" class="fa"></mat-icon>
+    <span>OneNote notebook</span>
+  </button> -->
+  <!-- <button mat-menu-item (click)="onAdd('Forms')">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-file-excel-o" class="fa"></mat-icon>
+    <span>Forms for Excel</span>
+  </button> -->
+  <!-- <button mat-menu-item (click)="onAdd()">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-scissors" class="fa"></mat-icon>
+    <span>Link</span>
+  </button> -->
+</mat-menu>

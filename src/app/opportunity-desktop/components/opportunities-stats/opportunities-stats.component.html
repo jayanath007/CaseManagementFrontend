@@ -1,0 +1,97 @@
+<div class="opportunities-stats-layout">
+  <div class="opportunities-heading">
+    <h1>
+      <mat-icon>description</mat-icon> Opportunities Stats
+    </h1>
+  </div>
+
+  <div class="dps-white-gray-scroll">
+    <div class="opportunities-stat-works" fxLayout="column wrap">
+      <div class="quotes-sent" *ngFor="let item of stats?.quoteSummaryViewModel ; let i = index"
+        class="{{'dps-oppertunity-stats-item-'+i}}">
+        <mat-card class="quotes-sent-wrapper">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>more_vert</mat-icon> {{item.opportunityStatus}}
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="details-row" fxLayout="row">
+              <div class="info-block">
+                <div class="quotes-info sent">{{item.todayCount}}</div>
+                <span>Today</span>
+              </div>
+              <div class="info-block ">
+                <div class="quotes-info sent">{{item.weekCount}}</div>
+                <span>Week</span>
+              </div>
+              <div class="info-block">
+                <div class="quotes-info sent">{{item.monthCount}}</div>
+                <span>Month</span>
+              </div>
+              <div class="info-block">
+                <div class="quotes-info sent">{{item?.yearCount}}</div>
+                <span>Year</span>
+              </div>
+              <div class="info-block">
+                <div class="quotes-info sent">{{item.total}}</div>
+                <span>Total</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+
+
+
+
+
+    </div>
+
+    <div class="pending-quotes">
+      <mat-card class="pending-quotes-wrapper">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>more_vert</mat-icon> {{stats?.opportunityStatus}}
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="details-row" fxLayout="row">
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.todayCount}}</div>
+              <br><span>Today</span>
+            </div>
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.oneDayCount}}</div>
+              <br><span>1 Day</span>
+            </div>
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.twoDaysPassedCount}}</div>
+              <br><span>2-5 Days</span>
+            </div>
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.sixDaysPassedCount}}</div>
+              <br><span>6-10 Days</span>
+            </div>
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.elevenDaysPassedCount}}</div>
+              <br> <span>11-14 Days</span>
+            </div>
+            <div class="info-block">
+              <div class="quotes-info pending">{{stats?.totalPrior}}</div>
+              <br><span>Prior</span>
+            </div>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+
+
+</div>

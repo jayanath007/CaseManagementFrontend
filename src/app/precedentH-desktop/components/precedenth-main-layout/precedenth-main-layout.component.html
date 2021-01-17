@@ -1,0 +1,135 @@
+<mat-toolbar class="popup-header" fxLayout="row">
+  <div class="indicator-icon">
+    <mat-icon matListIcon>how_to_reg</mat-icon>
+    <span matLine *ngIf="eBillingType==='PrecedentH'"> Precedent H </span>
+    <span matLine *ngIf="eBillingType==='PrecedentS'"> Precedent S </span>
+  </div>
+  <span fxFlex="1 1 auto"></span>
+  <button mat-icon-button>
+    <mat-icon class="header-icon-delete" (click)="onClose()">close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<!-- <div class="export-success-status" *ngIf="exportXMLSuccessStatus==='Success' && !isDirty">Exported document is successfully added as a file note.</div> -->
+
+<div class="presidenth-contents">
+  <div class="top-actions" fxLayout="row">
+    <div fxFlex="1 1 auto"></div>
+    <button class="president-h-controller-btn excel" [ngClass]="{disabled: isLoading}" [disabled]="isLoading" mat-button
+      (click)="onExportXML($event)">
+      <mat-icon matListIcon class="fa" fontSet="fontawesome" fontIcon="fa-file-excel-o"></mat-icon>
+    </button>
+    <!-- <button class="president-h-controller-btn" mat-button>
+      <mat-icon matListIcon class="fa" fontSet="fontawesome" fontIcon="fa-print"></mat-icon>
+      <mat-label class="details">Details</mat-label>
+      <mat-label>Summary</mat-label>
+    </button> -->
+  </div>
+  <mat-tab-group class="president-h-tabs">
+    <mat-tab label="Summary">
+      <dps-presidenth-summary-grid-data [rateTableName]="rateTableName" [presidentHSummaryData]="presidentHSummaryData"
+        [grandTotals]="grandTotals" (rowCheckBoxChange)="onRowCheckBoxChange($event)"
+        (checkAllClick)="onCheckAllClick($event)">
+      </dps-presidenth-summary-grid-data>
+      <!-- [ngClass]="{disabled: saveStatus}" [disabled]="saveStatus" (click)="onSavePrecedentH()" -->
+      <!-- <button (click)="onSavePrecedentHRates()" class="ph-save-btn" mat-button>
+        <span>Save</span>
+      </button> -->
+    </mat-tab>
+    <mat-tab label="Estimated/Incurred cost">
+
+      <dps-presidenth-estimated-grid-data [totalProfitCost]="totalProfitCost" [isDirty]="isDirty"
+        [selectedWorkTypeData]="selectedWorkTypeData" [estimatedCostGridData]="estimatedCostGridData"
+        [selectedEstimateValue]="selectedEstimateValue" [selectedActualValue]="selectedActualValue"
+        (rowInputChange)="onRowInputChange($event)" (savePrecedentHRates)="onSavePrecedentHRates()"
+        (changeWorkType)="onChangeWorkType($event)" (changeValue)="onChangeValues($event)">
+      </dps-presidenth-estimated-grid-data>
+
+      <!-- <mat-list dense fxLayout="row wrap" class="dps-table-content">
+    <div style="width:calc(100%  15px)" class="col-name">
+      <div fxLayout="column" fxFlex="1 1 auto" class="lbl-name">
+        <mat-list-item class="content-header">
+          Total Proﬁt and Cost
+        </mat-list-item>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 150px" class="input-estimated">
+        <mat-list-item class="content-header">
+          <span class="estimated"> Estimated</span>
+        </mat-list-item>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 150px" class="input-actual">
+        <mat-list-item class="content-header">
+          <span class="actual"> Incurred
+          </span>
+        </mat-list-item>
+      </div>
+    </div>
+    <div style="width:100%" class="col-content dps-white-gray-scroll">
+      <div class="dps-row-selector" *ngFor="let rowItem of precedentHSDataList; let row = index; let isOdd=odd; let isEven=even"
+        [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" (click)="onRowClick(rowItem, $event)">
+        <div [ngClass]="{'precedenths-row-select': selectedRow?.phaseID===rowItem?.phaseID,
+         'estimated-value-exeed': onExeedValueCheck(rowItem?.actualValue, rowItem?.estimatedValue)}">
+          <div fxLayout="column" fxFlex="1 1 auto" class="lbl-name">
+            <mat-list-item>
+              {{rowItem?.description}}
+            </mat-list-item>
+          </div>
+          <div fxLayout="column" fxFlex="1 1 150px" class="input-estimated">
+            <mat-list-item style="width:100%">
+              <div style="width:100%" class="input-wrapper">
+                <mat-form-field style="width:100%" floatLabel="auto">
+                  <input class="number-input" type="number" matInput [ngModel]="rowItem?.estimatedValue" (focusout)="onValueChange(rowItem,$event)">
+                </mat-form-field>
+              </div>
+            </mat-list-item>
+          </div>
+          <div fxLayout="column" fxFlex="1 1 150px" class="input-actual">
+            <mat-list-item style="width:100%">
+              <input class="number-input" [readonly]="true" matInput [value]="rowItem?.actualValue">
+            </mat-list-item>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width:100%" class=" footer">
+      <mat-divider mat-inset></mat-divider>
+      <div fxLayout="column" fxFlex="1 1 auto" class="lbl-name">
+        <mat-list-item>
+          Total
+        </mat-list-item>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 150px" class="input-estimated">
+        <mat-list-item style="width:100%">
+          <div style="width:100%" class="number-input">
+            <span class="number-input">{{actualAndEstimatedTotal?.estimatedTotal}}</span>
+          </div>
+        </mat-list-item>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 150px" class="input-actual">
+        <mat-list-item style="width:100%">
+          <div style="width:100%" class="number-input">
+            <span class="number-input">{{actualAndEstimatedTotal?.actualTotal}}</span>
+          </div>
+        </mat-list-item>
+      </div>
+    </div>
+  </mat-list> -->
+
+      <div class="assumtions-wrap" fxLayout="row">
+        <mat-form-field class="assumptions" fxFlex="1 1 auto">
+          <mat-label>Assumptions</mat-label>
+          <textarea matInput #assumptionVlue placeholder="Assumptions" [value]="selectedEstimateValue?.assumptions"
+            (focusout)="onChangeAssumptionValue(kind.Assumption, assumptionVlue.value)"></textarea>
+        </mat-form-field>
+
+        <!-- [ngClass]="{disabled: saveStatus}" [disabled]="saveStatus" (click)="onSavePrecedentH()" -->
+        <button class="ph-save-btn" (click)="onSavePrecedentHRates()" mat-button>
+          <span>Save</span>
+        </button>
+
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

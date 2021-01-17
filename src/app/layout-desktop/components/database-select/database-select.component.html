@@ -1,0 +1,11 @@
+<h3 matSubheader *ngIf="!(databases$ | async)||(databases$ | async).length > 0">
+  <mat-icon>storage</mat-icon>
+  <span fxFlex="1 1 auto">Select your database</span>
+  <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="!(databases$ | async)"></i>
+</h3>
+<mat-list-item *ngFor="let item of databases$ | async" (click)="switchDatabase(item)">
+  <mat-icon mat-list-icon *ngIf="!item.isSelected" color="primary">radio_button_unchecked</mat-icon>
+  <mat-icon mat-list-icon *ngIf="item.isSelected" color="primary">radio_button_checked</mat-icon>
+  <h2 matLine>{{item.databaseName}}</h2>
+  <!-- <mat-radio-button matLine [checked]="item.isSelected" disabled color="primary">{{item.databaseName}}</mat-radio-button> -->
+</mat-list-item>

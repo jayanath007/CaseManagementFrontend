@@ -1,0 +1,36 @@
+<div class="matter-summery" fxLayout="column">
+  <div class="dps_property_header" fxFlex="38px">
+    <mat-icon>panorama_fish_eye</mat-icon>
+    {{resoleModuleName('matter_search') | async}} Summary
+  </div>
+
+  <div class="dps-white-gray-scroll" fxFlex="calc(70%-76px)">
+    <div class="" *ngFor="let item of menuMatterSummery">
+      <div class="matter-content">{{item.description1}}</div>
+      <div class="sidebar-content"
+        [ngClass]="{'menu-orange-color':item.description2=='<Near Limit>','menu-red-color':item.description2=='<Over Limit>','menu-green-color':item.description2=='<Within Limit>'}">
+        {{item.description2}}</div>
+      <div class=""></div>
+    </div>
+  </div>
+
+  <div class="dps_property_header" fxFlex="38px">
+    <mat-icon>panorama_fish_eye</mat-icon> Shortcuts
+  </div>
+  <div class="dps-white-gray-scroll" fxFlex="calc(30%-76px)">
+    <div *ngFor="let item of menuShortCutKeys">
+      <div class="matter-content">{{item.kbs_keycode | workflowShortCutKey: item.kbs_keycode}}</div>
+      <mat-icon class="{{item.kbs_item_variant | workflowMenuIcon}}"></mat-icon>
+      <div class="sidebar-content">
+        <label class="matter-sidetxt">{{item.kbs_item_title}}</label>
+      </div>
+    </div>
+    <div class="wrapper" *ngIf="!(menuShortCutKeys && menuShortCutKeys.length>0)">
+      <div class="matter-content">(keyboard shortcuts</div>
+      <div class="sidebar-content">
+        <label class="matter-sidetxt">not set for this app)</label>
+      </div>
+      <div class="cleared"></div>
+    </div>
+  </div>
+</div>

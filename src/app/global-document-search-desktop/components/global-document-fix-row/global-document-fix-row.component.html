@@ -1,0 +1,27 @@
+<div>
+  <mat-list-item disableRipple>
+    <div fxLayout class="grid-data" [ngClass]="{'dps-selected-row': rowData.selected }">
+     
+        <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+      <div class="row-data action-column" [fxFlex]="getFxFlexProperty(1)">
+        <mat-icon matTooltip={{rowData.letterName}}>
+          <i [ngClass]="rowData.letterName | attachmentIcon" aria-hidden="true">
+            <span></span>
+          </i>
+        </mat-icon>
+      </div>
+      
+      <div class="row-data date-done mat_line" [fxFlex]="getFxFlexProperty(2)">{{rowData.dpsLastModified |
+        date:'dd/MM/yyyy h:mm a'}} </div>
+      <div class="row-data date-done mat_line" [fxFlex]="getFxFlexProperty(3)">{{rowData.columnFolderName}} </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)">{{rowData.matterCode}} </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(5)">{{rowData.feeEarner}} </div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{rowData.note | seacrhTextHighligh : getHighlightKeys(rowData.highlights.Note)}}">
+        <span *ngIf="rowData.auditParentID > 0 || rowData.auditVersion > 0">{{rowData.versionName}}</span>
+      </div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{rowData.matterRef}}{{rowData.matterDetails?' - '+rowData.matterDetails:''}}"></div>
+    </div>
+
+
+  </mat-list-item>
+</div>

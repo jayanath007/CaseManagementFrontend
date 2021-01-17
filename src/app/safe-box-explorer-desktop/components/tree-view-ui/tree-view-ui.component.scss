@@ -1,0 +1,44 @@
+ @import '~styles/variables.scss';
+
+ .dps-safebox-menu-tree {
+   dps-safebox-context-menue {
+     position: fixed;
+   }
+
+   height: 100%;
+
+   mat-list-item {
+     //  border-bottom: 1px solid #e1f0fd;
+     display: block;
+     height: 40px !important;
+
+     i {
+       vertical-align: middle;
+     }
+   }
+
+   .dps-folder-item-name {
+     font-size: $primary-font-size - 2;
+     color: #155186;
+     font-weight: 450;
+
+     i {
+       font-size: $primary-font-size + 2;
+       padding: 0px 4px;
+       color: #155186;
+       vertical-align: bottom;
+       height: 16px;
+       width: 16px;
+     }
+   }
+
+   .safe-box-option-tree .active {
+     background-color: #c5dcf1;
+   }
+ }
+
+ ::ng-deep.mat-nav-list {
+   .dps-safebox-menu-tree .mat-list-item .mat-list-item-content {
+     padding: 0 5px 0px 7px !important;
+   }
+ }

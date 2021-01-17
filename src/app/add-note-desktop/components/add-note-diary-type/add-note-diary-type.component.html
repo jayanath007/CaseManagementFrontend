@@ -1,0 +1,8 @@
+<mat-form-field floatLabel="always">
+  <mat-select placeholder="Type" [disabled]="isDiaryTypeDisable" [ngModel]="selectedType"
+    (selectionChange)="onChangeType($event)">
+    <mat-option *ngFor="let type of diaryTypes" [value]="type">
+      {{type.text}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

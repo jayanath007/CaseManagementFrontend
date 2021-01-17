@@ -1,0 +1,173 @@
+@import '~styles/variables.scss';
+
+.dps-mail-content,
+.dps-mail-main-content {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $primary;
+}
+
+.dps-mail-sidenav {
+  width: 250px;
+  background: $content-background;
+
+  .dps-mail-sidenav-content {
+    height: 100%;
+  }
+}
+
+/*.dps-mail-sidenav .dps-mail-folder-list{
+    padding: 0 18px;
+}*/
+
+.dps-mail-mini-sidenav {
+  min-width: 0px;
+  width: fit-content;
+  background-color: $content-background;
+}
+
+.dps-mail-sidenav mat-list {
+  padding-top: 0px;
+}
+
+.dps-mail-sidenav .dps-new-mail-btn span {
+  font-size: $primary-font-size;
+}
+
+.dps-mail-sidenav .dps-new-mail-btn,
+.dps-mail-mini-sidenav .dps-folder-menu-toggle-btn,
+.dps-mail-mini-sidenav .dps-new-mail-btn {
+  background-color: $mail-primary;
+  color: $primary;
+}
+
+.dps-mail-folder-list-search {
+  width: 100%;
+  background: $primary;
+  padding: 0px 5px 0px 5px;
+  font-size: $primary-font-size - 1;
+}
+
+.dps-mail-mini-sidenav .dps-folder-menu-toggle-btn i {
+  padding-left: 6px;
+}
+
+.dps-mail-mini-sidenav .dps-mail-search-btn {
+  color: #0D557C;
+}
+
+.dps-mail-sidenav .dps-mail-folder-search,
+.dps-mail-sidenav .dps-mail-folder-list,
+.dps-mail-mini-sidenav .dps-mail-folder-list {
+  overflow-y: auto;
+}
+
+.dps-mail-main-content mat-card {
+  overflow-x: auto;
+}
+
+.dps-folder-menu-toggle-btn {
+  padding: 3px 0px 0px 0px;
+}
+
+.dps-folder-menu-toggle-btn i {
+  font-size: 20px
+}
+
+.dps-mail-router-links button {
+  min-width: 0;
+}
+
+.dps-mail-sidenav .mat-toolbar {
+  background: #274e8a;
+  color: $primary;
+}
+
+.dps-compose-btn-wrap-around {
+  background: $mail-primary;
+  color: $primary;
+
+  .dps-mail-sidenav & {
+    padding-bottom: 8px;
+  }
+
+  .dps-mail-mini-sidenav & {
+    padding-bottom: 13px;
+  }
+}
+
+.dps-compose-btn {
+  height: 56px !important;
+  color: #fff
+}
+
+.dps-compose-new-mail {
+  height: 56px !important;
+}
+
+.dps-compose-btn .btn-name {
+  font-size: $primary-font-size + 6;
+  padding: 6px 0px 0px 0px;
+
+  .material-icons {
+    padding-right: 6px;
+    vertical-align: middle;
+    font-size: $primary-font-size + 12;
+  }
+
+  span {
+    vertical-align: bottom;
+  }
+}
+
+.dps-compose-btn-wrap-around .mat-button {
+  background: #1a60a9;
+  color: $primary;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+}
+
+// .dps-mail-main-content-background {
+//   height: 100%;
+//   width: 100%;
+//   background-color: $content-background;
+//   z-index: 0;
+//   position: absolute;
+// }
+
+// .dps-mail-main-content-background div {
+//   width: 100%;
+//   height: 120px;
+//   background-color: $mail-primary;
+// }
+
+// .dps-mail-main-content mat-card {
+//   padding: 0px;
+//   height: 100%;
+//   border-radius: 0px;
+// }
+
+// .dps-mail-main-content-forground {
+//   padding: 30px 20px 20px 2px;
+//   z-index: 1
+// }
+
+.dps-mail-router-links button.dps-mail-router-selected-link,
+.dps-mail-router-links mat-list-item.dps-mail-router-selected-link {
+  color: #20adf1;
+  background: $mail-primary;
+}
+
+.dps-mail-router-links button,
+.dps-mail-router-links mat-list-item {
+  color: #666;
+}
+
+mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -48px;
+  margin-left: -48px;
+}

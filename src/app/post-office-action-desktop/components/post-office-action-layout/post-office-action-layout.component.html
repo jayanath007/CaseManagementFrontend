@@ -1,0 +1,126 @@
+<div class="post-office-action-layout">
+  <div class="post-office-action-general">
+    <mat-toolbar class="top dps-toolbar-box-shadow">
+      <span fxFlex="1 1 auto">
+        <mat-icon>folder_open </mat-icon>
+        <span class="dps-popup-heading">{{ inputData.statusName}} </span>
+      </span>
+      <button class="time-rc-close" mat-icon-button (click)="onClose()">
+        <i class="material-icons">close</i>
+      </button>
+
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+    <div class="dps-white-gray-scroll">
+      <form novalidate [formGroup]="formGroup">
+        <div class="Main-tab">
+          <div class="main-details">
+            <div>
+              <h3>Details</h3>
+            </div>
+
+            <div class="controll-wrapper">
+
+              <div>
+                <mat-label> <span>Created By</span> {{ inputData.createdBy  }} </mat-label>
+              </div>
+              <div>
+                <mat-label> <span>Date Created</span> {{ inputData.dateOn | date : 'dd/MM/yyyy HH:mm' }}</mat-label>
+              </div>
+
+
+              <mat-form-field class="post-office-action-input sub" *ngIf="enabaleControlers.itemTypeEnable">
+                <mat-select placeholder="Attach as" formControlName="attachAs">
+                  <mat-option [value]="itemType.value" *ngFor="let itemType of itemTypeList">
+                    {{itemType.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+
+              <div class="postoffice-path">
+                <span>Document</span>
+                <mat-label> {{ inputData.document }}</mat-label>
+              </div>
+
+
+              <div *ngIf="enabaleControlers.matterSelectEnable" class="dps-matter-select">
+                <button mat-icon-button (click)="onMatterSearch($event)">
+                  <mat-icon>search</mat-icon>
+                </button>
+                <mat-label> {{ clientName }}</mat-label>
+              </div>
+
+
+              <mat-form-field class="message-box msg" *ngIf="enabaleControlers.noteEnable">
+                <textarea matInput placeholder="Note for diary" formControlName="note"></textarea>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="main-tracking">
+            <div>
+              <h3>Tracking Job </h3>
+            </div>
+
+            <div class="dps-post-office-tracking">
+              <mat-form-field class="post-office-action-input sub" *ngIf="enabaleControlers.actionEnable">
+                <mat-select placeholder="Action" formControlName="action">
+                  <mat-option [value]="action.value" *ngFor="let action of actionList">
+                    {{action.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+
+              <mat-form-field class="post-office-action-input sub" *ngIf="enabaleControlers.diaryFoldersEnable">
+                <mat-select placeholder="Folders" formControlName="diaryFoldes">
+                  <mat-option [value]="diaryFoldes.folderId" *ngFor="let diaryFoldes of diaryFoldesList">
+                    {{diaryFoldes.folderName  }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="post-office-action-input sub" *ngIf="enabaleControlers.groupEnable">
+                <mat-select placeholder="Groups" formControlName="group"
+                  (selectionChange)="onChangeGroup($event.value)">
+                  <mat-option>-- None --</mat-option>
+                  <mat-option [value]="group.groupId" *ngFor="let group of groupList">
+                    {{group.groupName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="post-office-action-input sub" *ngIf="enabaleControlers.sendToEnable">
+                <mat-select placeholder="Send To" formControlName="sendTo">
+                  <mat-option [value]="sendTo.user" *ngFor="let sendTo of feeEarnerList">
+                    {{ sendTo.user }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="message-box" *ngIf="enabaleControlers.massageEnable">
+                <textarea matInput placeholder="Message for Recipient" formControlName="massage"></textarea>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+    <div class="button-set">
+      <button class="btn-ok" mat-raised-button (click)="onClickAction(UserAction.Save)"> Ok</button>
+      <button mat-raised-button (click)="onClose()">Cancel</button>
+    </div>
+
+  </div>
+</div>

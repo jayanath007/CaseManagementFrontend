@@ -1,0 +1,6 @@
+<dps-common-popup-header icon="list" title="Time Records" buttons="close" [loading]="false" iconColor="#ffffff"
+  titleColor="#ffffff" (buttonClick)="onClose(null)">
+</dps-common-popup-header>
+<dps-time-record-grid class="dps-white-gray-scroll" [gridColumnDef]="data?.gridColumnDef" [timeRecordsGridData]="data?.timeRecordsGridData"
+  [allData]="data?.allData" [selectedType]="data?.selectedType" (selectGridItem)="onClose($event)">
+</dps-time-record-grid>

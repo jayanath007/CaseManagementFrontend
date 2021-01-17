@@ -1,0 +1,69 @@
+<mat-form-field class="dps-recipient-input" dpsDroppable dropZone="recipientInput" (onDrop)="onDrop($event)">
+  <mat-chip-list #chipList>
+    <span class="dps-lable" matPrefix>&nbsp; {{lable}} &nbsp;</span>
+    <mat-chip class="dps-recipient-chip" *ngFor="let recipient of recipients" [selectable]="selectable"
+      [title]="(recipient.emailAddress.address|validateEmail) ? recipient.emailAddress.address : 'The address may not be valid'"
+      [removable]="removable" (removed)="remove(recipient)">
+      <div [ngStyle]="{'background-color': recipient.emailAddress.address|recipientColorCode}" [dpsDraggable]="true"
+        [dropZones]="['recipientInput','mailCompose']" [dragData]="recipient" dragDataType="recipient"
+        *ngIf="!img.showProfileImg" (onDragEnd)="onDragend($event)">
+        <span>{{recipient.emailAddress.name|nameInitials}}</span>
+      </div>
+      <img class="person-filter" #img [hidden]="!img.showProfileImg"
+        src="{{recipient.emailAddress.address | dpsUserImage | async}}" alt="..." (load)="img.showProfileImg=true"
+        [dpsDraggable]="true" [dropZones]="['recipientInput','mailCompose']" [dragData]="recipient"
+        dragDataType="recipient" (onDragEnd)="onDragend($event)">
+      <span class="dps-recipient-name"
+        [ngStyle]="{'color': (recipient.emailAddress.address|validateEmail) ? '' : 'darkred'}">{{recipient.emailAddress.name}}</span>
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input fxFlex="1 0 150px" #contactInput matInput [matChipInputFor]="chipList"
+      [matAutocomplete]="contactAutocomplete" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" [formControl]="inputCtrl" />
+  </mat-chip-list>
+  <mat-autocomplete true #contactAutocomplete="matAutocomplete" (optionSelected)="optionSelected($event,contactInput)">
+    <div [hidden]="showSearchList">
+      <mat-option *ngFor="let person of filteredPeople | async" [value]="person.id">
+        <div [ngStyle]="{'background-color': person.emailAddresses[0].address|recipientColorCode}"
+          *ngIf="!img.showProfileImg" class="dps_recipient">
+          <span class="dps_recipient_name">
+            {{person.displayName|nameInitials}}
+          </span>
+        </div>
+        <img #img [hidden]="!img.showProfileImg" src="{{person.emailAddresses[0].address | dpsUserImage | async}}"
+          class="dps_recipient" alt="..." (load)="img.showProfileImg=true">
+        <span class="dps-display-name">{{person.displayName}}</span> |
+        <small>{{ person.emailAddresses[0].address}}</small>
+      </mat-option>
+    </div>
+    <div [hidden]="!showSearchList">
+      <mat-option *ngFor="let person of searchedPeople.people" [value]="person.id">
+        <div [ngStyle]="{'background-color': person.mail|recipientColorCode}" class="dps_recipient"
+          *ngIf="!img.showProfileImg">
+          <span class="dps_recipient_name">
+            {{person.displayName|nameInitials}}
+          </span>
+        </div>
+        <img #img [hidden]="!img.showProfileImg" src="{{person.mail | dpsUserImage | async}}" class="dps_recipient"
+          alt="..." (load)="img.showProfileImg=true">
+        <span class="dps-display-name">{{person.displayName}}</span> |
+        <small>{{ person.mail}}</small>
+      </mat-option>
+    </div>
+    <mat-divider></mat-divider>
+    <div [hidden]="isGoogle">
+      <mat-option disabled *ngIf="showLoader">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching
+      </mat-option>
+      <mat-option disabled *ngIf="showSearchList && !(searchedPeople?.people.length > 0)">
+        No match was found.
+      </mat-option>
+      <mat-nav-list *ngIf="showSearchBtn">
+        <a mat-list-item (click)="onSearchDirectory(contactInput.value)">
+          <mat-icon matListIcon>search</mat-icon>
+          Search Directory
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,6 @@
+<mat-nav-list dense class="create-folder-list">
+  <dps-folder-list-item *ngFor="let wrapper of folders" [isGroupMode]="isGroupMode" [item]="wrapper"
+    (editOperations)="onItemEditOperations($event)" (toggleExpand)="onItemToggle($event)" (refresh)="onRefresh($event)"
+    (select)="onItemSelect($event)" [deleteItemsFolderId]="deleteItemsFolder.data.id" (moveItems)="onMoveItems($event)">
+  </dps-folder-list-item>
+</mat-nav-list>

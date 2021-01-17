@@ -1,0 +1,107 @@
+<div class="dps-header-wrapper" fxFlex="1 1 100">
+  <div class="dps-header-wrapper-content" dpsIsMobile></div>
+  <div class="dps-ledger-card-option" dpsIsMobile fxLayout="row">
+    <span class="spacer" dpsIsMobile></span>
+    <dps-ledger-card-option [selectedTab]="selectedTab" [filterData]="allGridFilterData"
+      (openBillingGuide)="onOpenBillingGuide()" (printLedgerCard)="onPrintLedgerCard()"
+      (printPreTransaction)="onPrintPreTransaction()" (updateAllGridFilter)="onUpdateAllGridFilter($event)"
+      (updatePeriodFilter)="onUpdatePeriodFilter($event)" (openPreTransactionPopup)="onOpenPreTransactionPopup()">
+    </dps-ledger-card-option>
+
+    <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+      (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+      (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()"></dps-grid-font-controller>
+  </div>
+  <div class="dps-ledgercard-tab-header" dpsIsMobile fxLayout="column">
+    <!-- <mat-tab-group class="ledger-card-tabs" [selectedIndex]="selectedTab" (selectedTabChange)="onChangeTap($event)" fxFlex="1 1 100">
+      <mat-tab class="mat-tab" label="ALL">
+        <dps-all-grid [allGridData]="allGridData" class="{{fontSizeClassTag}}{{fontSize}}" [allGridFilterData]="allGridFilterData"
+          (allGridViewChange)="onAllGridViewChange($event)"></dps-all-grid>
+      </mat-tab>
+      <mat-tab label="Bills & Receipts">
+        <dps-bill-grid [billGridData]="billGridData" class="{{fontSizeClassTag}}{{fontSize}}" (billGridViewChange)="onBillGridViewChange($event)"></dps-bill-grid>
+      </mat-tab>
+      <mat-tab label="Disbs">
+        <dps-disbs-grid [disbsGridData]="disbsGridData" class="{{fontSizeClassTag}}{{fontSize}}" (disbsGridViewChange)="onDISPSGridViewChange($event)"></dps-disbs-grid>
+      </mat-tab>
+      <mat-tab label="Client {{currencyView[0]?.currencyCode}}{{currencyView[0]?.currencySign}}" *ngIf="currencyView[0]">
+        <dps-client-grds [clientGridData]="client1GridData" class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient1GridViewChange($event)"></dps-client-grds>
+      </mat-tab>
+      <mat-tab label="Client {{currencyView[1]?.currencyCode}}{{currencyView[1]?.currencySign}}" *ngIf="currencyView[1]">
+        <dps-client-grds [clientGridData]="client2GridData" class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient1GridViewChange($event)"></dps-client-grds>
+      </mat-tab>
+      <mat-tab label="Client" label="Client {{currencyView[2]?.currencyCode}}{{currencyView[2]?.currencySign}}" *ngIf="currencyView[3]">
+        <dps-client-grds [clientGridData]="client3GridData" class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient3GridViewChange($event)"></dps-client-grds>
+      </mat-tab>
+      <mat-tab label="Client GBP">
+        <dps-gbp-grid [gbpGridData]="gbpGridData" class="{{fontSizeClassTag}}{{fontSize}}" (gbpGridViewChange)="onGBPGridViewChange($event)"></dps-gbp-grid>
+      </mat-tab>
+      <mat-tab label="DDA">
+        <dps-dda-grid [ddaGridData]="ddaGridData" class="{{fontSizeClassTag}}{{fontSize}}" (ddaGridViewChange)="onDDAGridViewChange($event)"></dps-dda-grid>
+      </mat-tab>
+      <mat-tab label="eChits">
+        <dps-echit-grid [eChitGridData]="eChitGridData" class="{{fontSizeClassTag}}{{fontSize}}"></dps-echit-grid>
+      </mat-tab>
+    </mat-tab-group> -->
+
+    <nav mat-tab-nav-bar class="ledger-card-tabs">
+      <a mat-tab-link (click)="onChangeTap(0)" [active]="(selectedTab === 0)">
+        All
+      </a>
+      <a mat-tab-link (click)="onChangeTap(1)" [active]="(selectedTab === 1)">
+        Bills & Receipts
+      </a>
+      <a mat-tab-link (click)="onChangeTap(2)" [active]="(selectedTab === 2)">
+        Disbs
+      </a>
+      <a mat-tab-link (click)="onChangeTap(3)" [active]="(selectedTab === 3)" *ngIf="currencyView[0]">
+        {{resoleModuleName('client_search')|async}}
+      </a>
+      <a mat-tab-link (click)="onChangeTap(4)" [active]="(selectedTab === 4)" *ngIf="currencyView[1]">
+        {{resoleModuleName('client_search')|async}}
+      </a>
+      <a mat-tab-link (click)="onChangeTap(5)" [active]="(selectedTab === 5)" *ngIf="currencyView[3]">
+        {{resoleModuleName('client_search')|async}}
+      </a>
+      <a mat-tab-link (click)="onChangeTap(6)" [active]="(selectedTab === 6)">
+        {{resoleModuleName('client_search')|async}} GBP
+      </a>
+      <a mat-tab-link (click)="onChangeTap(7)" [active]="(selectedTab === 7)">
+        DDA
+      </a>
+      <a mat-tab-link (click)="onChangeTap(8)" [active]="(selectedTab === 8)">
+        eChits
+      </a>
+    </nav>
+    <div class="dps-grid-content-list">
+      <dps-all-grid *ngIf="(selectedTab === 0)" [allGridData]="allGridData" [allGridFilterData]="allGridFilterData"
+        (allGridViewChange)="onAllGridViewChange($event)">
+      </dps-all-grid>
+      <dps-bill-grid *ngIf="(selectedTab === 1)" [billGridData]="billGridData"
+        (billGridViewChange)="onBillGridViewChange($event)">
+      </dps-bill-grid>
+
+      <dps-disbs-grid *ngIf="(selectedTab === 2)" [disbsGridData]="disbsGridData"
+        class="{{fontSizeClassTag}}{{fontSize}}" (disbsGridViewChange)="onDISPSGridViewChange($event)">
+      </dps-disbs-grid>
+      <dps-client-grds *ngIf="(selectedTab === 3)" [clientGridData]="client1GridData"
+        class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient1GridViewChange($event)">
+      </dps-client-grds>
+      <dps-client-grds *ngIf="(selectedTab === 4)" [clientGridData]="client2GridData"
+        class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient1GridViewChange($event)">
+      </dps-client-grds>
+      <dps-client-grds *ngIf="(selectedTab === 5)" [clientGridData]="client3GridData"
+        class="{{fontSizeClassTag}}{{fontSize}}" (clientGridViewChange)="onClient3GridViewChange($event)">
+      </dps-client-grds>
+      <dps-gbp-grid *ngIf="(selectedTab === 6)" [gbpGridData]="gbpGridData" class="{{fontSizeClassTag}}{{fontSize}}"
+        (gbpGridViewChange)="onGBPGridViewChange($event)">
+      </dps-gbp-grid>
+      <dps-dda-grid *ngIf="(selectedTab === 7)" [ddaGridData]="ddaGridData" class="{{fontSizeClassTag}}{{fontSize}}"
+        (ddaGridViewChange)="onDDAGridViewChange($event)"></dps-dda-grid>
+      <dps-echit-grid *ngIf="(selectedTab === 8)" [eChitGridData]="eChitGridData"
+        class="{{fontSizeClassTag}}{{fontSize}}"></dps-echit-grid>
+    </div>
+
+  </div>
+
+</div>

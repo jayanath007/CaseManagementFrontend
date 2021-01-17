@@ -1,0 +1,87 @@
+<div class="grid-controller-set" fxLayout="row" fxLayoutAlign="end center">
+
+  <div class="dps-time-recorded-controllers" fxLayout="row" fxFlex="calc(100%-600px)">
+
+    <dps-view-apply-grid-filters [columnDef]="columnDef" fxFlex="calc(100%-465px)">
+    </dps-view-apply-grid-filters>
+
+      <mat-radio-group aria-label="Select an option"  class="billing-date-select" (change)="onDateTypeChanged($event.value)" fxLayout="row"
+        [value]="(selectedInfo?.isBillDate===true)?'BillDate':'Date'">
+        <mat-radio-button [value]="'Date'">Date</mat-radio-button>
+        <mat-radio-button [value]="'BillDate'">Bill Date</mat-radio-button>
+      </mat-radio-group>
+
+    <div *ngIf="selectedInfo?.periodId === 5" class="time_record_time_filter" fxLayout="row">
+
+      <mat-form-field class="time-recorded-input from">
+        <mat-placeholder class="time_record_selector">From</mat-placeholder>
+        <input matInput [matDatepicker]="picker" [ngModel]="selectedInfo?.dateFrom | date:'yyyy-MM-dd'"
+          (dateChange)="onChangeFromDateDone($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="time-recorded-input to">
+        <mat-placeholder class="time_record_selector">To</mat-placeholder>
+        <input matInput [matDatepicker]="picker1" [ngModel]="selectedInfo.dateTo | date:'yyyy-MM-dd'"
+          (dateChange)="onChangeToDateDone($event)">
+
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field class="time-recorded-input custom" floatLabel="never">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <mat-placeholder class="time_record_selector">Period</mat-placeholder>
+      <mat-select (selectionChange)="onChangePeriod($event)" [ngModel]="selectedPeriod">
+        <mat-option *ngFor="let period of periodList" [value]="period">
+          {{period.groupName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="time-recorded-input search" *ngIf="userPermision?.isAllGroups">
+      <mat-form-field floatLabel="never">
+        <span matPrefix>&nbsp;&nbsp;</span>
+        <input type="search" matInput #searchTextInput matInput placeholder="" [value]="selectedInfo?.searchText"
+          [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)" />
+        <button matSuffix mat-icon-button (click)="onSearchTextChanged(searchTextInput.value)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+
+  <button class="dps-grouping-cntxt-menu" [matMenuTriggerFor]="menu" mat-raised-button>
+    <mat-icon class="mat-18">{{groupMode | groupIconByMode}}</mat-icon>
+    <span>{{groupMode}}</span>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(groupModes.Default)">
+      <mat-icon class="material-icons">insert_drive_file</mat-icon>{{groupModes.Default}}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="groupBy(groupModes.DateGroup)">
+      <mat-icon class="material-icons">calendar_today</mat-icon>{{groupModes.DateGroup}}
+    </button>
+  </mat-menu>
+  <button mat-raised-button class="add-time" (click)="newTimeClick()">
+    <mat-icon class="material-icons">access_time</mat-icon>
+    <span>Add Time</span>
+  </button>
+  <button mat-raised-button class="add-time" (click)="onExportToExcel()">
+    <mat-icon class="material-icons export">cloud_download</mat-icon>
+    <span>Export to Excel</span>
+  </button>
+
+  <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+    (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+    (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()">
+  </dps-grid-font-controller>
+
+</div>

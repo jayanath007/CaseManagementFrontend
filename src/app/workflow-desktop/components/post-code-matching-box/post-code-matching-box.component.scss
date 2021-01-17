@@ -1,0 +1,62 @@
+@import '~styles/variables.scss';
+.save
+{
+    background: #61b318;
+    color:$primary;
+    margin-right: 10px;
+}
+
+.select
+{
+    background: #ffad16;
+    color:$primary;
+}
+
+.data-table-dynamic
+{
+  font-family: $primary-font-stack;
+  font-size: 12px;
+  border: 1px solid #d0c9c9;
+  border-spacing: 1px;
+  
+  border-collapse: separate;
+  background: #ececec;
+}
+.data-table-dynamic th
+{
+  background: #03588d;
+  color: $primary;
+  padding: 6px;
+  text-align: left;
+}
+.data-table-dynamic td
+{
+  padding: 6px;
+  font-size: $secondary-font-size;
+  background: $primary;
+}
+.data-grid-scroll
+{
+  height: 300px;
+  overflow: auto;
+
+}
+    
+
+.close-pop {
+    background: #bd514a;
+    
+   
+}
+
+.save , .close-pop  {
+  border: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  color: $primary;
+}
+.data-table-dynamic .dps_selected_item td
+{
+
+  background: #91ca5f;
+}

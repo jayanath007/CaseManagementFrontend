@@ -1,0 +1,200 @@
+@import '~styles/variables.scss';
+.grid-controller-set
+{
+    background: #32434d;
+    padding: 6px 0 6px 0;
+}
+
+.grid-controller-set .mat-line
+{
+    color: $primary;
+}
+.grid-controller-set .mat-radio-checked .mat-line
+{
+    color: #9bd285;
+}
+.grid-controller-set .mat-radio-button
+{
+margin-right: 10px;
+}
+.grid-controller-set .mat-checkbox
+{
+    margin-right: 10px;
+
+}
+
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+
+   .grid_controller_wrapper {
+       width: 50%;
+   }
+
+   .grid-controller-set .mat-radio-button
+{
+    margin-bottom: 3px;
+}
+
+}
+
+
+@media only screen and (min-width: 1440px) and (max-height: 900px) {
+
+    .grid_controller_wrapper {
+        width: 50%;
+    }
+
+    dps-grid-font-controller {
+        margin: 5px 0px 0px 0px;
+    }
+
+    .grid-controller-set .mat-radio-button
+    {
+    margin-bottom: 3px;
+    }
+ 
+ }
+
+
+ @media only screen and (min-width: 1280px) and (max-height: 800px) {
+
+    .grid_controller_wrapper {
+        width: 46%;
+    }
+
+    .grid-controller-set .mat-radio-button
+{
+    margin-bottom: 3px;
+}
+
+    
+
+    ::ng-deep {
+    .mat-form-field-infix {
+        width: 160px !important;
+    }
+    
+    }
+
+
+ }
+
+
+
+ @media (min-width: 1025px) and (max-width: 1280px) {
+  
+    ::ng-deep {
+        .dps-grid-font-controller {
+            display: none;
+        }
+        
+        }
+    
+  }
+
+
+
+ @media only screen and (min-width: 1366px) and (max-height: 1024px) {
+
+    .grid_controller_wrapper {
+        width: 50%;
+    }
+    .grid-controller-set .mat-radio-button
+    {
+    margin-bottom: 3px;
+    }
+ 
+ }
+
+ 
+
+ .dps-action-menu {
+
+  padding-top: 0px;
+
+    ::ng-deep .mat-list-item .mat-list-item-content {
+      padding: 0px 0px;
+    }
+
+    
+
+    mat-list-item {
+        height: 40px !important;
+        mat-icon {
+          padding: 10px 10px 10px;
+          border-radius: unset;
+        }
+    
+        span {
+          padding: 0px 10px 0px 10px;
+        }
+      }
+
+
+      
+
+      .ledger-card {
+
+        // background: #e8bbbb;
+        mat-icon {
+          color: #32434d;
+          background: #d4eeff;
+        }
+    
+        span {
+          color: #32434d;
+        }
+      }
+
+      .addvance-srch {
+        mat-icon {
+          color: #32434d;
+          background: #d2ece4;
+        }
+    
+        span {
+          color: #32434d;
+        }
+      }
+
+      .e-chit {
+        mat-icon {
+          color: #32434d;
+          background: #e6e6e6;
+        }
+    
+        span {
+          color: #32434d;
+        }
+      }
+
+      .billing-rqst {
+        mat-icon {
+          background: #bbe4ff;
+          color: #314f69;
+        }
+    
+        span {
+          color: #32434d;
+        }
+    
+      }
+
+      .echit-authorisations {
+
+        mat-icon {
+          background: #bbe4ff;
+          color: #314f69;
+        }
+    
+        span {
+          color: #32434d;
+        }
+
+      }
+}
+
+
+
+
+

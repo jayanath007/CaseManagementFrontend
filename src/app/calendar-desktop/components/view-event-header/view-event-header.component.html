@@ -1,0 +1,207 @@
+<mat-toolbar>
+  <button mat-button class="dps-remove-calendar-btn" *ngIf="event.data.isCancelled && event.isEditable"
+    (click)="onRemoveFromCalendar()">
+    <mat-icon>event_busy</mat-icon> Remove from calendar
+  </button>
+  <button mat-button class="dps-meeting-accept-btn"
+    *ngIf="event && !event.data.isCancelled && !event.data.responseRequested && !event.data.seriesMasterId && !event.data.isOrganizer"
+    (click)="onDontSendResponse('accept')">
+    <mat-icon>check_circle</mat-icon> Accept
+  </button>
+  <button mat-button class="dps-meeting-tentative-btn"
+    *ngIf="event && !event.data.isCancelled && !event.data.responseRequested && !event.data.seriesMasterId && !event.data.isOrganizer"
+    (click)="onDontSendResponse('tentativelyAccept')">
+    <mat-icon>help</mat-icon> Tentative
+  </button>
+  <button mat-button class="dps-meeting-decline-btn"
+    *ngIf="event && !event.data.isCancelled && !event.data.responseRequested && !event.data.seriesMasterId && !event.data.isOrganizer"
+    (click)="onDontSendResponse('decline')">
+    <mat-icon>cancel</mat-icon> Decline
+  </button>
+  <button mat-button [matMenuTriggerFor]="acceptMeetingMenu" class="dps-meeting-accept-btn"
+    *ngIf="event && !event.data.isCancelled && (event.data.responseRequested || event.data.seriesMasterId) && !event.data.isOrganizer">
+    <mat-icon>check_circle</mat-icon> Accept
+  </button>
+  <button mat-button [matMenuTriggerFor]="tentativeMeetingMenu" class="dps-meeting-tentative-btn"
+    *ngIf="event && !event.data.isCancelled && (event.data.responseRequested || event.data.seriesMasterId) && !event.data.isOrganizer">
+    <mat-icon>help</mat-icon> Tentative
+  </button>
+  <button mat-button [matMenuTriggerFor]="declineMeetingMenu" class="dps-meeting-decline-btn"
+    *ngIf="event && !event.data.isCancelled && (event.data.responseRequested || event.data.seriesMasterId) && !event.data.isOrganizer">
+    <mat-icon>cancel</mat-icon> Decline
+  </button>
+  <!-- <button mat-button (click)="onReplyForward('createReply')" *ngIf="event && (event.data.attendees && event.data.attendees.length> 0)">
+    <mat-icon>reply</mat-icon>
+    <span class="view_headings">Reply</span>
+  </button>
+  <button mat-button (click)="onReplyForward('createReplyAll')" *ngIf="event && (event.data.attendees && event.data.attendees.length> 0)">
+    <mat-icon>reply_all</mat-icon>
+    <span class="view_headings">Reply All</span>
+  </button>
+  <button mat-button (click)="onReplyForward('createForward')" *ngIf="event && !event.data.isCancelled && ((event.data.seriesMasterId &&!(event.data.isOrganizer && event.data.type==='exception')||!event.data.seriesMasterId) )">
+    <mat-icon>forward</mat-icon>
+    <span class="view_headings">Forward</span>
+  </button> -->
+  <button mat-button class="dps-open-series" *ngIf="event.data.seriesMasterId" (click)="onOpenSeries()">
+    <mat-icon>sync</mat-icon> Open series
+  </button>
+  <button mat-button class="dps-online-meeting" [ngClass]="event.data.onlineMeetingProvider" (click)="hyperlink.click()"
+    *ngIf="event && event.data && event.data.isOnlineMeeting && (event.data.onlineMeetingUrl ||
+    event.data.onlineMeeting?.joinUrl)">
+    <mat-icon fontSet="fontawesome"
+      [fontIcon]="event.data.onlineMeetingProvider==='skypeForBusiness'?'fa-skype':'fa-users'" class="fa">
+    </mat-icon> Join
+    {{event.data.onlineMeetingProvider==='teamsForBusiness'?'Teams':(event.data.onlineMeetingProvider==='skypeForBusiness'?'Skype':'')}}
+    meeting
+    <a #hyperlink [href]="event.data.onlineMeetingUrl || event.data.onlineMeeting?.joinUrl" target="_blank" hidden></a>
+  </button>
+  <span fxFlex="1 1 auto"></span>
+  <button mat-icon-button (click)="onClose()" matTooltip="Close" matTooltipPosition="below">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #acceptMeetingMenu="matMenu" [overlapTrigger]="false">
+  <div *ngIf="event &&!event.data.responseRequested">
+    <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Accept event</button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('accept')">
+      Occurrence
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('accept',true)">
+      Series
+    </button>
+  </div>
+  <div *ngIf="event && event.data.responseRequested">
+    <div *ngIf="event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Accept occurrence</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('accept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('accept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('accept')">
+        Don't send the response
+      </button>
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Accept series</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('accept',true)">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('accept',true)">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('accept',true)">
+        Don't send the response
+      </button>
+    </div>
+    <div *ngIf="!event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Accept event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('accept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('accept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('accept')">
+        Don't send the response
+      </button>
+    </div>
+  </div>
+</mat-menu>
+
+<mat-menu #tentativeMeetingMenu="matMenu" [overlapTrigger]="false">
+  <div *ngIf="event && !event.data.responseRequested">
+    <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Tentative accept event</button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('tentativelyAccept')">
+      Occurrence
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('tentativelyAccept',true)">
+      Series
+    </button>
+  </div>
+  <div *ngIf="event && event.data.responseRequested">
+    <div *ngIf="event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Tentative accept
+        occurrence</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('tentativelyAccept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('tentativelyAccept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('tentativelyAccept')">
+        Don't send the response
+      </button>
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Tentative accept series</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('tentativelyAccept',true)">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('tentativelyAccept',true)">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('tentativelyAccept',true)">
+        Don't send the response
+      </button>
+    </div>
+    <div *ngIf="!event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Tentative accept event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('tentativelyAccept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('tentativelyAccept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('tentativelyAccept')">
+        Don't send the response
+      </button>
+    </div>
+  </div>
+</mat-menu>
+
+<mat-menu #declineMeetingMenu="matMenu" [overlapTrigger]="false">
+  <div *ngIf="event && !event.data.responseRequested">
+    <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Decline event</button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('decline')">
+      Occurrence
+    </button>
+    <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('decline',true)">
+      Series
+    </button>
+  </div>
+  <div *ngIf="event && event.data.responseRequested">
+    <div *ngIf="event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Decline occurrence</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('decline')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('decline')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('decline')">
+        Don't send the response
+      </button>
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Decline series</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('decline',true)">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('decline',true)">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('decline',true)">
+        Don't send the response
+      </button>
+    </div>
+    <div *ngIf="!event.data.seriesMasterId">
+      <button class="calendar-event-btn" mat-menu-item class="dps-menu-item" disabled>Decline event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="onEditResponseBeforeSending('decline')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onSendResponseNow('decline')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="onDontSendResponse('decline')">
+        Don't send the response
+      </button>
+    </div>
+  </div>
+</mat-menu>

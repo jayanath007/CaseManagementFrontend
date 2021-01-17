@@ -1,0 +1,134 @@
+@import '~styles/variables.scss';
+
+mat-grid-tile {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2),
+    0 1px 1px 0 rgba(0, 0, 0, .14),
+    0 1px 3px 0 rgba(0, 0, 0, .12);
+
+  &.input-elements {
+    mat-form-field {
+      width: 94px;
+    }
+
+    &.dps-disbursement.input-elements {
+      mat-form-field {
+        width: 150px;
+      }
+
+    }
+  }
+
+  .mat-grid-tile-header {
+    height: 25px;
+    background: #386B98;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}
+
+.mat-tab-body-wrapper {
+  height: calc(100% - 9px);
+}
+
+.dps-civil-time-recording-popup {
+  font-size: 12px;
+  height: calc(100% - 0px);
+  overflow-y: auto;
+
+  .dps-grid-indicator-lbl {
+    color: #1a6098;
+    font-weight: 600;
+  }
+
+  &.container {
+    background: #cee9f3;
+    // height: calc(100% - 47px);
+  }
+
+  .dps-primary-section {
+
+    color: #093e6b;
+  }
+
+  .outer {
+    padding: 10px;
+    margin: 5px 5px;
+    background: #fff;
+  }
+
+  .check-margin {
+    margin-top: 14px;
+  }
+
+  .dps-card {
+    padding: 0px;
+    background: #d2dde6;
+    padding: 5px;
+    position: relative;
+
+    &.top-content {
+      border-radius: 0px;
+      // padding: 0px;
+      margin-bottom: 0px;
+    }
+
+    &.dps-value-container {
+      input {
+        text-align: right;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 12px;
+    background: #386B98;
+    color: #fff;
+    padding: 7px;
+    font-weight: 500;
+    margin: 0px;
+    text-align: center;
+  }
+
+  .milage-rate {
+    padding-left: 5em;
+    color: #f71c1c;
+    font-weight: unset;
+  }
+
+  .dps-card-content-rate-value {
+    padding: 10px 10px;
+  }
+}
+
+.dps-action-btn {
+  font-size: 12px;
+  line-height: 25px !important;
+  padding: 0 10px;
+  justify-content: flex-end;
+  border-top: 2px solid #e7e5e5;
+
+  button {
+    height: 35px;
+    font-size: 12px;
+    margin: 5px 5px;
+  }
+
+  button {
+    background: #0079c4;
+    color: #fff;
+
+
+
+    &.disabled-btn {
+      background: #b5b4b4;
+      color: #888686;
+    }
+  }
+
+  .dps-delete {
+    color: #c30d0d;
+    border-color: #ffbcbc;
+    background: #e4cbcb;
+
+  }
+}

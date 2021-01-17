@@ -1,0 +1,78 @@
+@import '~styles/variables.scss';
+.dps_screenedit_layout {
+  width: 100%;
+  height: 100%;
+
+}
+
+::ng-deep .dps-screen-edit-popup {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}
+
+.dps_srnedit_container {
+  // height: 600px;
+  height: calc(100% - 41px);
+}
+
+.mat-dialog-content {
+  display: block;
+  max-height: 80vh;
+  min-height: 80vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dps_screenedit_header {
+  padding: 0 !important;
+}
+
+.closed-btn mat-icon {
+  color: $primary;
+}
+
+mat-toolbar {
+  background: $dps-popup-matbar;
+  color: #dfeaff !important;
+  font-size: $primary-font-size + 2;
+
+  .dps-header {
+    mat-icon {
+      vertical-align: middle;
+      border-radius: 100%;
+      // border: 2px solid #859ece;
+      padding: 3px 2px 0px 2px;
+      color: #a9c6fd;
+      font-size:  $primary-font-size + 6;
+      text-align: center;
+      margin: 0px 3px 2px 0px;
+    }
+  }
+}
+
+mat-toolbar mat-icon.dps-toolbar-icon {
+  padding-right: 16px;
+}
+
+mat-toolbar {
+  color: $toolbar-title;
+}
+
+dps-screen-edit-tree {
+  width: 40%;
+  border-right: 1px solid #bad0ea;
+  background: #e7f2ff;
+  padding-left: 20px;
+}
+
+dps-screen-edit-content {
+  overflow-x: auto;
+}
+
+dps-screen-edit-tree {
+  overflow: auto;
+}

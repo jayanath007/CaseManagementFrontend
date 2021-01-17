@@ -1,0 +1,154 @@
+{
+    "Data": {
+        "LUT_ID": 21,
+        "LUT_Type": "SALTITLE",
+        "LUT_Description": "the Salution Title list grouping",
+        "LUT_VariantLabel": null,
+        "LookupViewModels": [
+            {
+                "LUP_ID": 18,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Miss",
+                "LUP_Description": "Miss",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 19,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Ms",
+                "LUP_Description": "Ms",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 20,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Mr ",
+                "LUP_Description": "Mr",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 21,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Mrs",
+                "LUP_Description": "Mrs",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 22,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Dr",
+                "LUP_Description": "Dr",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 23,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Sir",
+                "LUP_Description": "Sir",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 24,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Rev",
+                "LUP_Description": "Rev",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 25,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Mr \u0026 Mrs",
+                "LUP_Description": "Mr \u0026 Mrs",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 48,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Lord",
+                "LUP_Description": "Lord",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 15217,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Lady",
+                "LUP_Description": "Lady",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 15371,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "CDS6 Billing",
+                "LUP_Description": "CDS6 Billing",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 15383,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Mr \u0026 Miss",
+                "LUP_Description": "Mr \u0026 Miss",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 15384,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Mr \u0026 Ms",
+                "LUP_Description": "Mr \u0026 Ms",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            },
+            {
+                "LUP_ID": 15387,
+                "LUP_LookupID": null,
+                "LUP_LUTID": 21,
+                "LUP_Code": "Capt",
+                "LUP_Description": "Captain",
+                "LUP_VariantValue": null,
+                "LUP_Hidden": false,
+                "LookupType_LUT_ID": 0
+            }
+        ]
+    },
+    "Status": "Success",
+    "MessageBody": null,
+    "MessageHeader": null,
+    "DetailStatus": []
+}

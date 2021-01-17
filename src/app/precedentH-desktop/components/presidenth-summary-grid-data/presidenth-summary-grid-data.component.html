@@ -1,0 +1,42 @@
+<div fxLayout="column">
+
+  <div fxLayout="row" class="grid-controller-sub">
+    <mat-form-field floatLabel="always" class="type-selection">
+      <mat-label>Rate Table</mat-label>
+      <input matInput placeholder="Rate Table" value="{{rateTableName}}">
+    </mat-form-field>
+
+    <mat-checkbox labelPosition="before" [(ngModel)]="allComplete" (change)="onChangecheckAll($event)">
+      Select all</mat-checkbox>
+  </div>
+
+
+  <div class="estimated-summary-data-table">
+    <dps-common-grid-table [columns]="matterBalanceGridcolumns" [rows]="presidentHSummaryData"
+      (rowCheckBoxChange)="onRowCheckBoxChange($event)" (rowDblClick)="onRowDblClick($event)">
+    </dps-common-grid-table>
+  </div>
+
+  <div class="totals" fxLayout="row wrap">
+    <h2 fxFlex="1 1 auto">Grand Total</h2>
+    <div class="total-container">
+      <span>{{grandTotals?.actualDisbursmentTotal | number : '1.2-2'}}</span>
+      <label>Inc. Disburs</label>
+    </div>
+    <div class="total-container">
+      <span>{{grandTotals?.actualTimeCostTotal | number : '1.2-2'}}</span>
+      <label>Inc. Time c</label>
+    </div>
+    <div class="total-container">
+      <span>{{grandTotals?.estimateDisbursmentTotal | number : '1.2-2'}}</span>
+      <label>Est. Disbur </label>
+    </div>
+    <div class="total-container">
+      <span>{{grandTotals?.estimateTimeCostTotal | number : '1.2-2'}}</span>
+      <label>Est. Time c</label>
+    </div>
+    <div class="total-container">
+      <span><strong>{{grandTotals?.totalCost | number : '1.2-2'}}</strong></span>
+      <label><strong>Total</strong></label>
+    </div>
+  </div>

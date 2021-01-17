@@ -1,0 +1,11 @@
+
+  <!-- <dps-organizer-top-menu (toggleSettingsNav)="toggleSettingsNav()"></dps-organizer-top-menu> -->
+<mat-sidenav-container>
+  <mat-sidenav mode="over" [disableClose]="true" disableClose position="end" #settingsSidenav opened="false">
+    <dps-settings-view (closeSettingsView)="closeSettingsNav()"></dps-settings-view>
+  </mat-sidenav>
+  <div class="organizer-home">
+    <router-outlet></router-outlet>
+    <router-outlet name="mail"></router-outlet>
+  </div>
+</mat-sidenav-container>

@@ -1,0 +1,47 @@
+<div class="dps-grid-clmn-group" fxLayout="column" *ngFor="let group1 of fileHistorData?.groupData ; let row = index">
+  <mat-list dense>
+    <mat-list-item class="dps-clmn-main-group" fxLayout="row" [ngClass]="{cssClass: group1.isExpand}"
+      (click)="onGroupRowChange(group1)">
+      <i class="material-icons arrow-right-down-btn">
+        {{group1?.isExpand?'keyboard_arrow_down':'keyboard_arrow_right'}}
+      </i>
+      <h3>
+        <i class="material-icons indicator" style=vertical-align:middle;>{{group1.groupMode | groupIconByMode}} </i>
+
+        {{group1.data.value}}({{group1.data.count}})</h3>
+    </mat-list-item>
+  </mat-list>
+
+  <div class="dps-clmn-group-section" *ngIf="group1.isExpand">
+    <div *ngFor="let group2 of group1.items ; let row = index">
+      <mat-list dense>
+        <mat-list-item class="expand-panel-header" fxLayout="row" (click)="onGroupRowChange(group2)">
+          <i class="material-icons arrow-right-down-btn">
+            {{group2?.isExpand?'keyboard_arrow_down':'keyboard_arrow_right'}}
+          </i>
+          <h3>
+            <i class="material-icons indicator" style=vertical-align:middle;>{{group2.groupMode | groupIconByMode}} </i>
+            {{group2.data.value}}({{group2.data.count}})</h3>
+        </mat-list-item>
+      </mat-list>
+      <div class="dps-group-two-row-data" *ngIf="group2.isExpand">
+        <div *ngFor="let item of getFilehistoryDataGroupIds(group2.groupHash); let row = index">
+          <div class="dps-case-file-grid-row mat-elevation-z" [ngClass]="item.data.type | colorByFileType">
+            <dps-file-history-fix-row fxFlex="" (click)="onExpand(item , $event)" (onDeleteRow)="deleteRow($event)"
+              (onEditRow)="editRow($event)" (onCheckedRow)="checkedRow($event)" (signDoc)="onSignDoc($event)"
+              (xdraftItem)="onXdraftItem($event)" (newVersion)="onNewVersion($event)"
+              (moveSelectedFolder)="onMoveSelectedFolder($event)" (share)="onShare($event)" [columnDef]="columnDef"
+              [rowData]="item" [folderList]="folderList" [checkedItems]="checkedItems"
+              [deleteEntrySecurityInfo]="deleteEntrySecurityInfo" [isDocumentVersioning]="isDocumentVersioning"
+              [isMuiltySelect]="isMuiltySelect" [matterInfo]="matterInfo" (onCheckin)="doCheckin($event)"
+              (onDiscardCheckin)="doDiscardCheckin($event)">
+            </dps-file-history-fix-row>
+          </div>
+        </div>
+        <button class="dps-load-more" mat-flat-button *ngIf="group2.currentItems <  fileHistorData?.total"
+          (click)="onLoadMore(group2)">Load
+          More</button>
+      </div>
+    </div>
+  </div>
+</div>

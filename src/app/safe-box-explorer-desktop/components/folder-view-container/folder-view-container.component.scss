@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+.safe-box-content-row {
+    padding: 10px 5px 0px 10px;
+    font-size: 12px;
+    .safebox-content-row {
+        margin-right: 10px;
+    }
+    mat-icon{
+        vertical-align: middle;
+    font-size: $primary-font-size + 6;
+    color: #357dbb;
+    }
+}

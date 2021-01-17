@@ -1,0 +1,141 @@
+<mat-sidenav-container [style.display]="activeOutlet !== 'main'  ? 'none': 'block'" autosize>
+  <mat-sidenav mode="side" [disableClose]="true" position="start" class="dps-calendar-min-sidenav"
+    [opened]="!startSidenaveOpened" fxLayout="column">
+    <div>
+      <mat-nav-list class="dps_calender_container">
+        <mat-list-item (click)="onStartSidenaveToggle()" class="dps_calender_item">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </mat-list-item>
+        <mat-list-item (click)="onNewEvent(calendarContentLayout.selectedDate)" matTooltip="New Event"
+          matTooltipPosition="after">
+          <mat-icon class="dps_calender_add">add</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+    <div fxFlex="1 1 auto" class="dps-calendar-mini-list dps-white-gray-scroll">
+      <dps-calendar-mini-list [calendarList]="calendarList" (toggleCalendar)="onToggleCalendar($event)">
+      </dps-calendar-mini-list>
+    </div>
+    <!-- <div>
+      <mat-nav-list class="dps-mail-router-links" dense>
+        <mat-list-item matTooltip="Mail" matTooltipPosition="after">
+          <mat-icon>mail_outline</mat-icon>
+        </mat-list-item>
+        <mat-list-item matTooltip="Task" matTooltipPosition="after">
+          <mat-icon>content_paste</mat-icon>
+        </mat-list-item>
+        <mat-list-item matTooltip="Calendar" matTooltipPosition="after" class="dps-mail-router-selected-link">
+          <mat-icon>today</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </div> -->
+
+  </mat-sidenav>
+  <mat-sidenav mode="side" [disableClose]="true" position="end" class="dps-calendar-sidenav-end"
+    [opened]="endSidenaveOpened && endSidenaveEnabled" fxLayout="column">
+    <dps-day-event-list (editEvent)="calendarContentManager.onEditEvent($event)"
+      (loadSingleCalendarEvent)="calendarContentManager.onLoadSingleCalendarEvent($event)"
+      [calendarEvents]="calendarContentManager.selectedDateEvents$|async"
+      [selectedDate]="calendarContentManager.selectedDate$|async" (response)="calendarContentManager.onResponse($event)"
+      (replyForward)="calendarContentManager.onReplyForward($event)"
+      (showAsStateChange)="calendarContentManager.onShowAsStateChange($event)"
+      (removeFromCalendar)="calendarContentManager.onRemoveFromCalendar($event)"
+      (editSeriesEvent)="calendarContentManager.onEditSeriesEvent($event)"></dps-day-event-list>
+  </mat-sidenav>
+  <div class="dps-calendar-content">
+    <mat-sidenav-container [style.display]="activeOutlet !== 'main'  ? 'none': 'block'" autosize>
+      <mat-sidenav mode="side" [disableClose]="true" position="start" class="dps-calendar-sidenav-start"
+        [opened]="startSidenaveOpened" fxLayout="column">
+        <mat-list class="dps_calender_container">
+          <mat-list-item class="dps_calender_container-list">
+            <span matLine class="dps_calender-list">
+              <i class="fa fa-calendar-o" aria-hidden="true"></i> Calendar</span>
+            <button class="dps_calender-button" mat-icon-button (click)="onStartSidenaveToggle()">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </button>
+          </mat-list-item>
+
+          <mat-list-item class="dps-onnew-item">
+            <button (click)="onNewEvent(calendarContentLayout.selectedDate)" class="dps_add_event" fxFlex="1 1 auto"
+              mat-button>
+              <span>
+                <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; New Event</span>
+            </button>
+          </mat-list-item>
+        </mat-list>
+        <div class="dps-calender">
+          <mat-calendar #matCalendar (selectedChange)="calendarContentLayout.onDateChange($event)"
+            [selected]="calendarContentManager.selectedDate$|async" [dateClass]="dateClass"></mat-calendar>
+        </div>
+        <div fxFlex="calc(100%-405px)" class="dps_calender_view dps-white-gray-scroll">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+          <dps-calendar-group-list [calendarGroups]="calendarGroups" (toggledgroup)="onGroupToggle($event)"
+            (toggleCalendar)="onToggleCalendar($event)"
+            (calendarGroupEditOperations)="onCalendarGroupEditOperations($event)"
+            (calendarEditOperations)="onCalendarEditOperations($event)"></dps-calendar-group-list>
+        </div>
+        <!-- <div class="dps-mail-router-links" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-button matTooltip="Mail" matTooltipPosition="above">
+            <mat-icon>mail_outline</mat-icon>
+          </button>
+          <button mat-button matTooltip="Task" matTooltipPosition="above">
+            <mat-icon>content_paste</mat-icon>
+          </button>
+          <button mat-button matTooltip="Calendar" matTooltipPosition="above" class="dps-mail-router-selected-link">
+            <mat-icon>today</mat-icon>
+          </button>
+        </div> -->
+      </mat-sidenav>
+      <dps-module-layout moduleColor="calender-primary" contentPadding="0px 20px 20px 2px" layoutHeaderHeight="60px"
+        contentHeaderHeight="60px">
+        <div class="dps-calender-header" dps-layout-header fxLayout="row" fxLayoutAlign=" center">
+          <dps-selected-calendar-list fxFlex="1 1 auto"
+            [calendareViewList]="calendarContentManager.calendareViewList$|async"
+            (removeCalendar)="calendarContentManager.onRemoveCalendar($event)"></dps-selected-calendar-list>
+          <button class="dps-selected-cal-list" mat-mini-fab (click)="onEndSidenaveToggle()" *ngIf="endSidenaveEnabled">
+            <mat-icon class="dps-selected-cal-maticon">format_list_bulleted</mat-icon>
+          </button>
+        </div>
+        <!-- <div fxLayout="column" fxFlex="calc(100%-60px)"> -->
+        <!-- <div class="dps-calendar-content-background" fxFlex="calc(100%-60px)">
+            <div>
+
+            </div>
+          </div> -->
+        <!-- <div fxFlex="calc(100%-30px)" class="dps-calendar-content-forground" fxLayout="column">
+            <mat-card class="dps-white-gray-scroll" fxFlex="calc(100%-30px)"> -->
+        <dps-calendar-content-manager #calendarContentManager dps-layout-content>
+          <dps-calendar-content-layout #calendarContentLayout
+            [timeZone]="(calendarContentManager.user$|async)?.userTimeZone?.info.alias"
+            [endSidenaveOpened]="endSidenaveOpened" [currentView]="calendarContentManager.currentView$|async"
+            [defaultCalendar]="calendarContentManager.defaultCalendar$|async"
+            [currentTitle]="calendarContentManager.currentTitle$|async"
+            [showBusinessHours]="calendarContentManager.showBusinessHours$|async"
+            (changeCalendarView)="calendarContentManager.onChangeCalendarView($event)"
+            (viewChanged)="calendarContentManager.onViewChanged($event)"
+            (loadCalendarEvents)="calendarContentManager.onLoadCalendarEvents($event)"
+            (changeCalendarTitle)="calendarContentManager.onChangeCalendarTitle($event)"
+            (changeShowBusinessHours)="calendarContentManager.onChangeShowBusinessHours($event)"
+            (endSidenaveDisable)="onEndSidenaveDisable()" (endSidenaveEnable)="onEndSidenaveEnable()"
+            (editEvent)="calendarContentManager.onEditEvent($event)"
+            [calendareViewList]="calendarContentManager.calendareViewList$|async"
+            [calendarEventList]="calendarContentManager.calendarEventList$|async"
+            [selectedDate]="calendarContentManager.selectedDate$|async"
+            (changeSelectedDate)="calendarContentManager.onChangeSelectedDate($event)"
+            (loadSingleCalendarEvent)="calendarContentManager.onLoadSingleCalendarEvent($event)"
+            (response)="calendarContentManager.onResponse($event)"
+            (replyForward)="calendarContentManager.onReplyForward($event)"
+            (showAsStateChange)="calendarContentManager.onShowAsStateChange($event)"
+            (removeFromCalendar)="calendarContentManager.onRemoveFromCalendar($event)"
+            (eventDateTimeChange)="calendarContentManager.onEventDateTimeChange($event)"
+            (editSeriesEvent)="calendarContentManager.onEditSeriesEvent($event)"
+            (refreshMatCalendar)="onRefreshMatCalendar($event)">
+          </dps-calendar-content-layout>
+        </dps-calendar-content-manager>
+        <!-- </mat-card>
+          </div> -->
+        <!-- </div> -->
+      </dps-module-layout>
+    </mat-sidenav-container>
+  </div>
+</mat-sidenav-container>

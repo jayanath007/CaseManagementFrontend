@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+.grid-data{
+    font-size: 12px;
+    display: table-row;
+    word-break: break-word;
+    width: 100%
+}
+.row-data{
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    font-size: 12px;
+    padding: 6px 6px 6px;
+    line-height: 18px;
+}
+
+.grid-data:nth-child(odd) {
+    background: $primary;
+}
+
+.grid-data:nth-child(even) {
+    background: #e0f4ff;
+}
+.dps-text-align-center{
+    text-align: center;
+}

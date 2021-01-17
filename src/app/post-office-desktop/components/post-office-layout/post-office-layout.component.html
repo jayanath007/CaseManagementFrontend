@@ -1,0 +1,63 @@
+<mat-sidenav-container (backdropClick)="onMemberNavClick()">
+  <mat-sidenav class="dps-team-member-sidenav" [disableClose]="true" #teammembers position="end"
+    [mode]="memListPanelMode" [opened]="isMemberNavExpan" fxLayout="column">
+    <dps-team-member-manager #teammemberlist [teamMemberToken]="'TEAM_MEMBER_DATA_POST_CODE'"></dps-team-member-manager>
+    <mat-list dense class="team-member-header">
+      <mat-list-item>
+        <div fxFlex="row">
+          <button mat-icon-button (click)="onMemberNavClick()">
+            <mat-icon>reorder</mat-icon>
+          </button>
+          <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+          <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+            <mat-chip> {{teamMemberCount}} </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+      [teamMemberList]="teammemberlist.teamMemberList$ | async"
+      [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async" [selected]="teammemberlist.selected$ | async"
+      (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+      (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+    </dps-team-member-list>
+  </mat-sidenav>
+  <div class="dps-post-office-main-contentainer" fxLayout="column">
+    <mat-card class="dps-post-office-main-header">
+      <mat-card-content>
+        <div fxFlex="1 1 0%">
+          <dps-post-office-header [timeOffset]="timeOffset" [groupList]="groupList" [loookForList]="loookForList"
+            [userList]="userList" [selectedInfo]="selectedInfo" [departments]="departments"
+            [selectedTeamMember]="selectedTeamMember" (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+          </dps-post-office-header>
+        </div>
+        <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+      <div class="grid-wrapper-main" fxLayout="column">
+
+        <dps-post-office-views [selectedInfo]="selectedInfo" [timeOffset]="timeOffset" [groupMode]="groupMode"
+          (updateSelectedInfo)="onUpdateSelectedInfo($event)" (gridRefresh)="onGridRefresh()"
+          (gridFontSize)="onChangeGridFontSize($event)" (groupChange)="onGroupChange($event)"
+          (menuChange)="onMenuChange($event)">
+        </dps-post-office-views>
+
+
+        <dps-post-office-grid fxFlex="calc(100%-70px)" [groupMode]="groupMode" [groupData]="groupData"
+          [isLoading]="isLoading" [columnDef]="columnDef" class="grid-data {{fontSizeClass}}" [gridData]="gridData"
+          [selectedInfo]="selectedInfo" [totalItem]="totalItem" [expandedRow]="expandedRow"
+          [paginatorDef]="paginatorDef" [selectGroupHash]="selectGroupHash" (rowExpand)="onRowSelect($event)"
+          (viewChange)="onViewChange($event)" (clickGridButton)="onClickGridButton($event)"
+          (selectGroup)="onSelectGroup($event)" (loadMoreData)="loadMore($event)">
+        </dps-post-office-grid>
+
+
+
+      </div>
+    </mat-card>
+  </div>
+</mat-sidenav-container>

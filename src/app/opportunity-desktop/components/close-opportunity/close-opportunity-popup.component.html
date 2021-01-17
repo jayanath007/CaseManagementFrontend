@@ -1,0 +1,74 @@
+<div class="dps-opportunity-close-layout" fxLayout="column">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading?.closeOpportunityLoading"></mat-progress-bar>
+  <div class="dpspopup-header">
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-opportunity-header" fxLayoutAlign="center center">
+        <!-- <span fxFlex="1 1 auto"></span> -->
+        <div fxFlexAlign="center" class="dps-header" fxLayout="row">
+          <mat-icon matListIcon>format_indent_increase</mat-icon>
+          <span>Close Opportunity</span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button mat-icon-button (click)="onClose()">
+          <mat-icon class="close-btn">close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="dps-opportunity-details">
+    <!-- <h2>Opportunity Details</h2> -->
+    <div class="primary-header" fxLayout="row">
+      <mat-icon class="icon">edit</mat-icon>
+      <span>Opportunity Details</span>
+    </div>
+    <div fxLayout="column" class="dps-opportunity-wrapper dps-white-gray-scroll" fxLayoutGap="6px">
+      <div class="dps-opportunity-inner-wrapper" fxLayout="row wrap" fxLayoutGap="20px">
+        <mat-form-field floatLabel="always" class="date-input">
+          <input matInput [matDatepicker]="picker" placeholder="Close Date"
+            [ngModel]="model?.closeDate | date:'yyyy-MM-dd'" (dateChange)="onChangeDate($event.value)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Prospect Client</mat-placeholder>
+          <input matInput #prospectClient [disabled]="true" [value]="model?.clientName">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Department</mat-placeholder>
+          <input matInput #department [disabled]="true" [value]="departmentName">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Work Type</mat-placeholder>
+          <input matInput #workType [disabled]="true" [value]="opportunity?.workType">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-placeholder>Fee Earner</mat-placeholder>
+          <input matInput [disabled]="true" [value]="feeErnerName">
+        </mat-form-field>
+
+        <mat-form-field style="width:100%" class="dps-input-outer">
+          <mat-placeholder>Notes</mat-placeholder>
+          <textarea matInput #noteInput [value]="model?.note" (focusout)="onChangeNote(noteInput.value)" rows="12"
+            cols="24" maxlength="350"></textarea>
+        </mat-form-field>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="dps-opportunity-btn">
+    <button class="accepted" mat-raised-button (click)="onConfirmAction('Accepted')"
+      [ngClass]="{'dps_opportunity-btn-disable':isLoading?.closeOpportunityLoading}"
+      [disabled]="isLoading?.closeOpportunityLoading">
+      <mat-icon>done</mat-icon>
+      <span>Accepted</span>
+    </button>
+    <button class="dps-cancel" mat-raised-button (click)="onConfirmAction('Rejected')"
+      [ngClass]="{'dps_opportunity-btn-disable':isLoading?.closeOpportunityLoading}"
+      [disabled]="isLoading?.closeOpportunityLoading">
+      <mat-icon>clear</mat-icon>
+      <span>Rejected</span>
+    </button>
+  </div>
+</div>

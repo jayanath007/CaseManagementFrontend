@@ -1,0 +1,75 @@
+@import '~styles/variables.scss';
+
+.dps-grid-content-list{
+  
+  height: calc(100% - 49px);
+
+}
+.dps-header-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.dps-ledger-card-option {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+
+}
+
+mat-tab.mat-tab {
+  padding: 10px 0px;
+}
+
+.ledger-card-tabs {
+  a {
+    min-width: 90px;
+    font-size: 12px;
+    padding: 0px 8px 0px 8px;
+  }
+  background-color: #5c5e61;
+  // width:100px;
+  ::ng-deep .mat-tab-label-active{
+    background-color: #262e39;
+  }
+}
+
+.dps-ledgercard-tab-header {
+  height: 100%;
+}
+
+.dps-is-mobile.dps-ledger-card-option {
+  right: 5px;
+  padding-left: 4px;
+  overflow-x: auto !important;
+  width: 260px;
+}
+
+.dps-is-mobile.dps-header-wrapper-content {
+  position: absolute;
+  height: 55px;
+  background: #3d455d;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+}
+
+.dps-is-mobile dps-ledger-card-option {
+  margin-right: 10px;
+}
+
+.dps-is-mobile.spacer {
+  flex: 1 1 auto;
+}
+
+dps-grid-font-controller {
+  margin: 8px 0px;
+}
+
+dps-grid-font-controller {
+  margin: 4px 0px;
+}
+
+.mat-tab-link {
+  color: white;
+}

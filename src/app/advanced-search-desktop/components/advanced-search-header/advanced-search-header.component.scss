@@ -1,0 +1,116 @@
+@import '~styles/variables.scss';
+
+.advanced-search-header-layout {
+    padding: 2px 16px 0px 0px;
+    background: #c5dfff;
+    dps-editable-dropdown , mat-form-field {
+        font-size: $primary-font-size - 2;
+        cursor: pointer;
+    }
+
+    .dps-header-field {
+        margin-left: 10px;
+        margin-top: 9px;
+    }
+
+    mat-form-field {
+        width: 120px;
+    }
+
+    button {
+        color: #164398;
+    }
+
+    .dps-advanced-controller  {
+        .dps-controller {
+            margin-bottom: 12px;
+            button {
+                font-size: $primary-font-size - 2;
+                background: #273f6d;
+                color: #fff;
+                line-height: 34px;
+                border-radius: 2px;
+            }
+        }
+
+        .dps-grid-action {
+
+            background: white;
+            border: 1px solid gainsboro;
+            padding: 6px 7px 0px 0px;
+            border-radius: 5px;
+            height: 50px;
+            margin: -5px 10px 0px 10px;
+            padding-bottom: 3px;
+
+            &.dps-header-btn {
+            margin-left: 10px;
+    
+            }
+
+            mat-form-field {
+                width: 120px;
+            }
+
+            button {
+                
+                // width: 30px;
+                height: 30px;
+                line-height: 30px;
+                color: #fff;
+                font-weight: 600;
+                font-size: $primary-font-size - 2;
+                border-radius: 2px;
+                margin-left: 5px;
+                margin-top:3px;
+
+                // &:hover {
+                //     background:darken(#32a738, 10%);  
+                // }
+                i {
+                    font-size: $primary-font-size + 4;
+                }
+            }
+
+            .dps-search-btn {
+                button {
+                    
+                    border: 1px solid #39a05d;
+                    color: #39a05d;
+                    background: #effff4;
+                    
+                    &.dps-search-speed {
+                    background: #1c9c4f;
+                    color: #e1f9ea;    
+                        
+                    }
+                }
+            }
+
+            .dps-all-btn {
+                button {
+                    
+                    border: 1px solid #f5a884;
+                    color: #d27549;
+                    background: #ffeee6;
+
+                    &.dps-search-all {
+                    background: #e0662c;
+                    color: #ffeee6;    
+                    
+                    }
+                } 
+            }
+
+             
+        }
+    }
+
+    mat-checkbox {
+        font-size: $primary-font-size - 2;
+    }
+
+    .dps-advanced-help {
+        color: #164398;  
+    }
+}

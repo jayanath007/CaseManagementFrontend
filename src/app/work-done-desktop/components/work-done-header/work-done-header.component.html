@@ -1,0 +1,53 @@
+<div class="dps-work-done-header" fxLayout="row">
+  <div class="total-matter-count-wrap" fxFlex="1 1 auto" [hidden]="selectedInfo?.searchText">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <table>
+        <thead>
+          <tr class="work_done_summary_header">
+            <th colspan="2">Letters</th>
+            <th colspan="4">Calls</th>
+            <th colspan="2">Emails</th>
+          </tr>
+          <tr class="work_done_summary_sub">
+            <th>
+              <span>In</span>
+            </th>
+            <th>
+              <span>Out</span>
+            </th>
+            <th></th>
+            <th>
+              <span>In</span>
+            </th>
+            <th>
+              <span>Out</span>
+            </th>
+            <th></th>
+            <th>
+              <span>In</span>
+            </th>
+            <th>
+              <span>Out</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>{{summery?.lettersIn}}</td>
+          <td>{{summery?.lettersOut}}</td>
+          <td></td>
+          <td>{{summery?.callsIn}}</td>
+          <td>{{summery?.callsOut}}</td>
+          <td></td>
+          <td>{{summery?.emailsIn}}</td>
+          <td>{{summery?.emailsOut}}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="work-done-grid-controllers">
+    <dps-work-done-grid-filter [departmentList]="departmentList" [typeList]="typeList" [selectedInfo]="selectedInfo" (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+    </dps-work-done-grid-filter>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+.grid-data{
+    width:100%;
+}
+.dps-selected-row,.dps-selected-row:hover {
+    background: #f1ca6e;
+  }
+  .expansion-panelgrid-header{
+      height: auto !important;
+  }
+  
+.wrk_done_date,
+.wrk_done_for,
+.dps_task_ref {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

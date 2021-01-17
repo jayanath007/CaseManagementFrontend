@@ -1,0 +1,73 @@
+ <div fxLayout="column" fxLayoutGap="5px" class="dps-civil-time-recording-popup container dps-white-gray-scroll">
+   <div class="dps-primary-section outer" fxLayout="row wrap" fxLayoutGap="2em">
+     <mat-form-field>
+       <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+         [ngModel]="modelData?.dateDone | date:'yyyy-MM-dd'" (dateChange)="onChangeModel('dateDone', $event.value)" />
+       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+       <mat-datepicker #picker></mat-datepicker>
+     </mat-form-field>
+
+     <mat-form-field>
+       <mat-label>Fee Eaner</mat-label>
+       <mat-select matNativeControl (selectionChange)="onChangeModel('feeEarner', $event.value)"
+         [ngModel]="modelData?.feeEarner">
+         <mat-option *ngFor="let i of feeEarnerList" [value]="i.userId">{{i.userId}}</mat-option>
+       </mat-select>
+     </mat-form-field>
+
+     <mat-checkbox color="primary" class="check-margin" [checked]="modelData?.tickIfEstimated"
+       (change)="onChangeModel('tickIfEstimated', $event.checked)">Tick if Estimated</mat-checkbox>
+
+     <mat-form-field>
+       <mat-label>Level</mat-label>
+       <mat-select matNativeControl (selectionChange)="onChangeModel('level', $event.value)"
+         [ngModel]="modelData?.level">
+         <mat-option *ngFor="let i of viewData?.levels" [value]="i.id">{{i.value}}</mat-option>
+       </mat-select>
+     </mat-form-field>
+
+     <mat-form-field *ngIf="classData?.className === 'Certificated'">
+       <mat-label>Judge Level</mat-label>
+       <mat-select matNativeControl (selectionChange)="onChangeModel('judgeLevel', $event.value)"
+         [ngModel]="modelData?.judgeLevel">
+         <mat-option *ngFor="let i of viewData?.legalAidJudge" [value]="i.id">{{i.value}}</mat-option>
+       </mat-select>
+     </mat-form-field>
+     <mat-form-field *ngIf="classData?.className === 'Certificated'">
+       <mat-label>Claim Code</mat-label>
+       <mat-select matNativeControl (selectionChange)="onChangeModel('claimCode', $event.value)"
+         [ngModel]="modelData?.claimCode">
+         <mat-option *ngFor="let i of viewData?.claimCodes" [value]="i.code">{{i.code}} | {{i.description}}
+         </mat-option>
+       </mat-select>
+     </mat-form-field>
+   </div>
+
+   <dps-certificated-time-recording *ngIf="classData?.className === 'Certificated'" [modelData]="modelData"
+     [viewData]="viewData" [homeCurrency]="homeCurrency" (changeModel)="onChangeModel($event.key, $event.value)">
+   </dps-certificated-time-recording>
+   <dps-legal-help-time-recording *ngIf="classData?.className === 'Legal Help'" [modelData]="modelData"
+     [viewData]="viewData" [homeCurrency]="homeCurrency" (changeModel)="onChangeModel($event.key, $event.value)">
+   </dps-legal-help-time-recording>
+
+   <div class="cmn-table first outer" fxLayout="column">
+     <span class="dps-grid-indicator-lbl">Time records in current matter</span>
+     <dps-common-grid-table style="height: 150px;" [columns]="timeGridcolumns" [rows]="gridRows" [loading]="false"
+       (rowDblClick)="selectTimeRecord($event)">
+     </dps-common-grid-table>
+     <mat-paginator [pageIndex]="viewData?.civilTimeRecordData?.pageInfo?.currentPage"
+       [length]="viewData?.civilTimeRecordData?.totalCount"
+       [pageSize]="viewData?.civilTimeRecordData?.pageInfo?.itemPerPage" [pageSizeOptions]="[25, 50, 100]"
+       (page)="onPageChange($event)">
+     </mat-paginator>
+   </div>
+
+ </div>
+
+ <!-- <div fxLayout="row" class="dps-action-btn">
+
+   <button mat-flat-button color="primary" [disabled]="isLoading" (click)="onUserAction('NewTimeRecord')">New</button>
+   <button class="dps-delete " mat-flat-button color="primary" [disabled]="isLoading || modelData?.diaryId < 1"
+     (click)="onUserAction('DeleteTimeRecord')">Delete</button>
+   <button mat-flat-button color="primary" [disabled]="isLoading" (click)="onUserAction('SaveTimeRecord')">Save</button>
+ </div> -->

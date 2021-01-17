@@ -1,0 +1,6 @@
+<mat-list-item class="dps-primary-tab" [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible">
+  <mat-icon matListIcon fontSet="fontawesome" class="fa" fontIcon={{tabIcon}}></mat-icon>
+  <h4 matLine>{{customCaption || meta?.scL_Caption || meta?.scL_DefaultCaption}}
+    <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+  </h4>
+</mat-list-item>

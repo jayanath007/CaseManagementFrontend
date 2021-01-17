@@ -1,0 +1,17 @@
+@import '~styles/variables.scss';
+.edit-lookup-text-area
+{
+    width: 94%;
+    min-height: 50px;
+    max-height: 150px;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    padding: 10px;
+    overflow: auto;
+    text-align: justify;
+}
+
+.input-wrapper-edit-lookup
+{
+    padding:20px 20px 0 20px
+}

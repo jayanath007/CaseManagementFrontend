@@ -1,0 +1,124 @@
+@import '~styles/variables.scss';
+
+
+
+.dps-popup-outer {
+    height: calc(100% - 15px);
+}
+
+.dps-grid-x{
+    height: 100%;
+    overflow: hidden;
+  }
+  
+
+  dps-authorisations-grid-row {
+      width: 100%;
+  }
+
+
+.dps-inner-controller {
+    min-width: 1000px;
+    height: 100%;
+  }
+
+  
+  
+  .row-highlight.dps-is-mobile {
+    width: 100%;
+  }
+  
+  .row-highlight {
+    // background-color: #ecf7f4;
+    box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+    z-index: 2;
+    width: calc(100% - 15px); // padding-left: 15px;
+    height: 40px;
+    
+  }
+
+  .row-highlight-inner {
+    height: 40px;
+    width: 100%;
+  }
+
+  dps-column-header {
+    
+    padding: 10px 6px 6px !important;
+    line-height: 22px !important;
+
+    ::ng-deep {
+      .Net , .Vat {
+          text-align: right;
+      }
+
+  }
+    
+  }
+
+  .dps-auth-search-grid {
+    overflow-y: scroll;
+  }
+
+  mat-paginator {
+    border-bottom: 1px solid #dadada;
+    border-top: 1px solid #dadada;
+  }
+
+
+
+  @media only screen and (min-width: 1366px) and (max-height: 768px)  {
+    ::ng-deep dps-column-header {
+        .Reason {
+            min-width: 422px;
+            max-width: 422px;
+        }
+    } 
+
+    .dps-inner-controller {
+        min-width: 1600px;
+    }
+
+    .dps-grid-x {
+        overflow: auto;
+    }
+  }
+
+
+  @media only screen and (min-width: 1440px) and (max-height: 900px) {
+
+    ::ng-deep dps-column-header {
+        .Reason {
+            min-width: 422px;
+            max-width: 422px;
+        }
+    } 
+
+    .dps-inner-controller {
+        min-width: 1600px;
+    }
+
+    .dps-grid-x {
+        overflow: auto;
+    }
+  }
+
+  @media only screen and (min-width: 1280px) and (max-height: 800px) {
+
+    ::ng-deep dps-column-header {
+        .Reason {
+            min-width: 422px;
+            max-width: 422px;
+        }
+    } 
+
+    .dps-inner-controller {
+        min-width: 1600px;
+    }
+
+    .dps-grid-x {
+        overflow: auto;
+        overflow-y: hidden;
+    }
+
+  }

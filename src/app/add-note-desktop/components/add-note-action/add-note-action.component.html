@@ -1,0 +1,7 @@
+<mat-form-field  floatLabel="always">
+  <mat-select placeholder="Action" [ngModel]="selectedAction" (selectionChange)="onActionChange($event)" disabled>
+    <mat-option *ngFor="let Actions of actionTypeList" [value]="Actions">
+      {{ Actions.text }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

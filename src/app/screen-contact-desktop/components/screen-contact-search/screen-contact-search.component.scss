@@ -1,0 +1,138 @@
+@import '~styles/variables.scss';
+/* Structure */
+
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+.dps-grid-x {
+  height: 100%;
+  overflow: auto;
+}
+.dps-grid-layout-controller {
+  height:100%;
+  overflow: auto;
+}
+.row-highlight {
+  width: calc(100% - 15px);
+  background-color: $primary;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  height: 40px;
+  div {
+    height: 40px;
+  }
+}
+mat-toolbar {
+  min-height: 53px;
+  mat-toolbar-row.dps-toolbar-box-shadow {
+  background: #04588d;
+ 
+    color: #dfeaff;
+    font-size: $primary-font-size + 4;
+    height: 53px;
+    .dps-header {
+     
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+      mat-icon {
+        vertical-align: middle;
+        border-radius: 100%;
+        border: 2px solid #97d3fb;
+        padding: 5px;
+        color: #a9c6fd;
+      }
+      .header-test {
+        color: #e3f4ff;
+        width: 100%;
+      }
+    }
+  }
+}
+dps-column-header:last-child {
+  background-image: none;
+}
+
+
+dps-screen-contact-grid-row {
+  font-size: 12px;
+}
+
+mat-nav-list {
+  padding-top: 0px;
+  mat-list-item{
+    height: auto;
+    dps-screen-contact-grid-row{
+      width:100%;
+    }
+  }
+}
+
+.row-selected {
+  background-color: lightblue;
+}
+
+.tool-bar-contact-search .new {
+  color: $primary;
+  background: rgb(3, 116, 18);
+  font-size: 12px;
+  float: left;
+}
+
+.tool-bar-contact-search .delete {
+  float: right;
+  background: rgb(170, 10, 10);
+  color: $primary;
+  font-size: 12px;
+}
+
+.tool-bar-contact-search .contact-search {
+  font-family: $primary-font-stack;
+  font-size: 12px;
+  float: left;
+  padding-left: 20px;
+}
+
+.row-highlight {
+  font-family: $primary-font-stack;
+  font-size: 12px;
+  clear: both;
+  background: #03588d;
+  color: $primary;
+  font-weight: normal;
+}
+
+
+.general-buttons-bottom {
+  margin-top: 5px;
+}
+
+.popup-internal-message-wrapper {
+  height: 24px;
+}
+
+.popup-internal-message {
+  font-family: $primary-font-stack;
+  font-size: 12px;
+  background: #ff605e;
+  padding: 6px;
+  border-radius: 2px;
+  color: $primary;
+}
+
+.remove-from-file {
+  font-size: 12px;
+  line-height: 30px;
+  margin: 6px 0 0 8px;
+  color: $primary;
+  float: left;
+  background: #aa0c0a;
+}
+
+.remove-from-file .mat-button-focus-overlay {
+  background: none;
+  color: #880a07;
+}
+mat-paginator{
+  height: 50px;
+}

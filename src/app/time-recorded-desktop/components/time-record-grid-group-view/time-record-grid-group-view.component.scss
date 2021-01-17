@@ -1,0 +1,50 @@
+@import '~styles/variables.scss';
+dps-time-recorded-grid-item {
+  padding-left: 30px;
+
+}
+.dps-clmn-main-group {
+  padding-top: 4px;
+  ::ng-deep .mat-list-item-content {
+    width: 100%;
+  }
+    // background: #d4a684;
+    // width: 100%;
+    // cursor: pointer;
+    background: #f3e1d3;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #d4a684;
+
+    mat-icon {
+      color: #967964;
+    }
+}
+.dps-clmn-main-group {
+  ::ng-deep .mat-list-item-content {
+    padding: 0px 0px !important;
+  }
+  padding: 0px 8px;
+  background: #f3e1d3;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #f9d0b1;
+  color: #715039;
+ 
+   &:hover {
+    opacity: .9;
+  }
+
+  .arrow-right-down-btn {
+    cursor: pointer;
+  }
+}
+.dps-load-more {
+  &:hover {
+    opacity: .9;
+  }
+  background: #d0ecd0;
+  color: #043304;
+  font-weight: 600;
+  margin: 0px 0px 0px 30px;
+}

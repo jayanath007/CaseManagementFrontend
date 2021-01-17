@@ -1,0 +1,51 @@
+<button class="hd-bar-notifications-btn" [style.display]="mailList && mailList?.length > 0 ? 'inline-block' : 'none'" cdk-overlay-origin #trigger="cdkOverlayOrigin"
+  mat-icon-button (click)="indicatorClick()">
+  <mat-icon class="dps-hd-icon">email</mat-icon>
+</button>
+<ng-template cdk-portal #notificationOverlay="cdkPortal">
+  <mat-card (click)="overlayClick()" class="dps-mat-card">
+    <mat-card-content>
+      <mat-nav-list dense>
+        <dps-new-mail-indicator-item [event]="lastEvent" (click)="openPoup(lastEvent.Id)"></dps-new-mail-indicator-item>
+        <i class="fa fa-times-circle popup-close-circle" aria-hidden="true" (click)="onClose($event)" fxFlexAlign="end"></i>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template cdk-portal #reminderOverlay="cdkPortal">
+  <mat-card class="dps-reminder-mat-card">
+    <mat-card-content>
+      <mat-list dense>
+        <dps-reminder-indicator-item *ngFor="let reminder of newReminders" [curentTime]="curentTime" [reminder]="reminder"
+          (snooze)="onSnooze($event)" (dismiss)="onDismiss($event)"></dps-reminder-indicator-item>
+        <i class="fa fa-times-circle popup-close-circle" aria-hidden="true" (click)="onReminderClose($event)"
+          fxFlexAlign="end"></i>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template cdk-portal #autoReplyOverlay="cdkPortal">
+  <mat-card class="dps-reminder-mat-card">
+    <mat-card-content>
+      <mat-list dense>
+        <dps-auto-reply-msg-item (offAutoReply)="onAutoReplyOff($event)"></dps-auto-reply-msg-item>
+        <i class="fa fa-times-circle popup-close-circle" aria-hidden="true" (click)="onAutoReplyMSGClose($event)"
+          fxFlexAlign="end"></i>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayWidth]="300" [cdkConnectedOverlayOpen]="showList"
+  cdk-connected-overlay cdkConnectedOverlayHasBackdrop="true" cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="indicatorClick()" [cdkConnectedOverlayPositions]="position">
+  <mat-card class="dps-mat-card">
+    <mat-card-content>
+      <mat-nav-list dense>
+        <dps-new-mail-indicator-item *ngFor="let event of mailList" [event]="event" (click)="openPoup(event.Id)"></dps-new-mail-indicator-item>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

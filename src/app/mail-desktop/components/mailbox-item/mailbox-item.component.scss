@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+.dps-owner-avatar {
+  height: 36px !important;
+  width: 36px !important;
+  color: $primary;
+  padding: 8px 0px 0px 0px;
+}
+
+.dps-owner-avatar span {
+  font-family: $primary-font-stack;
+  font-size: 15px;
+  position: relative;
+  bottom: 10px;
+}
+
+.dps-user-avator {
+  height: 36px !important;
+  width: 36px !important;
+}
+
+.dps-owner {
+  font-size: 28px !important;
+  height: 28px !important;
+  width: 28px !important;
+  padding: 4px !important;
+  background-color: $calender-bck;
+  color: $calender-bck-color;
+}
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}

@@ -1,0 +1,128 @@
+@import '~styles/variables.scss';
+
+.dps-template-directory-header {
+  color: #155186;
+  width: 100%;
+
+  .dps-hide-indicator {
+    display: none !important;
+  }
+
+  .dps-white-gray-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .dps-folder-indicator {
+      padding-right: 15px;
+    }
+
+    mat-icon {
+      font-size: $primary-font-size + 5;
+      height: 23px;
+      width: 7px;
+      padding: 0px 5px;
+    }
+
+    span {
+      font-size: $primary-font-size - 1;
+      vertical-align: super;
+
+      &.dps-path-name {
+        padding: 8px 5px 8px;
+
+        i {
+          font-family: monospace;
+          font-weight: 600;
+          border: 1px solid;
+          padding: 0 0;
+          height: 18px;
+          width: 18px;
+          margin: 0 2px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  mat-form-field {
+    height: 34px;
+    padding-right: 10px;
+  }
+
+  .dps-sort-filter-btn,
+  .dps-template-directory-refresh {
+    button {
+      width: 34px;
+      height: 34px;
+
+      mat-icon {
+        font-size: $primary-font-size + 5;
+        height: 30px;
+        width: 22px;
+        padding: 0px;
+
+        &.fa {
+          font-size: $primary-font-size + 2;
+        }
+      }
+    }
+  }
+
+
+  .dps-sort-filter-btn {
+    mat-checkbox {
+      position: relative;
+      bottom: 3px;
+      padding-right: 10px;
+    }
+
+    button {
+      margin-right: 3px;
+
+      &.active {
+        color: #ffffff !important;
+      }
+
+      &.dps-you {
+        color: #39bf39;
+
+        &.active {
+          background-color: #39bf39;
+        }
+      }
+
+      &.dps-other-users {
+        color: #df4d4d;
+
+        &.active {
+          background-color: #df4d4d;
+        }
+      }
+
+      &.dps-no-one {
+        color: #ffb100;
+
+        &.active {
+          background-color: #ffb100;
+        }
+      }
+
+      &.dps-all {
+        color: #0d599c;
+
+        &.active {
+          background-color: #0d599c;
+        }
+      }
+    }
+  }
+
+  .dps-template-directory-refresh {
+    width: 40px;
+
+    button {
+      background: #1972c3;
+      color: white;
+    }
+  }
+}

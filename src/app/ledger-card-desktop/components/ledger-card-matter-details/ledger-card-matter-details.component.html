@@ -1,0 +1,32 @@
+<div fxLayout="column">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" class="ledger-card-details">
+    <div fxLayout="column" fxFlex="1 1 50">
+      <span class="lbl">
+        {{resoleModuleName('client_search')|async}} Details
+      </span>
+      <span class="value-lbl">&nbsp;
+        {{matterData?.clientRef}}-{{matterData?.clientName}}
+      </span>
+    </div>
+    <div fxLayout="column" fxFlex="1 1 50">
+      <span class="lbl">
+        Branch
+      </span>
+      <span class="value-lbl">&nbsp;
+        {{matterData?.branchID}}-{{matterData?.branchName}}
+      </span>
+    </div>
+
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="column">
+    <span class="lbl">
+      {{resoleModuleName('matter_search')|async}} Details
+    </span>
+    <span class="value-lbl"> &nbsp;
+      {{matterData?.matterDetails}} {{currencyLabel?.lable1}}
+    </span>
+  </div>
+
+</div>

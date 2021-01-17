@@ -1,0 +1,84 @@
+<div class="dps-general-popup dps-view-opportunity-popup" fxLayout="column">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading?.sendSaveQuoteLoading"></mat-progress-bar>
+  <div class="dpspopup-header">
+    <mat-toolbar>
+      <!-- class="dps-toolbar-box-shadow dps-general-popup-header" -->
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon class="header-icon" matListIcon>view_quilt</mat-icon>
+        <span class="header-text">View opportunity - {{selectedStatus?.value}}</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button class="general-close" mat-icon-button (click)="onClose()">
+        <mat-icon class="header-icon-delete">close</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+  <div class="dps-open-matter" *ngIf="!enableSaveBtn">
+    <button mat-button (click)="onOpenMatter()" matTooltip="Open Matter" [disabled]="isLoading?.sendSaveQuoteLoading">
+      <mat-icon>folder</mat-icon>
+      <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+      <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+    </button>
+  </div>
+  <div class="dps-open-matter" *ngIf="!!enableSaveBtn">
+    <button mat-button (click)="onSaveEditOpertunity()" matTooltip="Open Matter">
+      <mat-icon>save</mat-icon> Save
+    </button>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Opportunity">
+      <dps-oppertunity-viewer [isNew]="false" [isLoading]="isLoading"
+        [disbleBTN]="!!enableSaveBtn ? true : isLoading?.editData" [departmentList]="filterDepartmentList"
+        [feeEarnerList]="feeEarnerList" [introducerList]="introducerList"
+        [clientDataModel]="!!editItem ? editItem : gridItem" [selectedStatus]="selectedStatus" [salTitle]="salTitle"
+        (conflictRun)="onConflictRun($event)" (qouteRun)="onQouteRun($event)"
+        (closeOpportunitty)="onCloseOpportunitty($event)" (createCaseFile)="onCreateCaseFile($event)"
+        (selectedClientSearchData)="onClientSearch($event)" (departmetChangeItem)="onChangeDepartment($event)"
+        (workTypeChangeItem)="changeWorkType($event)" (feeEarnerChangeItem)="changeFeeEarner($event)"
+        (inputChangeData)="onChangeInput($event)" (introducerChangeItem)="onIntroducerChange($event)">
+      </dps-oppertunity-viewer>
+    </mat-tab>
+    <mat-tab label=" History">
+      <dps-opportunity-history [historyColumDef]="historyColumDef" [historyData]="historyData"
+        (openLogFile)="onOpenLogFile($event)">
+      </dps-opportunity-history>
+    </mat-tab>
+    <mat-tab label="Enquiry Info" *ngIf="!!gridItem?.enquiryInfo">
+      <mat-nav-list class="dps-enquiry-info dps-white-gray-scroll">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header class="dps_enquary_info_header">
+              <mat-panel-title>
+                Type Details
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <dps-enquiry-Info-item *ngFor="let i of gridItem?.enquiryInfo.typeDetails; let isOdd=odd;" [item]="i"
+              [isOdd]="isOdd">
+            </dps-enquiry-Info-item>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header class="dps_enquary_info_header">
+              <mat-panel-title>
+                Quote Type
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <dps-enquiry-Info-item *ngFor="let i of gridItem?.enquiryInfo.quoteType; let isOdd=odd;" [item]="i"
+              [isOdd]="isOdd">
+            </dps-enquiry-Info-item>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- 
+        <h4>Type Details </h4>
+        <dps-enquiry-Info-item *ngFor="let i of gridItem?.enquiryInfo.typeDetails" [item]="i">
+        </dps-enquiry-Info-item>
+        <h4>Quote Type </h4>
+        <dps-enquiry-Info-item *ngFor="let i of gridItem?.enquiryInfo.quoteType" [item]="i">
+        </dps-enquiry-Info-item> -->
+      </mat-nav-list>
+    </mat-tab>
+  </mat-tab-group>
+</div>

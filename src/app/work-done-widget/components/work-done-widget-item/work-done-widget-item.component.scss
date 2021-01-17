@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-list-item
+{
+  height: 50px !important;
+}
+
+
+.option {
+  color: #7b6d4b;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  mat-icon {
+    margin-right: 0px;
+  }
+}
+
+.widget-item {
+  border-bottom: 1px solid #ccd9e2;
+}
+
+.widget-item-content {
+  width: calc(100% - 40px);
+
+}
+
+
+
+.content{
+
+  width: 100%;
+
+  .ref{
+    font-weight: 400;
+    color: #198996;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-right: 7px;
+    text-overflow: clip;
+    overflow: visible;
+  }
+  .client 
+  {
+    font-size: 11px;
+    text-align: right;
+    font-weight: bold;
+    color: #616161;
+
+  }
+
+  
+  .details
+  {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    line-height: 21px;
+  }
+
+}

@@ -1,0 +1,24 @@
+<div class="dps-billing-import-data-layout">
+  <dps-common-popup-header icon="access_time" [title]="'Edit Time Entry '+ rowData?.timUniqueRef" buttons="close"
+    [loading]="requestViewData?.timeEditLoading" iconColor="#e8a348" titleColor="#a9c0f6"
+    (buttonClick)="onClose($event)">
+  </dps-common-popup-header>
+  <div class="dps-billing-import-data-form dps-white-gray-scroll" fxLayout="column">
+    <mat-form-field class="example-full-width">
+      <textarea matInput #billDetails rows="5" maxlength="250" placeholder="Details" [value]="rowData?.timDetails"
+        (focusout)="onControllerFocusOut('TimeDetails',billDetails.value)"></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput #billNotes rows="5" maxlength="250" placeholder="Notes" [value]="rowData?.timNotes"
+        (focusout)="onControllerFocusOut('TimeNotes',billNotes.value)"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="dps-time-edit-actions">
+    <button mat-button class="save" (click)="onSave()">
+      Save
+    </button>
+    <button mat-button class="cancel" (click)="onClose($event)">
+      Cancel
+    </button>
+  </div>
+</div>

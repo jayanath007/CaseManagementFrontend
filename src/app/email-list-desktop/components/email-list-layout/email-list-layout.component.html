@@ -1,0 +1,132 @@
+<div class="dps-email-list-layout" fxLayout="column">
+  <mat-toolbar fxFlex="42px" class="dps-toolbar-box-shadow">
+    <mat-icon>{{submitType===SubmitType.MsgViaMLS?'send':'share'}}</mat-icon>
+    <span fxFlex="1 1 auto" *ngIf="submitType!==SubmitType.NewMailOnly">{{(submitType===SubmitType.WorkflowShare || submitType===SubmitType.MsgViaMLS)?'Send
+      Form':'Share'}} Using</span>
+    <span fxFlex="1 1 auto" *ngIf="submitType===SubmitType.NewMailOnly">Email to</span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <div [@.disabled]="true" fxFlex="calc(100%-50px)" fxLayout="column" *ngIf="!loading">
+    <div class="expansion-panel" *ngIf="isShowOptionPanel">
+      <mat-expansion-panel [expanded]="true" [hideToggle]="false" class="mat-elevation-z">
+        <mat-expansion-panel-header collapsedHeight="34px" expandedHeight="40px">
+          <mat-panel-title>
+            <mat-icon matListIcon [ngClass]="{'msg-via-mls': submitType===SubmitType.MsgViaMLS}">
+              {{submitType===SubmitType.WorkflowShare ? 'send':(submitType===SubmitType.MsgViaMLS?'message':'share')}}
+            </mat-icon>
+            <span matLine
+              *ngIf="submitType!==SubmitType.MsgViaMLS">{{submitType===SubmitType.WorkflowShare?'Send Form':'Share'}}</span>
+            <span matLine *ngIf="submitType===SubmitType.MsgViaMLS">Message Via MLS</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="email-list-details" fxLayout="column" fxLayoutGap="1rem">
+          <mat-radio-group fxLayoutGap="2rem" fxLayout="row wrap" [ngModel]="share" labelPosition="after"
+            color="primary" (change)="onShareChange($event)" *ngIf="submitType!==SubmitType.MsgViaMLS">
+            <div fxLayout="column" fxLayoutGap="1rem">
+              <mat-radio-button color="primary" [value]="Share.MLSAndSafeChat">{{Share.MLSAndSafeChat}}
+              </mat-radio-button>
+              <mat-radio-button color="primary" [disabled]="submitType===SubmitType.WorkflowShare"
+                [value]="Share.SafeBox" *ngIf="isSafeBoxEnabled">{{Share.SafeBox}}</mat-radio-button>
+            </div>
+
+            <div fxLayout="column" fxLayoutGap="1rem">
+              <mat-radio-button color="primary" [disabled]="submitType===SubmitType.WorkflowShare"
+                [value]="Share.EmailAttachment">{{Share.EmailAttachment}}</mat-radio-button>
+              <mat-radio-button color="primary" [disabled]="submitType===SubmitType.WorkflowShare"
+                [value]="Share.EmailAttachmentPDF">{{Share.EmailAttachmentPDF}}</mat-radio-button>
+              <!-- *ngIf="submitType!==SubmitType.SignAndShare " -->
+            </div>
+
+          </mat-radio-group>
+
+          <div fxLayoutGap="1rem">
+
+            <div fxLayout="column wrap" fxLayoutGap="3px">
+              <div>
+                <mat-form-field class="date-input" floatLabel="always" *ngIf="submitType!==SubmitType.MsgViaMLS">
+                  <mat-placeholder>Review date</mat-placeholder>
+                  <input matInput [ngModel]="reviewDate" [matDatepicker]="picker"
+                    (dateChange)="onReviewDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-checkbox #isEditable class="dps-is-editable" color="primary" *ngIf="share===Share.MLSAndSafeChat && submitType!==SubmitType.WorkflowShare &&
+                  submitType!==SubmitType.MsgViaMLS">Is
+                  editable
+                </mat-checkbox>
+                <mat-checkbox class="dps-is-editable"
+                  *ngIf="share===Share.EmailAttachment || share===Share.EmailAttachmentPDF" color="primary"
+                  [checked]="isSilent" (change)="onChangeSilent($event)">
+                  Silent
+                </mat-checkbox>
+              </div>
+
+              <mat-form-field class="text-area" floatLabel="always" *ngIf="submitType!==SubmitType.MsgViaMLS">
+                <mat-placeholder>Review note</mat-placeholder>
+                <textarea matInput #textarea [ngModel]="reviewNote" (blur)="onBlurReviewNote(textarea.value)" rows="3"
+                  maxlength="250"></textarea>
+              </mat-form-field>
+              <mat-form-field class="text-area" floatLabel="always" *ngIf="showMessageInput">
+                <mat-placeholder>Message</mat-placeholder>
+                <textarea matInput #messageTextarea [ngModel]="message" (blur)="onBlurMessage(messageTextarea.value)"
+                  rows="3" maxlength="250"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+    </div>
+    <div fxFlex="1 1 auto" fxLayout="column" class="dps-mail-list-grid">
+      <div class="row-highlight" dpsIsMobile>
+        <div class="row-highlight-inner">
+          <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+            [filterAnchor]="header.extras.filterAnchor"></dps-column-header>
+        </div>
+      </div>
+      <div fxFlex="calc(100% - 90px)" class="dps-white-gray-scroll">
+        <mat-nav-list dence class="dps-grid-nav-list">
+          <mat-list-item class="dps-grid-list-item" *ngFor="let item of emailList">
+            <div fxLayout class="grid-data">
+              <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item?.contactType}}"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item?.name}}"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item?.email}}"></div>
+              <div class="row-data center" [fxFlex]="getFxFlexProperty(3)">
+                <mat-checkbox [checked]="item?.toCc===ToCc.To" color="primary"
+                  (change)="onToCcChange($event,item.id,ToCc.To)"></mat-checkbox>
+              </div>
+              <!-- <div class="row-data center" [fxFlex]="getFxFlexProperty(4)">
+                <mat-checkbox [checked]="item?.toCc===ToCc.Cc" color="primary" (change)="onToCcChange($event,i,ToCc.Cc)"></mat-checkbox>
+              </div> -->
+            </div>
+          </mat-list-item>
+          <!-- <mat-divider></mat-divider> -->
+        </mat-nav-list>
+      </div>
+    </div>
+    <mat-divider mat-inset></mat-divider>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign=" center">
+      <dps-recipient-input-manager #recipientInputManager fxFlex="1 1 auto">
+        <dps-recipient-input fxFlex="1 1 auto" [recipients]="[]" [people]="recipientInputManager.people$ | async"
+          lable="Add Recipients" (addRecipient)="onAddRecipient($event)"
+          [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+          [isGoogle]="recipientInputManager.authHelper.isGoogle()"
+          (searchDirectory)="recipientInputManager.searcheUsers($event)"
+          (addPerson)="recipientInputManager.addPerson($event)">
+        </dps-recipient-input>
+      </dps-recipient-input-manager>
+      <button class="dps-footer-btn create" *ngIf="submitType===SubmitType.NewMailOnly" mat-raised-button
+        color="primary" (click)="onCreateMail()" [disabled]="!hasToOrCc">Create</button>
+      <button class="dps-footer-btn" *ngIf="submitType!==SubmitType.NewMailOnly" mat-raised-button color="primary"
+        (click)="onShare()"
+        [disabled]="(!share && submitType!==SubmitType.SafeBoxSheare) ||
+        !hasToOrCc">{{(submitType===SubmitType.WorkflowShare||submitType===SubmitType.MsgViaMLS)?'Send':'Share'}}</button>
+      <button class="dps-cancel" (click)="onClose()">Cancel</button>
+
+    </mat-dialog-actions>
+  </div>
+</div>

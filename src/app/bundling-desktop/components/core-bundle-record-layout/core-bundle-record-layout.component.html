@@ -1,0 +1,38 @@
+<div class="dps-core-bundle-popup" fxLayout="column">
+  <div>
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-toolbar-box-shadow dps-core-bundle-header">
+        <span fxFlex="1 1 auto"></span>
+        <div fxFlexAlign="center" class="dps-header">
+          <span>{{headeName}} </span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button class="general-close" mat-icon-button (click)="onClose()">
+          <mat-icon class="header-icon-delete">
+            <span>close </span>
+          </mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x" fxFlex="calc(100%-45px)">
+    <div class="row-highlight" dpsIsMobile>
+      <div class="inner-highlight">
+        <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+          [filterAnchor]="header.extras.filterAnchor">
+        </dps-column-header>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex="calc(100%-80px)" class="dps-white-gray-scroll dps-grid-scroll">
+      <dps-core-bundle-record-row [columnDef]="columnDef" [isTreeDirty]="isTreeDirty" [rowData]="rowData" (changeItem)="onChangeItem($event)"
+        [changedItemId]="changedItemId">
+      </dps-core-bundle-record-row>
+    </div>
+
+    <div fxLayout="row" class="dps-core-action" fxLayoutAlign="end end">
+      <button mat-button (click)="onSubmit()" class="dps-core-btn" tabindex="2">Save and open in Bundle Creator window</button>
+      <button class="dps-cancel" (click)="onClose()" tabindex="-1">Close</button>
+    </div>
+
+  </div>
+</div>

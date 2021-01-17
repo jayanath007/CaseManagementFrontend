@@ -1,0 +1,32 @@
+<h1>Add/Edit Field</h1>
+<div class="screen-view-general-popup-body">
+  <mat-form-field class="ov-list-input">
+    <input matInput placeholder="Description" [(ngModel)]='ovItem.description' [disabled]="disableDescription" >
+  </mat-form-field>
+  <mat-form-field class="ov-list-input">
+      <input matInput placeholder="Help" [(ngModel)]='ovItem.help'>
+  </mat-form-field>
+  <mat-form-field class="ov-list-input">
+    <input matInput placeholder="Input Size" min="1" type='number' [(ngModel)]='ovItem.inputLength'>
+  </mat-form-field>
+  <mat-form-field class="ov-list-input">
+    <input matInput placeholder="Var No" #varNo (blur)="checkVarNumberExistence(varNo.value)" [disabled]="!ovItem.isNewItem" min="1" type='number' [(ngModel)]='ovItem.varNo'>
+  </mat-form-field>
+  <mat-form-field class="ov-list-input">
+    <mat-select placeholder="Select"  (selectionChange)="onFieldTypeChange($event)" [(ngModel)]='ovItem.fieldType' >
+        <mat-option *ngFor="let field of fieldTypeList" [value]="field.fieldTypeId">
+            {{ field.fieldTypeName }}
+          </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  
+<div class="general-buttons-bottom">
+
+    <button class="save" mat-button tabindex="-1" (click)="onSave(ovItem)">Save</button>
+
+    <button class="close-pop" mat-button color="warn"  tabindex="-1" (click)="onClose(ovItem)">close</button>
+  </div>
+</div>
+

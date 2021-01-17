@@ -1,0 +1,53 @@
+<mat-list-item class="dps-team-user-item-list-outer"
+  [ngClass]="{'dps-selected-user-movement': user?.user === selectedUserInMovement?.user}">
+  <div class="dps-team-user-item-list" fxLayout="column wrap">
+    <div class="dps-team-user-item" fxLayout="row">
+      <!-- <div class="dps-team-profile">
+        <div class="dps-team-profile-inner">
+          <div class="dps-team-base-txt">
+            <div style="display: flex;
+            flex-direction: column;
+            justify-content: space-around;">
+              <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-sender-avatar"
+                [ngStyle]="{'background-color': user?.userEmail| recipientColorCode}">
+                <span>{{user?.fullName | nameInitials}}</span>
+              </button>
+              <img style="vertical-align: middle;" matListAvatar [hidden]="!showProfileImg"
+                src="{{user?.userEmail | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true">
+            </div>
+
+
+            <div class="dps-pro-details" fxLayoutGap="3px">
+              <span class="f-name" fxLayout="row wrap">
+                <span matTooltip="{{user?.fullName}}" matTooltipPosition="below"
+                  class="s-name ">{{user?.fullName}}</span>
+                <span *ngIf="user?.jobTitle" class="title">({{user?.jobTitle}}) </span>
+              </span>
+
+              <span class="s-name extension" *ngIf="user?.directDialNo"><i class="material-icons">
+                  settings_phone
+                </i>{{user?.directDialNo}}</span>
+
+              <span *ngIf="getLastLocation()" class="s-name location">
+                <i class="material-icons">room</i>
+                <span>{{getLastLocation()}}</span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>-->
+
+      <div style="width: 100%;">
+        <dps-user-movement-time-line [pastMovements]="pastMovements" [currentMovements]="currentMovements"
+          [futureMovements]="futureMovements" [pastEvents]="pastEvents" [futureEvents]="futureEvents"
+          [currentEvents]="currentEvents" [morningHalfday]="halfdayMorning" [eviningHalfday]="halfdayEvining" class="dps-user-movement-time-line
+          dps-white-gray-scroll">
+        </dps-user-movement-time-line>
+
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</mat-list-item>

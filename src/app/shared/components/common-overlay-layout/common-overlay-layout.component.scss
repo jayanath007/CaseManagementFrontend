@@ -1,0 +1,13 @@
+.dps-common-overlay-layout, .dps-mat-card {
+  height: auto;
+  width: 100%;
+  // border: 1px solid #dcdcdc;
+  padding: 0px;
+}
+
+button:disabled {
+  color: #a7a4a4;
+background: #e4e4e4;
+border: 1px solid #d2d1d1;
+  
+}

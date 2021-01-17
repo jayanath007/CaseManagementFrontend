@@ -1,0 +1,124 @@
+<div class="dps-dashboard-main-contentainer dps-dashboard-version_v7 dps-white-gray-scroll" fxLayout="column"
+  dpsDroppable (onDrop)="onDrop($event.dragData)" dropZone="widget">
+  <!-- <div id="awan-4-vimana"></div> -->
+  <div id="cloud"></div>
+  <div class="spitfire-dashboard dashboard-inner-wrapper " fxLayout="column">
+    <div class="spitfire-dashboard-controller" fxLayout="row">
+      <div fxLayout="column" id="dps-dashboard-main-header" class="dps-dashboard-main-header" fxFlex="195px">
+        <div class="dashboard-main-header">
+        </div>
+        <div class="welcome-text">
+          <div class="welcome-main">
+            <span class="text one">Welcome to</span>
+            <span class="text two">Spitfire</span>
+          </div>
+          <div class="dps-dashboard-secondory">
+            <span class="text four cloud">Cloud Based Case Management Application</span>
+
+
+            <span class="text four case"> </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div fxLayout="row" class="dps-widget-group-outer dps-white-gray-scroll" style="width: 100%">
+        <div fxLayout="row" class="dps-widget-group dps-white-gray-scroll">
+
+
+          <div class="dps-widget calander-events" fxFlex="1 1 auto"
+            *ngIf="(isWidgetActive('calendar') | async ) && !authHelper.isGoogle()">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div class="item-card">
+              <dps-calendar-widget-manager (removeWidget)="onRemoveWidget('calendar')" [layout]="layout"
+              [theme]="theme">
+              </dps-calendar-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="(isWidgetActive('matter_search') | async )">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div mat-elevation-z class="item-card ">
+              <dps-matter-widget-manager (removeWidget)="onRemoveWidget('matter_search')" [layout]="layout">
+              </dps-matter-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="isWidgetActive('my_tasks') | async ">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div mat-elevation-z class="item-card ">
+              <dps-my-task-widget-manager (removeWidget)="onRemoveWidget('my_tasks')" [layout]="layout">
+              </dps-my-task-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="isWidgetActive('work_done') | async ">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div mat-elevation-z class="item-card ">
+              <dps-work-done-widget-manager (removeWidget)="onRemoveWidget('work_done')" [layout]="layout">
+              </dps-work-done-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto"
+            [hidden]="(mlsWidget.data$|async)?.length<1 || (!(isWidgetActive('mls') | async ))">
+
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div mat-elevation-z class="item-card ">
+              <dps-mls-widget-manager #mlsWidget (removeWidget)="onRemoveWidget('mls')" [layout]="layout">
+              </dps-mls-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="(isWidgetActive('team_efficiency') | async )">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div class="item-card chart">
+              <dps-te-pie-chart-widget-manager (removeWidget)="onRemoveWidget('team_efficiency')">
+              </dps-te-pie-chart-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="(isWidgetActive('time_recorded') | async )">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div mat-elevation-z class="item-card">
+              <dps-time-recorded-widget-manager (removeWidget)="onRemoveWidget('time_recorded')">
+              </dps-time-recorded-widget-manager>
+            </div>
+          </div>
+          <div class="dps-widget" fxFlex="1 1 auto" *ngIf="(isWidgetActive('team_efficiency') | async )">
+            <div [style.opacity]="(value/100)" class="dps-back-drop bar-chart"></div>
+            <div class="item-card">
+              <dps-te-time-recorded-widget-manager (removeWidget)="onRemoveWidget('team_efficiency')">
+              </dps-te-time-recorded-widget-manager>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mail-section">
+
+          <div class="dps-widget" style="height: 100%;" fxFlex="1 1 auto"
+            *ngIf="( isWidgetActive('mail') | async )&& !authHelper.isGoogle()">
+            <div [style.opacity]="(value/100)" class="dps-back-drop"></div>
+            <div class="item-card">
+              <dps-mail-widget-manager (removeWidget)="onRemoveWidget('mail')" [layout]="layout" >
+              </dps-mail-widget-manager>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="footer-shadow--remove" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="version">
+        <span style="color: #487ea7;">Ver {{appConfig.version}} </span> <span>Build {{appConfig.buildVersion}} </span>
+        <span> © 2018 DPS Software</span>
+      </div>
+
+      <div>
+        <div class="text alerts" *ngIf=" exceptionList?.length  > 0" (click)="onShowErrorListSidenav()">
+          <span>
+            <i class="material-icons">
+              notification_important
+            </i>
+            <span class="alert-label">{{ exceptionList?.length }} </span>
+          </span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

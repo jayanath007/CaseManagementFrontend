@@ -1,0 +1,36 @@
+<div fxLayout="column" class="dps-probate-payment-receipt-layout dps-white-gray-scroll">
+  <mat-tab-group (selectedTabChange)="tabChange($event)" [selectedIndex]="tabIndex">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Pecuniary</span>
+      </ng-template>
+
+      <dps-probate-account-desktop-manager [isPopup]="false" [token]="token" [matterData]="matterData"
+        [openFrom]="probateDealtBy.DistributionPecuniary" #manager>
+        <dps-probate-account-layout [editDataPecuniary]="pecuniaryData" [matterData]="matterData"
+          [savedData]="manager.savedData$ | async" [openFrom]="probateDealtBy.DistributionPecuniary"
+          (submitSaveData)="manager.onSubmitSaveData($event)">
+
+        </dps-probate-account-layout>
+      </dps-probate-account-desktop-manager>
+
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Residuary</span>
+      </ng-template>
+      <dps-probate-account-desktop-manager [isPopup]="false" [token]="token" [matterData]="matterData"
+        [openFrom]="probateDealtBy.DistributionResiduary">
+        <dps-probate-account-layout [editDataResiduary]="residuaryData" [savedData]="manager.savedData$ | async"
+          [matterData]="matterData" [openFrom]="probateDealtBy.DistributionResiduary"
+          [distributionViewItems]="distributionViewItems" (submitSaveData)="manager.onSubmitSaveData($event)">
+
+        </dps-probate-account-layout>
+      </dps-probate-account-desktop-manager>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

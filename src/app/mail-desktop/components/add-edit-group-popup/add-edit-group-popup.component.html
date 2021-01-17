@@ -1,0 +1,22 @@
+<div class="dps-add-edit-group-popup" fxLayout="column">
+  <mat-toolbar class="dps-toolbar-box-shadow">
+    <mat-icon>{{data.groupId?'group':'group_add'}}</mat-icon>
+    <span fxFlex="1 1 auto">{{data.groupId?'Edit group':'Create a group'}}</span>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!(manager.group$|async) || (manager.isGroupSaving$|async)"></mat-progress-bar>
+  <div fxFlex="calc(100%-110px)" class="dps-add-edit-group-content dps-white-gray-scroll">
+    <dps-add-edit-group-manager #manager [groupId]="data.groupId">
+      <dps-add-edit-group-content #content [group]="manager.group$|async" [isGroupSaved]="manager.isGroupSaved$|async"
+        (close)="dialogRef.close()" (valueChange)="manager.onValueChange($event)"></dps-add-edit-group-content>
+    </dps-add-edit-group-manager>
+  </div>
+  <mat-divider mat-inset></mat-divider>
+  <div fxLayout="row" fxLayoutAlign=" center" fxFlex="60px">
+    <span fxFlex="1 1 auto"></span>
+    <button mat-raised-button class="dps-footer-btn" *ngIf="data.groupId" (click)="onDelete()" [disabled]="!(manager.group$|async)">Delete
+      group</button>
+    <button mat-raised-button class="dps-footer-btn" color="primary" [disabled]="!(manager.group$|async) || (manager.isGroupSaving$|async)"
+      (click)="onSave(content.group,content.mailNickname,manager)">{{data.groupId?'Save':'Create'}}</button>
+    <button mat-raised-button class="dps-footer-btn" mat-dialog-close>Discard</button>
+  </div>
+</div>

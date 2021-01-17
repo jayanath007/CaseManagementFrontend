@@ -1,0 +1,38 @@
+<div class="dps-file-security-rights-layout" fxLayout="column">
+
+  <mat-toolbar class="dps-toolbar-box-shadow" fxFlex="50px">
+    <mat-icon>security</mat-icon>
+    <span fxFlex="1 1 auto" class="header-test">Users' File Security Rights</span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <div class="dps-file-security-rights-content" fxFlex="1 1 auto" fxLayout="column" *ngIf="!isLoading">
+    <div class="row-highlight" dpsIsMobile>
+      <div class="row-highlight-inner">
+        <dps-column-header *ngFor="let header of gridColoumns" [fxFlex]="header.extras.fxFlex" [def]="header" [filterAnchor]="header.extras.filterAnchor"></dps-column-header>
+      </div>
+    </div>
+    <div fxFlex="calc(100% - 90px)" class="dps-white-gray-scroll">
+      <mat-list dence class="dps-grid-nav-list">
+        <mat-list-item class="dps-grid-list-item" *ngFor="let item of users;let i = index" [ngClass]="{'dps-has-rights':item?.hasRights,'dps-is-feeEarner':item?.isFeeEarner}">
+          <div fxLayout class="grid-data">
+            <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item?.userRef}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item?.userName}}"></div>
+            <div class="row-data center" [fxFlex]="getFxFlexProperty(2)" [ngClass]="{'dps-is-dirty':item?.hasRights!==originalUsers[i].hasRights}">
+              <mat-checkbox [checked]="item?.hasRights" color="primary" [disabled]="item?.isFeeEarner" (change)="onHasRightsChange($event,i)"></mat-checkbox>
+            </div>
+          </div>
+        </mat-list-item>
+        <!-- <mat-divider></mat-divider> -->
+      </mat-list>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxFlex="50px" fxLayoutAlign=" center">
+      <span fxFlex="1 1 auto"></span>      
+      <button mat-raised-button (click)="onOk()" color="primary">Ok</button>
+      <button mat-raised-button (click)="onCancel()" color="primary">Cancel</button>
+    </div>
+  </div>
+</div>

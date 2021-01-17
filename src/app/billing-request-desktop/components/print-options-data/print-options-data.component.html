@@ -1,0 +1,160 @@
+<div class="dps-billing-request-layout">
+  <dps-common-popup-header icon="print" [title]="'Print Options'" buttons="close"
+    [loading]="requestViewData?.printSettingLoading" iconColor="#e8a348" titleColor="#a9c0f6" (buttonClick)="onClose()">
+  </dps-common-popup-header>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="dps-billing-print-settings dps-white-gray-scroll">
+    <div class="dps-print" style="border-right: 1px solid #dedede;">
+      <h4>Print Layout</h4>
+      <div>
+        <dps-select-input-with-table placeholder="Bill" [canEdit]="false"
+          [selectedKeyValue]="{key:requestViewData?.billDropDownSelectedData?.userRepID ,value: requestViewData?.billDropDownSelectedData?.userRepName}"
+          [columns]="printLayOutDropDownColumns" [rows]="printAllDropDownData?.printLayOutBillDropDown"
+          (selectionChange)="onDropDownValueChange('billDropDownSelectedData',$event)">
+        </dps-select-input-with-table>
+        <dps-select-input-with-table placeholder="Time" [canEdit]="false"
+          [selectedKeyValue]="{key:requestViewData?.timeDropDownSelectedData?.userRepID ,value: requestViewData?.timeDropDownSelectedData?.userRepName}"
+          [columns]="printLayOutDropDownColumns" [rows]="printAllDropDownData?.printLayOutTimeDropDown"
+          (selectionChange)="onDropDownValueChange('timeDropDownSelectedData',$event)">
+        </dps-select-input-with-table>
+        <dps-select-input-with-table placeholder="Disb" [canEdit]="false"
+          [selectedKeyValue]="{key:requestViewData?.disbDropDownSelectedData?.userRepID ,value: requestViewData?.disbDropDownSelectedData?.userRepName}"
+          [columns]="printLayOutDropDownColumns" [rows]="printAllDropDownData?.printLayOutDisbDropDown"
+          (selectionChange)="onDropDownValueChange('disbDropDownSelectedData',$event)">
+        </dps-select-input-with-table>
+      </div>
+
+      <div class="billing_check">
+
+        <h4>Address To Use</h4>
+
+        <mat-radio-group (change)="onBillingAddressTypeChange($event.value)"
+          [value]="requestViewData?.selectedprintSettingAddress.addresType" [(ngModel)]='addresType'>
+          <mat-radio-button color="primary" [value]="bilingAddressType.Correspondence">Correspondence</mat-radio-button>
+          <mat-radio-button color="primary" [value]="bilingAddressType.Statement">Statement</mat-radio-button>
+          <mat-radio-button color="primary" [value]="bilingAddressType.Billing">Billing</mat-radio-button>
+          <!-- <mat-radio-button color="primary" [value]="bilingAddressType.Other">Others</mat-radio-button> -->
+        </mat-radio-group>
+      </div>
+
+
+
+      <div class="billing_form" fxLayout="column">
+
+        <mat-form-field>
+          <input matInput placeholder="Address 1" [(ngModel)]='addressBillingAddr1'
+            [value]="requestViewData?.selectedprintSettingAddress.addressBillingAddr1">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Address 2" [(ngModel)]='addressBillingAddr2'
+            [value]="requestViewData?.selectedprintSettingAddress.addressBillingAddr2">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Town" [(ngModel)]='addressBillingAddr3'
+            [value]="requestViewData?.selectedprintSettingAddress.addressBillingAddr3">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Country" [(ngModel)]='addressBillingAddr4'
+            [value]="requestViewData?.selectedprintSettingAddress.addressBillingAddr4">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Post Code" [(ngModel)]="addressBillingPostcode"
+            [value]="requestViewData?.selectedprintSettingAddress.addressBillingPostcode">
+        </mat-form-field>
+        <button mat-button class="select" (click)="onPrintSaveAddress()">
+          Save Address
+        </button>
+      </div>
+    </div>
+    <div class="dps-print" fxLayout="column" style="padding: 0px 0px 0px 30px;">
+      <h4>Report Options</h4>
+      <div fxLayout="column" class="dps-print-controllers">
+        <div fxLayout="column">
+          <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowTimeBreakdown',$event.checked)"
+            [ngModel]="requestViewData?.printSettingModel?.chkShowTimeBreakdown" color="primary">
+            Include Time Breakdown Report
+          </mat-checkbox>
+          <div>
+
+            <div>
+              <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowGrandTotal',$event.checked)"
+                [ngModel]="requestViewData?.printSettingModel?.chkShowGrandTotal" class="Total">
+                Show Grand Total
+              </mat-checkbox>
+            </div>
+
+            <div>
+              <mat-checkbox (change)="onCheckBoxValueChange('chkGroupTimeReportByFeeEarner',$event.checked)"
+                [ngModel]="requestViewData?.printSettingModel?.chkGroupTimeReportByFeeEarner" color="primary"
+                class="Total">
+                Group By Fee Earner
+              </mat-checkbox>
+            </div>
+
+          </div>
+        </div>
+        <div class="group">
+
+          <div fxLayout="column">
+            <mat-checkbox (change)="onCheckBoxValueChange('chkShowTimeDetails',$event.checked)"
+              [ngModel]="requestViewData?.printSettingModel?.chkShowTimeDetails" color="primary">
+              Show Time Details
+            </mat-checkbox>
+            <mat-checkbox (change)="onCheckBoxValueChange('chkShowMinutes',$event.checked)" color="primary"
+              [ngModel]="requestViewData?.printSettingModel?.chkShowMinutes">
+              Show Time Minutes
+            </mat-checkbox>
+            <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowValues',$event.checked)"
+              [ngModel]="requestViewData?.printSettingModel?.chkShowValues">
+              Show Time Values
+            </mat-checkbox>
+            <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowTimeNotes',$event.checked)"
+              [ngModel]="requestViewData?.printSettingModel?.chkShowTimeNotes">
+              Show Time Notes
+            </mat-checkbox>
+            <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowTimeDates',$event.checked)"
+              [ngModel]="requestViewData?.printSettingModel?.chkShowTimeDates">
+              Show Time Dates
+            </mat-checkbox>
+          </div>
+        </div>
+        <mat-checkbox [disabled]="disableShowFESubTotals" color="primary"
+          (change)="onCheckBoxValueChange('chkShowFESubTotals',$event.checked)"
+          [ngModel]="requestViewData?.printSettingModel?.chkShowFESubTotals" class="fe-sub">
+          Show F/E Sub Totals
+        </mat-checkbox>
+        <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkPromptForMoneyOnAccount',$event.checked)"
+          [ngModel]="requestViewData?.printSettingModel?.chkPromptForMoneyOnAccount">
+          Prompt for Money On Account
+        </mat-checkbox>
+        <div class="Include" fxLayout="column">
+          <mat-checkbox color="primary" (change)="onCheckBoxValueChange('chkShowDisbBreakdown',$event.checked)"
+            [ngModel]="requestViewData?.printSettingModel?.chkShowDisbBreakdown">
+            Include Disb Breakdown Report
+          </mat-checkbox>
+          <div>
+            <mat-checkbox [disabled]="disableShowPreviousDPB" color="primary"
+              (change)="onCheckBoxValueChange('bIL_ShowPreviousDPB',$event.checked)"
+              [ngModel]="requestViewData?.printSettingModel?.bIL_ShowPreviousDPB" class="paid-bill">
+              Show Previously Paid & Billed
+            </mat-checkbox>
+          </div>
+
+          <mat-checkbox color="primary">
+            Save as Word File
+          </mat-checkbox>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="dps-print-actions">
+    <button mat-button class="default" (click)="onClose()">
+      OK
+    </button>
+    <button mat-button class="default" [disabled]="!isDurty" (click)="onMakeDefaultForAll($event)">
+      Make Default For All Bills
+    </button>
+  </div>
+</div>

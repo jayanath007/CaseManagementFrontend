@@ -1,0 +1,48 @@
+<div fxLayout="row" class="dps-mls-chat-layout">
+  <div class="dps-mls-chat-list">
+    <div>
+      <h3><i class="material-icons">more_vert</i> MyLegalSpace Users</h3>
+    </div>
+    <mat-progress-bar *ngIf="isChatListLoading" mode="indeterminate" value="40"></mat-progress-bar>
+    <div class="dps-white-gray-scroll mls-case-listed" style="overflow:auto;">
+      <dps-mls-chat-list-item *ngFor="let user of users" [user]="user" [selectedUser]="selectedUser"
+        (click)="onSelectUser(user)"></dps-mls-chat-list-item>
+    </div>
+    <div class="dps-recipient-input">
+      <div class="dps-mls-user-setting" fxLayout="row" fxLayoutAlign=" center">
+
+        <span fxFlex="1 1 auto">
+          <span *ngIf="!!selectedUser?.lastUsed && !hideSettingPanel">Last Used
+            {{selectedUser?.lastUsed | date :'dd/MM/yyyy HH:mm'}}</span>
+        </span>
+        <mat-checkbox color="primary" labelPosition="before" [checked]='selectedUser?.canViewMilestones'
+          *ngIf="!hideSettingPanel" (click)="OnChangeCanViewMilestone()">Notify Milestones
+        </mat-checkbox>
+      </div>
+      <dps-recipient-input-manager #recipientInputManager>
+        <dps-recipient-input #recipientInput fxFlex="1 1 auto" [recipients]="[]"
+          [people]="recipientInputManager.people$ | async" lable="Add Users"
+          (addRecipient)="onAddRecipient($event.emailAddress,recipientInput)"
+          [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+          [isGoogle]="recipientInputManager.authHelper.isGoogle()"
+          (searchDirectory)="recipientInputManager.searcheUsers($event)"
+          (addPerson)="recipientInputManager.addPerson($event)">
+        </dps-recipient-input>
+      </dps-recipient-input-manager>
+    </div>
+  </div>
+  <div fxLayout="column" class="dps-mls-chat-content">
+    <mat-progress-bar *ngIf="isChatMessageLoading" mode="indeterminate" value="40"></mat-progress-bar>
+    <div fxFlex="calc(100%-200px)" class="dps-mls-chat-content-body dps-white-gray-scroll" id="mlsChatScroll"
+      #mlsChatScroll>
+      <div class="mls-msg-loader">
+        <button mat-button (click)="onLoadMore()" *ngIf="notLoadedItem">- Load More -</button>
+      </div>
+      <dps-mls-chat-item *ngFor="let message of messages" [message]="message" [user]="user">
+      </dps-mls-chat-item>
+    </div>
+    <div>
+      <dps-mls-compose-message (sendMsg)="onSendMessage($event)" [isSending]="isSending"></dps-mls-compose-message>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="dps_screenedit_layout" fxLayout="column" *ngIf="!isLoading">
+  <mat-toolbar class="dps-toolbar-box-shadow" fxFlex="40px">
+    <!-- <span fxFlex="1 1 auto"></span> -->
+    <div fxFlexAlign="center" class="dps-header">
+      <mat-icon class="dps-toolbar-icon">widgets</mat-icon>
+      <span>Screen Edit</span>
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxFlex="1 1 auto" class="dps_srnedit_container">
+    <dps-screen-edit-tree #tree class="dps-white-gray-scroll" [screenEditComponentTreeData]="treeData" (selectNode)="onChangeSelectedNode($event)"
+      [options]="options"></dps-screen-edit-tree>
+    <dps-screen-edit-content class="dps-white-gray-scroll" [(treeData)]="treeData" [screenEditRuleListData]="screenEditRuleListData"
+      [selectedNode]="selectedNode" [componentStructure]="componentStructure" (close)="onClose()" (reset)="resetDataTree(tree)" (submit)="onSubmit()" style="width:60%">
+    </dps-screen-edit-content>
+  </div>
+</div>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

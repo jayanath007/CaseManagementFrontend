@@ -1,0 +1,153 @@
+@import '~styles/variables.scss';
+
+
+
+.dps-white-gray-scroll {
+  overflow: auto;
+  height: calc(100% - 42px);
+
+}
+
+.dps-total-and-info-header
+{
+  padding:10px 10px 0 10px;
+}
+dps-class-information
+{
+  border: 1px solid #e1e1e1;
+  margin-bottom: 10px;
+
+  
+  ::ng-deep mat-form-field
+  {
+    width: 100%;
+  }
+}
+
+dps-additional-class-information {
+
+  font-size: 14px;
+}
+
+dps-current-total {
+  background: #eff4f8;
+  width: 100%;
+}
+
+
+.information-bottom-left
+{
+
+  ::ng-deep mat-form-field
+  {
+    width: 100%;
+  }
+  dps-representation-order-details
+  {
+    background: #f38519;
+    padding: 21px;
+    height: 100%;
+
+  }
+  .status-information
+  {
+    
+    background: #2d435a;
+    padding: 21px;
+    height: 100%;
+
+
+    mat-checkbox
+    {
+      color: $primary;
+      font-size: 12px;
+      clear: both;
+      display: block;
+    }
+    
+    .status-information-button-set
+    {
+      
+      padding-top: 20px;
+
+      button
+      {
+        padding: 0 10px;
+        line-height: 29px;
+        font-size: $primary-font-size - 2;
+        color: $primary;
+      }
+      .st-inf-close
+      {
+        background: #3b7bb8;
+        color: #fff;
+        float: right;
+      }
+
+      
+      .st-inf-re-open
+      {
+          background: #6e7d88;
+
+      }
+    }
+
+ }
+
+  ::ng-deep .mat-form-field-infix
+  {
+    color: $primary;
+    font-size: 12px;
+
+      .mat-form-field-label,
+      mat-datepicker-toggle
+      {
+        
+        color: $primary;
+      }
+
+      .mat-form-field-underline
+      {
+        background:  $primary;
+      }
+  }
+}
+
+.rate-types
+{
+  font-size: 12px;
+  border: 1px solid #b6cee6;
+  padding: 10px 0 6px 9px;
+  margin: 0 4px 4px 4px;
+  background: #f5faff;
+  align-items: baseline;
+
+  .claims-check
+    {
+      padding:10px 10px 0 0;
+    }
+
+}
+
+
+.drop-edits 
+{
+  padding-left: 15px;
+  margin:0 0 -15px 0 !important;
+}
+.drop-edits dps-editable-dropdown
+{
+  width: auto;
+
+  ::ng-deep .mat-form-field-infix
+  {
+    width: 100% !important; 
+    /* someone override |mat-form-field-infix| on matter-search-views component css which effects for global inputs.
+    This Has to be fixed! untill then I'm overriding it again. - Dilantha */
+
+    .mat-input-element
+    {
+      width: 100%;
+    }
+  }
+}

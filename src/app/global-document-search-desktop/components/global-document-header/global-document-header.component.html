@@ -1,0 +1,21 @@
+<div class="dps-global-search-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="dps-global-header">
+      <div>
+          <mat-icon class="mat-18">public</mat-icon>
+      </div>
+      <div>
+          <div class="dps-global-heading">  Global Document Search</div>
+          <span>Spitfire File Search</span>
+      </div>    
+  </div>
+  <div class="global-document-search" fxLayout="row">
+    <mat-form-field floatLabel="never" >
+      <input matInput type="search" [value]="searchText" matTooltip="Use '+' operator for multiple search text"  matTooltipPosition = "left" (keyup)="onChangeSearchText($event, globalSearch)" #globalSearch  />
+      <button class="file-no-btn" *ngIf="searchText" matSuffix mat-icon-button mat-button  (click) = "onSearchClear()" tabindex="-1" >
+          <mat-icon>close</mat-icon>
+        </button>
+    
+      <mat-icon   (click)="onDocumentSearch()" matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+</div>

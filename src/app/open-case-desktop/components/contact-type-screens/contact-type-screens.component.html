@@ -1,0 +1,33 @@
+<!-- 
+   -->
+
+
+<div class="dps-notification-wrap">
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+
+        <span> </span>
+      </span>
+      <span class="spacer"></span>
+      <mat-icon class="header-icon close" (click)="onClose()">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- general-notification end -->
+
+  <mat-dialog-content class="notification-body dps-white-gray-scroll dps-blue-scroll">
+
+    <div *ngFor="let item of data.screensContactTypeList">
+      <div (click)="onOpenScreen(item)">
+        {{ item.screenTitle}}
+      </div>
+    </div>
+
+  </mat-dialog-content>
+  <!-- general-notification body end -->
+
+  <div class="bottom-controllers">
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onClose()"> close </button>
+  </div>
+  <!-- general-bottom controller end -->
+</div>

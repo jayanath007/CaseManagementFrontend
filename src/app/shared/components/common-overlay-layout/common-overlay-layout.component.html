@@ -1,0 +1,16 @@
+<ng-template #commonOverlay>
+  <div [id]="id" class="dps-common-overlay-layout" (mouseover)="onMouseOver($event)" (mouseout)="onMouseLeave($event)">
+    <mat-card class="dps-mat-card">
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>
+<!-- 
+      <mat-icon class="header-icon" [dpsCommonOverlayTriggerFor]="overlay" triggerWhen="click">
+        mail_outline</mat-icon>
+
+      <dps-common-overlay-layout #overlay [width]="300" [height]="100">
+        <div>aaaaaa</div>
+      </dps-common-overlay-layout> -->

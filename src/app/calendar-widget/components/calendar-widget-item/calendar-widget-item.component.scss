@@ -1,0 +1,231 @@
+@import '~styles/variables.scss';
+
+.widget-item-list {
+  padding-top: 0px;
+}
+
+.dps-widget {
+  width: 100%;
+}
+
+.widget-item {
+  border-bottom: 1px solid #ccd9e2;
+}
+
+.dps-calendar-widget {
+  width: calc(100% - 50px);
+}
+
+.event-content {
+  width: calc(100% - 60px);
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.ref {
+  font-weight: 400;
+  font-size: $primary-font-size - 2;
+  font-weight: bold;
+
+}
+
+.details {
+  /* padding: 2px 0px; */
+  font-size: $secondary-font-size;
+}
+
+.event-time,
+.event-content {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 15px;
+}
+
+.event-content span {
+  padding: 2px 0px;
+}
+
+.event-time {
+  padding-left: 0px;
+}
+
+.dps-sender-avatar span {
+  font-size: $primary-font-size + 4;
+  color: $primary;
+}
+
+.dps-mail-item-date {
+  flex: 0 1 auto;
+  box-sizing: border-box;
+  line-height: 18px;
+}
+
+.dps-unread-mail {
+  font-weight: 700;
+}
+
+.dps_calender_sidenav_icons {
+
+  .dps-calendar-event-icon {
+    font-size: $primary-font-size + 1;
+    display: inline-block;
+    top: 10px;
+    position: relative;
+    color: #276598;
+  }
+
+}
+
+
+
+.widget-item-v7 {
+  width: 145px;
+  display: none;
+
+  .detail-view {
+    padding: 35px 5px 25px 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    .ref {
+
+      word-break: break-all;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      height: 19px;
+      line-height: 20px;
+    }
+
+    .details {
+
+      width: 140px;
+      word-break: break-all;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      height: 18px;
+      line-height: 18px;
+
+
+    }
+
+  }
+
+  .time-view {
+    padding: 28px 10px 10px 10px;
+    justify-content: space-around;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 70px;
+    text-align: center;
+    position: relative;
+
+    .material-icons {
+      position: absolute;
+      left: 56px;
+      top: -19px;
+      padding: 9px;
+      border-radius: 100%;
+      opacity: 1;
+      font-size: 16px;
+      height: 16px;
+      width: 16px;
+
+      .fa-question {
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+        position: relative;
+        left: -16px;
+      }
+    }
+  }
+
+  .time-view .dps-event-time {
+    font-size: 18px;
+  }
+
+  .time-view .dps-event-time-allday {
+    text-align: center;
+    padding: 9px 0 0 0;
+    margin: 0;
+    font-size: 15px;
+    display: block;
+    opacity: 0.7;
+  }
+
+  .time-view .dps-event-time-frame {
+    font-size: 12px;
+
+  }
+
+  .time-block {
+    display: inline-block;
+    line-height: 17px;
+    padding: 14px 7px 0;
+    opacity: 0.7;
+
+  }
+
+  .time-block span {
+    display: block;
+  }
+}
+
+::ng-deep.widget-item-list-v7 {
+
+
+
+  .widget-item {
+    display: none;
+  }
+
+  .widget-item-v7 {
+    display: block;
+  }
+
+
+  ::ng-deep dps-calendar-widget-item:nth-child(2n+0) {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+
+    .detail-view,
+    .time-view .material-icons {
+      background: #f6a06f;
+      color: #6d2f0d;
+
+    }
+
+    .time-view {
+      background: #fa7a33;
+    }
+
+    .dps-mail-item-date {
+      color: #fbbfa5;
+    }
+
+  }
+
+  ::ng-deep dps-calendar-widget-item:nth-child(odd) {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+
+    .detail-view,
+    .time-view .material-icons {
+      background: #95c9ee;
+      color: #134d79;
+    }
+
+    .time-view {
+      background: #4a95cf;
+    }
+
+    .dps-mail-item-date {
+      color: #143753;
+    }
+  }
+}

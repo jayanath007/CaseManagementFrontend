@@ -1,0 +1,24 @@
+<mat-list-item class="dps-team-user-profile">
+
+
+  <div style="width:100%">
+    <div fxLayout="">
+      <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-team-member-avatar" [ngStyle]="{'background-color': loginUser?.userEmail | recipientColorCode}">
+        <span>{{loginUser?.fullName | nameInitials}}</span>
+      </button>
+      <img matListAvatar [hidden]="!showProfileImg" src="{{loginUser?.userEmail | dpsUserImage}}" alt="..." (load)="showProfileImg=true">
+      <!-- <mat-icon mat-list-icon>folder</!-->
+      <div  class="dps-team-lp-top">
+        <span class="dps-name" mat-line>{{loginUser?.fullName}}</span>
+        <span mat-line class="dps-job-name"> {{loginUser?.designation}} </span>
+      </div>
+    </div>
+
+    <div class="dps-team-lp-bottom">
+      <span class="dps-mail-name" mat-line> {{loginUser?.userEmail}}</span>
+      <span mat-line class="dps-telephone"> {{loginUser?.userMobileNo}} </span>
+    </div>
+
+  </div>
+  <mat-divider></mat-divider>
+</mat-list-item>

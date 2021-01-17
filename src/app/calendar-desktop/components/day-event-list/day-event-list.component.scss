@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+
+
+div.day-evnt {
+    height: 100%; 
+    width: 100%;
+}
+
+mat-toolbar{
+    height: 50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 2;
+    background: #e8f6ff;
+    padding-top: 12px;
+}
+
+span {
+    color: $calender-primary;
+    font-weight: 500;
+    font-size: 15px;
+}
+.dps-day-event-item-list{
+    overflow-y: auto;
+    overflow-x: hidden;
+}

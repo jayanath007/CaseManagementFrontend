@@ -1,0 +1,63 @@
+<div class="dps-task-grid">
+  <div fxLayout="column" class="dps-grid" >
+    <div fxLayout="column"  class="dps-white-gray-scroll dps-grid-x">
+      <div fxLayout="column" class="dps-grid-layout-controller" >
+        <div class="row-highlight" dpsIsMobile>
+          <div class="dps-columnheader" >
+            <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+              (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+          <mat-progress-bar *ngIf="caseTaskData?.loading" mode="indeterminate"></mat-progress-bar>
+        </div>
+
+        <div fxLayout="column" [@.disabled]="true" fxFlex="calc(100%-40px)"  class="dps-white-gray-scroll dps-task-panel">
+          <mat-accordion [multi]="false">
+            <mat-expansion-panel [expanded]="item.isExpand" *ngFor="let item of caseTaskData?.data ; let row = index; let isOdd=odd; let isEven=even"
+            [ngClass]="item.isExpand?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+             class="dps-case-task-grid-row mat-elevation-z">
+              <mat-expansion-panel-header class="expansion-panel-case-task" (click)="onSelectRow(item)">
+                <mat-panel-title>
+                  <dps-case-task-grid-row  [columnDef]="columnDef" [rowData]="item">
+                  </dps-case-task-grid-row>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!-- *ngIf="item?.expanded" -->
+              <div fxLayout="row">
+                <div fxLayout="row" class="grid-sub-button-container">
+                  <div class="dps-tasks-grid-button" (click)="onAddTaskClick(item?.data)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon>playlist_add</mat-icon>
+                    </button>
+                    <span>Add</span>
+                  </div>
+                  <div class="dps-tasks-grid-button" (click)="onEditTaskClick(item?.data)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <span>Edit</span>
+                  </div>
+                  <div class="dps-tasks-grid-button" (click)="onCompeteTaskClick(item?.data)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon>done</mat-icon>
+                    </button>
+                    <span>Complete</span>
+                  </div>
+
+                  <div *ngIf="item?.data.action"  class="dps-tasks-grid-button" (click)="onRunCommandClick(item?.data)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon >launch</mat-icon>
+                    </button>
+                    <span>Run Template</span>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

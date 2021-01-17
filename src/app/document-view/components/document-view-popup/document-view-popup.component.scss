@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+mat-toolbar {
+  height: 50px;
+  background: $header-primary;
+  color: $primary;
+  span {
+    font-size: $primary-font-size + 4;
+    padding-left: 16px;
+  }
+}
+.dps-document-view-popup{
+  height: 100%;
+}

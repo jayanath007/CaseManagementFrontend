@@ -1,0 +1,304 @@
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.Payment" fxLayoutAlign="space-around">
+  <div class="probate-data">
+
+
+
+
+    <mat-form-field class="example-full-width">
+      <input matInput #paymentDetail (blur)="onPaymentDetails(paymentDetail.value)" [value]="editDataPayment?.details"
+        placeholder="Details" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [readonly]="true"
+        [ngModel]="currentDate(editDataPayment?.soldDate) | date:'yyyy-MM-dd'"
+        (dateChange)="onPaymentDate($event.value)" placeholder="Payment Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" #paymentAmount dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"
+        (blur)="onPaymentAmount(paymentAmount.value)" [value]="positiveAmount(editDataPayment?.amount)"
+        placeholder="Amount">
+    </mat-form-field>
+  </div>
+
+
+</div>
+
+
+
+
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.Receipt" fxLayoutAlign="space-around">
+  <div class="probate-data">
+    <mat-form-field>
+      <mat-select placeholder="Select" [value]="editDataReciept?.receiptType"
+        (selectionChange)="onChangeRecieptType($event.value)">
+        <mat-option [value]="receiptTypeList.CapitalReceipts">Capital Receipts</mat-option>
+        <mat-option [value]="receiptTypeList.QuotedInvestments">Quoted Investments</mat-option>
+        <mat-option [value]="receiptTypeList.TaxedInterest">Taxed Interest</mat-option>
+        <mat-option [value]="receiptTypeList.UntaxedInterest">Untaxed Interest</mat-option>
+        <mat-option [value]="receiptTypeList.RentIncome">Rent Income</mat-option>
+        <mat-option [value]="receiptTypeList.NonTaxable">Non Taxable</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput #recieptDetail (blur)="onRecieptDetails(recieptDetail.value)" [value]="editDataReciept?.details"
+        placeholder="Details" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" readonly
+        [ngModel]=" currentDate(editDataReciept?.soldDate) | date:'yyyy-MM-dd'"
+        (dateChange)="onRecieptDate($event.value)" placeholder="Date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" #recieptAmount dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"
+        (blur)="onRecieptAmount(recieptAmount.value)" [value]="positiveAmount(editDataReciept?.amount)"
+        placeholder="Amount">
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- Pecuniary Distribution -->
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.DistributionPecuniary" fxLayoutAlign="space-around">
+  <mat-card class="benificiary-select mat-elevation-z">
+
+    <mat-card-header>
+      <mat-card-title>Beneficiary</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions align="start">
+      <div fxLayoutGap="1em" class="dps-tab-container-btn">
+
+        <button class="dps-save" mat-stroked-button color="primary" (click)="onSelectBeneficiary()"> Select </button>
+
+        <button class="dps-cancel" mat-stroked-button color="primary" (click)="onRemoveBeneficiary()">Remove</button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+
+
+
+
+  <div class="probate-data">
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="letterTitle">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="company">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="address">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="postCode">
+    </mat-form-field>
+
+    <!-- <mat-form-field class="example-full-width">
+      <input matInput #pecuniaryDetail disabled (blur)="onPecuniaryDetails(pecuniaryDetail.value)"
+        [value]="editDataPecuniary?.details" placeholder="">
+    </mat-form-field> -->
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" readonly
+        [ngModel]="currentDate(editDataPecuniary?.date) | date:'yyyy-MM-dd'"
+        (dateChange)="onPecuniaryDate($event.value)" placeholder="Payment Date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" #pecuniaryAmount dpsNumbersOnlyWithDecimals dpsNumbersOnlyWithDecimals
+        [noOfdecimalsPoint]="2" [maxlength]="15" (blur)="onPecuniaryAmount(pecuniaryAmount.value)"
+        [value]="positiveAmount(editDataPecuniary?.amount)" placeholder="Amount">
+    </mat-form-field>
+
+  </div>
+</div>
+
+<!-- Specific Distribution -->
+
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.DistributionResiduary" fxLayoutAlign="space-around">
+
+
+  <mat-card class="benificiary-select mat-elevation-z">
+
+    <mat-card-header>
+      <mat-card-title>Beneficiary</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions align="start">
+      <div fxLayoutGap="1em" class="dps-tab-container-btn">
+        <button class="dps-save" mat-stroked-button color="primary" (click)="onSelectBeneficiary()">Select</button>
+        <button class="dps-cancel" mat-stroked-button color="primary" (click)="onRemoveBeneficiary()">Remove</button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="probate-data">
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="letterTitle">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="company">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="address">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="postCode">
+    </mat-form-field>
+    <!-- 
+    <mat-form-field class="example-full-width">
+      <input matInput #residuaryDetail disabled (blur)="onResiduaryDetails(residuaryDetail.value)" [value]=""
+        placeholder="">
+    </mat-form-field> -->
+    <mat-form-field>
+      <mat-select placeholder="Type" [value]="editDataResiduary?.details"
+        (selectionChange)="onChangeResiduaryType($event.value)">
+        <mat-option [value]="residuaryType.FinalDistribution">Final Distribution</mat-option>
+        <mat-option [value]="residuaryType.IntrimDistribution">Interim Distribution</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="recType === residuaryType.FinalDistribution">
+      <span>Percentage Outstanding {{outstandingPrecent(editDataResiduary?.outstandingPercentage)}}%</span>
+      <mat-form-field class="example-full-width">
+        <input matInput #residuaryPercent (blur)="onResiduaryPercent(residuaryPercent.value)"
+          [value]="editDataResiduary?.percent" placeholder="Percent">
+      </mat-form-field>
+    </div>
+    <div *ngIf="recType === residuaryType.IntrimDistribution">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" readonly
+          [ngModel]="currentDate(editDataResiduary?.date) | date:'yyyy-MM-dd'"
+          (dateChange)="onResiduaryDate($event.value)" placeholder="Date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" #residAmount dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"
+          (blur)="onResiduaryAmount(residAmount.value)" [value]="positiveAmount(editDataResiduary?.amount)"
+          placeholder="Amount">
+      </mat-form-field>
+
+    </div>
+
+    <!-- <mat-form-field class="example-full-width">
+        <input matInput #residuaryDetail (blur)="onResiduaryDetails(residuaryDetail.value)"
+          [value]="editDataResiduary?.description"
+          placeholder="Details">
+      </mat-form-field> -->
+
+
+  </div>
+</div>
+
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.Sold " fxLayoutAlign="space-around">
+  <div class="probate-data">
+
+
+    <mat-form-field *ngIf="title === 'Sale of Share'" class="example-full-width">
+      <input matInput type="text" #noOfShares dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"
+        (blur)="onNoOfShares(noOfShares.value)" [value]="positiveAmount(editDataPayment?.noOfShares)"
+        placeholder="No Shares">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput #paymentDetail (blur)="onPaymentDetails(paymentDetail.value)" autocomplete="off"
+        [value]="editDataPayment?.details" placeholder="Details" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" readonly
+        [ngModel]="currentDate(editDataPayment?.soldDate) | date:'yyyy-MM-dd'"
+        (dateChange)="onPaymentDate($event.value)" placeholder="{{nameofDate}}">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" #paymentAmount dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"
+        (blur)="onPaymentAmount(paymentAmount.value)" [value]="positiveAmount(editDataPayment?.amount)"
+        placeholder="{{nameofAmount}}">
+    </mat-form-field>
+  </div>
+
+
+</div>
+<div fxLayout="row wrap" *ngIf="openFrom === probateDealtBy.Legacy" fxLayoutAlign="space-around">
+
+
+  <mat-card class="benificiary-select mat-elevation-z">
+
+    <mat-card-header>
+      <mat-card-title>Beneficiary</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions align="start">
+      <div fxLayoutGap="1em" class="dps-tab-container-btn">
+        <button class="dps-save" mat-stroked-button color="primary" (click)="onSelectBeneficiary()">Select</button>
+        <button class="dps-cancel" mat-stroked-button color="primary" (click)="onRemoveBeneficiary()">Remove</button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="probate-data">
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="letterTitle">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="company">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="address">
+    </mat-form-field>
+
+    <mat-form-field class="readonly">
+      <!-- <mat-label>Probate Data</mat-label> -->
+      <input matInput placeholder=" " readonly [value]="postCode">
+    </mat-form-field>
+
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput #lagacyDetail (blur)="onLagacyDetails(lagacyDetail.value)" [value]="editDataResiduary?.details"
+          placeholder="Details" autocomplete="off">
+      </mat-form-field>
+
+      <span>Percentage Outstanding {{100 - legacyPercentage}}%</span>
+      <mat-form-field class="example-full-width">
+        <input type="number" matInput #residuaryPercent (blur)="onResiduaryPercent(residuaryPercent.value)"
+          [value]="editDataResiduary?.percent" placeholder="Percent">
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div fxLayoutGap="1em" class="dps-tab-container-btn"> <button [disabled]="isLoading" class="dps-save" mat-stroked-button
+    color="primary" (click)="onSubmitData()">Save</button>
+  <button class="dps-cancel" [disabled]="isLoading" mat-stroked-button color="primary"
+    (click)="onCancel()">Cancel</button></div>

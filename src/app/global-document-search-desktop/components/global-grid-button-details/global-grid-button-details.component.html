@@ -1,0 +1,28 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-global-grid-button" (click)="OnOpenCaseClick()" fxLayout="column"
+    *ngIf="(moduleIsActive(module.Matter) | async) && (rowData?.matterRef)">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span *ngIf="!(getSettingValue(settingKey.IsPlotUser)| async)">Open Case</span>
+    <span *ngIf="(getSettingValue(settingKey.IsPlotUser)| async)">Open Plot</span>
+  </div>
+  <div class="dps-global-grid-button" (click)="OnShareClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+    <span>Share</span>
+  </div>
+  <div class="dps-global-grid-button" (click)="OnAttachToMatterClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>file_copy</mat-icon>
+    </button>
+    <span>Move File</span>
+  </div>
+  <div class="dps-global-grid-button" (click)="OnClickGridRow()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>credit_card</mat-icon>
+    </button>
+    <span>Document View</span>
+  </div>
+</div>

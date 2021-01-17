@@ -1,0 +1,28 @@
+
+@import '~styles/variables.scss';
+
+.row-highlight{
+    background: #7fb5e6;
+    height: 35px;
+    font-family: $primary-font-stack;
+
+}
+.dps-grid-min-width{
+    min-width: 1000px;
+    height:100%;
+}
+.dps-grid-x {
+    height: 100%;
+    overflow-x: auto;
+  }
+mat-paginator {
+    height: 50px !important;
+  }
+  
+  .footer-shadow{
+      box-shadow:0 0px 0px rgba(0,0,0,0.16), 0 -1px 6px rgba(0,0,0,0.16);
+      z-index:2;
+    }
+    .dps-item-grid-content{
+        overflow-y: scroll;
+    }

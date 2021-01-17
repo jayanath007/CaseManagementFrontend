@@ -1,0 +1,32 @@
+<div class="dps-ledger-card-main-contentainer" fxLayout="column">
+
+  <mat-card class="dps-ledger-card-main-header">
+    <mat-card-content>
+      <div class="dps-profile">
+        <dps-ledger-card-header [allMatterCount]="allMatterCount" [matterData]="matterData"
+          (openMatterSearch)="onOpenMatterSearch($event)" (openAllMattersPopup)="onOpenAllMattersPopup()"
+          (openMatter)="onOpenMatter($event)" (resetData)="onResetData()"></dps-ledger-card-header>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="grid-contents" fxFlex="calc(100%-129px)">
+    <div class="grid-wrapper-main" fxLayout="column">
+      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <dps-ledger-card-data-content [matterData]="matterData" [currencyLabel]="currencyLabel"
+        [selectedTab]="selectedTab" [matterBalances]="matterBalances" [currencyView]="currencyView"
+        [allGridFilterData]="allGridFilterData" [allGridData]="allGridData" [billGridData]="billGridData"
+        [disbsGridData]="disbsGridData" [gbpGridData]="gbpGridData" [ddaGridData]="ddaGridData"
+        [client1GridData]="client1GridData" [client2GridData]="client2GridData" [client3GridData]="client3GridData"
+        [eChitGridData]="eChitGridData" (changeSelectedTab)="onChangeTap($event)"
+        (updateAllGridFilter)="onUpdateAllGridFilter($event)" (allGridViewChange)="onAllGridViewChange($event)"
+        (billGridViewChange)="onBillGridViewChange($event)" (disbsGridViewChange)="onDISBSGridViewChange($event)"
+        (gbpGridViewChange)="onGBPGridViewChange($event)" (ddaGridViewChange)="onDDAGridViewChange($event)"
+        (client1GridViewChange)="onClient1GridViewChange($event)"
+        (client2GridViewChange)="onClient2GridViewChange($event)"
+        (client3GridViewChange)="onClient3GridViewChange($event)" (gridRefresh)="onGridRefresh()"
+        (updatePeriodFilter)="onUpdatePeriodFilter($event)" (printLedgerCard)="onPrintLedgerCard()"
+        (openBillingGuide)="onOpenBillingGuide()" (openPreTransactionPopup)="onOpenPreTransactionPopup()">
+      </dps-ledger-card-data-content>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,158 @@
+@import '~styles/variables.scss';
+
+.dps-calendar-sidenav-end {
+  width: 280px;
+  background: $primary;
+}
+
+.dps-calendar-sidenav-start {
+  width: 250px;
+  background: $content-background;
+}
+
+.dps-calendar-min-sidenav {
+  min-width: 0px;
+  width: 68px;
+  background-color: $content-background;
+}
+
+.dps-calendar-content {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $primary;
+}
+
+// .dps-calendar-content-forground {
+//   padding: 0px 20px 20px 2px;
+//   z-index: 1
+// }
+
+// .dps-calendar-content-background {
+//   width: 100%;
+//   background-color: $content-background;
+//   z-index: 0;
+//   position: absolute;
+// }
+
+// .dps-calendar-content-background div {
+//   width: 100%;
+//   height: 60px;
+//   background-color: $calender-primary;
+// }
+
+// .dps-calendar-content-forground mat-card {
+//   padding: 0px;
+// }
+
+dps-day-event-list {
+  height: 100%;
+  width: 100%;
+}
+
+.dps_calender_view {
+  overflow-y: auto;
+}
+
+.dps-calendar-mini-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.dps-mail-router-links button {
+  min-width: 0;
+}
+
+.dps-mail-router-links button.dps-mail-router-selected-link,
+.dps-mail-router-links mat-list-item.dps-mail-router-selected-link {
+  color: #e8f6ff;
+  background: $calender-primary;
+}
+
+.dps-mail-router-links button,
+.dps-mail-router-links mat-list-item {
+  color: #666;
+}
+
+.dps-mail-router-links mat-list-item mat-icon {
+  padding-left: 7px;
+}
+
+.dps_calender_container {
+  background-color: $calender-primary;
+}
+
+.dps_calender_container-list {
+  height: 56px !important;
+  color: #e8f6ff;
+}
+
+.dps_calender-list {
+  font-size: $primary-font-size + 6 !important;
+  color: #e8f6ff;
+}
+
+button.dps_calender-button {
+  font-size: $primary-font-size + 6;
+}
+
+mat-list-item.dps-onnew-item {
+  height: 56px
+}
+
+button.dps-selected-cal-list {
+  margin-right: 20px;
+  background: #cbe9fd !important;
+  color: $calender-primary;
+}
+
+dps-selected-cal-maticon {
+  color: $calender-primary;
+}
+
+mat-list-item.dps_calender_item {
+  padding-top: 16px;
+}
+
+i.fa-angle-double-right {
+  font-size: $primary-font-size + 6;
+  color: $primary;
+  padding-left: 12px;
+}
+
+mat-icon.dps_calender_add {
+  font-size: 20px;
+  color: $primary;
+  padding-left: 7px;
+}
+
+button.dps_add_event {
+  background: #e8f6ff;
+  color: $calender-primary;
+  margin: -10px 0px 0px 0px;
+}
+
+.dps-calender {
+  background: #e8f6ff;
+  border-bottom: 1px solid #cbe2f1;
+  height: 284px;
+}
+
+.dps-calender mat-calendar {
+  position: relative;
+  top: -15px;
+
+  ::ng-deep {
+    .dps-date-highlight {
+      background-color: #8cadc7;
+
+      .mat-calendar-body-today.mat-calendar-body-selected {
+        box-shadow: inset 0 0 0 1px #8cadc7;
+      }
+    }
+
+  }
+}
+.dps-calender-header {
+  height: 60px;
+}

@@ -1,0 +1,89 @@
+<div class="dps-team-user-year-activity" fxLayout="column">
+
+  <dps-team-user-grid-row *ngIf="eventYearSummery?.allDayEvents.length > 0" class="dps-user-activity-content"
+    [eventYearSummery]="eventYearSummery">
+  </dps-team-user-grid-row>
+
+
+
+
+  <div class="dps-team-chart" *ngIf='!!holidayadgedDebData'>
+      <mat-card>
+
+
+          <img align="middle" class="indicator-icon" src="/assets/legacy-dashboard-images/sick.png">
+          <div class="dps-team-card-content dps-sick-section " fxLayout="row wrap" fxLayoutGap="35px">
+    
+            <div fxLayout="column wrap" class="">
+              <span class="top-header">Sick</span>
+              <span class="primary-header">Summary - Year</span>
+    
+            </div>
+            <div fxLayout="column wrap">
+              <span class="secondary-header">{{ sickDays }}</span>
+            </div>
+          </div>
+          <!-- 
+           <div class="bb dps-sick-indidator-outer">
+    
+             <span class="dps-sick-indidator" > SICK</span> 
+             <span class="dps-sick-indidator"> {{sickDays}} </span> 
+            </div> -->
+    
+          <!-- <dps-pie-chart [chartOptions]="pieChartOptions" [pieChartDataset]="adgedDebData" [chartHeight]="piechartHeight"
+            [borderColor]="'#fff'"></dps-pie-chart> -->
+    
+        </mat-card>
+    <mat-card>
+
+      <dps-pie-chart style="height: 310px;
+      display: block;" [chartOptions]="pieChartOptions" [pieChartDataset]="holidayadgedDebData"
+        [chartHeight]="piechartHeight" [borderColor]="'#fff'"></dps-pie-chart>
+
+      <div style="height: calc(100% - 310px);" class="dps-team-card-content dps-holiday-section" fxLayout="row wrap" fxLayoutGap="35px">
+        <div fxLayout="column wrap">
+          <span class="primary top-header">Holiday</span>
+          <span class="primary primary-header">Summary - Year</span>
+
+        </div>
+
+        <div fxLayout="column wrap">
+          <span class="primary secondary-header">{{holidayadgedDebData.data[0].amount}}</span>
+        </div>
+      </div>
+
+    </mat-card>
+
+
+    <mat-card style="display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;">
+
+
+      <img align="middle" class="indicator-icon" src="/assets/legacy-dashboard-images/training.png">
+      <div class="dps-team-card-content dps-training-section" fxLayout="row wrap" fxLayoutGap="35px">
+
+        <div fxLayout="column wrap" >
+          <span class="primary top-header">Training</span>
+          <span class="primary primary-header">Summary - Year</span>
+
+        </div>
+        <div fxLayout="column wrap">
+          <span class="primary secondary-header">{{ trainning }}</span>
+        </div>
+      </div>
+
+
+      <!-- <dps-pie-chart [chartOptions]="pieChartOptions" [pieChartDataset]="trainningdgedDebData" [chartHeight]="piechartHeight"
+      [borderColor]="'#fff'"></dps-pie-chart> -->
+      <!-- <dps-team-user-bar-chart [chartOptions]="matterBarChartOptions" [chartHeight]="chartHeight" [chartType]="matterOpenChart"
+        [barChartDataset]="barChartInfo.data" [isloading]="barChartInfo.isLoading" [lineChartColors]="lineChartColors"> -->
+      <!-- </dps-team-user-bar-chart> -->
+    </mat-card>
+  
+
+  </div>
+
+
+
+</div>

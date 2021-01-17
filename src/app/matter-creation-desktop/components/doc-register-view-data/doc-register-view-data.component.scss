@@ -1,0 +1,8 @@
+@import '~styles/variables.scss';
+
+.row-data {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+

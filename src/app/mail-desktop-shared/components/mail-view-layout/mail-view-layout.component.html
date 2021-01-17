@@ -1,0 +1,11 @@
+<div class="dps-mail-view-layout" fxLayout="column" [ngStyle]="{'min-width': ((!emailReadingPaneMode||emailReadingPaneMode==='right')?'500px':'600px')}">
+  <dps-mail-view-header fxFlex="50px" [item]="item" (next)="onNext()" (previous)="onPrevious()" (close)="onClose()" (itemReadUnread)="onItemReadUnread($event)"
+    (itemFlag)="onItemFlag($event)" (itemDelete)="onItemDelete($event)" (openUrlPoup)="onOpenUrlPoup($event)" (attachToNewMail)="onAttachToNewMail($event)"
+    [timeZone]="timeZone" [emailReadingPaneMode]="emailReadingPaneMode" [companyCode]="companyCode">
+  </dps-mail-view-header>
+  <dps-mail-view-content fxFlex="calc(100% - 50px)" [item]="item" *ngIf="item" (itemDelete)="onItemDelete($event)" (meetingResponse)="onMeetingResponse($event)"
+    [timeZone]="timeZone" [companyCode]="companyCode" (openAttachement)="onOpenAttachement($event)" (replyForward)="onReplyForward($event)"
+    (downloardFileAttachment)="onDownloardFileAttachment($event)" (viewDpsFile)="onViewDpsFile($event)" (removeFromCalendar)="onRemoveFromCalendar($event)"
+    openFrom="mail">
+  </dps-mail-view-content>
+</div>

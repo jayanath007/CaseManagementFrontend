@@ -1,0 +1,101 @@
+@import '~styles/variables.scss';
+.grid-data{
+    line-height: 36px;
+}
+.grid-data:last-child{
+    background-image: none;
+}
+
+.row-data:first-child{
+    border-left:1px solid #afafaf;;
+}
+
+.row-data{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 36px !important;
+}
+.row-data{ 
+    padding: 0px 6px;
+    font-size: $primary-font-size - 2;
+    z-index: 10;
+    border-right: 1px solid #d4dae0;
+    box-sizing: border-box;    
+}
+
+div.row-data-inoput {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+
+    input {
+        width: 100%;
+    }
+}
+
+.row-data.input-data{
+    padding: 4px 5px 0px 4px;
+}
+.row-data.input-data .input-wrapper{
+    border: 1px solid #d4e2e8;
+}
+.workflow-rule-row-selected .row-data.input-data .input-wrapper{
+    background: #eef6ff;
+}
+.row-data.input-data input{
+    vertical-align: middle;
+    height: 30px;
+    display: block;
+    width: 100%;
+    padding-left: 2px;
+}
+.workflow-rule-row-selected{
+   
+    background-color: #bfddff;
+}
+
+button.wrkflow-action-btn {
+    height: 35px; 
+    width:35px;
+
+    mat-icon {
+        color: $workflow-action-btn;
+    }
+}
+
+mat-icon.wrflw_equation {
+    color: $toolbar-background !important;
+    font-weight: 700;
+    font-size: $primary-font-size + 10;
+    vertical-align: top;   
+}
+
+mat-icon.wrflw_equation_option {
+    vertical-align: middle !important;
+    font-size: $primary-font-size + 6;
+}
+
+span.wrflw_equation_content {
+font-size: 12px;
+}
+
+span.wrkflow_rule_row_delete mat-icon {
+    position: absolute;
+    /* left: 1.4%; */
+    top: 2px;
+    color: #da5252;
+    font-size: 17px;
+    cursor: pointer;
+    z-index: 53;
+  }
+
+  @media only screen and (min-width: 1366px) and (max-height: 768px) {
+
+    span.wrkflow_rule_row_delete mat-icon {
+        /* left:26px; */
+    }
+
+
+
+  }

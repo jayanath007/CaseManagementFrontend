@@ -1,0 +1,36 @@
+<mat-list-item dpsDroppable [dropZone]="'mailFolder-' + item.owner.toLowerCase()" (onDrop)="onDrop($event)"
+  (onDragEnter)="onDragEnter($event)" *ngIf="item.editMode !== FolderEditMode.Rename" class="dps-folder-list-item"
+  [ngClass]="{'dps-folder-item-selected':(item.selected && !isGroupMode),'dps-folder-item-unselected':!item.selected}"
+  (contextmenu)="contextmenuOpen($event)" (click)="selectItem($event)">
+  <i [ngStyle]="{'padding-left.px': (levels-1) * 10}" *ngIf="item.data.childFolderCount > 0" (click)="toggle($event)"
+    [ngClass]="item.expanded?'fa-angle-up':'fa-angle-down'" class="fa dps-folder-item-toggle" aria-hidden="true"></i>
+  <span class="dps-folder-item-name"
+    [ngStyle]="{'padding-left.px': (item.data.childFolderCount > 0? 0 : ((levels-1) * 10)+20)}">{{item.data.displayName}}</span>
+  <span fxFlex="1 1 auto"></span>
+  <span class="dps-folder-item-totalitemcount"
+    *ngIf="item.data.wellKnownName && (item.data.wellKnownName=='drafts'||item.data.wellKnownName=='junkemail') && item.data.totalItemCount>0">{{item.data.totalItemCount}}</span>
+  <span class="dps-folder-item-unreaditemcount"
+    *ngIf="(item.data.wellKnownName==null||(item.data.wellKnownName!='drafts'&& item.data.wellKnownName!='junkemail')) && item.data.unreadItemCount>0">{{item.data.unreadItemCount}}</span>
+  <span [matMenuTriggerFor]="contextMenu"></span>
+  <mat-menu #contextMenu="matMenu" dense>
+    <button class="dps-folder-action" mat-menu-item (click)="create()">Create subfolder</button>
+    <button class="dps-folder-action" *ngIf="!item.data.wellKnownName" mat-menu-item (click)="delete()">Delete
+      folder</button>
+    <button class="dps-folder-action" *ngIf="!item.data.wellKnownName" mat-menu-item (click)="rename()">Rename
+      folder</button>
+    <button class="dps-folder-action" *ngIf="item.owner==='me'" mat-menu-item
+      (click)="permissions()">Permissions...</button>
+    <button class="dps-folder-action" mat-menu-item (click)="onRefresh()" *ngIf="item.selected && !isGroupMode">Refresh
+      Items</button>
+  </mat-menu>
+</mat-list-item>
+<mat-list-item disableRipple *ngIf="item.editMode === FolderEditMode.Rename"
+  [ngStyle]="{'padding-left.px': (levels-1) * 10}">
+  <input #renameInput (keydown)="editingKeyPress($event, FolderEditMode.Rename, $event.target.value)"
+    [value]="item.data.displayName" (blur)="editingBlur($event, FolderEditMode.Rename, $event.target.value)">
+</mat-list-item>
+<mat-list-item disableRipple *ngIf="item.editMode === FolderEditMode.Create"
+  [ngStyle]="{'padding-left.px': (levels) * 10}">
+  <input #createInput (keydown)="editingKeyPress($event, FolderEditMode.Create, $event.target.value)"
+    (blur)="editingBlur($event, FolderEditMode.Create, $event.target.value)">
+</mat-list-item>

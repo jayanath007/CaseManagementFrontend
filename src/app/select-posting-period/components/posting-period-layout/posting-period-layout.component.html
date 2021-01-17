@@ -1,0 +1,34 @@
+<div class="dps-posting-period-layout">
+  <div>
+    <dps-common-popup-header icon="timelapse" title="Select Posting Period" buttons="close" [loading]="dataLoading"
+      iconColor="#a9c0f6" titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+    </dps-common-popup-header>
+  </div>
+  <div class="dps-billing-header">
+    <p>Multiple transaction periods are open
+      Please select a transaction period for posting</p>
+  </div>
+  <div class="dps-posting-period-list dps-white-gray-scroll">
+    <mat-list>
+      <div>
+        <div class="dps-posting-list"
+          [ngClass]="selectedPostingPeriod?.tP_ID === item?.tP_ID?'dps-selected':item?.tP_ID===selectedRow?.tP_ID?'posting-period-row-selected':''"
+          *ngFor="let item of postingPeriodList" dpsClick (dpsClick)="onRowSelect(item)"
+          (dpsDblClick)="onRowDblClickUpdate(item)">
+          {{item?.tP_ID}} [{{item?.tP_Start| date:'dd-MM-yyyy'}} - {{item?.tP_End| date:'dd-MM-yyyy'}}]
+        </div>
+      </div>
+    </mat-list>
+  </div>
+  <div class="dps-transaction">
+    <p>Current transaction periods is {{selectedPostingPeriod?.tP_ID || 0}}</p>
+  </div>
+  <div class="dps-posting-period-action">
+    <button mat-button [disabled]="!(selectedRow?.tP_ID)" (click)="onRowSelectUpdate()" class="select">
+      select
+    </button>
+    <button mat-button (click)="onClose($event)" class="cancel">
+      cancel
+    </button>
+  </div>
+</div>

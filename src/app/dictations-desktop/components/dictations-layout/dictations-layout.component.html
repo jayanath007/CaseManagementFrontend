@@ -1,0 +1,54 @@
+<dps-module-layout class="dps-team-primary-header dps-user-movement-layout" moduleColor="dps-dictation-primary"
+  layoutHeaderHeight="82px" contentHeaderHeight="53px">
+
+  <div fxLayout="row" fxLayoutGap="2em" dps-layout-header class="secondary-header">
+    <div fxLayoutGap="2em" class="dps-grid-primary-header-outer" fxLayout="row">
+      <div *ngIf="usetType?.level ===UserType.typist" class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(20)}}</span></h3>
+        <span>To do</span>
+      </div>
+      <div *ngIf="usetType?.level === UserType.typist" class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(30)}}</span></h3>
+        <span>Drafts</span>
+      </div>
+      <div *ngIf="usetType?.level ===UserType.typist" class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(50)}}</span></h3>
+        <span>To Print</span>
+      </div>
+      <div *ngIf="usetType?.level ===UserType.author || usetType?.level ===UserType.manager"
+        class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(20)}}</span></h3>
+        <span>Sent To</span>
+      </div>
+      <div *ngIf="usetType?.level ===UserType.author || usetType?.level ===UserType.manager"
+        class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(40)}}</span></h3>
+        <span>To Check</span>
+      </div>
+      <div
+        *ngIf="usetType?.level ===UserType.author || usetType?.level ===UserType.manager || usetType?.level ===UserType.typist"
+        class="dps-grid-primary-header" fxLayout="column">
+        <h3><span>{{getSummaryCount(60)}}</span></h3>
+        <span>Completed</span>
+      </div>
+    </div>
+  </div>
+
+  <dps-dictation-layout-content [matterRef]="matterRef" [dictationGridData]="dictationGridData"
+    [authorList]="authorList" [usetType]="usetType" (playDictations)="onPlayDictations($event)"
+    (openWordFileDictation)="onOpenWordFileDictation($event)" (competedJobDictations)="onCompetedJobDictations($event)"
+    (openCaseDictation)="onOpenCaseDictation($event)" (finishJobUpdate)="onFinishJobUpdate($event)"
+    (jobStageChange)="onJobStageChange($event)" (jobsForChange)="onJobsForChange($event)"
+    (openDictatioProfiling)="onOpenDictatioProfiling($event)" (rowExpand)="GridrowExpand($event)"
+    (authorChange)="onAuthorChange($event)" (uploadSelectedFile)="onUploadSelectedFile($event)"
+    (openCaseFile)="onOpenCaseFile($event)" (openDictationPdf)="onPdfFileClick($event)" (refreshGrid)="onRefresh()"
+    (changePage)="onChangePage($event)" [dictationGridFilters]="dictationGridFilters" [loading]="loading"
+    [myJobList]="myJobList" [jobStageList]="jobStageList" [coloumnDef]="coloumnDef" [paginatorDef]="paginatorDef"
+    dps-layout-content>
+  </dps-dictation-layout-content>
+
+</dps-module-layout>
+
+
+<!-- 
+  <button (click)="onClick()">player</button> -->

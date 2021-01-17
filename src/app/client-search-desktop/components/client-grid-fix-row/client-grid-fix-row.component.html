@@ -1,0 +1,52 @@
+<div fxLayout="row" class="grid-data" *ngIf="!isPlotUser">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)"
+    [ngClass]="{'highlightoggle' : isHighlighToggle && !ClientRowData?.expanded}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{ClientRowData.data.clientBranch | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data ref" [fxFlex]="getFxFlexProperty(2)">
+    <a href="#" (click)="onOpenClientCreationPopup($event)"
+      innerHTML="{{ClientRowData.data.clientRef | seacrhTextHighligh : searchText}}"></a>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{ClientRowData.data.clientName  | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+    innerHTML="{{ClientRowData.data.clientCompanyName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+    innerHTML="{{ClientRowData.data.firstName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)"
+    innerHTML="{{ClientRowData.data.lastName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data dps_client_dob" [fxFlex]="getFxFlexProperty(7)"
+    innerHTML="{{ClientRowData.data.dateOfBirth | date :'dd/MM/yyyy' | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(8)"
+    innerHTML="{{ClientRowData.data.feeEarner | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(9)"
+    innerHTML="{{ClientRowData.data.fullAddress | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(10)"
+    innerHTML="{{ClientRowData.data.postCode | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(11)"
+    innerHTML="{{ClientRowData.data.matterCount.toString() | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data telephone" [fxFlex]="getFxFlexProperty(12)"
+    innerHTML="{{ClientRowData.data.telephone | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(13)"
+    innerHTML="{{ClientRowData.data.email | seacrhTextHighligh : searchText}}"></div>
+</div>
+<div *ngIf="isPlotUser">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)"
+    [ngClass]="{'highlightoggle' : isHighlighToggle && !ClientRowData?.expanded}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(1)"
+    innerHTML="{{ClientRowData.data.clientBranch | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data ref" [fxFlex]="getFxFlexProperty(2)">
+    <a href="#" (click)="onOpenClientCreationPopup($event)"
+      innerHTML="{{ClientRowData.data.clientRef | seacrhTextHighligh : searchText}}"></a>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)"
+    innerHTML="{{ClientRowData.data.clientName  | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)"
+    innerHTML="{{ClientRowData.data.clientCompanyName | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"
+    innerHTML="{{ClientRowData.data.matterCount.toString() | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)"
+    innerHTML="{{ClientRowData.data.feeEarner | seacrhTextHighligh : searchText}}"></div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(7)"
+    innerHTML="{{ClientRowData.data.fullAddress | seacrhTextHighligh : searchText}}"></div>
+</div>

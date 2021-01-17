@@ -1,0 +1,42 @@
+<div class="screen-edit-wrapper" [ngClass]="{
+  'left-panel-active': !leftCollapse,
+  'left-panel-deactive': leftCollapse,
+  'right-panel-active': !rightCollapse,
+  'right-panel-deactive': rightCollapse
+  }" fxLayout="row">
+
+  <div class="ov-list-wrap">
+    <dps-ov-list [selectedOvItem]="selectedOvItem" fxLayout="column" (onExportOvList)="exportOvList($event)" [screenDefinition]="formView?.screenDefinition" (onComponentChange)="onItemChange($event)"
+      (onOvChange)="ovChange($event)" (onSearchTextChange)="searchTextChange($event)" [ovItemList]="ovItemList" [seachText]="searchText"></dps-ov-list>
+
+  </div>
+
+
+  <div class="screen-canvas-wrapper">
+    <dps-header-bar 
+    
+    (onCheckin)="doCheckin($event)" 
+    (onDiscardCheckin)="doDiscardCheckin($event)" 
+
+    (onExportXMLList)="exportXMLList($event)"  (onLogicDodumentView)="logicDodumentViewOpen($event)" (onSave)="save($event)" (onLeftCollapse)="leftCollapseMenu()"
+      (onRightCollapse)="rightCollapseMenu()" [rightCollapse]="rightCollapse" [leftCollapse]="leftCollapse" [curentIndex]="screenDesingner?.curentIndex"
+      [screenIds]="screenDesingner?.screenIds" [screenLogicDocuments]="screenLogicDocuments" [screenDefinition]="formView?.screenDefinition" (onClose)="closeDialog()" (onPrev)="prev($event)"
+      (onNext)="next($event)">
+    </dps-header-bar>
+
+    <div class="screen-edit-eliment-container dps-white-gray-scroll dps-blue-scroll">
+
+
+      <dps-screen-view-container (onAxisChange)="axisChange($event)" (onLogicDodumentView)="logicDodumentViewOpen($event)" (ondisplayTabOnRightBar)=displayTabOnRightBar() [curentIndex]="screenDesingner?.curentIndex"
+        dpsDroppable dropZone="screenEditViewContainer" (onDrop)="onDrop($event)" [formView]="formView" (onComponentChange)="onItemChange($event)"
+        [screenDesingner]="screenDesingner">
+      </dps-screen-view-container>
+
+    </div>
+
+  </div>
+  <dps-right-bar [activeTab]="screenDesingner.activeTab" (onSave)="save($event)" (onCreateLookup)="createLookup($event)" [screenComponentList]="screenDesingner?.formView?.screenContanerComponentList"
+    [screenDesingnerState]="screenDesingner?.ScreenDesingnerState" [masageCount]="masageCount" (onComponentChange)="onItemChange($event)"
+    [lookupFiles]="lookupFiles" (onScreenDefinitionChange)="onScreenTitleChange($event)" (onGetlookUpData)="getlookUpData($event)"
+    [screenDefinition]="formView?.screenDefinition" [selectedContanerComponent]="selectedContanerComponent" (changeSelectedTab)="onChangeSelectedTab($event)"></dps-right-bar>
+</div>

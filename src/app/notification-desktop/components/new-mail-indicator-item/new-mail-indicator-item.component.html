@@ -1,0 +1,14 @@
+<mat-list-item>
+  <img matListAvatar [hidden]="!showProfileImg"
+    src="{{event.From.EmailAddress.Address | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true"
+   >
+  <button *ngIf="!showProfileImg" matListAvatar mat-icon-button class="dps-mail-view-avatar"
+    [ngStyle]="{'background-color': ((event.From? event.From.EmailAddress.Address :'') | recipientColorCode)}">
+    <span class="mat-btn-avatar-circle">{{(event.From? event.From.EmailAddress.Name :'')|nameInitials}}
+    </span>
+  </button>
+  <span matLine>{{event.From.EmailAddress.Name}}</span>
+  <span matLine style="color: rgba(0, 0, 0, 0.54);">{{event.Subject||'(No subject)'}}</span>
+  <span matLine style="color: rgba(0, 0, 0, 0.54);">{{event.BodyPreview}}</span>
+</mat-list-item>
+<mat-divider></mat-divider>

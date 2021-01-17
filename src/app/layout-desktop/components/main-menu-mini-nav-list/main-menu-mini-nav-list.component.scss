@@ -1,0 +1,154 @@
+@import '~styles/variables.scss';
+
+.dps-main-nav-list {
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  background: #1d2c38;
+
+}
+
+.dps-main-nav-list mat-list-item {
+  // color: #9d9da5;
+  color: #7e95a7;
+  background: #1d2c38;
+  &:hover {
+    background: #152838;
+    opacity: .8;
+  }
+}
+
+
+// .mat-nav-list .mat-list-item .mat-list-icon {
+//   background: #3a3e4a;
+//   border: 2px solid #404446;
+// }
+
+.mat-nav-list .dps-timeline-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  // border: 2px solid #9e7ec3;
+  color: #e1c8ff;
+}
+
+.mat-nav-list .dps-dashboard-nav.active .mat-list-item .mat-list-icon {
+  // background: $dashboard-primary;
+  // border: 2px solid #464646;
+  // color: $primary;
+
+  // background: $primary-nav-back;
+  // border: 2px solid #9c572d;
+  color: #ff9758;
+}
+
+.mat-nav-list .dps-pageview-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  // border: 2px solid #24a77e;
+  color: #19a77a;
+}
+
+.mat-nav-list .dps-headset_mic-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  // border: 2px solid #5ba5e2;
+  color: #C79346;
+}
+.mat-nav-list .dps-track_changes-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  // border: 2px solid #5ba5e2;
+  color: #72bfff;
+}
+.mat-nav-list .dps-assignment_turned_in-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  // border: 2px solid #289da9;
+  color: #31afbb;
+}
+
+.mat-nav-list .dps-public-nav.active .mat-list-item .mat-list-icon {
+  
+
+  background: $primary-nav-back;
+  // border: 2px solid #4175c7;
+  color: #619dfd;
+
+}
+
+
+.mat-nav-list .dps-drafts-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  // border: 2px solid #7db74b;
+  color: #c56f6f;
+}
+
+.mat-nav-list .dps-assignment_ind-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  // border: 2px solid #bb9945;
+  color: #bf942a;
+}
+
+.mat-nav-list .dps-security-nav.active .mat-list-item .mat-list-icon {
+ 
+  background: $primary-nav-back;
+  color: #64aef3;
+  // border: 2px solid #64aef3;
+}
+
+.mat-nav-list .dps-timer-nav.active .mat-list-item .mat-list-icon {
+ 
+  background: $primary-nav-back;
+  // border: 2px solid #d29061;
+  color: #d88c56;
+}
+
+.mat-nav-list .dps-person-nav.active .mat-list-item .mat-list-icon {
+  
+  background: $primary-nav-back;
+  color: #65c4ec;
+  // border: 2px solid #65c4ec;
+
+}
+
+.mat-nav-list .dps-today-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  color: #b2ddf9;
+  // border: 2px solid #b2ddf9;
+
+}
+
+.mat-nav-list .dps-credit_card-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  color: #7db7de;
+  // border: 2px solid #7db7de;
+}
+
+.mat-nav-list .dps-credit_card-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  color: #7db7de;
+  // border: 2px solid #7db7de;
+}
+
+
+
+.mat-nav-list .dps-mail_outline-nav.active .mat-list-item .mat-list-icon {
+  background: $primary-nav-back;
+  // border: 2px solid #8bb0ec;
+  color: #8cb2ef;
+}
+
+.mat-nav-list .dps-contacts-nav.active .mat-list-item .mat-list-icon {
+  background: $dps-contacts-primary;
+  // border: 2px solid #3268b9;
+  color: #b7cff5;
+}
+
+.mat-nav-list .mat-list-item .mat-list-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 23px;
+}
+mat-nav-list{
+  padding-top: 0px !important;
+}

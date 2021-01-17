@@ -1,0 +1,9 @@
+<dps-folder-permissions-manager #manager [selectedFolder]="data">
+  <dps-folder-permissions-layout [selectedFolder]="data" [folderPermissions]="manager.folderPermissions$|async"
+    (selectUserPermission)="manager.onSelectUserPermission($event)" (addPermission)="manager.onAddPermission($event)"
+    (removeSelectedPermission)="manager.onRemoveSelectedPermission()" (valueChange)="manager.onValueChange($event)"
+    (permissionLevelChange)="manager.onPermissionLevelChange($event)" (saveFolderPermissions)="manager.onSaveFolderPermissions($event)"
+    (close)="onClose()">
+
+  </dps-folder-permissions-layout>
+</dps-folder-permissions-manager>

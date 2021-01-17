@@ -1,0 +1,36 @@
+@import '~styles/variables.scss';
+.row-highlight{
+    background: #7fb5e6;
+}
+.grid-data{
+   
+    font-size: $primary-font-size - 2;
+    display: table-row;
+    word-break: break-word;
+    background: #fff;
+    font-family: roboto;
+}
+.grid-data.header
+{
+    background: #7fb5e6;
+    font-weight: 500;
+}
+.row-data:last-child{
+    border-right: none;
+}
+
+a {
+    color: blue;
+}
+
+.row-data{
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    font-size: $primary-font-size - 2;
+    padding: 6px 6px 6px;
+    line-height: 18px;
+}
+.date{
+    text-align: center;
+}
+

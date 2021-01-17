@@ -1,0 +1,16 @@
+@import '~styles/variables.scss';
+
+.dps-owner {
+  font-size: 28px !important;
+  height: 28px !important;
+  width: 28px !important;
+  padding: 4px !important;
+  background-color: $calender-bck;
+  color: $calender-bck-color;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}

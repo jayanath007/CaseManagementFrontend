@@ -1,0 +1,76 @@
+<div class="dps-billing-request-layout">
+  <dps-common-popup-header icon="vertical_split" [title]="'Billing'" buttons="close" [loading]="mainLoader"
+    iconColor="#a9c0f6" (buttonClick)="onClose($event)" titleColor="#a9c0f6">
+  </dps-common-popup-header>
+
+  <div class="dps-billing-sub-toobar">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-billing-header">
+      <div>
+        <h4>
+          <mat-icon>assignment_turned_in</mat-icon> {{requestViewData?.proformaText?.headerText}}
+        </h4>
+        <span
+          *ngIf="requestViewData?.billRequestID > 0 && requestViewData?.postingDateText">{{requestViewData?.postingDateText}}</span>
+      </div>
+      <!-- <div fxLayout="row" class="dps-blling-dsp">
+        <div>Postings for period {{selectedPostingPeriod?.tP_ID}}
+          [{{selectedPostingPeriod?.tP_Start| date:'dd-MM-yyyy'}} -
+          {{selectedPostingPeriod?.tP_End| date:'dd-MM-yyyy'}}]</div>
+      </div> -->
+      <div fxLayout="row" fxLayoutAlign="center" class="dps-billing-contorlling">
+        <div>
+          <button class="dps-bill-matter-balance" mat-icon-button [dpsCommonOverlayTriggerFor]="overlay"
+            triggerWhen="click">
+            <mat-icon>person</mat-icon>
+            <span>{{resoleModuleName('matter_search')|async}} Balance</span>
+          </button>
+          <!--[ngClass]="{'matter-balance': matter-blance}" -->
+          <dps-common-overlay-layout #overlay [width]="420" [height]="100" [disposeWhenBackdropClick]="true">
+            <dps-common-grid-table [columns]="matterBalanceGridcolumns" [rows]="requestViewData?.matterBalancesModel"
+              (rowClick)="onRowClick($event)" (rowDblClick)="onRowDblClick($event)">
+            </dps-common-grid-table>
+          </dps-common-overlay-layout>
+        </div>
+        <div>
+          <button class="dps-billing-print-set" [disabled]="mainLoader" mat-icon-button
+            aria-label="Example icon-button with a heart icon" (click)="openPrintOptionsPopup()">
+            <mat-icon>print</mat-icon>
+            <span>Print Settings</span>
+          </button>
+        </div>
+        <div>
+          <button class="dps-billing-print" (click)="onBillingRequestSave('Print')" mat-icon-button
+            aria-label="Example icon-button with a heart icon"
+            [disabled]="(requestViewData?.timeAndProfitHeaderGridData.length<1 && requestViewData?.disbsAndExpenseHeaderGridData.length<1) || mainLoader">
+            <mat-icon>print</mat-icon>
+            <span>Print Preview</span>
+          </button>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="1em">
+          <mat-checkbox (change)="onChangeunProforma($event)" color="primary" [ngModel]="requestViewData?.isProforma">
+            Proforma
+          </mat-checkbox>
+          <mat-checkbox (change)="onChangeBill($event)" color="primary" [ngModel]="requestViewData?.isChkBill">
+            Bill
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height: 100%">
+    <dps-billing-details-data (importPopupOpen)="onOpenDataImportPopup($event)" [timeOffset]="timeOffset"
+      [timeHeaderGridOrderData]="timeHeaderGridOrderData"
+      (expenseOrProfitCostPopupOpen)="openExpenseOrProfitCostPopup($event)"
+      (billingNarrativePopupOpen)="onOpenBillingNarrativePopup($event)" (matterSearchData)="onMatterSearch($event)"
+      [matterInfo]="matterInfo" [requestViewData]="requestViewData" [mainLoader]="mainLoader"
+      [matterDisplyName]="resoleModuleName('matter_search')|async"
+      [clientDisplyName]="resoleModuleName('client_search')|async"
+      (disbursementPopupOpen)="disbursementPopupOpenClick()"
+      (timeAndCostGridSelectRowUpdate)="onTimeAndCostGridSelectRowUpdate($event)"
+      (headerGridRowDoubleClick)="onHeaderGridRowDoubleClick($event)" [totalValues]="totalValues"
+      (addToBillUpdate)="onAddToBillClick($event)" (removeAllGridDataByGridType)=onRemoveAllGridDataByGridType($event)
+      (updateControllerValue)="onUpdateControllerValue($event)" (billingRequestSave)="onBillingRequestSave($event)"
+      (narrativeItemText)="onChangeNarrativeItemText($event)" (deleteBillRequest)="onDeleteBillRequest()">
+    </dps-billing-details-data>
+  </div>
+</div>

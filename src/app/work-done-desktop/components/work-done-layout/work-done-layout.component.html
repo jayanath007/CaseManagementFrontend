@@ -1,0 +1,173 @@
+<mat-sidenav-container (backdropClick)="onMemberNavClick()" [style.display]="activeOutlet !== 'main' ? 'none': 'block'"
+  autosize>
+  <mat-sidenav class="dps-team-member-sidenav" [disableClose]="true" #teammembers position="end"
+    [mode]="memListPanelMode" [opened]="isMemberNavExpan" fxLayout="column">
+    <dps-team-member-manager #teammemberlist [teamMemberToken]="'TEAM_MEMBER_DATA_WORK_DONE'"></dps-team-member-manager>
+    <mat-list dense class="team-member-header">
+      <mat-list-item>
+        <div fxFlex="row">
+          <button mat-icon-button (click)="onMemberNavClick()">
+            <mat-icon>reorder</mat-icon>
+          </button>
+          <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+          <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+            <mat-chip> {{teamMemberCount}} </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+      [teamMemberList]="teammemberlist.teamMemberList$ | async"
+      [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async" [selected]="teammemberlist.selected$ | async"
+      (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+      (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+    </dps-team-member-list>
+  </mat-sidenav>
+  <div class="dps-work-done-main-contentainer" fxLayout="column">
+    <div id="work-done-print-section" style="display: none">
+      <div style="font-weight: normal; font-family: Roboto,' Helvetica Neue', sans-serif;">
+        <div style="border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;">
+          <div>
+            <h2 style="font-size:15px" class="dps-text" *ngIf="selectedTeamMember">{{selectedTeamMember.fullName}}</h2>
+            <h2 style="font-size:15px" class="dps-text" *ngIf="selectedDepartment">{{selectedDepartment.groupName}}</h2>
+            <h3 style="font-size:11px" class="dps-text" *ngIf="selectedTeamMember?.userEmail">Email:-
+              {{selectedTeamMember.userEmail}}</h3>
+            <h3 style="font-size:11px" class="dps-text" *ngIf="selectedTeamMember?.userMobileNo">Phone No:-
+              {{selectedTeamMember.userMobileNo}}</h3>
+          </div>
+          <div style="font-size:12px">
+            <table>
+              <thead>
+                <tr class="work_done_summary_header">
+                  <th colspan="2">Letters</th>
+                  <th colspan="4">Calls</th>
+                  <th colspan="2">Emails</th>
+                </tr>
+                <tr class="work_done_summary_sub">
+                  <th>
+                    <span>In</span>
+                  </th>
+                  <th>
+                    <span>Out</span>
+                  </th>
+                  <th></th>
+                  <th>
+                    <span>In</span>
+                  </th>
+                  <th>
+                    <span>Out</span>
+                  </th>
+                  <th></th>
+                  <th>
+                    <span>In</span>
+                  </th>
+                  <th>
+                    <span>Out</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <td>{{summery?.lettersIn}}</td>
+                <td>{{summery?.lettersOut}}</td>
+                <td></td>
+                <td>{{summery?.callsIn}}</td>
+                <td>{{summery?.callsOut}}</td>
+                <td></td>
+                <td>{{summery?.emailsIn}}</td>
+                <td>{{summery?.emailsOut}}</td>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style="font-size:14px" class="dps-text" *ngIf="selectedDepartment">Department:-
+              {{selectedDepartment.groupName}}</h3>
+          </div>
+        </div>
+        <div style="border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 12px;">
+          <h3 class="dps-text">
+            <span *ngIf="selectedInfo?.periodId !== 5">{{selectedPeriod?.groupName}}</span>
+            <span *ngIf="selectedInfo?.periodId === 5">From - {{selectedInfo?.dateFrom | date:'yyyy-MM-dd'}}</span>
+            <span *ngIf="selectedInfo?.periodId === 5">To- {{selectedInfo?.dateTo | date:'yyyy-MM-dd'}}</span>
+          </h3>
+          <h3 class="dps-text">
+            <span *ngIf="groupMode === GroupMode.Default">View</span>
+            <span *ngIf="groupMode === GroupMode.ByUser">By</span>
+            <span *ngIf="groupMode === GroupMode.Date">Date</span>
+            <span *ngIf="groupMode === GroupMode.ByUserDate">By Date</span>
+            <span *ngIf="groupMode === GroupMode.DateByUser">Date By</span>
+          </h3>
+          <h3 class="dps-text" *ngIf="selectedInfo.searchText">Search text:- {{selectedInfo.searchText}}</h3>
+          <h3 style="font-size:11px" class="dps-text" *ngIf="totalItem>0">
+            {{(paginatorDef?.currentPage*paginatorDef?.itemPerPage)+1}} -
+            {{((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)>=totalItem?totalItem:((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)}}
+            of {{totalItem}} </h3>
+        </div>
+        <div>
+          <table>
+            <tr>
+              <th *ngFor="let def of columnDef" [hidden]="def?.extras?.hidden || !def?.extras?.label">
+                {{def?.extras?.label}}</th>
+            </tr>
+            <tr *ngFor="let item of gridData">
+              <td>{{item?.dateDone | date :'dd/MM/yyyy'}}</td>
+              <td>{{item?.by}}</td>
+              <td>{{item?.letter_name}}</td>
+              <td>{{item?.matterReferenceNo}}</td>
+              <td>{{item?.client}}</td>
+              <td>{{item?.note}}</td>
+              <td>{{item?.details}}</td>
+              <td>{{item?.emailFrom}}</td>
+              <td>{{item?.emailTo}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-card class="dps-work-done-main-header">
+      <mat-card-content>
+        <div class="dps-profile">
+          <dps-user-profile-detail [selectedDepartment]="selectedDepartment" [selectedTeamMember]="selectedTeamMember">
+          </dps-user-profile-detail>
+        </div>
+        <div fxFlex="1 1 0%">
+          <dps-work-done-header [homeCurrancy]="homeCurrancy" [departmentList]="departmentList"
+            [selectedInfo]="selectedInfo" [summery]="summery" (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+          </dps-work-done-header>
+        </div>
+        <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()"
+          *ngIf="!isMemberNavExpan">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+      <div class="grid-wrapper-main" fxLayout="column">
+        <dps-work-done-views [periodList]="periodList" [selectedInfo]="selectedInfo" [groupMode]="groupMode"
+          [timeOffset]="timeOffset" (updateSelectedInfo)="onUpdateSelectedInfo($event)" (gridRefresh)="onGridRefresh()"
+          (gridFontSize)="onChangeGridFontSize($event)" (menuChange)="onMenuChange($event)" (print)="onPrint()">
+        </dps-work-done-views>
+
+        <dps-work-done-grid fxFlex="calc(100%-70px)" [groupMode]="groupMode" [groupData]="groupData"
+          [isLoading]="isLoading" [columnDef]="columnDef" class="grid-data {{fontSizeClass}}" [timeZone]="timeZone"
+          [companyCode]="companyCode" [gridData]="gridData" [selectedInfo]="selectedInfo" [totalItem]="totalItem"
+          [expandedRow]="expandedRow" [paginatorDef]="paginatorDef" [selectGroupHash]="selectGroupHash"
+          (rowExpand)="onRowSelect($event)" (viewChange)="onViewChange($event)"
+          (clickGridButton)="onClickGridButton($event)" (selectGroup)="onSelectGroup($event)"
+          (loadMoreData)="loadMore($event)">
+        </dps-work-done-grid>
+
+      </div>
+    </mat-card>
+  </div>
+</mat-sidenav-container>

@@ -1,0 +1,37 @@
+<div fxLayout="column" class="dps-client-screen-lookup-layout">
+<mat-toolbar fxFlex="45px">
+    <mat-toolbar-row class="dps-toolbar-box-shadow dps-lookup-toolbar">
+      <span fxFlex="1 1 auto"></span>
+      <div fxFlexAlign="center">
+        <mat-icon matListIcon class="header-icon">list</mat-icon>
+        <span class="lookup-header">Lookup Screen - {{screenLookupList?.luT_Type}}</span>
+      </div>
+       <span fxFlex="1 1 auto"></span>
+       <button mat-icon-button (click)="exitClientLookupClick()">
+         <mat-icon class="close-btn">close</mat-icon>
+       </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<dps-client-screen-lookup-header (onAddNewLookupClick)="AddNewLookupClick()" (onCancelChangesClick)="onCancelChange()" (changeDescriptionClick)="onChangeDescriptionClick($event)"  [screenLookupList]="screenLookupList" (onDeleteScreenLookupClick)="deleteScreenLookupClick($event)"></dps-client-screen-lookup-header>
+
+
+<!-- <dps-client-screen-lookup-list [columnDef]="columnDef"></dps-client-screen-lookup-list> -->
+
+<dps-client-screen-lookup-list [columnDef]="columnDef" [loading]="loading"  (onDeleteScreenLookupClick)="deleteScreenLookupClick($event)" (onlookupItemChange)="onLookupItemChange($event)" [screenLookupList]="screenLookupList" fxFlex="calc(100%-230px)">
+   
+</dps-client-screen-lookup-list>
+
+<!-- <mat-paginator fxFlex="56px" class="footer-shadow" #paginator [length]="totalItems" [pageIndex]="clientPaginatorDef?.currentPage"
+[pageSize]="clientPaginatorDef?.itemPerPage" [pageSizeOptions]="activeView=='Recent50'?[50]:pageSizeOptions" (page)="onNextPage($event)">
+</mat-paginator> -->
+
+<mat-dialog-actions fxFlex="60px">
+    <div fxLayoutAlign="end center" class="lookup-action-btn">
+        <button mat-button (click)="screenLookupSave()" class="scr-lookup_headings">Save</button>
+        <button mat-button (click)="screenLookupCancel()" class="scr-lookup_headings">Cancel</button>
+    </div>
+    
+</mat-dialog-actions>
+</div>

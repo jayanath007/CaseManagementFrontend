@@ -1,0 +1,75 @@
+@import '~styles/variables.scss';
+
+span.screen_lookup_row_delete mat-icon {
+    position: absolute;
+    top: 10px;
+    color: #da5252;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 53;
+    right: 28px;
+  }
+
+  .grid-data{
+    line-height: 36px;
+}
+
+.grid-data:last-child{
+    background-image: none;
+}
+
+.row-data:first-child{
+    border-left:1px solid #afafaf;;
+}
+
+.row-data{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 36px !important;
+}
+.row-data{ 
+    padding: 0px 6px;
+    font-size: $primary-font-size - 2;
+    z-index: 10;
+    border-right: 1px solid #d4dae0;
+    box-sizing: border-box;    
+}
+
+.row-data.input-data{
+    // padding: 4px 5px 0px 4px;
+    padding: 4px 5px 4px 18px;;
+}
+
+input:focus {
+    background: $primary;
+    height: 2.4em;
+    margin: 0px 0px 3px 0;
+}
+
+.client-lookup-row-edited:before {
+    content: "\f0da";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #d65741;
+    font-size: 13px;
+    position: absolute;
+    left: 5px;
+    top: -9px;
+    -webkit-transform: rotate(35deg);
+    -moz-transform: rotate(35deg);
+    -ms-transform: rotate(35deg);
+    -o-transform: rotate(35deg);
+    transform: rotate(35deg);
+
+}
+
+::ng-deep dps-screen-lookup-grid-fix-row {
+    width: 100% !important;
+}
+
+::ng-deep .dps-lookup-main .mat-nav-list .mat-list-item .mat-list-item-content {
+    padding: 0 0px !important;
+}

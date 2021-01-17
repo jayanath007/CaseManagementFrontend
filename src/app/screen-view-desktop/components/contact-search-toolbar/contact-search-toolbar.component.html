@@ -1,0 +1,20 @@
+<div class="top-button-panel">
+  <button class="contact-screen-general-btn save" mat-button *ngIf="enableSaving" (click)="onSaveContact($event)"><i
+      class="fa fa-user" aria-hidden="true"></i> SAVE CONTACT</button> <!-- new contact -->
+  <!-- contactType === 4  -->
+  <button class="contact-screen-general-btn" *ngIf="contactType !== 4" mat-button
+    color="primary" (click)="onSearchAll($event)" [disabled]="disableSearchButtons">ALL</button>
+  <button class="contact-screen-general-btn file" mat-button *ngIf="!oneOnlyPerMatter" (click)="onSearchOnFile($event)"
+    [disabled]="disableSearchButtons">FILE<span class="file-no"
+      *ngIf="contactsOnFile >= 0">({{contactsOnFile}})</span></button>
+  <button class="contact-screen-general-btn" mat-button *ngIf="enableSaving" (click)="onClear($event)">CLEAR</button>
+  <!-- new contact -->
+  <button class="contact-screen-general-btn" mat-button (click)="onConfigSearch($event)"
+    [disabled]="disableSearchButtons">CONFIG SEARCH</button>
+  <div class="contact-manage">
+    <label *ngIf="currentContactId > 0">Contact</label>
+    <label class="matter" *ngIf="currentContactId == 0">{{resoleModuleName('matter_search')|async}}</label>
+    <button class="contact-screen-general-btn warn" mat-button color="warn" *ngIf="currentContactId > 0"
+      (click)="onRemoveFromFile($event)">Remove from File</button> <!-- shown only when contact is visible on screen -->
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<mat-accordion [@.disabled]="true" [multi]="false">
+    <mat-expansion-panel class="my-task-expanded-row mat-elevation-z" [expanded]="item?.expanded"
+     *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even"
+      [ngClass]="item?.expanded?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'" dpsFileDroppable
+      (onDrop)="onFileDrop($event, item)">
+
+
+
+      <mat-expansion-panel-header class="expansion-panelgrid-header" (click)="gridRowExpan(item)" collapsedHeight="35px"
+        expandedHeight="35px">
+        <mat-panel-title class="grid-panel-title">
+          <div fxLayout class="grid-data">
+            <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+            <div class="row-data wrk_done_date" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item?.dateBy | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data wrk_done_for" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item?.taskFor | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data dps_task_client" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{item?.client | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data dps_task_ref" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{item?.matterReferenceNo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data dps_task_details" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{item?.note | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data dps_task_details" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{item?.matterDetails | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data dps_task_action" [fxFlex]="getFxFlexProperty(7)">
+              <mat-checkbox [checked]="item?.action" disabled></mat-checkbox>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="row" *ngIf="item?.expanded">
+        <dps-my-tasks-grid-button-details [selectedTaskData]="item" (clickGridButton)="onClickGridButton($event)"></dps-my-tasks-grid-button-details>
+        <span fxFlex="1 1 auto"></span>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>

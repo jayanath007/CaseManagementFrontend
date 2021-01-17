@@ -1,0 +1,116 @@
+<div class="dps-team-form-container">
+  <div class="dps-team-form">
+
+    <mat-form-field>
+      <mat-select placeholder="Type of movement" floatPlaceholder="never" [formControl]="movement"
+        (selectionChange)="onChangeMovementType($event.value)">
+        <mat-select-trigger>
+          <mat-icon matPrefix class="dps-selected-icon">{{movement.value?.movementTypeId | movementIcon}}</mat-icon>
+          {{movement.value?.movementTypeDes
+          }}
+
+        </mat-select-trigger>
+
+        <mat-option class="dps-team-drowp-menu" *ngFor="let movementType of nextMovementTypes" [value]="movementType">
+
+
+          <mat-icon matPrefix class="dps-option-menu-icon">{{movementType?.movementTypeId | movementIcon}}</mat-icon>
+          {{movementType.movementTypeDes}}
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+
+
+
+
+
+    <div fxLayoutAlign=" baseline" *ngIf="!isAlldayTypeMovement">
+      <mat-form-field style="width:190px">
+        <input type="text" dpsTimeOnly #startTimeInput matInput [matAutocomplete]="startTimeOptions" [ngModel]="time"
+          (focusout)="onChangeTime(startTimeInput.value)">
+        <button mat-icon-button matSuffix>
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-autocomplete #startTimeOptions="matAutocomplete">
+          <mat-option class="dps-team-drowp-menu" *ngFor="let time of  getTimeList()" [value]="time">
+            {{ time }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-button-toggle [disabled]="clockdisabkle" #startTimeToggle appearance="legacy" [checked]="period==='PM'"
+        (change)="onTimePeriodChange(startTimeToggle.checked?'PM':'AM')">{{startTimeToggle.checked?'PM':'AM'}}
+      </mat-button-toggle>
+    </div>
+
+
+
+
+
+    <div *ngIf="isAlldayTypeMovement" fxLayoutGap="5px" style="display: flex;flex-direction: column;">
+
+      <mat-form-field>
+        <mat-select placeholder="Period of movement" (selectionChange)="onChangeMovementPeriod($event.value)"
+          [ngModel]="-2">
+          <mat-option [value]="-2">All day</mat-option>
+          <mat-option class="dps-team-drowp-menu" *ngFor="let movementPeriod of dayMovementperiod"
+            [value]="movementPeriod">
+            {{movementPeriod.movementTypeDes}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" (dateChange)="onChangeDate($event)" placeholder="From Date"
+          [value]="from">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <mat-form-field *ngIf="!hideFromDate">
+        <input matInput [matDatepicker]="pickerx" [min]="from" placeholder="To Date"
+          (dateChange)="onChangeToDate($event)" [value]="to">
+        <mat-datepicker-toggle matSuffix [for]="pickerx"></mat-datepicker-toggle>
+        <mat-datepicker #pickerx></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field>
+      <input matInput placeholder="Notes" #notes (blur)="onChaneNotes(notes.value)">
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+      <mat-select placeholder="Location" floatPlaceholder="never"
+        (selectionChange)="onChangeMovementLocation($event.value)">
+        <mat-option class="dps-team-drowp-menu" *ngFor="let location of locationList" [value]="location">
+          {{location.value}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <dps-editable-dropdown [options]="getLocation()" [value]="" [placeholder]="'Location'"
+      (changeValue)="onChangeMovementLocation($event)">
+    </dps-editable-dropdown>
+
+    <!-- <mat-form-field>
+    <mat-select  placeholder="Location" floatPlaceholder="never"
+    (selectionChange)="onChangeLocation($event.value)">
+    <mat-option></mat-option>
+    <mat-option>Location 1</mat-option>
+    <mat-option>Location 2</mat-option>
+    <mat-option>Location 3</mat-option> 
+  </mat-select>
+</mat-form-field> -->
+
+
+  </div>
+  <div class="dps-btm-btn" fxLayoutGap="1em">
+
+    <button mat-raised-button class="dps-task-submit" (click)="onSubmitData()" tabindex="-1">Submit</button>
+    <button class="cancel" style="color: #537894;
+    background: #fff;" mat-raised-button (click)="onClose()" tabindex="2">Cancel</button>
+  </div>
+</div>

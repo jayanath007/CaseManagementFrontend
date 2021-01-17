@@ -1,0 +1,77 @@
+@import '~styles/variables.scss';
+
+.dps-audio-player {
+  width: 100%;
+  font-family: $primary-font-stack;
+  padding: 0 16px;
+
+
+  mat-slider {
+    padding: 0px;
+
+    &.dps-time-slider {
+      height: 32px;
+    }
+
+    &.dps-volume-slider {
+      height: 43px;
+    }
+
+    ::ng-deep {
+
+      .mat-slider-track-fill,
+      .mat-slider-thumb,
+      .mat-slider-thumb-label {
+        background-color: #8E5B11;
+      }
+    }
+  }
+
+  .dps-time-and-settings {
+    mat-icon {
+      color: #3e2e06;
+    }
+
+    .dps-time-value-section {
+      padding: 8px 8px 0px;
+      font-size: 13px;
+      color: #443E18;
+      font-weight: 500;
+    }
+  }
+
+  .dps-audio-btns {
+
+    mat-icon {
+      color: #876A3F;
+    }
+
+    .dps-rewine-forward-btn {
+      mat-icon {
+        color: #72562C
+      }
+
+    }
+
+    .dps-play-pause-btn {
+      margin: 0px 24px 0px 24px;
+
+      mat-icon {
+        color: #8E5B11;
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+  }
+
+  .dps-volume-section {
+    padding-top: 15px;
+
+    mat-icon {
+      color: #3e2e06;
+    }
+  }
+
+}

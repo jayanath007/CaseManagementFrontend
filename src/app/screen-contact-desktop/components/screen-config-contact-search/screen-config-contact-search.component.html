@@ -1,0 +1,32 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<h1>Configure Contact Search</h1>
+
+
+<div class="screen-view-general-popup-body">
+
+  <div class="tool-bar-contact-search">
+
+    <button mat-button class="save" (click)="saveSearchFields()">Save</button>
+  </div>
+
+  <div class="data-grid-scroll dps-white-gray-scroll dps-blue-scroll">
+    <h2> Default Search Fields</h2>
+
+    <dps-screen-contact-search-config-header></dps-screen-contact-search-config-header>
+    <dps-screen-contact-search-config-row [searchFields]="defaultSearchFields"
+      (onSearchFieldChanged)="searchFieldChanged($event)"></dps-screen-contact-search-config-row>
+
+    <h2> Mapped Contact Search Fields</h2>
+
+    <dps-screen-contact-search-config-header></dps-screen-contact-search-config-header>
+    <dps-screen-contact-search-config-row class="dps-config-row" [searchFields]="mappedSearchFields"
+      (onSearchFieldChanged)="searchFieldChanged($event)"></dps-screen-contact-search-config-row>
+
+  </div>
+
+  <div class="general-buttons-bottom">
+
+    <button mat-button color="warn" class="close-pop" (click)="closePopup()"> Close </button>
+  </div>
+
+</div>

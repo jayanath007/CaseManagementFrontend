@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+.mat-list-item.mat-list-item-avatar .mat-list-avatar
+{
+width: 45px;
+height: 45px;
+}
+
+.user-contact-info.mat-list-item.mat-2-line
+{
+    font-family: roboto;
+    font-size: $secondary-font-size;
+    height: auto;
+    
+}
+.dps-user-profile-detail .mat-list-item
+{
+    color: $primary;
+}
+.dps-user-profile-detail .mat-list-item .mat-line
+{
+    padding-top: 8px;
+
+}
+.user-contact
+{
+display:block;
+}
+.user-contact .material-icons
+{
+    font-size: 10px;
+    float: left;
+    background: #104c3a;
+    border-radius: 100%;
+    padding: 4px;
+    margin-top: 1px;
+    margin-left: 4px;
+    color: #cfffde;
+    margin-right: 3px;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.user-contact .material-icons:hover
+{
+    background: #fdba00;
+    color: #206709;
+
+}
+
+.user-contact label
+{
+    color: #96ccbb;
+    font-size: 12px;
+    margin-right: 3px;
+    margin-top: 4px;
+    float: left;
+}
+.user-contact .user-mail-text
+{
+    font-size: $secondary-font-size;
+    margin-top: 2px;
+    
+}
+
+.dps-team-member-avatar span{
+    font-size: 16px;
+    color: white;
+}

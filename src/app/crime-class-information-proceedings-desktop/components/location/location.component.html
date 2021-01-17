@@ -1,0 +1,20 @@
+<h3>Location</h3>
+<mat-form-field floatLabel="always" class="location-id">
+  <input #locationIdInput matInput placeholder="ID" [readOnly]="infomationModel[modelProperty?.stageReached] === 'PROV'"
+    [ngModel]="infomationModel[modelProperty?.locationId]"
+    (focusout)="onChangeUserInput(modelProperty?.locationId, locationIdInput.value)">
+  <span matSuffix *ngIf="infomationModel[modelProperty?.stageReached] !== 'PROV'">
+    <mat-icon (click)="onOpenlocationSearch($event, locationIdInput.value)">search</mat-icon>
+  </span>
+</mat-form-field>
+
+<mat-form-field floatLabel="always" class="advice-calls-responce-time"
+  [matTooltip]="infomationModel[modelProperty?.locationName]" matTooltipPosition="top">
+  <input #locationNameInput matInput placeholder="Name"
+    [readOnly]="infomationModel[modelProperty?.stageReached] === 'PROV'"
+    [ngModel]="infomationModel[modelProperty?.locationName]"
+    (focusout)="onChangeUserInput(modelProperty?.locationName, locationNameInput.value)">
+  <span matSuffix *ngIf="infomationModel[modelProperty?.stageReached] !== 'PROV'">
+    <mat-icon (click)="onOpenlocationSearch($event, locationNameInput.value)">search</mat-icon>
+  </span>
+</mat-form-field>

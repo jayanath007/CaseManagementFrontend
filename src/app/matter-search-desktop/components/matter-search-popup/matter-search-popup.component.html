@@ -1,0 +1,88 @@
+<div fxLayout="column" class="matter-search-form">
+
+  <div class="matter-search-popup-header" fxFlex="0 0 42px">
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-toolbar-box-shadow matter-by-client-popup-header">
+        <!-- <span fxFlex="1 1 auto"></span> -->
+        <div fxFlexAlign="center" class="dps-header">
+          <mat-icon matListIcon class="matter-icon">pageview</mat-icon>
+          <span class="clients-text">{{matterSearchTitle}}</span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button mat-icon-button (click)="onClose()">
+          <mat-icon class="close-btn">close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-divider></mat-divider>
+  </div>
+
+  <div>
+    <mat-toolbar class="sub-header" fxLayoutGap="5px">
+      <span fxFlex="1 1 auto"></span>
+      <dps-matter-search-box [searchText]="searchText" [totalItems]="totalItems" [matterDisplyName]="matterSearchTitle"
+        (updateSelectedSearchText)="onSearchTextChanged($event)">
+      </dps-matter-search-box>
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <mat-checkbox class="include-closed-matters" color="primary" (change)="onClosedMattersChange($event.checked)"
+        *ngIf="!isMatterCreate">
+        <span>Include Closed {{matterSearchTitle}}</span>
+      </mat-checkbox>
+      <mat-checkbox class="include-closed-matters" color="primary" (change)="onCompletedMattersChange($event.checked)"
+        *ngIf="!isMatterCreate">
+        <span>Include Completed {{matterSearchTitle}}</span>
+      </mat-checkbox>
+      <mat-radio-group #group (change)="changeMatterView($event)" [hidden]="isMatterCreate">
+        <mat-radio-button color="primary" [value]="MatterViews.Recent">
+          <span matLine>Recent 50 {{matterSearchTitle}}</span>
+        </mat-radio-button>
+        <mat-radio-button color="primary" [value]="MatterViews.MyMatter">
+          <span matLine>My {{matterSearchTitle}}</span>
+        </mat-radio-button>
+        <mat-radio-button *ngIf="basePopupType===BasePopupType" color="primary" [value]="MatterViews.Suggested">
+          <span matLine>Suggested {{matterSearchTitle}}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="matter-popup-outer" fxLayout="column">
+    <div fxLayout="column" fxFlex="calc(100% - 50px)" class="dps-white-gray-scroll dps-grid-x">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="matter-popup-inner" fxLayout="column">
+
+          <div class="row-highlight" dpsIsMobile>
+            <div class="row-highlight-inner">
+              <dps-column-header class="matter-popup-toggle-hide" *ngFor="let header of columnDef"
+                [fxFlex]="header.extras.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+                (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)"
+                [filterAnchor]="header.extras.filterAnchor">
+              </dps-column-header>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="isGridLoading"></mat-progress-bar>
+          </div>
+          <mat-dialog-content class="dps-popup-content">
+            <div fxFlex="calc(100% - 52px)" class="dps-white-gray-scroll dps-matter-search-grid">
+              <mat-nav-list dence>
+                <mat-list-item class="dps-popup" dpsClick [debounceTime]="350" (dpsDblClick)="popupRowdblclick(item)"
+                  (dpsClick)="popupRowclick(item)"
+                  *ngFor="let item of matterData ; let index =index; let isOdd=odd; let isEven=even"
+                  [ngClass]="clickedItem === item ? 'dps-selected-row' : (item.data?.closed ?'closed-matters':(item.data?.isCompleteMatter ? 'complete-matter':isOdd?'dps_row_separation-0':'dps_row_separation-1'))">
+                  <dps-matter-grid-fix-row [isPopup]="true" fxFlex="" [columnDef]="columnDef" [searchText]="searchText"
+                    [matterRowData]="item" [activeView]="activeView" [isPlotUser]="isPlotUser"
+                    [plotVarValues]="plotVarValues">
+                  </dps-matter-grid-fix-row>
+                </mat-list-item>
+              </mat-nav-list>
+            </div>
+          </mat-dialog-content>
+        </div>
+      </div>
+    </div>
+    <mat-paginator class="footer-shadow" fxFlex="nogrow" #paginator [length]="totalItems"
+      [pageIndex]="paginatorDef?.currentPage" [pageSize]="paginatorDef?.itemPerPage"
+      [pageSizeOptions]="activeView=='Recent50'?[50]:pageSizeOptions" (page)="onNextPage($event)">
+    </mat-paginator>
+  </div>

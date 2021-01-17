@@ -1,0 +1,101 @@
+<div class="dps-billing-import-data-layout">
+  <dps-common-popup-header icon="access_time"
+    [title]="(requestViewData?.requestFormTypes==='Time')?'Import Time':'Import Disbursements'" buttons="close"
+    [loading]="requestViewData?.timeGridLoading" iconColor="#e8a348" titleColor="#a9c0f6"
+    (buttonClick)="onClose($event)">
+  </dps-common-popup-header>
+  <div class="dps-billing-sub-toobar">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-billing-header">
+      <div>
+        <button mat-icon-button (click)="onExpanButtonClick()" class="time-entries"
+          *ngIf="(requestViewData?.requestFormTypes==='Time')">
+          <mat-icon>label</mat-icon>
+          <span>Time Entries</span>
+        </button>
+        <button mat-icon-button (click)="onExpanButtonClick()" class="disbursement-entries"
+          *ngIf="(requestViewData?.requestFormTypes!=='Time')">
+          <mat-icon>label</mat-icon>
+          <span>Disbursement Entries</span>
+        </button>
+      </div>
+      <div fxLayout="row" class="dps-billing-importtime">
+        <!-- dps-billing only - in import-time -->
+        <div *ngIf="requestViewData?.requestFormTypes==='Time'">
+          <mat-form-field>
+            <input matInput placeholder="Selected Units" disabled [value]="unitTotal">
+          </mat-form-field>
+        </div>
+        <div class="dps-sharing-component">
+          <mat-form-field>
+            <input matInput placeholder="Total" disabled [value]="valuTotal">
+          </mat-form-field>
+        </div>
+        <div *ngIf="requestViewData?.requestFormTypes==='Time'">
+          <mat-form-field>
+            <input matInput placeholder="Bill To" #billToEvent (focusout)="onBillToFocusout(billToEvent)"
+              [ngModel]="billTo">
+            <!-- [value]="(requestViewData.requestFormTypes ==='SelactTime')?requestViewData?.timeGridModel?.billTo :'0.00'"> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dps-import-controlling dps-white-gray-scroll">
+    <div class="dps-controlling" fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <button mat-button (click)="onSelectUnselectWriteOff('Select')">
+          Select All
+        </button>
+        <button mat-button (click)="onSelectUnselectWriteOff('Unselect')">
+          Unselect All
+        </button>
+        <button mat-button (click)="onSelectUnselectWriteOff('WriteOff')">
+          Write Off All
+        </button>
+      </div>
+      <div>
+        <div fxLayout="row" class="dps-billing-importtime" *ngIf="requestViewData?.requestFormTypes==='Time'">
+          <dps-select-input-with-table placeholder="VAT Code for Time on Bill" [canEdit]="false"
+            (selectionChange)="onVatCodeSelectChange($event)" [selectedKeyValue]="vatCodeSelectedValue"
+            [columns]="cmbVatCodeColumns" [rows]="vatCodeList">
+          </dps-select-input-with-table>
+          <dps-select-input-with-table placeholder="Nominal" [canEdit]="false" [columns]="cmbNominalColumns"
+            [selectedKeyValue]="nominalSelectedValue" [rows]="requestViewData?.nominalList"
+            (selectionChange)="onNominalSelectChange($event)">
+          </dps-select-input-with-table>
+          <dps-select-input-with-table placeholder="Allocate To" [canEdit]="false" [columns]="cmbAllocateToColumns"
+            [selectedKeyValue]="allocateSelectedValue" [rows]="feeEarnerList"
+            (selectionChange)="onAllocateSelectChange($event)"></dps-select-input-with-table>
+        </div>
+        <!-- End dps-billing only - in import-time -->
+      </div>
+    </div>
+    <div class="import-data-grid">
+      <!-- Grid Table -->
+      <dps-common-grid-table minWidth="1000px" [columns]="columns"
+        [rows]="(requestViewData.requestFormTypes ==='Time')?requestViewData.timeGridModel?.gridData :requestViewData.disbursementGridData?.gridData"
+        [matMenu]="menu" (rowClick)="onRowClick($event)" (rowDblClick)="onRowDblClick($event)"
+        (rowCtrlClick)="onRowCtrlClick($event)" (rowRightClick)="onRowRightClick($event)">
+      </dps-common-grid-table>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onSelect()"
+          style=" font-size: 12px;line-height: 34px;height: 34px;font-weight: 500;border-bottom: 1px solid #dcdcdc;">Select</button>
+        <button mat-menu-item (click)="onUnselect()"
+          style=" font-size: 12px;line-height: 34px;height: 34px;font-weight: 500;border-bottom: 1px solid #dcdcdc;">Unselect</button>
+        <button mat-menu-item (click)="onWriteOff()" style=" font-size: 12px;line-height: 34px;height: 34px;">Write
+          Off</button>
+      </mat-menu>
+
+    </div>
+    <div class="dps-import-actions">
+      <button mat-button class="select" [disabled]="(requestViewData.requestFormTypes ==='Time')?(requestViewData?.timeGridModel?.gridData.length<1) 
+        : (requestViewData?.disbursementGridData?.gridData.length<1)"
+        (click)="onOk(requestViewData?.requestFormTypes)">
+        Ok
+      </button>
+      <button mat-button class="cancel" (click)="onClose($event)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

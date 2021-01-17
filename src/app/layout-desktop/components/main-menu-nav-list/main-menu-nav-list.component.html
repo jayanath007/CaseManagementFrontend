@@ -1,0 +1,18 @@
+<div class="dps-main-nav-list dps-black-gray-scroll">
+  <mat-nav-list>
+    <div *ngFor="let item of data" class="{{'dps-'+item.icon+'-nav'}}" [ngClass]="{'active': item?.isSelected}">
+      <mat-list-item *ngIf="item.group !== MenuGroups.OpenCase" (click)="onItemClick(item, $event)"
+        [ngClass]="{ 'drag-enabale': isWidgetDeactive(item)}">
+        <mat-icon class="dps-nav-icon md-16" [dpsDraggable]="true" [dragData]="item" dragDataType="mainmenuItem"
+          [dropZones]="['widget']" matListIcon>
+          {{(isPlotUser$|async) && item.id === 'client_search' ? 'corporate_fare' : item.icon}}</mat-icon>
+        <div *ngIf="item.id === 'post_office' && item.data" class="dps-post-count"> {{item.data}} </div>
+        <h3 matLine>{{item.label}}</h3>
+        <button mat-icon-button (click)="onOpenInBrowser(item, $event)" *ngIf="item.group2 === MenuGroups.UrlPopUp"
+          class="open_in_browser">
+          <mat-icon>open_in_browser</mat-icon>
+        </button>
+      </mat-list-item>
+    </div>
+  </mat-nav-list>
+</div>

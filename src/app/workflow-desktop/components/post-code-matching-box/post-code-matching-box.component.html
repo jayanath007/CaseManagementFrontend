@@ -1,0 +1,32 @@
+<h1>Select Item</h1>
+<div class="screen-view-general-popup-body">
+    <div class="data-grid-scroll dps-white-gray-scroll dps-blue-scroll">
+    <table class="data-table-dynamic">
+        <tr>
+            <th> Company Name </th>
+            <th> Address 1 </th>
+            <th> Address 2 </th>
+            <th> Town </th>
+            <th> Country </th>
+            <th> Postcode </th>
+            <th> Telephone </th>
+            <th> Fax </th>
+            <th> DX </th>
+        </tr>
+        <tr *ngFor="let field of addressList" (click)="onSelectItem(field)" [ngClass]="{'dps_selected_item': selectedItem == field}">
+            <td>{{ field.ctC_CompanyName }} </td>
+            <td>{{ field.ctC_Address1 }}</td>
+            <td>{{ field.ctC_Address2 }}</td>
+            <td>{{ field.ctC_Town }} </td>
+            <td>{{ field.ctC_County }}</td>
+            <td>{{ field.ctC_PostCode }}</td>
+            <td>{{ field.ctC_Telephone }} </td>
+            <td>{{ field.ctC_Fax }}</td>
+            <td>{{ field.ctC_DX }}</td>
+        </tr>
+    </table>
+</div>
+<div class="general-buttons-bottom"  align="end">
+<button mat-button class="save" [disabled]="!selectedItem" (click)="onAction()"> Select </button>
+  <button mat-button class="close-pop"  (click)="onClose()">  Cancel </button>
+</div>

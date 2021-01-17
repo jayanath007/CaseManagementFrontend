@@ -1,0 +1,14 @@
+<!-- fxFlex="125px" -->
+
+<div fxLayout="row" class="grid-data">
+  <div class="row-data" *ngFor="let column of columnDef; let idx = index"
+    [fxFlex]="isMuiltiClientScreen ? column.extras.fxFlex : '125px'">
+    {{getValueForColumn(column.contactField, rowData)}} &nbsp;
+  </div>
+
+
+
+  <!-- <div class="row-data"   *ngIf="isFileSearch == true" fxFlex="calculateFxLayout()" fxLayoutAlign="center center">
+        <button class="remove" (click)="removeFromFile($event.stopPropagation(),rowData)">Remove</button>
+ </div> -->
+</div>

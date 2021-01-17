@@ -1,0 +1,33 @@
+<div class="dps-notification-wrap general">
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <span *ngIf="isCheckBox">Choose Required Options</span>
+        <span *ngIf="!isCheckBox">Choose 1 Option </span>
+      </span>
+      <span class="spacer"></span>
+      <button *ngIf="isCheckBox" class="notification-button mat-elevation-z0 general" mat-button
+        (click)="selectAllButton()">Select All </button>
+      <mat-icon class="header-icon close" (click)="onClose()">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- general-notification end -->
+
+
+  <mat-dialog-content class="notification-body dps-white-gray-scroll dps-blue-scroll">
+    <h4 *ngIf="!!caption">{{caption}}</h4>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let item of dataList" (click)="onCheckBoxClick(item)" [selected]="item.selected">
+        {{item.option}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-dialog-content>
+  <!-- general-notification body end -->
+
+  <div class="bottom-controllers">
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onAction()"> Ok </button>
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onClose()"> Cancel </button>
+  </div>
+  <!-- general-bottom controller end -->
+</div>

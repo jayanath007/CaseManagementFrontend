@@ -1,0 +1,238 @@
+.dps-crime-court-duty-popup {
+  ::ng-deep.mat-tab-body-wrapper {
+    height: calc(100% - 49px);
+  }
+
+  mat-tab-group {
+    height: 100%;
+  }
+
+  .dps-court-duty-tab-content {
+    height: 100%;
+  }
+
+}
+
+.dps-note-tab {
+  padding: 10px;
+  width: 97%;
+
+  .dps-note-input {
+    width: 100%;
+  }
+}
+
+mat-form-field {
+  font-size: 12px;
+}
+
+.dps-crime-duty-filter-btn {
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-bottom: 0px;
+  padding-right: 18px;
+  border-bottom: 3px solid #d0cdcd;
+  color: #b18b35;
+
+  mat-icon {
+    color: #d0cdcd;
+    height: 26px;
+    position: absolute;
+    bottom: -14px;
+    right: 76%;
+    font-size: 25px;
+  }
+
+  mat-form-field {
+    width: 140px;
+  }
+
+  input {
+    color: #b18b35;
+  }
+
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #1d5282;
+  }
+
+  color: #b18b35;
+}
+
+
+.dps-action-btn {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+
+  padding: 15px 0px 0px;
+  font-size: 12px;
+  line-height: 25px !important;
+
+  button {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  button {
+    background: #0079c4;
+    color: #fff;
+
+    &.disabled-btn {
+      background: #b5b4b4;
+      color: #888686;
+    }
+  }
+
+  .dps-delete {
+    color: #c30d0d;
+    margin-right: 2em;
+    border-color: #ffbcbc;
+    background: #e4cbcb;
+
+  }
+}
+
+.dps-chk-margin {
+  font-size: 12px;
+  width: 130px;
+  line-height: 46px;
+
+  // overwrite the checkbox background
+  ::ng-deep &.mat-checkbox-checked .mat-checkbox-background,
+  &.mat-checkbox-indeterminate .mat-checkbox-background {
+    background-color: #2e5f8a !important;
+  }
+
+  // overwrite the ripple overlay on hover and click
+  ::ng-deep &.mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+    background-color: #2e5f8a !important;
+  }
+}
+
+.dps-edit-rate,
+.dps-rate,
+.dps-value {
+  width: 28%;
+}
+
+.dps-card {
+  padding: 0px;
+  background: #d2dde6;
+  padding: 5px;
+  position: relative;
+
+  &.top-content {
+    border-radius: 0px;
+    // padding: 0px;
+    margin-bottom: 0px;
+  }
+
+  &.dps-value-container {
+    input {
+      text-align: right;
+    }
+  }
+}
+
+.dps-place-icon {
+  font-size: 16px !important;
+  color: #5674a0;
+
+  &.lock-icon {
+    color: #ccada8;
+  }
+
+  &.lock-open-icon {
+    color: #5674a0;
+  }
+}
+
+.title-location {
+  padding: 10px 0px;
+  background: #bac7d2;
+  FONT-SIZE: 12PX;
+  padding-left: 5px;
+}
+
+h3 {
+  font-size: 12px;
+  background: #386B98;
+  color: #fff;
+  padding: 7px;
+  font-weight: 500;
+  margin: 0px;
+  text-align: center;
+}
+
+.milage-rate {
+  padding-left: 5em;
+  color: #f71c1c;
+  font-weight: unset;
+}
+
+.dps-card-content-rate-value {
+  padding: 10px 10px;
+}
+
+.dps-top-content-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.dps-section {
+  font-size: 12px;
+}
+
+mat-card {
+  padding: 0px;
+
+  div {
+    padding: 10px 10px 0px;
+  }
+
+  mat-form-field {
+    width: 100px;
+
+  }
+}
+
+.dps-card-content-cdInfor {
+  padding: 0px 10px;
+  background: #fff;
+
+  mat-form-field {
+    width: 125px;
+
+  }
+}
+
+.dpsrate-calculation {
+  padding: 10px 10px 0px;
+}
+
+.dps-crime-court-duty-popup {
+  height: 100%;
+
+  ::ng-deep.tableContainer {
+    // height: 130px !important;
+
+    thead th {
+      border-right: 1px solid #dcdcdc;
+    }
+  }
+
+  dps-common-grid-table {
+    height: 75%;
+    width: calc(100% - 2px);
+    min-height: 130px;
+  }
+
+  .dps-court-duty-rate {
+    height: calc(100% - 457px);
+  }
+
+  .dps-white-gray-scroll {
+    overflow-y: auto;
+  }
+}

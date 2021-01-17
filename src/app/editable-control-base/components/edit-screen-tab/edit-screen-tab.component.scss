@@ -1,0 +1,47 @@
+@import '~styles/variables.scss';
+
+
+
+::ng-deep  .dps-client-creation-side-nav {
+  width: 300px;
+  mat-icon,
+  h4 {
+    color: #316a94;
+  }
+  h4 {
+    text-transform: uppercase;
+  }
+
+}
+
+::ng-deep .required-star
+{
+  color: #ffa533;
+}
+
+.dps-primary-tab
+{
+  color: #4277a1;
+::ng-deep .mat-list-item-content .mat-list-text{
+  padding-left: 2px !important;
+}
+
+}
+
+
+::ng-deep .dps-client-creation .mat-list-item-with-avatar,
+::ng-deep .dps-matter-creation-side-nav .mat-list-item-with-avatar
+{
+  height: 38px !important;
+  
+}
+
+::ng-deep .dps-matter-creation-side-nav .mat-list-item-with-avatar .mat-list-item-content
+{
+  padding: 10px;
+}
+::ng-deep .dps-matter-creation-side-nav .mat-list-item-with-avatar .mat-list-item-content .fa
+{
+  padding: 2px 7px 0 0 !important;
+    font-size: 17px;
+}

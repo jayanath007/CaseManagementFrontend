@@ -1,0 +1,60 @@
+<!-- <div class="spinnerCenter"></div> -->
+<!-- <mat-spinner class="spinnerCenter" *ngIf="ContactData.loading"></mat-spinner> -->
+
+<div class="dps-contact-grid" fxLayout="column">
+  <div *ngIf="!ContactData.loading" class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.Name }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Company">
+        <mat-header-cell *matHeaderCellDef> Company </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.Company}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Telephone">
+        <mat-header-cell *matHeaderCellDef> Telephone </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.Telephone}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.Email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PostCode">
+        <mat-header-cell *matHeaderCellDef> Postcode </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.PostCode}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RoleOnFile">
+        <mat-header-cell *matHeaderCellDef> Role On File </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.RoleOnFile}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <mat-header-cell *matHeaderCellDef> Address
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.data.Address}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <div fxFlex="56px">
+    <mat-paginator [length]="ContactData?.total" [pageSize]="PageInfo.pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="PageChange($event)">
+    </mat-paginator>
+  </div>
+</div>
+
+
+
+<style>
+  mat-icon i {
+    font-size: 19px;
+  }
+
+</style>

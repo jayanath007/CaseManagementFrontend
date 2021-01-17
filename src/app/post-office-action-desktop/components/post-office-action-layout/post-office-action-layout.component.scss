@@ -1,0 +1,180 @@
+@import '~styles/variables.scss';
+
+
+::ng-deep .dps-post-office-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+    overflow: hidden;
+  }
+}
+
+.post-office-action-layout {
+  height: calc(100% - 100px);
+
+.post-office-action-general {
+  height: 100%;
+}
+
+mat-toolbar.top {
+  background: $dps-popup-matbar;
+  height: 42px;
+  color: #fff;
+  font-size: $primary-font-size;
+  display: block;
+  padding: 5px 18px 0;
+
+  .dps-popup-heading {
+    vertical-align: super;
+    padding-left: 5px;
+  }
+
+    .time-rc-head-icon {
+      color: #fff;
+      font-size: $primary-font-size + 7;
+      float: left;
+      margin-top: 4px;
+      margin-right: 5px;
+    }
+    .time-rc-close
+  {
+    float: right;
+    width: 21px;
+    height: 22px;
+    margin-top: -5px;
+    text-align: center;
+
+    i
+    {
+      font-size: $primary-font-size + 8;
+      float: right;
+    }
+  }
+  }
+
+  .dps-white-gray-scroll {
+    height: 100%;
+    overflow: scroll;
+  }
+
+  form {
+
+    .Main-tab {
+      padding: 14px 0px 10px 20px;
+      h3 {
+      margin: 0;
+      font-size: $primary-font-size - 1;
+      color: #40505a;
+      background: #e8e8e8;
+      padding: 8px;
+      width: 95%;
+      border: 1px solid #d2d2d2;
+      font-family: $primary-font-stack;
+      }
+
+      .controll-wrapper {
+        padding: 5px 0px 0px 12px;
+        span {
+          font-weight: 600;
+          min-width: 77px;
+          display: inline-block;
+          font-family: $primary-font-stack;
+        }
+
+      }
+
+      .postoffice-path {
+        margin: 3px 0px 3px 0;
+        font-family: $primary-font-stack;
+
+        mat-label {
+          font-style: italic;
+        }
+
+        span {
+          font-size: $primary-font-size - 2;
+          font-weight: 600;
+          
+          margin-right: 5px;
+          min-width: 73px;
+          display: inline-block;
+        }
+      }
+
+
+      .dps-matter-select {
+        border: 1px solid #d6d6d6;
+        width: 50%;
+        margin: 6px 0px 5px 0;
+
+      button {
+        background: $dps-popup-matbar;
+        border-radius: 0;
+        color: #f3f3f3;
+      }
+      }
+
+      .main-details {
+        // min-height: 125px;
+        margin-bottom: 10px;
+      }
+
+      .main-tracking {
+        min-height: 160px;
+      }
+
+      .dps-post-office-tracking {
+        margin: 14px 0 0 0;
+      }
+  
+      mat-form-field {
+        font-size: $primary-font-size - 2;
+        margin-right: 10px;
+        margin-left: 10px;  
+      }
+
+      .msg {
+        margin-left: 0px !important;
+      }
+
+      .message-box {
+        width: 95%;
+        padding: 5px 0px 0px 0px;
+      }
+
+      mat-label {
+        font-size: $primary-font-size - 2;
+      }
+
+      .history {
+        min-height: 300px;
+      }
+  
+    }
+
+  }
+
+  
+
+  
+
+  .button-set {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 20px 0px 20px;
+    border-top: 1px solid #e8e8e8;
+    button {
+      font-size: $primary-font-size - 2;
+      margin-right: 5px;
+      border-radius: 0px;
+      margin-top: 10px;
+    }
+
+    .btn-ok {
+      background: $dps-popup-matbar;
+      color: $primary;
+    }
+  }
+
+  
+}

@@ -1,0 +1,40 @@
+
+<div class="screen-view-general-popup-body">
+  <h1>Edit Lookup</h1>
+
+    <div class="input-wrapper-edit-lookup">
+
+        <mat-form-field class="property-value-text">
+          <input matInput placeholder="Address1 Variable Number" type="number"  #action 
+           [(ngModel)]="address1">
+        </mat-form-field>
+
+
+
+        <mat-form-field class="property-value-text">
+          <input matInput placeholder="Address2 Variable Number" type="number" #action 
+          [(ngModel)]="address2">
+        </mat-form-field>
+
+        <mat-form-field class="property-value-text">
+          <input matInput placeholder="Town Variable Number" type="number" #action
+          [(ngModel)]="town">
+        </mat-form-field>
+
+        <mat-form-field class="property-value-text">
+          <input matInput placeholder="Country Variable Number" type="number" #action 
+          [(ngModel)]="country">
+        </mat-form-field>
+
+        <mat-form-field class="property-value-text" *ngIf="data.selectedContanerComponent.uiComponentType !== UiComponentType.PostCode">
+          <input matInput placeholder="Post code Variable Number" type="number" #action 
+          [(ngModel)]="postcode">
+        </mat-form-field>
+    </div>
+
+  <div class="general-buttons-bottom">
+    <button mat-button (click)="onSave(data.textFileData)">Save</button>
+    <button mat-button class="close-pop"  color="warn" (click)="onClose()">Close</button>
+  </div>
+  </div>
+  

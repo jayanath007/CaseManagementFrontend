@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+
+h3 {
+  background: #eaeaea;
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 600 !important;
+  color: #25313a !important;
+  margin-top: 0px !important;
+  border: 1px solid #d2d2d2;
+  border-right: none;
+  border-left: none;
+  height: 50px !important;
+
+  mat-icon {
+    margin: 0px 20px 0px 17px;
+
+  }
+}
+
+mat-list-item {
+  height: 38px !important;
+
+  [matLine] {
+    font-size: $primary-font-size - 2 !important;
+    margin-left: -17px;
+  }
+
+  mat-icon {
+    font-size: $primary-font-size + 8 !important;
+    margin-left: 31px !important;
+    color: #30a3e0;
+  }
+}

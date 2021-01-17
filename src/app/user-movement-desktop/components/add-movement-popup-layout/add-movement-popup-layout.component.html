@@ -1,0 +1,74 @@
+<div fxLayout="column" class="dps-team-movement-add">
+
+  <div fxLayout="column">
+    <mat-toolbar class="dps-toolbar-box-shadow team-header">
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="team-icon">playlist_add</mat-icon>
+        <span class="team-text">Add Movement</span>
+
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose($event)">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="addMovementloading" mode="indeterminate"></mat-progress-bar>
+    <div class="dps-add-movement-popup" fxLayout="column" fxLayoutGap="10px">
+
+      <span class="dps-ref"> {{data.user}}</span>
+      <!-- {{data | json}} -->
+      <dps-add-movement-popup-container [dayMovements]="data?.dayMovements" [data]="data" [timeOffset]="timeOffset"
+        [locationList]="locationList" [timeList]="timeList" [nextAvailableTypes]="nextAvailableTypes"
+        (close)="onClose($event)" (submitUserMovemetDetails)="onSubmitUserMovemetDetails($event)">
+      </dps-add-movement-popup-container>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  <div fxFlex="0 0 42px">
+    <mat-toolbar>
+
+      <mat-icon>playlist_add</mat-icon>
+      <span>Add Movement</span>
+
+    </mat-toolbar>
+   <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="addEditTaskLoading" mode="indet erminate"></mat-progress-bar>
+  </div>
+
+  <div>
+    <dps-add-movement-popup-container></dps-add-movement-popup-container>
+
+  </div>
+
+
+
+
+  <mat-divider></mat-divider>
+  <mat-dialog-actions fxFlex="0 0 60px">
+    <span fxFlex="1 1 auto"></span>
+
+    <button mat-raised-button class="dps-task-submit" [disabled]="addEditTaskLoading" (click)="onSubmitData()"
+      tabindex="-1">Submit</button>
+    <button mat-raised-button [disabled]="addEditTaskLoading" (click)="onClose()" tabindex="2">Cancel</button>
+  </mat-dialog-actions>
+</div> -->

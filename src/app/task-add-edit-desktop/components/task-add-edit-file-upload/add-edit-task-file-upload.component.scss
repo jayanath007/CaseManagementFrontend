@@ -1,0 +1,73 @@
+@import '~styles/variables.scss';
+.dps-addNote-Upload-Button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text {
+  font-family: $primary-font-stack;
+  font-size: $primary-font-size - 2;
+}
+
+.dps-file-upload {
+  border-radius: 50px;
+  padding: 0px 10px;
+  background: $primary;
+  height: 35px;
+  cursor: pointer;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.dps-file-upload button {
+  position: relative;
+  left: -10px;
+  background: #c19015;
+  height: 35px;
+  width: 35px;
+}
+
+.dps-file-upload span {
+  position: relative;
+  top: 0px;
+  right: 5px;
+}
+
+.dps-file-upload button mat-icon {
+  color: $primary;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.dps-file-upload-chip.mat-chip {
+  padding: 3px 12px;
+}
+
+.dps-file-upload-chip div {
+  color: #d0c8c8;
+  padding: 5px;
+  border-radius: 50%;
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background: #065996;
+  right: -10px;
+}
+
+.upload-file-name {
+  max-width: 385px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.add-edit-task-file-uploder {
+  padding: 5px 0px 12px;
+  input {
+    display: none;
+  }
+}
+
+.dps-file-upload-chip i.material-icons {
+  font-size: $primary-font-size + 3;
+}

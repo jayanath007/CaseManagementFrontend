@@ -1,0 +1,183 @@
+@import '~styles/variables.scss';
+.field-align-controller-set
+{
+    padding: 20px;
+}
+
+.field-align-controller-set .controller-movement-button-wrap {
+    float: left;
+    clear: left;
+    margin-bottom: 8px;
+    
+}
+.field-align-controller-set .controller-movement-button-wrap div
+{
+    outline: none;
+}
+
+    .field-align-controller-set .controller-movement-button-wrap .align-inputs .fa-chevron-right {
+        font-size: 10px;
+        margin-left: -4px;
+        margin-top: 1px;
+    }
+
+    .field-align-controller-set .controller-movement-button-wrap .align-inputs .custom-add {
+        font-size: $secondary-font-size;
+    }
+
+        .field-align-controller-set .controller-movement-button-wrap .align-inputs .custom-add.input-rectangle {
+            margin-left: 2px;
+        }
+
+    .field-align-controller-set .controller-movement-button-wrap:hover {
+        cursor: pointer;
+    }
+
+        .field-align-controller-set .controller-movement-button-wrap:hover .movement-label {
+            color: #ff8700;
+        }
+
+        .field-align-controller-set .controller-movement-button-wrap:hover .field-update-controller {
+            background-color: #ff8700;
+        }
+
+
+
+    .field-align-controller-set .controller-movement-button-wrap .movement-label {
+        float: left;
+        padding: 12px 0 0 5px;
+        font-size: 13px;
+        color: #114463;
+        font-weight: normal;
+    }
+
+    .field-align-controller-set .custom-add,
+    .field-align-controller-set .fa {
+        float: left;
+    }
+
+    .field-align-controller-set .field-update-controller {
+        background: #114463;
+        border-radius: 100%;
+        width: 27px;
+        height: 27px;
+        float: left;
+        border: 2px solid #4381aa;
+        color: #7d97a7;
+    }
+
+        .field-align-controller-set .field-update-controller.align-inputs {
+            padding: 11px 0 0px 10px;
+        }
+
+        .field-align-controller-set .field-update-controller.inline {
+            padding: 10px 0 7px 10px;
+            font-size: $primary-font-size;
+        }
+
+        .field-align-controller-set .field-update-controller.increase-space i {
+            clear: both;
+            margin-left: 3px;
+            margin-top: -2px;
+        }
+
+        .field-align-controller-set .field-update-controller.decrease-space i {
+            clear: both;
+            margin-left: 3px;
+            margin-top: -2px;
+        }
+
+    .field-align-controller-set .move-left {
+        padding-left: 9px;
+        padding-top: 10px;
+    }
+
+
+        .field-align-controller-set .move-left .fa {
+            padding-top: 1px;
+        }
+
+    .field-align-controller-set .move-right {
+        padding-left: 10px;
+        padding-top: 9px;
+    }
+
+        .field-align-controller-set .move-right .fa {
+            padding-top: 1px;
+        }
+
+
+    .field-align-controller-set .move-center {
+        padding-left: 6px;
+        padding-top: 9px;
+    }
+
+        .field-align-controller-set .move-center .fa {
+            padding-top: 1px;
+        }
+
+    .field-align-controller-set .move-top {
+        padding-left: 11px;
+        padding-top: 0px;
+        height: 37px;
+    }
+
+    .field-align-controller-set .increase-space {
+        padding: 3px 4px 2px 8px;
+        height: 32px;
+    }
+
+    .field-align-controller-set .decrees-space {
+        padding: 4px 1px 0px 11px;
+        height: 33px;
+    }
+
+    .field-align-controller-set .move-bottom {
+        padding-top: 15px;
+        padding-left: 10px;
+        height: 21px;
+    }
+
+    .field-align-controller-set .move-top .custom-add {
+        float: none;
+        clear: both;
+        display: block;
+        margin-left: 4px;
+        height: 12px;
+    }
+
+    .field-align-controller-set .move-bottom .custom-add {
+        float: none;
+        clear: both;
+        display: block;
+        line-height: 1px;
+        margin-left: 4px;
+    }
+
+    .field-align-controller-set .move-top .fa {
+        float: none;
+        clear: both;
+        display: block;
+        margin-right: 4px;
+    }
+
+    .field-align-controller-set .move-bottom .fa {
+        float: none;
+        clear: both;
+        display: block;
+        line-height: 1px;
+        margin-right: 4px;
+    }
+
+
+.helper
+{
+    display: block;
+    padding: 11px;
+    font-size: 13px;
+    background: #efc483;
+    margin: 10px 10px 0 10px;
+    border-radius: 2px;
+    border: 1px solid #ecb462;
+    color: #000;
+}

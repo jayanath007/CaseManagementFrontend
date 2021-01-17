@@ -1,0 +1,12 @@
+<div class="day-evnt" fxLayout="column">
+  <mat-toolbar fxFlex="50px">
+    <span>{{selectedDate|date:'EEEE, MMMM dd, yyyy'}}</span>
+  </mat-toolbar>
+  <div class="dps-day-event-item-list dps-white-gray-scroll" fxFlex="1 1 auto">
+    <mat-nav-list dense>
+      <dps-day-event-item [calendarEvent]="calendarEvent" (editEvent)="onEditEvent($event)" (loadSingleCalendarEvent)="onLoadSingleCalendarEvent($event)"
+        (response)="onResponse($event)" (replyForward)="onReplyForward($event)" (showAsStateChange)="onShowAsStateChange($event)"
+        (removeFromCalendar)="onRemoveFromCalendar($event)" *ngFor="let calendarEvent of calendarEvents" (editSeriesEvent)="onEditSeriesEvent($event)"></dps-day-event-item>
+    </mat-nav-list>
+  </div>
+</div>

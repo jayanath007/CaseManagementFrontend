@@ -1,0 +1,31 @@
+<div class="dps-document-view" fxLayout="column">
+  <div class="dps-document-view-content dps-white-gray-scroll" [hidden]="!documentUrl">
+    <mat-progress-bar *ngIf="iFrameLoading" mode="indeterminate"></mat-progress-bar>
+    <div #docDiv class="dps-doc-view dps-white-gray-scroll">
+      <!-- need to have empty div dont remove it -->
+      <div> </div>
+    </div>
+  </div>
+
+  <div class="editable document-view-controller" fxLayout="row" *ngIf="!isPopup"
+    [ngStyle]="{'right':
+    (fileItem?.data?.letter_icon?.toLowerCase()==='msg'||fileItem?.data?.letter_icon?.toLowerCase()==='eml'?'80px':'40px')}">
+    <button mat-icon-button *ngIf="!isSignDoc && fileItem?.data?.diary_UID && matterInfo?.AppCode && matterInfo?.BranchId &&
+      matterInfo.FileId && fileItem?.data?.letter_name" (click)="onDownload()">
+      <mat-icon>get_app</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="!isSignDoc && fileItem?.data?.diary_UID && !isGoogle" (click)="onCloudDownload()">
+      <mat-icon>cloud_download</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="showDocumentEditButton" [hidden]="isSignDoc" (click)="openDocumentEdit()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openInPopup()" *ngIf="!isSignDoc && documentUrl" color="primary">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+    <!-- <button *ngIf="isSignDoc" mat-icon-button (click)="onSendSignDoc()" color="primary">
+      <mat-icon> send</mat-icon>
+    </button> -->
+
+  </div>
+</div>

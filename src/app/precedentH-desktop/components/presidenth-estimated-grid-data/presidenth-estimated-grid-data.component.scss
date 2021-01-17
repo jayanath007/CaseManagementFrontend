@@ -1,0 +1,130 @@
+.type-selection {
+  padding: 5px 10px 0;
+  width: calc(100% - 24px);
+
+  .mat-option .mat-option-text {
+    font-size: 11px;
+  }
+}
+
+.total-profit-n-cost {
+
+  .cost-headers {
+    h4 {
+      width: 100px;
+      margin-left: 10px;
+    }
+  }
+
+  .list-item-container {
+    width: 100%;
+
+  }
+
+  .list-item-container.total-cost {
+    .mat-form-field {
+      font-weight: bold;
+    }
+  }
+
+  mat-form-field {
+    width: 100px;
+    margin-left: 10px;
+    text-align: right;
+  }
+
+  ::ng-deep .mat-list-item {
+    height: 28px;
+
+
+  }
+
+}
+
+.total-profit-n-cost.with-disbursments {
+  padding-right: 7px;
+}
+
+.total-profit-n-cost.estimated {
+  background: #dbe8f1;
+  width: 99%;
+  padding-bottom: 12px;
+  margin-top: 0px;
+  border: 1px solid #a2bdd0;
+  border-top: 0;
+
+  h4 {
+    text-align: right;
+  }
+}
+
+dps-common-grid-table {
+
+  ::ng-deep .tableContainer {
+    border: 0;
+  }
+}
+
+
+.estimated-cost-data-table {
+
+  width: 99%;
+  height: 136px;
+  border: 1px solid #d0d0d0;
+
+
+}
+
+table {
+  width: 100%;
+
+  .mat-cell,
+  .mat-header-cell {
+    font-size: 12px;
+  }
+
+
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
+
+.status-wrapper {
+  font-size: 12px;
+  color: #000000;
+  width: 100%;
+
+  .status-header {
+    background: #e1e1e1;
+    text-align: right;
+    width: 200px;
+
+  }
+
+  .status-data {
+
+    color: #000000;
+    text-align: right;
+    width: 200px;
+
+  }
+
+  .number,
+  .status,
+  .units {
+    text-align: left;
+
+  }
+}
+
+
+.mat-divider
+{
+  margin: 7px 16px;
+  border-color: white;
+}

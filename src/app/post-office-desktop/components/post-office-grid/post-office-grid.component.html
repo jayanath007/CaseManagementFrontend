@@ -1,0 +1,73 @@
+<div class="post-office-grid">
+  <mat-sidenav-container class="post-office-scrolle">
+    <mat-sidenav position="end" mode="side" [disableClose]="true"
+      [opened]="(docPrivewRow  && isBrowserCompatibleExtentions(docPrivewRow))" fxLayout="column">
+      <div class="wrkdone-actions" fxLayout="row">
+        <!-- <button class="doc-row" mat-icon-button *ngIf="docPrivewRow?.emailItem" (click)="openMsgFile(docPrivewRow)">
+          <mat-icon>open_in_new</mat-icon>
+        </button> -->
+        <button class="doc-close" mat-icon-button (click)="onCloseViewer()" color="primary"
+          [ngClass]="{'dps-doc-viwer-close-btn':docPrivewRow?.docUrl,'dps-email-viwer-close-btn':docPrivewRow?.emailItem}">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <dps-document-view-page fxFlex="calc(100%-41px)" *ngIf="docPrivewRow?.docUrl" (editDocument)="onCloseViewer()"
+        [documentUrl]="docPrivewRow?.docUrl" [fileItem]="docPrivewRow" [documentUrlLoadSuccess]="documentUrlLoadSuccess"
+        [documentUrlIsLoading]="documentUrlIsLoading" [extension]="docPrivewRow?.letter_icon">
+      </dps-document-view-page>
+    </mat-sidenav>
+
+    <div class="post-office-controller" fxLayout="column">
+      <div fxFlex="calc(100%-50px)" fxLayout="column">
+        <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+          <div fxLayout="column" class="postoffice-controller">
+            <div class="row-highlight" dpsIsMobile>
+
+
+              <div class="dps-columnheader" [ngClass]="{'group-level-one': (groupMode === GroupMode.ByGroup ||  groupMode === GroupMode.Date) 
+              ,'group-level-two':( groupMode === GroupMode.ByGroupDate ||  groupMode === GroupMode.DateByGroup)}">
+
+                <!-- <dps-column-header *ngFor="let header of columnDef" [fxFlex]="headerFlex(header)" [def]="header"
+                  (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)"
+                  [filterAnchor]="header.extras.filterAnchor">
+                </dps-column-header> -->
+
+                <dps-column-header *ngFor="let header of columnDefVisibale" [fxFlex]="headerFlex(header)" [def]="header"
+                  (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                  (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+                </dps-column-header>
+
+
+              </div>
+              <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            </div>
+            <div class="post-office-group dps-white-gray-scroll">
+
+              <div *ngIf="( groupMode === GroupMode.Default)">
+                <dps-post-office-grid-row [gridData]="gridData" [columnDef]="columnDef" [selectedInfo]="selectedInfo"
+                  [isMuiltySelect]="getIsMuiltySelect" [selectedRows]="selectedRows" [expandedRow]="expandedRow"
+                  [selectedGroup]="groupMode" (rowExpand)="gridRowExpan($event)"
+                  (clickGridButton)="onClickGridButton($event)">
+                </dps-post-office-grid-row>
+              </div>
+
+              <dps-postoffice-group *ngFor="let group of groupData" [selectGroupHash]="selectGroupHash"
+                [gridData]="gridData" [group]="group" [homeCurrancy]="homeCurrancy" [columnDef]="columnDef"
+                (selectGroup)="onSelectGroup($event)" [searchText]="searchText" [selectedInfo]="selectedInfo"
+                [expandedRow]="expandedRow" [selectedGroup]="groupMode" (loadMoreData)="loadMore($event)"
+                (rowExpand)="gridRowExpan($event)" (clickGridButton)="onClickGridButton($event)">
+              </dps-postoffice-group>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- *ngIf="groupMode === GroupMode.Default" -->
+      <mat-paginator fxFlex="50px" [length]="totalItem" [pageIndex]="paginatorDef?.currentPage"
+        [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)"
+        class="footer-shadow">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-container>
+</div>

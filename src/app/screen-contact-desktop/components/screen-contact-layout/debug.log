@@ -1,0 +1,14 @@
+[0801/142942.879:FATAL:v8_initializer.cc(167)] Failed to open V8 file 'C:\Program Files (x86)\Microsoft VS Code\natives_blob.bin' (reason: -1)
+Backtrace:
+	GetHandleVerifier [0x015BD347+16583]
+	GetHandleVerifier [0x0161503A+376250]
+	GetHandleVerifier [0x0167CEF1+801905]
+	GetHandleVerifier [0x0167CCF9+801401]
+	GetHandleVerifier [0x0167C8ED+800365]
+	(No symbol) [0x013E6988]
+	(No symbol) [0x013E12FC]
+	IsSandboxedProcess [0x0393D046+34640253]
+	BaseThreadInitThunk [0x76938744+36]
+	RtlGetAppContainerNamedObjectPath [0x776F58ED+253]
+	RtlGetAppContainerNamedObjectPath [0x776F58BD+205]
+

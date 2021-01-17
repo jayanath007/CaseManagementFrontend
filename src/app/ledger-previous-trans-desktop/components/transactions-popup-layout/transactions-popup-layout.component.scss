@@ -1,0 +1,57 @@
+* {
+  font-size: 12px;
+}
+
+
+.transactions-toolbar {
+  padding: 10px;
+  background: #deedff;
+  height: 42px;
+  margin-bottom: 1px;
+}
+
+.include-closed-matters {
+  margin: -2px 10px 10px 21px;
+}
+
+.print-traansaction {
+  line-height: 20px;
+}
+
+.dps-grid {
+  height: 534px;
+}
+
+.mat-paginator-container {
+  background: #e6eef7;
+}
+
+dps-column-header {
+  background: #c5d5e8;
+}
+
+.mat-chip.mat-standard-chip.mref {
+  margin: 0 !important;
+  background: #fdaf00;
+}
+
+
+
+.grid-selected-all {
+
+  mat-nav-list,
+  .row-highlight-inner {
+    min-width: 1400px;
+  }
+}
+
+.grid-selected-office,
+.grid-selected-client,
+.grid-selected-all.balance-checked
+{
+
+  mat-nav-list,
+  .row-highlight-inner {
+    min-width: 1000px;
+  }
+}

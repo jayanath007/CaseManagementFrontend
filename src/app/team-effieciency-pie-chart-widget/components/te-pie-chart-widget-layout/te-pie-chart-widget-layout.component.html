@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <mat-toolbar-row class="header team-efficiency">
+    <mat-icon class="header-icon">timelapse</mat-icon>
+    <span class="header-name" color="primary" (click)="goToTeamEfficiency()">{{title}}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button class="option-btn" (click)="onRefreshData()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #mainmenu="matMenu">
+      <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+        Remove
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="!data?.isLoading">
+  <div class="empty-view" *ngIf="data?.length === 0 || !data">
+    <p class="wrong-massage" *ngIf="data?.length === 0"> No item to preview</p>
+    <p class="wrong-massage" *ngIf="!data"> Something went wrong </p>
+  </div>
+</div>
+<div>
+  <dps-pie-chart [pieChartDataset]="data" [chartOptions]="chartOptions" [chartHeight]="chartHeight"
+    [borderColor]="'#e3f3ff'"></dps-pie-chart>
+</div>

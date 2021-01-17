@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutAlign=" center">
+  <button mat-icon-button (click)="onFirstPage()" [disabled]="pageIndex<1">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-angle-double-left" class="fa"></mat-icon>
+  </button>
+  <button mat-icon-button (click)="onPreviousPage()" [disabled]="pageIndex<1">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-angle-left" class="fa"></mat-icon>
+  </button>
+  <span>{{pageIndex>=0?(pageIndex+1):0}} of {{pagesLength||0}}</span>
+  <button mat-icon-button (click)="onNextPage()" [disabled]="pageIndex>pagesLength-2">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-angle-right" class="fa"></mat-icon>
+  </button>
+  <button mat-icon-button (click)="onLastPage()" [disabled]="pageIndex>pagesLength-2">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-angle-double-right" class="fa"></mat-icon>
+  </button>
+</div>

@@ -1,0 +1,20 @@
+<div class="componenet-drag" [dpsDraggable]="true" (onDragStart)="onDragStart($event,dataItem)" (onDragEnd)="onDragEnd($event)"
+  [dropZones]="['screenEditViewContainer','ovItem','ovItemFirst']" dragImage="item-drag.png">
+  <div class="components" (dblclick)=onOvItemChange(dataItem) [ngClass]="{'used': dataItem.onScreen }">
+    <div class="var">{{ dataItem.varNo }}</div>
+    <div class="type">
+        <!-- <label class="element-name">{{ dataItem.fieldType }}</label> -->
+ 
+      <i class="fa" [ngClass]="getClassByIconChange(dataItem.fieldType)" > </i>
+    </div>
+    <div class="var-lbl">{{ dataItem.description }}</div>
+    <div class="field-usage">
+      <mat-checkbox class="example-margin" color="primary" (click)="rowCheckChanged($event,dataItem)" [ngModel]="dataItem.isSelected"></mat-checkbox>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<!-- && dataItem.onScreen -->
+<!-- [hidden]="!(isShowDropInOvItem && dataItem.onScreen )" -->
+<div dpsDroppable dropZone="ovItem" (onDrop)="onDrop($event,dataItem)" (onDragEnter)="onDragEnter($event,dataItem)" [ngClass]="{'componenet-drag-space':  ( isShowDropInOvItem  && dataItem.onScreen ) }">
+</div>

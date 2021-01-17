@@ -1,0 +1,119 @@
+<div class="dps-search-option" fxLayout="column">
+  <mat-nav-list class="search-option-icon" dense>
+    <mat-list-item class="dps-matlist" (click)="onExitSearch()">
+      <mat-icon matListIcon>arrow_back</mat-icon>
+      <span matLine>Exit Search</span>
+    </mat-list-item>
+  </mat-nav-list>
+  <mat-nav-list dense fxFlex="1 1 auto" class="dps-mail-folder-search dps-white-gray-scroll">
+    <mat-selection-list (selectionChange)="onAllFolders($event)">
+      <h3 matSubheader>In folders</h3>
+      <mat-list-option checkboxPosition="before">All folders</mat-list-option>
+    </mat-selection-list>
+    <mat-divider class="mat-divider-option"></mat-divider>
+    <h3 class="form" matSubheader>From</h3>
+    <div class="search-content" fxLayout="row">
+      <mat-form-field class="always" floatLabel="always" *ngIf="!selectedFrom">
+        <input #contactInput [matAutocomplete]="fromAutocomplete" matInput type="text" [formControl]="inputCtrl">
+        <mat-autocomplete #fromAutocomplete="matAutocomplete" (optionSelected)="optionSelected($event)">
+          <div [hidden]="showSearchList">
+            <mat-option *ngFor="let person of filteredPeople | async" [value]="person.id" fxLayout="row">
+              <div class="person-filter" *ngIf="!img.showProfileImg"
+                [ngStyle]="{'background-color': person.emailAddresses[0].address|recipientColorCode}">
+                <span class="person">
+                  {{person.displayName|nameInitials}}
+                </span>
+              </div>
+              <img class="person-filter" #img [hidden]="!img.showProfileImg"
+                src="{{person.emailAddresses[0].address | dpsUserImage | async}}" alt="..."
+                (load)="img.showProfileImg=true">
+              <div class="display-person" fxLayout="column">
+                <small class="name">{{person.displayName}}</small>
+                <small class="address">{{ person.emailAddresses[0].address}}</small>
+              </div>
+            </mat-option>
+          </div>
+          <div [hidden]="!showSearchList">
+            <mat-option *ngFor="let person of searchedPeople.people;" [value]="person.id" fxLayout="row">
+              <div class="person-filter" *ngIf="!img.showProfileImg"
+                [ngStyle]="{'background-color': person.mail|recipientColorCode}">
+                <span class="person">
+                  {{person.displayName|nameInitials}}
+                </span>
+              </div>
+              <img class="person-filter" #img [hidden]="!img.showProfileImg"
+                src="{{person.mail | dpsUserImage | async}}" alt="..." (load)="img.showProfileImg=true">
+              <div class="display-person" fxLayout="column">
+                <small class="name">{{person.displayName}}</small>
+                <small class="address">{{person.mail}}</small>
+              </div>
+            </mat-option>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-option disabled *ngIf="showLoader">
+            <i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching
+          </mat-option>
+          <mat-option disabled *ngIf="showSearchList && !(searchedPeople?.people.length > 0)">
+            No match was found.
+          </mat-option>
+          <!-- <mat-option *ngIf="showSearchBtn" value="">
+                <mat-icon matListIcon style="color: #0D557C">search</mat-icon>
+                Search Directory
+            </mat-option> -->
+          <mat-nav-list style="padding-top: 0px;" *ngIf="showSearchBtn">
+            <a mat-list-item (click)="onSearchDirectory(contactInput.value)">
+              <mat-icon class="nav-list-mat-icon" matListIcon>search</mat-icon>
+              Search Directory
+            </a>
+          </mat-nav-list>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <mat-list-item *ngIf="selectedFrom" dense class="dps-search-mail-from" disableRipple>
+      <button matListAvatar mat-icon-button class="dps-mail-item-avatar" *ngIf="!showProfileImg"
+        [ngStyle]="{'background-color': selectedFrom.emailAddresses[0].address|recipientColorCode}">
+        <span>{{selectedFrom.displayName|nameInitials}}</span>
+      </button>
+      <img matListAvatar [hidden]="!showProfileImg" src="{{selectedFrom.emailAddresses[0].address | dpsUserImage | async}}"
+        alt="..." (load)="showProfileImg=true">
+      <span matLine>{{selectedFrom.displayName}}</span>
+      <span matLine>{{selectedFrom.emailAddresses[0].address}}</span>
+      <button mat-icon-button (click)="removeFrom()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-selection-list class="mat-option-list mat-option-disabled" (selectionChange)="onWithAttachements($event)">
+      <mat-divider></mat-divider>
+      <h3 class="option" matSubheader>Options</h3>
+      <mat-list-option checkboxPosition="before">With attachments</mat-list-option>
+    </mat-selection-list>
+    <mat-divider class="divider"></mat-divider>
+    <h3 class="date" matSubheader>Date</h3>
+    <mat-radio-group dense fxLayout="column" (change)="onDateTypeChange($event)" [value]="SerchDateTypes.All">
+      <mat-radio-button color="primary" [value]="SerchDateTypes.All">
+        <span>All</span>
+      </mat-radio-button>
+      <mat-radio-button color="primary" [value]="SerchDateTypes.ThisWeek">
+        <span>This week</span>
+      </mat-radio-button>
+      <mat-radio-button color="primary" [value]="SerchDateTypes.ThisMonth">
+        <span>This month</span>
+      </mat-radio-button>
+      <mat-radio-button color="primary" [value]="SerchDateTypes.SelectRange">
+        <span>Select range</span>
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="" floatLabel="always" style="padding-left: 23px; width: auto;  padding-top: 12px">
+      <input placeholder="From" #dateFrom matInput [matDatepicker]="fromDatePicker" disabled
+        (dateChange)="onFromDateChange($event)">
+      <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromDatePicker [disabled]="dateType.value!==SerchDateTypes.SelectRange"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" style="padding-left: 23px; width: auto">
+      <input placeholder="To" #dateTo matInput [matDatepicker]="toDatePicker" disabled
+        (dateChange)="onToDateChange($event)">
+      <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #toDatePicker [disabled]="dateType.value!==SerchDateTypes.SelectRange"></mat-datepicker>
+    </mat-form-field>
+  </mat-nav-list>
+</div>

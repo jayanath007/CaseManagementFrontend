@@ -1,0 +1,109 @@
+<mat-list-item
+  [ngClass]="{'dps-mail-item-read':item.data.isRead,'dps-mail-item-unread':!item.data.isRead,'dps-mail-item-selected':item.selected,'dps-mail-item-unselected':!item.selected ,'dps-mail-item-viewing':item.viewing}"
+  class="dps-mail-list-item" disableRipple (click)="select($event)" [dpsDraggable]="true"
+  (onDragStart)="onDragStart($event)" [dropZones]="['mailFolder-'+item.owner.toLowerCase(),'mailCompose','openCaseTab']"
+  dragImage="item-drag.png">
+  <button matListAvatar mat-icon-button class="dps-mail-item-avatar" [ngStyle]="{'background-color': item.displayColor}"
+    *ngIf="!item.selected && !showProfileImg">
+    <span>{{item.displayInitials}}</span>
+  </button>
+  <!-- <img matListAvatar [hidden]="!showProfileImg" class="dps-mail-item-avatar-img"
+    src="{{(item?.data?.isDraft ? (item?.data?.toRecipients?.length>0?item?.data?.toRecipients[0].emailAddress?.address:'') :item.data?.from?.emailAddress?.address )| dpsUserImage | async}}"
+    alt="..." (load)="showProfileImg=true" *ngIf="!item.selected"> -->
+  <button matListAvatar mat-icon-button class="dps-mail-item-check" (click)="check($event)">
+    <span>
+      <i class="material-icons">check_circle</i>
+    </span>
+  </button>
+
+
+
+  <div matLine class="dps-mail-item-data">
+    <!-- fxLayout="column" fxLayoutWrap="nowrap"  -->
+    <div class="dps-mail-item-data-col1">
+      <!-- fxFlex="1 1 20px" fxLayout="row" fxLayoutWrap="nowrap" -->
+      <div class="dps-mail-item-name">
+        <!-- fxFlex="1 1 auto" fxLayoutWrap="nowrap" -->
+        <span class="dps-mail-item-draft-tag" *ngIf="item.data.isDraft">
+          <!-- fxFlex="0 0 auto" -->
+          <span>[Draft]</span>
+        </span>
+        <span class="dps-mail-item-To">
+          <!-- fxFlex="0 1 auto" -->
+          <span>{{item.displayTo}}</span>
+        </span>
+      </div>
+      <div class="dps-mail-item-icons">
+        <!-- fxFlex="0 0 auto" -->
+        <div class="dps-icon">
+
+          <a *ngIf="item.iconIndex" class="dps-icon-index">
+            <i class="material-icons" *ngIf="item.iconIndex==='Replied mail'">reply</i>
+            <i class="material-icons" *ngIf="item.iconIndex==='Forwarded mail'">forward</i>
+          </a>
+          <a *ngIf="item.data.meetingMessageType" class="dps-meeting-icons">
+            <span
+              *ngIf="item.data.meetingMessageType==='meetingTentativelyAccepted' || item.data.meetingMessageType=== 'meetingTenativelyAccepted'">
+              <i class="fa fa-calendar-o"></i>
+              <i class="fa fa-question"></i>
+            </span>
+            <i *ngIf="!(item.data.meetingMessageType==='meetingTentativelyAccepted' || item.data.meetingMessageType=== 'meetingTenativelyAccepted')"
+              class="fa" [ngClass]="{'fa-calendar-minus-o':item.data.meetingMessageType==='meetingCancelled',
+                                      'fa-calendar-times-o':item.data.meetingMessageType==='meetingDeclined',
+                                      'fa-calendar-check-o':item.data.meetingMessageType==='meetingAccepted',
+                                      'fa-calendar-o':item.data.meetingMessageType==='meetingRequest'}"
+              aria-hidden="true"></i>
+          </a>
+          <a *ngIf="item.data.hasAttachments">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+          </a>
+          <a *ngIf="item.data.importance && item.data.importance!=='normal'">
+            <i class="fa" [ngClass]="item.data.importance==='high'?'fa-exclamation':'fa-long-arrow-down'"
+              aria-hidden="true"></i>
+          </a>
+          <a *ngIf="(item.data.subject | isDPSMail:companyCode) || item.diaryId!==null">
+            <img src="is-dps-mail.png" width="13px" height="13px">
+          </a>
+          <a *ngIf="item.data.flag && item.data.flag.flagStatus && item.data.flag.flagStatus!=='notFlagged'">
+            <i class="fa" [ngClass]="item.data.flag.flagStatus=='complete'?'fa-check':'fa-flag-o'"
+              aria-hidden="true"></i>
+          </a>
+
+        </div>
+
+        <div class="dps-icon-btn">
+          <a (click)="delete($event)" title="Delete">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
+          <a (click)="readUnread($event)" [title]="item.data.isRead?'Mark as unread':'Mark as read'">
+            <i class="fa" [ngClass]="item.data.isRead?'fa-envelope-o':'fa-envelope-open-o'" aria-hidden="true"></i>
+          </a>
+          <a (click)="flag($event)" [title]="item.data.flag.flagStatus=='flagged'?'Mark complete':'Flag this message'"
+            *ngIf="!(item.data.isDraft&&item.viewing)">
+            <i class="fa" [ngClass]="item.data.flag.flagStatus=='flagged'?'fa-check':'fa-flag-o'"
+              aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="dps-mail-item-data-col2">
+      <!-- fxFlex="1 1 auto" fxLayout="row" fxLayoutWrap="nowrap" -->
+      <div class="dps-mail-item-preview">
+        <!-- fxFlex="1 1 auto" fxLayout="column" fxLayoutWrap="nowrap" -->
+        <div class="dps-mail-item-subject">
+          <!-- fxFlex="0 0 auto" -->
+          <span class="mail-subject-text">{{item.data.subject ? item.data.subject : '(No subject)'}}</span>
+        </div>
+
+      </div>
+      <div class="dps-mail-item-body">
+        <!-- fxFlex="0 1 auto" -->
+        <span class="mail-body-preview-text">{{item.data.bodyPreview}}&nbsp; </span>
+        <span class="dps-mail-item-date">{{item.data.receivedDateTime | timezone:timeZone | dpsDate}}</span>
+      </div>
+
+      <!-- fxFlex="0 0 auto" fxFlexAlign="end" -->
+    </div>
+  </div>
+</mat-list-item>
+<mat-divider></mat-divider>

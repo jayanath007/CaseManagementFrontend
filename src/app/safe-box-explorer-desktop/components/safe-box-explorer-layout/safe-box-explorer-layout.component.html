@@ -1,0 +1,193 @@
+<div class="dps-safebox-layout">
+  <mat-sidenav-container [style.display]="activeOutlet !== 'main'  ? 'none': 'block'" autosize>
+
+    <mat-sidenav mode="side" opened fxLayout="column" class="dps-safebox-sidenav-start">
+      <div class="dps-safebox" fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="header-text" fxLayout="row" *ngIf="selectedSafeBoxType!==SafeBoxType.Drive">
+          <div class="header-indicator">
+            <span *ngIf="selectedSafeBoxType===SafeBoxType.Blob">
+              <mat-icon>security</mat-icon>
+              Safe Box
+            </span>
+            <span *ngIf="selectedSafeBoxType===SafeBoxType.Template" class="template-directory-title">
+              <mat-icon fontSet="fontawesome" fontIcon="fa-th-large" class="fa"></mat-icon>
+              <span> Template Directory</span>
+            </span>
+          </div>
+
+          <div class="next--previous-btn" *ngIf="selectedSafeBoxType===SafeBoxType.Blob">
+            <button matTooltip="Previous" matTooltipPosition="below" mat-icon-button [disabled]="backpaths?.length < 2"
+              (click)="clickNavigation('back')">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button matTooltip="Next" matTooltipPosition="below" mat-icon-button [disabled]="nextpaths?.length < 1"
+              (click)="clickNavigation('next')">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+
+        </div>
+        <button mat-raised-button (click)="safeBoxfileUploader.onFileUploadBtnClick()" class="dpsfile-uploader"
+          *ngIf="selectedSafeBoxType===SafeBoxType.Blob">
+          <mat-icon>attach_file</mat-icon>
+          <span> Upload Files</span>
+          <dps-file-uploader #safeBoxfileUploader inputId="safeBoxUploader" (fileUpload)="onFileChange($event)"
+            [multiple]="true"></dps-file-uploader>
+        </button>
+        <button mat-raised-button (click)="templateDirectoryUploader.onFileUploadBtnClick()" class="dpsfile-uploader"
+          *ngIf="selectedSafeBoxType===SafeBoxType.Template">
+          <mat-icon>attach_file</mat-icon>
+          <span> Upload Files</span>
+          <dps-file-uploader #templateDirectoryUploader inputId="templateDirectoryUploader" [multiple]="true"
+            (fileUpload)="template_list_view.onUploadFiles($event)">
+          </dps-file-uploader>
+        </button>
+      </div>
+      <div class="dps-safebox-tree dps-white-gray-scroll">
+        <dps-root-folders-list-manager *ngIf="!isGoogle" [isDriveFolderSelect]="selectedSafeBoxType===SafeBoxType.Drive"
+          (driveFolderSelect)="onDriveFolderSelect()">
+        </dps-root-folders-list-manager>
+        <dps-template-directory-manager #templateDirectoryManager (appSelect)="onAppSelect()">
+          <dps-template-directory-app-list [isLoading]="templateDirectoryManager.isLoading$|async"
+            [appList]="templateDirectoryManager.appList$|async"
+            [selectedApp]="templateDirectoryManager.selectedApp$|async"
+            [isAppListExpand]="templateDirectoryManager.isAppListExpand$|async"
+            [isAppselect]="selectedSafeBoxType===SafeBoxType.Template"
+            (selectApp)="templateDirectoryManager.onSelectApp($event)"
+            (toggleAppListExpand)="templateDirectoryManager.onToggleAppListExpand()">
+          </dps-template-directory-app-list>
+        </dps-template-directory-manager>
+        <mat-nav-list dense>
+          <mat-divider></mat-divider>
+          <dps-tree-view-ui [treeItem]="treeNodeItem" [isBlobSelect]="selectedSafeBoxType===SafeBoxType.Blob"
+            [level]="0" [copyItems]="copyItems" [selectedBlobData]="selectedBlobData"
+            (changeFolderItem)="onChangeFolderItem($event)" (onExpandCollapsed)="expandCollapsed($event)"
+            (onExpand)="expand($event)" (changeFileItem)="onChangeFileItem($event)">
+          </dps-tree-view-ui>
+          <mat-divider></mat-divider>
+        </mat-nav-list>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <dps-module-layout moduleColor="safe-box-primary"
+        [contentPadding]="(sidenavMode==='over' || selectedSafeBoxType===SafeBoxType.Template) ?'0px 20px 20px 2px':'0px 2px 20px 2px'"
+        layoutHeaderHeight="60px" contentHeaderHeight="47px">
+        <div class="dps-safebox-path" dps-layout-header
+          [ngStyle]="{'padding-right': (sidenavMode==='over' || selectedSafeBoxType===SafeBoxType.Template)?'20px':'2px'}">
+          <mat-card fxFlex="1 1 auto" fxLayout="row">
+            <div class="dps-safe-box-file-path-list" *ngIf="selectedSafeBoxType===SafeBoxType.Blob" fxLayout="row"
+              fxLayoutAlign="space-between center">
+              <div fxLayout="row" class="dps-white-gray-scroll dps-safe-box-path">
+                <mat-icon class="dps-folder-indicator">folder</mat-icon>
+                <div *ngIf="!filePathList || filePathList.length===0" class="dps-safe-box-file-path">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </div>
+                <div *ngFor="let path of filePathList" class="dps-safe-box-file-path" (click)="onGoToPath(path)">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                  <span class="dps-path-name">{{path}}</span>
+                </div>
+              </div>
+
+              <div class="dps-safe-box-refresh">
+                <button mat-icon-button (click)="onRefresh()">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+              </div>
+            </div>
+            <dps-drive-file-path-manager *ngIf="selectedSafeBoxType===SafeBoxType.Drive"></dps-drive-file-path-manager>
+            <dps-template-directory-header *ngIf="selectedSafeBoxType===SafeBoxType.Template"
+              [selectedApp]="templateDirectoryManager.selectedApp$|async" [sort]="templateDirectoryManager.sort$|async"
+              [filter]="templateDirectoryManager.filter$|async"
+              [searchText]="templateDirectoryManager.searchText$|async"
+              [showCommonTemplates]="templateDirectoryManager.showCommonTemplates$|async"
+              [isLocationMatch]="(templateDirectoryManager.selectedAppView$|async)?.isLocationMatch"
+              (refresh)="templateDirectoryManager.onRefresh($event)"
+              (changeSort)="templateDirectoryManager.onChangeSort($event)"
+              (changeFilter)="templateDirectoryManager.onChangeFilter($event)"
+              (changeSearchText)="templateDirectoryManager.onChangeSearchText($event)"
+              (changeShowCommonTemplates)="templateDirectoryManager.onChangeShowCommonTemplates($event)">
+            </dps-template-directory-header>
+          </mat-card>
+          <button class="togglesidenav-btn" mat-button (click)="toggleSidenav()"
+            *ngIf="sidenavMode==='over' && selectedSafeBoxType!==SafeBoxType.Template">
+
+            <mat-icon class="fa-rotate-180">more</mat-icon>
+          </button>
+        </div>
+        <div class="dps-safebox-forground" fxLayout="column" dpsFileDroppable (onDrop)="onDrop($event)"
+          (contextmenu)="contextmenuFolderOpen($event,safeboxFolderMenuInContent)" dps-layout-content>
+          <div class="dps-white-gray-scroll" *ngIf="selectedSafeBoxType===SafeBoxType.Blob">
+            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+            <dps-folder-view-container [treeNodeItem]="selectedTreeNodeItem" [viewType]="viewType">
+
+              <dps-list-view *ngIf="ExplorerViewType.List === viewType" [selectedBlobData]="selectedBlobData"
+                [treeNodeItem]="selectedTreeNodeItem" [copyItems]="copyItems" [selectedFolder]="selectedFolder"
+                (selectedBlobCon)="onSelectedBlobCon($event)" (onExpand)="expand($event)"
+                (changeFolderItem)="onChangeFolderItem($event)" (changeFileItem)="onChangeFileItem($event)">
+              </dps-list-view>
+              <dps-titles-view *ngIf="ExplorerViewType.Tile === viewType" [selectedBlobData]="selectedBlobData"
+                [treeNodeItem]="selectedTreeNodeItem" [copyItems]="copyItems" [selectedFolder]="selectedFolder"
+                (selectedBlobCon)="onSelectedBlobCon($event)" (onExpand)="expand($event)"
+                (changeFolderItem)="onChangeFolderItem($event)" (changeFileItem)="onChangeFileItem($event)">
+              </dps-titles-view>
+              <dps-content-view *ngIf="ExplorerViewType.Icon === viewType" [selectedBlobData]="selectedBlobData"
+                [treeNodeItem]="selectedTreeNodeItem" [copyItems]="copyItems" [selectedFolder]="selectedFolder"
+                (selectedBlobCon)="onSelectedBlobCon($event)" (onExpand)="expand($event)"
+                (changeFolderItem)="onChangeFolderItem($event)" (changeFileItem)="onChangeFileItem($event)">
+              </dps-content-view>
+              <dps-detail-view *ngIf="ExplorerViewType.Detail === viewType" [selectedBlobData]="selectedBlobData"
+                [treeNodeItem]="selectedTreeNodeItem" [copyItems]="copyItems" [selectedFolder]="selectedFolder"
+                (selectedBlobCon)="onSelectedBlobCon($event)" (onExpand)="expand($event)"
+                (changeFolderItem)="onChangeFolderItem($event)" (changeFileItem)="onChangeFileItem($event)">
+              </dps-detail-view>
+
+            </dps-folder-view-container>
+          </div>
+          <div class="dps-template-list-view"
+            [ngStyle]="{'display': selectedSafeBoxType===SafeBoxType.Template?'block':'none'}">
+            <dps-template-list-view #template_list_view [appView]="templateDirectoryManager.selectedAppView$|async"
+              [sort]="templateDirectoryManager.sort$|async" [filter]="templateDirectoryManager.filter$|async"
+              [searchText]="templateDirectoryManager.searchText$|async"
+              [clipboard]="templateDirectoryManager.clipboard$|async"
+              [copyFrom]="templateDirectoryManager.copyFrom$|async"
+              [showCommonTemplates]="templateDirectoryManager.showCommonTemplates$|async"
+              [diveClipboard]="templateDirectoryManager.driveClipboard$|async"
+              (checkIn)="templateDirectoryManager.onCheckIn($event)" (abort)="templateDirectoryManager.onAbort($event)"
+              (editeOrView)="templateDirectoryManager.onEditeOrView($event)"
+              (selectTemplate)="templateDirectoryManager.onSelectTemplate($event)"
+              (copyOrCutTemplate)="templateDirectoryManager.onCopyOrCutTemplate($event)"
+              (pasteItems)="templateDirectoryManager.onPaste($event)"
+              (refresh)="templateDirectoryManager.onRefresh($event)"
+              (deleteItems)="templateDirectoryManager.onDeleteItems($event)"
+              (renameItem)="templateDirectoryManager.onRenameItem($event)"
+              (downloadFile)="templateDirectoryManager.onDownloadFile($event)"
+              (uploadFiles)="templateDirectoryManager.onUploadFiles($event)"
+              (addNewItem)="templateDirectoryManager.onAddNewItem($event)">
+            </dps-template-list-view>
+          </div>
+          <div class="dps-white-gray-scroll dps-drive-folder-content" *ngIf="selectedSafeBoxType===SafeBoxType.Drive">
+            <dps-drive-folder-content-manager [viewType]="viewType"></dps-drive-folder-content-manager>
+          </div>
+          <dps-safebox-context-menue id="dps-safebox-folder-menu" #safeboxFolderMenuInContent
+            [isMultiSelect]="selectedBlobData?.length>1" [copyItems]="copyItems" [isRefresh]="true" [isFolder]="true"
+            [copyFrom]="copyFrom" (paste)="onPaste()" (refresh)="onRefresh()">
+          </dps-safebox-context-menue>
+        </div>
+      </dps-module-layout>
+    </mat-sidenav-content>
+    <mat-sidenav [mode]="sidenavMode" position="end" (closedStart)="onSidenavClose()"
+      [opened]="(sidenavMode==='over'? isSidenavOpen:true) && selectedSafeBoxType!==SafeBoxType.Template"
+      fxLayout="column" class="dps-safebox-sidenav-end">
+      <div>
+        <dps-view-types (onSeletViewTypes)="changeViewType($event)" [viewType]="viewType"></dps-view-types>
+        <dps-file-item-view *ngIf="selectedSafeBoxType===SafeBoxType.Blob" [selectedBlobData]="selectedBlobData"
+          [treeNodeItem]="selectedTreeNodeItem">
+        </dps-file-item-view>
+        <dps-drive-file-item-view-manager *ngIf="selectedSafeBoxType===SafeBoxType.Drive">
+        </dps-drive-file-item-view-manager>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+
+</div>

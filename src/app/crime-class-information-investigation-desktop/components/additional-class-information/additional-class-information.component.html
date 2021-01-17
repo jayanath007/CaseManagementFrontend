@@ -1,0 +1,40 @@
+<h3>Additional Class Information</h3>
+
+<div fxLayout="row">
+
+  <div fxLaout="column" fxFlex="65%" class="personel-data-chk-bx">
+    <mat-checkbox [disabled]="isRecursive" [ngModel]="infomationModel[modelProperty?.youthChecked]"
+      (change)="onChangeUserInput(modelProperty?.youthChecked, $event.checked)" color="primary">Does this involve a
+      youth
+    </mat-checkbox>
+    <mat-checkbox [disabled]="isRecursive" [ngModel]="infomationModel[modelProperty?.dutySoliChecked]"
+      (change)="onChangeUserInput(modelProperty?.dutySoliChecked, $event.checked)" color="primary">Are you acting as a
+      duty solicitor
+    </mat-checkbox>
+    <mat-checkbox [disabled]="isRecursive" [ngModel]="infomationModel[modelProperty?.doNotClaimVATChecked]"
+      (change)="onChangeUserInput(modelProperty?.doNotClaimVATChecked, $event.checked)" color="primary">Do not claim VAT
+    </mat-checkbox>
+    <mat-checkbox [disabled]="isRecursive" [ngModel]="infomationModel[modelProperty?.cdsDirectTAFChecked]"
+      (change)="onChangeUserInput(modelProperty?.cdsDirectTAFChecked, $event.checked)" color="primary">Claim CDS Direct
+      Telephone Acceptance Fee
+    </mat-checkbox>
+  </div>
+
+  <div fxLaout="column" class="personel-data" fxFlex="35%">
+    <mat-form-field floatLabel="always">
+      <input matInput readonly placeholder="Gender" [ngModel]="infomationModel[modelProperty?.gender]">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <mat-form-field floatLabel="always">
+      <input matInput readonly placeholder="Disability" [ngModel]="infomationModel[modelProperty?.disability]"
+        [matTooltip]="infomationModel[modelProperty?.disability]" matTooltipPosition="above">
+      <i matSuffix class="material-icons">accessible_forward</i>
+    </mat-form-field>
+    <mat-form-field floatLabel="always">
+      <input matInput readonly placeholder="Ethnic Code" [ngModel]="infomationModel[modelProperty?.ethnicCode]"
+        [matTooltip]="infomationModel[modelProperty?.ethnicCode]" matTooltipPosition="above">
+      <i matSuffix class="material-icons">face</i>
+    </mat-form-field>
+  </div>
+
+</div>

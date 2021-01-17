@@ -1,0 +1,204 @@
+@import '~styles/variables.scss';
+
+.dps-content,
+.dps-main-menu-nav-list {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  background: #1d2c38;
+}
+
+.collapsed .dps-content .mat-list {
+  //   background: $primary;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.dps-sidenav {
+  width: 235px;
+
+}
+
+.dps-right-sidenav {
+  width: 350px;
+}
+
+.dps-company-logo-section {
+  background-color: #1b2c39;
+}
+
+.dps-campany-logo-img {
+  padding: 4px 6px;
+}
+
+.dps-campany-logo-text {
+  width: 110px;
+  height: 46px;
+  padding: 0px 3px;
+  color: #9ba8b3;
+}
+
+.mat-toolbar {
+  background: #2b3135;
+  color: $primary;
+}
+
+.hd-bar-notifications-btn {
+  background: #696610;
+  color: #aead89;
+
+  &.mat-icon-button {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    right: 10px;
+  }
+
+  .dps-hd-icon {
+    font-size: 18px;
+    line-height: 16px;
+  }
+}
+
+.hd-bar-settings-btn {
+  background-color: #2e4b61;
+  color: #a1abb2;
+
+  &.mat-icon-button {
+    width: 30px;
+    height: 30px;
+
+  }
+
+  .dps-hd-icon {
+    font-size: $primary-font-size + 4;
+    line-height: 15px;
+  }
+}
+
+span.dps-side-panel-header {
+  font-size: $primary-font-size + 1;
+  font-weight: 500;
+  color: $primary;
+
+  i {
+    vertical-align: middle;
+  }
+
+  mat-icon,
+  i {
+    font-size: $primary-font-size + 7;
+  }
+}
+
+.dps-mini-sidenav {
+  min-width: 0px;
+  width: 72px;
+}
+
+.main-nav-controller {
+
+  .dps-sidenav & {
+    background-color: #263a4a;
+  }
+
+  .dps-mini-sidenav & {
+    background-color: #1d2c38;
+  }
+
+  div {
+    width: 53px;
+    background-color: #1d2c38;
+  }
+}
+
+.dps-header-bar-shadow {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+
+.dps-main-menu-shadow {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+  height: 50px !important;
+}
+
+
+div.dps-shell-content {
+  .dps-shellcontent {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+.fa-thumb-tack.main-nav-controller-btn {
+  position: absolute;
+  top: 40px;
+  height: 16px;
+  width: 10px;
+  border-radius: 100%;
+  padding: 6px 9px;
+  z-index: 100;
+  background: #1f222b;
+  color: #fff;
+  box-shadow: 2px 2px 2px 0px #333;
+  border: 1px solid #010a10;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  left: 59px;
+  transform: rotate(20deg);
+  transition: all 0.2s ease-in-out;
+  font-size: 17px;
+
+
+}
+
+.fa-bars.main-nav-controller-btn {
+  position: absolute;
+  top: 64px;
+  border-radius: 100%;
+  padding: 6px 9px;
+  z-index: 100;
+  left: 192px;
+  color: #738a9c;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.fa-bars.main-nav-controller-btn:hover {
+  color: #fff;
+}
+
+.expanded .fa-thumb-tack.main-nav-controller-btn,
+.collapsed .fa-bars.main-nav-controller-btn {
+  opacity: 1;
+}
+
+.expanded .fa-thumb-tack.main-nav-controller-btn,
+.collapsed .fa-bars.main-nav-controller-btn {
+  opacity: 0;
+  left: -10px;
+}
+
+.mini {
+  width: 56px;
+  height: 50px;
+  background-position: bottom;
+  left: -10px;
+  position: relative;
+}
+
+
+
+
+
+.right-sidenav {
+  overflow-y: auto;
+  background: $primary;
+}
+
+.company-logo-avatar-holder {
+  padding-top: 0px;
+}

@@ -1,0 +1,39 @@
+<mat-nav-list>
+  <div *ngFor="let item of previousTransGridData?.allGridPage?.data; let index=index;let  isOdd=odd; let isEven=even"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" (dpsClick)="selctedRowindex = index">
+    <mat-list-item disableRipple class="dps-grid-list-item"
+      [ngClass]="{'dps-selected-row' : selctedRowindex === index}">
+      <div fxLayout class="grid-data">
+        <div class="row-data mat_line date" [fxFlex]="columnWidth.Date" innerHTML="{{item.date | date :'dd/MM/yyyy'}}">
+        </div>
+        <div class="row-data mat_line" [fxFlex]="columnWidth.Type" innerHTML="{{item.type}}"></div>
+        <!-- <div class="row-data mat_line" [fxFlex]="columnWidth.URN" innerHTML="{{item.urn}}"></div> -->
+        <div class="row-data mat_line" [fxFlex]="columnWidth.Ref" innerHTML="{{item.ref}}"></div>
+        <div class="row-data" [fxFlex]="columnWidth.Details" innerHTML="{{item.details}}"></div>
+        <!-- <div class="row-data mat_line vat" [fxFlex]="columnWidth.VAT" innerHTML="{{item.vat | number : '1.2-2' }}">
+        </div> -->
+        <!-- <div class="row-data mat_line vat" [fxFlex]="columnWidth.Period" innerHTML="{{item.period }}"
+          *ngIf="!balanceOnly"></div> -->
+        <div class="row-data mat_line office-dr" [fxFlex]="columnWidth.OfficeDr"
+          innerHTML="{{item.officeDr | number : '1.2-2'}}" *ngIf="!(balanceOnly || gridFilterData?.showClient)"></div>
+        <div class="row-data mat_line office-cr" [fxFlex]="columnWidth.OfficeCr"
+          innerHTML="{{item.officeCr | number : '1.2-2'}}" *ngIf="!(balanceOnly || gridFilterData?.showClient)"></div>
+        <div class="row-data mat_line officeb-al" [fxFlex]="columnWidth.OfficeBal"
+          innerHTML="{{item.officeBal | number : '1.2-2'}}" *ngIf="!gridFilterData?.showClient"></div>
+        <div class="row-data mat_line client-dr" [fxFlex]="columnWidth.ClientDr"
+          innerHTML="{{item.clientDr | number : '1.2-2'}}" *ngIf="!(balanceOnly || gridFilterData?.showOffice)"></div>
+        <div class="row-data mat_line client-cr" [fxFlex]="columnWidth.ClientCr"
+          innerHTML="{{item.clientCr | number : '1.2-2'}}" *ngIf="!(balanceOnly || gridFilterData?.showOffice)"></div>
+        <div class="row-data mat_line client-bal" [fxFlex]="columnWidth.ClientBal"
+          innerHTML="{{item.clientBal | number : '1.2-2'}}" *ngIf="!gridFilterData?.showOffice"></div>
+        <div class="row-data mat_line dda-dr" [fxFlex]="columnWidth.DDADr" innerHTML="{{item.ddaDr | number : '1.2-2'}}"
+          *ngIf="!balanceOnly && gridFilterData?.showAll"></div>
+        <div class="row-data mat_line dda-cr" [fxFlex]="columnWidth.DDDCr" innerHTML="{{item.ddaCr | number : '1.2-2'}}"
+          *ngIf="!balanceOnly && gridFilterData?.showAll"></div>
+        <div class="row-data mat_line dda-bal" [fxFlex]="columnWidth.DDDbal"
+          innerHTML="{{item.ddAbal | number : '1.2-2'}}" *ngIf="gridFilterData?.showAll"></div>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-nav-list>

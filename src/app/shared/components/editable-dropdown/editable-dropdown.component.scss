@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+
+ng-deep .dps-editable-drop-down {
+  font-size: 12px;
+  position: relative;
+  line-height: 20px;
+}
+
+.dps-editable-drop-down input {
+  width: 89%;
+}
+
+mat-option {
+  font-size: 12px;
+  line-height: 36px;
+  height: 36px;
+}
+
+mat-icon {
+  position: absolute;
+  top: 2px;
+  cursor: pointer;
+  right: -5px;
+  color: #757575;
+}

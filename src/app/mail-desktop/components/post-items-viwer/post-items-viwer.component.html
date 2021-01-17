@@ -1,0 +1,29 @@
+<div class="dps-post-items-viwer" fxLayout="column" *ngIf="selectedConversation">
+  <mat-toolbar fxFlex="50px">
+    <div fxFlex="calc(100%-70px)">
+      <h3 class="dps-toolbar-text">{{selectedConversation.data.topic}}</h3>
+      <h4 class="dps-toolbar-text">
+        <span>{{selectedGroup.data.displayName}}; </span>
+        <span *ngFor="let sender of selectedConversation.data.uniqueSenders">{{sender}}; </span>
+      </h4>
+    </div>
+    <button mat-icon-button (click)="onReplyAll()" matTooltip="Reply all" *ngIf="selectedConversation.posts && selectedConversation.posts.length>0" class="Reply_all">
+      <mat-icon>reply_all</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="View DPS File" matTooltipPosition="before" 
+    *ngIf=" (moduleIsActive(module.Matter) | async) && (selectedConversation.data.topic | isDPSMail:companyCode)"
+      (click)="onViewDpsFile(selectedConversation.data.topic)">
+      <img src="is-dps-mail.png" width="24px" height="24px">
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!selectedConversation.posts"></mat-progress-bar>
+  <div fxFlex="calc(100% - 65px)" *ngIf="selectedConversation.posts" fxLayout="column">
+    <dps-virtual-scroll class="dps-post-list-view dps-white-gray-scroll" #virtualScroll [items]="selectedConversation.posts"
+      (update)="viewPortItems = $event" (end)="onListChange($event)" [bufferAmount]="7">
+      <dps-post-view-content *ngFor="let post of viewPortItems" [post]="post" [timeZone]="timeZone" [companyCode]="companyCode"
+        (separateWindow)="onSeparateWindow($event)" (viewDpsFile)="onViewDpsFile($event)" (openAttachement)="onOpenAttachement($event)"
+        (downloardFileAttachment)="onDownloardFileAttachment($event)" (replyForward)="onReplyForward($event)"
+        (deleteReply)="onDeleteReply($event)" (forward)="onForward($event)"></dps-post-view-content>
+    </dps-virtual-scroll>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.screen-view-wrapper {
+  background: #80b0d4;
+  border: 1px solid #467192;
+}
+
+.general-loader-light {
+  background: #61ace0 url(dps-loader-dark-2.gif) no-repeat center center;
+  z-index: 10000;
+  background-size: 65px;
+}
+
+.dps-screen-view {
+  position: relative;
+  .dps-progress-bar {
+    width: 500px;
+  }
+}

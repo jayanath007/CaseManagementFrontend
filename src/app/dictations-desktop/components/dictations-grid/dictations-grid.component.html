@@ -1,0 +1,45 @@
+<div class="dps-dictations-grid">
+
+  <div class="dictations-grid-outer" fxLayout="column">
+    <div fxFlex="calc(100%-50px)" fxLayout="column">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="length-calc" fxLayout="column">
+          <div class="row-highlight" dpsIsMobile>
+            <div class="row-highlight-inner">
+              <dps-column-header *ngFor="let header of coloumnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+                [filterAnchor]="header.extras.filterAnchor">
+              </dps-column-header>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          </div>
+
+          <div fxLayout="column" [@.disabled]="true" fxFlex="calc(100%-40px)"
+            class="dps-white-gray-scroll dictations-grid-content {{fontSizeClass}}">
+            <dps-dictations-grid-row (playDictations)="onPlayDictations($event)" (rowExpand)="GridrowExpand($event)"
+              (openWordFileDictation)="onOpenWordFileDictation($event)"
+              (competedJobDictations)="onCompetedJobDictations($event)"
+              (openDictatioProfiling)="onOpenDictatioProfiling($event)"
+              (openCaseDictation)="onOpenCaseDictation($event)" (openDictationPdf)="onPdfFileClick($event)"
+              (openCaseFile)="onOpenCaseFile($event)" (finishJobUpdate)="onFinishJobUpdate($event)"
+              [dictationGridFilters]="dictationGridFilters" [dictationGridData]="dictationGridData"
+              [usetType]="usetType" [matterRef]="matterRef" [coloumnDef]="coloumnDef"></dps-dictations-grid-row>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- {{dataBase$|async}} -->
+
+    <div class="dps-footer">
+      <div class="dps-team-talk-database" fxLayout="row">
+        <span class="last-child">{{dataBase$|async}} </span>
+      </div>
+      <mat-paginator class="dps-paginator" #paginator [length]="paginatorDef?.total"
+        [pageIndex]="paginatorDef?.currentPage" [pageSize]="paginatorDef?.itemPerPage"
+        [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="footer-shadow">
+      </mat-paginator>
+    </div>
+
+  </div>
+</div>

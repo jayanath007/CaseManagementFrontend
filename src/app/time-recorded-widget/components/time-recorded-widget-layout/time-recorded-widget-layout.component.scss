@@ -1,0 +1,71 @@
+@import '~styles/variables.scss';
+.header-icon {
+  vertical-align: middle;
+
+}
+
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.wrong-massage {
+  text-align: center;
+  color: #a4afab;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+.empty-view {
+  position: absolute;
+  // background: #b3d1ea;
+  top: 64px;
+  border-bottom: 0;
+  height: calc(100% - 64px);
+  width: 100%;
+}
+
+mat-toolbar {
+  background: unset;
+}
+  
+  .option-btn {
+    background: #5c97d4;
+  }
+
+.widget-item-list {
+  padding-top: 0px;
+}
+.widget-item-list::-webkit-scrollbar
+{
+  width: 4px;
+}
+.widget-item-list::-webkit-scrollbar-thumb {
+  background-color: #5c97d4;
+  border: 0;
+  border-radius: 4px;
+  
+}
+::ng-deep.dps-widgets_v7{
+  .header-name{
+    vertical-align: middle;
+    font-size: 22px;
+    padding: 0px 5px;
+    color: #2a6ead;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .header-icon{
+    display: none;
+  }
+}
+.mat-progress-bar
+{
+  height: 2px;
+}

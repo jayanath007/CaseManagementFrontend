@@ -1,0 +1,63 @@
+<dps-common-popup-header class="investigation-class-information" icon="work" title="Investigation Class Information"
+  buttons="close" [loading]="isLoading || !infomationModel" iconColor="#ffffff" titleColor="#ffffff"
+  toolbarColor="#1b6ebe" (buttonClick)="onClose()">
+</dps-common-popup-header>
+
+<div *ngIf="!!infomationModel" class="dps-white-gray-scroll">
+
+  <div class="dps-total-and-info-header" fxLayout="row">
+
+    <dps-class-information *ngIf="!selectSummeryType" fxLayout="column" [stageReachedList]="stageReachedList"
+      fxFlex="50" [matterTypeList]="matterTypeList" [outComeCode]="outComeCode" [infomationModel]="infomationModel"
+      [controlProperty]="controlProperty" [isRecursive]="isRecursive" (changeModel)="onChangeUserInput($event)"
+      (btnAdvoAssiClick)="onBtnAdvoAssiClick()">
+    </dps-class-information>
+    <dps-additional-class-information class="additional-class-information" *ngIf="!selectSummeryType"
+      [isRecursive]="isRecursive" fxLayout="column" fxFlex="50" [infomationModel]="infomationModel"
+      (changeModel)="onChangeUserInput($event)">
+    </dps-additional-class-information>
+    <div *ngIf="!!selectSummeryType" style="width: 100%;">
+      <dps-total-description [selectType]="selectSummeryType" [currenySymbol]="(homeCurrency | currencySymbols)"
+        [data]="summeryData" [height]="203" (unpinTotal)="onHideTotal()"> </dps-total-description>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="bottom-contents-wrapper">
+
+    <div class="information-bottom-left" fxLayout="row" fxFlex="50">
+
+      <dps-police-station-information [isRecursive]="isRecursive" [infomationModel]="infomationModel" fxFlex="50"
+        (changeModel)="onChangeUserInput($event)" (openPoliceStSearch)="onOpenPoliceStationSearch($event)">
+      </dps-police-station-information>
+
+      <div class="status-information" fxFlex="50">
+        <dps-class-statues-information [isRecursive]="isRecursive" [infomationModel]="infomationModel"
+          [isLoading]="isLoading" [controlProperty]="controlProperty" (changeModel)="onChangeUserInput($event)"
+          (closeReopenClass)="onCloseReopenClass()">
+        </dps-class-statues-information>
+
+        <div class="status-information-button-set">
+          <button class="st-inf-close" mat-button
+            [disabled]="!controlProperty || !(controlProperty[controler.btnSave]?.enabled)"
+            (click)="onSave()">Done</button>
+
+          <button class="st-inf-re-open" mat-button [disabled]="isLoading || isRecursive"
+            (click)="onCloseReopenClass()">
+            {{!!(infomationModel[modelProperty.closedDate]) ? 'Re-Open Class' : 'Close Class'}}</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <dps-current-total [data]="total" [selectType]="selectSummeryType" [isPinItem]="ispinSummery" fxFlex="50"
+      [isLoading]="isLoading" (viewTotalSummery)="onViewTotalSummery($event)" (hideTotal)="onHideTotal()"
+      (pinUnpin)="ispinSummery = !ispinSummery">
+    </dps-current-total>
+
+
+  </div>
+
+
+</div>

@@ -1,0 +1,137 @@
+@import '~styles/variables.scss';
+.dps-file-grid {
+  height: 100%;
+  mat-drawer-container {
+    mat-drawer {
+      width: 640px;
+      overflow-y: hidden;
+      border-left: 1px solid #e4e5e6;
+    }
+  }
+}
+
+.dps-grid-scroll{
+  overflow-y: scroll;
+}
+.global-search-scroll {
+    position: relative;
+    height: 100%;
+    background-color: $primary;
+  }
+  mat-drawer-content{
+    overflow: hidden;
+  }
+
+  .dps-file-history {
+    // height: 100%;
+    .dps-grid-x {
+      height: 100%;
+      overflow-x: auto
+    }
+    .dps-file-layout-controller {
+      min-width: 1200px;
+      height: 100%
+    }
+
+    .row-highlight {
+      background-color: $primary;
+      box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+      z-index: 2;
+      width: calc(100% - 15px);
+    }
+
+    .row-highlight.dps-is-mobile {
+      width: 100%;
+    }
+
+    .inner-highlight {
+      height: 40px;
+      position: relative;
+    }
+  }
+
+  .dps-documentview {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    div.dps-documentview-action {
+      background-color: #96bfff;
+      button {
+        float: right;
+      }
+      button.open-in-view {
+        color: #1d7396;
+      }
+    }
+
+    .no-attachment {
+      font-size: 12px;
+      text-align: center;
+    }
+
+  }
+
+  dps-global-document-view-page {
+    height: 100%;
+  }
+  dps-column-header {
+
+    ::ng-deep .Type , ::ng-deep .Open.Case {
+      text-align: center;
+    }
+
+
+
+  }
+
+
+  .dps-global-doc-search {
+    ::ng-deep .mat-expansion-panel-header {
+      padding: 0px;
+      
+    }
+
+    mat-expansion-panel {
+      box-shadow: none;
+      transition: 0ms !important;
+      border-radius: 0px !important;
+    }
+
+    
+
+    ::ng-deep .mat-expansion-panel-body {
+      background: #f0f5ff;
+      font-size: 12px;
+      padding: 0 24px 16px;
+
+      /* this is wrong styling! - Dilantha */
+    }
+
+    ::ng-deep .mat-expansion-panel-header {
+      height: auto !important;
+    }
+
+    ::ng-deep .mat-expansion-panel-header span.mat-expansion-indicator {
+      position: absolute;
+      left: .6%;
+      right: auto;
+      
+    }
+
+    ::ng-deep .mat-expansion-panel-spacing .mat-expansion-panel-header {
+      background: #b4d2ff;
+      border-bottom: 1px solid #b4d2ff;
+    }
+
+  }
+
+
+
+  
+
+
+  .footer-shadow {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16), 0 -1px 6px rgba(0, 0, 0, 0.16);
+    z-index: 2;
+  }

@@ -1,0 +1,26 @@
+<h3><i class="fa fa-user-circle" aria-hidden="true"></i> Representation Order Details</h3>
+<div fxLayout="column">
+  <mat-form-field floatLabel="always">
+    <input matInput [matDatepicker]="representationOrderDateAppliedFor"
+      placeholder="Representation order date applied for"
+      [ngModel]="infomationModel[modelProperty.representationOrderDateAppliedFor] | date:'yyyy-MM-dd'"
+      (dateChange)="onChangeUserInput(modelProperty.representationOrderDateAppliedFor, $event.value)">
+    <mat-datepicker-toggle matSuffix [for]="representationOrderDateAppliedFor"></mat-datepicker-toggle>
+    <mat-datepicker [startAt]="2016-01-01" #representationOrderDateAppliedFor></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field floatLabel="always">
+    <input matInput [matDatepicker]="representationOrderWithdrawnDate" placeholder="Representation order withdrawn date"
+      [ngModel]="infomationModel[modelProperty.representationOrderWithdrawnDate] | date:'yyyy-MM-dd'"
+      (dateChange)="onChangeUserInput(modelProperty.representationOrderWithdrawnDate, $event.value)">
+    <mat-datepicker-toggle matSuffix [for]="representationOrderWithdrawnDate"></mat-datepicker-toggle>
+    <mat-datepicker #representationOrderWithdrawnDate></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field floatLabel="always">
+    <input #MAATID matInput placeholder="MAAT ID" [ngModel]="infomationModel[modelProperty?.maatid]"
+      (focusout)="onChangeUserInput(modelProperty?.maatid, MAATID.value)">
+  </mat-form-field>
+  <mat-checkbox [ngModel]="infomationModel[modelProperty?.roNotGranted]" class="cdf-6"
+    (change)="onChangeUserInput(modelProperty?.roNotGranted, $event.checked)">RO applied for and NOT
+    Granded
+  </mat-checkbox>
+</div>

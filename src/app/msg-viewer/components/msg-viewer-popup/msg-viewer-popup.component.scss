@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+
+.dps-msg-viewer-popup {
+  height: 100%;
+  width: 100%;
+}
+
+mat-toolbar,
+mat-toolbar-row {
+  min-height: 42px !important;
+  height: 42px;
+}
+
+.dps-msg-viewer-header {
+  background: #1c2c39;
+  color: #dfeaff;
+  font-size: $primary-font-size + 2;
+
+  .dps-header {
+    mat-icon {
+      vertical-align: sub;
+      padding-right: 8px;
+    }
+  }
+}

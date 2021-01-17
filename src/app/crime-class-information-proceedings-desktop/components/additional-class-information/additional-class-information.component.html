@@ -1,0 +1,109 @@
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="17%" class="personel-data-chk-bx">
+        <mat-form-field floatLabel="always">
+          <input matInput [matDatepicker]="dateOfMainOffences" placeholder="Date of main offence"
+            [ngModel]="infomationModel[modelProperty.dateOfMainOffences] | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeUserInput(modelProperty.dateOfMainOffences, $event.value)">
+          <mat-datepicker-toggle matSuffix [for]="dateOfMainOffences"></mat-datepicker-toggle>
+          <mat-datepicker #dateOfMainOffences></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <input matInput [matDatepicker]="dateFirstInstructed" placeholder="Date first instructed by Client"
+            [ngModel]="infomationModel[modelProperty.dateFirstInstructed] | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeUserInput(modelProperty.dateFirstInstructed, $event.value)">
+          <mat-datepicker-toggle matSuffix [for]="dateFirstInstructed"></mat-datepicker-toggle>
+          <mat-datepicker #dateFirstInstructed></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <input matInput [matDatepicker]="preOrderWorkDate" placeholder="Pre-order Work Date"
+            [ngModel]="infomationModel[modelProperty.preOrderWorkDate] | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeUserInput(modelProperty.preOrderWorkDate, $event.value)">
+          <mat-datepicker-toggle matSuffix [for]="preOrderWorkDate"></mat-datepicker-toggle>
+          <mat-datepicker #preOrderWorkDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div fxLayoutGap="column" fxFlex="2%"></div>
+
+      <div fxLayout="column" fxFlex="20%" class="personel-data-chk-bx">
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.doNotClaimVATChecked]"
+          (change)="onChangeUserInput(modelProperty?.doNotClaimVATChecked, $event.checked)" color="primary">Do not claim
+          VAT
+        </mat-checkbox>
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.dutySoliChecked]"
+          (change)="onChangeUserInput(modelProperty?.dutySoliChecked, $event.checked)" color="primary">Are you acting as
+          a duty solicitor
+        </mat-checkbox>
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.youthChecked]"
+          (change)="onChangeUserInput(modelProperty?.youthChecked, $event.checked)" color="primary">Does this involve a
+          youth
+        </mat-checkbox>
+        <mat-checkbox [disabled]="!infomationModel[modelProperty?.isDesignatedAreaEnabled]"
+          [ngModel]="infomationModel[modelProperty?.urbanRates]"
+          (change)="onChangeUserInput(modelProperty?.urbanRates, $event.checked)" color="primary">
+          Designated Area (Case level)
+        </mat-checkbox>
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.wasAssignedCounselInstructed]" fxFlex="39%"
+          (change)="onChangeUserInput(modelProperty?.wasAssignedCounselInstructed, $event.checked)" color="primary">
+          Was assigned counsel instructed
+        </mat-checkbox>
+
+      </div>
+
+      <div fxLayout="column" fxFlex="20%" class="personel-data-chk-bx">
+
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.s61Committal]" fxFlex="36%"
+          (change)="onChangeUserInput(modelProperty?.s61Committal, $event.checked)" color="primary">
+          S.6(1) Committal
+        </mat-checkbox>
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.counselAsigned]"
+          (change)="onChangeUserInput(modelProperty?.counselAsigned, $event.checked)" color="primary">
+          Counsel asigned
+        </mat-checkbox>
+
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.advacacyAssistanceInCrownCourt]" fxFlex="39%"
+          (change)="onChangeUserInput(modelProperty?.advacacyAssistanceInCrownCourt, $event.checked)" color="primary">
+          Advocacy assistance in crown court
+        </mat-checkbox>
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.wastedCostOrderMade]" fxFlex="36%"
+          (change)="onChangeUserInput(modelProperty?.wastedCostOrderMade , $event.checked)" color="primary">
+          Wasted cost order made
+        </mat-checkbox>
+
+        <mat-checkbox [ngModel]="infomationModel[modelProperty?.extradition]"
+          (change)="onChangeUserInput(modelProperty?.extradition, $event.checked)" color="primary">Extradition
+        </mat-checkbox>
+
+      </div>
+
+      <div fxLayout="column" fxFlex="19%" class="personel-data">
+        <mat-form-field floatLabel="always">
+          <input matInput readonly placeholder="Gender" [ngModel]="infomationModel[modelProperty?.gender]">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <input matInput readonly placeholder="Disability" [ngModel]="infomationModel[modelProperty?.disability]"
+            [matTooltip]="infomationModel[modelProperty?.disability]" matTooltipPosition="above">
+          <i matSuffix class="material-icons">accessible_forward</i>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <input matInput readonly placeholder="Ethnic Code" [ngModel]="infomationModel[modelProperty?.ethnicCode]"
+            [matTooltip]="infomationModel[modelProperty?.ethnicCode]" matTooltipPosition="above">
+          <i matSuffix class="material-icons">face</i>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex="22%" class="personel-data">
+        <dps-location [infomationModel]="infomationModel" (changeModel)="onChangeUserInput($event.key, $event.value)"
+          (openLocationSearch)="onOpenLocationSearch($event)">
+        </dps-location>
+      </div>
+
+    </div>
+

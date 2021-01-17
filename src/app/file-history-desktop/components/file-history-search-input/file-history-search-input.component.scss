@@ -1,0 +1,59 @@
+@import '~styles/variables.scss';
+
+* {
+  font-size: 12px;
+}
+
+.dps-open-case-search-section
+{
+
+  .mat-checkbox
+  {
+    line-height: 56px;
+    margin-right: 15px;
+    color: $primary;
+    
+    .mat-checkbox-frame
+    {
+      border-color: $primary;
+    }
+
+  }
+}
+
+
+
+mat-form-field {
+  color: $primary;
+  width: 100%;
+  font-size: $primary-font-size - 2;
+  // width: 150px;
+}
+
+input {
+  color: $primary;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+.dps-file-history-search {
+
+  .mat-input-element
+  {
+    line-height: 26px;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: $primary;
+  }
+
+}

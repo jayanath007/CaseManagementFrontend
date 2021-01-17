@@ -1,0 +1,81 @@
+<div fxLayout="column" fxFlex="1 1 100">
+  <mat-accordion *ngIf="matterData && matterData.matterReferenceNo">
+    <mat-expansion-panel dpsIsMobile class="ledger-cd-matter-bal-panel" [expanded]="matterData?.app_Code">
+      <mat-expansion-panel-header class="ledger-cd-matter-bal-panel-header" collapsedHeight="52px"
+        expandedHeight="52px">
+        <mat-panel-title fxFlex="1 1 50">
+          <div class="indicator-header">
+            <span>
+              Fee Earner
+            </span>
+            <span class="value-field">
+              {{matterData?.feeEarner}}
+            </span>
+          </div>
+          <div class="indicator-header">
+            <span>
+              Matter Ref
+            </span>
+            <span class="value-field">
+              {{matterData?.matterReferenceNo}}
+            </span>
+          </div>
+          <div class="indicator-header">
+            <span>
+              Client Name
+            </span>
+            <span class="value-field">
+              {{matterData?.clientName}}
+            </span>
+          </div>
+          <div class="indicator-header">
+            <span>
+              Date opened
+            </span>
+            <span class="value-field">
+              {{matterData?.startDate | date :'dd/MM/yyyy'}}
+            </span>
+          </div>
+          <div class="indicator-header ref" dpsIsMobile *ngIf="matterData?.app_Code">
+            <span>
+              App
+            </span>
+            <span class="value-field app-ref">
+              {{matterData?.app_Code}} {{matterData?.appDescription}}
+            </span>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description fxFlex="1 1 50">
+          <!-- <span class="app-ref" *ngIf="matterData?.app_Code"> App-{{matterData?.app_Code}} {{matterData?.appDescription}}</span> -->
+          <span fxFlex="1 1 auto"></span>
+          <span class="ledger_card_matters">{{resoleModuleName('matter_search')|async}} Balances</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div fxLayout="row" fxFlex="1 1 auto" class="dps-ledger-card-matter-details">
+        <dps-ledger-card-matter-details [matterData]="matterData" [currencyLabel]="currencyLabel" fxFlex="1 1 25">
+        </dps-ledger-card-matter-details>
+        <span fxFlex="1 1 auto"></span>
+        <dps-ledger-card-matter-balance [matterBalances]="matterBalances" [currencyLabel]="currencyLabel"
+          fxFlex="1 1 75"></dps-ledger-card-matter-balance>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="dps-ledger-card" fxLayout="column" fxFlex="1 1 100">
+    <div fxFlex="1 1 100">
+      <dps-ledger-card-grid fxFlex="1 1 100" [currencyLabel]="currencyLabel" [currencyView]="currencyView"
+        [selectedTab]="selectedTab" [allGridFilterData]="allGridFilterData" [allGridData]="allGridData"
+        [billGridData]="billGridData" [disbsGridData]="disbsGridData" [gbpGridData]="gbpGridData"
+        [matterData]="matterData" [ddaGridData]="ddaGridData" [client1GridData]="client1GridData"
+        [client2GridData]="client2GridData" [client3GridData]="client3GridData" [eChitGridData]="eChitGridData"
+        (updateAllGridFilter)="onUpdateAllGridFilter($event)" (allGridViewChange)="onAllGridViewChange($event)"
+        (changeSelectedTab)="onChangeTap($event)" (billGridViewChange)="onBillGridViewChange($event)"
+        (dispsGridViewChange)="onDISBSGridViewChange($event)" (gbpGridViewChange)="onGBPGridViewChange($event)"
+        (ddaGridViewChange)="onDDAGridViewChange($event)" (client1GridViewChange)="onClient1GridViewChange($event)"
+        (client2GridViewChange)="onClient2GridViewChange($event)"
+        (client3GridViewChange)="onClient3GridViewChange($event)" (refresh)="onRefreshGrid()"
+        (updatePeriodFilter)="onUpdatePeriodFilter($event)" (openBillingGuide)="onOpenBillingGuide()"
+        (printLedgerCard)="onPrintLedgerCard()" (openPreTransactionPopup)="onOpenPreTransactionPopup()">
+      </dps-ledger-card-grid>
+    </div>
+  </div>
+</div>

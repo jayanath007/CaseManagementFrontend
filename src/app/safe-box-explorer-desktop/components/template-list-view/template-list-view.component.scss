@@ -1,0 +1,90 @@
+@import '~styles/variables.scss';
+
+.file-access {
+  color: #39bf39;
+}
+
+.file-abord {
+  color: #df4d4d;
+}
+
+.blink {
+  color: rgb(192, 25, 19);
+  -webkit-animation-name: example;
+  -webkit-animation-duration: .5s;
+  animation-name: example;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {
+    color: #db3939
+  }
+
+  //  25%  {color:#f79797;}
+  50% {
+    color: #fadbdb;
+    font-size: 17;
+  }
+
+  //  75%  {color:#ff0000;}
+  100% {
+    color: #db3939;
+  }
+}
+
+.dps-edit-view-btn,
+.dps-check-in-btn {
+  color: #2f6a82;
+}
+
+.dps-abort-btn {
+  color: #ec4646;
+}
+
+.dps-indicator {
+  position: absolute;
+  top: 13px;
+  font-size: 18px;
+}
+
+.dps-file-indicator {
+  height: unset !important;
+}
+
+.dps-edit-view-btn,
+.dps-check-in-btn,
+.dps-abort-btn {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+
+  mat-icon {
+    font-size: 18px;
+  }
+}
+
+.dps-white-gray-scroll {
+  height: 100%;
+
+  ::ng-deep {
+    mat-nav-list {
+      padding-top: 4px;
+    }
+
+    mat-list-item {
+      height: 48px !important;
+      font-size: 12px;
+    }
+
+    [mat-list-icon] {
+      font-size: 20px;
+      width: 20px;
+    }
+  }
+}
+
+dps-safebox-context-menue {
+  position: fixed;
+}

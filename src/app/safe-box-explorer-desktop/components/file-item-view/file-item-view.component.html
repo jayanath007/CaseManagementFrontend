@@ -1,0 +1,63 @@
+<div class="safe-box-item-view" fxLayout="column">
+  <div fxLayout="row" class="safe-box-itemview dps-toolbar-box-shadow">
+    <div *ngIf="!selectedBlobData || selectedBlobData.length===0">
+      <mat-icon>folder</mat-icon>
+      <span>{{itemCount}} Items</span>
+    </div>
+    <div *ngIf="selectedBlobData && selectedBlobData.length>1">
+      <mat-icon>file_copy</mat-icon>
+      <span>{{selectedBlobData.length}} Items Selected</span>
+    </div>
+    <div *ngIf="selectedBlobData && selectedBlobData.length===1">
+      <mat-icon>insert_drive_file</mat-icon>
+      <span>{{selectedBlobData[0]?.displayName | attachmentIcon:'type' | titlecase }} File</span>
+    </div>
+  </div>
+
+  <div class="safe-box-item-info" fxLayout="column" *ngIf="!selectedBlobData || selectedBlobData.length===0">
+    <i class="fa fa-folder-open-o" aria-hidden="true">
+      <span></span>
+    </i>
+
+    <span>{{ treeNodeItem?.name}}</span>
+  </div>
+  <div class="safe-box-item-info" fxLayout="column" *ngIf="selectedBlobData && selectedBlobData.length===1">
+    <i [ngClass]="selectedBlobData[0]?.displayName | attachmentIcon" aria-hidden="true">
+      <span></span>
+    </i>
+
+    <span>{{ selectedBlobData[0]?.displayName}}</span>
+  </div>
+  <div class="safe-box-items-info" fxLayout="column" *ngIf="selectedBlobData && selectedBlobData.length>1">
+    <div *ngFor="let item of selectedBlobData" fxLayout="row" fxLayoutAlign="space-between center" >
+      <div class="file-type">
+        <i [ngClass]="item?.displayName | attachmentIcon" aria-hidden="true">
+        <span></span>
+      </i>
+    </div>
+      <div class="file-information">{{ item?.displayName}}</div>
+    </div>
+  </div>
+  <div class="info file-info" *ngIf="selectedBlobData && selectedBlobData.length===1">
+    <div class="left">
+      <div> Size</div>
+      <div> Date Created </div>
+      <div> Date Modified </div>
+    </div>
+    <div class="right">
+      <div>{{selectedBlobData[0]?.Properties['Content-Length'] | attachmentsSize }}</div>
+      <div>{{selectedBlobData[0]?.Properties['Creation-Time']|date:'dd/MM/yyyy h:mm a' }}</div>
+      <div>{{selectedBlobData[0]?.Properties['Last-Modified']|date:'dd/MM/yyyy h:mm a' }}</div>
+    </div>
+  </div>
+
+  <div class="info file-info" *ngIf="selectedBlobData && selectedBlobData.length>1">
+    <div class="left">
+      <div>Totle Size</div>
+    </div>
+    <div class="right">
+      <div>{{totleSize | attachmentsSize }}</div>
+    </div>
+  </div>
+
+</div>

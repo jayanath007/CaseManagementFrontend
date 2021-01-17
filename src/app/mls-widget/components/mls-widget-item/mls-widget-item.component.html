@@ -1,0 +1,63 @@
+<mat-list-item class="widget-item mls" (click)="onClickItem(item, $event, mlsWidgetCompose)" *ngIf="resolveMatterRef">
+  <div fxLayout="row">
+    <button matListAvatar mat-icon-button class="dps-sender-avatar"
+      [ngStyle]="{'background-color': item?.messageSender?.emailAddress | recipientColorCode}">
+      <span>{{senderFullName | nameInitials}}</span>
+    </button>
+    <!-- <img matListAvatar [hidden]="!showProfileImg" src="{{item?.messageSender?.emailAddress | dpsUserImage}}" alt="..."
+    (load)="showProfileImg=true"> -->
+
+    <div fxLayout="column" style="padding-left: 3px">
+      <div class="dps-mls-user">
+        <div class="dps-mls-item-header" fxLayout="column  wrap" fxLayoutGap="3px">
+          <div class="dps-mls-chat-item-name">{{senderFullName}}</div>
+          <div>{{item?.messageSender?.emailAddress}}</div>
+          <div class="mls-body-preview-text">{{item?.text}}&nbsp; </div>
+        </div>
+
+        <div class="dps-mls-item-body" fxLayout="column">
+          <!-- <span dps-mls-chat-item-header-icon> -->
+          <i class="material-icons" *ngIf="item?.documentDetails"
+            [ngClass]="item?.documentDetails?.lettername | attachmentIcon"><span></span></i>
+          <span *ngIf="item?.xmlid" fxLayout="column">
+            <i class="material-icons fa fa-file dps-file-icon"></i>
+            <span *ngIf="isXmlStatueIsNew || isFormFillingStatuesIsNew">Pending</span>
+            <span *ngIf="!isXmlStatueIsNew">{{item?.xmlStatus}}</span>
+            <span *ngIf="!isFormFillingStatuesIsNew">{{item?.documentDetails?.status}}</span>
+          </span>
+          <span> Ref: {{resolveMatterRef}}</span>
+          <span class="dps-mls-item-date">{{item?.datePosted | dpsDate}}</span>
+        </div>
+        <div class="dps-mls-rply">
+          <button class="dps-reply-btn" mat-button (click)="onReplyToChat(item, $event)"
+            [matMenuTriggerFor]="replayForm">
+            <mat-icon>reply</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-menu #replayForm="matMenu" [xPosition]="xPosition">
+    <div fxLayout="column"
+      [ngClass]="continueChatItem?.sourceMessageID === item.sourceMessageID?'show-compose':'hide-compose'"
+      style="height: 50px;">
+      <!-- fxFlex="60%" -->
+      <mat-progress-bar *ngIf="isMsgSending" mode="indeterminate" value="40"></mat-progress-bar>
+      <div fxFlex="1 1 auto" fxLayout="row">
+        <div class="dps-message-module">
+          <input class="dps-input-message" #mlsWidgetCompose [disabled]="isMsgSending" type="text" maxlength="250"
+            (keydown)="onInsertMessageKeydown($event, mlsWidgetCompose.value)" (click)="onClickCompose($event)">
+          <button class="dps-send-btn" mat-button (click)="
+          onSendMessage(mlsWidgetCompose.value, $event)">
+            <mat-icon>send</mat-icon>
+          </button>
+          <button mat-icon-button class="dps-exit" (click)="onExitCompose()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+
+</mat-list-item>

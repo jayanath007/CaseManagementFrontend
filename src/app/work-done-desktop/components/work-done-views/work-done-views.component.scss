@@ -1,0 +1,136 @@
+@import '~styles/variables.scss';
+.grid-controller-set {
+  background: #32434d;
+  padding: 0px 0px 6px 0 !important;
+}
+
+.grid-controller-set .mat-line {
+  color: $primary;
+}
+
+.grid-controller-set .mat-radio-checked .mat-line {
+  color: #44a020;
+}
+
+.grid-controller-set .mat-radio-button {
+  margin-right: 10px;
+}
+
+.grid-controller-set .mat-checkbox {
+  margin-right: 10px;
+}
+
+.search_clear_icon {
+  font-size: $primary-font-size + 2 !important;
+  color: #d86969;
+}
+
+.time_record_selector {
+  color: $primary;
+  font-weight: 400;
+  font-size: $primary-font-size - 1;
+}
+
+mat-option {
+  font-size: $primary-font-size - 1 !important;
+  font-weight: 500;
+}
+
+.mat-datepicker-toggle[_ngcontent-c38] {
+  color: $primary !important;
+}
+
+.mat-select-trigger {
+  color: $primary !important;
+}
+
+.mat-input-element.mat-form-field-autofill-control {
+  color: $primary !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #076973;
+  background: #defcff;
+}
+
+.mat-form-field-autofill-control {
+  font-size: $primary-font-size - 2;
+}
+
+dps-grid-font-controller {
+  margin: -10px 0px 0px 0;
+}
+
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+  .dps_workdone_time_filter {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.workdone-input {
+  font-size: $primary-font-size - 2;
+}
+
+.workdone-input.from,
+.workdone-input.to,
+.workdone-input.custom {
+  width: 100px;
+  margin-right: 10px;
+}
+
+
+
+.dps_workdonegrid_controller {
+  ::ng-deep .mat-datepicker-toggle-default-icon {
+    color: $primary;
+  }
+
+  .dps-wrkdone-search {
+    margin: 0px 10px 8px 0px;
+  }
+
+}
+
+.workdone-input.search {
+  mat-icon {
+    font-size: $primary-font-size + 2;
+  }
+}
+.dps-grouping-cntxt-menu {
+  margin: -7px 10px 0px 0px;
+  font-size: $primary-font-size - 2;
+  background: #4a94c1;
+  color: white;
+  border-radius: 0;
+ 
+
+mat-icon {
+  vertical-align: middle;
+  font-size: 20px;
+}
+}
+
+.contxt-menu-btn {
+  &:hover {
+    background: #b8dbf3;
+    opacity: .9;
+  }
+  
+  background: #b8dbf3;
+  padding: 0px 12px 0px 0px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 12px;
+  color: #0c4367;
+  
+  mat-icon {
+    color:rgba(22, 84, 138, 0.83);
+    border: 1px solid #a3d5f5;
+    padding: 6px 12px;
+    background: #a3d5f5;
+    margin-right: 10px;
+  }
+  }

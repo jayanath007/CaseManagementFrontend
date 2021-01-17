@@ -1,0 +1,104 @@
+<div class="dps-custome-recurrence-box">
+  <h2 mat-dialog-title>
+    <i class="fa fa-refresh" aria-hidden="true"></i>Select repeat Pattern</h2>
+  <mat-dialog-content>
+    <span class="dps-custome-title">Occurs</span>
+    <mat-form-field floatLabel="never" class="dps-occurs-controller">
+      <mat-select [ngModel]="type" (selectionChange)="onOccursChange($event.value)">
+        <mat-option [value]="item?.value" *ngFor="let item of data.repeatTypeList">
+          {{item.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="type==='daily'">
+      <span class="dps-custome-title">Every</span>
+      <mat-form-field class="dps-custome-days">
+        <input matInput #dailyInterval [dpsNumberOnly] [value]="interval" (focusout)="onChangeInterval(dailyInterval.value)">
+      </mat-form-field>
+      <span class="dps-custome-daily">Days</span>
+    </div>
+    <div *ngIf="type==='weekly'" class="dps-custome-weekly">
+      <span class="dps-custome-title">Every</span>
+      <mat-form-field class="dps-custome-days">
+        <input matInput #weeklyInterval [dpsNumberOnly] [value]="interval" (focusout)="onChangeInterval(weeklyInterval.value)">
+      </mat-form-field>
+      <span class="dps-custome-daily" >Weeks On</span>
+
+      <div class="dps-custome-dates">
+        <mat-checkbox *ngFor="let day of data?.dayOfWeekList" color="primary" [ngModel]="getIsDaySelect(day.val)" (change)="onChangeWeekDays($event.checked,day.val)">{{day.lable | slice:0:3}} {{day.selected}}</mat-checkbox>
+      </div>
+
+    </div>
+
+    <div *ngIf="type==='absoluteMonthly'">
+      <span class="dps-custome-title">Day</span>
+      <mat-form-field class="dps-custome-days">
+
+        <input matInput type="number" [dpsNumberOnly]=2 #absoluteMonthlyDay [value]="dayOfMonth" (focusout)="onChangedayOfMonth(absoluteMonthlyDay.value)">
+      </mat-form-field>
+      <span class="dps-custome-daily"> of every</span>
+      <mat-form-field class="dps-custome-days">
+        <input matInput #absoluteMonthlyInterval [dpsNumberOnly] [value]="interval" (focusout)="onChangeInterval(absoluteMonthlyInterval.value)">
+      </mat-form-field>
+      <span class="dps-custome-daily">months</span>
+    </div>
+
+    <div *ngIf="type==='relativeMonthly'" class="dps-cal-select dps-every-month-calc">
+      <span class="dps-custome-title">Every</span>
+      <mat-form-field class="dps-custome-days">
+        <input matInput #relativeMonthlyInterval [dpsNumberOnly] [value]="interval" (focusout)="onChangeInterval(relativeMonthlyInterval.value)">
+      </mat-form-field>
+      <span class="dps-custome-daily">months on the </span>
+      <mat-select [ngModel]="index" (selectionChange)="onWeekIndexChange($event.value)">
+        <mat-option [value]="weekIndex" *ngFor="let weekIndex of data?.weekIndexList">
+          {{weekIndex}}
+        </mat-option>
+      </mat-select>
+      <mat-select [ngModel]="dayOfWeek" (selectionChange)="ondayOfWeekChange($event.value)">
+        <mat-option [value]="dayOfWeek.val" *ngFor="let dayOfWeek of data?.dayOfWeekList">
+          {{dayOfWeek.lable}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div *ngIf="type==='absoluteYearly'" class="dps-cal-month-select">
+      <span class="dps-custome-title">On</span>
+      <mat-select [ngModel]="getSelectMonth" (selectionChange)="onMonthChange($event.value)">
+        <mat-option [value]="monthItem" *ngFor="let monthItem of data?.monthList let i ">
+          {{monthItem.label}}
+        </mat-option>
+      </mat-select>
+      <mat-form-field class="dps-custome-days">
+        <input matInput type="number" [dpsNumberOnly]=2 #absoluteYearlyDay [value]="dayOfMonth" (focusout)="onChangedayOfMonth(absoluteYearlyDay.value)">
+      </mat-form-field>
+    </div>
+
+    <div *ngIf=" type==='relativeYearly' " class="dps-cal-select">
+      <span class="dps-custome-title">On The</span>
+      <mat-select [value]="index ">
+        <mat-option [value]="weekIndex " *ngFor="let weekIndex of data?.weekIndexList ">
+          {{weekIndex}}
+        </mat-option>
+      </mat-select>
+      <mat-select [ngModel]="dayOfWeek " (selectionChange)="onDayChange($event.value) ">
+        <mat-option [value]="day.val " *ngFor="let day of data?.dayOfWeekList ">
+          {{day.lable}}
+        </mat-option>
+      </mat-select>
+      <span class="dps-custome-daily">of</span>
+      <mat-select [ngModel]="getSelectMonth " (selectionChange)="onMonthChange($event.value) ">
+        <mat-option [value]="monthItem" *ngFor="let monthItem of data?.monthList ">
+          {{monthItem.label}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-button (click)="onSaveClick()" class="dps-custome-save">Save</button>
+    <button mat-button (click)="onCancelClick()" class="dps-custome-cancel">Cancel</button>
+  </mat-dialog-actions>
+
+</div>

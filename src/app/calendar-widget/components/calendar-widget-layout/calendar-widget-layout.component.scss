@@ -1,0 +1,193 @@
+@import '~styles/variables.scss';
+
+mat-toolbar {
+  background: unset;
+}
+
+.option-btn {
+  background: #5c97d4;
+}
+.widget-item-list::-webkit-scrollbar
+{
+  width: 4px;
+}
+.widget-item-list::-webkit-scrollbar-thumb {
+  background-color: #5c97d4;
+  border: 0;
+  border-radius: 4px;
+  
+}
+.header-icon {
+  vertical-align: middle;
+}
+
+
+.calender-events {
+  height: calc(100% - 70px);
+  overflow-y: auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.data-empty {
+  text-align: center;
+  color: #a4afab;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+// .empty-view {
+//   position: absolute;
+//   // background: #b3d1ea;
+//   top: 64px;
+//   border-bottom: 0;
+//   height: calc(100% - 64px);
+//   width: 100%;
+// }
+
+::ng-deep.dps-widgets_v7 {
+
+  .widget-item-list-v7.calender-events {
+    display: flex;
+  }
+
+
+  .dps-navigate-btn {
+    display: block !important;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background-color: #5d97d4;
+    margin-left: 6px;
+
+    &[disabled] {
+      color: rgba(0, 0, 0, 0.1);
+      background-color: #aacce4;
+    }
+  }
+
+  .widget-item-list.calender-events {
+    display: none;
+  }
+
+  .calender-events {
+    padding: 0px;
+  }
+}
+
+// for Angular vertion_7
+dps-calendar-widget-item {
+  padding-bottom: 10px;
+  margin-top: 12px;
+}
+
+// .widget-item-list-v7.calender-events,
+// .dps-navigate-btn {
+//   display: none;
+// }
+.dps-navigate-btn {
+  display: block !important;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  background-color: #5d97d4;
+  margin-left: 6px;
+
+  &[disabled] {
+    color: rgba(0, 0, 0, 0.1);
+    background-color: #aacce4;
+  }
+}
+
+#widget_calender_events {
+  scroll-behavior: smooth;
+  padding-top: 12px;
+}
+
+
+
+
+
+
+// new empty areas
+.dps-empty-item {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 12px 10px 0px 0px;
+}
+
+.detail-view {
+  background: #e9f5fe;
+  padding: 0px 0px;
+  font-size: 12px;
+  text-align: center;
+  color: #8cadc4;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 145px;
+  // height: 75px;
+  height: 97px;
+  line-height: 75px;
+}
+
+.time-view {
+  background: #aacce4;
+  padding: 41px 30px 34px;
+  font-size: 12px;
+  justify-content: space-around;
+  color: #547b96;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 145px;
+  height: 108px;
+  // height: 50px;
+  // height: 76px;
+}
+
+.dps-widgets_v7 .dps-navigate-btn {
+  background-color: #aacce4;
+  color: #c1d5e3;
+}
+
+.dps-empty-line {
+  justify-content: space-between;
+  padding: 5px 0px 5px 0px;
+
+  span {
+    width: 17px;
+    border: 2px solid #8cadc4;
+    border-radius: 5px;
+  }
+
+}
+
+.dps-time-indicator {
+  justify-content: space-between;
+}
+
+.dps-empty-events {
+  border: 2px solid #c8dcea;
+
+  display: inline-block;
+
+  &.l1 {
+    width: 26%;
+    margin-top: 25px;
+  }
+
+  &.l2 {
+    width: 26%;
+    margin-bottom: 16px;
+  }
+}
+
+.mat-progress-bar {
+  height: 2px;
+}

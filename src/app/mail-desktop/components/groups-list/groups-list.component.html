@@ -1,0 +1,18 @@
+<mat-nav-list dense>
+  <mat-divider></mat-divider>
+  <mat-list-item (click)="onGroupsToggle($event)" (contextmenu)="contextmenuOpen($event)">
+    <mat-icon class="dps-owner" matListIcon>group</mat-icon>
+    <h4 mat-line><span [matMenuTriggerFor]="groupMenu"></span> Groups</h4>
+    <button mat-icon-button>
+      <mat-icon>{{isExpanded?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <div *ngIf="isExpanded">
+<dps-group-list-item *ngFor="let group of groups" [group]="group" [isGroupMode]="isGroupMode" (selectGroup)="onSelectGroup($event)"></dps-group-list-item>
+  </div>
+</mat-nav-list>
+<mat-menu #groupMenu="matMenu">
+  <button class="dps-folder-action" mat-menu-item (click)="onCreateNewGroup()">Create
+    new group</button>
+</mat-menu>

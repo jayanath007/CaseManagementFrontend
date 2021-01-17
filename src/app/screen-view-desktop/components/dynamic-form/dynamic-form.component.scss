@@ -1,0 +1,29 @@
+.screen-viewer-wrapper-outer
+{
+    overflow: auto;
+}
+
+.screen-viewer-main-wrapper
+{
+    padding: 10px;
+    position: relative;
+    // max-height: 480px !important; 
+    width: 970px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.screen-view-component-wrap
+{
+   position: absolute;
+}
+.screen-viewer-wrapper-outer
+{
+    max-height: 600px; 
+}
+
+@media only screen and (max-height: 768px) {
+    .screen-viewer-wrapper-outer {
+        max-height: 480px !important; 
+    }
+}

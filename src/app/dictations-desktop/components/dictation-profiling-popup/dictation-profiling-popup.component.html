@@ -1,0 +1,135 @@
+<div fxLayout="column" class="dps-team-movement-add">
+  <div fxLayout="column">
+    <mat-toolbar class="dps-toolbar-box-shadow team-header">
+      <div fxFlexAlign="center" fxLayout="row" class="dps-header">
+        <mat-icon matListIcon class="team-icon">how_to_reg</mat-icon>
+        <span class="team-text">Send Audio File - Job {{jobInfo.id}}</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="profileLoading" mode="indeterminate"></mat-progress-bar>
+    <div class="dps-add-movement-popup" fxLayout="column" fxLayoutGap="10px">
+      <div class="dps-team-form-container">
+        <div class="job-profile-wrap">
+          <mat-card class="mat-elevation-z0">Job Profile</mat-card>
+          <div fxLayout="row">
+            <mat-form-field>
+              <mat-label>Job Name</mat-label>
+              <input matInput #job [value]="jobName" (blur)="onChangeJobName(job.value)">
+            </mat-form-field>
+
+            <!-- 
+            <mat-form-field>
+              <mat-label>Job Description</mat-label>
+              <input matInput #description (blur)="onChangeDescription(description.value)" [value]="jobDescription">
+            </mat-form-field> -->
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Job Description</mat-label>
+              <mat-select (selectionChange)="onChangeDescription($event.value)" [value]="jobDescription">
+                <mat-option value="Imported">Imported</mat-option>
+                <mat-option [value]="description.value" *ngFor="let description of jobDescriptionList">
+                  {{description.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <dps-editable-dropdown [options]="getDescription()" [value]="jobDescription" placeholder="Job Description"
+              (changeValue)="onChangeDescription($event)">
+            </dps-editable-dropdown>
+
+            <button (click)="openMatterSearchPopup()" mat-button class="btn-insertlink"><span
+                class="material-icons">insert_link</span> DPS File</button>
+
+          </div>
+
+
+
+          <mat-card class="mat-elevation-z0">Send Details</mat-card>
+
+          <div fxLayout="row">
+
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Due Date</mat-label>
+              <mat-select>
+                <mat-option>
+                  Select Option
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field class="date-picker-inner">
+              <mat-label>Due Date</mat-label>
+              <input matInput [matDatepicker]="dueDateicker" [value]="jobInfo.dueDate"
+                (dateChange)="onChangeDueDate($event.value)" placeholder="Due Date">
+              <mat-datepicker-toggle matSuffix [for]="dueDateicker"></mat-datepicker-toggle>
+              <mat-datepicker #dueDateicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Urgency</mat-label>
+              <mat-select [value]="jobInfo.urgentValue" (selectionChange)="onChangeUrgency($event.value)">
+                <mat-option [value]="urgentValue.normal">
+                  Normal
+                </mat-option>
+                <mat-option [value]="urgentValue.important">
+                  Important
+                </mat-option>
+                <mat-option [value]="urgentValue.urgent">
+                  Urgent
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+          <div fxLayout="row">
+            <mat-form-field appearance="fill">
+              <mat-label>Group</mat-label>
+              <mat-select (selectionChange)="onChangeGroup($event.value)" [value]="groupFor">
+                <mat-option value="0">-- None --</mat-option>
+                <mat-option [value]="group.groupId" *ngFor="let group of profileGroups">
+                  {{group.groupName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Secretary</mat-label>
+              <mat-select (selectionChange)="onChangeSecratary($event.value)" [value]="secFor">
+                <mat-option [value]="secrarary.key" *ngFor="let secrarary of profileSecrarary">
+                  {{secrarary.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+
+          <br />
+
+          <div fxLayout="row">
+            <mat-checkbox (change)="onIsPrivateJob($event.checked)" class="confidentiality" [value]="privateJob">
+              This Job is Private &amp; Confidential (Sent only to a single
+              Secretary)</mat-checkbox>
+          </div>
+
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput #pass type='password' (blur)="onChangePassword(pass.value)">
+          </mat-form-field>
+
+        </div>
+        <div class="dps-btm-btn" fxLayoutGap="1em">
+
+          <button mat-raised-button class="dps-task-submit" (click)="onSubmitData()" tabindex="-1"
+            [disabled]="profileLoading">Submit</button>
+          <button [disabled]="profileLoading" class="cancel" style="color: #537894; 
+      background: #fff;" mat-raised-button (click)="onClose()" tabindex="2">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>

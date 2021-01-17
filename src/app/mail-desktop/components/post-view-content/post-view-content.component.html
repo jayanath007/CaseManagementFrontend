@@ -1,0 +1,45 @@
+<mat-list-item class="dps-post-view-To-header">
+  <!-- <img matListAvatar src="favicon.ico" alt="..."> -->
+  <img matListAvatar [hidden]="!showProfileImg" *ngIf="post.sender"
+    src="{{post.from.emailAddress.address | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true"
+   >
+  <button *ngIf="!showProfileImg" matListAvatar mat-icon-button class="dps-post-view-avatar"
+    [ngStyle]="{'background-color': ((post.from? post.from.emailAddress.address :(post.sender ? post.sender.emailAddress.address : '')) | recipientColorCode)}">
+    <span>{{(post.from? post.from.emailAddress.name :(post.sender ?
+        post.sender.emailAddress.name : ''))|nameInitials}}</span>
+  </button>
+  <!-- {{(post.From? post.From.Name :(post.Sender ? post.Sender.Name : '(No name)'))|nameInitials}} -->
+  <span matLine class="dps-post-view-To"
+    *ngIf="!(post.from && post.sender && post.from.emailAddress.address !==post.sender.emailAddress.address)"
+    [title]="post.from ? post.from.emailAddress.address :(post.sender ? post.sender.emailAddress.address : '')">{{post.from?
+      post.from.emailAddress.name :(post.sender ? post.sender.emailAddress.name : '(No name)')}}</span>
+  <span matLine class="dps-post-view-To"
+    *ngIf="post.from && post.sender && post.from.emailAddress.address !== post.sender.emailAddress.address"
+    [title]="(post.sender ? post.sender.emailAddress.address : '')+'/'+(post.from ? post.from.emailAddress.address :'')">
+    <span>{{post.sender.emailAddress.name}}</span> on behalf of
+    <span>{{post.from.emailAddress.name}}</span>
+  </span>
+  <h4 matLine class="dps-post-view-date">{{post.receivedDateTime | timezone:timeZone | date : 'EEE dd/MM/yyyy
+      h:mm a'}}</h4>
+  <button mat-icon-button fxFlexAlign="start" [matMenuTriggerFor]="contextMenu" matTooltip="More"
+    matTooltipPosition="below">
+    <mat-icon>more_horiz</mat-icon>
+    <mat-menu #contextMenu="matMenu" dense>
+      <button class="dps-post-action" mat-menu-item (click)="onReplyAll()">Reply all</button>
+      <button class="dps-post-action" mat-menu-item (click)="onForward()">Forward</button>
+      <button class="dps-post-action" mat-menu-item (click)="onSeparateWindow()">Open in a separate window</button>
+      <button class="dps-post-action" mat-menu-item (click)="onDeleteReply()">Delete reply</button>
+    </mat-menu>
+  </button>
+</mat-list-item>
+<div fxLayout="row" *ngIf="post.hasAttachments && attachments && attachments.length > 0" class="dps-attachment-list">
+  <dps-attachment-list [attachments]="attachments" [companyCode]="companyCode" (openMatter)="onOpenMatter($event)"
+    (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)">
+  </dps-attachment-list>
+</div>
+<div fxLayout="row" class="dps-mail-body">
+  <div #mailBody fxFlex="calc(100%-70px)">
+    <div> </div>
+  </div>
+</div>
+<mat-divider></mat-divider>

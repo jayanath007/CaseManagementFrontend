@@ -1,0 +1,46 @@
+.notification-body {
+  /* display: table-cell; */
+  display: block;
+  min-height: auto;
+  padding: 20px;
+  font-size: 12px;
+}
+
+/* notification logic */
+
+.dps-notification-wrap .title .fa {
+  display: none;
+}
+
+.dps-workflow-hand .toolbar {
+  background: #d09413;
+}
+
+.dps-notification-wrap.dps-workflow-hand .title .fa.fa-hand-pointer-o {
+  display: inline-block;
+}
+
+.dps-workflow-error .toolbar,
+.dps-workflow-exclamation .toolbar,
+.dps-workflow-warning .toolbar,
+.dps-workflow-stop .toolbar {
+  background: #a12524;
+}
+
+.dps-workflow-question .toolbar,
+.dps-workflow-information .toolbar,
+.dps-notification-wrap.dps-workflow-none .toolbar,
+.dps-workflow-asterisk .toolbar {
+  background: #0d508c;
+}
+
+.dps-notification-wrap.dps-workflow-error .title .fa.fa-exclamation-circle,
+.dps-notification-wrap.dps-workflow-exclamation .title .fa.fa-exclamation-circle,
+.dps-notification-wrap.dps-workflow-warning .title .fa.fa-exclamation-circle,
+.dps-notification-wrap.dps-workflow-stop .title .fa.fa-ban,
+.dps-workflow-question .title .fa.fa-question-circle,
+.dps-workflow-asterisk .title .fa.fa-info-circle,
+.dps-workflow-information .title .fa.fa-info-circle,
+.dps-workflow-none .title .fa.fa-info-circle {
+  display: inline-block;
+}

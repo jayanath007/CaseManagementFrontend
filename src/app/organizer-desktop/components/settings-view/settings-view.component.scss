@@ -1,0 +1,20 @@
+@import '~styles/variables.scss';
+
+mat-list {
+    width: inherit;
+
+    mat-list-item {
+        h2 {
+            font-weight: 100; 
+            flex: 1 1 auto;
+            }
+
+        span.btn-positon {
+            flex: 1 1 auto;
+        }    
+    }
+}
+
+mat-select {
+    width: 100%;
+}

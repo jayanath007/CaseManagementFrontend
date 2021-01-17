@@ -1,0 +1,68 @@
+<div class="dps-team-widget-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="header">
+      <mat-icon class="header-icon">supervisor_account</mat-icon>
+      <span (click)="onOpenModule()">My Activities - (Current Year)</span>
+      <span class="spacer"></span>
+      <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #mainmenu="matMenu">
+        <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+          Remove
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading && !eventYearSummery?.length" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" class="dps-team-widget-data-wraper">
+    <div class="dps-team-widget-chart-wraper" *ngIf="!!holidayadgedDebData">
+      <dps-pie-chart [chartOptions]="pieChartOptions" [pieChartDataset]="holidayadgedDebData" chartHeight="200"
+        [borderColor]="'#fff'">
+      </dps-pie-chart>
+    </div>
+    <div fxLayout="column" class="dps-team-widget-count-wraper" fxLayoutGap="8px">
+      <div class="dps-training" fxLayout="row">
+        <div fxLayout="column" class="dps-team-widget-count-label">
+          <span class="text">Training</span>
+          <span class="text-btm">Year summary</span>
+        </div>
+
+        <span class="number">{{traningCount}}</span>
+
+      </div>
+      <mat-divider></mat-divider>
+      <div class="dps-sick" fxLayout="row">
+        <div fxLayout="column" class="dps-team-widget-count-label">
+          <span class="text">Sick</span>
+          <span class="text-btm">Year summary</span>
+        </div>
+
+        <span class="number">{{sickCount}}</span>
+
+      </div>
+
+
+      <!-- <div class="dps-team-widget-count-wraper-item " fxLayoutGap="5px">
+        
+        <span class="dps-team-widget-count-label">Training</span>
+
+        <div class="dps-team-widget-count">
+            <span>{{traningCount}}</span>
+          </div>
+      </div> -->
+
+      <!--       
+      <div class="dps-team-widget-count-wraper-item " fxLayoutGap="5px">
+          
+          <span class="dps-team-widget-count-label">Sick</span>
+          <div class="dps-team-widget-count">
+              <span>{{sickCount}}</span>
+            </div>
+        </div> -->
+
+    </div>
+
+  </div>
+</div>

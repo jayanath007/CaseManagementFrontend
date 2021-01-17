@@ -1,0 +1,98 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-app-settings-popup-panel {
+    .mat-dialog-container {
+      overflow: hidden;
+
+    }
+}
+
+.dps-white-gray-scroll {
+  overflow: auto;
+  height: 100%;
+}
+
+.dps-automatic-setting-layout {
+  font-family: $primary-font-stack;
+  font-size: $primary-font-size - 2;
+  padding: 10px;
+
+  mat-radio-button {
+    padding-bottom: 5px;
+  }
+
+  .dps-automatic-setting-controller {
+
+    .dps-automatic-wrapper {
+      padding: 0px 0px 0px 30px;
+
+      mat-checkbox {
+        padding-top: 10px;
+      }
+
+      .dps-automatic-time {
+        padding: 0px 0px 0px 28px;
+        min-height: 100px;
+
+        &.disabled {
+          .dps-date-input {
+            color: rgba(0, 0, 0, .38) !important;
+          }
+
+          mat-button-toggle {
+            background: #c7c7c7 !important;
+            color: #a7a7a7 !important;
+          }
+        }
+
+        .dps-automatic-start,
+        .dps-automatic-end {
+          min-height: 50px;
+
+          .time {
+            width: 60px;
+          }
+
+          mat-form-field {
+            padding-right: 10px;
+          }
+
+          mat-button-toggle {
+            background: #c1daf7;
+            color: #175296;
+          }
+
+          .dps-date-input {
+            color: #000;
+          }
+        }
+      }
+
+      .dps-automatic-message {
+        dps-ck-editor {
+          padding-bottom: 5px;
+        }
+      }
+
+      .dps-automatic-editor {
+        padding: 10px 0px 0 28px;
+
+        mat-radio-group {
+          padding-bottom: 10px;
+        }
+      }
+    }
+
+  }
+}
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  background: #c9e7fd;
+}
+
+mat-option {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+  color: #4c4c4c !important;
+  height: 38px !important;
+}

@@ -1,0 +1,63 @@
+<div class="dps-bundling-layout" fxLayout="column">
+
+  <div fxLayout="column" style="height: 100%;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-bundling-actions-input">
+      <div fxLayout="row" class="dps-bundle-heading">
+        <h5>Diary items :</h5>
+        <span>{{matterInfo?.matterReferenceNo}}.&nbsp;{{matterInfo?.matterDetails}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="35px">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [ngModel]="fromDate | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeFromDate($event)" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" [ngModel]="toDate | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeToDate($event)" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="search" #searchTextInput placeholder="Search" [value]="searchText"
+            [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)"
+            (change)=OnSearchTextChanged(searchTextInput.value) />
+          <button matSuffix mat-icon-button (click)="OnSearchTextChanged(searchTextInput.value)">
+            <mat-icon> search </mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-icon-button class="refresh" (click)="onRefresh($event)">
+          <mat-icon>
+            refresh
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x" fxFlex="calc(100%-55px)">
+      <div class="dps-file-layout-controller" fxLayout="column">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="inner-highlight">
+            <dps-column-header *ngFor="let header of getVisibleColumnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+              [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+          <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        </div>
+        <div fxLayout="column" fxFlex="calc(100%-45px)" class="dps-white-gray-scroll dps-grid-scroll">
+          <div #fileHistorGridContent class="dps-file-history-grid-content">
+            <!-- file history grid Folder -->
+            <dps-bundling-item-grid-group [selectGroupHash]="selectGroupHash" [selectGroup]="selectGroup"
+              [gridData]="gridData" [groupData]="groupData" [selectedGridItems]="selectedGridItems"
+              [columnDef]="getVisibleColumnDef" [loading]="loading" (openDocument)="onOpenDocument($event)"
+              (folderRowChange)="onFolderRowChange($event)" (rowExpand)="gridRowExpan($event)"
+              (selectRow)="onSelectRow($event)" (changeSelectGroup)="onSelectGroup($event)"
+              (loadMoreData)="loadMore($event)">
+            </dps-bundling-item-grid-group>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

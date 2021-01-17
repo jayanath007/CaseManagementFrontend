@@ -1,0 +1,74 @@
+
+.grid-controller-sub
+{
+  .mat-checkbox
+  {
+    font-size: 12px;
+    align-self: center;
+    margin-right: 16px;
+    width: 100px;
+    text-align: right;
+
+    .mat-checkbox-inner-container
+    {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.type-selection
+{
+  padding: 5px 10px 0;
+  width: calc(100% - 24px);
+
+  .mat-option .mat-option-text
+  {
+    font-size: 11px;
+  }
+}
+
+dps-common-grid-table
+{
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+
+  ::ng-deep .tableContainer
+  {
+    overflow: hidden;
+
+    .mat-icon
+    {
+      width: 16px;
+      font-size: 15px;
+      margin: 0px 0 0;
+      height: 16px;
+    }
+  }
+}
+
+
+  .totals
+  {
+    padding: 20px 75px 20px 25px;
+
+    .total-container
+    {
+      padding: 12px 0 12px 0;
+      text-align: right;
+      width: 76px;
+      font-size: 14px;
+
+      span
+      {
+        display: block;
+      }
+      label
+      {
+        display: block;
+        font-size: 11px;
+      }
+    }
+  }

@@ -1,0 +1,58 @@
+.dps-dictation-audio-player {
+  background-color: #EBEAE5;
+  height: 100%;
+  width: 100%;
+
+  mat-toolbar {
+    background: #EBEAE5;
+  }
+
+  .dps-btn {
+    border-radius: 20px;
+    height: 30px;
+    font-size: 12px;
+    padding: 0px 10px;
+
+
+    &.dps-open-word {
+      background: #C4A75A;
+
+      mat-icon {
+        color: #4B2B0B;
+      }
+
+      .btn-text {
+        color: #EFEFEF;
+      }
+    }
+
+    &.dps-save {
+      background: #ACC45A;
+
+      mat-icon {
+        color: #2C4E05;
+      }
+
+      .btn-text {
+        color: #E9E9E9;
+      }
+
+    }
+
+    div {
+      position: relative;
+      top: -2px;
+    }
+
+    .btn-text {
+      padding: 0px 4px;
+    }
+
+    // mat-icon {
+    //   width: 20px;
+    //   height: 18px;
+    // }
+  }
+
+
+}

@@ -1,0 +1,16 @@
+@import '~styles/variables.scss';
+.dps-document-view{
+    position: relative;   
+}
+.dps-document-view .editable{
+    float: right;
+    padding: 5px 5px 0px;
+    position: absolute;
+    bottom: 4em;
+    right: 15px;
+}
+
+iframe {
+    width:100%; 
+    border-width: 0px;
+}

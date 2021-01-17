@@ -1,0 +1,39 @@
+<div class="matter-search-popup-header" fxLayout="column">
+
+  <mat-toolbar class="dps-popup-header">
+    <mat-toolbar-row>
+      <mat-icon matListIcon>credit_card</mat-icon>
+      <span matLine>Ledger Card</span>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="header-icon-delete">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <div class="dps-ledger-card-main-contentainer" fxLayout="column">
+    <div class="data-contents">
+      <div class="data-wrapper-main" fxLayout="column" fxFlex="calc(100%-200px)">
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        <dps-ledger-card-data-content class="dps-ledger-card-data-content" [matterData]="matterData"
+          [currencyLabel]="currencyLabel" [selectedTab]="selectedTab" [matterBalances]="matterBalances"
+          [currencyView]="currencyView" [allGridFilterData]="allGridFilterData" [allGridData]="allGridData"
+          [billGridData]="billGridData" [disbsGridData]="disbsGridData" [gbpGridData]="gbpGridData"
+          [ddaGridData]="ddaGridData" [client1GridData]="client1GridData" [client2GridData]="client2GridData"
+          [client3GridData]="client3GridData" [eChitGridData]="eChitGridData" (changeSelectedTab)="onChangeTap($event)"
+          (updateAllGridFilter)="onUpdateAllGridFilter($event)" (allGridViewChange)="onAllGridViewChange($event)"
+          (billGridViewChange)="onBillGridViewChange($event)" (disbsGridViewChange)="onDISBSGridViewChange($event)"
+          (gbpGridViewChange)="onGBPGridViewChange($event)" (ddaGridViewChange)="onDDAGridViewChange($event)"
+          (client1GridViewChange)="onClient1GridViewChange($event)"
+          (client2GridViewChange)="onClient2GridViewChange($event)"
+          (client3GridViewChange)="onClient3GridViewChange($event)" (gridRefresh)="onGridRefresh()"
+          (printLedgerCard)="onPrintLedgerCard()" (openPreTransactionPopup)="onOpenPreTransactionPopup()"
+          (openBillingGuide)="onOpenBillingGuided()">
+        </dps-ledger-card-data-content>
+      </div>
+    </div>
+  </div>
+
+
+</div>

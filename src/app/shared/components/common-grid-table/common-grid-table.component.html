@@ -1,0 +1,49 @@
+<div class="tableContainer scrollContent">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead [style.min-width]="minWidth">
+      <tr>
+        <th width="0%"></th>
+        <th [width]="column.width" *ngFor="let column of columns" [style.text-align]="column.textAlign"
+          (click)="onChangeSortOrder(column.propertyName, $event)">{{column.name}}
+          <i class="fa fa-sort-alpha-desc" aria-hidden="true"
+            *ngIf="column.propertyName===_sortBy && _orderBy===-1"></i>
+          <i class="fa fa-sort-alpha-asc" aria-hidden="true" *ngIf="column.propertyName===_sortBy && _orderBy===1"></i>
+        </th>
+      </tr>
+    </thead>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <tbody class="scrollContent" [style.min-width]="minWidth">
+
+      <tr [ngClass]="{'dps-select-row': row.selected}" *ngFor="let row of sortedRows" (dpsClick)="onClick($event, row)"
+        (dpsDblClick)="onDblClick($event, row)" (contextmenu)="onContextmenu($event, row)" [debounceTime]="350">
+        <div matRipple [matRippleDisabled]="!rippleEnabled">
+          <td width="0%"></td>
+          <td [width]="column.width" *ngFor="let column of columns" [style.text-align]="column.textAlign">
+            {{(column.isButton || column.isCheckBox || column.isInput )?'': 
+            (!row.data[column.propertyName] && !!column.defuiltValue) ?  column.defuiltValue:
+                  ((column.isDate && column.dateFormat && row.data[column.propertyName]) ?
+                  (row.data[column.propertyName] | date: column.dateFormat):  ( column.numberFormat?
+                  (row.data[column.propertyName] | number: column.numberFormat): row.data[column.propertyName])) 
+            }}
+            <!-- <mat-icon *ngIf="column.isCheckBox">
+              {{!!row.data[column.propertyName]?'check_box':'check_box_outline_blank'}}</mat-icon> -->
+            <!-- <button mat-icon-button *ngIf="column.isButton"  (click)="onClickRowIcon($event, row, column)">
+              <mat-icon>{{row.data[column.propertyName]}}</mat-icon>
+            </button> -->
+            <mat-checkbox class="property-value-check-box" *ngIf="column.isCheckBox" #checkValue
+              [checked]="row.data[column.propertyName]" (click)="onChangeCheckbox($event, checkValue, row, column)"
+              #checkValue>
+            </mat-checkbox>
+
+
+            <input matInput type="number" min="0" *ngIf="column.isInput" value="{{row.data[column.propertyName]}}"
+              (focusout)="onRowInputChange($event.target.value, row, column)">
+
+          </td>
+        </div>
+
+      </tr>
+      <span *ngIf="!!matMenu" #span [matMenuTriggerFor]="matMenu"></span>
+    </tbody>
+  </table>
+</div>

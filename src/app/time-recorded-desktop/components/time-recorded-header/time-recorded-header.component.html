@@ -1,0 +1,54 @@
+<div class="matter-summary" fxLayout="row" fxLayoutAlign="end center">
+  <div class="total-matter-count-wrap" fxFlex="1 1 auto" [hidden]="selectedInfo?.searchText">
+    <div fxLayout="row" fxLayoutAlign="center center">
+
+      <div class="total-matter-count">
+
+      </div>
+      <div class="total-bill-outstanding-count">
+        <div fxLayout="row" fxLayoutAlign="space-evenly center">
+          <div>
+            <label>Hrs:Mins</label>
+            <span>{{summery?.totalTime ? summery?.totalTime: '0:0'}}</span>
+          </div>
+          <span class="dps_seperator"></span>
+          <!-- <div>
+            <label>Hrs:Mins</label>
+            <span>{{hoursMinutes}}</span>
+          </div> 
+          <span class="dps_seperator"></span>-->
+          <div>
+            <label>Units</label>
+            <span>{{summery?.units ? summery?.units: 0}}</span>
+          </div>
+          <span *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2" class="dps_seperator"></span>
+          <div *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2">
+            <label>Value</label>
+            <span>{{summery?.value ? summery?.value: 0}}</span>
+          </div>
+          <span *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 1 || selectedInfo?.typeId === 2"
+            class="dps_seperator"></span>
+          <div *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2">
+            <label>Billed</label>
+            <span>{{summery?.billed}}</span>
+          </div>
+
+          <span class="dps_seperator" *ngIf="selectedInfo?.typeId === 2"></span>
+
+          <div *ngIf="selectedInfo?.typeId === 1" class="total_unbilled">
+            <!-- || selectedInfo?.typeId === 2  This condition is removed request by Suren -->
+            <label>Unbilled</label>
+            <span>{{summery?.unbilled}}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-recorded-grid-controllers">
+    <dps-time-recorded-grid-filter *ngIf="userPermision?.isAllGroups" [departmentList]="departmentList"
+      [typeList]="typeList" [selectedInfo]="selectedInfo" (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+    </dps-time-recorded-grid-filter>
+  </div>
+</div>

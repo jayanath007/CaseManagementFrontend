@@ -1,0 +1,69 @@
+<mat-nav-list fxLayout="row" class="opened-case-main-nav" dpsIsMobile>
+
+
+
+  <span class="file-history-seperator"></span>
+  <div fxFlex="1 1 auto" [ngClass]="{'seperat-section': (selectedTab) !== 'case-time'}">
+    <dps-times-financial-figures *ngIf="(selectedTab) === 'case-time'" [fdDetails]="fdDetails"
+      [homeCurrancy]="homeCurrancy"></dps-times-financial-figures>
+  </div>
+
+
+
+  <mat-list-item [style.display]="hidden?'none':'flex'">
+    <dps-file-history-search-input [hidden]="hidden" [searchText]="searchText" [isSearchFullText]="isSearchFullText"
+      (isSearchFullTextValue)="onIsSearchFullTextValue($event)" (searchTextChanged)="onSearchTextChanged($event)">
+    </dps-file-history-search-input>
+  </mat-list-item>
+
+  <button mat-button class="dps-grouping-cntxt-menu" [matMenuTriggerFor]="menu" mat-flat-button
+    *ngIf="selectedTab === 'file-history'">
+    <mat-icon class="mat-18">{{groupMode | groupIconByMode}}</mat-icon>
+    <span>{{groupMode}}</span>
+  </button>
+
+  <button *ngIf="selectedTab === 'file-history'" dpsIsMobile mat-raised-button matTooltip='Attach Files'
+    [matMenuTriggerFor]="attachmentUploadMenu.contextMenu" class="open-case-btn-section dps_file_attached">
+    <mat-icon>attach_file</mat-icon>
+    <span class="select-file-lbl">Select File</span>
+    <dps-attachment-upload-menu #attachmentUploadMenu (fromComputer)="onUploadBTNClick()" (fromCloud)="onCloud()">
+    </dps-attachment-upload-menu>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.Default)">
+      <mat-icon class="material-icons">insert_drive_file</mat-icon> {{ fileHistoryGroupMode.Default}}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.Folder)">
+      <mat-icon class="material-icons">web_asset</mat-icon> {{ fileHistoryGroupMode.Folder }}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.Note)">
+      <mat-icon class="material-icons">web_asset</mat-icon> {{ fileHistoryGroupMode.Note }}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.Type)">
+      <mat-icon class="material-icons">file_copy</mat-icon> {{ fileHistoryGroupMode.Type }}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.Date)">
+      <mat-icon class="material-icons">calendar_today</mat-icon> {{ fileHistoryGroupMode.Date }}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.FolderDate)">
+      <mat-icon class="material-icons">ballot</mat-icon> {{ fileHistoryGroupMode.FolderDate }}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(fileHistoryGroupMode.DateFolder)">
+      <mat-icon class="material-icons">event</mat-icon> {{ fileHistoryGroupMode.DateFolder }}
+    </button>
+    <mat-divider></mat-divider>
+  </mat-menu>
+
+  <dps-grid-font-controller [hideFontControll]="selectedTab === 'mls'" [activeClass]="buttonActiveClass"
+    [showRefreshButton]="true" (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+    (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()">
+  </dps-grid-font-controller>
+
+</mat-nav-list>

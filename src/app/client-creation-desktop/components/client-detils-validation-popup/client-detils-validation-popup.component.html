@@ -1,0 +1,127 @@
+<div class="dps-aml-client-id-layout" fxLayout="column" style="height: 100%;">
+  <div>
+    <dps-common-popup-header icon="folder_shared" title="Client ID" buttons="close" [loading]="isLoading"
+      iconColor="#a9c0f6" titleColor="#a9c0f6" (buttonClick)="onClose(ConfirmDialogResultKind.Rejected)">
+    </dps-common-popup-header>
+  </div>
+
+
+  <div class="dps-white-gray-scroll" fxFlex="calc(100%-46px)" fxLayout="column">
+
+    <div class="dps-compulsory-field" fxLayout="column">
+      <h5>
+        Compulsory Field
+      </h5>
+      <div fxLayout="row wrap" fxLayoutGap="1em" class="inner-section">
+        <mat-form-field>
+          <input type="text" #directorForename matInput placeholder="Surname" maxlength="8" [value]="client.firstName"
+            (blur)="onChangSureName(directorForename.value)" [readonly]="isLoading">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" #directorSurname matInput placeholder="Forename" maxlength="8" [value]="client.lastName"
+            (blur)="onChangForeName(directorSurname.value)" [readonly]="isLoading">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" #houseNo matInput placeholder="House Number" maxlength="8" [value]="client.clientAddress1"
+            (blur)="onChangHouseNumber(houseNo.value)" [readonly]="isLoading">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" #directorAddressLine matInput placeholder="Address Line 1" maxlength="8"
+            [value]="client.clientAddress2" (blur)="onChangAddressLine(directorAddressLine.value)"
+            [readonly]="isLoading">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" #clientTown matInput placeholder="Town" maxlength="8" [value]="client.clientTown"
+            (blur)="onChangTown(clientTown.value)" [readonly]="isLoading">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" #clientPostCode matInput placeholder="Post Code" maxlength="8"
+            [value]="client.clientPostCode" (blur)="onChangPostCode(clientPostCode.value)" [readonly]="isLoading">
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="dps-optional-field" fxLayout="column wrap">
+      <h5>
+        Optional-field
+      </h5>
+      <div fxLayout="row wrap" fxLayoutGap="1em" class="inner-section">
+        <mat-form-field class="dps-date-picker-input">
+          <input matInput [matDatepicker]="picker" placeholder="DOB" [value]="client.dateOfBirth"
+            (dateChange)="onDateOfBirthChange($event.value)" fxLayoutGap="2em">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="N.I.Number" #nic [value]="client.niNumber" maxlength="10"
+            (blur)="onChangeNIC(nic.value)">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput #drivingLicence placeholder="Driving licence Number" maxlength="8"
+            (blur)="onDrivingLicence(drivingLicence.value)" [value]="">
+        </mat-form-field>
+      </div>
+
+
+      <span class="dps-separator-group">
+        Passport Details - if provided, need all fields, and date of birth
+        <mat-divider></mat-divider>
+      </span>
+      <div fxLayout="row wrap" fxLayoutGap="1em" class="inner-section">
+        <mat-form-field class="example-full-width">
+          <input matInput #issueCode placeholder="Country of Issue(Code)" maxlength="8"
+            (blur)="onCountryOfIssue(issueCode.value)" [readonly]="isLoading" value="">
+        </mat-form-field>
+        <mat-form-field class="dps-date-picker-input">
+          <input matInput [matDatepicker]="picker1" (dateChange)="onEntryDateChange($event.value)"
+            placeholder="Entry Date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <span class="dps-separator-group">
+        Passport Number - 2nd line of machine Readable Zone
+        <mat-divider></mat-divider>
+      </span>
+      <div fxLayout="row wrap" fxLayoutGap="1em" maxlength="21" fxLayoutAlign="space-around">
+        <mat-form-field class="example-full-width" style="width: 100px;">
+          <input matInput placeholder="" #passportLine1 (blur)="onPassportLine1(passportLine1.value)">
+          <mat-hint>eg 4510164327</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 50px;">
+          <input matInput placeholder="" maxlength="21" #passportLine2 (blur)="onPassportLine2(passportLine2.value)">
+          <mat-hint>eg GBR</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 80px;">
+          <input matInput placeholder="" maxlength="21" #passportLine3 (blur)="onPassportLine3(passportLine3.value)">
+          <mat-hint>eg 6908061F</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 80px;">
+          <input matInput placeholder="" maxlength="21" #passportLine4 (blur)="onPassportLine4(passportLine4.value)">
+          <mat-hint>eg 9406236</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 100px;">
+          <input matInput placeholder="" maxlength="21" #passportLine5 (blur)="onPassportLine5(passportLine5.value)">
+          <mat-hint>14 random characters</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 50px;">
+          <input matInput placeholder="" maxlength="21" #passportLine6 (blur)="onPassportLine6(passportLine6.value)">
+          <mat-hint>eg 14</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <span fxFlex="1 1 100%"></span>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="end center" class="dps-mail-setting-actions" fxLayoutGap="1em">
+      <button class="dps-stting-sve" [disabled]="isLoading" mat-raised-button
+        (click)="onSaveChanges(ConfirmDialogResultKind.Confirmed)">
+        Save
+      </button>
+      <button class="dps-stting-cancel" mat-raised-button (click)="onClose(ConfirmDialogResultKind.Rejected)">
+        Cancel
+      </button>
+    </div>
+  </div>

@@ -1,0 +1,75 @@
+<div class="dps-compose-mail-content dps-white-gray-scroll" *ngIf="item !== null">
+  <div class="dps-massege" *ngIf="followUpText">
+    <div>
+      <span matLine class="dps-followup-massege">{{followUpText}}</span>
+    </div>
+  </div>
+  <dps-recipient-input-manager #recipientInputManager>
+    <div fxLayout="row" fxLayoutAlign=" center" class="dps-to-recipients-input">
+      <dps-recipient-input #toRecipientInput fxFlex="1 1 auto" [recipients]="item.toRecipients"
+        [people]="recipientInputManager.people$ | async" lable="To"
+        [isGoogle]="recipientInputManager.authHelper.isGoogle()" (addRecipient)="onAddToRecipient($event)"
+        (removeRecipient)="onRemoveToRecipient($event)" [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+        (searchDirectory)="recipientInputManager.searcheUsers($event)"
+        (addPerson)="recipientInputManager.addPerson($event)">
+      </dps-recipient-input>
+      <div fxFlex="77px" *ngIf="hideCcBcc">
+        <button mat-button class="dps-icon-btn" (click)="hideCcBcc=false">Cc/Bcc</button>
+      </div>
+    </div>
+    <div fxLayout="row" class="dps-cc-recipients-input" *ngIf="!hideCcBcc">
+      <dps-recipient-input #ccRecipientInput fxFlex="1 1 auto" [recipients]="item.ccRecipients"
+        [people]="recipientInputManager.people$ | async" lable="Cc"
+        [isGoogle]="recipientInputManager.authHelper.isGoogle()" (addRecipient)="onAddCcRecipient($event)"
+        (removeRecipient)="onRemoveCcRecipient($event)" [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+        (searchDirectory)="recipientInputManager.searcheUsers($event)"
+        (addPerson)="recipientInputManager.addPerson($event)">
+      </dps-recipient-input>
+    </div>
+    <div fxLayout="row" class="dps-bcc-recipients-input" *ngIf="!hideCcBcc">
+      <dps-recipient-input #bccRecipientInput fxFlex="1 1 auto" [recipients]="item.bccRecipients"
+        [people]="recipientInputManager.people$ | async" lable="Bcc"
+        [isGoogle]="recipientInputManager.authHelper.isGoogle()" (addRecipient)="onAddBccRecipient($event)"
+        (removeRecipient)="onRemoveBccRecipient($event)" [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+        (searchDirectory)="recipientInputManager.searcheUsers($event)"
+        (addPerson)="recipientInputManager.addPerson($event)">
+      </dps-recipient-input>
+    </div>
+    <div class="dps-subject-input">
+      <mat-form-field>
+        <span matPrefix class="dps-lable">&nbsp; Subject &nbsp;</span>
+        <input #subjectInput matInput [value]="item.subject" (blur)="onSubjectChange(subjectInput.value)">
+        <span matSuffix>&nbsp;
+          <i class="fa"
+            [ngClass]="{'fa-exclamation':item.importance==='high','fa-long-arrow-down':item.importance==='low'}"
+            aria-hidden="true"></i> &nbsp;</span>
+      </mat-form-field>
+    </div>
+  </dps-recipient-input-manager>
+  <div fxLayout="row" *ngIf="(listAttachements && listAttachements.length > 0)" class="dps-attachment-list">
+    <dps-attachment-list [canDelete]="true" [composeAttachments]="listAttachements"
+      (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+      (deleteAttachment)="onDeleteAttachment($event)"></dps-attachment-list>
+  </div>
+  <div class="dps-editor">
+    <dps-ck-editor *ngIf="item.body.contentType==='html'" dpsCkEditorInlineImageRendere
+      (attachedInline)="onInlineAttachemnt($event)" (attachedFile)="onFileAttachement($event)"
+      (attachedItem)="onItemAttachement($event)" [ngModel]="body" (ngModelChange)="onBodyChange.next($event)"
+      (focus)="toRecipientInput?.focuseOut();ccRecipientInput?.focuseOut();bccRecipientInput?.focuseOut()"
+      [dpsCkSignature]="signature" [attachmentStatus]="lastInlineAttachment"></dps-ck-editor>
+    <div fxLayout="row" fxLayoutAlign="end center" *ngIf="readonlyBody" class="dps-edit-full-message">
+      <button mat-button (click)="onEditFullMessage()" matTooltip="There is a possibility to slow the editor"
+        matTooltipPosition="below" matTooltipClass="dps-edit-full-message-tooltip">
+        Edit full message
+      </button>
+    </div>
+    <div #mailBody style="display: none;">
+      <div></div>
+    </div>
+
+    <mat-form-field appearance="outline" *ngIf="item.body.contentType==='text'">
+      <textarea matInput #textarea [ngModel]="body" [formControl]="inputCtrl" matTextareaAutosize
+        matAutosizeMinRows="20" (drop)="onDrop($event,textarea)"></textarea>
+    </mat-form-field>
+  </div>
+</div>

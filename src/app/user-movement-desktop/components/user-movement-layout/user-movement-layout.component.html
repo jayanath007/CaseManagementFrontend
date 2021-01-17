@@ -1,0 +1,147 @@
+<dps-module-layout class="dps-team-primary-header dps-user-movement-layout" moduleColor="dps-team-primary"
+  layoutHeaderHeight="82px" contentHeaderHeight="53px">
+
+
+  <div fxLayout="row" fxLayoutGap="2em" dps-layout-header class="secondary-header">
+
+
+    <div class="dps-profile">
+      <dps-user-profile-detail [selectedDepartment]="" [selectedTeamMember]="selectedUserInMovement">
+      </dps-user-profile-detail>
+
+    </div>
+
+    <span fxFlex="1 1 auto"></span>
+
+    <div fxLayout="row" fxLayoutGap="1em" class="dps-primary-header ">
+      <!-- dps-white-gray-scroll -->
+      <mat-form-field class="dps-team-drop-down-list" [ngClass]="{'dps-empty-selected': !selectedUserInMovement}">
+        <mat-select placeholder="Select Department" (selectionChange)="onChangeDepartment($event)">
+          <mat-option class="dps-team-drowp-menu" *ngFor="let department of departmentList" [value]="department">
+            {{department.groupName}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <dps-editable-dropdown class="dps-team-drop-down-location" [options]="getLocation()" [value]=""
+        [placeholder]="'Location'" (changeValue)="onChangeMovementLocation($event)"
+        (KeyupEnter)="onSearchTextChanged(TeamMemberSearchText2.value)">
+      </dps-editable-dropdown>
+
+
+
+      <mat-form-field floatLabel="never" class="dps-team-common-btn">
+        <input matInput type="search" (change)="onSearchTextChanged(TeamMemberSearchText2.value)"
+          #TeamMemberSearchText2>
+        <mat-placeholder>Search User</mat-placeholder>
+      </mat-form-field>
+
+      <!-- <button class="" matSuffix mat-icon-button>
+      <mat-icon>clear</mat-icon>
+      </button> -->
+
+      <button class="dps-team-search" matSuffix mat-icon-button
+        (click)="onSearchTextChanged(TeamMemberSearchText2.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+
+    </div>
+    <mat-checkbox class="dps-checkbox-events" labelPosition="before" (change)="onIsAllDayEventChange($event)"
+      color="primary">
+      Off Today
+    </mat-checkbox>
+    <div class="dps-team-filter-bar">
+      <button (click)="onAddMovement()"
+        [disabled]=" isLoading || userList && userList.length <= 0 || !selectUserInMovements" mat-raised-button
+        color="primary" class="add-movement-btn">
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">playlist_add
+        </mat-icon><span class="btn-test"> Add Movement </span>
+      </button>
+
+    </div>
+    <button class="dps-filter-btn" mat-raised-button [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu">
+      <mat-icon> filter_list</mat-icon>
+      <span>Filter Options</span>
+    </button>
+    <mat-menu #menu="matMenu" panelClass="dps-movement-filte-menu">
+      <span>
+        <mat-form-field style="width: 100%;" class="dps-team-drop-down-list"
+          [ngClass]="{'dps-empty-selected': !selectedUserInMovement}">
+          <mat-select placeholder="Select Department" (click)="stopPropgation($event)"
+            (selectionChange)="onChangeDepartment($event)">
+            <mat-option class="dps-team-drowp-menu" *ngFor="let department of departmentList" [value]="department">
+              {{department.groupName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+
+        <dps-editable-dropdown class="dps-team-drop-down-location dps-menu-item" [options]="getLocation()" [value]=""
+          [placeholder]="'Location'" (click)="stopPropgation($event)" (changeValue)="onChangeMovementLocation($event)"
+          (KeyupEnter)="onSearchTextChanged(TeamMemberSearchText.value)">
+        </dps-editable-dropdown>
+
+
+
+        <mat-form-field style="width: 100%;top:0" floatLabel="never" class="dps-team-common-btn">
+          <input matInput type="search" (click)="stopPropgation($event)"
+            (change)="onSearchTextChanged(TeamMemberSearchText.value)" #TeamMemberSearchText>
+          <mat-placeholder>Search User</mat-placeholder>
+        </mat-form-field>
+
+        <button class="dps-team-search " style="width: 100%;position: relative;
+      top: 2px;" matSuffix mat-raised-button (click)="onSearchTextChanged(TeamMemberSearchText.value,$event)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </span>
+    </mat-menu>
+  </div>
+
+  <div dps-layout-content style="height: inherit;padding-left: 10px;">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <dps-user-movements-row-view [userList]="userList" [loading]="isLoading" [timeOffset]="timeOffset"
+      [selectedUserInMovement]="selectedUserInMovement" (selectUserInMovements)="onSelectUserInMovements($event)">
+
+    </dps-user-movements-row-view>
+  </div>
+</dps-module-layout>
+
+
+
+<!-- <div fxLayout="column" class="dps-user-movement-layout">
+  <div style="height: 100%;">
+    <mat-toolbar>
+
+      <mat-toolbar-row class="primary-header">
+        <span fxFlex="1 1 auto"></span>
+        <mat-icon matListIcon>
+          <span>directions_runf</span>
+        </mat-icon>
+        <span>User Movements</span>
+        <span fxFlex="1 1 auto"></span>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row class="secondary-header">
+
+
+
+        <span fxFlex="1 1 100%"></span>
+
+
+
+      </mat-toolbar-row>
+
+
+    </mat-toolbar>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div fxLayout="column" class="dps-team-filter-bar">
+
+    </div>
+
+
+    <dps-user-movements-row-view [userList]="userList" [selectedUserInMovement]="selectedUserInMovement"
+      (selectUserInMovements)="onSelectUserInMovements($event)">
+    </dps-user-movements-row-view>
+  </div>
+</div> -->

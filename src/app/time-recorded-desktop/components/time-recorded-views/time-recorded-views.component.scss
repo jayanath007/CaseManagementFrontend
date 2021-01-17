@@ -1,0 +1,159 @@
+@import '~styles/variables.scss';
+
+.grid-controller-set {
+  background: #32434d;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+[mat-raised-button] {
+  margin: 0px 5px;
+}
+
+.grid-controller-set .mat-line {
+  color: $primary;
+}
+
+.dps-time-recorded-controllers {
+
+  align-items: baseline;
+
+  ::ng-deep .mat-datepicker-toggle-default-icon {
+    color: $primary;}
+
+    .billing-date-select
+    {
+      color: white;
+      margin-right: 5px;}
+}
+
+.dps-grouping-cntxt-menu {
+  min-width: 110px;
+  font-size: $primary-font-size - 2;
+  background: #4a94c1;
+  color: white;
+  border-radius: 0;
+
+  mat-icon {
+    vertical-align: middle;
+    font-size: 20px;
+  }
+}
+
+.grid-controller-set .mat-radio-checked .mat-line {
+  color: #44a020;
+}
+
+.grid-controller-set .mat-radio-button {
+  margin-right: 10px;
+}
+
+.grid-controller-set .mat-checkbox {
+  margin-right: 10px;
+}
+
+.search_clear_icon {
+  font-size: $primary-font-size + 2 !important;
+  color: #d86969;
+}
+
+.time_record_selector {
+  color: $primary;
+  font-weight: 400;
+  font-size: $primary-font-size - 1;
+}
+
+mat-option {
+  font-size: $primary-font-size - 1 !important;
+  font-weight: 500;
+}
+
+.mat-datepicker-toggle[_ngcontent-c38] {
+  color: $primary !important;
+}
+
+.mat-select-trigger {
+  color: $primary !important;
+}
+
+.mat-input-element.mat-form-field-autofill-control {
+  color: $primary !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #ff6f28;
+  background: #ffefe2;
+}
+
+.mat-form-field-autofill-control {
+  font-size: $primary-font-size - 2;
+}
+
+button.add-time {
+  background: #cc8858;
+  font-size: $primary-font-size - 2;
+  color: $primary;
+  border-radius: 0px;
+  padding: 0 8px;
+
+  span {
+    padding-left: 5px;
+  }
+
+  .export {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+  .time_record_time_filter {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.time-recorded-input {
+  font-size: 12px;
+}
+
+.time-recorded-input.from,
+.time-recorded-input.to,
+.time-recorded-input.custom {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.custom-time-recorded-controllers {
+  align-items: center;
+}
+
+.time-recorded-input.search {
+  mat-icon {
+    font-size: $primary-font-size + 2;
+  }
+}
+
+
+
+.contxt-menu-btn {
+  &:hover {
+    background: #b8dbf3;
+    opacity: .9;
+  }
+
+  background: #b8dbf3;
+  padding: 0px 12px 0px 0px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 12px;
+  color: #0c4367;
+
+  mat-icon {
+    color: rgba(22, 84, 138, 0.83);
+    border: 1px solid #a3d5f5;
+    padding: 6px 12px;
+    background: #a3d5f5;
+    margin-right: 10px;
+  }
+}

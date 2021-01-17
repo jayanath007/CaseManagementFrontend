@@ -1,0 +1,12 @@
+<mat-list-item [title]="group.data.EmailAddress" [ngClass]="{'dps-group-selected':(group.selected && isGroupMode)}"
+  (click)="onSelectGroup($event)" (contextmenu)="contextmenuOpen($event)">
+  <img class="dps-user-avator" matListAvatar [src]="group.data.id | dpsUserImage:'groups' | async"
+    (load)="showProfileImg=true"
+    alt="group.data.EmailAddress" [hidden]="!showProfileImg">
+  <button matListAvatar mat-icon-button class="dps-owner-avatar" *ngIf="!showProfileImg"
+    [ngStyle]="{'background-color': (group.data.EmailAddress | recipientColorCode)}">
+    <span>{{group.data.displayName | nameInitials}}</span>
+  </button>
+  <h4 mat-line> {{group.data.displayName}}</h4>
+  <!-- [matMenuTriggerFor]="" -->
+</mat-list-item>

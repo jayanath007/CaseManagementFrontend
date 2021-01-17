@@ -1,0 +1,40 @@
+<div class="my-task-grid">
+
+  <div class="my-task-grid-outer" fxLayout="column">
+    <div fxFlex="calc(100%-50px)" fxLayout="column">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="length-calc" fxLayout="column">
+          <div class="row-highlight" dpsIsMobile>
+            <div class="row-highlight-inner" [ngClass]="{'groupmode-column-header': groupMode === mytaskGroupMode.Date }">
+              <dps-column-header [ngClass]="{'': groupMode === 'Date'}" *ngFor="let header of columnDefVisibale" [fxFlex]="header.extras.fxFlex" [def]="header"
+                (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)"
+                [filterAnchor]="header.extras.filterAnchor">
+              </dps-column-header>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+          </div>
+
+          <div fxLayout="column" [@.disabled]="true" fxFlex="calc(100%-40px)" class="dps-white-gray-scroll my-task-grid-content">
+
+            <dps-my-task-default (clickGridButton)="onClickGridButton($event)" (rowExpand)="gridRowExpan($event)"
+              (openAddTaskWithFile)="onFileDrop($event)" [gridData]="gridData" [columnDef]="columnDef" [selectedInfo]="selectedInfo"
+              *ngIf="groupMode ===  mytaskGroupMode.Default ">
+            </dps-my-task-default>
+
+            <dps-my-task-group [totalItem]="totalItem"  (loadMore)="onLoadMore($event)" (selectedGroupRowChange)="onSelectedGroupRowChange($event)"  (clickGridButton)="onClickGridButton($event)" (rowExpand)="gridRowExpan($event)"
+              (openAddTaskWithFile)="onFileDrop($event)" [gridData]="gridData" [gridGroupData]="gridGroupData" [columnDef]="columnDef" [selectedInfo]="selectedInfo"
+              *ngIf="groupMode === mytaskGroupMode.Date">
+            </dps-my-task-group>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <mat-paginator  *ngIf="groupMode ===  mytaskGroupMode.Default " fxFlex="50px" #paginator [length]="totalItem" [pageIndex]="paginatorDef?.currentPage" [pageSize]="paginatorDef?.itemPerPage"
+      [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="footer-shadow">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="total-matter-count-outer-wrap" fxLayout="row">
+  <div class="total-matter-count-wrap" fxFlex="1 1 auto">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!selectedInfo?.searchText">
+      <div class="grid-detail">
+        <label>Tasks</label>
+        <span class="task-details">{{summery?.totalTaskCount}}</span>
+      </div>
+      <span class="dps_seperator"></span>
+      <div class="grid-detail">
+        <label>Overdue</label>
+        <span class="task-details">{{summery?.totalTasksOverdue}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="my-tasks-grid-controllers" *ngIf="userPermision?.isAllGroups">
+    <mat-form-field floatLabel="never">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <mat-placeholder class="my_task_selector">Department</mat-placeholder>
+      <mat-select (selectionChange)="onChangeDepartment($event)" [ngModel]="selectedDepartment">
+        <mat-option>-- None --</mat-option>
+        <mat-option *ngFor="let department of departmentList" [value]="department">
+          {{department.groupName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <i class="fa fa-refresh" (click)="removeSelectedUser()" *ngIf="selectedInfo?.user && selectedDepartment"></i>
+  </div>
+</div>

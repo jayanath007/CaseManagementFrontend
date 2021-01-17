@@ -1,0 +1,33 @@
+<mat-chip-list *ngIf="(showProofAddress && !hiddenIdCheck  && !client.directorAddressProof) 
+|| (showProofId && !hiddenIdCheck && !client.directorProofofID) 
+|| (!riskAssessmentHidden && client.riskAssessmentFailed === null && riskAssessmentData?.riskAssessmentRequired) 
+|| (showNoRiskAssessmentFailed && !riskAssessmentHidden && (client && client.riskAssessmentFailed === true))">
+  <mat-chip class="risk" *ngIf="showProofAddress && !hiddenIdCheck  && !client.directorAddressProof">
+    <mat-icon class="first">error_outline</mat-icon>
+    No Proof of address attached
+    <mat-icon matChipRemove class="last" (click)="showProofAddress = false">
+      cancel
+    </mat-icon>
+  </mat-chip>
+  <mat-chip class="risk" *ngIf="showProofId && !hiddenIdCheck && !client.directorProofofID">
+    <mat-icon class="first">error_outline</mat-icon> No Proof of ID attached
+    <mat-icon matChipRemove class="last" (click)="showProofId = false">
+      cancel
+    </mat-icon>
+  </mat-chip>
+  <mat-chip class="risk"
+    *ngIf="showNoRiskAssessment && !riskAssessmentHidden && client.riskAssessmentFailed === null && riskAssessmentData?.riskAssessmentRequired">
+    <mat-icon class=" first">error_outline</mat-icon> No Risk Assessment
+    <mat-icon matChipRemove class="last" (click)="showNoRiskAssessment = false">
+      cancel
+    </mat-icon>
+  </mat-chip>
+  <mat-chip class="high-risk"
+    *ngIf="showNoRiskAssessmentFailed && !riskAssessmentHidden && (client && client.riskAssessmentFailed === true)">
+    <mat-icon class="first">error_outline</mat-icon>
+    Risk Assessment failed
+    <mat-icon matChipRemove class="last" (click)="showNoRiskAssessmentFailed = false">
+      cancel
+    </mat-icon>
+  </mat-chip>
+</mat-chip-list>

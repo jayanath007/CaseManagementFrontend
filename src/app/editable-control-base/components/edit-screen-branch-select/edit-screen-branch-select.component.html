@@ -1,0 +1,18 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="meta?.scL_Visible" class="label-with-drop-down">
+  <mat-form-field>
+    <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+    </mat-placeholder>
+    <mat-select [disabled]="meta?.scL_ReadOnly"  [ngModel]="selectedBranch" (selectionChange)="branchSelectionChange($event.value)">
+      <dps-select-search (change)="filterbranches($event)" [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"></dps-select-search>
+      <tr>
+        <th width="50">Referencd |</th>
+        <th>Name</th>
+      </tr>
+      <mat-option>-- None --</mat-option>
+      <mat-option *ngFor="let branch of dataSourseItems" [value]="branch">
+        {{branch.id}} | {{branch.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

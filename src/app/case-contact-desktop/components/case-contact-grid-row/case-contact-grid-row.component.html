@@ -1,0 +1,21 @@
+<div fxLayout="row" [ngClass]="{'dps-contacts-group': rowData.data.isScreenContact}" class="grid-data" dpsClick
+  (dpsClick)="onSelectRow($event)" (dpsDblClick)="onSelectRow(true)">
+  <!-- {{rowData.data.dateBy}} -->
+
+  <div class="row-data" (click)="onOpenContact(rowData)" [fxFlex]="getFxFlexProperty(0)">
+    <a class="records" *ngIf="rowData.data.screenId > 0">
+      {{rowData.data.roleOnFile}}
+    </a>
+    <div *ngIf="!(rowData.data.screenId > 0)"> {{rowData.data.roleOnFile}} </div>
+  </div>
+  <div class="row-data name" [fxFlex]="getFxFlexProperty(1)"> {{rowData.data.name}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(2)"> {{rowData.data.company}} </div>
+  <div class="row-data telephone mat_line" [fxFlex]="getFxFlexProperty(3)"> {{rowData.data.telephone}}</div>
+  <div class="row-data email mat_line" [fxFlex]="getFxFlexProperty(4)" (click)="onProcessEMail(rowData.data.email)">
+    <a>
+      {{rowData.data.email}}
+    </a>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(5)"> {{rowData.data.postCode}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)"> {{rowData.data.address}}</div>
+</div>

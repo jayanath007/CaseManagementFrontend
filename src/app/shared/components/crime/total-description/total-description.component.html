@@ -1,0 +1,12 @@
+<div class="total-description-main"  [ngStyle]="{'height': height+'px'}">
+  <div class="class-description">
+      <button class="pin" mat-icon-button (click)="onUnPinItem()">
+            <i class="fa fa-thumb-tack "></i>
+        </button>
+  </div>
+
+  <dps-common-grid-table class="price-cap-limit-data"
+    [columns]="selectedColumsList" [rows]="gridRows">
+  </dps-common-grid-table>
+
+</div>

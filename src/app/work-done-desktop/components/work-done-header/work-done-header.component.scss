@@ -1,0 +1,35 @@
+@import '~styles/variables.scss';
+.work-done-grid-controllers {
+  text-align: right;
+  margin-top: 0px;
+}
+
+.work_done_summary_header {
+  font-size: $primary-font-size - 2;
+  text-transform: uppercase;
+  height: 25px;
+}
+
+tbody td {
+  width: 15%;
+  text-align: center;
+  font-size: $primary-font-size - 2;
+}
+
+.work_done_summary_sub th span {
+  font-weight: 400;
+}
+
+.dps-work-done-header {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.total-matter-count-wrap {
+  table {
+    color: $primary;
+    text-align: center;
+    width: 250px;
+    margin-top: 5px;
+  }
+}

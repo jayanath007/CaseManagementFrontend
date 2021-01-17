@@ -1,0 +1,126 @@
+<div class="dps-general-popup" fxLayout="column">
+  <div class="dpspopup-header">
+    <mat-toolbar>
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon class="header-icon" matListIcon>bookmarks</mat-icon>
+        <span class="header-text">Opportunity Quote Run</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button class="general-close" mat-icon-button (click)="onClose()">
+        <mat-icon class="header-icon-delete">close</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+  <mat-progress-bar *ngIf="isQuoteRunLoading" mode="indeterminate"></mat-progress-bar>
+  <div fxflex="calc(100% - 50px)" class="dps-opportunity-q-run">
+
+    <div class="dps-opportunity-container" fxLayout="column">
+
+      <div class="primary-header" fxLayout="row">
+        <mat-icon class="icon">edit</mat-icon>
+        <span>Opportunity Details</span>
+      </div>
+      <div fxLayout="column" class="content-outer">
+        <div class="dps-white-gray-scroll content" fxLayout="column" fxLayoutGap="5px">
+          <mat-form-field>
+            <mat-placeholder>Prospect Client</mat-placeholder>
+            <input matInput #prospectClientInput [disabled]="true" [value]="opportunity?.clientName">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-placeholder>Department</mat-placeholder>
+            <input matInput #departmentInput [disabled]="true" [ngModel]="department">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-placeholder>Work Type</mat-placeholder>
+            <input matInput #workTypeInput [disabled]="true" [value]="opportunity?.workType">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Fee Earner" [ngModel]="selectedFeeEarner"
+              (selectionChange)="onChangeFeeEarner($event.value)">
+              <mat-option *ngFor="let feeEarnerItem of feeEarnerList" [value]="feeEarnerItem">
+                {{feeEarnerItem.key}} - {{ feeEarnerItem.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-placeholder>Quote Amount</mat-placeholder>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput type="number" #quoteAmount [value]="opportunity?.amount"
+              (focusout)="onChangeAmount(quoteAmount.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-placeholder>Quote Disbursements</mat-placeholder>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput type="number" #quoteDisInput [value]="opportunity?.quoteDis"
+              (focusout)="onChangeQuoteDis(quoteDisInput.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-placeholder>Other fees</mat-placeholder>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput type="number" #otherFeesInput [value]="opportunity?.otherFees"
+              (focusout)="onChangeOtherFees(otherFeesInput.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Template" [ngModel]="selectedTemplate"
+              (selectionChange)="onChangeTemplate($event.value)">
+              <mat-option *ngFor="let item of templete" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button class="btm-btn mat-elevation-z" mat-raised-button
+          [ngClass]="{'dps_opportunity-btn-disable':isQuoteRunLoading}" (click)="onGenerate()"
+          [disabled]="isQuoteRunLoading">
+          <mat-icon>file_copy</mat-icon>
+          <span>Generate</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- <div>Opportunity Details</div> -->
+<!-- <div fxLayout="column">
+      <div fxLayout="row wrap" fxLayoutGap="20px">
+        <mat-form-field>
+          <mat-placeholder>Prospect Client</mat-placeholder>
+          <input matInput #prospectClientInput [disabled]="true" [value]="opportunity?.clientName">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Department</mat-placeholder>
+          <input matInput #departmentInput [disabled]="true" [ngModel]="department">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Work Type</mat-placeholder>
+          <input matInput #workTypeInput [disabled]="true" [ngModel]="workType">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Fee Earner" [ngModel]="selectedFeeEarner" (selectionChange)="onChangeFeeEarner($event.value)">
+            <mat-option *ngFor="let feeEarnerItem of feeEarnerList" [value]="feeEarnerItem">
+              {{feeEarnerItem.key}} - {{ feeEarnerItem.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Quote Amount($)</mat-placeholder>
+          <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+          <input matInput type="number" #quoteAmount [value]="quoteAmount" (focusout)="onChangeAmount(quoteAmount.value)">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Template" [ngModel]="selectedTemplate" (selectionChange)="onChangeTemplate($event.value)">
+            <mat-option *ngFor="let item of templete" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div> -->
+
+<!-- <div>
+    <button mat-raised-button (click)="onGenerate()" [disabled]="isQuoteRunLoading">
+      <mat-icon>file_copy</mat-icon>
+      <span>Generate</span>
+    </button>
+  </div> -->

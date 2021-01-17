@@ -1,0 +1,25 @@
+<div class="dps-echit-general-popup" fxLayout="column">
+  <div class="matter-search-popup-header">
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-toolbar-box-shadow dps-general-popup-header">
+        <!-- <span fxFlex="1 1 auto"></span> -->
+        <div fxFlexAlign="center" class="dps-header">
+          <mat-icon class="header-icon" matListIcon>supervisor_account</mat-icon>
+          <span>{{popupTitle}} </span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button class="general-close" mat-icon-button (click)="onClose()">
+          <mat-icon class="header-icon-delete">close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+      <mat-toolbar-row fxLayoutAlign="end center" class="primary-section" *ngIf="!hideSearchBox">
+        <dps-general-popup-search-box [searchText]="searchText" [totalItems]="totalItems" (searchTextValueChanges)="onSearchTextChanged($event)"
+          (updateSearchTextClick)="onSearch($event)"></dps-general-popup-search-box>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <dps-grid-container fxFlex="calc(100% - 106px)" [isGridLoding]="isLoading" [gridColoumn]="columnDef" [pageEvent]="hidePaginator ? null : pageEvent"
+    (page)="onChangePage($event)" (toggleSorting)="onToggleSorting($event)">
+    <ng-content></ng-content>
+  </dps-grid-container>
+</div>

@@ -1,0 +1,14 @@
+<h3 matSubheader>
+  <mat-icon>settings_system_daydream</mat-icon>
+  <span fxFlex="1 1 auto">Open Document</span>
+</h3>
+<mat-list-item (click)="onChange(true)">
+  <mat-icon mat-list-icon *ngIf="!isOnline" color="primary">radio_button_unchecked</mat-icon>
+  <mat-icon mat-list-icon *ngIf="isOnline" color="primary">radio_button_checked</mat-icon>
+  <h2 matLine>Online Office</h2>
+</mat-list-item>
+<mat-list-item (click)="onChange(false)">
+  <mat-icon mat-list-icon *ngIf="isOnline" color="primary">radio_button_unchecked</mat-icon>
+  <mat-icon mat-list-icon *ngIf="!isOnline" color="primary">radio_button_checked</mat-icon>
+  <h2 matLine>Desktop Office</h2>
+</mat-list-item>

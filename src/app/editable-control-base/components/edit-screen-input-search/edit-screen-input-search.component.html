@@ -1,0 +1,12 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="meta?.scL_Visible" class="label-with-inputtext input-wrapper">
+  <mat-form-field>
+    <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+    </mat-placeholder>
+    <input matInput [readonly]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" [value]="modelData" [formControl]="inputCtrl">
+    <!-- <mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error> -->
+    <button (click)="onSearchClick($event)" mat-icon-button matSuffix [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

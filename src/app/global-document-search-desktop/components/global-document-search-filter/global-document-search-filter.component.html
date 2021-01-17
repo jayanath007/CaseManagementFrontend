@@ -1,0 +1,134 @@
+<div [@.disabled]="true" class="dps-global-document-filters" fxLayout="column">
+
+  <div class="dps-primary-header" fxLayout="row" >
+    <div class="title"> <span> Global Documents Filter</span> <span
+        class="dps-global-filteration">{{filterCondition()}}</span></div>
+    <div class="dps-filter-content" fxLayout="row">
+     
+      <div class="button-row primary-action-btn" fxLayoutGap="5px">
+
+        <button mat-flat-button [matMenuTriggerFor]="menu">Action Filter</button>
+        <mat-menu #menu="matMenu" class="dps-document-filter-menu" (click)="$event.stopPropagation()"
+          [overlapTrigger]="false">
+          <dps-global-document-filter *ngFor="let filterRow of filterViewModel.filterList let index =index; "
+            [feeEarnerList]="feeEarnerList" [appCodeList]="appCodeList" [filterRow]="filterRow"
+            [filterList]="filterViewModel.filterList" [filterViewModel]="filterViewModel"
+            (removeFilterRow)="onRemoveFilterRow($event)" (filterItemChange)="onFilterItemChange($event)"
+            (addFilterRow)="onAddFilterRow()">
+          </dps-global-document-filter>
+         
+          <button style="float: right;" mat-stroked-button (click)="onDocumentSearch()">
+            <mat-icon class="mat-18">filter_list</mat-icon>
+            Filter
+          </button>
+        </mat-menu>
+        <button mat-flat-button class="dps-clear" (click)="onDocumentClear($event)">
+          <mat-icon>remove_circle_outline</mat-icon>
+          Clear All
+        </button>
+
+      </div>
+      <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+        (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+        (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()">
+      </dps-grid-font-controller>
+    </div>
+
+  </div>
+
+
+  <!-- Commented by chathu -->
+  <!-- <div fxLayout="row" dpsIsMobile>
+    <div class="dps-grid-font-controller grid-font-controller {{buttonActiveClass}}">
+      <button (click)="onFontSizeMinusClick($event)" mat-mini-fab>
+        <mat-icon>
+          <span class="fa fa-minus fa-1"></span>
+        </mat-icon>
+      </button>
+      <button (click)="onFontSizeResetClick($event)" mat-mini-fab>
+        <mat-icon>
+          <span>A</span>
+        </mat-icon>
+      </button>
+      <button (click)="onFontSizePlusClick($event)" mat-mini-fab>
+        <mat-icon>
+          <span class="fa fa-plus fa-1"></span>
+        </mat-icon>
+      </button>
+      <button class="dps-grid-refresh-button" (click)="onRefresh($event)" mat-mini-fab>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    
+    </div> -->
+
+  <!-- <mat-accordion>
+    <mat-expansion-panel dpsIsMobile [expanded]="filterExpanded">
+      <mat-expansion-panel-header collapsedHeight="55px" expandedHeight="55px">
+        <mat-panel-title>
+        
+          <div class="title"> Global Documents Filter <span class="dps-global-filteration">{{filterCondition()}}</span></div>
+          <span fxFlex="1 1 auto"></span>
+          <div fxLayout="row" class="button-row primary-action-btn" fxLayoutGap="5px">
+            <button mat-flat-button (click)="onDocumentSearch($event)">
+              <mat-icon class="mat-18">filter_list</mat-icon>
+              Filter
+            </button>
+
+            <button mat-flat-button class="dps-clear" (click)="onDocumentClear($event)">
+              <mat-icon >remove_circle_outline</mat-icon>
+              Clear All
+            </button>
+            
+          </div>
+
+          <div fxLayout="row" dpsIsMobile>
+            <div class="dps-grid-font-controller grid-font-controller {{buttonActiveClass}}">
+              <button (click)="onFontSizeMinusClick($event)" mat-mini-fab>
+                <mat-icon>
+                  <span class="fa fa-minus fa-1"></span>
+                </mat-icon>
+              </button>
+              <button (click)="onFontSizeResetClick($event)" mat-mini-fab>
+                <mat-icon>
+                  <span>A</span>
+                </mat-icon>
+              </button>
+              <button (click)="onFontSizePlusClick($event)" mat-mini-fab>
+                <mat-icon>
+                  <span class="fa fa-plus fa-1"></span>
+                </mat-icon>
+              </button>
+              <button class="dps-grid-refresh-button" (click)="onRefresh($event)" mat-mini-fab>
+                <mat-icon>refresh</mat-icon>
+              </button>
+            </div>
+            
+            </div>
+
+        </mat-panel-title>
+       
+      </mat-expansion-panel-header>
+
+      <div fxLayout="column" fxFlex="1 1 auto">
+
+        <dps-global-document-filter 
+         *ngFor="let filterRow of filterViewModel.filterList let index =index; "  
+         [feeEarnerList]="feeEarnerList"
+         [appCodeList]="appCodeList"
+         [filterRow]="filterRow"
+         [filterList]="filterViewModel.filterList" 
+         [filterViewModel]="filterViewModel"
+         (removeFilterRow)="onRemoveFilterRow($event)"
+         (filterItemChange)="onFilterItemChange($event)"
+         (addFilterRow)="onAddFilterRow()">
+        </dps-global-document-filter>
+        <button mat-icon-button (click)="onAddFilterRow()">
+            <mat-icon class="add">add_circle</mat-icon>
+            
+          </button>
+      
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion> -->
+</div>

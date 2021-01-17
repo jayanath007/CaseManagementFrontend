@@ -1,0 +1,45 @@
+.dps-disbale {
+  background-color: #c2c1c1;
+}
+
+.submittion-input-types
+{
+  width: 300px;
+    padding: 20px;
+    background: #f3efe6;
+    border: 1px dashed #d8cfbc;
+    border-radius: 3px;
+    margin: 14px 12px 12px 0;
+}
+
+dps-grid-container
+{
+  padding: 12px 0 0 0;
+}
+
+.button-container
+{
+  padding-bottom: 15px;
+
+  .override
+{
+  background: #ad0909;
+  color: #fff;
+  font-size: 12px;
+}
+
+.submit
+{
+  background: #255073;
+    color: #fff;
+    font-size: 12px;
+}
+}
+
+.fail-status
+{
+  background: #e2d0a9;
+    padding: 10px 6px;
+    margin: 0 0 0 -3px;
+    border-radius: 3px;
+}

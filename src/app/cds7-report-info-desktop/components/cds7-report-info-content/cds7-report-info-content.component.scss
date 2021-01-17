@@ -1,0 +1,207 @@
+@import '~styles/variables.scss';
+
+.dps-cds7-report-info-content {
+
+    .txt-sm2
+    {
+      font-size: $primary-font-size - 2;       
+    }
+    .mt-n7
+    {
+      margin-top: -7px;
+    }
+    .ml-5
+    {
+      margin-left: 5px;
+    }
+    .mb-5
+    {
+      margin-bottom: 5px;
+    }
+    .ml-20
+    {
+      margin-left: 20px;
+    }
+    .mt-20
+    {
+      margin-top: 20px;
+    }
+
+  .txt-center
+  {
+    text-align: center;
+  }
+
+  .cds7-card
+  {
+    padding:0;
+    width: 100%;
+
+    &.highlight
+    {
+      width: 100%;
+      background: #def5ff;
+      padding: 16px 15px 0;
+      border: 1px dashed #a2ccfd;
+      margin: 22px;
+    }
+
+    .mat-card-header-text
+    {
+      margin: 0;  
+      .mat-card-title
+      {
+        font-size: $primary-font-size;
+        span
+        {
+          font-size: $primary-font-size - 2;
+        }
+      }      
+    }
+
+    .mat-card-content
+    {
+
+      .mat-checkbox
+      {
+        font-size: $primary-font-size - 2;        
+      }      
+    }    
+
+    mat-checkbox
+    {
+      margin-right: 10px;
+    }
+    
+    mat-checkbox:last-child
+    {
+      margin-right: 0;
+    }
+
+    .cds7-date
+    {
+
+      .mat-form-field-flex
+      {
+        padding: .25em .25em 0 .75em;
+      }
+      .mat-form-field-infix
+      {
+        padding: .25em 0 0 0;
+        font-size: $primary-font-size - 2; 
+      }
+
+      .mat-datepicker-toggle .mat-datepicker-toggle-default-icon
+      {
+        width: 1.2em;
+        height: 1.2em;
+      }
+
+    }
+    .cds7-select
+    {
+      background: #b8d3f1;
+      padding: 7px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom: 1px solid #6197d2;
+
+      &.heightfix
+      {
+        height: 40px;
+        line-height: 28px;
+      }
+      &.gutterfix-15
+      {
+        width: calc(100% - 15px);
+      }
+    }
+
+    .cds7-input
+    {
+      font-size: $primary-font-size - 2; 
+      line-height: 18px;
+
+      &.w-sm
+      {
+        width: 115px;
+        
+      }
+    }
+
+
+  }
+
+  .withdrawn-date
+  {
+    width: 240px;
+
+  }
+  .charge-layed
+  {
+    .lbl-ext
+    {
+      line-height: 40px;
+    }
+    
+  }
+}
+
+
+.reasons
+{
+  padding: 0 25px;
+}
+
+.case-disposal-wrap
+{
+  border: 1px dashed #e1e1e1;
+  padding: 12px;
+  margin: 0 20px;
+  border-radius: 5px;
+
+
+  .case-disposal.location
+  {
+    background: $dps-user-movment-item-1;
+    padding: 16px;
+    color:$primary;
+
+    .cds7-input .mat-form-field-infix .mat-form-field-label
+    {
+      color:$primary;
+    }
+    .mat-form-field-underline
+    {
+      background: #5eb0d2ad;
+    }
+}
+
+}
+
+.claim-details
+{
+  padding: 26px 26px 15px;
+}
+
+.bottom-checkboxes
+{
+  border: 1px dashed #e1e1e1;
+    padding: 15px 15px 6px;
+}
+
+.checkbox-with-valueinpt
+{
+  margin-top: 10px;
+}
+.btn-container 
+{
+  padding: 0 28px 30px;
+
+  .save-btn
+  {
+    background: $dps-user-movment-item-1;
+      color:$primary;
+  }
+}
+

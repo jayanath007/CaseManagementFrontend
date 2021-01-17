@@ -1,0 +1,115 @@
+  <div class="dps-input-container dps-white-gray-scroll">
+    <div fxLayout="row wrap" class="dps-primary-header">
+      <div fxLayout="row wrap" fxLayoutGap="4px">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder=" Spouse/Civil Partner Name" readonly [value]="name">
+        </mat-form-field>
+        <mat-form-field style="width:100px">
+          <input matInput [matDatepicker]="picker1" readonly [ngModel]="dateofBirth | date:'yyyy-MM-dd'"
+            (dateChange)="onDateofBirth($event.value)" placeholder="DOB">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field style="width:100px">
+          <input matInput [matDatepicker]="picker2" readonly [ngModel]="dateofDeath | date:'yyyy-MM-dd'"
+            (dateChange)="onDateofDeath($event.value)" placeholder="DOD">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <section style="    margin: 15px;" class="dps-input-inner" fxLayout="row" fxLayoutGap="5px">
+        <mat-checkbox [checked]='isUseFullNilRateBand' (change)="onChangeIsUseFullNillRate($event.checked)"
+          color="primary">
+          Use Full Nil Rate Band
+        </mat-checkbox>
+        <mat-checkbox [checked]='isUseRemainingNilRateBand' (change)="onChangeIsUseRemainNillRate($event.checked)"
+          color="primary">
+
+          Use Remaining Nil Rate Band
+        </mat-checkbox>
+      </section>
+      <span fxFlex="1 1 auto"></span>
+      <button class="blue" mat-button (click)="onUpdateSpouseCivil()">
+        <mat-icon>playlist_add_check</mat-icon> Update
+      </button>
+
+    </div>
+
+    <div fxLayout="column">
+
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>A</mat-icon>
+        <label>Net value of the spouse or civil partners estate</label>
+        <input mat-input #net (blur)="onChangeNetValue(net.value)" [value]="netValue" dpsNumbersOnlyWithDecimals
+          [noOfdecimalsPoint]="2" [maxlength]="20">
+      </div>
+
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>B</mat-icon>
+        <label>Inheritance tax. capital transfer tax or estate duty nill rate band in force at DOD</label>
+        <input mat-input disabled [value]="inheritanceTax | number : '1.2-2'">
+      </div>
+
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>C</mat-icon>
+        <label>Total chargeble value of gift mode withing seven years</label>
+        <input mat-input #totalChargeable (blur)="onChangetotalChargeable(totalChargeable.value)"
+          [value]="totalChargeableValueofGift" dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="20">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>D</mat-icon>
+        <label>Nil rate band against the eastate of spouse or civil partner(B-C)</label>
+        <input mat-input disabled [value]="nilRateBand | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>E</mat-icon>
+        <label>Total legacies as assets passing under will</label>
+        <input mat-input disabled [value]="totalLegancies | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>F</mat-icon>
+        <label>Share of jointly owned assets</label>
+        <input dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="20" mat-input #share
+          (blur)="onChangeShareofGointly(share.value)" [value]="shareofGointly">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>G</mat-icon>
+        <label>Assets held in trust</label>
+        <input dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="20" mat-input type="text" #assetHeld
+          (blur)="onChangeAssetHeldInTrust(assetHeld.value)" [value]="assetHeldInTrust">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>H</mat-icon>
+        <label>Gift with reservation</label>
+        <input dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="20" mat-input #gifts
+          (blur)="onChangeGiftsWithReservation(gifts.value)" [value]="giftsWithReservation">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>I</mat-icon>
+        <label>Total chargable asset(E+F+G+H)</label>
+        <input mat-input type="text" disabled [value]="totalChargeableAssets | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>J</mat-icon>
+        <label>Nil rate band available for transfer(D-I)</label>
+        <input mat-input disabled [value]="nilRateBandAvailableTransfer | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>K</mat-icon>
+        <label>Percentage by which to increase nil rate band available (J/B*100)</label>
+        <input mat-input disabled [value]="percentageByWhich | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>L</mat-icon>
+        <label>Nil rate band at the DOD of the deceased</label>
+        <input mat-input disabled [value]="nilRateBandatDOD | number : '1.2-2'">
+      </div>
+      <div class="dps-input-lbl" fxLayout="row wrap">
+        <mat-icon>M</mat-icon>
+        <label>Transferable nil rate(L*K%)</label>
+        <input mat-input disabled [value]="transferableNilRate | number : '1.2-2'">
+      </div>
+    </div>
+  </div>

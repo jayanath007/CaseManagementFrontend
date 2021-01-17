@@ -1,0 +1,20 @@
+<mat-list dense>
+  <div *ngFor="let data of groupData" fxLayout="column">
+    <mat-list-item class="dps-clmn-main-group" fxLayout="" (click)="onSelectGroup(data)">
+   
+        <i class="material-icons arrow-right-down-btn">
+          {{data?.select?'keyboard_arrow_down':'keyboard_arrow_right'}}
+        </i>
+        <!-- <mat-icon mat-list-icon></mat-icon> -->
+        <h3 > 
+            <i class="material-icons indicator" style=vertical-align:middle;>{{groupMode | groupIconByMode}}</i>
+          {{data?.value}} ( {{data?.count}} ) </h3>
+     
+    </mat-list-item>
+    <dps-time-recorded-grid-item *ngIf="data.select" [groupMode]="groupMode" [columnDef]="columnDef" [gridData]="groupItems(data)"
+      [selectedInfo]="selectedInfo" (selectRow)="SelectRow($event)" (clickGridButton)="onClickGridButton($event)">
+    </dps-time-recorded-grid-item>
+    <button class="dps-load-more" mat-flat-button (click)="loadMore(data)" *ngIf="data.select && groupItems(data).length > 0 && data?.currentItems < data?.count">Load More</button>
+  </div>
+
+</mat-list>

@@ -1,0 +1,59 @@
+@import '~styles/variables.scss';
+
+mat-form-field {
+  font-size: 12px;
+}
+
+.dps-white-gray-scroll {
+  overflow-y: auto;
+}
+
+.dps-aml-client-id-layout {
+  font-family: inherit;
+}
+
+.dps-compulsory-field,
+.dps-optional-field {
+  padding: 0px 10px;
+}
+
+h5 {
+  background: #749bbf;
+  line-height: 25px;
+  padding-left: 10px;
+  font-family: ROBOTO;
+  color: #edf7ff;
+  margin: 5px -5px;
+}
+
+.dps-mail-setting-actions {
+  padding: 6px;
+}
+
+.dps-stting-sve {
+  background: #506f82;
+  color: #fff;
+}
+
+.dps-date-picker-input {
+  width: 180px;
+}
+
+.inner-section {
+  padding: 0px 6px;
+}
+
+.dps-separator-group {
+  font: 400 12px/32px Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  color: #3b7db9;
+  display: flex;
+  flex-direction: column;
+  line-height: 13px;
+  padding: 10px 8px;
+
+  mat-divider {
+    border-top-color: #f0f5fb !important;
+  }
+}

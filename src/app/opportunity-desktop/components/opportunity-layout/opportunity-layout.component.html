@@ -1,0 +1,70 @@
+<div class="dps-opportunity-layout" fxLayout="column">
+  <mat-card class="dps-opportunity-header">
+    <mat-card-content>
+      <div class="dps-profile">
+        <dps-user-profile-detail [selectedDepartment]="''" [selectedTeamMember]="user.general">
+        </dps-user-profile-detail>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="grid-contents" fxFlex="calc(100%-132px)">
+    <div class="grid-wrapper-main dps-opportunities" fxLayout="column">
+      <div fxLayout="column" fxFlex="1 1 100" style="position: relative">
+        <mat-tab-group fxFlex="1 1 auto" [selectedIndex]="selectedTabIndex" (selectedTabChange)="onChangeTab($event)">
+          <mat-tab label="New Opportunity">
+            <dps-oppertunity-viewer [isNew]="true" [isLoading]="isLoading" [departmentList]="departmentList"
+              [feeEarnerList]="feeEarnerList" [introducerList]="introducerList" [selectedStatus]="selectedStatus"
+              [salTitle]="salTitle" (departmetChangeItem)="onChangeDepartmen($event)"
+              [clientDataModel]="clientDataModel" [defuiltNote]="defuiltNote"
+              (feeEarnerChangeItem)="onChangeFeeEarner($event)" (introducerChangeItem)="onChangeIntroducer($event)"
+              (workTypeChangeItem)="onChangeWorkType($event)" (selectedClientSearchData)=onClientSearch($event)
+              (inputChangeData)="onInputChangeData($event)" (clearOpportunityData)="onClearInputData()"
+              (sendAndSaveData)="onSaveAndSend()" (sendAndQuote)="onSaveAndQuote()">
+            </dps-oppertunity-viewer>
+          </mat-tab>
+          <mat-tab label="Saved Opportunities" class="dps-save-opportunity-grid">
+            <dps-saved-opportunities [columnDef]="columnDef" [loadSaveOpportunityData]="loadSaveOpportunityData"
+              [isLoading]="isLoading" [selectedStatus]="selectedStatus" [fontSizeClass]="fontSizeClass"
+              [paginetorDef]="paginetorDef" (openOpprtunity)="onOpenOpprtunity($event)"
+              (changePage)="onChangePage($event)" (columsSortApply)="onToggleSorting($event)"
+              (selectedRowItem)="onRowSelect($event)" (clickOnNotificationSetting)="onClickNotificationSetting($event)" 
+              (changeColumFilteration)="onChangeColumFilteration($event)">
+            </dps-saved-opportunities>
+          </mat-tab>
+          <mat-tab label="Opportunities Stats">
+            <dps-opportunities-stats [stats]="stats"></dps-opportunities-stats>
+          </mat-tab>
+        </mat-tab-group>
+        <div class="dps-opportunity-status-btn" *ngIf="selectedTabIndex===1">
+          <mat-form-field class="dps-input-outer">
+            <mat-placeholder class="dps-lable">Opportunity Status</mat-placeholder>
+            <!-- placeholder="Opportunity Status" -->
+            <mat-select [ngModel]="selectedStatus" (selectionChange)="onChangeStatus($event)"
+              [disabled]="isLoading?.savedGridLoading">
+              <mat-option *ngFor="let statusItem of statusList" [value]="statusItem">
+                {{ statusItem.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span fxFlex="1 1 auto"></span>
+          <div class="dps-grid-font-controller">
+            <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+              (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+              (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefreshClick()">
+            </dps-grid-font-controller>
+          </div>
+        </div>
+
+
+        <!-- <button class="dps-setting-btn" mat-raised-button (click)="openBottomSheet()">
+          <mat-progress-bar style="height: 2px;" mode="indeterminate" *ngIf="settingIsLoading"></mat-progress-bar>
+          <i class="fa fa-cogs" aria-hidden="true"></i> Settings
+          <!-- <mat-spinner *ngIf="settingIsLoading"></mat-spinner>Settings -->
+        <!-- </button> -->
+
+
+      </div>
+    </div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,30 @@
+@import '~styles/variables.scss';
+:host {
+    display: block;
+    position: absolute;
+    top: 76px;
+    right: 23px;
+}
+
+.file-logic-status {
+    padding: 15px 15px 15px 20px;
+    font-size: 13px;
+    color: $primary;
+    background: #a71b40;
+    background-image: repeating-linear-gradient( 45deg, rgb(224, 0, 0), #ff225d 5px, #ff094a 4px, #ff0043 9px );
+    -webkit-animation: progress 2s linear infinite;
+    animation: progress 2s linear infinite;
+    border-radius: 4px;
+    border: 2px solid #e40000;
+    font-family: $primary-font-stack;
+}
+
+@keyframes progress {
+0% {
+background-position: 0 0;
+}
+
+100% {
+background-position: -70px 0px;
+}
+}

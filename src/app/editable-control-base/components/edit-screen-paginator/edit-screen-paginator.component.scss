@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+span {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #224079;
+  font-size: 12px;
+  font-weight: 400;
+  padding-top: 1px;
+  min-width: 50px;
+  text-align: center;
+}
+
+mat-icon {
+  color: $header-primary;
+  font-size: 20px;
+  &:hover {
+    color: $primary-blue;
+  }
+}
+
+button[disabled] {
+  mat-icon {
+    color: #c9d7e6;
+    &:hover {
+      color: #c9d7e6;
+    }
+  }
+}
+
+div {
+  border: 1px dashed #a4c2e4;
+  border-radius: 20px;
+}
+
+// mat-icon {
+//     font-size: 18px;
+//     color: #ffffff;
+//     background: #456f94;
+//     border-radius: 100%;
+//     padding: 2px;
+//     border: 4px solid #d2e3f5;
+//     cursor: pointer;
+//     &:hover {
+//     background: $header-primary;
+//     }
+// }

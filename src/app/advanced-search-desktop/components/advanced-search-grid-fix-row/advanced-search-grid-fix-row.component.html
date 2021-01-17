@@ -1,0 +1,6 @@
+
+  <div fxLayout class="grid-data">
+    <div class="row-data" fxFlex="calculateFxLayout()" *ngFor="let key of coloumnArray; let idx = index" [fxFlex]="getFxFlexProperty(key)">
+      {{gridRowData[key]}}
+    </div>
+  </div>

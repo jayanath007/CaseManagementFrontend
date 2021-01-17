@@ -1,0 +1,225 @@
+@import '~styles/variables.scss';
+
+.dps-safebox-layout {
+  dps-safebox-context-menue {
+    position: fixed;
+  }
+
+  height: 100%;
+  font-family: $primary-font-stack;
+
+  mat-sidenav-container {
+    .dps-safebox {
+      height: 107px;
+      background: $dps-safe-box-primary;
+      color: $primary;
+      font-size: $primary-font-size + 4;
+      font-weight: 500;
+
+      .header-text {
+        padding-top: 8px;
+        width: 267px;
+        height: 47px;
+
+        .header-indicator {
+          mat-icon {
+            position: relative;
+            top: 5px;
+            padding: 0px 5px 0px 0px;
+          }
+
+          .template-directory-title {
+            text-align: right;
+
+            mat-icon {
+              font-size: 24px;
+            }
+
+            span {
+              position: relative;
+              top: 3px;
+            }
+          }
+        }
+
+        .next--previous-btn {
+          bottom: 4px;
+          padding: 0px 16px 0px 16px;
+          position: relative;
+          left: 66px;
+        }
+
+        span {
+          font-family: $primary-font-stack;
+        }
+      }
+    }
+
+    mat-sidenav-content {
+      overflow: hidden;
+    }
+  }
+
+  .dps-safebox-tree {
+    height: calc(100% - 110px);
+    overflow-y: auto;
+
+    mat-divider {
+      padding-bottom: 4px;
+    }
+  }
+
+  .dps-safebox-sidenav-start {
+    width: 300px;
+    background: #f9f9f9;
+    overflow: hidden;
+
+    button.dpsfile-uploader {
+      background: #1972c3;
+      color: #fff;
+      padding: 0 85px;
+      font-size: $primary-font-size - 2;
+
+      mat-icon {
+        font-size: $primary-font-size + 6;
+      }
+    }
+
+    ::ng-deep {
+      .mat-drawer-inner-container {
+        overflow-x: hidden;
+      }
+    }
+  }
+
+  .dps-safe-box-path {
+    width: calc(100% - 40px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    // width: 100%;
+  }
+
+  .dps-safebox-path {
+    padding: 11px 2px;
+
+    mat-card {
+      background: #fff;
+      padding: 4px 7px;
+      font-size: $primary-font-size - 2;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow-y: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 0;
+
+      .dps-safe-box-file-path-list {
+        color: #155186;
+        width: 100%;
+
+        .dps-folder-indicator {
+          padding-right: 15px;
+        }
+
+        mat-icon {
+          font-size: $primary-font-size + 5;
+          height: 23px;
+          width: 7px;
+          padding: 0px 5px;
+        }
+
+        span {
+          font-size: $primary-font-size - 1;
+          vertical-align: super;
+          cursor: pointer;
+
+          &.dps-path-name {
+            padding: 8px 5px 8px;
+          }
+
+          &:hover {
+            background-color: #f3f3f3;
+            color: #155186;
+          }
+        }
+
+        .dps-safe-box-refresh {
+          width: 40px;
+
+          button {
+            background: #1972c3;
+            color: white;
+            width: 34px;
+            height: 34px;
+
+            mat-icon {
+              font-size: $primary-font-size + 8;
+              height: 30px;
+              width: 22px;
+              padding: 0px;
+            }
+          }
+        }
+      }
+
+      dps-drive-file-path-manager,
+      dps-template-directory-header {
+        width: 100%;
+      }
+    }
+  }
+
+  .dps-safebox-forground {
+    height: 100%;
+
+    .dps-white-gray-scroll {
+      overflow: auto;
+    }
+
+    .dps-drive-folder-content,
+    .dps-template-list-view {
+      height: 100%;
+    }
+
+    ::ng-deep {
+
+      .dps-file-select,
+      .dps-dragover {
+        background-color: #ddefff;
+        box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9; // border: 1px solid #b7daf9;
+      }
+
+      .dps-cut-file {
+        opacity: 0.5;
+      }
+    }
+
+  }
+
+  .dps-safebox-sidenav-end {
+    width: 250px;
+    background: #fafafa;
+
+    .safe-box-view {
+      background: #1e88e5;
+      color: $primary;
+    }
+  }
+}
+
+// dps-folder-view-container::ng-deep .dps-folder-select {
+//   background-color: #ddefff;
+//   box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9; // border: 1px solid #b7daf9;
+// }
+
+.togglesidenav-btn {
+  color: #fff !important;
+  border-radius: 2px;
+  background: #1972c3;
+  margin-left: 3px;
+  min-width: 50px;
+  box-sizing: border-box;
+  outline: 2px solid #2265a2;
+  outline-offset: -3px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}

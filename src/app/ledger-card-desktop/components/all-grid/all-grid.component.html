@@ -1,0 +1,53 @@
+<div fxLayout="column" class="dps-ld-all-grid dps-grid-content">
+  <div fxFlex="calc(100%-50px)" fxLayout="column">
+    <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+      <div class="dps-allgrid-controller" fxLayout="column" >
+        <div class="row-highlight" dpsIsMobile>
+          <div class="dps-columnheader" >
+            <dps-column-header *ngFor="let header of getGridColoum" [fxFlex]="header?.extras?.fxFlex" [def]="header" (filterApply)="onFilterApply($event)"
+              (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header?.extras?.filterAnchor">
+            </dps-column-header>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex="calc(100%-40px)" class="dps-white-gray-scroll all-grid-scroll">
+          <mat-nav-list>
+            <div *ngFor="let item of allGridData?.allGridPage?.data;let  isOdd=odd; let isEven=even" [ngClass]="item == selectRow?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+              (click)="onSelectRow(item)" >
+              <mat-list-item disableRipple class="dps-grid-list-item">
+                <div fxLayout class="grid-data" >
+                  <div class="row-data mat_line date" [fxFlex]="columnWidth.Date" innerHTML="{{item.date | date :'dd/MM/yyyy'}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="columnWidth.Type" innerHTML="{{item.type}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="columnWidth.URN" *ngIf="allGridFilterData?.showURN" innerHTML="{{item.urn}}"></div>
+                  <div class="row-data mat_line" [fxFlex]="columnWidth.Ref" innerHTML="{{item.ref}}"></div>
+                  <div class="row-data" [fxFlex]="columnWidth.Details" innerHTML="{{item.details}}"></div>
+                  <div class="row-data mat_line vat" [fxFlex]="columnWidth.VAT" innerHTML="{{item.vat | number : '1.2-2' }}"></div>
+                  <div class="row-data mat_line vat" [fxFlex]="columnWidth.Period" innerHTML="{{item.period }}" *ngIf="allGridFilterData?.showTransPeriods"></div>
+                  <div class="row-data mat_line office-dr dps-ledgerCard-balances-color-paleturquoise" *ngIf="!allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.OfficeDr" innerHTML="{{item.officeDr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line office-cr dps-ledgerCard-balances-color-paleturquoise" *ngIf="!allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.OfficeCr" innerHTML="{{item.officeCr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line officeb-al dps-ledgerCard-balances-color-paleturquoise" [fxFlex]="columnWidth.OfficeBal" innerHTML="{{item.officeBal | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line client-dr dps-ledgerCard-balances-color-palegreen" *ngIf="!allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.ClientDr" innerHTML="{{item.clientDr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line client-cr dps-ledgerCard-balances-color-palegreen" *ngIf="!allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.ClientCr" innerHTML="{{item.clientCr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line client-bal dps-ledgerCard-balances-color-palegreen" [fxFlex]="columnWidth.ClientBal" innerHTML="{{item.clientBal | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line dda-dr dps-ledgerCard-balances-color-lightpink" *ngIf="allGridFilterData?.showDDA && !allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.DDADr" innerHTML="{{item.ddaDr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line dda-cr dps-ledgerCard-balances-color-lightpink" *ngIf="allGridFilterData?.showDDA && !allGridFilterData?.showBalanceOnly"
+                    [fxFlex]="columnWidth.DDDCr" innerHTML="{{item.ddaCr | number : '1.2-2'}}"></div>
+                  <div class="row-data mat_line dda-bal dps-ledgerCard-balances-color-lightpink" *ngIf="allGridFilterData?.showDDA" [fxFlex]="columnWidth.DDDbal"
+                    innerHTML="{{item.ddAbal | number : '1.2-2'}}"></div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator fxFlex="50px" #paginator [length]="allGridData?.allGridPage?.total" [pageIndex]="allGridData?.PaginatorDef?.currentPage"
+    [pageSize]="allGridData?.PaginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="footer-shadow">
+  </mat-paginator>
+</div>

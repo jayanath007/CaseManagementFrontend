@@ -1,0 +1,25 @@
+<div class="dps-team-filter-bar-outer">
+  <div fxLayout="column" class="dps-team-filter-bar">
+    <mat-form-field class="dps-team-drop-down-list">
+      <mat-select placeholder="Select Department"  
+        (selectionChange)="onChangeDepartment($event)">
+        <mat-option class="dps-team-drowp-menu" *ngFor="let department of departmentList" [value]="department">
+          {{department.groupName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="dps-team-members-search">
+      <input matInput type="search" #TeamMemberSearchText>
+      <mat-placeholder>Search User</mat-placeholder>
+      <button matSuffix mat-icon-button (click)="onSearchTextChanged(TeamMemberSearchText.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="dps-white-gray-scroll dps-user-list">
+    <mat-progress-bar *ngIf="teamUsersLoading" mode="indeterminate"></mat-progress-bar>
+    <dps-team-users-item *ngFor="let user of teamUsersList; let i = index" [user]="user" [selectedTeamUser]="selectedTeamUser" (click)="onTeamUserChange(user)">
+    </dps-team-users-item>
+  </div>
+</div>

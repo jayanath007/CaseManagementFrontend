@@ -1,0 +1,33 @@
+<div style="height: 100%;width: 100%;">
+  <mat-drawer-container class="dps-mat-drawer-container">
+    <!-- [disableClose]="true" -->
+    <mat-drawer class="dps-mat-drawer" #drawer [opened]="openDrewer" mode="side" position="start">
+      <dps-probate-payment-receipt-tab [transactionsEditRow]="transactionsEditRow" [matterData]="matterData"
+        [token]="token" (submitSaveData)="onSubmitSaveData($event)" (clear)="onClear()">
+      </dps-probate-payment-receipt-tab>
+      <!-- <button class="btn" mat-raised-button (click)="clickPopup()">Payment</button> -->
+    </mat-drawer>
+
+    <mat-drawer-content [ngClass]="toggleActive?'slide-off':'slide-on'" class="dps-white-gray-scroll">
+      <div class="dps-container-btn">
+        <button class="btn dps-toggle-btn" mat-raised-button (click)="slideTogle(drawer)">
+          <mat-icon *ngIf="toggleActive">arrow_forward_ios
+          </mat-icon>
+          <mat-icon *ngIf="!toggleActive">arrow_back_ios
+          </mat-icon>
+        </button>
+        <span fxFlex="1 1 auto"></span>
+        <button class="red" mat-button (click)="onDelete()">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </div>
+
+      <div class="transaction-grid-outer dps-white-gray-scroll">
+        <dps-transaction-grid (edittransactionClick)="onEdittransactionClick($event)" [selectedRow]="selectedRow"
+          (selectedRowClick)="onSelectedRowClick($event)" [transactions]="transactions" class="dps-white-gray-scroll">
+        </dps-transaction-grid>
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

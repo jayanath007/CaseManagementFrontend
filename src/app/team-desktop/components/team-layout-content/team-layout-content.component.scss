@@ -1,0 +1,53 @@
+.dps-team-secondary-header {
+    background: #ececec;
+    height: 55px;
+
+    mat-chip-list {
+      width: 100%;
+
+      .dps-calender-btn {
+        padding: 10px 0px 10px 10px;
+
+        .dps-cal-text {
+          padding: 0px 16px 0px 0px;
+          color: #646c75;
+        }
+
+        .dps-cal-btn {
+          background: #2a89d6;
+          border-radius: 0px;
+
+          mat-icon {
+            color: #d3e7f6;
+            font-size: 22px;
+          }
+        }
+
+        mat-form-field {
+          position: relative;
+          top: 3px;
+          width: 100px;
+        }
+
+        ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+          background-color: unset;
+          height: unset;
+
+          span {
+            display: none;
+          }
+        }
+
+      }
+    }
+  }
+
+  .dps-content-view{
+    height: calc(100% - 59px);
+  }
+  .active{
+    background: #438fcc;
+    color: #fff;
+
+  }
+  

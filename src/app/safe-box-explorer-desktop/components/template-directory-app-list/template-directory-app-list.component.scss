@@ -1,0 +1,47 @@
+@import '~styles/variables.scss';
+
+mat-list-item {
+  display: block;
+  height: 40px !important;
+
+  span[matLine] {
+    font-size: $primary-font-size - 2;
+    color: #155186;
+    font-weight: 450;
+
+    i {
+      font-size: $primary-font-size + 2;
+      padding: 0px 4px;
+      color: #155186;
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  ::ng-deep .mat-list-item-content {
+    padding: 0 5px 0px 7px !important;
+  }
+
+}
+
+div {
+  mat-list-item {
+    span[matLine] {
+      padding-left: 15px;
+
+      i {
+        font-family: monospace;
+        font-weight: 600;
+        border: 1px solid;
+        padding: 0 0;
+        height: 18px;
+        width: 18px;
+        margin: 0 2px;
+      }
+    }
+  }
+
+  .active {
+    background-color: #c5dcf1;
+  }
+}

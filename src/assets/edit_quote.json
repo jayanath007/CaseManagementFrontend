@@ -1,0 +1,26 @@
+
+
+
+
+        {"propertyQuoteData": {
+            "appId": "p",
+            "branchId": 2,
+            "isEngProperty": true,
+            "purchesValue": "1200",
+            "buyLeasehold": "f",
+            "lasId": 0,
+            "buyShare": false,
+            "martgage": true,
+            "isBuyHouse": false,
+            "isFirstTimeBuyer": true,
+            "isNewBuild": false,
+            "isBuyToLet": false,
+            "isSecondProperty": false,
+            "isRightToBuy": false,
+            "purchesProfCostDis": null
+          },
+        "enquiryInfo": [{ "question": "question1", "answer": "answer1" },{ "question": "question2", "answer": "answer2" },{ "question": "question3", "answer": "answer3" }],
+        "amount": 1000,
+        "quoteDis": 2000,
+        "otherFees": 3000,
+        "templete": "templete"}

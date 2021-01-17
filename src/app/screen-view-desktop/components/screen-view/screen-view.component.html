@@ -1,0 +1,38 @@
+<div class="dps-screen-view">
+  <div *ngIf="screenViewState?.isLoading" class="dps-progress-bar">
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </div>
+  <div class="screen-view-wrapper" *ngIf="!screenViewState?.isLoading">
+    <div class="general-loader-light" *ngIf="screenViewState?.isFormDataLoading" mode="indeterminate"></div>
+
+    <dps-screen-view-header [hasTabLogic]="medator['message'].isTabLogic"
+      [isMasterMatter]="medator['message'].isMasterMatter" [screenViewState]="screenViewState"
+      [screenList]="screenViewState?.screenList" [currentIndex]="screenViewState?.currentIndex"
+      [screenDefinition]="formView?.screenDefinition" (onClose)="closeDialog($event)"
+      (onEnableTabLogic)="enableTabLogic($event)" (onTabLogic)="runTabLogic(null)"
+      (onTabLogicAndPlotSync)="runPlotSync(null)" (onPrev)="prives($event)" (onNext)="next($event)" (onOk)="ok($event)">
+    </dps-screen-view-header>
+    <dps-contact-search-toolbar *ngIf="showToolBar" (onSearchAction)="onToolBarAction($event)"
+      [enableSaving]="enableSaving" [contactsOnFile]="contactsOnFile" [currentContactId]="currentContactId"
+      [disableSearchButtons]="disableSearchButtons"
+      [oneOnlyPerMatter]="this.screenViewState.formView.screenDefinition.oneOnlyPerMatter"
+      [contactType]="screenViewState?.formView?.screenDefinition?.contactType">
+    </dps-contact-search-toolbar>
+    <dps-dynamic-form (dblclick)="formDoubleClick($event)" [screenComponentList]="formView?.screenContanerComponentList"
+      [screenDefinition]="formView?.screenDefinition" #form="dynamicForm" (submit)="submit($event)"
+      (eventOutput)="onEventOutput($event)">
+    </dps-dynamic-form>
+
+    <!-- 
+      <h1> {{screenViewState?.isFormDataLoading}}</h1>
+    <dps-dynamic-form-desingner (dblclick)="formDoubleClick($event)" [screenComponentList]="formView?.screenContanerComponentList"
+      [screenDefinition]="formView?.screenDefinition" #form="dynamicForm" (submit)="submit($event)" (eventOutput)="onEventOutput($event)">
+    </dps-dynamic-form-desingner> -->
+    <!-- <div>
+      {{ form?.value | json }}
+    </div> -->
+
+
+  </div>
+</div>

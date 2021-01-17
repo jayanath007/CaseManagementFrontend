@@ -1,0 +1,6 @@
+<a mat-list-item [ngClass]="isOdd?'dps_item_separation-0':'dps_item_separation-1'">
+  <strong class="input-text" mat-line>{{item.question}} :</strong>
+  <!-- <mat-checkbox [disabled] *ngIf="isBooleanField(item.answer)" [ngModel]="item.answer">
+  </mat-checkbox> -->
+  <span class="input-infor item-answer dps-white-gray-scroll" mat-line>{{item.answer}}</span>
+</a>

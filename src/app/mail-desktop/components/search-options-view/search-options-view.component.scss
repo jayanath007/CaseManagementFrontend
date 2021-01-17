@@ -1,0 +1,142 @@
+@import '~styles/variables.scss';
+
+.dps-search-option {
+  height: 100%;
+
+  mat-nav-list.search-option-icon {
+    padding-top: 0px;
+    background-color: #c6ecff;
+  }
+
+  mat-list-item.dps-matlist {
+    color: #274e8a;
+
+    mat-icon {
+      border: 2px solid;
+      padding: 0px;
+    }
+
+    span {
+      font-size: $primary-font-size;
+      font-weight: 500;
+    }
+  }
+}
+
+.dps-mail-folder-search {
+  padding-top: 0px;
+  overflow-y: auto;
+}
+
+.search-content {
+  width: 100%;
+}
+
+mat-selection-list {
+  h3 {
+    font-weight: 600;
+    // margin: -10px 0 -10px 0;
+    color: #0079c4;
+  }
+}
+
+.person-filter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+}
+
+.person {
+  position: absolute;
+  top: -9px;
+  text-align: center;
+  width: 28px;
+  color: white;
+  font-size: $primary-font-size - 1;
+}
+
+mat-form-field.always {
+  padding: 0px 15px;
+  width: 100%;
+
+}
+
+.display-person {
+  padding-left: 31px;
+
+  small.name {
+    line-height: 20px
+  }
+
+  small.address {
+    line-height: 10px;
+    font-size: $primary-font-size - 4;
+  }
+}
+
+i {
+  font-size: $primary-font-size + 11;
+}
+
+mat-icon.nav-list-mat-icon {
+  color: #0D557C;
+}
+
+.mat-divider-option {
+  margin: 8px 15px 0px 15px;
+}
+
+mat-selection-list.mat-option-list {
+  height: auto;
+
+  mat-divider {
+    margin: 0px 15px;
+  }
+}
+
+
+mat-divider.divider {
+  margin: 15px 15px 0px 15px;
+}
+
+mat-radio-button {
+  margin: 5px 0px;
+  padding-left: 15px;
+
+  span {
+    font-size: 12px;
+  }
+}
+
+h3.form {
+  font-weight: 600;
+  color: #0079c4;
+  margin-bottom: -15px;
+}
+
+h3.option {
+  font-weight: 600;
+  color: #0079c4;
+}
+
+h3.date {
+  font-weight: 600;
+  color: #0079c4;
+}
+
+
+
+
+.dps-search-mail-from .dps-mail-item-avatar {
+  height: 30px;
+  width: 30px;
+}
+
+.dps-mail-item-avatar span {
+  color: white;
+  position: relative;
+  bottom: 5px;
+  font-size: $primary-font-size - 2;
+}

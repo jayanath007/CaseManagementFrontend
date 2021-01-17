@@ -1,0 +1,42 @@
+<div  fxLayout="column" style="height: 59px;">
+    <mat-toolbar class="dps-team-secondary-header">
+    
+        <mat-chip-list fxLayoutGap="8px">
+          <mat-chip [ngClass]="selectedViewType === viewType.YearView?'active':'none'" (click)="onChangeViewType(viewType.YearView)">Year</mat-chip>
+          <!-- <mat-chip [disabled]="loading"  [ngClass]="selectedViewType === viewType.MonthView?'active':'none'" (click)="onChangeViewType(viewType.MonthView)">Month</mat-chip> -->
+          <!-- <mat-chip (click)="onChangeViewType(viewType.DayView)">Day</mat-chip> -->
+          <span fxFlex="0 0 23%;"></span>
+          <mat-chip class="dps-calender-btn">
+            <span *ngIf="selectedViewType === viewType.YearView" class="dps-cal-text">{{selectYearAndMonth.year()}}</span>
+            <!-- <span *ngIf="selectedViewType === viewType.MonthView"  class="dps-cal-text">{{selectYearAndMonth.format('MMMM')}}</span> -->
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" >
+              <mat-datepicker #picker  [startView]="getViewType()" 
+              (yearSelected)="chosenDateHandler($event, picker)" (monthSelected)="chosenDateHandler($event, picker)" panelClass="dps-calendar-datepicker"></mat-datepicker>
+            </mat-form-field>
+            <button class="dps-cal-btn" [disabled]="loading" mat-icon-button (click)="picker.open()">
+                <mat-icon>date_range</mat-icon>
+              <!-- <mat-icon>keyboard_arrow_down</!--> 
+            </button>
+          </mat-chip>
+    
+          <!-- <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+            <span>{{currentTitle}}</span>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" [value]="selectedDate" (dateChange)="onDateChange($event)">
+              <mat-datepicker #picker startView="year" panelClass="dps-calendar-datepicker"></mat-datepicker>
+            </mat-form-field>
+            <button mat-icon-button (click)="picker.open()">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+          </div> -->    
+        </mat-chip-list>       
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading"  mode="indeterminate"></mat-progress-bar>
+<!-- *ngIf="loading" -->
+</div>
+
+
+<dps-team-user-year-activity *ngIf="selectedViewType === viewType.YearView"  dps-layout-content [eventYearSummery]="eventYearSummery"  [columnDef]="columnDef" class="dps-content-view"></dps-team-user-year-activity>  
+<dps-team-user-month-activity *ngIf="selectedViewType === viewType.MonthView" [activityListByDay]="activityListByDay" dps-layout-content  (selectedDay)="onSelectedDay($event)" [monthActivityList]="monthActivityList"  [selectYearAndMonth]="selectYearAndMonth" class="dps-content-view" ></dps-team-user-month-activity>
+<dps-team-user-day-activity  *ngIf="selectedViewType === viewType.DayView" dps-layout-content   class="dps-content-view"></dps-team-user-day-activity>

@@ -1,0 +1,7 @@
+<mat-form-field floatLabel="always">
+  <mat-select placeholder="Folder" [ngModel]="selectedFolder" (selectionChange)="onFolderChanged($event.value)">
+    <mat-option *ngFor="let folder of folderList" [value]="folder">
+      {{folder.text}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

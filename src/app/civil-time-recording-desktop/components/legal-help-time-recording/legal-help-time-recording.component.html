@@ -1,0 +1,150 @@
+<div class="outer">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-card class="dps-time input-elements">
+      <h5>Time</h5>
+
+      <div class="dps-mat-card-content">
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span class="time-information-input short">Units</span>
+          <span class="time-information-input sub-2 values">Rate</span>
+          <span class="time-information-input sub-2 values">Value</span>
+        </div>
+        <div class="dpsrate-calculation" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field>
+            <mat-label>Attendance</mat-label>
+            <input [dpsNumberOnly]=8 matInput [value]="modelData?.attendanceUnit"
+              (keyup)="onChangeModel('attendanceUnit', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput readonly tabindex="-1" [value]="modelData?.attendanceRate | number:'1.2-2' " />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.attendanceValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field matTooltip="Preparation/Consideration">
+            <mat-label>Preparation/Consideration</mat-label>
+            <input [dpsNumberOnly]=8 matInput [value]="modelData?.preparationUnit"
+              (keyup)="onChangeModel('preparationUnit', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput readonly tabindex="-1" [value]="modelData?.preparationRate | number:'1.2-2' " />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.preparationValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field>
+            <mat-label>Travelling</mat-label>
+            <input [dpsNumberOnly]=8 matInput [value]="modelData?.travelUnit"
+              (keyup)="onChangeModel('travelUnit', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput readonly tabindex="-1" [value]="modelData?.travelRate | number:'1.2-2'" />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.travelValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field>
+            <mat-label>Waiting</mat-label>
+            <input [dpsNumberOnly]=8 matInput [value]="modelData?.waitingUnit"
+              (keyup)="onChangeModel('waitingUnit', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput readonly tabindex="-1" [value]="modelData?.waitingRate | number:'1.2-2'" />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.waitingValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="dps-disbursement input-elements">
+      <h5>Disbursement</h5>
+
+      <div class="dps-mat-card-content">
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field>
+            <mat-label>Mileage<b class="milage-rate">{{modelData?.mileageRate}}</b> </mat-label>
+            <input [dpsNumberOnly]=8 matInput [value]="modelData?.mileageUnit"
+              (keyup)="onChangeModel('mileageUnit', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.mileageValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout=" row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <!-- <mat-label>Fares. VAT exempt</mat-label> -->
+          <mat-form-field class="time-information-input sub-2 values">
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input placeholder="Fares. VAT exempt" matInput [dpsNumberOnly]=8 [value]="modelData?.faresVatExempt"
+              (keyup)="onChangeModel('faresVatExempt', $event.target.value, true)" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input placeholder="Fares. including VAT" matInput [dpsNumberOnly]=8 [value]="modelData?.faresIcludingVat"
+              (keyup)="onChangeModel('faresIcludingVat', $event.target.value, true)" />
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.faresIcludingVatNet | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field>
+            <mat-label>Parking</mat-label>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput [dpsNumberOnly]=8 [value]="modelData?.parkingFees"
+              (keyup)="onChangeModel('parkingFees', $event.target.value, true)" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="dps-value input-elements">
+      <h5>Value</h5>
+      <div class="dps-mat-card-content">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span class="time-information-input sub-2 values">Total Time Value </span>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="totalTimeValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span class="time-information-input sub-2 values">Total Disbursements</span>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="totalDisbsValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span class="time-information-input sub-2 values">Total</span>
+          <mat-form-field>
+            <span matPrefix>{{homeCurrency | currencySymbols}} &nbsp;</span>
+            <input matInput readonly tabindex="-1" [value]="modelData?.totalValue | number:'1.2-2'" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+
+</div>

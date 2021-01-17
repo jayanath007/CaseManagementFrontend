@@ -1,0 +1,38 @@
+<div class="dps-mls-widget-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="header mls">
+      <mat-icon class="header-icon">chat_bubble_outline</mat-icon>
+      <span class="header-name">MLS</span>
+      <span class="spacer"></span>
+      <button mat-icon-button class="option-btn" (click)="onRefreshData()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button mat-icon-button class="option-btn" [matMenuTriggerFor]="mainmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #mainmenu="matMenu">
+        <button class="dps-folder-action" mat-menu-item (click)="onRemove()">
+          Remove
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading && layout===1" mode="indeterminate"></mat-progress-bar>
+  <mat-spinner mode="indeterminate" *ngIf="isLoading  && layout===2" diameter="35" strokeWidth="3">
+  </mat-spinner>
+  <mat-progress-bar *ngIf="isLoading && layout===3" mode="indeterminate"></mat-progress-bar>
+  <!-- <div *ngIf="!isLoading && !data">
+    <div class="empty-view" *ngIf="data?.length === 0 || !data">
+      <p class="wrong-massage" *ngIf="data?.length === 0"> No item to preview</p>
+      <p class="wrong-massage" *ngIf="!data"> Something went wrong </p>
+    </div>
+  </div> -->
+  <mat-nav-list dense class="widget-item-list dps-white-gray-scroll" fxFlex="calc(100%-66px)">
+    <dps-mls-widget-item *ngFor="let item of data ; let isOdd=odd; let isEven=even"
+      [ngClass]="isOdd?'separator-0':'separator-1'" [item]="item" [layout]="layout"
+      [continueChatItem]="continueChatItem" [isMsgSending]="isMsgSending" [allMatterRef]="allMatterRef"
+      (openCase)="onOpenCase($event)" (replayToChat)="onReplyToChat($event)" (sendMsg)="onSendMessage($event)">
+    </dps-mls-widget-item>
+  </mat-nav-list>
+
+</div>

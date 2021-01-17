@@ -1,0 +1,106 @@
+@import '~styles/variables.scss';
+
+
+
+
+.dps-total-and-info-header {
+  height: 235px;
+  padding: 15px;
+}
+
+.dps-white-gray-scroll {
+  overflow: auto;
+  height: 100%;
+}
+
+dps-additional-class-information
+{
+
+  padding: 15px;
+  font-size: 14px;
+}
+
+dps-current-total
+{
+  background: #eff4f8;
+}
+.bottom-contents-wrapper
+{
+height:398px
+}
+
+.information-bottom-left
+{
+
+  ::ng-deep mat-form-field
+  {
+    width: 100%;
+  }
+
+  dps-police-station-information
+  {
+    background: #21517f;
+    padding: 21px;
+    height: 100%;
+  }
+  .status-information
+  {
+    background: #2d435a;
+    padding: 21px;
+    height: 100%;
+
+    mat-checkbox
+    {
+      color: $primary;
+      font-size: 12px;
+      clear: both;
+      display: block;
+    }
+    
+    .status-information-button-set
+    {
+      
+      padding-top: 20px;
+
+      button
+      {
+        padding: 0 10px;
+        line-height: 29px;
+        font-size: $primary-font-size - 2;
+        color: $primary;
+      }
+      .st-inf-close
+      {
+        background: #3b7bb8;
+        color: #fff;
+        float: right;
+      }
+
+      
+      .st-inf-re-open
+      {
+          background: #6e7d88;
+
+      }
+    }
+
+ }
+
+  ::ng-deep .mat-form-field-infix
+  {
+    color: $primary;
+    font-size: 12px;
+
+      .mat-form-field-label,
+      mat-datepicker-toggle
+      {
+        
+        color: $primary;
+      }
+
+      .mat-form-field-underline
+      {
+        background:  $primary;
+      }
+  }
+}

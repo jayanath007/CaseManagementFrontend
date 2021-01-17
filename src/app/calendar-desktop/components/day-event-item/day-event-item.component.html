@@ -1,0 +1,38 @@
+<div [ngStyle]="{'background-color': calendarEvent.color,'opacity':(calendarEvent.data.showAs==='tentative'&& !calendarEvent.data.isOrganizer)?'0.7':'1'}"
+  class="dps-day-event">
+  <mat-list-item title="{{calendarEvent.data.subject?calendarEvent.data.subject:''}}" class="dps-calender-day-event" [ngClass]="calendarEvent.data.showAs"
+    (dblclick)="onEventDblClick(calendarEvent)" (contextmenu)="contextmenuOpen($event,eventContextMenue)">
+
+
+    <dps-event-context-menue #eventContextMenue [calendarEvent]="calendarEvent" (open)="onEventDblClick($event)" (openOccurrence)="onOpenOccurrence($event)"
+      (openSeries)="onOpenSeries($event)" (response)="onResponse($event)" (replyForward)="onReplyForward($event)" (showAsStateChange)="onShowAsStateChange($event)"
+      (removeFromCalendar)="onRemoveFromCalendar($event)">
+    </dps-event-context-menue>
+    <div class="dps-cal-evnt-tme" fxLayout="row" fxLayoutWrap="nowrap">
+      <div fxFlex="42px" class="day_wrapper" *ngIf="!calendarEvent.data.isAllDay">
+        <span >{{calendarEvent.data.start.dateTime|date:'h:mmaaaaa'}}</span>
+      </div>
+      <div class="dps-cal-evnt" [fxFlex]="calendarEvent.data.isAllDay?'calc(100%-0px)':'calc(100%-42px)'" fxLayout="column" >
+        <div fxFlex="0 0 auto">
+          <span class="dps-event-subject">{{calendarEvent.data.subject}}&nbsp;</span>
+        </div>
+        <div class="dps-location" fxFlex="0 0 auto" fxLayout="row" fxLayoutWrap="nowrap">
+
+          <span class="dps-event-location">
+            <span>{{calendarEvent.duration}}</span>
+            <span>{{calendarEvent.data.location.displayName}}</span>
+          </span>
+
+          <span class="dps_calender_sidenav_icons">
+            <i class="material-icons dps-calendar-event-icon" *ngIf="calendarEvent.data.hasAttachments">attach_file</i>
+            <i class="material-icons dps-calendar-event-icon" *ngIf="calendarEvent.data.type === 'occurrence'">sync</i>
+            <i class="material-icons dps-calendar-event-icon" *ngIf="calendarEvent.data.type === 'exception'">sync_disabled</i>
+            <i class="material-icons dps-calendar-event-icon" *ngIf="calendarEvent.data.sensitivity === 'private'">lock</i>
+            <img src="is-dps-mail.png" width="13px" height="13px" *ngIf="calendarEvent.hasDPSLinks">
+          </span>
+        </div>
+      </div>
+    </div>
+  </mat-list-item>
+</div>
+<!-- [disabled]="calendarGroup.hasChild" -->

@@ -1,0 +1,135 @@
+dps-column-header {
+  height: 40px;
+}
+
+mat-nav-list {
+  padding-top: 0;
+  width: 100%;
+}
+
+.time_record_gird_value,
+.time_record_gird_netbilled,
+.time_record_gird_netbilled {
+  text-align: right;
+}
+
+.time_record_gird_units,
+.time_record_mood,
+.time_record_data {
+  text-align: center;
+}
+
+.time_record_gird_value,
+.time_record_gird_netbilled,
+.time_record_date,
+.time_record_ref {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time_record_mood {
+  color: #e48a49 !important;
+}
+
+.dps_time_record_value {
+  line-height: 16px;
+}
+
+.row-data:last-child {
+  border-right: none;
+}
+
+.grid-data .row-data:last-child {
+  background-image: none;
+}
+
+.grid-data,
+.grid-table-row {
+  font-size: 12px;
+  display: table-row;
+  word-break: break-word;
+}
+
+.row-data,
+.grid-table-cell {
+  border-right: 1px solid #c3c3ca;
+  display: table-cell;
+  font-size: 12px;
+  padding: 6px 6px 6px;
+  line-height: 18px;
+}
+.dps-white-gray-scroll.dps-filter-time-recorded-grid-content{
+overflow-y: hidden !important;
+}
+.dps-white-gray-scroll.dps-time-recorded-grid-content {
+  width: 100%;
+  overflow-y: scroll;
+
+  mat-list-item {
+    height: auto;
+
+    .grid-data {
+      width: 100%;
+    }
+  }
+}
+
+.expansion-panelgrid-header {
+  display: table;
+  width: 100%;
+  height: auto !important;
+  position: relative;
+  padding: 0px 0px;
+}
+
+.grid-panel-title {
+  display: table;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 100%;
+  margin-right: 0px;
+}
+
+.dps-time-recorded-grid-content {
+  .grid-data {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-expansion-indicator {
+    position: absolute;
+    left: 0.7%;
+    right: auto;
+    top: 7px;
+  }
+
+  mat-expansion-panel-header {
+    position: relative;
+    padding: 0px 0px;
+  }
+
+  ::ng-deep .mat-expansion-panel-spacing {
+    margin: 0px 0px !important;
+  }
+
+  ::ng-deep .mat-expanded {
+    background: #fff2e9;
+  }
+
+  .mat-expansion-panel-header-title {
+    margin-right: 0px;
+  }
+}
+
+.dps-selected-row {
+  background: #f3d5bf;
+}
+
+.dps-selected-row:hover {
+  background: #f3d5bf;;
+}
+
+.dps-time-record-hide-date {
+  display: none;
+}

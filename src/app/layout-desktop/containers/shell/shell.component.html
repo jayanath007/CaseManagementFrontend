@@ -1,0 +1,121 @@
+<div class="dps-content" [ngClass]="{'collapsed':(minNavVisibility$ | async),'expanded':(fullNavVisibility$ | async)}">
+  <i class="fa fa-thumb-tack main-nav-controller-btn" aria-hidden="true" (click)="menuPinClick()"></i>
+  <i class="fa fa-bars main-nav-controller-btn" aria-hidden="true" (click)="menuPinClick()"></i>
+  <mat-sidenav-container (backdropClick)="onCloseRightSideNav()">
+    <mat-sidenav #mindashbordnav [disableClose]="true" [opened]="minNavVisibility$ | async" mode="side"
+      class="dps-mini-sidenav">
+      <div class="dps-content" fxLayout="column">
+        <div fxFlex="50px" class="company-logo-avatar-holder-outer">
+          <mat-list class="company-logo-avatar-holder">
+            <mat-list-item class="dps-main-menu-shadow">
+              <!-- <img matListAvatar class="dps-favicon" src="favicon.ico" alt="DPS Spitfire"> -->
+              <img class="dps-favicon mini" src="logo1.png" alt="DPS Spitfire">
+              <!-- matListAvatar -->
+            </mat-list-item>
+          </mat-list>
+
+        </div>
+        <div fxFlex="20px" class="main-nav-controller" fxLayout="row">
+        </div>
+        <div fxFlex="calc(100% - 70px)" class="dps-main-menu-nav-list">
+          <dps-main-menu-mini-nav-list (itemClick)="onMainMenuItemClick($event)" [activeOutlet]="activeOutlet$ | async"
+            [data]="menuItems$ | async"></dps-main-menu-mini-nav-list>
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav #endSideNav [disableClose]="true" [opened]="rightSidenavIsOpend$ | async" position="end" mode="over"
+      class="dps-right-sidenav">
+      <div class="dps-content" fxLayout="column">
+        <mat-toolbar fxFlex="45px">
+          <span class="dps-side-panel-header"><i class="material-icons">settings</i>
+            {{(rightSidenavModule$ | async) | titlecase}}</span>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button (click)="onCloseRightSideNav()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-toolbar>
+        <div fxFlex="calc(100% - 50px)" class="right-sidenav dps-white-gray-scroll">
+          <dps-reminders-list-manager *ngIf="(rightSidenavModule$ | async)==='reminders'"></dps-reminders-list-manager>
+          <dps-settings-sidenav *ngIf="(rightSidenavModule$ | async)==='settings'"
+            (updateImageFile)="onUpdateImageFile($event)" (openMailSettings)="loadMailSettings()"
+            (openPostingPeriod)="loadPostingPeriod()" (mlsInquiryForm)="onMLSInquiryForm()"
+            (oppenOpportunitySettings)="onOpportunitySettings()" (openPageSetup)="loadPageSetup()" (logout)="onLogout()"
+            [user]="user$ | async" [isGoogle]="authHelper.isGoogle()"></dps-settings-sidenav>
+          <dps-exception-indicator-list-manager *ngIf="(rightSidenavModule$ | async)==='error log'">
+          </dps-exception-indicator-list-manager>
+        </div>
+      </div>
+    </mat-sidenav>
+    <div class="dps-content expanded-nav-wrap">
+
+      <mat-sidenav-container (backdropClick)="menuPinClick()">
+        <mat-sidenav #dashbordnav [disableClose]="true" [mode]="openMode" [opened]="fullNavVisibility$ | async"
+          class="dps-sidenav">
+          <div class="dps-content" fxLayout="column">
+            <div fxFlex="50px" class="dps-company-logo-section" *ngIf="(user$ | async)?.general?.companyLogoUrl">
+
+              <img matListAvatar class="dps-favicon dps-campany-logo-img" width="40px" height="40px"
+                src="{{(user$ | async)?.general?.companyLogoUrl}}" alt="DPS Spitfire">
+              <mat-icon class="dps-favicon dps-campany-logo-text" matListIcon [svgIcon]="svgIcons.IconLogoText">
+              </mat-icon>
+
+
+            </div>
+
+            <div fxFlex="50px" class="dps-company-logo-section" *ngIf="!(user$ | async)?.general?.companyLogoUrl">
+
+              <img matListAvatar class="dps-favicon" src="logo.png" alt="DPS Spitfire">
+            </div>
+            <div fxFlex="10px" class="main-nav-controller" fxLayout="row">
+              <div>
+
+              </div>
+            </div>
+            <div fxFlex="calc(100% - 74px)" class="dps-main-menu-nav-list">
+              <dps-main-menu-nav-list [activeOutlet]="activeOutlet$ | async" (itemClick)="onMainMenuItemClick($event)"
+                [data]="menuItems$ | async" [dashBoardWidgetList]="dashBoardWidgetList$ | async">
+                <div open-case></div>
+              </dps-main-menu-nav-list>
+            </div>
+
+
+          </div>
+        </mat-sidenav>
+        <div class="dps-content" fxLayout="column">
+          <dps-header-bar (itemClick)="onMainMenuItemClick($event)" [activeOutlet]="activeOutlet$ | async"
+            (itemCloseClick)="onMainMenuItemClose($event)" [menuOpenCaseItems]="menuOpenCaseItems$ | async"
+            [isGoogle]="authHelper.isGoogle()" (showSetingsSidenav)="onShowSetingsSidenav()" [user]="user$ | async"
+            fxFlex="50px" class="dps-header-bar-shadow" (menuToggle)="menuPinClick()" [companyCode]="(user$|async)?.general?.companyCode">
+
+            <!-- <div fxLayout="row" fxLayoutGap="10px">  </div> -->
+            <div azure-storage-section #azureStorageModule></div>
+            <div notification-section #notificationModule></div>
+            <button notifications-btn class="hd-bar-notifications-btn" #notifications mat-icon-button
+              (click)="onShowRemindersSidenav()" *ngIf="!authHelper.isGoogle()">
+              <mat-icon class="dps-hd-icon">notifications_active</mat-icon>
+            </button>
+            <button settings-btn class="hd-bar-settings-btn" #settings (click)="onShowSetingsSidenav()" mat-icon-button>
+              <mat-icon class="dps-hd-icon">settings</mat-icon>
+              <!-- loadAppSettings -->
+            </button>
+
+          </dps-header-bar>
+          <div fxFlex="calc(100% - 50px)" class="dps-shell-content">
+            <div class="dps-shellcontent" [style.display]="(activeOutlet$ | async) !== 'mail'  ? 'none': 'block'">
+              <router-outlet name="mail"></router-outlet>
+            </div>
+            <div class="dps-shellcontent" [style.display]="(activeOutlet$ | async) !== 'main'  ? 'none': 'block'">
+              <router-outlet name="main"></router-outlet>
+            </div>
+            <div class="dps-shellcontent" [style.display]="(activeOutlet$ | async) !== 'dashboard'  ? 'none': 'block'">
+              <router-outlet name="dashboard"></router-outlet>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-container>
+    </div>
+  </mat-sidenav-container>
+  <!-- dynamic modules load here -->
+  <div #workflowTest></div>
+  <dps-exception-indicator-manager></dps-exception-indicator-manager>
+</div>

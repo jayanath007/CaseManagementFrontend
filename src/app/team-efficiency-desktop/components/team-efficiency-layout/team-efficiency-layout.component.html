@@ -1,0 +1,160 @@
+<mat-sidenav-container>
+  <mat-sidenav class="dps-team-member-sidenav" [disableClose]="true" #teammembers position="end" [mode]="mode"
+    [opened]="isMemberNavExpan" fxLayout="column">
+    <dps-team-member-manager #teammemberlist [teamMemberToken]="'TEAM_MEMBER_DATA_TEAM_EFFICIENCY'">
+    </dps-team-member-manager>
+    <mat-list dense class="team-member-header">
+      <mat-list-item>
+        <div fxFlex="row">
+          <button mat-icon-button (click)="onMemberNavClick()">
+            <mat-icon>reorder</mat-icon>
+          </button>
+          <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+          <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+            <mat-chip> {{teamMemberCount}} </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+      [teamMemberList]="teammemberlist.teamMemberList$ | async"
+      [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async" [selected]="teammemberlist.selected$ | async"
+      (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+      (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+    </dps-team-member-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="dps-white-gray-scroll">
+    <div class="dps-team-efficency-main-contentainer" fxLayout="column">
+      <div class="dps-team-efficency-main-header" fxFlex="87px">
+        <div class="dps-profile" fxLayout="row">
+          <div fxFlex="1 1 auto">
+            <dps-user-profile-detail [selectedDepartment]="selectedDep" [selectedTeamMember]="selectedTeamMember">
+            </dps-user-profile-detail>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field floatLabel="allways" class="dps_teamefficiency_controllers dps-teamefficiency-month">
+              <span matPrefix>&nbsp;&nbsp;</span>
+              <mat-placeholder class="tm_effy_selector">Month</mat-placeholder>
+              <mat-select (selectionChange)="OnMonthChanged($event)" [ngModel]="selectMonth">
+                <mat-option *ngFor="let month of monthList" [value]="month">
+                  {{month.monthName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field floatLabel="never" class="dps_teamefficiency_controllers">
+              <span matPrefix>&nbsp;&nbsp;</span>
+              <mat-placeholder class="tm_effy_selector">Department</mat-placeholder>
+              <mat-select (selectionChange)="OnDepartmentChanged($event)" [ngModel]="selectedDep">
+                <mat-option *ngFor="let department of departmentList" [value]="department">
+                  {{department.groupName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <i class="fa fa-refresh team-member-remove" (click)="removeSelectedUser()"
+            *ngIf="selectedTeamMember && selectedDepartment"></i>
+          <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()"
+            *ngIf="!isMemberNavExpan">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="dps-chart-contents dps-white-gray-scroll" fxLayout="column" fxFlex="calc(100%-87px)">
+        <div class="dps_te_card">
+          <mat-card>
+            <mat-card-title>{{timeRecordChartTitle}}</mat-card-title>
+            <mat-button-toggle-group [value]="timeRecordOption" appearance="legacy">
+              <mat-button-toggle [value]="timeOption?.ALL" (click)="changeTimeRecordOption(timeOption.ALL)">
+                <span class="dps-button-label">ALL</span>
+              </mat-button-toggle>
+              <mat-button-toggle [value]="timeOption?.CHARGEABLE"
+                (click)="changeTimeRecordOption(timeOption.CHARGEABLE)">
+                <span class="dps-button-label">CHARGEABLE ONLY</span>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <div class="dps-chart">
+              <dps-bar-chart [chartOptions]="timeRecordedBarChartOptions" [chartHeight]="chartHeight"
+                [chartType]="timeRecordChartType" [barChartDataset]="timeRecodedData"
+                [isloading]="isTimeRecordDataLoading" [lineChartColors]="lineChartColors">
+              </dps-bar-chart>
+            </div>
+          </mat-card>
+        </div>
+        <div class="dps_te_card">
+          <mat-card>
+            <mat-card-title>{{billeTimesData?.title}}</mat-card-title>
+
+            <div class="dps-chart">
+              <dps-bar-chart [chartOptions]="barChartOptions" [chartHeight]="chartHeight" [chartType]="billedChartType"
+                [barChartDataset]="billeTimesData.data" [isloading]="billeTimesData.isLoading"
+                [lineChartColors]="lineChartColors">
+              </dps-bar-chart>
+            </div>
+          </mat-card>
+        </div>
+        <!-- <div class="dps_te_card">
+          <mat-card>
+            <mat-card-title>{{cashReceivedData?.title}}</mat-card-title>
+
+            <div class="dps-chart">
+              <dps-bar-chart [chartOptions]="barChartOptions" [chartHeight]="chartHeight"
+                [chartType]="cashResvChartType" [barChartDataset]="cashReceivedData.data"
+                [isloading]="cashReceivedData.isLoading" [lineChartColors]="lineChartColors">
+              </dps-bar-chart>
+            </div>
+          </mat-card>
+        </div> -->
+        <div class="dps_te_card">
+          <mat-card>
+            <mat-card-title>{{matterData?.title}}</mat-card-title>
+            <mat-button-toggle-group [value]="timeRecordOption" appearance="legacy">
+              <mat-button-toggle value="value" (click)="changeMatterType(matterType.OPENED)">
+                <span class="dps-button-label">{{matterType.OPENED}}</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="hour" (click)="changeMatterType(matterType.CLOESD)">
+                <span class="dps-button-label">{{matterType.CLOESD}}</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="hour" (click)="changeMatterType(matterType.GROWTH)">
+                <span class="dps-button-label">{{matterType.GROWTH}}</span>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <div class="dps-chart">
+              <dps-bar-chart [chartOptions]="matterBarChartOptions" [chartHeight]="chartHeight"
+                [chartType]="matterOpenChart" [barChartDataset]="matterData?.data" [isloading]="matterData?.isLoading"
+                [lineChartColors]="lineChartColors">
+              </dps-bar-chart>
+            </div>
+          </mat-card>
+        </div>
+
+        <div class="last dps_te_card">
+          <mat-card>
+            <mat-card-title>{{adgedDebData?.title}}</mat-card-title>
+            <div class="dps-chart">
+              <dps-pie-chart [chartOptions]="pieChartOptions" [pieChartDataset]="adgedDebData"
+                [chartHeight]="piechartHeight" [borderColor]="'#fff'"></dps-pie-chart>
+            </div>
+          </mat-card>
+        </div>
+        <div class="dps_te_card">
+          <mat-card style="height: 700px;position: relative;">
+            <mat-card-title>Activity Year Summary {{ activityTitle }}</mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-progress-bar *ngIf="userActivityLoading" mode="indeterminate"></mat-progress-bar>
+            <div class="dps-empty-timeline" *ngIf="(eventYearSummery?.length < 1) && (!userActivityLoading)">
+              <i class="material-icons dps-mat-icon">
+                folder_open
+              </i>
+              <span class="dps-text">{{getMessage()}}</span>
+            </div>
+            <dps-team-user-year-activity [eventYearSummery]="eventYearSummery"></dps-team-user-year-activity>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

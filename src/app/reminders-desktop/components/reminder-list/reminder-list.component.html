@@ -1,0 +1,46 @@
+<div *ngIf="reminderList?.length<1">
+  <h3 class="mat-h3">Nothing new right now</h3>
+</div>
+<div *ngIf="reminderList?.length>0" class="dps-rmnd-list">
+  <span fxFlex="1 1 auto"></span> 
+  <button mat-button (click)="onDismissAll()" class="dps-event-dissmiss">
+      <i class="material-icons">
+          clear_all
+          </i>
+    Dismiss all
+  </button>
+</div>
+<mat-accordion>
+  <!-- <dps-reminder-item *ngFor="let reminder of reminderList" [reminder]="reminder" [curentTime]="curentTime"></dps-reminder-item> -->
+  <mat-expansion-panel hideToggle="true" *ngFor="let reminder of reminderList;let i=index" [expanded]="i===0" class="dps-list-panel">
+    <mat-expansion-panel-header collapsedHeight="64px" expandedHeight="64px">
+      <div class="dps_notification_reminder" fxLayout="row" fxLayoutAlign="space-between ">
+        <div class="dps_reminder_content">
+
+          <div matLine class="dps-eventSubject">{{reminder.eventSubject}}&nbsp;</div>
+          <div matLine class="dps-eventime">{{reminder.eventStartTime.dateTime|dpsDate}} - {{reminder.eventEndTime.dateTime|dpsDate}}</div>
+          <div matLine class="dps-event-location">{{reminder.eventLocation.displayName}}&nbsp;</div>
+
+
+        </div>
+
+        <div class="dps_reminder_time">
+
+          <div matLine class="dps-duration">{{durationString(reminder)}} </div>
+          <div matLine class="dps-duration-overdue" [ngClass]="overdueRemaining(reminder)">{{overdueRemaining(reminder)}}</div>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <mat-action-row>
+      <mat-form-field>
+        <mat-select [value]="5" #snoozeSelect>
+          <mat-option *ngFor="let snooze of snoozeList" [value]="snooze.val">
+            {{snooze.lable}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button class="dps-event-snnoze" (click)="onSnoozeClick(snoozeSelect.value,reminder)">Snooze</button>
+      <button mat-button color="primary" (click)="onDismissClick(reminder)">Dismiss</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

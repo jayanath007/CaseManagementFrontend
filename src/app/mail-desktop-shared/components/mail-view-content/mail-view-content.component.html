@@ -1,0 +1,355 @@
+<!-- <mat-list-item>
+        <button mat-button>
+            <mat-icon>print</mat-icon>
+            <span>Print</span>
+        </button>
+    </mat-list-item>
+    <mat-divider></mat-divider> -->
+<div class="dps-mail-view-content dps-white-gray-scroll"
+  [ngClass]="item.data.isRead?'dps-mail-item-read':'dps-mail-item-unread'">
+  <!-- <button mat-mini-fab (click)="onClose()" color="primary">
+    <mat-icon>close</mat-icon>
+  </button> -->
+  <mat-list dense>
+    <div class="dps-mail-view-subject-header mat-list-item">
+      <div class="mat-list-item-content" *ngIf="!item.data.id">
+        <span class="dps-mail-view-subject">{{item.data.subject ? item.data.subject : '(No subject)'}}</span>
+        <span fxFlex="1 1 auto"></span>
+        <!-- open from file history -->
+        <button mat-button *ngIf="openFrom==='openCase'" (click)="onReplyForward('createForward')" matTooltip="Forward"
+          matTooltipPosition="below">
+          <mat-icon>forward</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="openFrom==='openCase'" (click)="onReplyForward('createReply')" matTooltip="Reply"
+          matTooltipPosition="below">
+          <mat-icon>reply</mat-icon>
+        </button>
+        <button mat-button *ngIf="openFrom==='openCase'" (click)="onReplyForward('createReplyAll')"
+          matTooltip="Reply All" matTooltipPosition="below">
+          <mat-icon>reply_all</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="isItemAttachment===true" matTooltip="Print" matTooltipPosition="below"
+          dpsMailMessagePrint [item]="item.data" [timeZone]="timeZone">
+          <mat-icon>print</mat-icon>
+        </button>
+
+      </div>
+
+      <!-- <div class="mat-list-item-content dps_mail_view_action_btn-lg" *ngIf="openFrom==='openCase'">
+        <button mat-button (click)="onReplyForward('createReply')" fxFlexAlign="start">
+          <mat-icon>reply</mat-icon>
+          <span>Reply</span>
+        </button>
+      </div> -->
+      <div class="mat-list-item-content dps_mail_view_action_btn-lg" *ngIf="item.data.id && !isProtectedMail">
+        <!-- fxHide [fxShow.gt-lg]="true" -->
+        <span [fxFlex]="isItemAttachment?'calc(100%-365px)':'calc(100%-325px)'" class="dps-mail-view-subject">{{item.data.subject
+          ? item.data.subject : '(No subject)'}}</span>
+        <button mat-button (click)="onReplyForward('createForward')" fxFlexAlign="start">
+          <mat-icon>forward</mat-icon>
+          <span>Forward</span>
+        </button>
+        <button mat-button (click)="onReplyForward('createReply')" fxFlexAlign="start">
+          <mat-icon>reply</mat-icon>
+          <span>Reply</span>
+        </button>
+        <button mat-button (click)="onReplyForward('createReplyAll')" fxFlexAlign="start">
+          <mat-icon>reply_all</mat-icon>
+          <span>Reply All</span>
+        </button>
+        <button mat-icon-button *ngIf="isItemAttachment===true" matTooltip="Print" matTooltipPosition="below"
+          dpsMailMessagePrint [item]="item.data" [timeZone]="timeZone">
+          <mat-icon>print</mat-icon>
+        </button>
+      </div>
+      <div class="mat-list-item-content dps_mail_view_action_btn" *ngIf="item.data.id && !isProtectedMail">
+        <!-- fxShow [fxHide.gt-lg]="true" -->
+        <span [fxFlex]="isItemAttachment?'calc(100%-365px)':'calc(100%-325px)'" class="dps-mail-view-subject">{{item.data.subject
+          ? item.data.subject : '(No subject)'}}</span>
+        <button mat-icon-button (click)="onReplyForward('createForward')" fxFlexAlign="start" matTooltip="Forward"
+          matTooltipPosition="below">
+          <mat-icon>forward</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onReplyForward('createReply')" fxFlexAlign="start" matTooltip="Reply"
+          matTooltipPosition="below">
+          <mat-icon>reply</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onReplyForward('createReplyAll')" fxFlexAlign="start" matTooltip="Reply All"
+          matTooltipPosition="below">
+          <mat-icon>reply_all</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="isItemAttachment===true" matTooltip="Print" matTooltipPosition="below"
+          dpsMailMessagePrint [item]="item.data" [timeZone]="timeZone">
+          <mat-icon>print</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-list-item class="dps-mail-view-To-header">
+      <!-- <img matListAvatar src="favicon.ico" alt="..."> -->
+      <img matListAvatar [hidden]="!showProfileImg" *ngIf="item.data.from"
+        src="{{item.data.from.emailAddress.address | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true">
+      <img matListAvatar [hidden]="!showProfileImg" *ngIf="!item.data.from && item.data.sender"
+        src="{{item.data.sender.emailAddress.address | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true">
+      <button *ngIf="!showProfileImg" matListAvatar mat-icon-button class="dps-mail-view-avatar"
+        [ngStyle]="{'background-color': ((item.data.from? item.data.from.emailAddress.address :(item.data.sender ? item.data.sender.emailAddress.address : '')) | recipientColorCode)}">
+        <span>{{(item.data.from? item.data.from.emailAddress.name :(item.data.sender ?
+          item.data.sender.emailAddress.name : ''))|nameInitials}}</span>
+      </button>
+      <!-- {{(item.data.From? item.data.From.Name :(item.data.Sender ? item.data.Sender.Name : '(No name)'))|nameInitials}} -->
+      <span matLine class="dps-mail-view-To"
+        *ngIf="!(item.data.from && item.data.sender && item.data.from.emailAddress.address !==item.data.sender.emailAddress.address)"
+        [title]="item.data.from ? item.data.from.emailAddress.address :(item.data.sender ? item.data.sender.emailAddress.address : '')">{{item.data.from?
+        item.data.from.emailAddress.name :(item.data.sender ? item.data.sender.emailAddress.name : '(No name)')}}</span>
+      <span matLine class="dps-mail-view-To"
+        *ngIf="item.data.from && item.data.sender && item.data.from.emailAddress.address !== item.data.sender.emailAddress.address"
+        [title]="(item.data.sender ? item.data.sender.emailAddress.address : '')+'/'+(item.data.from ? item.data.from.emailAddress.address :'')">
+        <span>{{item.data.sender.emailAddress.name}}</span> on behalf of
+        <span>{{item.data.from.emailAddress.name}}</span>
+      </span>
+      <h4 matLine class="dps-mail-view-date">{{item.data.receivedDateTime | timezone:timeZone | date : 'EEE dd/MM/yyyy
+        h:mm a'}}</h4>
+      <button mat-icon-button matTooltip="View DPS File" matTooltipPosition="before" *ngIf="(moduleIsActive(module.Matter) | async) && ((item.data.subject | isDPSMail:companyCode) ||
+        item.diaryId!==null)" (click)="onViewDpsFile()">
+        <img src="is-dps-mail.png" width="24px" height="24px">
+        <!-- <img *ngIf="isWindowUrlPopup" src="disabale-is-dps-mail.png" width="24px" height="24px"> -->
+      </button>
+    </mat-list-item>
+    <mat-list-item *ngIf="item.data.meetingMessageType">
+      <mat-icon class="icon-date_range" matListAvatar>date_range</mat-icon>
+      <!-- <img matListAvatar src="favicon.ico" alt="..."> -->
+      <!-- <h4 matLine hidden></h4> -->
+      <!-- <h4 matLine *ngIf="item.data.type!=='seriesMaster'">
+        <strong>When: </strong>
+        <span *ngIf="item.data.startDateTime">{{item.data.startDateTime.dateTime | timezone:timeZone | date : 'EEE
+          dd/MM/yyyy h:mm a'}}</span>
+        <span *ngIf="item.data.startDateTime && item.data.endDateTime">{{(item.data.startDateTime.dateTime |
+          timezone:timeZone | date : 'dd/MM/yyyy') === (item.data.endDateTime.dateTime
+          | timezone:timeZone | date : 'dd/MM/yyyy') ? ' - '+(item.data.endDateTime.dateTime | timezone:timeZone | date
+          :
+          'shortTime'):' to '+(item.data.endDateTime.dateTime | timezone:timeZone | date : 'EEE dd/MM/yyyy h:mm a')}}</span>
+      </h4> -->
+      <h4 matLine *ngIf="item.data.event && item.data.event.type!=='seriesMaster'">
+        <strong>When: </strong>
+        <span *ngIf="item.data.event.start">{{item.data.event.start.dateTime | timezone:timeZone | date : 'EEE
+          dd/MM/yyyy h:mm a'}}</span>
+        <span *ngIf="item.data.event.start && item.data.event.end">{{(item.data.event.start.dateTime |
+          timezone:timeZone | date : 'dd/MM/yyyy') === (item.data.event.end.dateTime |
+          timezone:timeZone | date : 'dd/MM/yyyy') ? ' - '+(item.data.event.end.dateTime | timezone:timeZone | date :
+          'shortTime'):'
+          to '+(item.data.event.end.dateTime | timezone:timeZone | date : 'EEE dd/MM/yyyy h:mm a')}}</span>
+      </h4>
+      <h4 matLine *ngIf="(item.data.event && item.data.event.type==='seriesMaster')||!item.data.event">
+        <strong>When: </strong>
+        <span>
+          Occurs
+          <span *ngIf="item.data.event.recurrence.pattern.type==='daily'">
+            every
+            {{item.data.event.recurrence.pattern.interval===1?'day':(item.data.event.recurrence.pattern.interval===2?'other
+            day':item.data.event.recurrence.pattern.interval+'
+            days')}}
+          </span>
+
+          <span *ngIf="item.data.event.recurrence.pattern.type==='weekly'">
+            every
+            {{item.data.event.recurrence.pattern.interval===1?'':(item.data.event.recurrence.pattern.interval===2?'other':item.data.event.recurrence.pattern.interval+'
+            weeks on')}}
+            <span
+              *ngFor="let daysOfWeek of item.data.event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+              <span *ngIf="item.data.event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+              <span>
+                {{daysOfWeek|titlecase}}{{item.data.event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+            </span>
+          </span>
+
+          <span *ngIf="item.data.event.recurrence.pattern.type==='absoluteMonthly'">
+            day {{item.data.event.recurrence.pattern.dayOfMonth}} of every
+            {{item.data.event.recurrence.pattern.interval===1?'month':(item.data.event.recurrence.pattern.interval===2?'other
+            month':item.data.event.recurrence.pattern.interval+' months')}}
+          </span>
+
+          <span *ngIf="item.data.event.recurrence.pattern.type==='relativeMonthly'">
+            every
+            {{item.data.event.recurrence.pattern.interval===1?'month':(item.data.event.recurrence.pattern.interval===2?'other
+            month':item.data.event.recurrence.pattern.interval+'
+            months')}} on the {{item.data.event.recurrence.pattern.index}}
+            <span
+              *ngFor="let daysOfWeek of item.data.event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+              <span *ngIf="item.data.event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+              <span>
+                {{daysOfWeek|titlecase}}{{item.data.event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+            </span>
+          </span>
+
+          <span *ngIf="item.data.event.recurrence.pattern.type==='absoluteYearly'">
+            every {{'0000-'+item.data.event.recurrence.pattern.month+'-1' | date : 'MMMM'}}
+            {{item.data.event.recurrence.pattern.dayOfMonth}}
+          </span>
+          <!-- {{item.data.event.recurrence.pattern.index==='first'?'':item.data.event.recurrence.pattern.index}} -->
+          <span
+            *ngIf="item.data.event.recurrence.pattern.type==='relativeYearly' &&  item.data.event.recurrence.pattern.month">
+            every
+            {{item.data.event.recurrence.pattern.interval===1?'year':(item.data.event.recurrence.pattern.interval===2?'other
+            year':item.data.event.recurrence.pattern.interval+'
+            years')}} on the {{item.data.event.recurrence.pattern.index}}
+            <span
+              *ngFor="let daysOfWeek of item.data.event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+              <span *ngIf="item.data.event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+              <span>
+                {{daysOfWeek|titlecase}}{{item.data.event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+            </span>
+            of {{'0000-'+item.data.event.recurrence.pattern.month+'-1' | date : 'MMMM'}}
+          </span>
+
+          <span>from {{(item.data.event.start.dateTime| timezone:timeZone | date : 'h:mm a')}} to
+            {{(item.data.event.end.dateTime|
+            timezone:timeZone | date : 'h:mm a')}}</span>
+          <span>effective
+            {{(item.data.event.recurrence.range.startDate| timezone:timeZone | date : 'EEE dd/MM/yyyy')}}</span>
+          <span *ngIf="item.data.event.recurrence.range.type==='endDate'">until
+            {{(item.data.event.recurrence.range.endDate|
+            timezone:timeZone | date : 'EEE dd/MM/yyyy')}}</span>
+        </span>
+      </h4>
+      <h4 matLine>
+        <strong>Where: </strong>{{(item.data.event &&
+        item.data.event.location)?item.data.event.location.displayName:''}}</h4>
+    </mat-list-item>
+    <mat-list-item
+      *ngIf="item.data.meetingMessageType ==='meetingAccepted' && item.data.sender && item.data.sender.emailAddress.name"
+      class="dps-meeting-info">
+      <h3>
+        <i class="fa fa-check" aria-hidden="true"></i>
+        <span>{{item.data.sender.emailAddress.name}}</span> has accepted this event
+      </h3>
+    </mat-list-item>
+    <mat-list-item
+      *ngIf="(item.data.meetingMessageType ==='meetingTentativelyAccepted' || item.data.meetingMessageType=== 'meetingTenativelyAccepted') && item.data.sender && item.data.sender.emailAddress.name"
+      class="dps-meeting-info">
+      <h3>
+        <i class="fa fa-question" aria-hidden="true"></i>
+        <span>{{item.data.sender.emailAddress.name}}</span> has tentatively accepted this event
+      </h3>
+    </mat-list-item>
+    <mat-list-item
+      *ngIf="item.data.meetingMessageType ==='meetingDeclined' && item.data.sender && item.data.sender.emailAddress.name"
+      class="dps-meeting-info">
+      <h3>
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span>{{item.data.sender.emailAddress.name}}</span> has declined this event
+      </h3>
+    </mat-list-item>
+    <dps-meeting-request-button [item]="item" (onResponse)="onMeetingResponse($event)"
+      *ngIf="isItemAttachment!==true && item.data.meetingMessageType === 'meetingRequest' && item.data.event && item.data.event.id && item.data.event.isOrganizer===false">
+    </dps-meeting-request-button>
+    <mat-list-item
+      *ngIf="isItemAttachment!==true && item.data.meetingMessageType === 'meetingCancelled' && item.data.event.isOrganizer!==true">
+      <button mat-button (click)="onRemoveFromCalendar()">
+        <mat-icon>event_busy</mat-icon>
+        <span>Remove from calendar</span>
+      </button>
+    </mat-list-item>
+    <div class="mail-address-holder-list">
+      <h4 *ngIf="item.data.toRecipients && item.data.toRecipients.length > 0">
+        <strong>To:</strong>
+        <span *ngFor="let recipient of item.data.toRecipients" [title]="recipient.emailAddress.address">
+          {{recipient.emailAddress.name}};</span>
+      </h4>
+      <h4 *ngIf="item.data.ccRecipients && item.data.ccRecipients.length > 0">
+        <strong>Cc:</strong>
+        <span *ngFor="let recipient of item.data.ccRecipients" [title]="recipient.emailAddress.address">
+          {{recipient.emailAddress.name}};</span>
+      </h4>
+      <h4 *ngIf="item.data.bccRecipients && item.data.bccRecipients.length > 0">
+        <strong>Bcc:</strong>
+        <span *ngFor="let recipient of item.data.bccRecipients" [title]="recipient.emailAddress.address">
+          {{recipient.emailAddress.name}};</span>
+      </h4>
+      <h4 *ngIf="requiredAttendees && requiredAttendees.length > 0">
+        <strong>Required:</strong>
+        <span *ngFor="let recipient of requiredAttendees" [title]="recipient.emailAddress.address">
+          {{recipient.emailAddress.name}};</span>
+      </h4>
+      <h4 *ngIf="optionalAttendees && optionalAttendees.length > 0">
+        <strong>Optional:</strong>
+        <span *ngFor="let recipient of optionalAttendees" [title]="recipient.emailAddress.address">
+          {{recipient.emailAddress.name}};</span>
+      </h4>
+    </div>
+    <mat-list-item *ngIf="isPastEvent" class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege" *ngIf="item.data.event.type !== 'seriesMaster'">This event occurs
+          in the
+          past.</span>
+        <span matLine class="dps-importance-massege" *ngIf="item.data.event.type === 'seriesMaster'">All instances of
+          this
+          repeating event occur in the past.</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item *ngIf="item.data.event && item.data.event.sensitivity==='private'" class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">This message has been marked as Private.</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item
+      *ngIf="item && item.data && item.data.event && !item.data.event.responseRequested && isItemAttachment!==true && item.data.meetingMessageType === 'meetingRequest' && item.data.event && item.data.event.id && item.data.event.isOrganizer===false"
+      class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">The organizer hasn't reqested a response for this event. To update
+          your own calendar, select a response.</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item *ngIf="item && item.data && item.data.importance && item.data.importance!=='normal'"
+      class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">This message was sent with {{item.data.importance}}
+          importance.</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item
+      *ngIf="item && item.data&& item.data.flag && item.data.flag.flagStatus &&  item.data.flag.flagStatus!=='notFlagged'"
+      class="dps-massege">
+      <div>
+        <span matLine class="dps-followup-massege">
+          Flag for follow up.
+          <span *ngIf="item.data.flag?.flagStatus==='complete'"> Completed on
+            {{item.data.flag.completedDateTime.dateTime | timezone:timeZone | date : 'EEE dd/MM/yyyy'}}.</span>
+          <span *ngIf="item.data.flag?.flagStatus==='flagged'">
+            <span *ngIf="item.data.flag?.startDateTime"> Start by {{item.data.flag.startDateTime.dateTime |
+              timezone:timeZone | date : 'EEE dd/MM/yyyy'}}.</span>
+            <span *ngIf="item.data.flag?.dueDateTime"> Due by {{item.data.flag.dueDateTime.dateTime | timezone:timeZone
+              | date : 'EEE dd/MM/yyyy'}}.</span>
+          </span>
+        </span>
+      </div>
+    </mat-list-item>
+    <mat-list-item *ngIf="item.iconIndex==='Replied mail'" class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">You replied on
+          {{item.actionDate | date: 'dd/MM/yyyy h:mm a'}}</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item *ngIf="item.iconIndex==='Forwarded mail'" class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">You forwarded this message on {{item.actionDate | date:
+          'dd/MM/yyyy h:mm a'}}</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item class="dps-massege">
+      <div>
+        <span matLine class="dps-importance-massege">Click on a unloaded image to view images</span>
+      </div>
+    </mat-list-item>
+    <div fxLayout="row" *ngIf="item.data.hasAttachments && attachments && attachments.length > 0"
+      class="dps-attachment-list">
+      <dps-attachment-list [attachments]="attachments" [companyCode]="companyCode" (openMatter)="onOpenMatter($event)"
+        (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+        [mailItemData]="item?.data" [isComputerDownloadOnly]="isComputerDownloadOnly">
+      </dps-attachment-list>
+    </div>
+    <div fxLayout="row" class="dps-mail-body">
+      <div #mailBody fxFlex="calc(100%-20px)">
+        <div> </div>
+      </div>
+    </div>
+  </mat-list>
+</div>

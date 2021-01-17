@@ -1,0 +1,45 @@
+.dps-action-btn {
+  font-size: 12px;
+  line-height: 25px !important;
+  padding: 0 10px;
+  justify-content: flex-end;
+  border-top: 2px solid #e7e5e5;
+
+  button {
+    height: 35px;
+    font-size: 12px;
+    margin: 5px 5px;
+  }
+
+  button {
+    background-color: #0079c4;
+    color: #fff;
+
+    &.disabled-btn {
+      background: #b5b4b4;
+      color: #888686;
+    }
+  }
+
+  .dps-delete {
+    color: #c30d0d;
+    border-color: #ffbcbc;
+    background: #e4cbcb;
+
+  }
+}
+
+
+mat-tab-group {}
+
+.dps-diary-note {
+  padding: 10px;
+}
+
+// .mat-tab-body-content {
+//   height: auto;
+// }
+
+.attendance-note-txt {
+  width: 100%;
+}

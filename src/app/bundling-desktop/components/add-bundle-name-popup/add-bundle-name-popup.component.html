@@ -1,0 +1,33 @@
+<div class="dps-bundle-save-layout" fxLayout="column">
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow dps-bundling-header" fxLayoutAlign="center center">
+      <span fxFlex="1 1 auto"></span>
+      <div fxFlexAlign="center" class="dps-header" fxLayout="row">
+        <mat-icon matListIcon>
+          <span>bookmarks</span>
+        </mat-icon>
+        <span>Save Bundled</span>        
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">
+          <span> close</span>
+        </mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="dps-bundle-saving " fxLayout="column">
+    <span>
+      {{infoText}}
+    </span>
+    <div class="dps-form-controller dps-white-gray-scroll">
+      <mat-form-field>
+        <input matInput maxlength="100" placeholder="Name" #bundleName [value]="bundleNameInput" (change)=onNameChanged(bundleName.value)>
+      </mat-form-field>
+    </div>
+    <div class="dps-save-actions">
+      <button mat-flat-button (click)="onNameTextSave($event)" tabindex="2" class="submit">Ok</button>
+      <button (click)="onClose()" tabindex="-1" class="dps-cancel">Cancel</button>
+    </div>
+  </div>
+</div>

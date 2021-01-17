@@ -1,0 +1,36 @@
+<div class="dps-crime-management-content" fxLayout="column">
+  <dps-crime-management-header-bar [rateFileloading]="rateFileloading" (rateFileUpdate)="onRateFileUpdate()"
+    [isLoading]="isLoading" [classType]="classType" [addClassModel]="addClassModel"
+    (updateAddClassModel)="onUpdateAddClassModel($event)" (userAction)="onUserAction($event)">
+  </dps-crime-management-header-bar>
+  <div fxLayout="column" class="dps-white-gray-scroll dps-crime-management-grid">
+    <div class="lenth-calc" fxLayout="column">
+      <div class="row-highlight" dpsIsMobile>
+        <div class="row-highlight-inner">
+          <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+            [filterAnchor]="header.extras.filterAnchor">
+          </dps-column-header>
+        </div>
+      </div>
+
+      <div [@.disabled]="true" fxFlex="calc(100%-20px)" class="dps-white-gray-scroll dps-crime-management-grid-content">
+        <mat-accordion [multi]="false">
+          <mat-expansion-panel *ngFor="let item of filterdClassList ; let index =index; let isOdd=odd; let isEven=even"
+            class="mat-elevation-z" [expanded]="index === OpenRowIndex" (opened)="OpenRow(index, item)">
+            <mat-expansion-panel-header class="expansion-panelgrid-header">
+              <mat-panel-title fxLayout="row">
+                <dps-crime-class-grid-row [columnDef]="columnDef" fxFlex="" [rowData]="item"></dps-crime-class-grid-row>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row">
+              <dps-crime-grid-buttons (buttonClick)="onUserAction($event, item)" [classItem]="item">
+              </dps-crime-grid-buttons>
+              <dps-crime-class-summery [summery]="item?.classTotalsViewModel" *ngIf="item?.rectype < 100">
+              </dps-crime-class-summery>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+@import '~styles/variables.scss';
+
+.safe-box-listview {
+  dps-safebox-context-menue {
+    position: fixed;
+  }
+
+  // padding: 10px 5px 0px 10px;
+  font-size: 12px;
+  line-height: 32px; // padding-left: 7px;
+  cursor: pointer;
+
+  mat-icon {
+    vertical-align: middle;
+    font-size: $primary-font-size + 6;
+    color: #155186;
+    width: 20px;
+  }
+
+  mat-list {
+    width: 100%;
+    padding-top: 0px;
+
+
+    .folder-list-view,
+    .type-list-view {
+      border-bottom: 1px solid #efefef;
+      padding: 2px 0px 2px 6px;
+      font-weight: 500;
+
+
+      &:hover {
+        background-color: #ddefff;
+        box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9;
+        // border: 1px solid #b7daf9;
+      }
+
+
+      i {
+        font-size: $primary-font-size + 6;
+      }
+      span.name {
+        padding-left: 5px;
+      }
+
+    }
+
+
+  }
+
+  #dragPreView {
+    background: #658db1;
+    padding: 3px 9px 3px;
+    -webkit-box-shadow: 2px -1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -1px 5px 0px #51677b;
+    border: 1px solid #658db1;
+    border-radius: 3px;
+    max-width: 95px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: -100;
+
+    mat-icon {
+      color: #1161ab;
+      border-right: 1px solid #4979;
+      vertical-align: middle;
+    }
+
+    span.name {
+      color: #1d3b54;
+      font-size: 13px;
+      padding-left: 2px;
+    }
+  }
+
+}

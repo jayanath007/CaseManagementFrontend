@@ -1,0 +1,28 @@
+
+.grid-data{
+    font-size: 12px;
+    display: table-row;
+    word-break: break-word;
+}
+
+.grid-data .row-data:last-child{
+    border-right: none;
+} 
+.row-data{
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    font-size: 12px;
+    padding: 6px 6px 6px;
+    line-height: 18px;
+}
+.do-by{
+    text-align: center;
+}
+.row-data.do-by,.row-data.task-for,.row-data.put-on-by{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.run-template-enabale {
+    background: #fdf8ce;
+}

@@ -1,0 +1,36 @@
+<div fxLayout="column">
+  <div fxFlex="0 0 42px">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <mat-icon>playlist_add</mat-icon>
+        <span>{{taskHeaderName?taskHeaderName:'Task'}}</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="addEditTaskLoading" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div>
+    <dps-task-add-edit-container [addEditTaskLoading]="addEditTaskLoading" [feeEarnerList]="feeEarnerList"
+      [folderList]="folderList" [actionTypeList]="actionTypeList" [fileUploadDisable]="fileUploadDisable"
+      [password]="password" [fileData]="fileData" [taskNote]="taskNote" [matterInfo]="matterInfo"
+      [loginUser]="loginUser" (selectedFeeEarnerChanged)="onFeeEarnerChanged($event)"
+      (selectedActionChanged)=onActionTypeChanged($event) [taskDate]="taskDate"
+      (selectedFolderChanged)="onFolderChanged($event)" (upateSelectedDate)="onDateChange($event)"
+      (updateNote)="onNoteChange($event)" (uploadedFile)="onUploadedFile($event)"
+      (updatePassword)="onUpdatePassword($event)" [taskHeaderName]="taskHeaderName" [hasPassword]="hasPassword"
+      (selectedMatterObj)=changMatterObj($event) (unLockPassword)="onUnLockPassword($event)">
+    </dps-task-add-edit-container>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions fxFlex="0 0 60px">
+    <span fxFlex="1 1 auto"></span>
+
+    <button mat-raised-button class="dps-task-submit" *ngIf="matterInfo?.billRequestId > 0"
+      [disabled]="addEditTaskLoading" (click)="onEditBill()" tabindex="-1">Edit Bill
+    </button>
+    <button mat-raised-button class="dps-task-submit" [disabled]="addEditTaskLoading" (click)="onSubmitData()"
+      tabindex="-1">Submit
+    </button>
+    <button mat-raised-button [disabled]="addEditTaskLoading" (click)="onClose()" tabindex="2">Cancel</button>
+  </mat-dialog-actions>
+</div>

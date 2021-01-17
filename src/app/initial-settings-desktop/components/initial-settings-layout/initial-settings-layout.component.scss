@@ -1,0 +1,44 @@
+@import '~styles/variables.scss';
+
+div.dps-initail-layout {
+    height:100%;
+}
+.DPS_signature_auto_add {
+    font-size: $primary-font-size - 2;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.ng-tns-c33-17 {
+    font-size: $primary-font-size - 2 !important;
+    font-weight: 500;
+}
+
+.mat-checkbox-background {
+    background-color: #5994ea;
+}
+
+.chaser_event {
+    
+    text-transform: capitalize;
+}
+
+mat-option {
+    font-size: $primary-font-size - 2 !important;
+    font-weight: 400;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-select {
+    font-size: $primary-font-size - 2 !important;
+    font-weight: 500;
+}
+
+h2 {
+    color: #3f51b5;
+    margin: 0px 0px 22px 14px;
+    font-size: $primary-font-size + 6;
+}

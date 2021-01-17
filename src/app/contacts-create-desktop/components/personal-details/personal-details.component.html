@@ -1,0 +1,73 @@
+<mat-form-field class="input-element">
+  <mat-placeholder>Title</mat-placeholder>
+  <input [value]="selectedContact?.title" (focusout)="onChangeDetails('title', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Gender</mat-placeholder>
+  <mat-select [ngModel]="selectedContact?.gender" (selectionChange)="onChangeDetails('gender', $event.value)">
+    <mat-option value="F">F</mat-option>
+    <mat-option value="M">M</mat-option>
+    <mat-option value="U">U</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>First Name</mat-placeholder>
+  <input [value]="selectedContact?.forename" (focusout)="onChangeDetails('forename', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Middle Names</mat-placeholder>
+  <input [value]="selectedContact?.companyFax" (focusout)="onChangeDetails('companyFax', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Surnames</mat-placeholder>
+  <input [value]="selectedContact?.middleName" (focusout)="onChangeDetails('middleName', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Solution</mat-placeholder>
+  <input [value]="selectedContact?.salutation" (focusout)="onChangeDetails('salutation', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Initials</mat-placeholder>
+  <input [value]="selectedContact?.initial" (focusout)="onChangeDetails('initial', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Email 1</mat-placeholder>
+  <input [value]="selectedContact?.email1" (focusout)="onChangeDetails('email1', $event.target.value)" matInput>
+  <mat-icon matSuffix>contact_mail</mat-icon>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Email 2</mat-placeholder>
+  <input [value]="selectedContact?.email2" (focusout)="onChangeDetails('email2', $event.target.value)" matInput>
+  <mat-icon matSuffix>contact_mail</mat-icon>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Mobile</mat-placeholder>
+  <input [value]="selectedContact?.phoneMobile" (focusout)="onChangeDetails('phoneMobile', $event.target.value)" matInput>
+</mat-form-field>
+<mat-form-field class="input-element">
+  <mat-placeholder>Evening</mat-placeholder>
+  <input [value]="selectedContact?.phoneEvening" (focusout)="onChangeDetails('phoneEvening', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field class="input-element">
+  <mat-placeholder>Speciality</mat-placeholder>
+  <input [value]="selectedContact?.speciality" (focusout)="onChangeDetails('speciality', $event.target.value)" matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-placeholder>Type</mat-placeholder>
+  <mat-select [ngModel]="selectedContact?.typeId" (selectionChange)="onChangeDetails('typeId', $event.value)">
+    <mat-option value="option">F</mat-option>
+    <mat-option value="option">M</mat-option>
+    <mat-option value="option">U</mat-option>
+  </mat-select>
+</mat-form-field>

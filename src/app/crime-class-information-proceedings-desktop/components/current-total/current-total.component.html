@@ -1,0 +1,146 @@
+<h3><i class="fa fa-info-circle" aria-hidden="true"></i> Current Totals</h3>
+
+<table class="figure-tbl">
+  <tr>
+    <th>Type</th>
+    <th class="total">Class Totals</th>
+    <th class="total">Claim Totals</th>
+    <th class="total" [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#333333'}">Lead UFN Totals
+      <label [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#326298'}">
+        <span *ngIf="!!total?.leadUfnTotal?.leadUfnNumber">({{total?.leadUfnTotal?.leadUfnNumber}})</span>
+      </label>
+    </th>
+  </tr>
+  <tr>
+    <td>Profit Cost</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.ProfitCost)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.ProfitCost === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.ProfitCost">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+        {{total?.classTotal?.profitCost | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{(committedToCrownCourt ? 0.00 : total?.claimTotal?.profitCost) | number : '1.2-2'}}
+    </td>
+    <td class="value" [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#333333'}">
+      {{total?.leadUfnTotal?.profitCost | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Travel</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Travel)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Travel === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Travel">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+        {{total?.classTotal?.travetTot | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{(committedToCrownCourt ? 0.00 : total?.claimTotal?.travetTot) | number : '1.2-2'}}
+    </td>
+    <td class="value" [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#333333'}">
+      {{total?.leadUfnTotal?.travetTot | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Waiting</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Waiting)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Waiting === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Waiting">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+        {{total?.classTotal?.waitTot | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{(committedToCrownCourt ? 0.00 :  total?.claimTotal?.waitTot) | number : '1.2-2'}}
+    </td>
+    <td class="value" [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#333333'}">
+      {{total?.leadUfnTotal?.waitTot | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Disbursements</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.Disbursements)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.Disbursements === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.Disbursements">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+        {{total?.classTotal?.disbsTot | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{(committedToCrownCourt ? 0.00 : total?.claimTotal?.disbsTot) | number : '1.2-2'}}
+    </td>
+    <td class="value" [ngStyle]="{'color': leadUfnTotalSummary?.isLeadUfnClientMatter?'gray':'#333333'}">
+      {{total?.leadUfnTotal?.disbsTot | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>Fee Earner Total</td>
+    <td (mouseenter)="onMovesOver(summeryViewType.FeeEarnerTotal)" (mouseleave)="onMouseleave()" class="value">
+      <span class="value-tab-higlight" (click)="onPinUnPinItem()"
+        [ngClass]="{'dps-active': summeryViewType.FeeEarnerTotal === selectType}">
+        <button class="pin" mat-icon-button *ngIf="selectType === summeryViewType.FeeEarnerTotal">
+          <i class="fa fa-thumb-tack "></i>
+        </button>
+        {{total?.classTotal?.feeEarnerTot | number : '1.2-2'}}
+      </span>
+    </td>
+    <td class="value">
+      {{total?.claimTotal?.feeEarnerTot | number : '1.2-2'}} <span
+        *ngIf="!!total?.claimTotal?.feeType">({{total?.claimTotal?.feeType}})</span>
+    </td>
+    <td class="value"></td>
+  </tr>
+</table>
+
+<div class="fixed-fee-total">
+  <h3>Standard Fee Totals</h3>
+  <div class="primary-fee-wrapper" fxLayout="row" fxLayoutGap="15px">
+
+    <div fxFlex="50">
+      <div class="dps-fee-controller">
+        <span class="fee-txt" fxFlex="1 1 auto">Standard Fee</span>
+        <!-- <span [ngStyle]="{'color': data?.fixedFeeColor}"> -->
+        <span>
+          {{total?.standardFeeTotal?.standardFee | number : '1.2-2'}}
+        </span>
+      </div>
+
+
+    </div>
+
+    <div fxFlex="50">
+
+      <div class="dps-fee-controller">
+        <span class="fee-txt" fxFlex="1 1 auto">Amount to the next band</span>
+        <!-- <span [ngStyle]="{'color': data?.additionalFixFeeColor}"> -->
+        <span>
+          {{total?.standardFeeTotal?.amountToTheNextBand | number : '1.2-2'}}
+        </span>
+      </div>
+
+
+      <!-- If you ever enabling this div, MOVE the dps-fee-controller Div on top to the upper section where other dps-fee-controller is.
+          -- Dilantha -->
+
+
+      <div class="dps-fee-controller" *ngIf="false">
+        <span class="fee-txt" fxFlex="1 1 auto">10% Next Band Amount</span>
+        <!-- <span [ngStyle]="{'color': data?.escapeAmountColor}"> -->
+        <span>
+          {{total?.standardFeeTotal?.pecentageOfNextBandAmount}}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

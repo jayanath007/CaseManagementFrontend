@@ -1,0 +1,47 @@
+<div fxLayout="column" class="matter-search-grid">
+
+  <div class="row-highlight">
+    <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header">
+    </dps-column-header>
+  </div>
+  <!-- <mat-progress-bar mode="indeterminate" *ngIf="isGridLoading || isDepartmentLoading"></mat-progress-bar> -->
+  <div fxLayout="column" class="dps-client-controller" fxFlex="calc(100%-40px)">
+    <mat-progress-bar mode="indeterminate" *ngIf="clientRowData?.matterLoading"></mat-progress-bar>
+    <div [@.disabled]=" true" class="grid-sub-options dps-white-gray-scroll">
+      <!-- fxFlex="calc(100%-56px)" -->
+      <mat-accordion [multi]="false">
+        <mat-expansion-panel class="matter-grid client-search" [expanded]="matter.expanded"
+          *ngFor="let matter of clientRowData.data.matterViewModel">
+          <mat-expansion-panel-header (click)="MatterGridRowExpan(clientRowData,matter, $event)" collapsedHeight="35px"
+            expandedHeight="35px">
+            <!-- class="{{getSeparationClass}}" -->
+            <mat-panel-title fxLayout="row" collapsedHeight="35px" expandedHeight="35px">
+              <dps-matter-grid-fix-row fxFlex="" [columnDef]="columnDef" [searchText]="searchText"
+                [matterRowData]="matter" [isPlotUser]="isPlotUser">
+              </dps-matter-grid-fix-row>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="row">
+            <dps-grid-button-details [selectedMatterData]="matter" [menuItem]="menuItem"
+              (updateOpenCaseClick)="openCaseClick($event)" (updateTimeRecordingClick)="timeRecordingClick($event)"
+              (updateNewMailClick)="newMailClick($event)" (updateLedgerCardClick)="ledgerCardClick($event)"
+              (eChitClick)="onEChitClick($event)" (matterCreationClick)="onMatterCreationClick($event)">
+            </dps-grid-button-details>
+            <span fxFlex="1 1 auto"></span>
+            <span fxFlex="1 1 auto"></span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <!-- <mat-paginator fxFlex="50px" [length]="totalItems" [pageIndex]="clientPaginatorDef?.currentPage"
+              [pageSize]="clientPaginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions"
+              (page)="onNextPage($event)" class="footer-shadow">
+            </mat-paginator> -->
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" fxFlex="50px" [length]="clientRowData?.data?.matterCount"
+      [pageIndex]="clientRowData?.matterPaginatorDef?.currentPage" class="footer-shadow"
+      [pageSize]="clientRowData?.matterPaginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions"
+      (page)="onNextPage($event)">
+    </mat-paginator>
+  </div>
+
+</div>

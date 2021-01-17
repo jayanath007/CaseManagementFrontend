@@ -1,0 +1,89 @@
+<mat-list-item>
+    <button mat-button class="dps-meeting-accept-btn" *ngIf="!item.data.event.responseRequested" (click)="dontSendResponse('accept')">
+      <mat-icon>check_circle</mat-icon>
+      <span>Accept</span>
+    </button>
+    <button mat-button class="dps-meeting-tentative-btn" *ngIf="!item.data.event.responseRequested" (click)="dontSendResponse('tentativelyAccept')">
+      <mat-icon>help</mat-icon>
+      <span>Tentative</span>
+    </button>
+    <button mat-button class="dps-meeting-decline-btn" *ngIf="!item.data.event.responseRequested" (click)="dontSendResponse('decline')">
+      <mat-icon>cancel</mat-icon>
+      <span>Decline</span>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="acceptMeetingMenu" class="dps-meeting-accept-btn" *ngIf="item.data.event.responseRequested">
+      <mat-icon>check_circle</mat-icon>
+      <span>Accept</span>
+    </button>
+    <mat-menu #acceptMeetingMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item class="dps-menu-item btn-accept-event" disabled >Accept event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="editResponseBeforeSending('accept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="sendResponseNow('accept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="dontSendResponse('accept')">
+        Don't send the response
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="tentativeMeetingMenu" class="dps-meeting-tentative-btn" *ngIf="item.data.event.responseRequested">
+      <mat-icon>help</mat-icon>
+      <span>Tentative</span>
+    </button>
+    <mat-menu #tentativeMeetingMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item class="dps-menu-item btn-accept-event" disabled>Tentative accept event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="editResponseBeforeSending('tentativelyAccept')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="sendResponseNow('tentativelyAccept')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="dontSendResponse('tentativelyAccept')">
+        Don't send the response
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="declineMeetingMenu" class="dps-meeting-decline-btn" *ngIf="item.data.event.responseRequested">
+      <mat-icon>cancel</mat-icon>
+      <span>Decline</span>
+    </button>
+    <mat-menu #declineMeetingMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item class="dps-menu-item btn-accept-event" disabled>Decline event</button>
+      <button mat-menu-item class="dps-menu-item" (click)="editResponseBeforeSending('decline')">
+        Edit the response before sending
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="sendResponseNow('decline')">
+        Send the response now
+      </button>
+      <button mat-menu-item class="dps-menu-item" (click)="dontSendResponse('decline')">
+        Don't send the response
+      </button>
+    </mat-menu>
+    <!-- <button mat-button>
+            <mat-icon>info</mat-icon>
+            <span>NO RESPONSE REQUIRED</span>
+        </button>
+    <button mat-button>
+            <mat-icon>event_busy</mat-icon>
+            <span>REMOVE FROM CALENDAR</span>
+        </button>
+    <button mat-button>
+            <mat-icon>delete_forever</mat-icon>
+            <span>DELETE</span>
+        </button>
+    <button mat-button>
+            <mat-icon>screen_share</mat-icon>
+            <span>MOVE TO TASK</span>
+        </button>
+    <button mat-button>
+            <mat-icon>screen_share</mat-icon>
+            <span>MOVE TO CALENDAR</span>
+        </button>
+    <button mat-button>
+            <mat-icon>screen_share</mat-icon>
+            <span>MOVE TO CONTACTS</span>
+        </button> -->
+  </mat-list-item>

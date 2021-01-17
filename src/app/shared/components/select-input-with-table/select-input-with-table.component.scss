@@ -1,0 +1,42 @@
+.dps-select-input-with-table {
+  mat-form-field {
+    width: 100%;
+
+    .dps-trigger {
+      position: absolute;
+      bottom: 0px;
+    }
+
+    button {
+      mat-icon {
+        font-size: 24px;
+      }
+    }
+
+    &.cant-edit {
+
+      input,
+      ::ng-deep .mat-form-field-flex {
+        cursor: pointer;
+      }
+
+    }
+  }
+}
+
+::ng-deep .dps-table-panel {
+  min-width: unset;
+  max-width: unset;
+  overflow: hidden;
+}
+
+dps-common-grid-table {
+  ::ng-deep {
+    .tableContainer {
+      border: none;
+    }
+    tbody{
+      max-height: 322px;
+    }
+  }
+}

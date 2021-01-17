@@ -1,0 +1,22 @@
+
+<mat-form-field floatPlaceholde>
+  <span matPrefix>&nbsp;&nbsp;</span>
+  <mat-placeholder class="time_record_selector">Type</mat-placeholder>
+  <mat-select (selectionChange)="onChangeType($event)" [ngModel]="selectedType">
+    <mat-option *ngFor="let type of typeList" [value]="type">
+      {{type.groupName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field floatLabel>
+  <span matPrefix>&nbsp;&nbsp;</span>
+  <mat-placeholder class="time_record_selector">Department</mat-placeholder>
+  <mat-select (selectionChange)="onChangeDepartment($event)" [ngModel]="selectedDepartment">
+    <mat-option>-- None --</mat-option>
+    <mat-option *ngFor="let department of departmentList" [value]="department">
+      {{department.groupName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<i class="fa fa-refresh" (click)="removeSelectedUser()" *ngIf="selectedInfo?.user && selectedDepartment"></i>

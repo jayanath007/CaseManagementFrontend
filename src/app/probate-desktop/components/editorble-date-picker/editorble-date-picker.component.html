@@ -1,0 +1,13 @@
+<!-- ===DATEPICKER=== -->
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<!-- ===DISABLED DATEPICKER=== -->
+<mat-form-field>
+  <input matInput [matDatepicker]="dp1" placeholder="Completely disabled" disabled>
+  <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+  <mat-datepicker #dp1></mat-datepicker>
+</mat-form-field>

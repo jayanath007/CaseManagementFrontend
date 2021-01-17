@@ -1,0 +1,62 @@
+@import '~styles/variables.scss';
+.jobs-data-grid {
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: #e1e1e1;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  width: 100%;
+}
+
+.jobs-data-grid td {
+  background: $primary;
+  padding: 8px 12px;
+}
+
+.jobs-data-grid th {
+  background: #006bc2;
+  padding: 8px 12px;
+  color: $primary;
+}
+
+.jobs-data-grid .dps_selected_item td {
+  background: #b3e0eb;
+}
+
+.jobs-data-grid th:first-child {
+  border-top-left-radius: 2px;
+}
+
+.jobs-data-grid th:last-child {
+  border-top-right-radius: 2px;
+}
+
+.dps-notification-wrap .notification-body {
+  padding: 16px;
+}
+
+.action-save {
+  background: #298557;
+  color: $primary;
+  min-width: auto;
+  float: left;
+  line-height: 27px;
+  padding: 0px 11px;
+  margin-right: 10px;
+}
+
+.action-disabled {
+  background: #b4b4b4;
+  color: #dadada;
+  cursor: default;
+}
+
+.action-save-not {
+  float: left;
+  font-size: 12px;
+  background: #6087a7;
+  padding: 0 7px;
+  border-radius: 3px;
+  line-height: 27px;
+  color: $primary;
+}

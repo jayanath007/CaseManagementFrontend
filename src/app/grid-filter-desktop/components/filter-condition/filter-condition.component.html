@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutGap="5px" class="filter-drop-down">
+
+  <mat-form-field>
+    <mat-select md-maxlength="50" [ngModel]="condition?.operator" (selectionChange)="onOperatorChange($event.value)">
+      <mat-option *ngFor="let item of operatorList" [value]="item.id">
+        {{ item.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+    <ng-container [ngSwitch]="condition?.fieldType">
+      <mat-form-field md-maxlength="50" *ngSwitchCase="FieldType.Date">
+        <input matInput [matDatepicker]="picker" (keyup)="onDateSubmit($event)" (dateChange)="changeDate('change', $event)"
+          [ngModel]="condition?.value | date:'yyyy-MM-dd'">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field md-maxlength="50" *ngSwitchCase="FieldType.TextAfterBefore">
+        <input matInput [matDatepicker]="picker" (keyup)="onDateSubmit($event)" (dateChange)="changeDate('change', $event)"
+          [ngModel]="condition?.value | date:'yyyy-MM-dd'">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field md-maxlength="50" *ngSwitchCase="FieldType.DropValue">
+        <mat-select [ngModel]="condition?.value" (selectionChange)="onDropValueChange($event)">
+         <mat-option [value]="docType.Eml">Email</mat-option>
+          <mat-option [value]="docType.Pdf">Pdf</mat-option>
+          <mat-option [value]="docType.Docx">Docx</mat-option>
+          <mat-option [value]="docType.Excel">Excel</mat-option>
+          <mat-option [value]="docType.Image">Image</mat-option>
+          <!-- <mat-option [value]="docType.All">All</mat-option> -->
+      </mat-select>
+      </mat-form-field>
+
+      <mat-form-field md-maxlength="50" *ngSwitchDefault>
+        <input matInput [value]="condition?.value" (keyup)="onValueChange($event)">
+      </mat-form-field>
+    </ng-container>
+  </div>
+</div>

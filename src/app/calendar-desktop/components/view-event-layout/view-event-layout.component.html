@@ -1,0 +1,10 @@
+<div class="dps-view-event-layout" fxLayout="column" *ngIf="event?.data">
+  <dps-view-event-header class="dps-viewevent-header" fxFlex="50px" 
+    [event]="event" (close)="onClose($event)" (response)="onResponse($event)" (removeFromCalendar)="onRemoveFromCalendar($event)" (replyForward)="onReplyForward($event)"></dps-view-event-header>
+  <div class="dps-white-gray-scroll dps-view-event-content" fxFlex="calc(100%-50px)">
+    <dps-view-event-content [freeBusyStatusList]="freeBusyStatusList" [timeZone]="timeZone" [companyCode]="companyCode" [reminderList]="reminderList" [event]="event"
+    (reminderChange) = "onReminderChange($event)" (openMatter)="onOpenMatter($event)" (showAsStateChange) = "onShowAsStateChange($event)" (sensitivityChange) ="onSensitivityChange($event)"
+    (close)="onClose($event)" (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+    ></dps-view-event-content>
+  </div>
+</div>

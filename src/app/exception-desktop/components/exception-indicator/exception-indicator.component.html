@@ -1,0 +1,8 @@
+<!-- <button [style.display]="exceptionList && exceptionList?.length > 0 ? 'initial' : 'none'" cdk-overlay-origin #trigger="cdkOverlayOrigin"
+  mat-icon-button (click)="indicatorClick()">
+  <mat-icon>email</mat-icon>
+</button> -->
+<ng-template cdk-portal #exceptionOverlay="cdkPortal">
+  <dps-exception-indicator-item [data]='event' (removeException)="onRemoveException($event)" (closeException)="onRemoveException($event)"
+    *ngFor="let event of exceptionList"   [closeIcon]='"minimize"' > </dps-exception-indicator-item>
+</ng-template>

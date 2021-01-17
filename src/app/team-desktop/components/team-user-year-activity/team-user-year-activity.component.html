@@ -1,0 +1,24 @@
+<div class="dps-team-user-year-activity" fxLayout="column">
+
+  <dps-team-user-grid-row class="dps-user-activity-content" [eventYearSummery]="eventYearSummery">
+  </dps-team-user-grid-row>
+
+
+  <div class="dps-team-chart" *ngIf='!!adgedDebData'>
+    <mat-card>
+      <mat-card-title>Testing</mat-card-title>
+      <dps-pie-chart [chartOptions]="pieChartOptions" [pieChartDataset]="adgedDebData" [chartHeight]="piechartHeight"
+        [borderColor]="'#fff'"></dps-pie-chart>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Testing</mat-card-title>
+      <dps-team-user-bar-chart [chartOptions]="matterBarChartOptions" [chartHeight]="chartHeight"
+        [chartType]="matterOpenChart" [barChartDataset]="barChartInfo.data" [isloading]="barChartInfo.isLoading"
+        [lineChartColors]="lineChartColors">
+      </dps-team-user-bar-chart>
+    </mat-card>
+  </div>
+
+
+
+</div>

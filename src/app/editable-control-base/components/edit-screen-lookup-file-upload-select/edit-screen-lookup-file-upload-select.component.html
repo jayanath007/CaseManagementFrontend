@@ -1,0 +1,64 @@
+
+
+<div *ngIf="!isKeyValue">
+  <div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible" class="label-with-drop-down dps-client-id" fxLayout="row" fxLayoutAlign="center" >
+    <mat-form-field>
+      <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+        <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+      </mat-placeholder>
+      <mat-select [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" [value]="modelData" (selectionChange)="selectionChange($event.value)">
+        <dps-select-search (change)="cmbFilterChanged($event)" [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"></dps-select-search>
+        <mat-option [value]="''">-- None --</mat-option>
+        <mat-option *ngFor="let dataItem of (cmbDataListList | async)" [value]="dataItem.luP_ID" [ngStyle]="{'display': dataItem?.luP_Hidden ? 'none' : ''}">
+          <!-- {{showType==='key'?dataItem.key:(showType==='value'?dataItem.value:(dataItem.key+' | '+dataItem.value))}} -->
+          {{showType==='luP_Code'?dataItem.luP_Code:(showType==='luP_Description'?dataItem.luP_Code:(dataItem.luP_Code+' | '+dataItem.luP_Description))}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button matTooltip="Lookup Screen" matTooltipPosition="above" *ngIf="!isLookupLinkDisable" mat-icon-button class="dps-open-look-up"
+      (click)="lookupClick(meta)">
+      <mat-icon>list</mat-icon>
+    </button>
+
+    <button [disabled]="(((disabled===true || disabled===false)? disabled : false) || isUploadDisable)" class="dps-upload-attachment"
+      mat-icon-button matTooltip="Attach files" class="attach-file-type" matTooltipPosition="above" (click)="fileUploader.onFileUploadBtnClick()">
+      <mat-icon>attach_file</mat-icon>
+
+   
+      <mat-icon *ngIf="uploaded" class="done-mode">done_all</mat-icon>
+      <dps-file-uploader #fileUploader [inputId]="lookupType" (fileUpload)="onFileUploadChange($event)" [multiple]="false">
+      </dps-file-uploader>
+    </button>
+  </div>
+</div>
+<div *ngIf="isKeyValue">
+  <div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible" class="label-with-drop-down">
+    <mat-form-field>
+      <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+        <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+      </mat-placeholder>
+      <mat-select [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" [value]="modelData" (selectionChange)="selectionChange($event.value)">
+        <dps-select-search (change)="cmbFilterChanged($event)" [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"></dps-select-search>
+        <mat-option [value]="''">-- None --</mat-option>
+        <mat-option *ngFor="let dataItem of (cmbDataListList | async)" [value]="dataItem.key">
+          {{showType==='key'?dataItem.key:(showType==='value'?dataItem.value:(dataItem.key+' | '+dataItem.value))}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button matTooltip="Lookup Screen" matTooltipPosition="above" *ngIf="!isLookupLinkDisable" mat-icon-button class="dps-open-look-up"
+      (click)="lookupClick(meta)">
+      <mat-icon>list</mat-icon>
+    </button>
+
+    <button matTooltipPosition="above" [disabled]="(((disabled===true || disabled===false)? disabled : false) || isUploadDisable)"
+      class="dps-upload-attachment" mat-icon-button matTooltip="Attach files" (click)="fileUploader.onFileUploadBtnClick()">
+      <mat-icon>attach_file</mat-icon>
+   
+      <mat-icon *ngIf="uploaded" class="done-mode">done_all</mat-icon>
+      <dps-file-uploader #fileUploader [inputId]="lookupType" inputId="fileUploaderId" (fileUpload)="onFileUploadChange($event)"
+        [multiple]="false"></dps-file-uploader>
+    </button>
+  </div>
+</div>

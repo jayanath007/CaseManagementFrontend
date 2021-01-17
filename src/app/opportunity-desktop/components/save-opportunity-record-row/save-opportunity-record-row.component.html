@@ -1,0 +1,86 @@
+<mat-nav-list dence class="dps-grid-nav-list" *ngIf="selectedStatus?.key === 1">
+  <mat-list-item class="dps-grid-list-item" *ngFor="let row of loadSaveOpportunityData; let isOdd=odd;" dpsClick
+    (dpsClick)="onRowSelect(row)" (dpsDblClick)="onOpprtunityRowDBClick(row)"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': row?.selected}">
+      <div class="row-data" [fxFlex]="getFxFlexProperty(0)">
+        <mat-icon class="alert-icon-with-plus" *ngIf="row.opportunityType === type.Solicitor" mat-list-icon
+          (click)="onClickNotificationSetting(row)">
+          <span class="alert-icon-with-plus"> add_alert </span>
+        </mat-icon>
+      </div>
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(1)"
+        innerHTML="{{row?.enquiryDateOn | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{row?.opportunityNumber}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{row?.conflictRunDate | date:'dd-MM-yyyy'}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{row?.clientRef}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{row?.clientName}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{row?.mobileNo}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{row?.department}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{row?.workType}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{row?.feeEarner}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(10)" innerHTML="{{row?.note}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>
+
+<mat-nav-list dence class="dps-grid-nav-list" *ngIf="selectedStatus?.key === 2">
+  <mat-list-item class="dps-grid-list-item" *ngFor="let row of loadSaveOpportunityData; let isOdd=odd;" dpsClick
+    (dpsClick)="onRowSelect(row)" (dpsDblClick)="onOpprtunityRowDBClick(row)"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': row?.selected}">
+      <div class="row-data" [fxFlex]="getFxFlexProperty(0)">
+        <mat-icon *ngIf="row.opportunityType === type.Solicitor" mat-list-icon
+          (click)="onClickNotificationSetting(row)">
+          <span class="alert-icon-with-plus"> add_alert </span>
+        </mat-icon>
+      </div>
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(1)"
+        innerHTML="{{row?.enquiryDateOn | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{row?.opportunityNumber}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{row?.conflictRunDate | date:'dd-MM-yyyy'}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{row?.quoteRunDate | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{row?.clientRef}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{row?.clientName}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{row?.mobileNo}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{row?.department}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{row?.workType}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(10)" innerHTML="{{row?.feeEarner}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(11)" innerHTML="{{row?.note}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>
+
+<mat-nav-list dence class="dps-grid-nav-list"
+  *ngIf="selectedStatus?.key === 3 || selectedStatus?.key === 5 || selectedStatus?.key === 4">
+  <mat-list-item class="dps-grid-list-item" *ngFor="let row of loadSaveOpportunityData; let isOdd=odd;" dpsClick
+    (dpsClick)="onRowSelect(row)" (dpsDblClick)="onOpprtunityRowDBClick(row)"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': row?.selected}">
+      <div class="row-data" [fxFlex]="getFxFlexProperty(0)">
+        <mat-icon *ngIf="row.opportunityType === type.Solicitor" mat-list-icon
+          (click)="onClickNotificationSetting(row)">
+          <span class="alert-icon-with-plus"> add_alert </span>
+        </mat-icon>
+      </div>
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(1)"
+        innerHTML="{{row?.enquiryDateOn | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{row?.opportunityNumber}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{row?.conflictRunDate | date:'dd-MM-yyyy'}}">
+      </div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{row?.quoteRunDate | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{row?.closedDate | date:'dd-MM-yyyy'}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{row?.clientRef}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{row?.clientName}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{row?.mobileNo}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{row?.department}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(10)" innerHTML="{{row?.workType}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(11)" innerHTML="{{row?.feeEarner}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(12)" innerHTML="{{row?.note}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(13)" innerHTML="{{row?.closeNote}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(14)" innerHTML="{{row?.matterRef}}"></div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

@@ -1,0 +1,49 @@
+@import '~styles/variables.scss';
+h3
+{
+    padding: 0 0 20px;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    margin: 0;
+    color: #0979d3;
+}
+
+.personel-data
+{
+    mat-form-field
+    {
+        width: 100%;
+    }
+    ::ng-deep .mat-form-field-infix
+    {
+        .mat-input-element
+        {
+            font-size: 12px;
+        }
+    }
+}
+
+.personel-data-chk-bx
+{
+    mat-checkbox
+    {
+        margin-bottom: 21px;
+        display: block;
+
+        
+        ::ng-deep span
+        {
+            white-space: normal;
+            font-size: 11px;
+        }
+    }
+
+    ::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+        background-color: #1472ce;
+    }
+
+    ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+        background-color: #c8c8c8;
+    }
+
+}

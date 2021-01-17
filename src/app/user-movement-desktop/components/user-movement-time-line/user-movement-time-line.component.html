@@ -1,0 +1,419 @@
+<div class="dps-user-movment-time-line-outer" id="dpsMpvementLineContainer" fxLayout="column">
+
+  <div class="dps-team-time-line" fxLayout="row">
+    <div *ngIf="pastMovements.length <= 0 && futureMovements.length <=0 && currentMovements.length <=0 &&
+        morningHalfday.length <=0 && eviningHalfday.length <=0" class="dps-empty-event dps-no"><span>No
+        Movement(s)</span>
+    </div>
+
+    <div class="dps-team-past-event" fxLayout="row">
+
+      <div *ngFor="let morning of morningHalfday"
+        class="dps-user-movment-item-{{morning?.userMovementTypeId}} dps-team-events-section">
+
+
+        <span class="{{morning?.userMovementTypeId | movementTheamClass }}" [title]="morning.userDes||''">
+          <mat-icon *ngIf="morning?.userMovementTypeId !== -1" class="dps-user-movment-icon" mat-list-icon>
+            {{morning?.userMovementTypeId | movementIcon}}
+          </mat-icon>
+
+
+        </span>
+
+        <span class="dps-event-line">
+
+          <span [title]="morning?.notes||''" *ngIf="morning?.isHalfDayMovementType && morning?.userDes"
+            class="dps-user-movment-status">{{morning?.userDes}}</span>
+
+        </span>
+      </div>
+    </div>
+
+
+
+
+    <div class="dps-team-past-event" fxLayout="row">
+
+      <div *ngFor="let pastMove of pastMovements"
+        class="dps-user-movment-item-{{pastMove?.userMovementTypeId}} dps-team-events-section">
+
+
+        <span class="{{pastMove?.userMovementTypeId | movementTheamClass }}" [title]="pastMove.userDes||''">
+          <mat-icon *ngIf="pastMove?.userMovementTypeId !== -1" class="dps-user-movment-icon" mat-list-icon>
+            {{pastMove?.userMovementTypeId | movementIcon}}
+          </mat-icon>
+
+
+        </span>
+
+        <span class="dps-event-line" [title]="!(!pastMove.isAllDayMovementType  &&
+          pastMove.isHalfDayMovementType || pastMove.isAllDayMovementType &&
+          !pastMove.isHalfDayMovementType)?(pastMove.dateTime | dpsDate) + ' '+
+          (pastMove.notes? '<'+pastMove.notes+'>':'') + ' ' +
+        (pastMove.endTime | dpsDate):pastMove.notes">
+          <span *ngIf=" pastMove?.dateTime && !(!pastMove.isAllDayMovementType  &&
+          pastMove.isHalfDayMovementType || pastMove.isAllDayMovementType &&
+          !pastMove.isHalfDayMovementType)" class="dps-user-movment-time-gap">
+            {{pastMove?.dateTime | dpsDate}}</span>
+
+          <span class="dps-user-movment-indicator" *ngIf="pastMove?.isAllDayMovementType">ALL Day {{pastMove.userDes}}
+          </span>
+
+          <span *ngIf="!pastMove?.isAllDayMovementType && pastMove?.userDes"
+            class="dps-user-movment-status">{{pastMove?.userDes}}</span>
+        </span>
+
+      </div>
+    </div>
+
+    <div class="dps-team-current-event" fxLayout="row">
+      <div *ngFor="let currentMove of currentMovements"
+        class="dps-user-movment-item-{{currentMove?.userMovementTypeId}} dps-team-events-section">
+
+
+
+        <span class="{{currentMove?.userMovementTypeId | movementTheamClass }}" [title]="currentMove.userDes||''">
+          <mat-icon *ngIf="currentMove?.userMovementTypeId !== -1" class="dps-user-movment-icon" mat-list-icon>
+            {{currentMove?.userMovementTypeId | movementIcon}}
+          </mat-icon>
+        </span>
+        <span class="dps-event-line" [title]="!(!currentMove.isAllDayMovementType  &&
+          currentMove.isHalfDayMovementType || currentMove.isAllDayMovementType &&
+          !currentMove.isHalfDayMovementType)?(currentMove.dateTime | dpsDate) + ' ' +(currentMove.notes?'
+          <'+currentMove.notes+'>':'') + ' ' +
+        (currentMove.endTime | dpsDate):currentMove.notes">
+          <span *ngIf=" currentMove?.dateTime && !(!currentMove.isAllDayMovementType  &&
+          currentMove.isHalfDayMovementType || currentMove.isAllDayMovementType &&
+          !currentMove.isHalfDayMovementType)" class="dps-user-movment-time-gap">
+            {{currentMove?.dateTime | dpsDate}}</span>
+
+
+          <span class="dps-user-movment-indicator" *ngIf="currentMove?.isAllDayMovementType">ALL Day
+            {{currentMove.userDes}}
+          </span>
+          <span *ngIf="!currentMove?.isAllDayMovementType && currentMove?.userDes"
+            class="dps-user-movment-status">{{currentMove?.userDes}}</span>
+        </span>
+
+      </div>
+    </div>
+
+    <div class="dps-team-future-event" fxLayout="row">
+      <div *ngFor="let futureMove of futureMovements"
+        class="dps-user-movment-item-{{futureMove?.userMovementTypeId}} dps-team-events-section">
+
+        <span class="{{futureMove?.userMovementTypeId | movementTheamClass }}" [title]="futureMove.userDes||''">
+          <mat-icon *ngIf="futureMove?.userMovementTypeId !== -1" class="dps-user-movment-icon" mat-list-icon>
+            {{futureMove?.userMovementTypeId | movementIcon}}
+          </mat-icon>
+        </span>
+        <span class="dps-event-line" [title]="!(!futureMove.isAllDayMovementType &&
+          futureMove.isHalfDayMovementType  || futureMove.isAllDayMovementType &&
+          !futureMove.isHalfDayMovementType)?(futureMove.dateTime | dpsDate)+ ' ' +(futureMove.notes?'
+          <'+futureMove.notes+'>':'') + ' ' +
+        (futureMove.endTime | dpsDate): futureMove.notes">
+          <span *ngIf=" futureMove?.dateTime && !(!futureMove.isAllDayMovementType &&
+          futureMove.isHalfDayMovementType  || futureMove.isAllDayMovementType &&
+          !futureMove.isHalfDayMovementType)" class="dps-user-movment-time-gap">
+            {{futureMove?.dateTime | dpsDate}}</span>
+
+
+          <span class="dps-user-movment-indicator" *ngIf="futureMove?.isAllDayMovementType">ALL Day
+            {{futureMove.userDes}}
+          </span>
+
+          <span *ngIf="!futureMove?.isAllDayMovementType && futureMove?.userDes"
+            class="dps-user-movment-status">{{futureMove?.userDes}}</span>
+        </span>
+
+
+      </div>
+
+    </div>
+
+    <div class="dps-team-future-event" fxLayout="row">
+
+      <div *ngFor="let evining of eviningHalfday"
+        class="dps-user-movment-item-{{evining?.userMovementTypeId}} dps-team-events-section">
+
+
+        <span class="{{evining?.userMovementTypeId | movementTheamClass }}" [title]="evining.userDes||''">
+          <mat-icon *ngIf="evining?.userMovementTypeId !== -1" class="dps-user-movment-icon" mat-list-icon>
+            {{evining?.userMovementTypeId | movementIcon}}
+          </mat-icon>
+
+
+        </span>
+
+        <span class="dps-event-line">
+
+          <span [title]="evining?.notes||''" *ngIf="evining?.isHalfDayMovementType && evining?.userDes"
+            class="dps-user-movment-status">{{evining?.userDes}}</span>
+
+        </span>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <div class="dps-outlook-time-line" fxLayout="row">
+    <div *ngIf="(pastEvents.length <= 0 && futureEvents.length <= 0) && currentEvents.length <= 0"
+      class="dps-empty-event dps-no"><span>No Event(s)</span>
+    </div>
+    <!--calanserEvent-->
+    <div class="dps-outlook-past-event">
+      <div class="dps-calender-events-section" fxLayout="column">
+        <div class="inner">
+          <div class="dps-user-movment-time-line-inner" *ngFor="let event of pastEvents; let index=index">
+
+            <div class="btn dps-user-movment-time-line-inner-wrapper {{event.status}}" mat-button
+              [ngClass]="{'dps-empty-event': !event.status}">
+
+              <span
+                [title]="((event.status&& event.status==='workingElsewhere') ? 'working Elsewhere': (event.status||'')) | titlecase">
+
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='free'" [ngClass]="event.status">
+                  insert_emoticon
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='busy'" [ngClass]="event.status">
+                  person_add_disabled</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='tentative'" [ngClass]="event.status">
+                  contact_support
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='workingElsewhere'"
+                  [ngClass]="event.status">
+                  person_pin
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='oof'" [ngClass]="event.status">
+                  explore_off
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='unknown'" [ngClass]="event.status">
+                  perm_identity</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='overlap'" [ngClass]="event.status">
+                  dynamic_feed</mat-icon>
+
+              </span>
+              <span class="dps-event-title"
+                [title]="(event.start.dateTime | dpsDate) + ' ' + (event.subject? '<'+event.subject+'>':'') + ' ' + (event.end.dateTime | dpsDate)">
+                <span class="dps-user-movment-status time">{{event.start.dateTime | dpsDate}}
+                </span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.preExisiting">arrow_back</i> -->
+                <span class="dps-user-movment-status"> {{event.subject}}</span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.postExisiting">arrow_forward</i> -->
+              </span>
+
+              <!-- <span [ngStyle]="{width: event.width}" class="dps-user-movment-status">{{event.status}}</span> -->
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- <div style="background: chocolate;height: 20px;"></div> -->
+      </div>
+    </div>
+
+    <div class="dps-outlook-current-event">
+      <div class="dps-calender-events-section" fxLayout="column">
+        <div class="inner">
+          <div class="dps-user-movment-time-line-inner" *ngFor="let event of currentEvents; let index=index">
+
+            <div class="btn dps-user-movment-time-line-inner-wrapper {{event.status}}" mat-button
+              [ngStyle]="{width:'150px'}" [ngClass]="{'dps-empty-event': !event.status}">
+              <span
+                [title]="((event.status&& event.status==='workingElsewhere') ? 'working Elsewhere': (event.status||'')) | titlecase">
+
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='free'" [ngClass]="event.status">
+                  insert_emoticon
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='busy'" [ngClass]="event.status">
+                  person_add_disabled</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='tentative'" [ngClass]="event.status">
+                  contact_support
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='workingElsewhere'"
+                  [ngClass]="event.status">
+                  person_pin
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='oof'" [ngClass]="event.status">
+                  explore_off
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='unknown'" [ngClass]="event.status">
+                  perm_identity</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='overlap'" [ngClass]="event.status">
+                  dynamic_feed</mat-icon>
+
+              </span>
+
+              <span class="dps-event-title"
+                [title]="(event.start.dateTime | dpsDate) + ' ' + (event.subject?'<'+event.subject+'>':'') + ' ' + (event.end.dateTime | dpsDate)">
+                <span class="dps-user-movment-status time">{{event.start.dateTime | dpsDate}}
+                </span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.preExisiting">arrow_back</i> -->
+                <span class="dps-user-movment-status"> {{event.subject}}</span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.postExisiting">arrow_forward</i> -->
+              </span>
+
+
+              <!-- <span [ngStyle]="{width: event.width}" class="dps-user-movment-status">{{event.status}}</span> -->
+            </div>
+            <!-- <span [matMenuTriggerFor]="menu" #span></span>
+        
+          <mat-menu #menu="matMenu">
+            <mat-list style="padding-top: 1px !important;">
+              <mat-list-item *ngFor="let oevent of event.overlapEvents" class="dps-mat-menu-item">
+
+                <span class="dps-mat-menu-item-icon" [ngClass]="oevent.status">
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='free'">
+                    insert_emoticon
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='busy'">
+                    person_add_disabled</mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='tentative'">
+                    contact_support
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='workingElsewhere'">
+                    person_pin
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='oof'">explore_off
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='unknown'">
+                    perm_identity</mat-icon>
+                </span>
+                <div class="dps-menu-text-content">
+                  <h5 class="dps-menu-text" mat-line [title]="oevent.subject"> {{oevent.subject}}</h5>
+                  <p class="dps-menu-text location" mat-line>
+                    {{oevent.status}}
+                    <span *ngIf="oevent.location"><i class="material-icons">room</i>{{oevent.location}}</span>
+                  </p>
+
+                  <span fxLayout="row wrap" style="font-size: 13px;
+                color: #0d4256;">
+                    <p class="dps-menu-text" mat-line>{{oevent.start.dateTime | dpsDate}}</p>
+                    <p class="dps-menu-text" mat-line>{{oevent.end.dateTime | dpsDate}}</p>
+                  </span>
+                </div>
+
+
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+            </mat-list>
+
+           
+
+          </mat-menu> -->
+
+          </div>
+        </div>
+
+
+        <!-- <div style="background: chocolate;height: 20px;"></div> -->
+      </div>
+    </div>
+
+    <div class="dps-outlook-future-event">
+      <div class="dps-calender-events-section" fxLayout="column">
+        <div class="inner">
+          <div class="dps-user-movment-time-line-inner" *ngFor="let event of futureEvents; let index=index">
+
+            <div class="btn dps-user-movment-time-line-inner-wrapper {{event.status}}" mat-button
+              [ngStyle]="{width:'150px'}" [ngClass]="{'dps-empty-event': !event.status}">
+              <span
+                [title]="((event.status&& event.status==='workingElsewhere') ? 'working Elsewhere': (event.status||'')) | titlecase">
+
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='free'" [ngClass]="event.status">
+                  insert_emoticon
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='busy'" [ngClass]="event.status">
+                  person_add_disabled</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='tentative'" [ngClass]="event.status">
+                  contact_support
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='workingElsewhere'"
+                  [ngClass]="event.status">
+                  person_pin
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='oof'" [ngClass]="event.status">
+                  explore_off
+                </mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='unknown'" [ngClass]="event.status">
+                  perm_identity</mat-icon>
+                <mat-icon class="dps-user-movment-icon" *ngIf="event.status==='overlap'" [ngClass]="event.status">
+                  dynamic_feed</mat-icon>
+
+              </span>
+
+              <span class="dps-event-title"
+                [title]="(event.start.dateTime | dpsDate) + ' ' + (event.subject?'<'+event.subject+'>':'') + ' ' + (event.end.dateTime | dpsDate)">
+                <span class="dps-user-movment-status time">{{event.start.dateTime | dpsDate}}
+                </span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.preExisiting">arrow_back</i> -->
+                <span class="dps-user-movment-status"> {{event.subject}}</span>
+                <!-- <i class="material-icons dps-user-movment-overlap" *ngIf="event.postExisiting">arrow_forward</i> -->
+              </span>
+
+
+              <!-- <span [ngStyle]="{width: event.width}" class="dps-user-movment-status">{{event.status}}</span> -->
+            </div>
+            <!-- <span [matMenuTriggerFor]="menu" #span></span>
+        
+          <mat-menu #menu="matMenu">
+            <mat-list style="padding-top: 1px !important;">
+              <mat-list-item *ngFor="let oevent of event.overlapEvents" class="dps-mat-menu-item">
+
+                <span class="dps-mat-menu-item-icon" [ngClass]="oevent.status">
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='free'">
+                    insert_emoticon
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='busy'">
+                    person_add_disabled</mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='tentative'">
+                    contact_support
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='workingElsewhere'">
+                    person_pin
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='oof'">explore_off
+                  </mat-icon>
+                  <mat-icon mat-list-icon class="dps-user-movment-icon" *ngIf="oevent.status==='unknown'">
+                    perm_identity</mat-icon>
+                </span>
+                <div class="dps-menu-text-content">
+                  <h5 class="dps-menu-text" mat-line [title]="oevent.subject"> {{oevent.subject}}</h5>
+                  <p class="dps-menu-text location" mat-line>
+                    {{oevent.status}}
+                    <span *ngIf="oevent.location"><i class="material-icons">room</i>{{oevent.location}}</span>
+                  </p>
+
+                  <span fxLayout="row wrap" style="font-size: 13px;
+                color: #0d4256;">
+                    <p class="dps-menu-text" mat-line>{{oevent.start.dateTime | dpsDate}}</p>
+                    <p class="dps-menu-text" mat-line>{{oevent.end.dateTime | dpsDate}}</p>
+                  </span>
+                </div>
+
+
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+            </mat-list>
+
+           
+
+          </mat-menu> -->
+
+          </div>
+        </div>
+
+
+        <!-- <div style="background: chocolate;height: 20px;"></div> -->
+      </div>
+    </div>
+  </div>
+
+
+</div>

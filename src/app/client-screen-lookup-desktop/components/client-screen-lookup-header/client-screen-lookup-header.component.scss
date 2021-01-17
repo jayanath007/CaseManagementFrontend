@@ -1,0 +1,42 @@
+@import '~styles/variables.scss';
+span,
+div {
+  font-family: $primary-font-stack;
+}
+
+mat-toolbar-row {
+  background: #f0f5ff;
+}
+
+.dps-primary-action-btn-inner {
+  width: 100%;
+  div.look-up-actions {
+    button {
+      background: #cfdfff;
+      color: $header-primary;
+      font-size: $primary-font-size - 2;
+      margin-right: 4px;
+      &:hover {
+        background: #416bbb;
+        color: #fff;
+      }
+    }
+    ::ng-deep .mat-form-field {
+      font-size: $primary-font-size - 2;
+      color: $header-primary;
+      width: 250px; // margin-right: 5px; 
+    }
+    span.type {
+      font-size: $primary-font-size - 1;
+      color: $header-primary;
+      font-weight: 500;
+      padding: 0px 20px 0px 0px;
+    }
+    span.desp {
+      font-size: $primary-font-size - 1;
+      color: #d24209;
+      padding: 0 22px 0px 0;
+      font-weight: 500;
+    }
+  }
+}

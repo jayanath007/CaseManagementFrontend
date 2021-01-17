@@ -1,0 +1,50 @@
+@import '~styles/variables.scss';
+
+.dps-group-content {
+  width: 100%;
+  height: 100%;
+}
+
+mat-toolbar {
+  background: $primary;
+  border-bottom: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+}
+
+.dps-group-content-hidden {
+  display: none !important;
+}
+
+.dps-access-type {
+  font-size: $primary-font-size + 2;
+  color: #0079c4;
+}
+
+.dps-conversation-list {
+  margin: 0;
+  height: 100%;
+}
+
+dps-conversation-short-list-view,
+.dps-groupcontent {
+  border-right: 1px solid #dcdcdc;
+}
+
+.dps-empty-group {
+  font-weight: 100;
+  color: #666666;
+  line-height: 14px;
+
+  h3 {
+    text-align: center;
+    font-family: $primary-font-stack;
+    font-weight: 400;
+    font-size: $primary-font-size - 2;
+  }
+
+  h2 {
+    font-size: 44px;
+    text-align: center;
+    margin: 0px;
+  }
+}

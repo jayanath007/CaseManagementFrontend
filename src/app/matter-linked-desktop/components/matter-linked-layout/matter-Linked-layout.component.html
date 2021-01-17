@@ -1,0 +1,77 @@
+<div fxLayout="column" class="dps-matter-linked-layout">
+
+  <mat-toolbar *ngIf="isPopup">
+
+    <mat-toolbar-row class="dps-toolbar-box-shadow">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="matter-icon">link</mat-icon>
+        <!-- fa-rotate-90 -->
+        <span class="header-text" matTooltipPosition="after">{{title}} </span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="dps-primary-header" fxLayout="row" fxLayoutAlign="flex-start center ">
+    <mat-divider></mat-divider>
+    <div class="dps-linked-matter-btn">
+      <button *ngIf="openFrom === matterLinkedType.WorkFlow" mat-button class="dps-matter-submit" tabindex="3"
+        (click)="onSyncData()">
+        <mat-icon>sync</mat-icon>
+        <span>Sync</span>
+      </button>
+      <button *ngIf="openFrom === matterLinkedType.Chaser" mat-button class="dps-matter-submit" tabindex="3"
+        (click)="onSyncChaser()">
+        <span>Sync & Send</span>
+      </button>
+    </div>
+    <div *ngIf="matterData?.isPlotMasterMatter || onlySelectMatter" class="" fxLayoutGap="10px" class="dps-primary-btn">
+      <span fxFlex="1 1 auto"></span>
+      <mat-checkbox class="property-value-check-box" #selectAllMatter
+        [disabled]="openFrom === matterLinkedType.OpenCase" [(ngModel)]="ischecked"
+        (change)="onSelectAllMatter($event)">
+        Select All
+      </mat-checkbox>
+    </div>
+    <div class="" *ngIf="!onlySelectMatter" fxLayoutGap="10px" class="dps-primary-btn">
+      <span fxFlex="1 1 auto"></span>
+      <button mat-button class="dps-matter-submit" tabindex="3" (click)="onCreateMatterLinked()">
+        <mat-icon>create </mat-icon>
+        <span>Create</span>
+      </button>
+    </div>
+    <!-- *ngIf="matterData?.isPlotMasterMatter || onlySelectMatter" -->
+    <div *ngIf="matterData?.isPlotMasterMatter || onlySelectMatter" fxLayoutGap="10px"
+      class="dps-primary-btn dps-plot-no">
+      <span fxFlex="1 1 auto"></span>
+      <mat-form-field class="dps-mat-form-input">
+        <input matInput type="text" #plotNo placeholder="Plot No" (keyup)="changePlotNo(plotNo.value)"
+          [value]="plotRange">
+
+        <mat-icon class="dps-search-close-icon" *ngIf="plotRange" matSuffix mat-icon-button aria-label="Clear"
+          (click)="onPlotRangeClear()">close</mat-icon>
+
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <!-- [disabled]="mode !== Mode.AddMode || !matterData?.isPlotMasterMatter"   -->
+  <div class="dps-matter-linked-outer dps-white-gray-scroll" fxLayout="column">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div class="dps-matter-linked-wrapper grid">
+      <dps-grid-container [gridColoumn]="coloumnDef">
+        <dps-linked-matter-view-data (selectedMatter)="onSelectedMatter($event)"
+          (multiSelectMatter)="onMultiSelectMatter($event)" [openFrom]="openFrom" [multiSelectItem]="multiSelectItem"
+          [selectedMatterData]="selectedMatterData" [matterData]="matterData" [linkedMatterData]="gridData"
+          [onlySelectMatter]="onlySelectMatter" [columnDef]="coloumnDef" [plotRange]="plotRange"
+          (onOpenLinkedMatter)="openLinkedMatter($event)">
+        </dps-linked-matter-view-data>
+      </dps-grid-container>
+    </div>
+  </div>
+
+</div>

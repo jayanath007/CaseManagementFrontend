@@ -1,0 +1,10 @@
+<div fxLayout="column">
+  <mat-toolbar [fxFlex]="height|| '42px'" class="dps-toolbar-box-shadow" [style.background-color]="toolbarColor">
+    <mat-icon [style.color]="iconColor" class="dps-toolbar-icon">{{icon}}</mat-icon>
+    <span fxFlex="1 1 auto" [style.color]="titleColor" title="{{title}}">{{title}}</span>
+    <button mat-icon-button *ngFor="let button of buttonList" (click)="onClick(button)">
+      <mat-icon class="dps-toolbar-close-icon" [style.color]="buttonColor">{{button}}</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</div>

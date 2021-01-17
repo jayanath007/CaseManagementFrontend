@@ -1,0 +1,44 @@
+@import '~styles/variables.scss';
+
+.dps-mail-list {
+  min-width: 600px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dps-folder-content {
+  width: 100%;
+  height: 100%;
+}
+
+.dps-folder-content-hidden {
+  display: none !important;
+}
+
+.dps-empty-folder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -115px;
+  margin-left: -115px;
+  font-weight: 100;
+  color: #666666;
+}
+
+.dps-empty-folder h2 {
+  font-size: 64px;
+  text-align: center;
+  margin: 0px;
+}
+
+.dps-empty-folder h3 {
+  text-align: center;
+  font-family: $primary-font-stack;
+  font-weight: 400;
+}
+
+.dps-mail-list dps-mail-list-header {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}

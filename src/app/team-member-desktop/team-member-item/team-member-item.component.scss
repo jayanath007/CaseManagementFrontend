@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+.dps-selected-Member {
+  background-color: #4b5b65;
+}
+
+.mat-list-item p {
+  color: $primary;
+}
+
+.mat-list-item small {
+  color: #7c9cb2;
+}
+
+.mat-list-item {
+  border-bottom: 1px solid #4b5b65;
+}
+
+.mat-list-item:hover {
+  background: #272c2f !important;
+}
+
+.mat-list-avatar {
+  background: #0b3f65;
+}
+
+.mat-list-item-content {
+  padding: 0;
+}
+
+.dps-team-member-avatar span{
+  font-size: 13px;
+  color: white;
+}

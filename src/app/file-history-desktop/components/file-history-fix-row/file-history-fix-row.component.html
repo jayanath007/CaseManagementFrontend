@@ -1,0 +1,157 @@
+<mat-list-item>
+  <div [ngClass]="rowData.data.type | colorByFileType" [class.] [dpsDraggable]="true"
+    (onDragStart)="onDragStart($event)" [dropZones]="['mailCompose', 'openCaseTab']" [dragElement]="dragElement">
+    <div fxLayout class="grid-data file-history-data-grid"
+      [ngClass]="{'dps-selected-row' : rowData.isExpand || getIsChecked(rowData),'dps-expanded-row':rowData.isExpand}">
+      <div class="row-data detail" *ngIf="getHiddenProperty(0)" [fxFlex]="getFxFlexProperty(0)">
+        <span>
+          <mat-checkbox color="primary" class="select-row" (click)="rowCheckChanged($event,rowData)"
+            [ngModel]="getIsChecked(rowData)"></mat-checkbox>
+        </span>
+      </div>
+      <div fxLayout="row " class="row-data action-column" *ngIf="getHiddenProperty(1)" [fxFlex]="getFxFlexProperty(1)">
+        <!-- <span *ngIf="false" (click)="rowForce($event)" [matMenuTriggerFor]="contextMenu">
+          <i class="material-icons edit">edit</i>
+        </span> -->
+
+
+
+        <span [ngClass]="isMuiltySelect?'action-disabled':''" [matTooltip]="!isMuiltySelect?'Action':''"
+          [matTooltipPosition]="'before'" class="edit material-icons" [matMenuTriggerFor]="menu"
+          (click)="clickMenuTrigge($event, rowData)">
+          <i class="material-icons lock_open">more_horiz</i>
+        </span>
+        <span class="dps-indicator">
+          <!-- [ngClass]="rowData.editingBusy == true ? 'blink' : '' " -->
+          <i *ngIf="isCheckoutFile(rowData) || rowData.editingBusy == true"
+            matTooltip="Checkout by {{rowData.data.checkedOutByUser || 'you' }}"
+            [ngClass]="{'file-access': isCheckoutByMe(rowData), 'file-abord': !isCheckoutByMe(rowData), 'blink': rowData.editingBusy == true}"
+            class="material-icons">person</i>
+
+          <!-- <i class="material-icons lock_open">lock_open</i> -->
+        </span>
+        <span class="row-field">
+          <mat-menu #menu="matMenu">
+
+            <mat-nav-list dense class="dps-action-menu" *ngIf="checkIsShow(rowData)">
+
+              <mat-list-item class="btn-list-item delete" (click)="deleteRow($event,rowData)"
+                *ngIf="!isCheckoutFile(rowData) && (accessControl?.getUserPermision(userPermisionType.diaryDeleteEntry)|async)">
+                <mat-icon matListIcon>delete</mat-icon>
+                <span>Delete</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="edit" (click)="editRow($event,rowData)"
+                *ngIf="!(isMuiltySelect ||  rowData.data.type === 'MO'  ||  rowData.data.type === 'MI')">
+                <mat-icon matListIcon>edit</mat-icon>
+                <span>Edit</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="sign-send" (click)="clickSign(rowData, $event)"
+                *ngIf="rowData.data.letter_name && !isCheckoutFile(rowData)">
+                <mat-icon matListIcon>border_color</mat-icon>
+                <span> Sign and Share</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+              <mat-list-item class="share" (click)="clickShare(rowData, $event)"
+                *ngIf="(isMuiltySelect || rowData.data.letter_name) && !isCheckoutFile(rowData)">
+                <mat-icon matListIcon>share</mat-icon>
+                <span> Share</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="check-in" (click)="doCheckin(rowData)"
+                *ngIf="!isMuiltySelect && isCheckoutByMe(rowData)">
+                <mat-icon matListIcon>assignment_turned_in</mat-icon>
+                <span>Check-In</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="check-out" (click)="doDiscardCheckin(rowData)"
+                *ngIf="!isMuiltySelect && isCheckoutByMe(rowData)">
+                <mat-icon matListIcon>assignment_return</mat-icon>
+                <span>Abort</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="xdraft_item" (click)="clickXdraftItem(rowData, $event)" *ngIf="!isMuiltySelect">
+                <mat-icon matListIcon>file_copy</mat-icon>
+                <span> Xdraft Item</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+
+              <mat-list-item class="new-version" (click)="clickNewVersion(rowData, $event)" *ngIf="!isMuiltySelect">
+                <mat-icon matListIcon>playlist_add</mat-icon>
+                <span> New Version</span>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+              <mat-list-item>
+                <button fxLayout="row" class="move-to-folder" mat-menu-item [matMenuTriggerFor]="treeMenu.childMenu">
+                  <mat-icon matListIcon>folder</mat-icon>
+                  <span>Move To Folder</span>
+                </button>
+                <!-- <mat-menu #invertebrates="matMenu">
+                  <button class="mat-item-sub-menu" mat-menu-item *ngFor="let folder of folderList" [value]="folder"
+                    (click)="clickMoveSelectedFolder(folder, rowData)"> {{folder.text}}</button>
+                </mat-menu> -->
+                <!-- <button fxLayout="row" class="move-to-folder" mat-button [matMenuTriggerFor]="menu.childMenu">
+                  <mat-icon matListIcon>folder</mat-icon>
+                  <span>Move To Folder</span>
+                </button> -->
+                <!-- <dps-folder-tree-menu #menu [items]="treeFolder" (updateSelectedFolder)="onFolderChanged($event)">
+                </dps-folder-tree-menu> -->
+                <dps-folder-tree-menu (updateSelectedFolder)="onFolderChanged($event,rowData)" #treeMenu
+                  [items]="treeFolder">
+                </dps-folder-tree-menu>
+              </mat-list-item>
+
+
+            </mat-nav-list>
+
+          </mat-menu>
+        </span>
+
+      </div>
+
+      <div class="row-data date-done mat_line" *ngIf="getHiddenProperty(2)" [fxFlex]="getFxFlexProperty(2)"> {{
+        rowData.data.dateDone | date :'dd/MM/yyyy HH:mm'}}</div>
+
+      <div class="row-data by" *ngIf="getHiddenProperty(3)" [fxFlex]="getFxFlexProperty(3)">{{rowData.data.folderName}}
+      </div>
+      <div class="row-data type-column" *ngIf="getHiddenProperty(4)" [fxFlex]="getFxFlexProperty(4)">
+        <mat-icon matTooltipPosition="right" matTooltip={{rowData.data.letter_name}}>
+          <i [ngClass]="rowData.data.letter_name | attachmentIcon"><span></span></i>
+        </mat-icon>
+        <span class="type"> {{rowData.data.type}}</span>
+      </div>
+      <div class="row-data by mat_line" *ngIf="getHiddenProperty(5)" [fxFlex]="getFxFlexProperty(5)">{{rowData.data.by}}
+      </div>
+      <div class="row-data" *ngIf="getHiddenProperty(6)" [fxFlex]="getFxFlexProperty(6)">
+        <i class="new-version material-icons"
+          *ngIf="isDocumentVersioning && rowData.data.auditParentId > 0 ">new_releases</i>
+        {{rowData.data.note}}
+        <span
+          *ngIf=" isDocumentVersioning && (rowData.data.auditParentId > 0 ||  rowData.data.auditVersion > 0 )">{{rowData.data.versionName}}</span>
+      </div>
+      <div class="row-data mat_line" *ngIf="getHiddenProperty(7)" [fxFlex]="getFxFlexProperty(7)">
+        {{rowData.data.emailFrom}}</div>
+      <div class="row-data mat_line" *ngIf="getHiddenProperty(8)" [fxFlex]="getFxFlexProperty(8)">
+        {{rowData.data.emailTo}}</div>
+    </div>
+  </div>
+</mat-list-item>
+
+<div style="display: none;">
+  <div id="file-history-dragPreView">
+    <div *ngIf="checkedItems?.length > 1">
+      <mat-icon class="mat-18">file_copy</mat-icon>
+      <span class="name">{{checkedItems?.length}}</span>
+    </div>
+    <span *ngIf="!checkedItems || checkedItems?.length === 0">
+      <i [ngClass]="rowData.data.letter_name | attachmentIcon" *ngIf="rowData?.data.letter_name"><span></span></i>
+      <span class="name">{{rowData?.data.letter_icon}}</span>
+    </span>
+  </div>
+</div>

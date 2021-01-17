@@ -1,0 +1,79 @@
+<div class="dps-dictation-layout-content" fxLayout="column">
+  <mat-toolbar class="dps-grid-header">
+    <!-- <button mat-flat-button class="dps-btn"><mat-icon>schedule</mat-icon>
+      Import Recording</button> -->
+
+    <h3><span>{{dictationGridFilters?.jobFor?.name}}</span> <span *ngIf="dictationGridFilters?.jobStage?.value"> <span
+          class="material-icons path-icon">
+          navigate_next
+        </span> {{dictationGridFilters?.jobStage?.value}}</span></h3>
+    <div fxFlex="1 1 auto" class="dps-dictation-file-uploader-wrapper">
+
+      <button mat-raised-button *ngIf="usetType?.level === UserType.author"
+        (click)="safeBoxfileUploader.onFileUploadBtnClick()" class="dpsfile-uploader">
+
+        <mat-icon>attach_file</mat-icon>
+
+        <!-- on upload change icon in to this  --  
+       
+        <mat-icon class="rotating">donut_large</mat-icon>
+        
+        -->
+
+        <span> Upload Files</span>
+        <dps-file-uploader #safeBoxfileUploader inputId="safeBoxUploader" (fileUpload)="onFileChange($event)"
+          [multiple]="false" [maxSize]="1000000" [accept]="'audio/mp3,audio/*;capture=microphone'"></dps-file-uploader>
+      </button>
+
+    </div>
+    <div class="dps-secondery-header-input" fxLayoutGap="15px">
+      <mat-form-field *ngIf="usetType?.level === UserType.manager">
+        <mat-select placeholder="Author" floatPlaceholder="never" [ngModel]="dictationGridFilters?.jobFor?.id"
+          (selectionChange)="onAuthorChange($event.value)">
+          <mat-option *ngFor="let author of getOrderAutherList()" [value]="author.id">
+            {{ author.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="usetType?.level === UserType.typist">
+        <mat-select placeholder="Jobs For" floatPlaceholder="never" [disabled]="loading"
+          [ngModel]="dictationGridFilters?.jobFor?.id" (selectionChange)="onJobsForChange($event.value)">
+          <mat-option *ngFor="let Job of myJobList" [value]="Job.id">
+            {{ Job.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Job Stage" [disabled]="loading" floatPlaceholder="never"
+          [ngModel]="dictationGridFilters?.jobStage?.key" (selectionChange)="onJobStageChange($event.value)">
+          <mat-option *ngFor="let Stage of jobStageListData" [value]="Stage.key">
+            {{ Stage.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- chathu todo -->
+      <!-- <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+    (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+    (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()" class="drid_controller_custom">
+  </dps-grid-font-controller> -->
+
+    </div>
+
+    <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true"
+      (fontSizeMin)="onFontSizeMinusClick()" (fontSizeReset)="onFontSizeResetClick()"
+      (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()" class="drid_controller_custom">
+    </dps-grid-font-controller>
+
+  </mat-toolbar>
+
+  <dps-dictations-grid (playDictations)="onPlayDictations($event)"
+    (openWordFileDictation)="onOpenWordFileDictation($event)" (competedJobDictations)="onCompetedJobDictations($event)"
+    (openCaseDictation)="onOpenCaseDictation($event)" (rowExpand)="GridrowExpand($event)"
+    (authorChange)="onAuthorChange($event)" (openDictationPdf)="onPdfFileClick($event)"
+    (openCaseFile)="onOpenCaseFile($event)" (openDictatioProfiling)="onOpenDictatioProfiling($event)"
+    (finishJobUpdate)="onFinishJobUpdate($event)" (changePage)="onChangePage($event)" [fontSizeClass]="fontSizeClass"
+    [dictationGridFilters]="dictationGridFilters" [dictationGridData]="dictationGridData" [matterRef]="matterRef"
+    [usetType]="usetType" [loading]="loading" [coloumnDef]="coloumnDef" [paginatorDef]="paginatorDef">
+  </dps-dictations-grid>
+</div>

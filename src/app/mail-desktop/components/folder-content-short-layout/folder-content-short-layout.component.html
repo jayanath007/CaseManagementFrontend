@@ -1,0 +1,45 @@
+<div [ngClass]="{'dps-folder-content-hidden': hidden}" class="dps-folder-content"
+  fxLayout="row">
+  <div class="dps-mail-list" fxLayout="column" fxFlex="400px">
+    <dps-mail-list-header fxFlex="50px" (viewChange)="onListViewChange($event)" [itemPerPage]="listOptions?.itemPerPage"
+      [filter]="listOptions?.filter" [orderBy]="listOptions?.orderBy" [sortDir]="listOptions?.sortDir" [total]="listOptions?.total"
+      [isSearching]="isSearching" [pageIndex]="listOptions?.pageIndex" [selectedItems]="selectedItems"
+      (itemsReadUnread)="onItemsReadUnread($event)" (itemsFlag)="onItemsFlag($event)" (itemsDelete)="onItemsDelete($event)"
+      [itemsLoading]="isItemsLoading && !hidden" (attachToNewMail)="onAttachToNewMail($event)" [isShortView]="true"
+      [folderList]="folderList" (moveToFolder)="onMoveToFolder($event)"[companyCode]="companyCode" ></dps-mail-list-header>
+
+    <dps-mail-short-list-view [style.display]=" (!isItemsLoading && activeItems && activeItems.length < 1) ? 'none': 'flex'"
+      [items]="activeItems" fxFlex="calc(100% - 50px)" (itemsReadUnread)="onItemsReadUnread($event)" (itemsFlag)="onItemsFlag($event)"
+      (itemCheck)="onItemCheck($event)" (itemsDelete)="onItemsDelete($event)" (itemSelect)="onItemSelect($event)"
+      [selectedItems]="selectedItems" [timeZone]="timeZone" [companyCode]="companyCode" [total]="listOptions?.total"
+      (viewChange)="onListViewChange($event)" [itemsLoading]="isItemsLoading">
+    </dps-mail-short-list-view>
+    <div fxFlex="calc(100% - 50px)" fxLayout="column" fxLayoutAlign="center" class="dps-folder-content dps-foldercontent"
+      *ngIf="!isItemsLoading && activeItems && activeItems.length < 1">
+      <div class="dps-empty-folder" fxFlexAlign="center">
+        <h2>
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+        </h2>
+        <h3>This folder is empty.</h3>
+      </div>
+    </div>
+  </div>
+  <div class="dps-folder-content" fxFlex="1 1 auto">
+    <div *ngIf="selectedItems?.length>0" class="dps-folder-content">
+      <dps-mail-multi-select-view [selectedItems]="selectedItems" (itemsReadUnread)="onItemsReadUnread($event)"
+        (itemsFlag)="onItemsFlag($event)" (itemsDelete)="onItemsDelete($event)" (attachToNewMail)="onAttachToNewMail($event)"
+        [folderList]="folderList" (moveToFolder)="onMoveToFolder($event)" (cancel)="onMultiSelectCancel()" [companyCode]="companyCode"></dps-mail-multi-select-view>
+    </div>
+    <div [style.display]="(!viewingItem || selectedItems?.length>0) ? 'none': ''" class="dps-folder-content">
+      <router-outlet name="item"></router-outlet>
+    </div>
+    <div class="dps-folder-content" fxLayout="column" fxLayoutAlign="center" class="dps-folder-content" *ngIf="!(viewingItem || (selectedItems?.length>0))">
+      <div class="dps-empty-folder" fxFlexAlign="center">
+        <h2>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        </h2>
+        <h3>Select an item to read.</h3>
+      </div>
+    </div>
+  </div>
+</div>

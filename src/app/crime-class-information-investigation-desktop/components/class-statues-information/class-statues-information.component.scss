@@ -1,0 +1,75 @@
+@import '~styles/variables.scss';
+h3
+{
+    padding: 0 0 20px;
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    margin: 0;
+    color: $primary;
+}
+
+::ng-deep .class-status-information {
+    
+        .mat-form-field.mat-focused .mat-form-field-ripple 
+        {
+            background-color: #c8c8c8;
+        }
+        .mat-input-element:disabled {
+            color: #fff;
+        }
+    
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            background-color: #c0c0c0;
+        }
+
+        .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button, .mat-datepicker-toggle {
+            color: #efefef;
+        }
+
+        .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+            background-color: #1472ce;
+        }
+
+        .mat-checkbox-frame {
+            border-color: #f6fbff;
+        }
+
+        .mat-checkbox-disabled
+        {
+            .mat-checkbox-label
+            {
+                color: #5e7790;
+            }
+            .mat-checkbox-frame
+            {
+                border-color:#5e7790;  
+            }
+        }
+
+}
+
+
+
+.cdf-6
+{
+    color: $primary;
+    font-size: $primary-font-size - 2;
+}
+
+.btn-action {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+::ng-deep .status-information-button-set
+{
+//    text-align: right;
+}
+
+button {   
+    font-weight: 400;
+}
+
+
+

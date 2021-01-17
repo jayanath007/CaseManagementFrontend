@@ -1,0 +1,88 @@
+@import '~styles/variables.scss';
+.safe-box-item-view {
+  dps-safebox-context-menue {
+    position: fixed;
+  }
+  .safe-box-itemview {
+    color: #ffffff;
+    padding: 10px;
+    background: #043967;
+    span {
+      vertical-align: super;
+      font-size: $primary-font-size - 1;
+      font-weight: 300;
+      padding-left: 5px;
+    }
+  }
+  .safe-box-item-info {
+    padding: 20px 0px 20px 0px;
+    line-height: 13px;
+    text-align: center;
+    font-size: $primary-font-size - 2;
+    align-items: center;
+    mat-icon {
+      font-size: $primary-font-size + 26;
+      color: #de8f13e8;
+    }
+    i {
+      font-size: $primary-font-size + 46;
+      margin-bottom: 8px;
+    }
+    i.fa-folder-open-o {
+      color: #155186;
+    }
+  }
+  .safe-box-items-info {
+    padding-left: 14px; 
+    padding-top: 10px;
+    .file-type {
+      width:10%;
+      i {
+        font-size: $primary-font-size + 6;
+        margin-bottom: 8px;
+      }
+    }
+
+    .file-information {
+      width: 90%;
+      text-align: left;
+      padding-right: 2px;
+    }
+    
+    div {
+      font-size: $primary-font-size - 2;
+      margin-bottom: 2px;
+    }
+    
+  }
+  .file-info {
+    display: flex;
+    overflow: hidden;
+    margin: 1em 0;
+    color: #043967;
+    align-items: center;
+    .left {
+      text-align: left;
+      font-size: $primary-font-size - 2;
+      width: 35%;
+      line-height: 20px;
+      padding: 5px;
+      mat-icon {
+        vertical-align: sub;
+      }
+    }
+    .right {
+      text-align: left;
+      font-size: $primary-font-size - 2;
+      width: 65%;
+      line-height: 20px;
+      padding: 5px;
+      font-weight: 500;
+    }
+    .info {
+      div {
+        flex: 1;
+      }
+    }
+  }
+}

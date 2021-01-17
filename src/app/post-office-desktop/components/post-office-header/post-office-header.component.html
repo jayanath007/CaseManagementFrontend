@@ -1,0 +1,50 @@
+<div class="dps-post-office-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="dps-post-office-heading" fxLayout="row">
+    <!-- <div>
+      <i class="material-icons">
+        drafts
+      </i>
+    </div>
+    <div>
+      <h1>Post Office Inbox</h1>
+      <span>demo@dpssoftware.co.uk</span>
+    </div> -->
+    <dps-user-profile-detail [selectedDepartment]="selectedDepartment" [selectedTeamMember]="selectedTeamMember"></dps-user-profile-detail>
+  </div>
+
+  <div class="dps-post-office-forms">
+
+
+    <mat-form-field floatLabel>
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <mat-placeholder class="time_record_selector">Group</mat-placeholder>
+      <mat-select (selectionChange)="onChangeDepartment($event)" [ngModel]="selectedDepartment">
+        <!-- <mat-option>-- None --</mat-option> -->
+        <mat-option *ngFor="let department of departments" [value]="department">
+          {{department.groupName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <input type="search" matInput #searchTextInput matInput placeholder="" [value]="selectedInfo?.searchText"
+        [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)" />
+      <!-- <button *ngIf="searchTextInput.value" matSuffix mat-icon-button (click)="onSearchTextClear()">
+              <mat-icon  class="search_clear_icon">close</mat-icon>
+            </button> -->
+     </mat-form-field>
+
+    <button class="dps-post-search" matSuffix mat-icon-button (click)="onSearchTextChanged(searchTextInput.value)">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <!-- <button class="dps-post-cancel" matSuffix mat-icon-button (click)="onSearchTextChanged('')">
+      <mat-icon>clear_all</mat-icon>
+    </button> -->
+
+
+
+  </div>
+
+</div>

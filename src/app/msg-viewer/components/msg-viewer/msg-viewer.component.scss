@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+
+.dps-msg-viewer {
+  width: 100%;
+  height: 100%;
+}
+
+.no-attachment {
+  background: #da3434;
+  padding: 7px;
+  color: $primary;
+  font-size: $primary-font-size - 2;
+}

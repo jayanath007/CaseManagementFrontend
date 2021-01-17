@@ -1,0 +1,30 @@
+.dps-open-look-up,.dps-upload-attachment{
+    border-radius: 4px;
+    padding: 0px 0px 0px;
+    opacity: .7;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 15px;
+    &:hover{
+        opacity: .9;
+    }
+}
+
+.dps-open-look-up
+{
+    border: 1px solid #3271ea;
+    color: #103e6f;
+    background: #c1e0fd;
+}
+.dps-upload-attachment{
+    border: 1px solid #bda767;
+    color: #583208;
+    background: #fdeec1;
+
+}
+.done-mode{
+    font-size: 15px;
+    color: #004c00;
+}

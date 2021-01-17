@@ -1,0 +1,19 @@
+<div class="dps-compose-mail-layout" fxLayout="column">
+  <dps-compose-mail-header fxFlex="50px" (close)="onClose()" (send)="onSend()" (sendAS)="onSendAs()"
+    (discard)="onDiscard()" (draft)="onDraft()" (flagFollowUp)="onFlagFollowUp($event)"
+    (importance)="onImportance($event)" (addAttachment)="onAddAttachment($event)" (openUrlPoup)="onOpenUrlPoup()"
+    (saveAndClose)="onSaveAndClose()" [hasRecipientsList]="hasRecipientsList" [listAttachements]="listAttachements"
+    [hasEmailSendAsPermission]="hasEmailSendAsPermission" [isGoogle]="!composeItem?.flag"
+    (showRecipientsList)="onShowRecipientsList()" (subjectChange)="onSubjectChange($event)" [item]="composeItem">
+  </dps-compose-mail-header>
+  <dps-compose-mail-content #composeMailContent fxFlex="calc(100% - 50px)" [item]="composeItem"
+    [followUpText]="followUpText" (addAttachment)="onAddAttachment($event)"
+    (downloardFileAttachment)="onDownloardFileAttachment($event)" [listAttachements]="listAttachements"
+    (deleteAttachment)="onDeleteAttachment($event)" (addToRecipient)="onAddToRecipient($event)"
+    (addCcRecipient)="onAddCcRecipient($event)" (addBccRecipient)="onAddBccRecipient($event)"
+    (removeToRecipient)="onRemoveToRecipient($event)" (removeCcRecipient)="onRemoveCcRecipient($event)"
+    (removeBccRecipient)="onRemoveBccRecipient($event)" (subjectChange)="onSubjectChange($event)"
+    (bodyChange)="onBodyChange($event)" [signature]="signature" [lastInlineAttachment]="lastInlineAttachment"
+    (openAttachement)="onOpenAttachement($event)" [refItem]="refItem">
+  </dps-compose-mail-content>
+</div>

@@ -1,0 +1,130 @@
+<mat-sidenav-container (backdropClick)="onMemberNavClick()" [style.display]="activeOutlet !== 'main' ? 'none': 'block'"
+  autosize>
+  <mat-sidenav class="dps-team-member-sidenav" [disableClose]="true" *ngIf="userPermision?.isAllUsers" #teammembers
+    position="end" [mode]="memListPanelMode" [opened]="isMemberNavExpan" fxLayout="column">
+    <dps-team-member-manager #teammemberlist [teamMemberToken]="'TEAM_MEMBER_DATA_MY_TASKS'"></dps-team-member-manager>
+    <mat-list dense class="team-member-header">
+      <mat-list-item>
+        <div fxFlex="row">
+          <button mat-icon-button (click)="onMemberNavClick()">
+            <mat-icon>reorder</mat-icon>
+          </button>
+          <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+          <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+            <mat-chip> {{teamMemberCount}} </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+      [teamMemberList]="teammemberlist.teamMemberList$ | async"
+      [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async" [selected]="teammemberlist.selected$ | async"
+      (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+      (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+    </dps-team-member-list>
+  </mat-sidenav>
+  <div class="dps-my-tasks-main-contentainer" fxLayout="column">
+    <div id="my-tasks-print-section" style="display: none">
+      <div style="font-weight: normal; font-family: Roboto,' Helvetica Neue', sans-serif;">
+        <div style="border-top:1px solid black;border-bottom:1px solid black;display: flex;
+        flex-direction: row;
+        justify-content: space-between;">
+          <div>
+            <h2 style="font-size:14px" class="dps-text" *ngIf="selectedTeamMember">{{selectedTeamMember.fullName}}</h2>
+            <h2 style="font-size: 14px;
+            font-weight: 500;" class="dps-text" *ngIf="selectedDepartment">{{selectedDepartment.groupName}}</h2>
+            <h3 style="font-size:11px" class="dps-text" *ngIf="selectedTeamMember?.userEmail">Email:-
+              {{selectedTeamMember.userEmail}}</h3>
+            <h3 style="font-size:11px" class="dps-text" *ngIf="selectedTeamMember?.userMobileNo">Phone No:-
+              {{selectedTeamMember.userMobileNo}}</h3>
+          </div>
+
+          <div style="display: flex;
+      flex-direction: row;
+      padding: 15px 0px;" *ngIf="!selectedInfo?.searchText">
+            <div style="flex-direction: column;
+            display: flex;
+            padding: 0px 15px;">
+              <label>Tasks</label>
+              <span style="    text-align: center;">{{summery?.totalTaskCount}}</span>
+            </div>
+            <div style="flex-direction: column;
+            display: flex;
+            border-left: 1px solid #8795a0;
+            padding: 0px 15px;">
+              <label>Overdue</label>
+              <span style="    text-align: center;">{{summery?.totalTasksOverdue}}</span>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:13px" class="dps-text" *ngIf="selectedDepartment">Department:- {{selectedDepartment.groupName}}</h3>
+          </div>
+        </div>
+        <div style="border-bottom: 1px solid black;
+        font-size: 12px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;">
+          <h3 class="dps-text">
+            <span>{{groupMode}}</span>
+          </h3>
+          <h3 style="font-size:12px" class="dps-text" *ngIf="selectedInfo?.searchText">Search text:- {{selectedInfo?.searchText}}</h3>
+          <h3 style="font-size:12px"  class="dps-text" *ngIf="totalItem>0">{{(paginatorDef?.currentPage*paginatorDef?.itemPerPage)+1}} -
+            {{((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)>=totalItem?totalItem:((paginatorDef?.currentPage+1)*paginatorDef?.itemPerPage)}}
+            of {{totalItem}} </h3>
+        </div>
+        <div>
+          <table>
+            <tr>
+              <th *ngFor="let def of gridColoum" [hidden]="def?.extras?.hidden || !def?.extras?.label">
+                {{def?.extras?.label}}</th>
+            </tr>
+            <tr *ngFor="let item of gridData">
+              <td>{{item?.dateBy | date :'dd/MM/yyyy'}}</td>
+              <td>{{item?.taskFor}}</td>
+              <td>{{item?.client}}</td>
+              <td>{{item?.matterReferenceNo}}</td>
+              <td>{{item?.note}}</td>
+              <td>{{item?.matterDetails}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <mat-card class="dps-my-tasks-main-header">
+      <mat-card-content>
+        <div class="dps-profile">
+          <dps-user-profile-detail [selectedDepartment]="selectedDepartment" [selectedTeamMember]="selectedTeamMember">
+          </dps-user-profile-detail>
+        </div>
+        <div fxFlex="1 1 0%">
+          <dps-my-tasks-header [departmentList]="department" [userPermision]="userPermision"
+            [selectedInfo]="selectedInfo" [summery]="summery" (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+          </dps-my-tasks-header>
+        </div>
+        <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()"
+          *ngIf="!isMemberNavExpan && userPermision?.isAllUsers">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+      <div class="grid-wrapper-main" fxLayout="column">
+        <dps-my-tasks-views (groupChange)="onGroupChange($event)" [groupMode]="groupMode"
+          [gridGroupData]="gridGroupData" [selectedInfo]="selectedInfo"
+          (updateSelectedInfo)="onUpdateSelectedInfo($event)" [isLoading]="isLoading" (gridRefresh)="onGridRefresh()"
+          (gridFontSize)="onChangeGridFontSize($event)" (updateNewTaskClick)="newTaskClick()" (print)="onPrint()">
+        </dps-my-tasks-views>
+        <dps-my-tasks-grid [gridGroupData]="gridGroupData" (loadMore)="onLoadMore($event)" [groupMode]="groupMode"
+          fxFlex="calc(100%-80px)" [isLoading]="isLoading" [columnDef]="gridColoum" [paginatorDef]="paginatorDef"
+          class="grid-data {{fontSizeClass}}" [gridData]="gridData" [selectedInfo]="selectedInfo"
+          [totalItem]="totalItem" (selectedGroupRowChange)="onSelectedGroupRowChange($event)"
+          (rowExpand)="onRowExpand($event)" (viewChange)="onViewChange($event)"
+          (clickGridButton)="onClickGridButton($event)" (openAddTaskWithFile)="onOpenAddTaskWithFile($event)">
+        </dps-my-tasks-grid>
+      </div>
+    </mat-card>
+  </div>
+</mat-sidenav-container>

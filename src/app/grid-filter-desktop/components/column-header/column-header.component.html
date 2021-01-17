@@ -1,0 +1,16 @@
+<div class="dps-column-header" (click)="onHeaderClick($event)" *ngIf="!def?.extras?.hidden" fxLayout="row"
+  fxLayoutAlign="start center" class="{{def?.extras?.label}}">
+  <div class="column-header" class="{{def?.extras?.label}}" fxFlex="grow" [style.textAlign]="def?.extras?.textAlign">
+    <span [innerHtml]="def?.extras?.label"></span>
+    <i class="fa fa-sort-alpha-asc" *ngIf="!def.extras?.disableShort && def?.sort?.dir === 'asc'"
+      aria-hidden="true"></i>
+    <i class="fa fa-sort-alpha-desc" *ngIf="!def.extras?.disableShort && def?.sort?.dir === 'desc'"></i>
+  </div>
+  <dps-grid-field-filter *ngIf="!def?.extras?.filterHidden" [anchor]="filterAnchor" (click)="$event.preventDefault()"
+    fxflex="nogrow" (filter)="onFilterApply($event)" (clear)="onFilterClear($event)" [active]="def?.filterActive"
+    [filterGroup]="def?.filter">
+    <!-- Done by lakmal - 19.01.2018 -->
+    <mat-icon class="filter-icon">{{def?.filterActive ? 'clear_all':'filter_list'}}</mat-icon>
+    <!-- <mat-icon class="filter-icon" *ngIf="def?.filterActive">clear_all</mat-icon> -->
+  </dps-grid-field-filter>
+</div>

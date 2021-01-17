@@ -1,0 +1,11 @@
+<div class="dps-main-nav-list dps-black-gray-scroll">
+  <mat-nav-list>
+    <div *ngFor="let item of data" class="{{'dps-'+item.icon+'-nav'}}" [ngClass]="{'active': item?.isSelected}">
+      <mat-list-item matTooltipPosition="after" *ngIf="item.group !== 'opencase'" (click)="onItemClick(item, $event)"
+        [matTooltip]="item.label">
+        <mat-icon class="dps-nav-icon" matListIcon>
+          {{(isPlotUser$|async) && item.id === 'client_search' ? 'corporate_fare' : item.icon}}</mat-icon>
+      </mat-list-item>
+    </div>
+  </mat-nav-list>
+</div>

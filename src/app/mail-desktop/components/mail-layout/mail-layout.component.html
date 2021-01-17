@@ -1,0 +1,124 @@
+<mat-sidenav-container *ngIf="!isFolderLoading && initView === true" autosize
+  [style.display]="activeOutlet !== 'mail'  ? 'none': 'block'">
+  <mat-sidenav #minifoldermenue [disableClose]="true" [opened]="menuMode === SideBarMenuMode.Compact" mode="side"
+    class="dps-mail-mini-sidenav">
+    <div>
+      <mat-nav-list class="dps-compose-btn-wrap-around">
+        <mat-list-item class="dps-folder-menu-toggle-btn" (click)="onFolderMenuToggle($event)">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </mat-list-item>
+        <mat-list-item (click)="onNewMail($event)" class="dps-new-mail-btn" matTooltip="Compose"
+          matTooltipPosition="after">
+          <mat-icon>edit</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-nav-list>
+        <mat-list-item (click)="onFolderMenuToggle($event)" matTooltip="Search Mail" matTooltipPosition="after"
+          class="dps-mail-search-btn">
+          <mat-icon>search</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+    <div fxFlex="1 1 auto" class="dps-mail-folder-list dps-white-gray-scroll">
+      <dps-welknown-folder-list-view dpsDroppable dropZone="mailFolder-me" (onDragEnter)="onFolderMenuToggle($event)"
+        [folders]="welknownFolders" (itemSelect)="onFolderSelect($event)" [isGroupMode]="isGroupMode">
+      </dps-welknown-folder-list-view>
+    </div>
+  </mat-sidenav>
+  <div class="dps-mail-content">
+    <mat-sidenav-container autosize [style.display]="activeOutlet !== 'mail'  ? 'none': 'block'">
+
+      <mat-sidenav #foldermenue mode="side" [disableClose]="true" [opened]="menuMode === SideBarMenuMode.Full"
+        class="dps-mail-sidenav">
+        <div fxLayout="column" class="dps-mail-sidenav-content">
+          <div fxLayout="column" fxflex="175px">
+            <mat-list class="dps-compose-btn-wrap-around">
+              <mat-list-item class="dps-compose-btn">
+                <span class="btn-name" matLine *ngIf="!isGroupMode">
+                  <i class="fa fa-envelope" aria-hidden="true"></i> {{selectedFolder?.data.displayName}}
+                </span>
+                <span class="btn-name" matLine *ngIf="isGroupMode" [title]="selectedGroup?.data.EmailAddress">
+                  <i class="material-icons">group</i><span>{{selectedGroup?.data.displayName}}</span>
+                </span>
+                <button mat-icon-button (click)="onFolderMenuToggle($event)" class="dps-folder-menu-toggle-btn">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </button>
+              </mat-list-item>
+
+              <mat-list-item class="dps-compose-new-mail">
+                <button fxFlex="1 1 auto" mat-button (click)="onNewMail($event)" class="md-elevation-z2">
+                  <span>
+                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Compose</span>
+                </button>
+              </mat-list-item>
+            </mat-list>
+            <dps-mail-search-input fxFlex="41px" [isSearching]="isSearching"
+              (searchViewChange)="onSearchViewChange($event,searchOptionsViewManage)"
+              class="dps-mail-folder-list-search"></dps-mail-search-input>
+            <dps-search-mail-from-list-manager #searchMailFromList></dps-search-mail-from-list-manager>
+            <dps-search-options-view-manager #searchOptionsViewManage [selectedFolder]="selectedFolder">
+            </dps-search-options-view-manager>
+          </div>
+
+          <div fxFlex="calc(100%-175px)" class="dps-mail-folder-list dps-white-gray-scroll" *ngIf="!isSearching">
+            <dps-mailbox-item *ngFor="let mailBox of mailBoxes" [mailBox]="mailBox" [isGroupMode]="isGroupMode"
+              [profile]="profile" (removeSharedFolder)="onRemoveSharedFolder($event)"
+              (addSharedFolder)="onAddSharedFolder($event)" (mailboxToggle)="onMailboxToggle($event)"
+              (mailboxRefresh)="onMailboxRefresh($event)" (moveItems)="onMoveItems($event)"
+              (itemRefresh)="onFolderRefresh($event)" (newRootFolder)="onNewRootFolder($event)"
+              (itemEditOperations)="onFolderEditOperation($event)" (itemToggleExpand)="onFolderToggle($event)"
+              (itemSelect)="onFolderSelect($event)" [folders]="folders" [deleteItemsFolder]="deleteItemsFolder">
+            </dps-mailbox-item>
+            <dps-groups-list [groups]="groups" [isExpanded]="isGroupExpanded" [isGroupMode]="isGroupMode"
+              (groupsToggle)="onGroupsToggle()" (selectGroup)="onSelectGroup($event)"></dps-groups-list>
+          </div>
+          <div fxFlex="calc(100%-175px)" *ngIf="isSearching">
+            <dps-search-options-view [fromList]="searchMailFromList.people$ | async "
+              [searchedPeople]="searchMailFromList.searcheUsers$| async"
+              (searchDirectory)="searchMailFromList.searcheUsers($event)"
+              (exitSearch)="searchOptionsViewManage.onExitSearch()"
+              (searchViewChange)="searchOptionsViewManage.onSearchViewChange($event)"
+              (onCurrentFolderSelect)="onCurrentFolderSelect()"></dps-search-options-view>
+          </div>
+
+          <!-- <div class="dps-mail-router-links" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-button matTooltip="Mail" matTooltipPosition="above" class="dps-mail-router-selected-link">
+            <mat-icon>mail_outline</mat-icon>
+          </button>
+          <button mat-button matTooltip="Task" matTooltipPosition="above">
+            <mat-icon>content_paste</mat-icon>
+          </button>
+          <button mat-button matTooltip="Calendar" matTooltipPosition="above">
+            <mat-icon>today</mat-icon>
+          </button>
+        </div> -->
+        </div>
+
+      </mat-sidenav>
+      <dps-module-layout moduleColor="mail-primary" contentPadding="0px 20px 20px 2px" layoutHeaderHeight="30px"
+        contentHeaderHeight="90px">
+        <div dps-layout-content class="dps-mail-main-content">
+          <dps-sticky-folder-state-manager></dps-sticky-folder-state-manager>
+          <router-outlet name="item"></router-outlet>
+        </div>
+      </dps-module-layout>
+      <!-- <div class="dps-mail-main-content" fxLayout="column">
+        <div fxFlex="calc(100%-50px)" class="dps-mail-main-content-forground">
+          <mat-card class="dps-white-gray-scroll">
+            <dps-sticky-folder-state-manager></dps-sticky-folder-state-manager> -->
+      <!-- <div [ngClass]="{'dps-mail-reading-pane-right':(!readingPaneMode || readingPaneMode==='right')}"> -->
+      <!-- <router-outlet name="item"></router-outlet> -->
+      <!-- </div> -->
+      <!-- </mat-card>
+        </div>
+        <div class="dps-mail-main-content-background">
+          <div>
+
+          </div>
+        </div>
+      </div> -->
+
+    </mat-sidenav-container>
+  </div>
+</mat-sidenav-container>
+<mat-spinner *ngIf="isFolderLoading"></mat-spinner>

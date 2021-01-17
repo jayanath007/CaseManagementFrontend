@@ -1,0 +1,62 @@
+<div class="input-section seperator">
+  <h3>Buying Information </h3>
+  <div fxLayout="row" class="dps-radio-btn">
+    <mat-radio-group fxLayoutGap="2em" [ngModel]="propertyQuRequest[key.isBuyHouse]"
+      (change)="onChnageProQuoteRequest(key.isBuyHouse, $event.value)">
+      <mat-radio-button class="example-radio-button" [value]="true">
+        House
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="false">
+        Flat
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="2em" class="general-stripped-seperator">
+    <mat-checkbox [ngModel]="propertyQuRequest[key.buyLeasehold] === leaseHold.Yes"
+      (change)="onChnageProQuoteRequest(key.buyLeasehold, ($event.checked === true ? leaseHold.Yes : leaseHold.No) )"
+      color="primary">
+      <label>Buying leasehold</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'shared_ownership', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.buyShare]" (change)="onChnageProQuoteRequest(key.buyShare, $event.checked)"
+      color="primary">
+      <label>{{costDescription('p', 'shared_ownership', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'mortgage', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.martgage]" (change)="onChnageProQuoteRequest(key.martgage, $event.checked)"
+      color="primary">
+      <!-- <label>Will you need a mortgage?</label> -->
+      <label>{{costDescription('p', 'mortgage', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+    <mat-checkbox [ngModel]="propertyQuRequest[key.isSecondProperty]"
+      (change)="onChnageProQuoteRequest(key.isSecondProperty, $event.checked)" color="primary">
+      <label>Second property</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'first_time_buyer', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.isFirstTimeBuyer]"
+      (change)="onChnageProQuoteRequest(key.isFirstTimeBuyer, $event.checked)" color="primary">
+      <!-- <label>First time buyer</label> -->
+      <label>{{costDescription('p', 'first_time_buyer', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'new_Build', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.isNewBuild]" (change)="onChnageProQuoteRequest(key.isNewBuild, $event.checked)"
+      color="primary">
+      <!-- <label>New Build</label> -->
+      <label>{{costDescription('p', 'new_Build', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'buying_to_let', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.isBuyToLet]" (change)="onChnageProQuoteRequest(key.isBuyToLet, $event.checked)"
+      color="primary">
+      <!-- <label>Buy To Let</label> -->
+      <label>{{costDescription('p', 'buying_to_let', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost('p', 'Right_to_buy', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.isRightToBuy]"
+      (change)="onChnageProQuoteRequest(key.isRightToBuy, $event.checked)" color="primary">
+      <!-- <label>Right to buy</label> -->
+      <label>{{costDescription('p', 'Right_to_buy', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+  </div>
+
+
+</div>

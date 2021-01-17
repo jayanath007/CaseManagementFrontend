@@ -1,0 +1,15 @@
+.dps-add-edit-group-content {
+  padding: 20px 10px;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .dps-mail-enabled {
+    height: 70px;
+  }
+}

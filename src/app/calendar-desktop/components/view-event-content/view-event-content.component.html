@@ -1,0 +1,150 @@
+<div class="dps-view-event-content" fxLayout="column">
+  <div class="calender_event_msg">
+    <!-- Dps-event layout message in header  -->
+    <div class="dps-message" *ngIf="isPastEvent">
+      <div>
+        <span matLine class="dps-event-message" *ngIf="event.data.type !== 'seriesMaster'">This event occurs in the past.</span>
+        <span matLine class="dps-event-message" *ngIf="event.data.type === 'seriesMaster'">All instances of this repeating event occur in the past.</span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event.data.isCancelled">
+      <div>
+        <span matLine class="dps-event-message">The event was canceled.</span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event.data.responseStatus &&(event.data.responseStatus.time | date : 'yyyy')!=='0001' &&
+        (event.data.responseStatus.response === 'tentativelyAccepted' || event.data.responseStatus.response === 'accepted' || event.data.responseStatus.response === 'declined')">
+      <div>
+        <span matLine class="dps-event-message">{{event.data.responseStatus.response==='accepted'?'Accepted':(event.data.responseStatus.response==='tentativelyAccepted'?'Tentatively
+          accepted':'Declined')}} on {{event.data.responseStatus.time | date : 'EEE dd/MM/yyyy h:mm a'}}.</span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event.data.seriesMasterId">
+      <div>
+        <span matLine class="dps-event-message">You're viewing a single occurence of a series.
+          <a class="dps-open-series" (click)="onOpenSeries()">View series.</a>
+        </span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event.data.type==='seriesMaster'">
+      <div>
+        <span matLine class="dps-event-message">You're viewing the series.</span>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="1 1 auto" fxLayout="row">
+    <div class="calender_evt" fxFlex="1 0 560px">
+      <mat-list class="calender_evt_details" dense>
+        <span class="details">Details</span>
+        <mat-list-item class="event_container">
+          <span matLine class="dps_event-info">{{event.data.subject ? event.data.subject : '(No title has been added.)'}}</span>
+        </mat-list-item>
+        <mat-list-item class="dps_event_time">
+          <h4 matLine>
+            <span class="when">When: </span>
+            <span *ngIf="event.data.start && event.data.type!=='seriesMaster'" class="dps_evt_details">{{event.data.start.dateTime | date : 'EEE dd/MM/yyyy h:mm a'}}</span>
+            <span *ngIf="event.data.start && event.data.end && event.data.type!=='seriesMaster'" class="dps_evt_details">{{(event.data.start.dateTime | date : 'dd/MM/yyyy') === (event.data.end.dateTime | date : 'dd/MM/yyyy') ? ' -
+              '+(event.data.end.dateTime | date : 'shortTime'):' to '+(event.data.end.dateTime | date : 'EEE dd/MM/yyyy h:mm
+              a')}}
+            </span>
+            <span *ngIf="event.data.type==='seriesMaster'" class="dps_evt_details">
+              Occurs
+              <span *ngIf="event.data.recurrence.pattern.type==='daily'">
+                every {{event.data.recurrence.pattern.interval===1?'day':(event.data.recurrence.pattern.interval===2?'other day':event.data.recurrence.pattern.interval+'
+                days')}}
+              </span>
+
+              <span *ngIf="event.data.recurrence.pattern.type==='weekly'">
+                every {{event.data.recurrence.pattern.interval===1?'':(event.data.recurrence.pattern.interval===2?'other':event.data.recurrence.pattern.interval+'
+                weeks on')}}
+                <span *ngFor="let daysOfWeek of event.data.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                  <span *ngIf="event.data.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                  <span> {{daysOfWeek|titlecase}}{{event.data.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                </span>
+              </span>
+
+              <span *ngIf="event.data.recurrence.pattern.type==='absoluteMonthly'">
+                day {{event.data.recurrence.pattern.dayOfMonth}} of every {{event.data.recurrence.pattern.interval===1?'month':(event.data.recurrence.pattern.interval===2?'other
+                month':event.data.recurrence.pattern.interval+' months')}}
+              </span>
+
+              <span *ngIf="event.data.recurrence.pattern.type==='relativeMonthly'">
+                every {{event.data.recurrence.pattern.interval===1?'month':(event.data.recurrence.pattern.interval===2?'other month':event.data.recurrence.pattern.interval+'
+                months')}} on the {{event.data.recurrence.pattern.index}}
+                <span *ngFor="let daysOfWeek of event.data.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                  <span *ngIf="event.data.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                  <span> {{daysOfWeek|titlecase}}{{event.data.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                </span>
+              </span>
+
+              <span *ngIf="event.data.recurrence.pattern.type==='absoluteYearly'">
+                every {{'0000-'+event.data.recurrence.pattern.month+'-1' | date : 'MMMM'}} {{event.data.recurrence.pattern.dayOfMonth}}
+              </span>
+              <!-- {{event.data.recurrence.pattern.index==='first'?'':event.data.recurrence.pattern.index}} -->
+              <span *ngIf="event.data.recurrence.pattern.type==='relativeYearly' &&  event.data.recurrence.pattern.month">
+                every {{event.data.recurrence.pattern.interval===1?'year':(event.data.recurrence.pattern.interval===2?'other year':event.data.recurrence.pattern.interval+'
+                years')}} on the {{event.data.recurrence.pattern.index}}
+                <span *ngFor="let daysOfWeek of event.data.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                  <span *ngIf="event.data.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                  <span> {{daysOfWeek|titlecase}}{{event.data.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                </span>
+                of {{'0000-'+event.data.recurrence.pattern.month+'-1' | date : 'MMMM'}}
+              </span>
+
+              <span>from {{(event.data.start.dateTime | date : 'h:mm a')}} to {{(event.data.end.dateTime | date : 'h:mm a')}}</span>
+              <span>effective {{(event.data.recurrence.range.startDate | date : 'EEE dd/MM/yyyy')}}</span>
+              <span *ngIf="event.data.recurrence.range.type==='endDate'">until {{(event.data.recurrence.range.endDate | date : 'EEE dd/MM/yyyy')}}</span>
+            </span>
+          </h4>
+          <h4 matLine>
+            <span class="where">Where: </span>
+            <span class="dps_evt_details"> {{event.data.location?.displayName ? event.data.location.displayName:'No location has been added.'}}</span>
+          </h4>
+        </mat-list-item>
+        <div fxLayout="row" fxLayoutAlign=" baseline" *ngIf="event.isEditable">
+          <mat-form-field class="view-event-form-controller">
+            <mat-placeholder class="dps-lable">&nbsp; Reminder</mat-placeholder>
+            <mat-select [value]="event.data.reminderMinutesBeforeStart" (selectionChange)="onReminderChange($event)">
+              <mat-option *ngFor="let reminder of reminderList" [value]="reminder.val">
+                {{reminder.lable}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="view-event-form-controller">
+            <mat-placeholder class="dps-lable">&nbsp; Show as</mat-placeholder>
+            <mat-select [value]="event.data.showAs" (selectionChange)="onShowAsStateChange($event)">
+              <mat-option *ngFor="let status of freeBusyStatusList" [value]="status.val">
+                <span class="{{status.val}}">&nbsp;{{status.lable}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-checkbox [checked]="event.data.sensitivity!=='normal'" *ngIf="!event.data.seriesMasterId" (change)="onIsPrivateChange($event)"
+            color="primary" class="checkbox-label">Private</mat-checkbox>
+        </div>
+      </mat-list>
+      <div fxLayout="row" *ngIf="event.data.hasAttachments && attachments && attachments.length > 0" class="dps-attachment-list">
+        <dps-attachment-list [attachments]="attachments" [companyCode]="companyCode" (openMatter)="onOpenMatter($event)" (openAttachement)="onOpenAttachement($event)"
+          (downloardFileAttachment)="onDownloardFileAttachment($event)"></dps-attachment-list>
+      </div>
+      <div fxLayout="row" class="dps-mail-body">
+        <div #mailBody fxFlex="calc(100%-20px)">
+            <div> </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="0 1 560px" class="calender_people">
+      <span class="details">Organizer</span>
+      <mat-list dense>
+        <dps-attendee-item [attendee]="event.data.organizer" [hasRemove]="false"></dps-attendee-item>
+      </mat-list>
+      <span class="details">Attendees</span>
+      <mat-list dense>
+        <h3 mat-subheader *ngIf="requiredAttendees && requiredAttendees.length>0">Required</h3>
+        <dps-attendee-item *ngFor="let attendee of requiredAttendees" [attendee]="attendee" [hasRemove]="false"></dps-attendee-item>
+        <h3 mat-subheader *ngIf="optionalAttendees && optionalAttendees.length>0">Optional</h3>
+        <dps-attendee-item *ngFor="let attendee of optionalAttendees" [attendee]="attendee" [hasRemove]="false"></dps-attendee-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

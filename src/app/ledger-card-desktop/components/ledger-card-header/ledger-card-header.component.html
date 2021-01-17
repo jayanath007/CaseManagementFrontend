@@ -1,0 +1,24 @@
+<div class="search-option" fxLayout="row">
+  <div class="search-input">
+    <mat-form-field class="matter-general-search" floatLabel="never">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <mat-placeholder class="matter-ref">{{resoleModuleName('matter_search')|async}} Ref</mat-placeholder>
+      <input type="search" #matterRef matInput [formControl]="inputCtrl"
+        (blur)="getSearchMatterDetails($event, matterRef.value)"
+        (keyup)="getSearchMatterDetails($event, matterRef.value)" [value]="matterData?.matterReferenceNo" />
+    </mat-form-field>
+  </div>
+
+  <button mat-icon-button (click)="onOpenMatterSearch(matterRef.value)" class="ledger_card_search">
+    <mat-icon class="search-icon">search</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="onOpenAllMattersPopup()" *ngIf="allMatterCount > 1"
+    class="ledger_card_search mat-elevation-z">
+    <mat-icon class="mat-icon material-icons">person</mat-icon>
+
+  </button>
+  <button mat-icon-button (click)="onOpenMatter()" matTooltip="Open Matter" *ngIf="matterData?.matterReferenceNo"
+    class="dps_ledger_matter_icon">
+    <mat-icon>folder</mat-icon>
+  </button>
+</div>

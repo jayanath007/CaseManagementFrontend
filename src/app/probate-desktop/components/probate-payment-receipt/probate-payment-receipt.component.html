@@ -1,0 +1,47 @@
+  <div fxLayout="row wrap" *ngIf="openType === 'payment'" fxLayoutAlign="space-around">
+    <mat-form-field class="example-full-width">
+      <input matInput #paymentDetail (blur)="onPaymentDetails(paymentDetail.value)" placeholder="Details">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [ngModel]=" transactionsEditRow?.soldDate | date:'yyyy-MM-dd'"
+        (dateChange)="onPaymentDate($event.value)" placeholder="Payment Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput #paymentAmount (blur)="onPaymentAmount(paymentAmount.value)" [value]="transactionsEditRow?.amount"
+        placeholder="Amount">
+    </mat-form-field>
+  </div>
+
+
+
+  <div fxLayout="row wrap" *ngIf="openType === 'receipt'" fxLayoutAlign="space-around">
+    <mat-form-field>
+      <mat-select placeholder="Select" (selectionChange)="onChangeRecieptType($event.value)">
+        <mat-option [value]="receiptType.CapitalReceipts">CapitalReceipts</mat-option>
+        <mat-option [value]="receiptType.QuotedInvestments">QuotedInvestments</mat-option>
+        <mat-option [value]="receiptType.TaxedInterest">TaxedInterest</mat-option>
+        <mat-option [value]="receiptType.UntaxedInterest">UntaxedInterest</mat-option>
+        <mat-option [value]="receiptType.RentIncome">RentIncome</mat-option>
+        <mat-option [value]="receiptType.NonTaxable">NonTaxable</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput #recieptDetail (blur)="onRecieptDetails(recieptDetail.value)" placeholder="Details">
+    </mat-form-field>
+    <mat-form-field>
+      <!-- [ngModel]=" ss | date:'yyyy-MM-dd'" -->
+      <input matInput [matDatepicker]="picker1" (dateChange)="onRecieptDate($event.value)" placeholder="Date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput #recieptAmount (blur)="onRecieptAmount(recieptAmount.value)" placeholder="Amount">
+    </mat-form-field>
+  </div>
+
+  <div fxLayoutGap="1em" class="dps-tab-container-btn"> <button class="dps-save" mat-stroked-button color="primary"
+      (click)="onSubmitData()">Save</button>
+    <button class="dps-cancel" mat-stroked-button color="primary" (click)="onCancel()">Cancel</button></div>

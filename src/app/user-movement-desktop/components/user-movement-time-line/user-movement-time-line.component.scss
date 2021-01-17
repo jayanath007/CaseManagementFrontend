@@ -1,0 +1,419 @@
+@import '~styles/variables.scss';
+
+.dps-outlook-time-line {
+  border-top: 1px solid #b9b9b9;
+}
+
+.dps-team-past-event,
+.dps-outlook-past-event {
+  background-color: #b3b3b3 !important;
+}
+
+
+.dps-team-future-event,
+.dps-outlook-future-event {
+  background-color: #b88b48 !important;
+}
+
+.dps-team-current-event,
+.dps-outlook-current-event {
+  background-color: #587dad;
+}
+
+.dps-event-title-Line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // display: flex;
+  // justify-content: space-between;
+  width: inherit;
+  display: unset !important;
+}
+
+.dps-user-movment-item-1 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-1;
+}
+
+.dps-user-movment-item--1 .dps-user-movement-time-line {
+  background-image: linear-gradient(55deg, #dde0eb 33.33%, #dce9fc 33.33%, #c7d5e9 50%, #dde0eb 50%, #dde0eb 83.33%, #b2c1d6 83.33%, #aebccf 100%);
+  background-size: 3.66px 5.23px;
+}
+
+.dps-user-movment-item-2 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-2;
+}
+
+.dps-user-movment-item-3 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-3;
+}
+
+.dps-user-movment-item-4 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-4;
+}
+
+.dps-user-movment-item-5 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-5;
+}
+
+.dps-user-movment-item-6 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-6;
+}
+
+.dps-user-movment-item-7 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-7;
+}
+
+.dps-user-movment-item-8 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-8;
+}
+
+.dps-user-movment-item-9 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-9;
+}
+
+.dps-user-movment-item-10 .dps-user-movement-time-line {
+  background-color: $dps-user-movment-item-10;
+}
+
+
+// .dps-team-current-event{
+//   .dps-user-movment-item-1,.dps-user-movment-item-2,.dps-user-movment-item-3,
+//   .dps-user-movment-item-4,
+//   .dps-user-movment-item-5,
+//   .dps-user-movment-item-6,
+//   .dps-user-movment-item-7,
+//   .dps-user-movment-item-8,
+//   .dps-user-movment-item-9,
+//   .dps-user-movment-item-10{
+//     .dps-user-movement-time-line{
+//       background-color: #587dad;
+//     }
+//   }
+// }
+
+.dps-team-future-event {
+
+  .dps-user-movment-item-1,
+  .dps-user-movment-item-2,
+  .dps-user-movment-item-3,
+  .dps-user-movment-item-4,
+  .dps-user-movment-item-5,
+  .dps-user-movment-item-6,
+  .dps-user-movment-item-7,
+  .dps-user-movment-item-8,
+  .dps-user-movment-item-9,
+  .dps-user-movment-item-10 {
+    .dps-user-movement-time-line {
+      background-color: #ac803e;
+    }
+  }
+}
+
+
+
+
+
+// .dps-user-movment-item .dps-user-movement-time-line{
+//   background-color: $dps-user-movment-item-11;
+// }
+.dps-user-movement-time-line {
+  width: 100%;
+  // height: 5px;
+}
+
+.dps-user-movment-time-line-outer {
+  position: relative;
+  height: 100%;
+  white-space: nowrap;
+  width: fit-content;
+  justify-content: center;
+}
+
+.dps-user-movment-time-line-outer {
+  ::ng-deep .tooltip {
+    font-size: 16px;
+  }
+}
+
+.dps-user-movment-time {
+  //   justify-content: space-around;
+  font-size: 12px;
+  //   padding-bottom: 3px;
+  color: #8f9da6;
+}
+
+.dps-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 120px;
+  position: relative;
+  top: 4px;
+}
+
+.dps-event-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 30px);
+  position: relative;
+  top: 4px;
+  color: #d0d3d8;
+}
+
+.dps-user-movment-status {
+  font-size: 13px;
+  padding-top: 3px;
+  // display: inline-block;
+  padding: 8px 3px;
+}
+
+.dps-event-title {
+  color: #d0d3d8;
+}
+
+.dps-user-movment-time-gap {
+  font-size: 12PX;
+  font-weight: 700;
+  color: #cdd7df;
+  // padding-top: 3px;
+
+}
+
+.dps-non-allocated-time {
+  padding: 17px 0px;
+}
+
+.dps-user-movment-time-icon {
+  font-size: 17px;
+  color: #395468;
+  position: relative;
+  bottom: 27.5px;
+}
+
+.dps-more-item .dps-user-movement-time-line {
+  position: relative;
+  bottom: 27px;
+}
+
+.dps-user-movment-time-line-inner {
+  display: -webkit-inline-box;
+  height: 30px;
+  position: relative;
+  border-left: 1px solid #b9bfc5;
+  width: 150px;
+}
+
+.dps-user-movment-time-line-inner-wrapper {
+  display: -webkit-inline-box;
+  width: -webkit-fill-available;
+}
+
+.dps-infor-hover {
+  position: relative;
+  bottom: 27.5px;
+}
+
+
+.dps-user-movment-indicator {
+  font-size: 12px;
+  padding: 0px 4px;
+}
+
+.dps-user-movment-overlap {
+  vertical-align: middle;
+  border-radius: unset !important;
+  color: #ced5da;
+  font-size: 17px !important;
+}
+
+.dps-user-movment-icon {
+  border-radius: unset !important;
+  color: #ced5da;
+  font-size: 17px !important;
+  padding: 7px 0px 0px 5px !important;
+}
+
+.dps-user-movement-time-line {
+  display: flex;
+  flex-direction: row;
+  // justify-content: space-between;
+  height: 31px;
+  border-bottom: 1px solid #86b2ce;
+}
+
+// style="display: -webkit-inline-box;
+// padding: 23px 0px 11px;"
+
+// .dps-user-movment-time-line-inner-wrapper {
+
+//   &.busy {
+//     background: $calendar-day-busy;
+//   }
+
+//   &.free {
+//     background: $calendar-day-free;
+//   }
+
+//   &.tentative {
+//     background: $calendar-day-tentative;
+//   }
+
+//   &.oof {
+//     background: $calendar-day-oof;
+//   }
+
+//   &.workingElsewhere {
+//     background: $calendar-day-workingElsewhere;
+//   }
+
+//   &.unknown {
+//     background: $calendar-day-unknown;
+//   }
+
+//   &.overlap {
+//     background: #9d8e3b;
+//   }
+// }
+
+.dps-mat-menu-item-icon {
+  &.busy {
+    background: #ad4259;
+  }
+
+  &.free {
+    background: #1a81ba;
+  }
+
+  &.tentative {
+    background: #752c69;
+    ;
+  }
+
+  &.oof {
+    background: #bb8e14;
+  }
+
+  &.workingElsewhere {
+    background: #2c8533;
+  }
+
+  &.unknown {
+    background: #ad9115;
+  }
+
+  &.overlap {
+    background: #887a29;
+  }
+}
+
+.dps-team-events-section {
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid #b9bfc5;
+  width: 150px;
+}
+
+.dps-calender-events-section {
+  display: flex;
+
+  .inner {
+    display: inherit;
+  }
+}
+
+// .dps-calender-events-section {
+//   background-image: linear-gradient(55deg, #dde0eb 33.33%, #dce9fc 33.33%, #c7d5e9 50%, #dde0eb 50%, #dde0eb 83.33%, #b2c1d6 83.33%, #aebccf 100%);
+//   background-size: 3.66px 5.23px;
+//   // border-top: 2px solid #909bb5;
+// }
+
+.dps-empty-event {
+  // background-image: linear-gradient(135deg, #e4e7ed 25%, #d0d4d9 25%, #d0d4d9 50%, #e4e7ed 50%, #e4e7ed 75%, #d0d4d9 75%, #d0d4d9 100%);
+  // background-size: 28.28px 28.28px;
+  background-image: linear-gradient(55deg, #dde0eb 33.33%, #dce9fc 33.33%, #c7d5e9 50%, #dde0eb 50%, #dde0eb 83.33%, #b2c1d6 83.33%, #aebccf 100%);
+  background-size: 3.66px 5.23px;
+  opacity: .6;
+  height: 20px;
+  display: flex;
+  justify-content: left;
+  font-size: 12px;
+  padding-top: 10px;
+  color: #91959c;
+
+  // padding-left: 4px;
+  &.dps-no {
+    border-left: 1px solid #b9bfc5;
+    width: 150px;
+
+    span {
+      padding-left: 4px;
+    }
+  }
+
+}
+
+
+.dps-empty-event {
+  .time {
+    color: #000;
+  }
+}
+
+.dps-menu-text {
+  margin: 0px;
+  padding: 0px 12px;
+
+  &.location {
+    i {
+      font-size: 11px;
+      color: #53a421;
+      vertical-align: middle;
+    }
+
+    span {
+      font-size: 12px;
+      color: #375e0c;
+    }
+  }
+}
+
+.dps-mat-menu-item {
+  ::ng-deep.mat-list-item-content {
+    padding: 0 0;
+    width: -webkit-fill-available;
+  }
+
+  .dps-mat-menu-item-icon {
+
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: -webkit-fill-available;
+  }
+
+}
+
+.dps-mat-menu-item:nth-child(2n) {
+  background-color: #eff0f1;
+  display: flex;
+
+}
+
+.dps-mat-menu-item:nth-child(2n+1) {
+  background-color: #c1d3e285;
+  display: flex;
+}
+
+.dps-menu-text-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: calc(100% - 30px);
+}
+
+.mat-nav-list .mat-list-item:hover {
+  background: rgba(0, 0, 0, .04);
+}

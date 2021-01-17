@@ -1,0 +1,79 @@
+<div [@.disabled]="true" [ngClass]="{ 'dps-group-view-grid' : selectedGroup !== groupMode.Default }" fxLayout="column"
+  fxFlex="calc(100%-40px)" class="dps-white-gray-scroll dps-scroll work-done-selected">
+  <mat-accordion [multi]="false">
+    <mat-expansion-panel [expanded]="item?.diary_UID === expandedRow?.diary_UID"
+      *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even"
+      [ngClass]="item?.diary_UID === expandedRow?.diary_UID?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+      class="mat-elevation-z work-done-expanded-row">
+      <mat-expansion-panel-header class="expansion-panelgrid-header" (click)="gridRowExpan(item, $event)">
+        <mat-panel-title class="grid-panel-title">
+          <div fxLayout class="grid-data">
+            <div class="row-data" [fxFlex]="getFxFlexProperty(0)"></div>
+            <div class="row-data wrk_done_date" [fxFlex]="getFxFlexProperty(1)"
+              innerHTML="{{item?.dateDone | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data wrk_done_by" [fxFlex]="getFxFlexProperty(2)"
+              innerHTML="{{item?.by | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data wrk_done_type" (click)="onOpenDocument($event,item)" [fxFlex]="getFxFlexProperty(3)">
+              <mat-icon class="wrkdone_type_file" matTooltipPosition="right" matTooltip="{{item?.letter_name}}">
+                <i [ngClass]="item?.letter_name | attachmentIcon"><span></span></i>
+              </mat-icon>
+            </div>
+            <div class="row-data wrk_done_ref" [fxFlex]="getFxFlexProperty(4)"
+              innerHTML="{{item?.matterReferenceNo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <!-- <div class="row-data wrk_done_for" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{item?.for | seacrhTextHighligh : selectedInfo?.searchText}}"></div> -->
+            <div class="row-data wrk_done_client" [fxFlex]="getFxFlexProperty(5)"
+              innerHTML="{{item?.client | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(6)"
+              innerHTML="{{item?.note | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(7)"
+              innerHTML="{{item?.details | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data wrk_done_email" [fxFlex]="getFxFlexProperty(8)"
+              innerHTML="{{item?.emailFrom | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+            <div class="row-data wrk_done_email" [fxFlex]="getFxFlexProperty(9)"
+              innerHTML="{{item?.emailTo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="row">
+        <dps-work-done-grid-button-details [selectedMatterData]="item" (clickGridButton)="onClickGridButton($event)">
+        </dps-work-done-grid-button-details>
+        <span></span>
+        <span fxFlex="1 1 auto"></span>
+        <div>
+          <div fxLayout="row" fxFlexAlign="center center" fxFlex="1 1 auto" class="dps-actions">
+            <div fxLayout="column" class="dps-matter-button">
+              <span class="value" *ngIf="item.matterFinance?.dateLastBill">
+                {{item?.matterFinance?.dateLastBill | date :'dd/MM/yyyy'}}</span>
+              <span *ngIf="!item.matterFinance?.dateLastBill"> - -</span>
+              <label>Last Billed</label>
+            </div>
+            <div fxLayout="column" class="dps-matter-button">
+              <span
+                class="value">{{homeCurrancy | currencySymbols}}{{item?.matterFinance?.unpaidBill | number : '1.2-2'}}</span>
+              <label>Unpaid Bills</label>
+            </div>
+            <div fxLayout="column" class="dps-matter-button">
+              <span
+                class="value">{{homeCurrancy | currencySymbols}}{{item?.matterFinance?.clientBal | number : '1.2-2'}}
+              </span>
+              <label>Client</label>
+            </div>
+            <div fxLayout="column" class="dps-matter-button">
+              <span
+                class="value">{{homeCurrancy | currencySymbols}}{{item?.matterFinance?.wipSum | number : '1.2-2'}}</span>
+              <label>WIP</label>
+            </div>
+            <div fxLayout="column" class="dps-matter-button">
+              <span class="value">
+                {{homeCurrancy | currencySymbols}}{{item?.matterFinance?.wipLimit | number : '1.2-2'}}
+              </span>
+              <label>WIP Limit</label>
+            </div>
+          </div>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

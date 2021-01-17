@@ -1,0 +1,123 @@
+@import '~styles/variables.scss';
+
+.drive-title-view {
+  dps-drive-context-menue {
+    position: fixed;
+  }
+
+  padding: 5px 0px 0px 5px;
+  height: 100%;
+
+  .dps-title-view {
+    flex-wrap: wrap;
+    cursor: pointer;
+
+    .dps-titleview {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 5px;
+      margin: 2px;
+      width: 250px;
+      height: 66px;
+      display: inline-flex;
+
+      &:hover {
+        background-color: #ddefff;
+        box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9; // border: 1px solid #b7daf9;
+      }
+
+      // span {
+      //   font-size: $primary-font-size - 1;
+      //   font-weight: 400;
+      //   color: #2f2f2f;
+      //   padding: 9px 0px 0px 7px;
+      // }
+      p {
+        font-size: $primary-font-size - 3;
+        color: #6b6b6b;
+        margin: 10px 0px 0px 2px;
+      }
+    }
+
+    .folder-list-view {
+      display: contents;
+
+      .file-info {
+        line-height: 5px;
+        width: 200px;
+      }
+
+      mat-icon {
+        font-size: $primary-font-size + 36;
+        height: 50px;
+        width: 50px;
+        color: #155186;
+        vertical-align: bottom;
+
+        i {
+          padding-left: 3px;
+
+          &.fa-envelope-o {
+            font-size: $primary-font-size + 28;
+          }
+        }
+
+        .fa-file-text {
+          color: #8028b0;
+        }
+      }
+
+      .dps-file-name {
+        font-size: $primary-font-size - 2;
+        font-weight: 500;
+        color: #151515;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        word-break: break-all;
+        line-height: 12px;
+      }
+    }
+
+    ::ng-deep .mat-list .mat-list-item .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
+      padding-left: 4px;
+    }
+  }
+
+  #dragPreView {
+    background: #658db1;
+    padding: 3px 9px 3px;
+    -webkit-box-shadow: 2px -1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -1px 5px 0px #51677b;
+    border: 1px solid #658db1;
+    border-radius: 3px;
+    max-width: 95px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: -100;
+
+    mat-icon {
+      color: #1161ab;
+      border-right: 1px solid #4979;
+      vertical-align: middle;
+    }
+
+    span.name {
+      color: #1d3b54;
+      font-size: 13px;
+      padding-left: 2px;
+    }
+  }
+
+  .dps-load-more {
+    width: 100%;
+
+    span {
+      text-align: center;
+      width: 100%;
+    }
+
+  }
+}

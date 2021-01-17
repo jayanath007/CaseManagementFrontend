@@ -1,0 +1,24 @@
+<div class="add-edit-task-file-uploder">
+  <div fxLayout="row">
+    <!-- <input id="taskFileUploader" type="file" class="ng-hide" (change)="fileUpload($event)" /> -->
+    <dps-file-uploader #taskFileUploader [inputId]="taskFileUploader"
+      (fileUpload)="fileUpload($event)" [multiple]="false">
+    </dps-file-uploader>
+    <div class="dps-file-upload" (click)="taskFileUploader.onFileUploadBtnClick()" *ngIf="!fileData">
+      <button mat-icon-button [disabled]="fileUploadDisable">
+        <mat-icon>file_upload</mat-icon>
+      </button>
+      <span class="text"> Upload File </span>
+    </div>
+  </div>
+  <mat-chip-list #fileInput *ngIf="fileData">
+    <mat-chip class="dps-file-upload-chip" matTooltip={{filename}}>
+      <span class="upload-file-name"> {{filename}}</span>
+      <mat-icon (click)="fileRemove()" matChipRemove *ngIf="isEnableRemover && !hasPassword">cancel</mat-icon>
+      <div *ngIf="isEnablePassword">
+        <i *ngIf="!hasPassword" class="material-icons" (click)="openDialog()">lock</i>
+        <i *ngIf="hasPassword" class="material-icons" (click)="onOpenEnterPassword()">lock_open</i>
+      </div>
+    </mat-chip>
+  </mat-chip-list>
+</div>

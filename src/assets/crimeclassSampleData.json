@@ -1,0 +1,44 @@
+
+{"StageReached" :
+    ["PROC Magistrates’ court advocacy assistance",
+    "PROE Representation order - lower standard fee" ,
+    "PROF Representation order - higher standard fee" ,
+    "PROG Representation order - non-standard fee" ,
+    "PROH Crown Court advocacy assistance", 
+    "PROI High Court representation" ,
+    "PROJ Second claim for deferred sentence" ,
+    "PROK Carter Fee - Representation order- lower standard fee" ,
+    "PROL Carter Fee - Representation order – higher standard fee" ,
+    "PROM Carter Fee - Representation order – non-standard fee ",
+    "PROP Pre-order cover" ,
+    "PROT Early cover", 
+    "PROU Refused means test - form completion fee",
+    "PROV Standard Fee in County or High Courts in Part 1 Injunctions under ASBPCA"],
+
+
+"caseTypes" :[
+    "(1) Guilty plea",
+    "(1) Uncontested breach",
+    "(1) Discontinuance / withdrawal",
+    "(1) Bind over",
+    "(1) Deferred sentence hearing",
+    "(1) Change of solicitor",
+    "(1) Warrant of arrest",
+    "(2) Not guilty plea",
+    "(2) Cracked trial",
+    "(2) Last minute discontinuance",
+    "(2) Contested breach",
+    "(2) Mixed pleas",
+    "(3) Committal Discontinued s6[2]",
+    "(3) Committal s6[2]",
+    "(3) Committal Discontinued s6[1]",
+    "(3) Transfer: S4 CJA 1987",
+    "(3) Transfer: S53 CJA 1991",
+    "(3) Committal Criminal s6[1]",
+    "(N) Committal s6[1]",
+    "(N) Extradition",
+    "(U) Category 1B",
+    "(C) Category 2"
+]
+
+}

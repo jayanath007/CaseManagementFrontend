@@ -1,0 +1,40 @@
+  <div class="dps-crime-layout-header" fxLayoutAlign="space-between center" fxLayout="row">
+
+    <div class="dps-crime-heading">
+      <label>Case Class Crime</label>
+      <span>Ref #1202484</span>
+    </div>
+
+    <div class="dps-crime-case-info">
+      <table>
+        <thead>
+          <tr>
+            <th>00</th>
+            <th>00</th>
+            <th>00</th>
+            <th>00</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Class Total (Fixed)</td>
+            <td>Class Total</td>
+            <td>Disbursements</td>
+            <td>Total</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <button mat-raised-button (click)="viewWorkflowClick()">
+        <mat-icon>poll</mat-icon>
+        View Workflow
+      </button>
+      <button mat-raised-button (click)="fileHistoryClick()">
+        <i class="material-icons">history</i>
+        File History
+      </button>
+    </div>
+  </div>
+  <dps-crime-management-content></dps-crime-management-content>
+

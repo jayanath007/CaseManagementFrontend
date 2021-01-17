@@ -1,0 +1,186 @@
+<div fxLayout="column">
+
+  <mat-form-field floatLabel="always" class="type-selection">
+    <mat-select placeholder="Work Type" [ngModel]="selectedType" (selectionChange)="onChangeWorkType($event.value)">
+      <mat-option *ngFor="let type of selectedWorkTypeData" [value]="type">
+        {{type.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- example
+<div class="sample-input-change" style="display: none;">
+  <mat-label>input type 01</mat-label>
+  <input type="text" [ngModel]="input01" (change)="onChangeValue($event)" matInput placeholder="input 01">
+  <mat-label>input type 02</mat-label>
+  <input type="text" [disabled]="true" [ngModel]="input02" matInput placeholder="input 02">
+</div> -->
+  <div class="estimated-cost-data-table">
+    <dps-common-grid-table [columns]="feeEarnerStatusGridcolumns" [rows]="estimatedCostGridData"
+      (rowInputChange)="onRowInputChange($event)" (rowClick)="onRowClick($event)" (rowDblClick)="onRowDblClick($event)">
+    </dps-common-grid-table>
+  </div>
+
+  <div class="total-profit-n-cost estimated">
+    <mat-list dense>
+      <mat-list-item>
+        <div class="list-item-container cost-headers" fxLayout="row">
+          <h3 fxFlex="1 1 auto"> Total Profit and Cost </h3>
+          <h4> Estimate </h4>
+          <h4> Incurred </h4>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto"> </span>
+          <mat-form-field>
+            <input matInput value="{{ totalProfitCost.totalProfitCost | number : '1.2-2'}}" [disabled]="true">
+          </mat-form-field>
+          <mat-form-field floatLabel="always">
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.totalProfitCost ? selectedActualValue?.actualValues?.totalProfitCost :0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="total-profit-n-cost with-disbursments">
+    <mat-list dense>
+      <mat-list-item class="list-header">
+        <div class="list-item-container" fxLayout="row">
+          <h4 fxFlex="1 1 auto" fxFlexAlign="center">Expert’s Cost </h4>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center"> Fees </span>
+          <mat-form-field>
+            <input matInput #fee
+              value="{{(selectedEstimateValue?.estimateValues?.expertFees ? selectedEstimateValue?.estimateValues?.expertFees : 0 )| number : '1.2-2'}}"
+              (focusout)="onChangeValues(kind.Fees, fee.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.expertFees ? selectedActualValue?.actualValues?.expertFees : 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center"> Disbursments </span>
+          <mat-form-field>
+            <input matInput #disbursments
+              value="{{(selectedEstimateValue?.estimateValues?.expertDisbursements ? selectedEstimateValue?.estimateValues?.expertDisbursements : 0) | number : '1.2-2'}}"
+              (focusout)="onChangeValues(kind.Disbursment, disbursments.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.expertDisbursements ? selectedActualValue?.actualValues?.expertDisbursements : 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item class="list-header">
+        <div class="list-item-container" fxLayout="row">
+          <h4 fxFlex="1 1 auto" fxFlexAlign="center">Councel’s Fee [indicate seniority]</h4>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center"> Leading councel </span>
+          <mat-form-field>
+            <input matInput
+              value="{{(selectedEstimateValue?.estimateValues?.leadingCounsel ? selectedEstimateValue?.estimateValues?.leadingCounsel : 0) | number : '1.2-2'}}"
+              #leading (focusout)="onChangeValues(kind.LeadingCounsel, leading.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.leadingCounsel ? selectedActualValue?.actualValues?.leadingCounsel : 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center">Junior counsel </span>
+          <mat-form-field>
+            <input matInput
+              value="{{(selectedEstimateValue?.estimateValues?.juniorCounsel ? selectedEstimateValue?.estimateValues?.juniorCounsel : 0)| number : '1.2-2'}}"
+              #junior (focusout)="onChangeValues(kind.JouniorCounsel, junior.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.juniorCounsel ? selectedActualValue?.actualValues?.juniorCounsel : 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center"> Court Fees </span>
+          <mat-form-field>
+            <input matInput
+              value="{{(selectedEstimateValue?.estimateValues?.courtFees ? selectedEstimateValue?.estimateValues?.courtFees:0 )| number : '1.2-2'}}"
+              #court (focusout)="onChangeValues(kind.CourtFees, court.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.courtFees ? selectedActualValue?.actualValues?.courtFees: 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <span fxFlex="1 1 auto" fxFlexAlign="center">Other Disbursments </span>
+          <mat-form-field>
+            <input matInput
+              value="{{(selectedEstimateValue?.estimateValues?.otherDisbursements ? selectedEstimateValue?.estimateValues?.otherDisbursements : 0) | number : '1.2-2'}}"
+              #otherDis (focusout)="onChangeValues(kind.OtherDisbursment, otherDis.value)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.otherDisbursements ? selectedActualValue?.actualValues?.otherDisbursements : 0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+
+      <mat-list-item>
+        <div class="list-item-container" fxLayout="row">
+          <h4 fxFlex="1 1 auto" fxFlexAlign="center"> Total Disbursments</h4>
+          <mat-form-field>
+            <input matInput value="{{ totalProfitCost.totalDisbursment | number : '1.2-2'}}" [disabled]="true">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.totalDisbursements ? selectedActualValue?.actualValues?.totalDisbursements: 0| number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="list-item-container total-cost" fxLayout="row">
+          <h3 fxFlex="1 1 auto" fxFlexAlign="center"> Totals <small> (Proﬁt cost + Disbursements)
+            </small></h3>
+          <mat-form-field>
+            <input matInput value="{{ totalProfitCost.total  | number : '1.2-2'}}" [disabled]="true">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              value="{{selectedActualValue?.actualValues?.total ? selectedActualValue?.actualValues?.total :0 | number : '1.2-2'}}"
+              [disabled]="true">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

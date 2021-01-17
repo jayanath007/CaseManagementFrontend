@@ -1,0 +1,27 @@
+<div class="matter-linked-panel">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <div fxFlexAlign="center" class="dps-header">
+        <h2 mat-dialog-title><i class="fa fa-file" aria-hidden="true"></i>Create {{resoleModuleName('matter_search')|async}} Linked</h2>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <div class="dps-matter-linked-content" fxLayout="column" fxLayoutGap="5px">
+      <mat-form-field>
+        <input #plotNo matInput placeholder="Plot No">
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <input #toPlotNo [dpsNumberOnly]="8" matInput placeholder="To Plot No">
+      </mat-form-field> -->
+    </div>
+    <div class="general-buttons-bottom">
+      <button mat-raised-button class="dps-submit" tabindex="-1"
+        (click)="onCreateLinkedMatter(plotNo.value)">OK</button>
+    </div>
+  </mat-dialog-content>
+</div>

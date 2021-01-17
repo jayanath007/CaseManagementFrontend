@@ -1,0 +1,110 @@
+@import '~styles/variables.scss';
+
+.dps-mls-chat-layout {
+
+
+  .dps-mls-chat-list {
+    width: 450px;
+    background: #153352;
+
+    h3 {
+      background: #425e79;
+      margin: 0;
+      font-size: 16px;
+      padding: 20px 0px 20px 24px;
+      color: $primary;
+      font-weight: 400;
+
+      i {
+        vertical-align: sub;
+        font-size: $primary-font-size + 6;
+      }
+
+    }
+
+  }
+
+  height: 100%;
+  width: 100%;
+
+  .dps-mls-chat-content {
+    width: 100%;
+
+    mat-card {
+      border-radius: 0px;
+      padding: 0px;
+      font-size: $primary-font-size - 2;
+      font-weight: 500;
+    }
+
+    .mls-msg-loader {
+      text-align: center;
+
+      button {
+        font-size: $primary-font-size - 2;
+        color: #7d7d7d;
+        font-weight: 400;
+      }
+    }
+
+  }
+
+  .dps-mls-chat-content-body {
+    background: #f5f5f5;
+    overflow-y: auto;
+    padding: 15px 15px 15px 20px;
+  }
+
+  ::ng-deep dps-mls-chat-item {
+    height: 0;
+  }
+
+  .mls-case-listed {
+    overflow: scroll;
+    height: calc(100% - 135px);
+  }
+
+  .dps-mls-user-setting {
+    height: 29px;
+    color: #8295a9;
+    font-size: 13px;
+  }
+
+}
+
+.dps-sender-avatar span {
+  font-size: 15px;
+  color: $primary;
+  position: relative;
+  top: -2px;
+}
+
+
+.dps-white-gray-scroll::-webkit-scrollbar-thumb {
+  background-color: #bcbdbd;
+  border-radius: 10px;
+
+}
+
+.dps-recipient-input {
+  padding: 0px 10px 5px 10px;
+  border-top: 1px solid #d4d4d4;
+  background: #143a62;
+
+  dps-recipient-input-manager {
+    margin-top: -9px;
+  }
+
+  ::ng-deep {
+
+    .dps-lable,
+    input {
+      color: #efefef !important;
+      caret-color: #efefef;
+    }
+
+    .mat-form-field-underline {
+      background-color: rgba(239, 239, 239, 0.42);
+    }
+  }
+}

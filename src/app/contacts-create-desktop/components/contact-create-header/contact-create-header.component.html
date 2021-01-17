@@ -1,0 +1,41 @@
+<div class="dps-contacts-tab-common">
+  <div fxLayout="row">
+    <form>
+      <mat-form-field class="input-element look-for" floatLabel="never">
+        <span matPrefix>&nbsp;&nbsp;</span>
+        <input type="search" matInput #searchTextInput matInput placeholder="" [value]="contactSearchKey"
+          [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)" />
+        <button matSuffix mat-icon-button (click)="onSearchTextChanged(searchTextInput.value)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+    <span fxFlex="1 1 auto"></span>
+
+    <div *ngIf="false" class="contact-type-select" (click)="onCaseContactModeChange()">
+      <span class="case-tab-lbl" [ngClass]="contactMode === contactModes.View   ? 'case-active': ''">Contacts</span>
+      /
+      <span class="case-tab-lbl" [ngClass]="contactMode === contactModes.All  ? 'case-active' : ''">All</span>
+    </div>
+    <!-- <div class="button-row" fxLayout="row wrap" fxFlexAlign="end" fxLayoutGap="5px">
+
+      <button class="new-btn" mat-raised-button>
+        <mat-icon class="mat-18">playlist_add</mat-icon>
+        <span>Create</span>
+      </button>
+      <button class="save-btn" mat-raised-button>
+        <mat-icon class="mat-18">save</mat-icon>
+        <span>Save</span>
+      </button>
+      <button class="clear-btn" mat-raised-button color="wran">
+        <mat-icon class="mat-18">clear_all</mat-icon>
+        <span>Clear</span>
+      </button>
+      <button class="clear-btn" mat-raised-button color="wran">
+        <mat-icon class="mat-18">delete</mat-icon>
+        <span>Delete</span>
+      </button>
+
+    </div> -->
+  </div>
+</div>

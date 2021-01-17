@@ -1,0 +1,66 @@
+<div class="dps-audio-player" fxLayout="column">
+  <audio #audio [src]="src"   type="audio/mpeg">
+
+  </audio>
+  <div fxLayout="row" class="dps-time-and-settings">
+    <div fxLayout="column" class="dps-time-section" fxFlex="1 1 auto">
+      <mat-slider color="primary" min="0" [max]="duration" step="1" [value]="currentTime" class="dps-time-slider"
+        [disabled]="loading" (change)="onTimePosChange($event)"></mat-slider>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-time-value-section">
+        <span>{{(currentTime || 0)|secondsToMinutes}}</span>
+        <span>{{(duration || 0)|secondsToMinutes}}</span>
+      </div>
+    </div>
+    <button mat-icon-button [disabled]="loading" [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="dps-menu-item" [matMenuTriggerFor]="menu1">Playback Speed</button>
+      <button mat-menu-item class="dps-menu-item" [matMenuTriggerFor]="menu2">Rewind Forward Time</button>
+    </mat-menu>
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item class="dps-menu-item" *ngFor="let speed of speedList" (click)="onChangeSpeed(speed)"
+        [ngClass]="{'dps-selected': speed===playbackSpeed}">
+        {{speed===1 ? 'Normal' : speed}}
+      </button>
+    </mat-menu>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item class="dps-menu-item" (click)="rewineForwardTime=5"
+        [ngClass]="{'dps-selected': rewineForwardTime===5}">5s</button>
+      <button mat-menu-item class="dps-menu-item" (click)="rewineForwardTime=10"
+        [ngClass]="{'dps-selected': rewineForwardTime===10}">10s</button>
+      <button mat-menu-item class="dps-menu-item" (click)="rewineForwardTime=30"
+        [ngClass]="{'dps-selected': rewineForwardTime===30}">30s</button>
+    </mat-menu>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" class="dps-audio-btns">
+    <button mat-icon-button [disabled]="loading" (click)="onStart()">
+      <mat-icon>first_page</mat-icon>
+    </button>
+    <button class="dps-rewine-forward-btn" mat-icon-button [disabled]="loading" (click)="onRewind()">
+      <mat-icon>replay_{{rewineForwardTime}}</mat-icon>
+    </button>
+    <button mat-icon-button class="dps-play-pause-btn" (click)="onPlayPuse()" [disabled]="loading">
+      <mat-icon>{{isPlaying?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
+    </button>
+    <button class="dps-rewine-forward-btn" mat-icon-button [disabled]="loading" (click)="onForward()">
+      <mat-icon>forward_{{rewineForwardTime}}</mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="loading" (click)="onEnd()">
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign=" center" class="dps-volume-section">
+    <button mat-icon-button [disabled]="loading" (click)="onVolumeOff()">
+      <mat-icon>volume_off</mat-icon>
+    </button>
+    <mat-slider color="primary" min="0" max="100" step="1" [value]="volume*100" fxFlex="1 1 auto"
+      class="dps-volume-slider" [disabled]="loading" thumbLabel [displayWith]="formatLabel"
+      (change)="onVolumePosChange($event)">
+    </mat-slider>
+    <button mat-icon-button [disabled]="loading" (click)="onMaxVolume()">
+      <mat-icon>volume_up</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+@import '~styles/variables.scss';
+
+.dps-contacts-tab {
+
+  mat-tab
+  {
+    background: #092d3c;
+  }
+  ::ng-deep .mat-tab-body-wrapper {
+    height: 100%;
+  }
+
+  ::ng-deep.mat-tab-body-content {
+    overflow: hidden;
+  }
+
+  mat-icon {
+    vertical-align: middle;
+  }
+
+  .dps-tab-header-content {
+ 
+    mat-icon,
+    span {
+      color: #fff
+    }
+
+  }
+
+}
+
+::ng-deep .dps-contacts-tab .mat-tab-header {
+  background: #21556b;
+}
+
+
+.contacts-details,
+.dps-contacts-tab-common {
+  ::ng-deep .mat-form-field {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+    width: 250px;
+    margin-right: 5px;
+
+    .mat-form-field-ripple.mat-form-field-ripple {
+      background: $header-primary;
+    }
+
+    .mat-form-field-label {
+      color: $header-primary;
+    }
+  }
+
+  .address-field {
+    display: block !important;
+  }
+
+
+}
+
+.case-contact-manager-grid-outer-wrapper
+{
+  height: 100%;
+}

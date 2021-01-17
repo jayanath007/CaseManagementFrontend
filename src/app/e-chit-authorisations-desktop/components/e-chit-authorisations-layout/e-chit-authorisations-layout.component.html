@@ -1,0 +1,48 @@
+<div class="dps-authorisations-layout">
+  <div>
+    <dps-common-popup-header icon="library_books" [title]="'Authorisations'" buttons="close"
+      [loading]="viewData?.mainLoading" iconColor="#e8a348" titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+    </dps-common-popup-header>
+  </div>
+  <div class="dps-authorisations-inputs" fxLayout="row" fxLayoutAlign="end center">
+    <div>
+      <dps-select-input-with-table placeholder="Group" [canEdit]="false" [columns]="cmbGroupColumns"
+        [selectedKeyValue]="{key:viewData?.selectedGroupId,value:null}" [rows]="groupList"
+        [readonly]="viewData?.mainLoading" (selectionChange)="onGroupSelectChange($event)">
+      </dps-select-input-with-table>
+    </div>
+    <div>
+      <dps-select-input-with-table placeholder="Users" [canEdit]="false" [columns]="cmbFeeEarnerColumns"
+        [selectedKeyValue]="{key:viewData?.selectedFeeEarnerCode, value:viewData?.selectedFeeEarnerCode}"
+        [rows]="feeEarnerList" [readonly]="viewData?.mainLoading" (selectionChange)="onFeeEarnerSelectChange($event)">
+      </dps-select-input-with-table>
+    </div>
+    <div>
+      <button mat-mini-fab (click)="onRefresh()" [disabled]="viewData?.mainLoading">
+        <mat-icon>replay</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="dps-authorisations-wrapper">
+    <div class="dps-authorisations-info">
+      <dps-authorisations-grid [columnDef]="columnDef" [viewData]="viewData" [user]="user"
+        (changePage)="onChangePage($event)" (selectedRowItem)="onSelectedRow($event)"
+        (checkedChange)=onCheckedChange($event) (viewReportData)="onViewFile($event)"
+        (columsSortApply)="onToggleSorting($event)">
+      </dps-authorisations-grid>
+    </div>
+    <div class="dps-authorisations-action" fxLayoutGap="5px" fxLayout="row">
+      <button mat-button class="authorise" (click)="onReject()"
+        [disabled]="viewData?.mainLoading || selectedRowCount<1">
+        Reject
+      </button>
+      <button mat-button class="authorise" [disabled]="viewData?.mainLoading || selectedRowCount<1"
+        (click)="onAuthorise()">
+        Authorise
+      </button>
+      <button mat-button class="cancel" (click)="onClose($event)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,196 @@
+<div class="field-properties-container  dps-white-gray-scroll dps-blue-scroll">
+  <!-- 
+  <div class="top-update-button-wrap">
+      <button class="update-button" mat-button tabindex="-1" (click)="onItemChange()">update</button>
+    </div> -->
+
+
+  <h1>Application Variable Properties</h1>
+
+  <mat-divider></mat-divider>
+
+
+  <div fxLayout="row">
+    <div fxFlex="50%">
+      <mat-form-field class="property-value-text">
+        <input matInput placeholder="Variable Number" readonly [ngModel]="selectedContanerComponent?.varNo">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%"></div>
+  </div>
+
+  <!-- <mat-select #fieldTypeName placeholder="Contact Type" [(value)]="screenDefinition.contactType"
+    (change)="onContactTypeChange($event)">
+    <mat-option *ngFor="let contactType of screenDefinition?.screenContactTypes" [value]="contactType.tP_ID">
+-->
+
+
+
+  <div [hidden]="!(screenDefinition.dataSource === 3)">
+    <mat-form-field class="property-value-drop">
+      <mat-select [ngModel]="selectedContanerComponent?.mappedContactField" #contactMaping placeholder="Contact Mapping"
+        (selectionChange)="onMappedContactTypeChange($event)">
+        <mat-option *ngFor="let field of screenDefinition.screenContactFieldTypes" [value]="field.name">
+          {{ field.description1 }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Description" [disabled]="disableDescription" #lableDescription
+      (blur)="onLableDescriptionChange(lableDescription.value)"
+      [ngModel]="selectedContanerComponent?.contanerLable.value">
+  </mat-form-field>
+
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Help" #helpText (blur)="onHelpTextChange(helpText.value)"
+      [ngModel]="selectedContanerComponent?.control?.helpText">
+  </mat-form-field>
+
+
+
+
+  <div fxLayout="row">
+
+    <div fxFlex="49%">
+      <mat-form-field class="property-value-drop field-type">
+        <mat-select #fieldTypeName placeholder="Field type" [(value)]="selectedContanerComponent.uiComponentType"
+          (selectionChange)="onFieldTypeChange($event)" [disabled]="selectedContanerComponent?.uiComponentType===3">
+          <mat-option *ngFor="let field of fieldTypeList" [value]="field.fieldTypeId">
+            {{ field.fieldTypeName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div fxFlex="2%"> &nbsp; </div>
+
+    <div fxFlex="49%">
+      <mat-form-field class="property-value-text">
+        <input matInput placeholder="Input Size" type="Number" min="1" #inputSize
+          (change)="onInputSizeChange(inputSize.value)" [readonly]="selectedContanerComponent?.uiComponentType===3"
+          [ngModel]="selectedContanerComponent?.control?.maxLength">
+      </mat-form-field>
+
+
+    </div>
+
+  </div>
+  <h1>Screen Field Properties</h1>
+
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field class="property-value-drop">
+    <mat-select #viewTypeId placeholder="View Type" [ngModel]="selectedContanerComponent?.uiViewType"
+      (selectionChange)="onViewType($event)">
+      <mat-option *ngFor="let viewtype of ViewTypeList" [value]="viewtype.viewTypeId">
+        {{ viewtype.viewTypeName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="property-value-drop">
+    <mat-select #maskName placeholder="Mask" [ngModel]="maskTextDropdownValue"
+      (selectionChange)="onMaskChange(maskName.value)">
+      <mat-option *ngFor="let mask of MaskList" [value]="mask.maskName">
+        {{ mask.maskName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div [hidden]="!isCustomMaskText">
+    <mat-form-field class="property-value-text">
+      <input matInput placeholder="Mask Custom Value" #maskCustomerValue
+        (blur)="onMaskCustomerTextValueChange(maskCustomerValue.value)"
+        [ngModel]="selectedContanerComponent?.control.maskText">
+    </mat-form-field>
+  </div>
+
+
+  <mat-form-field class="property-value-text">
+    <input matInput placeholder="Sequence" #sequence type="Number" min="1" (blur)="onSequenceChange(sequence.value)"
+      [ngModel]="selectedContanerComponent?.sequence">
+  </mat-form-field>
+
+
+
+  <div fxLayout="row">
+
+    <div fxFlex="49%">
+      <mat-form-field class="property-value-text">
+        <input matInput placeholder="X" #xAxis (change)="onContainerXAxisChange(xAxis.value)" type="Number" min="1"
+          [ngModel]="selectedContanerComponent?.containerXAxis">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="2%"> &nbsp; </div>
+
+    <div fxFlex="49%">
+      <mat-form-field class="property-value-text">
+        <input matInput placeholder="Y" #yAxis (change)="onContainerYAxisChange(yAxis.value)" type="Number" min="1"
+          [ngModel]="selectedContanerComponent?.containerYAxis">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div fxLayout="row">
+    <div [hidden]="actionHidden">
+      <mat-form-field class="property-value-text">
+        <input matInput placeholder="Action" #action (keyup)="changeAction(action.value)"
+          [ngModel]="selectedContanerComponent.control.action">
+      </mat-form-field>
+    </div>
+
+    <div [hidden]="actionSelectionHidden">
+      <div class="lookup-btn" [hidden]="isChangeAction">
+        <button mat-button (click)="onLookup($event)">Lookup</button>
+      </div>
+
+      <div class="lookup-btn" [hidden]="!isChangeAction">
+        <button mat-button (click)="onActionChange(action.value)">Update</button>
+      </div>
+    </div>
+  </div>
+
+
+  <mat-checkbox class="property-value-check-box" #multiline (change)="onMultiLine(multiline.checked)"
+    [hidden]="selectedContanerComponent?.uiComponentType!==0" [checked]="selectedContanerComponent?.control.multiLine">
+    Multi Line</mat-checkbox>
+
+  <mat-checkbox class="property-value-check-box" #searchfield (change)="onSearchFields(searchfield.checked)"
+    [hidden]="selectedContanerComponent.screenComponentDto?.sC_ScreenNo !==1"
+    [checked]="selectedContanerComponent?.searchField">Search Fields</mat-checkbox>
+
+
+  <div class="clear"></div>
+
+
+
+
+</div>
+
+
+<div class="bottom-controller-set">
+  <div>
+    <button mat-mini-fab class="mat-elevation-z0 property-navigation" (click)="onPreviousField()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+  </div>
+  <div fxFlex="5%"></div>
+  <div>
+    <button mat-mini-fab class="mat-elevation-z0 property-navigation" (click)="onNextField()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+  <div fxFlex="1 1 auto"></div>
+  <div>
+    <button mat-mini-fab class="mat-elevation-z0" color="warn" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+</div>

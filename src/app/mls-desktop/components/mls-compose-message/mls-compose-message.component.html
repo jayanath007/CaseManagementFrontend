@@ -1,0 +1,21 @@
+<div class="dps-compose-msg-works">
+  <input type="file" id="mlsfileUpload" style="display: none" onchange="onFileInputChange(event)" accept=".xls, .xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,
+   .pdf, application/pdf, .doc, application/msword, .docx, application/vnd.openxmlformats-officedocument.wordprocessingml.document
+   .rtf, application/rtf, .tif, image/tif, .jpg, image/jpg, .jpeg, image/jpeg, .png, image/png">
+  <div fxLayout="column">
+    <mat-progress-bar mode="indeterminate" *ngIf="isSending"></mat-progress-bar>
+    <div class="dps-compose-msg-type" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-icon-button [disabled]="isSending" *ngIf="false">
+        <i matPrefix class="material-icons">attach_file</i>
+      </button>
+      <mat-form-field class="dps-mls-compose-textarea" floatLabel="never">
+        <input #messageInput id="messageInput" matInput type="text" [disabled]="isSending" placeholder="Type Your Message Here !"
+          maxlength="250" (keydown)="onInsertMessageKeydown($event, messageInput.value)">
+      </mat-form-field>
+      <button mat-icon-button [disabled]="isSending" (click)="onSendMessage(messageInput.value)">
+        <i matPrefix class="material-icons">send</i>
+      </button>
+    </div>
+  </div>
+
+</div>

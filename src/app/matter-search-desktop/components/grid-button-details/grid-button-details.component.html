@@ -1,0 +1,58 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-matter-grid-button" (click)="OnOpenCaseClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.Matter) | async">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+    <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+  </div>
+  <div class=" dps-matter-grid-button" (click)="OnTimeRecordingClick()" fxLayout="column"
+    *ngIf="(moduleIsActive(module.TimeRecorded) | async) && !selectedMatterData?.data?.isProspectMatter">
+    <button mat-icon-button>
+      <mat-icon>alarm_add</mat-icon>
+    </button>
+    <span>Record Time</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="OnNewMailClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>email</mat-icon>
+    </button>
+    <span>New Mail</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="OnLedgerCardClick()" fxLayout="column"
+    *ngIf="(moduleIsActive(module.LedgerCard) | async) && !selectedMatterData?.data?.isProspectMatter">
+    <button mat-icon-button>
+      <mat-icon>credit_card</mat-icon>
+    </button>
+    <span>Ledger Card</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onMLSClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>account_balance</mat-icon>
+    </button>
+    <span>MLS</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onEChitClick()" fxLayout="column"
+    *ngIf="(moduleIsActive(module.ChequeRequest) | async) && !selectedMatterData?.data?.isProspectMatter">
+    <button mat-icon-button>
+      <mat-icon>library_books</mat-icon>
+    </button>
+    <span>eChit</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="openBillingRequestPopup()" fxLayout="column"
+    *ngIf="(moduleIsActive(module.Accounts) | async) && !selectedMatterData?.data?.isProspectMatter">
+    <button mat-icon-button>
+      <mat-icon>assessment</mat-icon>
+    </button>
+    <span>Billing Request</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="openReferralNoteDatePopup()" fxLayout="column"
+    *ngIf="moduleIsActive(module.Accounts) | async">
+    <button mat-icon-button>
+      <mat-icon>description</mat-icon>
+    </button>
+    <span>Review Note</span>
+
+  </div>
+</div>

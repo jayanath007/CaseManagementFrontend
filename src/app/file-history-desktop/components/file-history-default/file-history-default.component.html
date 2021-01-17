@@ -1,0 +1,12 @@
+<div class="dps-case-file-grid-row mat-elevation-z" *ngFor="let item of fileHistorData?.data ; let row = index"
+  fxLayout="row">
+  <dps-file-history-fix-row [folderList]="folderList" (click)="onExpand(item , $event)" fxFlex=""
+    (onDeleteRow)="deleteRow($event)" (onEditRow)="editRow($event)" (onCheckedRow)="checkedRow($event)"
+    (signDoc)="onSignDoc($event)" (moveSelectedFolder)="onMoveSelectedFolder($event)"
+    (xdraftItem)="onXdraftItem($event)" (newVersion)="onNewVersion($event)" (share)="onShare($event)"
+    [columnDef]="columnDef" [rowData]="item" [matterInfo]="matterInfo"
+    [deleteEntrySecurityInfo]="deleteEntrySecurityInfo" [checkedItems]="checkedItems"
+    [isDocumentVersioning]="isDocumentVersioning" [isMuiltySelect]="isMuiltySelect" (onCheckin)="doCheckin($event)"
+    (onDiscardCheckin)="doDiscardCheckin($event)">
+  </dps-file-history-fix-row>
+</div>

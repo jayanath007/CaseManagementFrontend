@@ -1,0 +1,14 @@
+<div class="dps-grid-filterd">
+  <span *ngFor="let col of filterColumnDef; let index =index">
+    <u *ngIf="index !== 0"> AND </u>
+    <span *ngFor="let filter of col?.filter?.filters; let i =index">
+      <span *ngIf="filter?.value">
+        <i *ngIf="i !== 0">{{col.filter.logic}}&nbsp;</i>
+        <span class="dps-grid-filterd-item-label" *ngIf="i === 0">&nbsp;{{col.extras?.label}} &nbsp;</span>
+        <i> {{operatorDisplayName(filter?.operator)}} &nbsp;</i>
+        <span>'{{filter?.fieldType === fieldType.Date ? (filter?.value | date:'dd/MM/yyyy')  : filter?.value }}'
+          &nbsp;</span>
+      </span>
+    </span>
+  </span>
+</div>

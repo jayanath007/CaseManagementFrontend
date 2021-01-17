@@ -1,0 +1,38 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-matter-grid-button" (click)="onOpenCaseClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.Matter) | async">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+    <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onTimeRecordingClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.TimeRecorded ) | async">
+    <button mat-icon-button>
+      <mat-icon>alarm_add</mat-icon>
+    </button>
+    <span>Time Recording</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onNewMailClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>email</mat-icon>
+    </button>
+    <span>New Mail</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onLedgerCardClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.LedgerCard ) | async">
+    <button mat-icon-button>
+      <mat-icon>credit_card</mat-icon>
+    </button>
+    <span>Ledger Card</span>
+  </div>
+  <div class="dps-matter-grid-button" (click)="onViewDocClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon matTooltipPosition="right" matTooltip={{selectedMatterData?.letter_name}}>
+        <i [ngClass]="selectedMatterData?.letter_name | attachmentIcon"><span></span></i>
+      </mat-icon>
+    </button>
+    <span *ngIf="selectedMatterData?.letter_name ">View Document</span>
+  </div>
+</div>

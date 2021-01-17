@@ -1,0 +1,3 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible">
+  <button mat-button [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" (click)="onButtonClick($event)">{{meta?.scL_Caption || meta?.scL_DefaultCaption}}</button>
+</div>

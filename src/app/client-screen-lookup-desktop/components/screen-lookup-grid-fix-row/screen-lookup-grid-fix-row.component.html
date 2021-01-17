@@ -1,0 +1,28 @@
+
+<div fxLayout="row" class="grid-data" [ngClass]="{'client-lookup-row-edited':lookupRowData?.isDirty === true}">
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(0)">
+    <div class="input-wrapper">
+      <input #luP_Code matInput [value]="lookupRowData?.luP_Code"  (focusout)="lookupCodeChange(lookupRowData,$event)" class="input-cell">
+    </div>
+  </div>
+
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(1)">
+    <div class="input-wrapper">
+      <input matInput [value]="lookupRowData?.luP_Description" (focusout)="descriptionChange(lookupRowData,$event)" class="input-cell">
+    </div>
+  </div>
+  <div class="row-data input-data" [fxFlex]="getFxFlexProperty(2)">
+    <div class="input-wrapper">
+      <mat-checkbox [checked]="lookupRowData?.luP_Hidden" (change)="onChangeHide(lookupRowData, $event)" color="primary"></mat-checkbox>
+    </div>
+
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)">
+    <span class="screen_lookup_row_delete"  (click)="onBtnDelete(lookupRowData?.luP_ID)">
+      <!-- [hidden]="!isDeleteBtnShow"  -->
+      <mat-icon class="material-icons mat-18">delete</mat-icon>
+      
+    </span>
+  </div>
+
+</div>

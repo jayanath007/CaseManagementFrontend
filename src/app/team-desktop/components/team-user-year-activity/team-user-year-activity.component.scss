@@ -1,0 +1,112 @@
+@import '~styles/variables.scss';
+
+.dps-team-user-year-activity {
+  height: 100%;
+  .dps-user-activity-content{
+    height: calc(100% - 502px);
+  }
+ 
+  mat-chip-list {
+    height: 40px;
+    overflow-x: hidden;
+    background: #f2f2f2;
+    padding: 2px 0px 0px;
+    border-radius: 4px;
+
+    ::ng-deep.mat-chip-list-wrapper {
+      margin: 0px;
+    }
+  }
+
+
+  .dps-badge-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .dps-badge {
+      border-radius: 30px;
+      padding: 2px 0px;
+      position: relative;
+      height: 30px;
+      min-width: 30px;
+      left: 34px;
+      top: 5px;
+      z-index: 10;
+      line-height: 30px;
+      font-size: 11px;
+    }
+
+    mat-chip {
+      padding: 15px 0px 15px 4.5em;
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+
+      p {
+        position: relative;
+        right: 22px;
+        font-size: 15px;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+    }
+
+    &.dps-allowed {
+      button {
+        background: #438f6b;
+      }
+
+      mat-chip {
+        background-color: #82ac98 !important;
+      }
+    }
+
+    &.dps-taken {
+      button {
+        background: #ae8d30;
+      }
+
+      mat-chip {
+        background-color: #bcae87 !important;
+      }
+    }
+
+    &.dps-remaining {
+      button {
+        background: #5b8ebb;
+      }
+
+      mat-chip {
+        background-color: #8bbce5 !important;
+      }
+    }
+
+    &.dps-lost-days {
+      button {
+        background: #b8715d;
+      }
+
+      mat-chip {
+        background-color: #e8b8ae !important;
+      }
+    }
+  }
+}
+
+.dps-team-chart {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: auto;
+  padding: 6px;
+
+}
+
+.dps-team-chart mat-card { 
+  width: 50%;
+  padding: 0px;
+}
+

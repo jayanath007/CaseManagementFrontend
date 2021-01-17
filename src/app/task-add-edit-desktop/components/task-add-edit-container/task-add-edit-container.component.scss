@@ -1,0 +1,96 @@
+@import '~styles/variables.scss';
+.dps-chaser-form {
+  padding: 20px;
+  height: 100%;
+}
+
+.section-header {
+  display: block;
+  border-bottom: 1px solid #c7c6c6;
+  padding-top: 15px;
+}
+
+.open-folder-list {
+  background: #94acca
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.case-highlight,
+.case-highlight:hover {
+  background: green;
+  color: $primary;
+}
+
+mat-icon.open-folder {
+  color: #455A64;
+}
+
+.case-highlight mat-icon.open-folder {
+  color: $primary;
+}
+
+mat-list {
+  padding-top: 0px;
+}
+
+div[fxLayoutAlign] {
+  padding-left: 8px;
+  padding-top: 10px;
+}
+
+.chaser_open_file,
+.chaser_open_file:hover {
+  background: $toolbar-background;
+}
+
+.opened-case-selection {
+  background: $toolbar-background;
+}
+
+mat-panel-title span {
+  color: $primary
+}
+
+.opened-case-selection mat-expansion-panel-header {
+  background: $toolbar-background;
+}
+
+.selected-matter-indicator {
+  color: #0d315d;
+}
+
+mat-option {
+  font-size: $primary-font-size - 2 !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #bf8902;
+  background: #fff7e2;
+}
+
+.dps-folder-select mat-form-field {
+  width: 60%;
+}
+
+.dps-select-matter-btn button {
+  margin: 0px 0px 0px 35px;
+  font-size: $primary-font-size - 2;
+  color: #8c6400;
+
+  &:hover {
+    color: #ab7b02;
+  }
+
+}
+
+.dps-note-for-diary {
+  margin-top: 10px;
+  mat-form-field {
+    width: 100%;
+    height: 100px;
+  }
+}

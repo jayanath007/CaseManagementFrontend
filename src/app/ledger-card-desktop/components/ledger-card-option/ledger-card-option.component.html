@@ -1,0 +1,74 @@
+<div fxLayout="row" dpsIsMobile>
+  <div class="dps-ledger-card-grid-header"></div>
+  <div class="period" *ngIf="filterData.showTransPeriods && selectedTab === 0">
+    <mat-form-field class="input-controller">
+      <mat-placeholder class="ledger_card_selector input-controller">Period</mat-placeholder>
+
+      <input #period type="number" class="dps-remove-arrow rate" matInput
+        (keydown)="onPeriodKeyDown($event,period.value)">
+
+    </mat-form-field>
+    <mat-icon class="filter-list" mat-mini-fab color="primary" (click)="onPeriodAdd(period.value)">filter_list
+    </mat-icon>
+  </div>
+  <div class="dps-ledger-card-dropdown">
+    <mat-form-field *ngIf="selectedTab === 0" floatLabel="never">
+      <mat-placeholder class="ledger_card_selector input-controller">ledger card</mat-placeholder>
+      <mat-select multiple class="dps-ledger-card-option-list">
+        <mat-select-trigger class="ledger_card_selector input-controller">ledger card
+        </mat-select-trigger>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showDDA'
+            (change)="onChangeShowDDA($event.checked)">Show DDA</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox class="filter-data" disableRipple color="primary" [checked]='filterData.showBalanceOnly'
+            (change)="onChangeShowBalanceOnly($event.checked)">Show Balance Only</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showCOS'
+            (change)="onChangeShowCOS($event.checked)">Show COS</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showReversal'
+            (change)="onChangeShowReversal($event.checked)">Show Reversal</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showURN'
+            (change)="onChangeShowURN($event.checked)">Show URN</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showSysBills'
+            (change)="onChangeHideSysBills($event.checked)">Hide Sys Bills</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showTransPeriods'
+            (change)="onChangeShowTransPeriods($event.checked)">Show Trans Periods</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showOnlyOfficeTrans'
+            (change)="onChangeShowOnlyOfficeTrans($event.checked)">Show Only Office Trans</mat-checkbox>
+        </mat-option>
+        <mat-option>
+          <mat-checkbox disableRipple color="primary" [checked]='filterData.showOnlyDisbuersements'
+            (change)="onChangeShowshowOnlyDisbuersements($event.checked)">Show Only Disbursements</mat-checkbox>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="bill-receipts-option">
+    <mat-checkbox color="primary" class="input-controller" *ngIf="selectedTab === 1" [checked]='filterData.isBillsOnly'
+      (change)="onChangeShowBillsOnly($event.checked)">Show Bills Only</mat-checkbox>
+  </div>
+  <button class="print-btn" mat-icon-button matTooltip="Print" matTooltipPosition="above" (click)="onPrintLedgerCard()">
+    <mat-icon>print</mat-icon>
+  </button>
+  <button class="print-btn" mat-icon-button matTooltip="Transactions" matTooltipPosition="above"
+    (click)="onOpenPreTransactionPopup()">
+    <mat-icon>multiple_stop</mat-icon>
+  </button>
+  <button class="billing-btn" mat-icon-button matTooltip="Time" matTooltipPosition="above"
+    (click)="onOpenBillingGuide()">
+    <mat-icon>line_weight</mat-icon>
+  </button>
+</div>

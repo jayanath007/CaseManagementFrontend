@@ -1,0 +1,95 @@
+@import '~styles/variables.scss';
+
+
+::ng-deep .dps-billing-posting-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+    overflow: hidden;
+  }
+}
+
+.dps-posting-period-layout {
+  width: 100%;
+  height: 100%;
+
+  span,
+  div {
+    font-family: $primary-font-stack;
+  }
+
+  .dps-billing-header {
+
+    font-size: $primary-font-size - 2;
+    background: #bddfff;
+    color: #193d5e;
+    padding: 4px 30px 8px 16px;
+  }
+
+  p,
+  button {
+    font-size: $primary-font-size - 2;
+  }
+
+  .dps-posting-period-action {
+    text-align: right;
+    padding: 0px 20px 0px 0px;
+
+    .select {
+      background: #2972b6;
+      color: $primary;
+    }
+
+    button:disabled {
+      background: #efefef;
+      color: #b1b1b1;
+    }
+
+    .cancel {
+      color: $primary;
+      background: #696a6c;
+      margin-left: 4px;
+    }
+
+  }
+
+  .dps-transaction {
+    p {
+      text-align: center;
+    }
+  }
+
+  .dps-posting-period-list {
+    height: calc(100% - 185px);
+    overflow: auto;
+    padding: 5px 5px 5px 10px;
+
+    mat-list-item {
+      font-size: $primary-font-size - 2;
+    }
+
+    .dps-posting-list {
+      font-size: $primary-font-size - 2;
+      border: 1px solid #c9e3fb;
+      padding: 5px;
+      background: #e5f3ff;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+  }
+
+  .posting-period-row-selected {
+    background: #bbdeff !important;
+
+    &:hover {
+      background: #b9d0f3;
+    }
+  }
+
+  .dps-selected {
+    background: #6696c3 !important;
+    color: white;
+  }
+
+}

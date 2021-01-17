@@ -1,0 +1,11 @@
+@import '~styles/variables.scss';
+.dps-grid-nav-list {
+    .dps-grid-list-item.active {
+        background: #4d8bc3;
+        color: $primary;
+    }
+}
+
+.grid-data.client-closed-matter {
+    background: #dab3b3;
+}

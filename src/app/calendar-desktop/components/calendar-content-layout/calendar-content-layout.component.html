@@ -1,0 +1,104 @@
+<div fxLayout="column" class="dps-calendar-layout">
+  <mat-toolbar class="dps_calendar_toolbar">
+    <dps-event-context-menue id="dps-event-context-menue" #eventContextMenue [calendarEvent]="contextEvent"
+      (open)="onEventDblClick($event)" (openOccurrence)="onOpenOccurrence($event)" (openSeries)="onOpenSeries($event)"
+      (response)="onResponse($event)" (replyForward)="onReplyForward($event)"
+      (showAsStateChange)="onShowAsStateChange($event)" (removeFromCalendar)="onRemoveFromCalendar($event)">
+    </dps-event-context-menue>
+    <button mat-icon-button (click)="onPrev()" matTooltip="Previous" matTooltipPosition="below">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onNext()" matTooltip="Next" matTooltipPosition="below">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    <button mat-button (click)="onToday()" class="today">Today</button>
+    <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+      <span>{{currentTitle}}</span>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" [value]="selectedDate" (dateChange)="onDateChange($event)">
+        <mat-datepicker #picker startView="year" panelClass="dps-calendar-datepicker"
+          (monthSelected)="onMonthChange($event,picker)"></mat-datepicker>
+      </mat-form-field>
+      <button mat-icon-button (click)="picker.open()">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+    <mat-button-toggle-group appearance="legacy" #group="matButtonToggleGroup" (change)="onViewChange($event)"
+      [ngStyle]="{'display': isMobile?'none':''}">
+      <mat-button-toggle value="timeGridDay" [ngClass]="{'active':this.currentView==='timeGridDay'}" matTooltip="Day"
+        matTooltipPosition="below">
+        <mat-icon>view_array</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="timeGridFourDay" [ngClass]="{'active':this.currentView==='timeGridFourDay'}"
+        matTooltip="Work week" matTooltipPosition="below">
+        <mat-icon>view_carousel</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="timeGridWeek" [ngClass]="{'active':this.currentView==='timeGridWeek'}" matTooltip="Week"
+        matTooltipPosition="below">
+        <mat-icon>view_week</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="dayGridMonth" [ngClass]="{'active':this.currentView==='dayGridMonth'}"
+        matTooltip="Month" matTooltipPosition="below">
+        <mat-icon>view_module</mat-icon>
+      </mat-button-toggle>
+      <!-- <mat-button-toggle value="listMonth">
+                <mat-icon>format_align_justify</mat-icon>
+            </mat-button-toggle> -->
+    </mat-button-toggle-group>
+  </mat-toolbar>
+  <div fxFlex="calc(100%-50px)" fxLayout="column" *ngIf="calendarOptions" class="dps-calendaroptions">
+    <div fxFlex="calc(100%-35px)" class="dps-white-gray-scroll dps-calendaroptions-body">
+      <!-- <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventDrop)="onEventDateTimeChange($event.detail.event)"
+        (eventResize)="onEventDateTimeChange($event.detail.event)"></ng-fullcalendar> -->
+      <full-calendar [plugins]="calendarOptions?.plugins" [editable]="calendarOptions?.editable"
+        [eventLimit]="calendarOptions?.eventLimit" [defaultView]="calendarOptions?.defaultView"
+        [nowIndicator]="calendarOptions?.nowIndicator" [fixedWeekCount]="calendarOptions?.fixedWeekCount"
+        [slotEventOverlap]="calendarOptions?.slotEventOverlap" [eventOverlap]="calendarOptions?.eventOverlap"
+        [navLinks]="calendarOptions?.navLinks" [now]="calendarOptions?.now" [defaultDate]="calendarOptions?.defaultDate"
+        [minTime]="calendarOptions?.minTime" [maxTime]="calendarOptions?.maxTime" [height]="calendarOptions?.height"
+        [header]="calendarOptions?.header" [views]="calendarOptions?.views" [events]="calendarEventList || []"
+        [navLinkDayClick]="calendarOptions?.navLinkDayClick" (dateClick)="onDateClick($event)"
+        (eventPositioned)="onEventAfterRender($event)" (eventResize)="onEventDateTimeChange($event.event)"
+        (eventDrop)="onEventDateTimeChange($event.event)" (viewSkeletonRender)="eventAfterAllRender($event.view)"
+        (datesRender)="eventAfterAllRender($event.view)">
+      </full-calendar>
+    </div>
+    <div fxFlex="35px" fxLayoutAlign=" center">
+      <mat-checkbox (change)="onShowBusinessHours($event)" color="primary" [checked]="showBusinessHours"
+        [disabled]="this.currentView==='month'">Show
+        business hours</mat-checkbox>
+    </div>
+  </div>
+  <mat-menu #contextMenu="matMenu">
+    <div *ngIf="contextEvent">
+      <button mat-menu-item class="dps-folder-action">Open</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item class="dps-folder-action">Forward</button>
+      <button mat-menu-item class="dps-folder-action"
+        *ngIf="contextEvent.isEditable && (contextEvent.data.attendees && contextEvent.data.attendees.length> 0)">Reply</button>
+      <button mat-menu-item class="dps-folder-action"
+        *ngIf="contextEvent.isEditable && (contextEvent.data.attendees && contextEvent.data.attendees.length> 0)">Reply
+        all</button>
+      <mat-divider></mat-divider>
+      <!-- <button mat-menu-item class="dps-folder-action" [disabled] *ngIf="contextEvent.isEditable">Charm</button> -->
+      <button mat-menu-item class="dps-folder-action" *ngIf="contextEvent.isEditable">Show as</button>
+      <!-- <button mat-menu-item class="dps-folder-action" [disabled] *ngIf="contextEvent.isEditable">Categorize</button> -->
+      <mat-divider></mat-divider>
+      <button mat-menu-item class="dps-folder-action"
+        *ngIf="contextEvent.isEditable && (contextEvent.data.attendees && contextEvent.data.attendees.length> 0)">Cancel</button>
+      <button mat-menu-item class="dps-folder-action"
+        *ngIf="contextEvent.isEditable && (!contextEvent.data.attendees || contextEvent.data.attendees.length === 0)"
+        class="dps-folder-action">Delete</button>
+    </div>
+  </mat-menu>
+  <!-- <div class="dropdown-content mat-elevation-z2">
+        <mat-nav-list dense style="padding-top: 0px;">
+            <mat-list-item>
+                <span>Open</span>
+                <i class="fa fa-caret-right"></i>
+            </mat-list-item>
+            <mat-list-item>
+                <span>Delete</span>
+            </mat-list-item>
+        </mat-nav-list> -->
+</div>

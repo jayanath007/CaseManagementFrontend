@@ -1,0 +1,45 @@
+<div class="dps-file-history-main-contentainer" fxLayout="column">
+  <mat-card class="dps-file-history-main-header">
+    <div class="dps-profile dps-white-gray-scroll">
+      <dps-open-case-header [hedingText]="hedingText$ | async"
+        [ammendTemplatesMenus]="user?.general?.userAccessRights?.ammendTemplatesMenus" [isDirtyMenu]="isDirtyMenu$ |
+        async" [isFromFileBase]="isFileBaseMenu$ | async" [menuButtonType]="menuButtonType$ | async"
+        [menuItem]="menuItem$|async" (viewWorkflowOut)="viewWorkflowOut($event)"
+        [selectedFileHistoryTab]="selectedTab$ | async" (viewProperties)="viewProperties($event)"
+        (addNoteOpenClick)="openAddNote()" (addTaskOpenClick)="openAddTask()" (timeRecordOpenClick)="openTimeRecord()"
+        (mailOpenClick)="newMailOpen()" (ledgerCardOpenClick)="onLedgerCardOpenClick()"
+        (matterCreationClick)="onMatterCreationClick()" (openBillingGuide)="onBillingGuideClick()"
+        (openLinkedMatter)="onLinkedMattersClick()" (openEchit)="onOpenEchitClick()"
+        (clientCreationClick)="onClientCreationClick()" [workFlowButtonStatus]="workFlowButtonStatus$| async"
+        (openCrimeClassManager)="onOpenCrimeClassManager()" (eBillingTypeData)=onEBilling() [matterInfo]="matterInfo"
+        (openConflictSearch)="onOpenConflictSearch()" (openCrimeDuty)="onOpenCrimeDuty()"
+        (openCivilTimeRecording)="onOpenCivilTimeRecording()" (openProbate)="onOpenProbate()"
+        (openBundle)="onOpenBundle()" (manageDiaryFolders)="onManageDiaryFolders()"
+        (openBillingRequest)="onOpenBillingRequestPopup($event)" (sendMsgViaMLS)="onSendMsgViaMLS()"
+        [matterData]="inputData?.matterData" (formsLibrary)="openFormsLibrary($event)" (openProbate)="onOpenProbate()">
+      </dps-open-case-header>
+    </div>
+  </mat-card>
+
+  <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+    <div class="grid-wrapper-main" fxLayout="column">
+      <dps-open-case-layout (menuChange)="onMenuChange($event)" (contactChange)="onContactChange($event)"
+        [screensContactTypeList]="screensContactTypeList$ | async" [contactMode]="contactMode$  | async"
+        [openCaseToken]="token" *ngIf="(menuButtonType$ | async) =='ViewFileHistoy'" [fdDetails]="fdDetails$ | async"
+        (fontSizeClassChangeValue)="onFontSizeClassChange($event)" [selectedTab]="selectedTab$ | async"
+        (ShowContent)="onShowContent($event)" (refreshClick)="onRefresh()"
+        (searchTextChanged)="onSearchTextChanged($event)" [hidden]="(selectedTab$ | async) != 'file-history'"
+        (closeMsgBanner)="onCloseMsgBanner()" [searchText]="searchText$ | async" [fontSizeClass]="fontSizeClass"
+        [matterInfo]="matterInfo" [searchText]="searchText$ | async" [refreshCount]="refreshCount$ | async"
+        [deleteEntrySecurityInfo]="deleteEntrySecurityInfo$ | async" [showFDFigures]="showFDFigures$ | async"
+        [homeCurrancy]="homeCurrancy$ | async" [groupMode]="groupMode$ | async"
+        [matterBannerMsg]="matterBannerMsg$ | async" [isCloseBanner]="isCloseBanner$ | async"
+        [isSearchFullText]="isSearchFullText$ | async" (searchFullTextValue)="onIsSearchFullTextValue($event)">
+      </dps-open-case-layout>
+      <dps-workflow-menu-router-host *ngIf="(menuButtonType$ | async) !='ViewFileHistoy'" [token]="token"
+        [inputData]="inputData" [menuButtonClickType]="menuButtonType$ | async"
+        [menuPropertyButtonClick]="menuPropertyButtonClick$ | async">
+      </dps-workflow-menu-router-host>
+    </div>
+  </mat-card>
+</div>

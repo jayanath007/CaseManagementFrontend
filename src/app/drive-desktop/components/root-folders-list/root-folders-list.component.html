@@ -1,0 +1,75 @@
+<div class="dps-drive" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="isDriveFolderSelect && !isPopup">
+  <div class="header-text" fxLayout="row">
+    <div class="header-indicator">
+      <span>
+        <mat-icon>cloud_queue</mat-icon>
+        {{activeDrive?.name}}
+      </span>
+    </div>
+
+  </div>
+  <div  fxLayout="row" fxLayoutGap="5px">
+    <button mat-raised-button (click)="drivefileUploader.onFileUploadBtnClick()">
+      <mat-icon>attach_file</mat-icon>
+      <span> Upload Files</span>
+      <dps-file-uploader #drivefileUploader inputId="driveUploader" (fileUpload)="onFileChange($event)" [multiple]="true"></dps-file-uploader>
+    </button>
+    <button mat-raised-button [matMenuTriggerFor]="addNewMenue.contextMenu">
+      <mat-icon>add</mat-icon>
+      <span> New </span>
+      <mat-icon class="keyboard_arrow_down">keyboard_arrow_down</mat-icon>
+    </button>
+    <dps-add-new-menue #addNewMenue (addNew)="onAddNew($event)"></dps-add-new-menue>
+  </div>
+</div>
+<div class="dps-drive-search">
+  <mat-form-field floatLabel="never">
+    <span matPrefix>&nbsp;&nbsp;</span>
+    <input #driveSearch matInput type="search" [readonly]="!isDriveFolderSelect" (keyup.enter)="onSearch(driveSearch.value)">
+    <mat-placeholder>{{isDriveFolderSelect? 'Search '+activeDrive?.name:"Can't Search"}}</mat-placeholder>
+  </mat-form-field>
+  <button class="dps-drive-search-button" mat-icon-button (click)="onSearch(driveSearch.value)" [disabled]="!isDriveFolderSelect">
+    <mat-icon class="mat-18">search</mat-icon>
+  </button>
+</div>
+
+<mat-nav-list dense [ngStyle]="{'padding-top': true?'54px':''}">
+  <mat-list-item *ngIf="loading">
+    <span matLine class="dps-folder-item-name">
+      <i class="fa fa-cloud"></i>
+      My Drive
+    </span>
+    <button mat-icon-button>
+      <mat-icon fontSet="fontawesome" fontIcon="fa-circle-o-notch" class="fa fa-spin"></mat-icon>
+    </button>
+  </mat-list-item>
+  <div *ngFor="let drive of stikeyFolders">
+    <div [ngClass]="{'dps-folder-selected':(drive.root.id===activeView?.owner.id && isDriveFolderSelect)}">
+      <mat-list-item (click)="onOpenItem(drive.root)">
+        <span matLine class="dps-folder-item-name">
+          <i class="fa" [ngClass]="{'fa-share-alt-square':drive?.drive.name==='Shared Drive','fa-cloud':drive?.drive.name==='My Drive'}"></i>
+          {{drive?.drive.name}}
+        </span>
+        <!-- <button mat-icon-button *ngIf="true">
+        <mat-icon>{{false?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="false">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-circle-o-notch" class="fa fa-spin"></mat-icon>
+      </button> -->
+      </mat-list-item>
+    </div>
+
+    <div class="dps-root-folders" *ngIf="drive.folders">
+      <div *ngFor="let folder of drive.folders" [ngClass]="{'dps-folder-selected':(folder.id===activeView?.owner.id && isDriveFolderSelect)}">
+        <mat-list-item (click)="onOpenItem(folder)">
+          <span matLine class="dps-folder-item-name">
+            <i class="fa" [ngClass]="folder.name==='Documents'?'fa-archive':'fa-user'"></i>
+            {{folder.name}}
+          </span>
+        </mat-list-item>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-nav-list>

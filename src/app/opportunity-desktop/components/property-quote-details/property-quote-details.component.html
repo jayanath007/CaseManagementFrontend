@@ -1,0 +1,88 @@
+<div class="workspace dps-white-gray-scroll">
+  <!-- <dps-loader-component class="client" *ngIf="loading"></dps-loader-component> -->
+  <h1 class="selling-head"> {{selectedQuoteType?.appDesc}} </h1>
+  <h3>Please provide the following details for your quote:</h3>
+  <!-- <h2 innerHTML={{topTest}}></h2> -->
+  <div *ngIf="propertyQuRequest" name="addDetails" class="editForm quote-details dps-white-gray-scroll"
+    style="overflow: scroll;">
+
+    <dps-section-for-price class="Buying for"
+      *ngIf="propertyQuRequest.appId === 'p' || propertyQuRequest.appId === 'ps'" [currency]="currency"
+      header="Buying for" [value]="propertyQuRequest[key.purchesValue]"
+      (changeValue)="onChnageProQuoteRequest(key.purchesValue, $event)"
+      [ngClass]="propertyQuRequest.appId === 'ps' ? 'input-wrapper-section-half-screen buying': ''">
+    </dps-section-for-price>
+    <dps-section-for-price class="Selling for"
+      *ngIf="propertyQuRequest.appId === 's' || propertyQuRequest.appId === 'ps'" [currency]="currency"
+      header="Selling for" [value]="propertyQuRequest[key.saleValue]"
+      (changeValue)="onChnageProQuoteRequest(key.saleValue, $event)"
+      [ngClass]="propertyQuRequest.appId === 'ps' ? 'input-wrapper-section-half-screen selling right': ''">
+    </dps-section-for-price>
+    <dps-section-for-price
+      *ngIf="propertyQuRequest.appId !== 'p' && propertyQuRequest.appId !== 's' && propertyQuRequest.appId !== 'ps'"
+      [currency]="currency" [header]="getValueHeaderForHIP()" [value]="propertyQuRequest[key.hIPsValue]"
+      (changeValue)="onChnageProQuoteRequest(key.hIPsValue, $event)" class="Buying for">
+    </dps-section-for-price>
+    <div class="input-section" *ngIf="useBranch">
+      <mat-form-field floatLabel="always" class="dps-option">
+        <mat-select placeholder="Branch" [ngModel]="selectedBranch"
+          (selectionChange)="onChnageProQuoteRequest(key.branchId, $event.value.branchId)">
+          <mat-option *ngFor="let b of webQuoteData?.branch" [value]="b">
+            {{b.branchName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <dps-section-for-buying-information *ngIf="propertyQuRequest.appId === 'p' || propertyQuRequest.appId === 'ps'"
+      [propertyQuRequest]="propertyQuRequest" [cost]="webQuoteData?.cost"
+      (changeProQuoteRequest)="onChnageProQuoteRequest($event.key, $event.value)">
+    </dps-section-for-buying-information>
+    <div class="clear"></div>
+    <dps-section-for-selling-information *ngIf="propertyQuRequest.appId === 's' || propertyQuRequest.appId === 'ps'"
+      [propertyQuRequest]="propertyQuRequest" [cost]="webQuoteData?.cost"
+      (changeProQuoteRequest)="onChnageProQuoteRequest($event.key, $event.value)">
+    </dps-section-for-selling-information>
+    <div class="clear"></div>
+
+    <div class="seperator">
+      <dps-section-for-property
+        *ngIf="propertyQuRequest.appId !== 'p' && propertyQuRequest.appId !== 's' && propertyQuRequest.appId !== 'ps'"
+        [propertyQuRequest]="propertyQuRequest" [cost]="webQuoteData?.cost"
+        (changeProQuoteRequest)="onChnageProQuoteRequest($event.key, $event.value)">
+      </dps-section-for-property>
+
+      <div class="seperator">
+        <div class="input-section"
+          *ngIf="(webQuoteData?.loclAuth?.length > 0) && (propertyQuRequest.appId === 'p' || propertyQuRequest.appId === 'ps')">
+          <mat-form-field floatLabel="always" class="dps-option">
+            <mat-select placeholder="Please select the Local Authority of the Property" [ngModel]="selectedLas"
+              (selectionChange)="onChnageProQuoteRequest(key.lasId, $event.value.localSearchRateId)">
+              <mat-option *ngFor="let l of webQuoteData?.loclAuth" [value]="l">
+                {{l.localAuthority}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <div class="input-section" *ngIf="useBranch">
+          <mat-form-field floatLabel="always" class="dps-option">
+            <mat-select placeholder="Branch" [ngModel]="selectedBranch"
+              (selectionChange)="onChnageProQuoteRequest(key.branchId, $event.value.branchId)">
+              <mat-option *ngFor="let b of webQuoteData?.branch" [value]="b">
+                {{b.branchName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <br />
+  <br />
+  <br />
+  <button mat-button [disabled]="isLoading" class="general-button" (click)="clickOnNext()">
+    {{propertyQuRequest && propertyQuRequest[key.reportId] == 0 ?  'Next' : 'Re-Create Report'}}
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+  <div class="clear"></div>
+</div>

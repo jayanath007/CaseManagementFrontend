@@ -1,0 +1,32 @@
+@import '~styles/variables.scss';
+
+.dps-save-grid {
+    // padding-left: 15px;
+    height: 100%;
+}
+.dps-width-controller{
+    height: 100%;
+}
+.row-highlight {
+    background: #96caee;
+    box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+    z-index: 2;
+    width: calc(100% - 15px);
+  }
+
+  .row-highlight.dps-is-mobile {
+    width: 100%;
+  }
+  .dps-save-grid{
+      height: 100%;
+  }
+  .grid-content{
+    overflow-y: scroll;
+  }
+  .dps-grid-nav-list{
+     
+      height: 100%;
+  }
+  .dps-grid-x{
+      padding-left: 12px;
+  }

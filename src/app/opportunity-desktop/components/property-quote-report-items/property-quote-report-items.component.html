@@ -1,0 +1,203 @@
+<h2>Estimate for {{type}}</h2>
+<!-- value -->
+
+<div class="dps-white-gray-scroll">
+
+  <table class="quote-figures general"
+    style="width: 100%;border-spacing: 0; border-collapse: collapse; text-align: left; font-size:13px;">
+    <tr>
+      <th style="text-align: left;background: #5e7890;padding: 10px;color: #fff;">Property Type</th>
+      <th style="text-align: right;background: #5e7890;padding: 10px;color: #fff; width: 185px;">
+        {{valueHeader}}
+      </th>
+    </tr>
+    <tr>
+      <td style="padding: 10px;border-bottom: 1px solid #d3d4d6; color: #32363B; font-weight: bold; ">{{type}} Price
+      </td>
+      <td
+        style="width:200px; padding: 10px;border-bottom: 1px solid #d3d4d6; color: #32363B; font-weight: bold;  text-align: right; background: #e3e7ea; white-space: nowrap;"
+        class="total-counts">
+        {{currency}} {{data.price | number : '1.2-2'}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"> &nbsp; </td>
+    </tr>
+    <tr *ngIf="data.profCosts">
+      <td
+        style="padding: 6px 10px;border-bottom: 1px solid #d3d4d6; border-top: 1px solid #d3d4d6; color: #32363B;position: relative;">
+        Professional Costs <span
+          style="font-size: 12px; color: #e49e47;vertical-align: middle;position: absolute;bottom: 0px;right: 18em;cursor: pointer;padding: 8px;"
+          (click)="onOpenReportEditPopup('extraCostItems')" class="material-icons"> local_offer </span>
+        <!-- <span *ngIf="!!profCostDiscount && profCostDiscount.editedProfesionalFee && profCostDiscount.editedProfesionalFee>0"> (edited)</span> -->
+      </td>
+      <td
+        style="padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="total-counts">
+        {{currency}} {{ data.profCosts | number : '1.2-2'}}
+      </td>
+    </tr>
+    <tr *ngFor="let item of filterCostItem(data.extraCostItems)">
+      <td style="padding: 10px;border-bottom: 1px solid #d3d4d6;">
+        {{itemDesplayName(item)}}
+      </td>
+      <td
+        style="padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;">
+        {{currency}} {{item.price | number : '1.2-2'}}
+      </td>
+    </tr>
+    <tr *ngIf="!!profCostDiscount && profCostDiscount.discountAmount > 0">
+      <td
+        style="padding: 10px;border-bottom: 1px solid #d3d4d6;padding: 6px 10px;border-bottom: 1px solid #d3d4d6; border-top: 1px solid #d3d4d6;color: #32363B;">
+        {{profCostDiscount.allowanceText}}
+      </td>
+      <td
+        style="width:200px; padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;">
+        - {{currency}} {{profCostDiscount.discountAmount | number: '1.2-2'}}
+      </td>
+    </tr>
+    <tr *ngIf="data.vat">
+      <td
+        style="padding: 10px;border-bottom: 1px solid #d3d4d6;padding: 6px 10px;border-bottom: 1px solid #d3d4d6; border-top: 1px solid #d3d4d6;color: #32363B;">
+        V.A.T.
+      </td>
+      <td
+        style="width:200px; padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;">
+        {{currency}} {{data.vat - vatReduction| number : '1.2-2'}}
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="border-top: 1px dashed #6e8a77; border-bottom: 1px solid #868d92; font-size: 17px; color: #0d5825; font-weight: 700; text-align: left; padding-bottom: 10px; padding-top: 10px; padding-left: 12px;">
+        Our Fees</td>
+      <td
+        style="width:200px; border-top: 1px dashed #6e8a77; border-bottom: 1px solid #868d92; padding-top: 10px; font-size: 17px; color: #0d5825; font-weight: 700; text-align: right; padding-bottom: 10px; padding-right: 11px; background: #d2e6d8;">
+        {{currency}}
+        {{  ourTotal | number : '1.2-2'}}
+        <!-- (data.ourtot - profCostDiscount.discountAmount - vatReduction) -->
+      </td>
+    </tr>
+  </table>
+
+  <!-- feeCostItems -->
+  <table *ngIf="filterCostItem(data.feeCostItems).length > 0"
+    style="width: 100%;border-spacing: 0; border-collapse: collapse; text-align: left; font-size:13px; margin-top:20px;">
+    <tr>
+      <th style="text-align: left; padding: 10px;color: #fff;">
+        <ins style="color: #47637d; ">
+          Additional Fees
+        </ins>
+        <span
+          style="font-size: 12px; color: #e49e47;vertical-align: middle;bottom: 0px;right: 18em;cursor: pointer;padding: 8px;"
+          (click)="onOpenReportEditPopup('feeCostItems')" class="material-icons"> local_offer
+        </span>
+      </th>
+      <th style="width: 200px;">&nbsp;</th>
+    </tr>
+    <tr *ngFor="let item of filterCostItem(data.feeCostItems)">
+      <td style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea;">
+        {{itemDesplayName(item)}}&nbsp;&nbsp;<span *ngIf="item.description" title="{{item.description}}">(?)</span></td>
+      <td
+        style="width:200px;padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue" align="right">
+        {{currency}} {{item.price | number : '1.2-2'}}</td>
+    </tr>
+  </table>
+
+  <!-- Vatable -->
+  <table *ngIf="filterCostItem(data.repVatItem).length > 0"
+    style="width: 100%;border-spacing: 0; border-collapse: collapse; text-align: left; font-size:13px; margin-top:20px;">
+    <tr>
+      <th style="text-align: left;padding: 10px;color: #fff;">
+        <ins style="color: #47637d; ">Vatable Disbursements
+        </ins>
+        <span
+          style="font-size: 12px; color: #e49e47;vertical-align: middle;bottom: 0px;right: 18em;cursor: pointer;padding: 8px;"
+          (click)="onOpenReportEditPopup('repVatItem')" class="material-icons"> local_offer
+        </span>
+      </th>
+      <th style="width:200px;">&nbsp;</th>
+    </tr>
+    <tr *ngFor="let item of filterCostItem(data.repVatItem)">
+      <td
+        style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea; border-bottom: 1px solid #d2e0ea;">
+        {{itemDesplayName(item)}}&nbsp;&nbsp;<span *ngIf="item.description" title="{{item.description}}">(?)</span></td>
+      <td
+        style="width:200px; padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue">
+        {{currency}} {{item.price | number : '1.2-2'}}</td>
+    </tr>
+  </table>
+
+  <!-- Non-Vatable -->
+  <table
+    style="width: 100%;border-spacing: 0; border-collapse: collapse; text-align: left; font-size:13px; margin-top:20px;">
+    <tr *ngIf="filterCostItem(data.repNonVatItem).length > 0">
+      <th style="text-align: left; padding: 10px;color: #fff;">
+        <ins style="color: #47637d; ">
+          {{filterCostItem(data.repVatItem).length === 0 ? 'Disbursements' : 'Non-Vatable Disbursements'}}
+        </ins>
+        <span
+          style="font-size: 12px; color: #e49e47;vertical-align: middle; bottom: 0px;right: 18em;cursor: pointer;padding: 8px;"
+          (click)="onOpenReportEditPopup('repNonVatItem')" class="material-icons"> local_offer
+        </span>
+      </th>
+      <th style="width: 200px;">&nbsp;</th>
+    </tr>
+    <tr *ngFor="let item of filterCostItem(data.repNonVatItem)">
+      <td style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea;">
+        {{itemDesplayName(item)}}&nbsp;&nbsp;<span *ngIf="item.description" title="{{item.description}}">(?)</span></td>
+      <td
+        style="width: 200px;padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue" align="right">
+        {{currency}} {{item.price | number : '1.2-2'}}</td>
+    </tr>
+    <tr *ngIf="type === 'Purchase' && !!data.lasRate && (data.lasRate > 0)">
+      <td style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea;">Local
+        Search</td>
+      <td
+        style="width: 200px;padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue" align="right">
+        {{currency}} {{data.lasRate | number : '1.2-2'}}</td>
+    </tr>
+    <tr *ngIf="!!data.landRegFee && (data.landRegFee > 0)">
+      <td style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea;">Land Registry
+        Fee</td>
+      <td
+        style="width: 200px;padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue" align="right">
+        {{currency}} {{data.landRegFee | number : '1.2-2'}}</td>
+    </tr>
+    <tr *ngIf="!!data.stampDuty && (data.stampDuty > 0)">
+      <td
+        style="padding: 6px 10px; color: #32363B; text-align: left; border-top: 1px solid #d2e0ea; border-bottom: 1px solid #d2e0ea;">
+        Stamp Duty</td>
+      <td
+        style="width: 200px;padding: 6px 10px;text-align: right; background: #e3e7ea; white-space: nowrap;  color: #32363B; border-bottom: 1px solid #f5faff;"
+        class="TQ_listValue" align="right">
+        {{currency}} {{data.stampDuty | number : '1.2-2'}}</td>
+    </tr>
+  </table>
+  <table
+    style="width: 100%;border-spacing: 0; border-collapse: collapse; text-align: left; font-size:13px; margin-top:20px;">
+    <tr>
+      <td
+        style="border-top: 1px dashed #4682bb; border-bottom: 1px solid #4682bb; font-size: 17px; color: #1e5385; font-weight: 700; text-align: left; padding-bottom: 10px; padding-top: 10px; padding-left: 12px;">
+        Disbursements</td>
+      <td
+        style="width:200px; border-top: 1px dashed #4682bb; border-bottom: 1px solid #4682bb; padding-top: 10px;padding-left: 10px; font-size: 17px; color: #1e5385; font-weight: 700; text-align: right; padding-bottom: 10px; padding-right: 11px; background: #d6ebff;">
+        {{currency}} {{data.total| number : '1.2-2'}}</td>
+    </tr>
+
+    <tr>
+      <td
+        style="border-top: 1px dashed #4682bb; border-bottom: 1px solid #4682bb; font-size: 17px; color: #000; font-weight: 700; text-align: left; padding-bottom: 10px; padding-top: 10px; padding-left: 12px;">
+        Our Fees & Disbursements {{type}}</td>
+      <td
+        style="width:200px; border-top: 1px dashed #4682bb; border-bottom: 1px solid #4682bb; padding-top: 10px;padding-left: 10px; font-size: 17px; color: #1e5385; font-weight: 700; text-align: right; padding-bottom: 10px; padding-right: 11px; background: #d6ebff;">
+        {{currency}} {{data.total + ourTotal| number : '1.2-2'}}</td>
+    </tr>
+  </table>
+</div><!-- End head div -->
+<!-- PDF Page Break -->
+<div style="page-break-after:always"></div>

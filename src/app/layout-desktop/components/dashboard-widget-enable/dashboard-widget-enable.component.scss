@@ -1,0 +1,93 @@
+.dps-dashboard-widget-list {
+  height: 100%;
+
+  &.mat-expansion-panel {
+    border-bottom: none !important;
+  }
+
+  mat-panel-description {
+    overflow-y: auto;
+    height: calc(100% - 48px);
+
+    mat-list {
+      padding-top: 0px;
+    }
+  }
+
+  mat-list-item {
+    height: 40px;
+    mat-checkbox{
+      padding-left: 18px;
+    }
+  }
+
+  .dps-panel-header {
+    background: #eaeaea;
+    border: 1px solid #d2d2d2;
+    border-right: none;
+    border-left: none;
+  }
+
+  mat-panel-title {
+    mat-icon {
+      color: #212121;
+      margin: 0px 16px 0px 3px;
+    }
+
+    .dps-text-hd {
+      position: relative;
+      top: 6px;
+      padding-left: 4px;
+      color: #212121;
+      font-weight: 600;
+    }
+  }
+
+  ::ng-deep .mat-expansion-panel-content {
+
+    height: 100%;
+  }
+
+  ::ng-deep.mat-expansion-indicator {
+    position: relative;
+    right: 14px;
+  }
+
+  mat-expansion-panel-body {
+    height: 100%;
+  }
+
+  ::ng-deep.mat-expansion-panel-body {
+    padding: 0 0 0;
+    height: 100%;
+  }
+
+  ::ng-deep.mat-expansion-panel-header-description {
+    margin-right: 0px;
+  }
+
+  mat-list {
+    width: 100%;
+  }
+
+  mat-list-item {
+    font-size: 12px;
+  }
+
+  ::ng-deep {
+    .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background , 
+    .mat-checkbox:not(.mat-checkbox-disabled).mat-primary .mat-checkbox-ripple .mat-ripple-element {
+      background-color: #31a5e2;
+    }
+  }
+
+
+}
+
+.dps-widget-add-list.mat-list-item {
+  ::ng-deep.mat-list-item-content {
+    padding: 0px 35px !important;
+  }
+
+}
+

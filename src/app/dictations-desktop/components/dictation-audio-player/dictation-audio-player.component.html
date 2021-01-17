@@ -1,0 +1,22 @@
+<div class="dps-dictation-audio-player" fxLayout="column">
+    <mat-toolbar>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayoutGap="2em" fxLayout="row">
+            <!-- <button mat-raised-button class="dps-btn dps-open-word" (click)="onOpenWord()">
+                <div>
+                    <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-file-word-o"></mat-icon>
+                    <span class="btn-text">Word</span>
+                </div>
+            </button> -->
+            <!-- <button mat-raised-button class="dps-btn dps-save" (click)="onSave()" [disabled]="loading">
+                <div>
+                    <mat-icon class="fa" fontSet="fontawesome" fontIcon="fa-save"></mat-icon>
+                    <span class="btn-text">Save</span>
+                </div>
+            </button> -->
+        </div>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <dps-audio-player [src]="url" [time]="time" fxFlex="1 1 auto">
+    </dps-audio-player>
+</div>

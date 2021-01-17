@@ -1,0 +1,35 @@
+<!-- <div>
+  <a [routerLink]="[{outlets:{'mail':['mail']}}]" >Mail</a>
+  <a routerLink="task" >Tasks</a>
+  <a routerLink="calendar" >Calendar</a>
+</div> -->
+<nav mat-tab-nav-bar backgroundColor="primary" class="dps-top-nav">
+  <a mat-tab-link disabled></a>
+  <a mat-tab-link class="mat-tab" (click)="toggleSettingsNav.emit()">
+    <mat-icon>settings</mat-icon>
+  </a>
+  <a class="mat-tab-link" mat-tab-link
+    routerLink="calendar"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive"
+    >
+    <mat-icon>today</mat-icon>
+    <span>&nbsp;Calendar</span>
+  </a>
+  <a class="mat-tab-link" mat-tab-link
+    routerLink="task"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive"
+    >
+    <mat-icon>content_paste</mat-icon>
+    <span>&nbsp;Task</span>
+  </a>
+  <a class="mat-tab-link" mat-tab-link 
+    [routerLink]="[{outlets:{'mail':['mail']}}]"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive"
+    >
+    <mat-icon>email</mat-icon>
+    <span>&nbsp;Mail</span>
+  </a>
+</nav>

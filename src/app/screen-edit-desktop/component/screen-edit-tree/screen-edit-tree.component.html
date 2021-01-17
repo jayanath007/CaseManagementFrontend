@@ -1,0 +1,11 @@
+<!-- {{screenEditComponentTreeData | json}} -->
+<div class="dps_screen_edit_tree" fxLayout="column">
+  <tree-root class="tree-text" [nodes]="screenEditComponentTreeData" [options]="options">
+    <ng-template #treeNodeTemplate let-node>
+      <div (click)="onClick(node.data)" class="dps-tree-node">
+        <mat-icon class="indicator-icon"> {{node.data.scL_Name | screenEditIcon}} </mat-icon>
+        <span class="screen_tree_item">{{ node.data.scL_Caption || node.data.scL_DefaultCaption || '(none)' }}</span>
+      </div>
+    </ng-template>
+  </tree-root>
+</div>

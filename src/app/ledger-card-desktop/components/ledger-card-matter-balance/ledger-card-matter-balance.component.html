@@ -1,0 +1,35 @@
+<div fxLayout="column">
+  <!-- <div>Matter Balances</div> -->
+  <div fxFlex="row" class="ledger-card-matter">
+    <div class="balance-field" fxLayout="column" fxFlex="1 1 auto">
+      <dps-ledger-card-matter-balance-item [displyName]="'Office Balance'"
+        [value]="matterBalances?.officeBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'Unpaid Bills'"
+        [value]="matterBalances?.unpaidBills | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'DPU Balance'"
+        [value]="matterBalances?.dpuBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'DUB Balance'"
+        [value]="matterBalances?.dubBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+    </div>
+    <div class="balance-field" fxLayout="column" fxFlex="1 1 auto">
+      <dps-ledger-card-matter-balance-item [displyName]="(resoleModuleName('client_search')|async)+' '+'Balance'"
+        [value]="matterBalances?.clientBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'DDA Balance'"
+        [value]="matterBalances?.ddaBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'WIP Balance'"
+        [value]="matterBalances?.wipBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'U/T Balance'"
+        [value]="matterBalances?.utBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+    </div>
+    <div class="balance-field" fxLayout="column" fxFlex="1 1 auto">
+      <dps-ledger-card-matter-balance-item [displyName]="'Office A/M Bal'"
+        [value]="matterBalances?.officeAMBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="(resoleModuleName('client_search')|async)+'
+      A/M Bal'" [value]="matterBalances?.clientAMBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'DDA A/M Bal'"
+        [value]="matterBalances?.ddaamBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+      <dps-ledger-card-matter-balance-item [displyName]="'DUU Balance'"
+        [value]="matterBalances?.duuBalance | number : '1.2-2'"></dps-ledger-card-matter-balance-item>
+    </div>
+  </div>
+</div>

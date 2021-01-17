@@ -1,0 +1,81 @@
+<div class="matter-search-grid">
+  <div class="matter-search-grid-outer-wrapper" fxLayout="column">
+    <div fxLayout="column" fxFlex="calc(100%-50px)">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="lenth-calc" fxLayout="column">
+          <div class="row-highlight" dpsIsMobile>
+            <div class="row-highlight-inner">
+              <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+                (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+              </dps-column-header>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="isGridLoading || isDepartmentLoading"></mat-progress-bar>
+          </div>
+          <div fxLayout="column" [@.disabled]="true" fxFlex="calc(100%-40px)"
+            class="grid-sub-options dps-white-gray-scroll">
+            <mat-accordion [multi]="false">
+              <mat-expansion-panel [expanded]="item.expanded" *ngFor="let item of matterData ; let isOdd=odd"
+                [ngClass]="(item.data?.closed === 1)?'closed-matters':(item.data?.isCompleteMatter ? 'complete-matter':(isOdd?'dps_row_separation-0':'dps_row_separation-1'))">
+                <mat-expansion-panel-header collapsedHeight="34px" expandedHeight="34px"
+                  class="expansion-panelgrid-header" (click)="gridRowExpan(item, $event)">
+                  <mat-panel-title fxLayout="row">
+                    <dps-matter-grid-fix-row [isPopup]="false" fxFlex="" [columnDef]="columnDef"
+                      [searchText]="searchText" [matterRowData]="item" [activeView]="activeView"
+                      [isPlotUser]="isPlotUser" [plotVarValues]="plotVarValues">
+                    </dps-matter-grid-fix-row>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row">
+                  <dps-grid-button-details [selectedMatterData]="item"
+                    (openReferralNoteAndDate)="onOpenReferralNoteAndDate($event)"
+                    (updateOpenCaseClick)="openCaseClick($event)"
+                    (updateTimeRecordingClick)="timeRecordingClick($event)" (updateNewMailClick)="newMailClick($event)"
+                    (ledgerCardClick)=onOpenLedgerCard($event) (openMLS)="onOpenMLS($event)"
+                    (openEChitWithMatter)="onOpenEChitWithMatter($event)"
+                    (openBillingRequest)="onOpenBillingRequestPopup($event)"></dps-grid-button-details>
+                  <span fxFlex="1 1 auto"></span>
+                  <div *ngIf="(moduleIsActive(module.Accounts) | async)">
+                    <div fxLayout="row" fxFlexAlign="center center" fxFlex="1 1 auto">
+                      <div fxLayout="column" class="dps-matter-button">
+                        <span *ngIf="item.financeDetails?.dateLastBill">
+                          {{item.financeDetails?.dateLastBill | date :'dd/MM/yyyy'}}</span>
+                        <span *ngIf="!item.financeDetails?.dateLastBill"> - -</span>
+                        <label>Last Billed</label>
+                      </div>
+                      <div fxLayout="column" class="dps-matter-button">
+                        <span>{{homeCurrancy | currencySymbols}}{{item.financeDetails?.unpaidBill | number : '1.2-2'}}</span>
+                        <label>Unpaid Bills</label>
+                      </div>
+                      <div fxLayout="column" class="dps-matter-button">
+                        <span>{{homeCurrancy | currencySymbols}}{{item.financeDetails?.clientBal | number : '1.2-2'}}
+                        </span>
+                        <label>Client</label>
+                      </div>
+                      <div fxLayout="column" class="dps-matter-button">
+                        <span>{{homeCurrancy | currencySymbols}}{{item.financeDetails?.wipSum | number : '1.2-2'}}</span>
+                        <label>WIP</label>
+                      </div>
+                      <div fxLayout="column" class="dps-matter-button">
+                        <span> {{homeCurrancy | currencySymbols}}{{item.financeDetails?.wipLimit | number : '1.2-2'}}
+                        </span>
+                        <label>WIP Limit</label>
+                      </div>
+                    </div>
+                  </div>
+                  <span fxFlex="1 1 auto"></span>
+                </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-paginator fxFlex="50px" #paginator [length]="totalItems" [pageIndex]="paginatorDef?.currentPage"
+      [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="activeView=='Recent50'?[50]:pageSizeOptions"
+      (page)="onNextPage($event)" class="footer-shadow">
+    </mat-paginator>
+  </div>
+</div>

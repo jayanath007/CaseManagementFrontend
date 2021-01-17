@@ -1,0 +1,74 @@
+<div class="dps-billing-request-add-record-layout">
+
+  <dps-common-popup-header icon="label"
+    title="{{requestViewData?.requestFormTypes}} - {{requestViewData?.importAndAddRecordPopupMode}}" buttons="close"
+    [loading]="requestViewData?.disbursementGridLoading" iconColor="#e8a348" titleColor="#a9c0f6"
+    (buttonClick)="onClose($event)">
+  </dps-common-popup-header>
+  <div class="dps-billing-wrapper">
+    <div fxLayout="row">
+      <dps-select-input-with-table placeholder="Fee Earner" [canEdit]="false" [columns]="cmbfeeEarnerColumns"
+        [rows]="feeEarnerList" (selectionChange)="onfeeEarnerSelectChange($event)"
+        [selectedKeyValue]="feeEarnerSelectedValue"
+        [readonly]="(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)">
+      </dps-select-input-with-table>
+      <dps-select-input-with-table placeholder="Details" [canEdit]="true" [columns]="cmbDescriptionColumns"
+        [rows]="descriptionList" (selectionChange)="onDescriptionSelectChange($event)"
+        [selectedKeyValue]="descriptionSelectedValue"
+        [readonly]="(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)">
+      </dps-select-input-with-table>
+    </div>
+    <div fxLayout="row" class="dps-billing-forms">
+      <mat-form-field *ngIf="selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem">
+        <input matInput #disbursmentDate [matDatepicker]="picker" placeholder="Date" [value]="itemDate"
+          [readonly]="selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem">
+        <mat-datepicker-toggle matSuffix [for]="picker"
+          [disabled]="selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <dps-select-input-with-table placeholder="Nominal" [canEdit]="false" [columns]="cmbNominalColumns"
+        [selectedKeyValue]="nominalSelectedValue" [rows]="requestViewData?.nominalList"
+        (selectionChange)="onNominalSelectChange($event)"
+        *ngIf="!(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)">
+      </dps-select-input-with-table>
+      <mat-form-field>
+        <input [disabled]="(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)" matInput #selectedNet
+          type="number" placeholder="Net" min="0" maxlength="11" step="0.01" [ngModel]="netVal"
+          (focusout)="onNetFocusout(selectedNet)">
+      </mat-form-field>
+      <dps-select-input-with-table placeholder="VAT Code" [canEdit]="false" [selectedKeyValue]="vatCodeSelectedValue"
+        [columns]="cmbVatCodeColumns" [rows]="vatCodeList" (selectionChange)="onVatCodeSelectChange($event)">
+      </dps-select-input-with-table>
+      <mat-form-field class="form">
+        <input matInput #selectedVat type="number" [readonly]="true" placeholder="VAT" min="0" maxlength="11"
+          step="0.01" [ngModel]="vatVal" (focusout)="onVatFocusout(selectedVat)">
+      </mat-form-field>
+      <mat-form-field class="form">
+        <input matInput #selectedGross type="number" [readonly]="true" placeholder="Gross" min="0" maxlength="11"
+          step="0.01" [ngModel]="grossVal" (focusout)="onGrossFocusout(selectedGross)">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="dps-add-actions" fxLayout="row">
+    <div *ngIf="requestViewData?.importAndAddRecordPopupMode === popupMode.Edit">
+      <button mat-button class="remove" (click)="onDelete(requestViewData?.requestFormTypes)"
+        *ngIf="!(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)">
+        Delete
+      </button>
+      <button *ngIf="(selectedRow?.isDisbursmenGrid && selectedRow?.isDisbursmenItem)" mat-button class="remove"
+        (click)="onDelete(requestViewData?.requestFormTypes)">
+        Remove
+      </button>
+      <button mat-button class="save" (click)="onAddEdit(requestViewData?.requestFormTypes)">
+        Save
+      </button>
+    </div>
+    <button *ngIf="requestViewData?.importAndAddRecordPopupMode !== popupMode.Edit" mat-button class="select"
+      (click)="onAddEdit(requestViewData?.requestFormTypes)">
+      Add
+    </button>
+    <button mat-button class="cancel" (click)="onClose(requestViewData?.requestFormTypes)">
+      Cancel
+    </button>
+  </div>
+</div>

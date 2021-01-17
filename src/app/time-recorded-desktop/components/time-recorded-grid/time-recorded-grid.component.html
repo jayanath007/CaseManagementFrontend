@@ -1,0 +1,79 @@
+<div fxLayout="column" class="dps-time-recorded-grid">
+  <div class="dps-time-recorded-grid-outer" fxLayout="column">
+    <div [fxFlex]="groupMode === GroupMode.Default?'calc(100%-50px)':'100%'" fxLayout="column">
+      <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+        <div class="dps-length-calc" fxLayout="column">
+          <div class="row-highlight" dpsIsMobile>
+            <div class="row-highlight-inner" [ngClass]="{'dps-group-view-header':groupMode !== GroupMode.Default}">
+              <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+                (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+                (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+              </dps-column-header>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+          </div>
+          <dps-time-recorded-grid-item fxFlex="calc(100%-50px)" *ngIf="groupMode === GroupMode.Default"
+            [homeCurrancy]="homeCurrancy" [groupMode]="groupMode" [columnDef]="columnDef" [gridData]="gridData"
+            [selectedInfo]="selectedInfo" (clickGridButton)="onClickGridButton($event)"
+            (selectRow)="onSelectRow($event)">
+          </dps-time-recorded-grid-item>
+          <dps-time-record-grid-group-view class="dps-white-gray-scroll" *ngIf="groupMode !== GroupMode.Default"
+            [homeCurrancy]="homeCurrancy" [groupMode]="groupMode" [groupData]="groupData" [columnDef]="columnDef"
+            [gridData]="gridData" [selectedInfo]="selectedInfo" (selectGroup)="onSelectGroup($event)"
+            (clickGridButton)="onClickGridButton($event)" (selectRow)="onSelectRow($event)"
+            (loadMoreData)="loadMore($event)">
+          </dps-time-record-grid-group-view>
+        </div>
+      </div>
+    </div>
+    <!-- @@@@{{canMinimizeViews | json}} -->
+    <diV fxFlex="50px" class="footer-shadow content" fxLayout="row">
+      <diV fxLayout="row" class="dps-time-play-section" id="tabPannel">
+        <div class=" dps-time-play-section-inner" style="    display: inline-flex;">
+          <div *ngFor="let view of showItems" class="dps-time-footer-btn" fxLayout="row">
+            <div class="dps-time-text" (click)="onOpenTimeRecording(view)" style="padding-left:4px"
+              fxLayout="column wrap">
+              <span matTooltip={{view.view?.clientMatterData?.clientName}}>{{view.view?.matterRefNo}}</span>
+              <span class="dps-time-number">{{getTimeRecord(view.view?.timeValue)}} </span>
+            </div>
+            <div class="dps-time-play-btn">
+              <button mat-icon-button (click)="onStopStartTimeRecording(view,$event)" *ngIf="view">
+                <mat-icon [ngClass]="{'pause':view.isActive}" class="play">
+                  {{view.isActive?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </diV>
+
+      <button [ngClass]="{'dps-tab-menu-active':forContexMenu?.length>0}" *ngIf="forContexMenu?.length>0" mat-button
+        [matMenuTriggerFor]="aboveMenu">
+        <div fxLayout="row">
+          <i class="material-icons">
+            more_vert
+          </i>
+          <span> ({{forContexMenu?.length}})</span>
+        </div>
+      </button>
+      <mat-menu #aboveMenu="matMenu" yPosition="above">
+        <div *ngFor="let view of forContexMenu" class="dps-time-footer-btn" fxLayout="row">
+          <div class="dps-time-text" (click)="onOpenTimeRecording(view)" style="padding-left:4px"
+            fxLayout="column wrap">
+            <span matTooltip={{view.view?.clientMatterData?.clientName}}>{{view.view?.matterRefNo}}</span>
+            <span class="dps-time-number">{{getTimeRecord(view.view?.timeValue)}} </span>
+          </div>
+          <div class="dps-time-play-btn">
+            <button mat-icon-button (click)="onStopStartTimeRecording(view.token,$event)" *ngIf="view">
+              <mat-icon>{{view.isActive?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-menu>
+
+      <mat-paginator fxFlex="500px" *ngIf="groupMode === GroupMode.Default" #paginator [length]="totalItem"
+        [pageIndex]="paginatorDef?.currentPage" [pageSize]="paginatorDef?.itemPerPage"
+        [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)" class="dps-mat-paginator">
+      </mat-paginator>
+    </diV>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<span [matMenuTriggerFor]="contextMenu"></span>
+
+<mat-menu #contextMenu="matMenu" possitonX>
+  <div *ngIf="!activeView">
+    <button class="cut" mat-menu-item (click)="onCut()">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-scissors" class="fa"></mat-icon>
+      <span>Cut</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="copy" mat-menu-item (click)="onCopy()">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-files-o" class="fa"></mat-icon>
+      <span>Copy</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button class="download" mat-menu-item *ngIf="!isMultiSelect && !item?.folder && !item?.package"
+      (click)="onDownload()">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-download" class="fa"></mat-icon>
+      <span>Download</span>
+    </button>
+    <mat-divider *ngIf="!isMultiSelect && !item?.folder && !item?.package"></mat-divider>
+    <!-- <button class="share" mat-menu-item (click)="onShare()">
+      <mat-icon>share</mat-icon>
+      <span>Share</span>
+    </button> -->
+    <!-- <mat-divider></mat-divider> -->
+    <button class="delete" mat-menu-item (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+
+    <mat-divider></mat-divider>
+    <button class="edit" mat-menu-item *ngIf="!isMultiSelect" (click)="onRename()">
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+    <mat-divider *ngIf="!isMultiSelect"></mat-divider>
+    <button class="attach" mat-menu-item (click)="onAttachToDPSFile()">
+      <mat-icon>screen_share</mat-icon>
+      <span>Attach to DPS file</span>
+    </button>
+    <mat-divider></mat-divider>
+  </div>
+  <button class="add" mat-menu-item (click)="onRefresh()" *ngIf="activeView"
+    [matMenuTriggerFor]="addNewMenue.contextMenu">
+    <mat-icon>add</mat-icon>
+    <span>New</span>
+  </button>
+  <mat-divider *ngIf="activeView"></mat-divider>
+  <button class="paste" mat-menu-item (click)="onPaste()"
+    *ngIf="(item?.folder && copyFrom===SafeBoxType.Drive && !!cutCopyItems)||(activeView && copyFrom===SafeBoxType.Drive && !!cutCopyItems) || copyFrom===SafeBoxType.Template">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-clipboard" class="fa"></mat-icon>
+    <span>Paste</span>
+  </button>
+  <mat-divider
+    *ngIf="(item?.folder && copyFrom===SafeBoxType.Drive && !!cutCopyItems)||(activeView && copyFrom===SafeBoxType.Drive && !!cutCopyItems) || copyFrom===SafeBoxType.Template">
+  </mat-divider>
+  <button class="refresh" mat-menu-item (click)="onRefresh()" *ngIf="activeView">
+    <mat-icon>refresh</mat-icon>
+    <span>Refresh</span>
+  </button>
+  <mat-divider *ngIf="activeView"></mat-divider>
+</mat-menu>
+<dps-add-new-menue #addNewMenue (addNew)="onAdd($event)"></dps-add-new-menue>

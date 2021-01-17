@@ -1,0 +1,21 @@
+<div class="dps-bank-search-layout">
+  <div>
+    <dps-common-popup-header icon="library_books" [title]="'Bank Search'" buttons="close"
+      [loading]="viewData?.mainLoading" iconColor="#e8a348" titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+    </dps-common-popup-header>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <mat-placeholder> Bank Search</mat-placeholder>
+    <input matInput (blur)="onBankDetailsSearch($event)" (keypress)="onBankDetailsKeypress($event)">
+    <button mat-icon-button matSuffix (click)="onBankDetailsSearch($event)">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div>
+    <dps-bank-search-grid [columnDef]="columnDef" [viewData]="viewData" [user]="user"
+      (changePage)="onChangePage($event)" (selectedRowItem)="onSelectedRow($event)"
+      (checkedChange)=onCheckedChange($event) (viewReportData)="onViewFile($event)"
+      (columsSortApply)="onToggleSorting($event)">
+    </dps-bank-search-grid>
+  </div>
+</div>

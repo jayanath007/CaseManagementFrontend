@@ -1,0 +1,14 @@
+<mat-form-field class="dps-client-search" floatLabel="never">
+  <span matPrefix (click)="OnSearchTextClear()" >&nbsp;&nbsp;</span>
+  <input type="search" matInput #searchTextInput matInput placeholder="Search" [value]="searchText" 
+  [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)"/>
+  <button matSuffix mat-icon-button  (click)="OnSearchTextClick(searchTextInput.value)" >
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-hint *ngIf="showSearchHint">
+      <span matPrefix>&nbsp;&nbsp;</span>
+    <span class="search-number">{{totalItems}}</span>
+    <span>Clients found for</span>
+    <span innerHTML="{{searchTextInput.value | seacrhTextHighligh : searchText}}"></span>
+  </mat-hint>
+</mat-form-field>

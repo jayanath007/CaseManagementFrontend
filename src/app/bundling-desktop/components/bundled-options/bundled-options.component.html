@@ -1,0 +1,87 @@
+<div fxLayout="column" class="dps-bundling-option-layout">
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow dps-bundling-header" fxLayoutAlign="center center">
+      <span fxFlex="1 1 auto"></span>
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="matter-icon">
+          <span>add_to_photos </span>
+        </mat-icon>
+        <span>Bundled Options</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">
+          <span>close</span>
+        </mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <div fxLayout="column" class="dps-bundling-options-wrapper">
+    <mat-form-field>
+      <input matInput maxlength="100" placeholder="Name" #bundleName [value]="options.name"
+        (focusout)="onInputChangeOption('name',bundleName.value)">
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="40px" class="dps-bundling-forms">
+
+      <div fxLayout="column">
+        <div class="label-controller">
+          <mat-icon>
+            <span>keyboard_arrow_right</span>
+          </mat-icon>
+          <label>Contents Page</label>
+        </div>
+        <mat-checkbox [ngModel]="options.createIndexPage" (change)="onChangeOption('createIndexPage',$event.checked)"
+          color="primary">Create
+          Index Page</mat-checkbox>
+        <mat-checkbox [ngModel]="options.showDocDate" (change)="onChangeOption('showDocDate',$event.checked)"
+          color="primary">Show
+          document date</mat-checkbox>
+        <mat-checkbox [ngModel]="options.separateEmail" (change)="onChangeOption('separateEmail',$event.checked)"
+          color="primary" class="seperate-attach">Separete
+          and include email attachments
+          <br>(.msg and .eml files only)</mat-checkbox>
+      </div>
+      <div fxLayout="column">
+        <div class="label-controller">
+          <mat-icon>
+            <span> keyboard_arrow_right </span>
+          </mat-icon>
+          <label>Page Numbering and Format</label>
+        </div>
+        <mat-checkbox [ngModel]="options.preserveExitPage" (change)="onChangeOption('preserveExitPage',$event.checked)"
+          [disabled]="true" color="primary">Preserve Existing Pagination</mat-checkbox>
+        <mat-checkbox [ngModel]="options.restartPageNoAtSection"
+          (change)="onChangeOption('restartPageNoAtSection',$event.checked)"
+          [disabled]="bundleHeaderView?.pbH_IsCoreBundle && preserveExistingPage?.checked" color="primary">Restart Page
+          Numbering at
+          Sections</mat-checkbox>
+        <mat-form-field>
+          <mat-select placeholder="Page Number location"
+            [ngModel]="bundleHeaderView?.pbH_IsCoreBundle?4:options.pageNumberLocation"
+            (selectionChange)="onChangeOption('pageNumberLocation',$event.value)">
+            <mat-option *ngFor="let location of pageNoLoactions" [value]="location.key">
+              {{ location.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="dps-bundling-controller">
+      <mat-checkbox [ngModel]="options.stopMergeIfError" (change)="onChangeOption('stopMergeIfError',$event.checked)"
+        color="primary">Stop merge if errors
+        encountered. if unchecked then items
+        that cannot be merge
+        will be skipped and will
+        not appear.
+      </mat-checkbox>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayoutAlign="end end" class="dps-option-buttons">
+      <span fxFlex="1 1 auto"></span>
+      <button mat-flat-button (click)="onSubmit()" tabindex="2" class="submit">Submit</button>
+      <button mat-flat-button (click)="onClose()" tabindex="-1" [disabled]="isLoading" class="close">Cancel</button>
+    </div>
+  </div>
+</div> <!-- End-dps-bundling-option-layout -->

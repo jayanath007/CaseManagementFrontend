@@ -1,0 +1,10 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible" class="label-with-inputtext input-wrapper">
+  <mat-form-field floatLabel="never">
+    <span matPrefix>{{customCaption || meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span> &nbsp;&nbsp;
+      <span>{{currencySymbols}}</span>
+    </span>
+    <mat-placeholder>0.00</mat-placeholder>
+    <input type="number" matInput (blur)="onblurInputData()" [formControl]="inputCtrl">
+  </mat-form-field>
+</div>

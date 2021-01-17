@@ -1,0 +1,29 @@
+.row-data {
+  border-right: 1px solid #c3c3ca;
+  display: table-cell;
+  padding: 6px 6px 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.row-data:last-child {
+  border-right: none;
+}
+
+.grid-data {
+  font-size: 12px;
+  display: table-row;
+  word-break: break-word;
+}
+
+.delete-btn {
+  font-size: 23px;
+  color: #9c6262;
+  position: relative;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  left: 6px;
+}
+
+.grid-data:hover {}

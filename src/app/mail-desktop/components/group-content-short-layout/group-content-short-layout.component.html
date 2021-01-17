@@ -1,0 +1,31 @@
+<div [ngClass]="{'dps-group-content-hidden': hidden}" class="dps-group-content" fxLayout="row" *ngIf="selectedGroup">
+  <div class="dps-conversation-list" fxLayout="column" fxFlex="350px">
+    <mat-toolbar fxFlex="50px">
+      <span fxFlex="1 1 auto" class="dps-access-type">{{selectedGroup.data.accessType | titlecase}} group</span>
+      <button mat-button *ngIf="selectedGroup.members">{{selectedGroup.members.length}} members</button>
+    </mat-toolbar>
+    <dps-conversation-short-list-view fxFlex="calc(100% - 60px)" [style.display]=" (!isConversationsLoading && conversations && conversations.length < 1) ? 'none': 'flex'"
+      [conversations]="conversations" [timeZone]="timeZone" [companyCode]="companyCode" [isConversationsLoading]="isConversationsLoading"
+      (conversationSelect)="onConversationSelect($event)" (loadMoreConversations)=" onLoadMoreConversations($event)"
+      (conversationDelete)="onConversationDelete($event)"></dps-conversation-short-list-view>
+    <div fxFlex="calc(100% - 50px)" fxLayout="column" *ngIf="!isConversationsLoading && conversations && conversations.length < 1"
+      fxLayoutAlign="center" class="dps-group-content dps-groupcontent">
+      <div class="dps-empty-group" fxFlexAlign="center">
+        <h3>We didn't find anything to show here.</h3>
+      </div>
+    </div>
+  </div>
+  <div class="dps-group-content" fxFlex="calc(100%-350px)">
+    <div [style.display]="!selectedconversation ? 'none': ''" class="dps-group-content">
+      <router-outlet name="item"></router-outlet>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center" class="dps-group-content" *ngIf="!selectedconversation">
+      <div class="dps-empty-group" fxFlexAlign="center">
+        <h2>
+          <i class="fa fa-comments-o" aria-hidden="true"></i>
+        </h2>
+        <h3>Select a conversation to read.</h3>
+      </div>
+    </div>
+  </div>
+</div>

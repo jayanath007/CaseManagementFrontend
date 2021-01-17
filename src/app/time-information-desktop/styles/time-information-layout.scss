@@ -1,0 +1,101 @@
+
+@import '~styles/variables.scss';
+
+.use-custom-template
+{
+.time-information-input
+{
+  ::ng-deep .mat-checkbox-label
+  {
+    font-size: $primary-font-size - 3;
+  }
+}
+}
+
+.filter-set-01
+  {
+    padding: 0 10px 5px 10px;
+    clear: both;
+    background: #c8ddec;
+    border-top-left-radius: 5px;
+    border: 1px solid #c8ddec;
+    border-top-right-radius: 5px;
+    border-bottom: 0;
+    box-shadow: 1px 1px 2px 0px #90aabd;
+    height: 39px;
+  }
+
+  .claim-london-rates
+{
+
+  margin: 14px 0 6px 3px;
+
+
+}
+
+
+
+.filter-set-02
+{
+  font-size: $primary-font-size - 3;
+  border: 1px solid #b9cede;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  box-shadow: 0px 1px 1px 0px #f1f1f1;
+}
+.filter-set-01 .time-information-input
+{
+  margin-right: 24px;
+}
+.filter-set-01 .time-information-input.last-child
+{
+  margin-right: 0;
+}
+.filter-set-02 .time-information-input
+{
+  margin-right: 15px;
+}
+
+
+.filter-set-02 .time-information-input.last-child,
+.filter-set-02 .time-information-input.next-app-date-enable
+{
+margin-right: 4px;
+}
+.filter-set-02 .time-information-input.next-app-date-enable .mat-checkbox-inner-container
+{
+  top: 10px;
+}
+
+.filter-set-02 .search-police-st
+  {
+    width: 100%;
+  }
+
+  
+
+.attendance-note-txt
+{
+  margin: 27px 0 0 4px;
+
+}
+
+
+.tc-general-btn {
+  line-height: 31px;
+  min-width: 60px;
+  font-size: $primary-font-size - 2;
+  color: #fff;
+  background: $primary-blue;
+
+}
+
+.bottom-filter-types
+{
+  padding: 7px 12px 14px 12px;
+}
+
+dps-limit-bar
+{
+  margin: 11px 30px 10px;
+}

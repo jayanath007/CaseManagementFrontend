@@ -1,0 +1,268 @@
+<div class="dps-ui-tree" fxLayout="column">
+  <mat-list class="add-new-item" *ngIf="!(menuTreeItems && menuTreeItems.length>0)">
+    <mat-list-item fxLayout="row">
+      <div class="item-move">
+        <span class="icon-box add-item-above">
+          <mat-icon class="fa fa-th-large" matListIcon title="Add Item" (click)="addNewItemAbove()">
+            <span class="fa fa-sort-asc"></span>
+          </mat-icon>
+        </span>
+        <span class="icon-box add-menu-above">
+          <mat-icon class="fa fa-folder" matListIcon title="Add Menu" (click)="addNewMenuAbove()">
+            <span class="fa fa-sort-asc"></span>
+          </mat-icon>
+        </span>
+      </div>
+    </mat-list-item>
+  </mat-list>
+
+  <div fxLayout="column" *ngFor="let menuItem of menuTreeItems; let i = index" [attr.tabindex]="i"
+    (keydown)="upDownClick($event, menuItem)" class="workflow-tree-items-edit-list">
+    <div fxLayout="column" *ngIf="!(menuItem.data.atN_Type===6 ||  menuItem.data.atN_Type===7)">
+      <!-- <ng-container > -->
+      <mat-list fxFlex="1 1 100" fxLayout="column" class="workflow-edit-list">
+        <div class="list-item" fxLayout="column" *ngIf="!menuItem.isRowEdit" dpsDroppable dropZone="listItem"
+          (onDrop)="onDrop($event.dragData,menuItem)" fxFlex="1 1 auto" fxLayout="row"
+          (click)="onDpsTreeRowClick($event,menuItem)" dpsClick (dpsDblClick)="onDpsTreeRowDoubleClick($event,menuItem)"
+          (contextmenu)="onDpsTreeRowRightClick($event,menuItem)"
+          [ngClass]="{'edit-tree-row-select': menuItem.isRowSelected}" [dpsDraggable]="true" [dropZones]="['listItem']"
+          [dragData]="menuItem" dragDataType="menuItem" (onDragEnd)="onDragSuccess($event)"
+          [tabindex]="menuItem.indexId">
+
+          <mat-list-item class="dps-folder-list-item workflow-menu-tee-item row-data">
+
+            <i matListIcon (click)="dpsTreeNodeExpandClick($event,menuItem)"
+              [ngStyle]="{'padding-left.px': (menuItem.treeLevel) * 20}"
+              [ngStyle]="{'padding-left.px': (menuItem.items.length > 0? 0 : ((menuItem.treeLevel-1) * 10)+20)}"
+              *ngIf="menuItem.items.length > 0"
+              [ngClass]="{'fa-angle-right':menuItem.items.length>0 && !menuItem.isTreeNodeExpand,'fa-angle-down':menuItem.isTreeNodeExpand}"
+              class="fa dps-folder-item-toggle"></i>
+            <!-- <span fxFlex="1 1 auto"></span> -->
+            <span [ngStyle]="{'padding-left.px': (menuItem.items.length > 0? 0 : ((menuItem.treeLevel) * 20)+16)}"
+              matLine class="dps-folder-item-name" title="{{menuItem.data.ATN_Desc}}">
+
+              <mat-icon class="{{menuItem.data.atN_Type | workflowMenuIcon}}"></mat-icon>
+              <span class="grid-data {{gridFontSizeEdit}}">{{menuItem?.data.atN_Desc}}</span>
+            </span>
+            <span fxFlex="1 1 auto"></span>
+            <button class="menu-edit-btn command-icon" (click)="onDpsTreeRowRightClick($event,menuItem)" mat-fab>
+              <i class="material-icons">keyboard_arrow_left</i>
+            </button>
+            <span>&nbsp;</span>
+
+          </mat-list-item>
+          <mat-list-item class="dps-folder-description-item">
+            <span class="grid-data {{gridFontSizeEdit}}">{{menuItem.data.atN_Command}}</span>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </div>
+
+        <div class="edit-field" *ngIf="menuItem.isRowEdit">
+          <mat-list-item class="edit-field-area" fxLayout="row">
+            <mat-icon class="{{menuItem.data.atN_Type | workflowMenuIcon}}"></mat-icon>
+
+            <div fxFlex="1 1 20" fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="40px">
+              <input class="input-line" matInput maxlength="299" [value]="menuItem?.data.atN_Desc"
+                (keyup.enter)="onEnter('atN_Desc',menuItem,$event)" (focusout)="descriptionChange(menuItem,$event)">
+
+              <!-- <form fxFlex="1 1 auto">
+                <mat-form-field fxFlex="1 1 auto">
+                  <input matInput maxlength="299" [value]="menuItem?.data.atN_Desc" (keyup.enter)="onEnter('atN_Desc',menuItem,$event)" (focusout)="descriptionChange(menuItem,$event)">
+                </mat-form-field>
+              </form> -->
+            </div>
+
+            <div class="editable-items">
+
+              <button mat-icon-button [ngClass]="{'active':menuItem?.data.atN_Type===1 }">
+                <mat-icon class="template" matListIcon (click)="menuTypeChange(menuItem,1)">
+                  <span class="fa fa-folder"></span>
+                </mat-icon>
+              </button>
+              <button mat-icon-button [ngClass]="{'active':menuItem?.data.atN_Type===2}">
+                <mat-icon class="screen" matListIcon (click)="menuTypeChange(menuItem,2)">
+                  <span class="fa fa-pencil-square-o"></span>
+                </mat-icon>
+              </button>
+              <button mat-icon-button [ngClass]="{'active':menuItem?.data.atN_Type===4}">
+                <mat-icon class="menu" matListIcon (click)="menuTypeChange(menuItem,4)">
+                  <span class="fa fa-th-large"></span>
+                </mat-icon>
+              </button>
+              <!-- </mat-list-item> -->
+            </div>
+            <div fxFlex="1 1 30" fxLayout="row" fxLayoutAlign="strat center" class="input-wrapper">
+              <input class="input-line" matInput maxlength="49" [value]="menuItem?.data.atN_Command"
+                (keyup.enter)="onEnter('atN_Command',menuItem,$event)" (focusout)="commandTextChange(menuItem,$event)">
+              <!-- <form fxFlex="1 1 auto">
+                <mat-form-field fxFlex="1 1 auto">
+                  <input matInput maxlength="49" [value]="menuItem?.data.atN_Command" (keyup.enter)="onEnter('atN_Command',menuItem,$event)"
+                    (focusout)="commandTextChange(menuItem,$event)">
+                </mat-form-field>
+
+                <span *ngIf="!isRowEditCompleted" class="screen fa fa-exclamation-triangle" [ngClass]="{'my-class': viewLoaded, 'my-class2': viewLoadedtwo}"></span>
+
+              </form> -->
+            </div>
+
+
+          </mat-list-item>
+        </div>
+
+        <div class="right-click" *ngIf="menuItem.isRightClick">
+          <mat-list-item fxLayout="row">
+            <div class="item-move">
+              <span class="icon-box add-item-above">
+                <mat-icon class="fa fa-th-large" matListIcon title="Add Item Above" (click)="addItemAbove(menuItem)">
+                  <span class="fa fa-sort-asc"></span>
+                </mat-icon>
+              </span>
+              <span class="icon-box add-item-above">
+                <mat-icon class="fa fa-th-large" matListIcon title="Add Item Below" (click)="addItemBelow(menuItem)">
+                  <span class="fa fa-sort-desc"></span>
+                </mat-icon>
+              </span>
+              <span class="icon-box add-menu-above">
+                <mat-icon class="fa fa-folder" matListIcon title="Add Menu Above" (click)="addMenuAbove(menuItem)">
+                  <span class="fa fa-sort-asc"></span>
+                </mat-icon>
+              </span>
+              <span class="icon-box add-menu-above">
+                <mat-icon class="fa fa-folder" matListIcon title="Add Menu Below" (click)="addMenuBelow(menuItem)">
+                  <span class="fa fa-sort-desc"></span>
+                </mat-icon>
+              </span>
+            </div>
+
+            <div class="export-menu-localpc" [ngClass]="exportToLocalClick? 'active':'deactive'"
+              (click)="onExportToLocalClick()">
+              <span class="icon-box expanded">
+                <mat-icon matListIcon title="Export Menus To Local PC">
+                  <span class="material-icons">file_upload</span>
+                </mat-icon>
+              </span>
+              <span class="expand-icon" [hidden]="!exportToLocalClick">
+                <button mat-icon-button (click)="OnExportMenu('AllMenus',false)">
+                  <mat-icon matListIcon title="All Menus">
+                    <span class="fa fa-check-square-o"></span>
+                  </mat-icon>
+                </button>
+
+                <button mat-icon-button (click)="OnExportMenu('FirstLevel',false)">
+                  <mat-icon matListIcon title="First Menu Only">
+                    <span class="fa fa-external-link"></span>
+                  </mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="menuItem.data.atN_Type===1" (click)="OnExportMenu('Other',false)">
+                  <mat-icon matListIcon
+                    title="Export Menu'{{menuItem?.data.atN_Desc}}({{menuItem?.data.atN_Command}})'">
+                    <span class="fa fa-tag"></span>
+                  </mat-icon>
+                </button>
+              </span>
+            </div>
+            <div class="export-menu-server" [ngClass]="exportToServerClick? 'active':'deactive'"
+              (click)="onExportToServerClick()">
+              <span class="icon-box expanded">
+                <mat-icon matListIcon title="Export Menus To Server">
+                  <span class="material-icons">cloud</span>
+                </mat-icon>
+              </span>
+              <span class="expand-icon" [hidden]="!exportToServerClick">
+                <button mat-icon-button (click)="OnExportMenu('AllMenus',true)">
+                  <mat-icon matListIcon title="All Menus">
+                    <span class="fa fa-check-square-o"></span>
+                  </mat-icon>
+                </button>
+                <button mat-icon-button (click)="OnExportMenu('FirstLevel',true)">
+                  <mat-icon matListIcon title="First Menu Only">
+                    <span class="fa fa-external-link"></span>
+                  </mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="menuItem.data.atN_Type===1" (click)="OnExportMenu('Other',true)">
+                  <mat-icon matListIcon
+                    title="Export Menu'{{menuItem?.data.atN_Desc}}({{menuItem?.data.atN_Command}})'">
+                    <span class="fa fa-tag"></span>
+                  </mat-icon>
+                </button>
+              </span>
+            </div>
+            <div class="import-menu" [ngClass]="importClick? 'active':'deactive'" (click)="onImportButtonClick()">
+              <span class="icon-box expanded">
+                <mat-icon matListIcon title="Import Menus">
+                  <span class="material-icons">file_download</span>
+                </mat-icon>
+
+              </span>
+              <span class="expand-icon" [hidden]="!importClick">
+                <button mat-icon-button (click)="fileUploaderAbove.onFileUploadBtnClick()">
+                  <mat-icon matListIcon title="Full Menu Above">
+                    <span class="fa fa-level-up"></span>
+                  </mat-icon>
+                  <dps-file-uploader inputId="menuAbove" #fileUploaderAbove
+                    (fileUpload)="importMenuItem($event,'FullMenuAbove')" [multiple]="false"></dps-file-uploader>
+                </button>
+                <button mat-icon-button (click)="fileUploaderBelows.onFileUploadBtnClick()">
+                  <mat-icon matListIcon title="Full Menu Below">
+                    <span class="fa fa-level-down"></span>
+                  </mat-icon>
+                  <dps-file-uploader inputId="menuBelow" #fileUploaderBelows
+                    (fileUpload)="importMenuItem($event,'FullMenuBelow')" [multiple]="false"></dps-file-uploader>
+                </button>
+                <button mat-icon-button *ngIf="menuItem.data.atN_Type===1"
+                  (click)="fileUploaderChildren.onFileUploadBtnClick()">
+                  <mat-icon matListIcon title="Children Menu Below">
+                    <span class="fa fa-angle-double-down"></span>
+                  </mat-icon>
+                  <dps-file-uploader inputId="menuChild" #fileUploaderChildren
+                    (fileUpload)="importMenuItem($event,'ChildMenu')" [multiple]="false"></dps-file-uploader>
+                </button>
+              </span>
+            </div>
+
+            <div class="row-option" fxLayoutGap="5px" fxLayout="row">
+              <button class="cut" mat-icon-button title="Cut" (click)="cutItem(menuItem)">
+                <mat-icon matListIcon>
+                  <span class="fa fa-scissors"></span>
+                </mat-icon>
+              </button>
+
+              <button class="copy" mat-icon-button title="Copy" (click)="copyItem(menuItem)">
+                <mat-icon matListIcon>
+                  <span class="fa fa-clone"></span>
+                </mat-icon>
+              </button>
+              <button [disabled]="!cutOrCopyItem" title="Paste" class="paset" mat-icon-button
+                (click)="paseteItem(menuItem)">
+                <mat-icon matListIcon>
+                  <span class="fa fa-clipboard"></span>
+                </mat-icon>
+              </button>
+              <button class="duplicate" mat-icon-button title="Duplicate" (click)="onMenuDuplicate(menuItem)">
+               
+                <i   matListIcon class="material-icons">
+                    control_point_duplicate
+                    </i>
+              </button>
+              <button class="delete" mat-icon-button title="Delete" (click)="deleteItem(menuItem)">
+                <mat-icon matListIcon>
+                  <span class="fa fa-trash"></span>
+                </mat-icon>
+              </button>
+            </div>
+
+          </mat-list-item>
+        </div>
+      </mat-list>
+
+    </div>
+    <dps-ui-tree *ngIf="menuItem.items.length>0 && menuItem.isTreeNodeExpand" [cutOrCopyItem]="cutOrCopyItem"
+      (exportMenus)="onExportMenus($event)" (itemChange)="onItemChange($event)" [menuTreeItems]="menuItem.items"
+      (onImportMenu)="importMenu($event)" (keyUpDown)="onKeyUpDown($event)" [gridFontSizeEdit]="gridFontSizeEdit"
+      (menuduplicate)="onMenuDuplicate($event)"></dps-ui-tree>
+
+    <!-- </ng-container> -->
+
+  </div>
+</div>

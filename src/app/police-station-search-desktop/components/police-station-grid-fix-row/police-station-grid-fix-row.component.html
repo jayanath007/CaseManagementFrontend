@@ -1,0 +1,11 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+
+  <mat-list-item class="dps-grid-list-item" *ngFor="let rowData of generalPopupRowData; let isOdd=odd;" dpsClick
+    (dpsDblClick)="onRowClick(rowData)" [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+    <div fxLayout="row" class="grid-data" [ngClass]="{'active': rowData.selected}">
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData?.code}}"></div>
+      <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData?.name}}"></div>
+    </div>
+  </mat-list-item>
+
+</mat-nav-list>

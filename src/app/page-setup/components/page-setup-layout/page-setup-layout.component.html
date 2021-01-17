@@ -1,0 +1,219 @@
+<div class="dps-page-setup-layout">
+  <div>
+    <dps-common-popup-header icon="menu_open" title="Document settings" buttons="close" [loading]="isLoading"
+      iconColor="#a9c0f6" titleColor="#a9c0f6" (buttonClick)="onClose()">
+    </dps-common-popup-header>
+  </div>
+
+  <div class="dps-page-setup-setting dps-white-gray-scroll container">
+    <div fxLayout="row wrap" fxLayoutGap="1em" class="dps-doc-setting-check">
+      <mat-checkbox color="primary" #selectAfterAdding [checked]="differentPage"
+        (change)="onDifferentFirstPage($event)">Enable 1 Page margins </mat-checkbox>
+      <!-- <mat-checkbox color="primary" #selectAfterAdding [checked]="isDifferentPageHeaderFooter"
+        (change)="onDifferentPageHeaderFooter($event)"> Different Header Footer
+        Page</mat-checkbox> -->
+    </div>
+    <mat-tab-group>
+      <!--[selectedIndex]="differentPage? 1 : activeIndex" -->
+      <mat-tab label="First Page" *ngIf="!differentPage">
+        <div class="dps-page-setup-setting-inner">
+          <!-- <mat-form-field>
+        <mat-checkbox [value]="" (change)="isFirstPage()">Different First Page</mat-checkbox>
+      </mat-form-field> -->
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Margins</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #top matInput placeholder="Top" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.topMargin" (focusout)="onChangeTop('fp',top.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #bottom matInput placeholder="Bottom" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.bottomMargin" (focusout)="onChangeBottom('fp',bottom.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #left matInput placeholder="Left" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.leftMargin" (focusout)="onChangeLeft('fp',left.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #right matInput placeholder="Right" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.rightMargin" (focusout)="onChangeRight('fp',right.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" #gutter matInput placeholder="Gutter" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.gutter" (focusout)="onChangeGutter('fp',gutter.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Page size</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #width matInput placeholder="Width" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.pageWidth" (focusout)="onChangeWidth('fp',width.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #hight matInput placeholder="Hight" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.pageHeight" (focusout)="onChangeHight('fp',hight.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Headers and footers</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #header matInput placeholder="Header" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.headerDistance" (focusout)="onChangeHeader('fp',header.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #footer matInput placeholder="Footer" step="0.1" min="1"
+                  [value]="setupData?.firstPage?.footerDistance" (focusout)="onChangeFooter('fp',footer.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="{{differentPage?'All':'Other'}} Pages">
+        <div fxLayout="row wrap" fxLayoutGap="1em" class="dps-doc-setting-check">
+          <mat-checkbox *ngIf="differentPage" color="primary" #selectAfterAdding [checked]="isDifferentPageHeaderFooter"
+            (change)="onDifferentPageHeaderFooter($event)"> Different First Page
+          </mat-checkbox>
+        </div>
+        <div class="dps-page-setup-setting-inner">
+          <!-- <mat-form-field>
+        <mat-checkbox [value]="" (change)="isFirstPage()">Different First Page</mat-checkbox>
+      </mat-form-field> -->
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Margins</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #top matInput placeholder="Top" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.topMargin" (focusout)="onChangeTop('op',top.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #bottom matInput placeholder="Bottom" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.bottomMargin" (focusout)="onChangeBottom('op',bottom.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #left matInput placeholder="Left" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.leftMargin" (focusout)="onChangeLeft('op',left.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #right matInput placeholder="Right" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.rightMargin" (focusout)="onChangeRight('op',right.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" #gutter matInput placeholder="Gutter" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.gutter" (focusout)="onChangeGutter('op',gutter.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Page size</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #width matInput placeholder="Width" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.pageWidth" (focusout)="onChangeWidth('op',width.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #hight matInput placeholder="Hight" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.pageHeight" (focusout)="onChangeHight('op',hight.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="dps-page-setup-types">
+            <span class="dps-page-setup-content-header">Headers and footers</span>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="2em">
+              <mat-form-field>
+                <input type="number" #header matInput placeholder="Header" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.headerDistance" (focusout)="onChangeHeader('op',header.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input type="number" #footer matInput placeholder="Footer" step="0.1" min="1"
+                  [value]="setupData?.otherPages?.footerDistance" (focusout)="onChangeFooter('op',footer.value)"
+                  [readonly]="isLoading">
+                <span style="font-size: 12px;" matSuffix>cm</span>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+      </mat-tab>
+
+
+
+    </mat-tab-group>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="end center" class="dps-mail-setting-actions">
+
+    <button class="dps-stting-sve" [disabled]="isLoading" mat-raised-button (click)="onSaveChanges()">
+      Save
+    </button>
+    <button class="dps-stting-cancel" mat-raised-button (click)="onClose()">
+      Cancel
+    </button>
+  </div>
+
+  <!-- <div class="dps-page-setup-action" fxLayoutGap="1em">
+    <button mat-button (click)="onSaveChanges()" class="select">
+      Save
+    </button>
+    <button mat-button (click)="onClose()" class="cancel">
+      Cancel
+    </button>
+  </div> -->
+
+</div>

@@ -1,0 +1,147 @@
+<div class="dps-probate-add-asset-layout-pop" fxLayout="column">
+  <dps-common-popup-header icon="add_business" title="Add {{formType}}" buttons="close" (buttonClick)="onClose($event)"
+    iconColor="#d08b52" titleColor="#c6d1da" [loading]="loading" toolbarColor="#00233f">
+  </dps-common-popup-header>
+  <div class="dps-primary-header" fxLayout="row" [ngClass]="{'eov-disable-button': loading}">
+    <mat-form-field class="input-flex">
+      <mat-select [disabled]="dataModel?.probateTransId!==0 && dataModel?.probateTransId" placeholder="Select"
+        [ngModel]="setSelectedCategory" (selectionChange)="onChangeProbateCategory($event.value)">
+        <mat-option *ngFor="let category of categoryList" [value]="category">
+          {{category.description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="dps-container-btn" fxLayout="row wrap" fxLayoutGap="5px">
+      <button [disabled]="loading" class="blue" mat-button (click)="onOpenAddContact($event)">
+        <mat-icon>person_add</mat-icon>Add Contact
+      </button>
+      <button [disabled]="contactDetails?.contactId===0 && loading" class="red" mat-button
+        (click)="onRemoveContact($event)">
+        <mat-icon>person_remove</mat-icon> Remove
+      </button>
+      <button [disabled]="loading" class="green" mat-button (click)="onSaveData($event)">
+        <mat-icon>person_outline</mat-icon> Save
+      </button>
+      <!-- <button class="red" mat-button (click)="onClose($event)">
+        <mat-icon>close</mat-icon> Close
+      </button> -->
+    </div>
+  </div>
+  <div class="dps-probate-add-asset-layout-pop-content dps-white-gray-scroll"
+    *ngIf="selectedCategoty?.id===0 || selectedCategoty?.id">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <mat-form-field class="input-flex">
+        <mat-placeholder>Description</mat-placeholder>
+        <input #desInputVal matInput [value]="dataModel['description']" autocomplete="off"
+          (focusout)="onMasterValueChanged(CommonControllerTypes.Input,desInputVal.value,'description')">
+      </mat-form-field>
+      <label class="form-id">
+        {{formControllersByCategory?.formName}}
+      </label>
+    </div>
+    <div class="inner-panel-wrapper dps-white-gray-scroll dps-blue-scroll">
+      <div fxLayout="column" fxLayoutAlign="space-between">
+        <mat-grid-list cols="6" rowHeight="50px">
+          <mat-grid-tile *ngFor="let controller of formControllersByCategory?.formControllers"
+            [colspan]="controller.cols" [rowspan]="controller.rows">
+            <dps-all-input-types [dataModel]="dataModel" [controllerType]="controller.type"
+              [styleSheet]="controller.styleSheet" [controllerText]="controller.text" [controllerName]="controller.name"
+              (valueChangedData)="onValueChanged($event)" [controllerDisabled]="controller.disabled"
+              [controllerValueArray]="controller.valueArray" [liabilityAsset]="liabilityAsset"
+              [exemptionAsset]="exemptionAsset">
+            </dps-all-input-types>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <div class="asset-grid-data" *ngIf="(formType!==FormType.Exemption && formType!==FormType.Gift) && dataModel?.probateTransId &&
+      dataModel['dealtBy']!==5">
+      <div class="dps-container-btn" fxLayout="row wrap" fxLayoutGap="5px">
+        <button *ngIf="dataModel['dealtBy']===0" class="blue" mat-button
+          (click)="openPaymentPopup(ProbateDealtBy.Sold,'Asset Sale')">
+          <mat-icon>receipt</mat-icon>{{(dealtBySellText==='Paid Off'? 'Pay':dealtBySellText)}}
+        </button>
+        <button *ngIf="dataModel['dealtBy']===1" class="blue" mat-button
+          (click)="openPaymentPopup(ProbateDealtBy.Legacy,'Legacy')">
+          <mat-icon>receipt</mat-icon>Legacy
+        </button>
+        <button class="blue" mat-button (click)="openPaymentPopup(ProbateDealtBy.Payment,'Payment')">
+          <mat-icon>credit_card</mat-icon> Payment
+        </button>
+        <button class="green" mat-button (click)="openPaymentPopup(ProbateDealtBy.Receipt,'Receipt')">
+          <mat-icon>recent_actors</mat-icon> Receipt
+        </button>
+        <span fxFlex="1 1 auto"></span>
+        <button class="red" mat-button (click)="onGridRowDelete()" [disabled]="!getSelectedRow?.rowId">
+          <mat-icon>close</mat-icon> Delete
+        </button>
+      </div>
+
+      <div fxLayout="column" class="asset-grid-data-table">
+        <dps-common-grid-table style="height: 100px;" minWidth="560px" [columns]="paymentGridColumns"
+          [rows]="gridDataModel" (rowClick)="onRowClick($event)" (rowDblClick)="onRowDblClick($event)">
+        </dps-common-grid-table>
+      </div>
+    </div>
+
+    <div class="dps-input-bottom-container" fxLayout="column">
+      <section class="dps-input-inner" fxLayout="row" fxLayoutGap="5px">
+        <mat-form-field class="input-sm readonly">
+          <!-- <mat-label>Probate Label</mat-label> -->
+          <input matInput #title matInput [value]="contactDetails['letterTitle']" [disabled]="true">
+        </mat-form-field>
+        <mat-form-field class="input-sm readonly">
+          <!-- <mat-label>Probate Label</mat-label> -->
+          <input matInput #title matInput [value]="contactDetails['name']" [disabled]="true">
+        </mat-form-field>
+        <mat-form-field class="input-flex readonly">
+          <!-- <mat-label>Probate Label</mat-label> -->
+          <input matInput #title matInput [value]="contactDetails['address']" [disabled]="true">
+        </mat-form-field>
+        <mat-form-field class="input-xs readonly">
+          <!-- <mat-label>Probate Label</mat-label> -->
+          <input matInput #title matInput [value]="contactDetails['postCode']" [disabled]="true">
+        </mat-form-field>
+      </section>
+      <section class="dps-input-inner" fxLayout="row" fxLayoutGap="5px" *ngIf="formType !== FormType.Exemption && formType !== FormType.Liability &&
+         !(selectedCategoty.id === 7 && formType === FormType.Asset) && 
+         !(dataModel.itemData['jointAssetType']===jointAssetType)">
+        <mat-checkbox
+          (change)="onMasterValueChanged(CommonControllerTypes.CheckBox,$event.checked,'spouceCivilPartnerExemption')"
+          color="primary" [ngModel]="dataModel['spouceCivilPartnerExemption']">
+          Spouse/Civil Partner Exemption
+        </mat-checkbox>
+        <mat-checkbox [disabled]="selectedCategoty?.id===17"
+          (change)="onMasterValueChanged(CommonControllerTypes.CheckBox,$event.checked,'charityExemption')"
+          color="primary" [ngModel]="dataModel['charityExemption']">
+          Charity Exemption
+        </mat-checkbox>
+
+      </section>
+      <section class="dps-input-inner" [ngClass]="{'eov-disable-button': loading}"
+        *ngIf="formType!==FormType.Exemption && formType!==FormType.Gift">
+        <mat-card class="mat-elevation-z" fxLayout="row">
+          <strong>
+            Dealt By
+          </strong>
+          <mat-radio-group fxLayout="row" [disabled]="(dataModel?.probateTransId>0 && checkdealByType) || loading"
+            fxLayoutGap="5px" (change)="onRadioButtonChanged($event)" [value]="dataModel['dealtBy']">
+            <mat-radio-button *ngIf="!(selectedCategoty.id === 7 && formType === FormType.Asset)" color="primary"
+              [value]="5" style="margin-bottom: 35px;">
+              Passed by Surviorship
+            </mat-radio-button>
+            <mat-radio-button color="primary" [value]="0" style="margin-bottom: 35px;">
+              {{(dealtBySellText==='Withdraw'? 'Close and Withdraw':dealtBySellText)}}
+            </mat-radio-button>
+            <mat-radio-button *ngIf="!(selectedCategoty.id === 7 && formType === FormType.Asset) &&
+            !(dataModel.itemData['jointAssetType']===jointAssetType)" color="primary" [value]="1"
+              style="font-size: 12px;color:#193d5e;margin-bottom: 26px;" color="primary">
+              Left as Legacy
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card>
+      </section>
+    </div>
+  </div>
+</div>

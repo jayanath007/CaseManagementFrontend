@@ -1,0 +1,18 @@
+@import '~styles/variables.scss';
+.time-out-header{
+    border-bottom: 1px solid #e0dfdf;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+.content{
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size;
+}
+.notification-body{
+    /* display: table-cell; */
+    display: block;
+    min-height: auto;
+    padding: 20px;
+    font-size: 12px;
+}

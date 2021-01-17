@@ -1,0 +1,28 @@
+.listdemoBasicUsage md-divider {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+	.row-data{
+		border-right: 1px solid #c3c3ca;
+		display: table-cell;
+		/* padding: 10px 6px; */
+		padding: 6px 6px 6px;
+		font-size: 12px;
+		line-height: 18px;
+	}
+	.row-data:last-child{
+		border-right: none;
+	}
+
+	.grid-data{
+		font-size: 12px;
+		display: table-row;
+		word-break: break-word;
+	  }
+	  .review-date,
+	  .lastused-date,.app-code{
+		  text-align: center;
+	  }
+	  .dps-exponential-column-hide{
+		  display: none !important;
+	  }

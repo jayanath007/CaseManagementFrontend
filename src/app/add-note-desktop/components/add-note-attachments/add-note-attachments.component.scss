@@ -1,0 +1,81 @@
+.mat-header-row {
+  background: #59707f;
+  padding: 0 6px;
+  min-height: 40px;
+}
+
+mat-row {
+  padding: 0 6px;
+}
+
+.mat-header-cell {
+  color: #eae4e4;
+}
+
+mat-cell {
+  padding: 0px 12px;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.dps-add-note-attachments {
+  overflow-x: auto;
+}
+
+.dps-addnote-attachment {
+  position: relative;
+  height: 600px;
+}
+
+.dps-attachment-docview {
+  height: 40px;
+  background: #bad5f5;
+}
+
+.mat-column-attach {
+  flex: 0 0 8%;
+}
+
+.mat-column-type {
+  flex: 0 0 10%;
+}
+
+.mat-column-UC {
+  flex: 0 0 10%;
+}
+
+.mat-column-View {
+  flex: 0 0 10%;
+}
+
+.mat-column-folder {
+  flex: 0 0 20%;
+}
+
+.mat-column-folder,
+.mat-column-fileNote {
+  padding: 0px 12px 0px 0px;
+}
+
+.mat-column-View,
+.mat-column-UC,
+.mat-column-attach,
+.mat-column-type {
+  text-align: center;
+  padding: 0px 0px;
+}
+
+.mat-column-View,
+.mat-column-UC,
+.mat-column-attach,
+.mat-column-preview {
+  text-align: center;
+  padding: 0px 0px;
+  width: 100%;
+}
+
+.dps-disable-a {
+  pointer-events: none;
+}

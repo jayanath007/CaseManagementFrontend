@@ -1,0 +1,59 @@
+@import '~styles/variables.scss';
+
+.dps-client-screen-lookup-layout {
+  height: 100%;
+  width:100%;
+}
+
+span , div {
+  font-family: $primary-font-stack;
+}
+
+mat-toolbar-row {
+  height: 45px;
+}
+mat-list {
+  width:100%;
+  padding-top:0px;
+}
+
+mat-toolbar {
+  mat-toolbar-row.dps-lookup-toolbar {
+    
+    background: $header-primary;
+    color: #dfeaff;
+    font-size: 16px;
+  }
+
+  mat-icon.header-icon {
+    vertical-align: middle;
+    border-radius: 100%;
+    border: 2px solid #859ece;
+    padding: 2px;
+    color: #a9c6fd;
+    margin-right: 4px;
+  }
+
+}
+
+mat-dialog-actions {
+  margin-bottom: 0px !important;
+
+  div.lookup-action-btn {
+    width:100%;
+    padding: 0px 15px 0 0;
+
+    button {
+      background: $header-primary;
+      color: #f0f5ff;
+      font-size: 12px;
+    }
+
+  }
+}
+
+.footer-shadow{
+  box-shadow:0 0px 0px rgba(0,0,0,0.16), 0 -1px 6px rgba(0,0,0,0.16);
+  z-index:2;
+}
+

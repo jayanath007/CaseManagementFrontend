@@ -1,0 +1,43 @@
+<div [@.disabled]="true" fxLayout="column" fxFlex="calc(100%-40px)" [ngClass]="{'dps-filter-time-recorded-grid-content':groupMode !== mode.Default}"
+  class="dps-white-gray-scroll dps-scroll dps-time-recorded-grid-content">
+  <mat-accordion [multi]="false">
+    <mat-expansion-panel [expanded]="item?.select" [ngClass]="item?.select?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+      *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even">
+      <mat-expansion-panel-header class="expansion-panelgrid-header" (mousedown)="rowMouseDown()" (mouseup)="clickOnRow(item)">
+        <mat-panel-title class="grid-panel-title mat-expansion-panel-header-title">
+          <div fxLayout class="grid-data">
+            <div fxLayout class="grid-data" [ngClass]="{'dps-selected-row': item?.select}">
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)"></div>
+              <div class="row-data time_record_date" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.dateDone | date :'dd/MM/yyyy' | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data time_record_ref" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.matterReferenceNo | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_time_record_value" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.client | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.matter | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data dps_time_record_wrk" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.timeDetails | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.note | seacrhTextHighligh : selectedInfo?.searchText}}"></div>
+              <div class="row-data time_record_gird_units" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.units}}"></div>
+              <div class="row-data time_record_gird_value" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML=" {{ homeCurrancy | currencySymbols }} {{item?.value | number : '1.2-2'}}"></div>
+              <div class="row-data time_record_mood" [fxFlex]="getFxFlexProperty(columnIntex)" *ngIf="selectedInfo?.typeId === 2 || selectedInfo?.typeId === 3 || selectedInfo?.typeId === 4">
+                <mat-icon *ngIf="item?.billed" matTooltipPosition="right" matTooltip="Billed">
+                  <i class="material-icons">mood</i>
+                </mat-icon>
+                <mat-icon *ngIf="!item?.billed" matTooltipPosition="right" matTooltip="Unbilled">
+                  <i class="material-icons">mood_bad</i>
+                </mat-icon>
+              </div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.timeBillFE}}" *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2 || selectedInfo?.typeId === 3 || selectedInfo?.typeId === 4"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.billNo}}" *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2 || selectedInfo?.typeId === 3 || selectedInfo?.typeId === 4"></div>
+              <div class="row-data" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML="{{item?.dateBilled | date :'dd/MM/yyyy'}}"
+                *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2 || selectedInfo?.typeId === 3 || selectedInfo?.typeId === 4"></div>
+              <div class="row-data time_record_gird_netbilled" [fxFlex]="getFxFlexProperty(columnIntex)" innerHTML=" {{ homeCurrancy | currencySymbols }} {{item?.netBilled | number : '1.2-2'}}"
+                *ngIf="selectedInfo?.typeId === 0 || selectedInfo?.typeId === 2 || selectedInfo?.typeId === 3 || selectedInfo?.typeId === 4"></div>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="row">
+        <dps-time-record-grid-buttons [row]="item" (clickGridButton)="onClickGridButton($event)"></dps-time-record-grid-buttons>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

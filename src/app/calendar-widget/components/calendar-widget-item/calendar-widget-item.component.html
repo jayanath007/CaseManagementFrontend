@@ -1,0 +1,69 @@
+<mat-list-item class="widget-item">
+  <div class="dps-calendar-widget">
+    <div class="dps-widget">
+      <div class="event-time" fxFlex="1 1 50px">
+        <span *ngIf="item.isAllDay" class="details dps-mail-item-date">All day</span>
+        <span *ngIf="!item.isAllDay" class="details dps-mail-item-date">{{item?.start.dateTime | date:'hh:mma'}}
+          {{item?.end.dateTime | date:'hh:mma'}}</span>
+      </div>
+      <div class="event-content">
+        <span class="ref" mat-line>{{(item?.subject)? item.subject:'No title'}}</span>
+        <span class="details" mat-line> {{(item?.location?.displayName)?item.location.displayName:'No location'}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <span class="spacer"></span>
+  <span class="dps_calender_sidenav_icons">
+    <i class="material-icons dps-calendar-event-icon" *ngIf="item.hasAttachments">attach_file</i>
+    <i class="material-icons dps-calendar-event-icon" *ngIf="item.type === 'occurrence'">sync</i>
+    <i class="material-icons dps-calendar-event-icon" *ngIf="item.type === 'exception'">sync_disabled</i>
+    <i class="material-icons dps-calendar-event-icon" *ngIf="item.sensitivity === 'private'">lock</i>
+  </span>
+  <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon class="option">keyboard_arrow_down</mat-icon>
+  </button> -->
+</mat-list-item>
+<!-- <mat-divider></mat-divider>-->
+
+
+
+
+
+
+
+<div class="widget-item-v7 {{item.showAs}}" [ngStyle]="{'opacity':(item.showAs==='tentative'&& !item.isOrganizer)?'0.7':'1'}">
+  <div fxLayout="column" class="detail-view">
+    <span class="ref">{{(item?.subject)? item.subject:'No title'}}</span>
+    <span class="details"> {{(item?.location?.displayName)?item.location.displayName:'No location'}} </span>
+  </div>
+
+  <div class="time-view">
+    <!-- <i class="material-icons">today</i> -->
+    <i *ngIf="item.isCancelled" class="fa material-icons fa-calendar-minus-o" aria-hidden="true"></i>
+    <span *ngIf="item.responseStatus?.response ==='tentativelyAccepted' && !item.isCancelled" class="material-icons">
+      <i class="fa fa-calendar-o"></i>
+      <i class="fa fa-question"></i>
+    </span>
+    <i *ngIf="item.responseStatus?.response !=='tentativelyAccepted' && !item.isCancelled" class="fa material-icons"
+      [ngClass]="{ 'fa-calendar-times-o':item.responseStatus?.response ==='declined',
+                    'fa-calendar-check-o':item.responseStatus.response==='accepted',
+                    'fa-calendar-o': !(item.responseStatus?.response ==='declined' || item.responseStatus?.response ==='accepted')}"
+      aria-hidden="true"></i>
+    <span *ngIf="item.isAllDay" class="details dps-event-time-allday">All day</span>
+
+    <div class="time-block">
+
+      <span *ngIf="!item.isAllDay" class="details dps-event-time">{{item?.start.dateTime
+        | date:'hh:mm'}}</span>
+      <span *ngIf="!item.isAllDay" class="dps-event-time-frame">{{item?.start.dateTime | date:'a'}}</span>
+    </div>
+    <div class="time-block">
+
+      <span class="details dps-event-time" *ngIf="!item.isAllDay">{{item?.end.dateTime
+        | date:'hh:mm'}}</span>
+      <span class="details dps-event-time-frame" *ngIf="!item.isAllDay">{{item?.end.dateTime | date:'a'}}</span>
+    </div>
+  </div>
+</div>

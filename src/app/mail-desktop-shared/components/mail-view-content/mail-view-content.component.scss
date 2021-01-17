@@ -1,0 +1,156 @@
+@import '~styles/variables.scss';
+
+.dps-mail-view-content {
+  overflow-y: auto;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dps-mail-view-subject {
+  font-size: $primary-font-size + 2;
+  font-weight: 500;
+  margin: 0px 0px 0px 4px;
+  word-break: break-word;
+}
+
+.icon-date_range {
+  font-size: 40px;
+}
+
+.mat-list-item {
+  border-left: 2px white solid;
+  width: calc(100% - 2px) !important;
+}
+
+.dps-mail-view-content mat-list {
+  padding-top: 0px;
+  padding-left: 5px;
+}
+
+.dps-mail-item-unread .dps-mail-view-subject-header,
+.dps-mail-item-unread .dps-mail-view-To-header {
+  border-left-color: #0079c4;
+}
+
+.dps-mail-item-unread .dps-mail-view-subject,
+.dps-mail-item-unread .dps-mail-view-To {
+  font-weight: 500;
+  color: #0079c4;
+}
+
+.dps-mail-view-To {
+  font-size: $primary-font-size !important;
+  font-weight: 500 !important;
+  color: #151515;
+}
+
+.dps-mail-view-date {
+  color: #484848;
+  font-size: $primary-font-size - 3 !important;
+}
+
+.dps-mail-view-To-header .dps-mail-view-avatar span {
+  font-size: $primary-font-size + 4;
+  color: $primary;
+  position: relative;
+  top: -2px;
+}
+
+.dps-meeting-info i.fa {
+  font-size: $primary-font-size + 2;
+}
+
+.dps-meeting-info i.fa-check {
+  color: #68A490;
+}
+
+.dps-meeting-info i.fa-question {
+  color: #976CBE;
+}
+
+.dps-meeting-info i.fa-times {
+  color: #D82300;
+}
+
+.dps-mail-view-subject-header button {
+  color: #0079c4;
+  font-weight: 400;
+}
+
+.dps-massege div {
+  height: 30px;
+  border-left: 2px solid #a6a6a6;
+  width: 100%;
+  background-color: #eaeaea;
+}
+
+.dps-massege .dps-importance-massege,
+.dps-massege .dps-followup-massege {
+  padding-left: 10px;
+  padding-top: 9px;
+  color: #767676;
+}
+
+.dps-mail-body {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.dps-attachment-list {
+  width: 100%;
+  padding-left: 18px;
+  padding-right: 10px;
+}
+
+.dps-mail-body div {
+  height: auto;
+  min-height: auto;
+}
+
+.dps-mail-view-subject-header .mat-list-item-content {
+  height: fit-content !important;
+  padding-top: 6px !important;
+  display: flex;
+  box-sizing: border-box !important;
+  flex-direction: row !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+
+}
+
+.dps-mail-view-subject-header.mat-list-item {
+  height: fit-content !important;
+}
+
+.mail-address-holder-list {
+  font-size: $primary-font-size - 2;
+  font-weight: normal;
+  margin: 0 20px;
+  padding-top: 6px;
+  border: dashed #e1e1e1;
+  border-width: 1px 0;
+  font-family: $primary-font-stack;
+}
+
+.mail-address-holder-list h4 {
+  white-space: normal;
+  font-weight: normal;
+  margin: 0 0 6px;
+
+}
+
+@media only screen and (min-width: 1441px) {
+
+  .dps_mail_view_action_btn {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+
+  .dps_mail_view_action_btn-lg {
+    display: none !important;
+  }
+}

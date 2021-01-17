@@ -1,0 +1,51 @@
+<div class="workflow-rules" fxLayout="column" >
+  <div fxFlex="42px">
+    <mat-toolbar>
+      <mat-toolbar-row fxLayoutAlign="center center">
+        <mat-list matLine fxLayout="row" >
+          <span fxFlex="1 1 0%"></span>
+          <mat-list-item  fxLayoutAlign="center center">
+            <mat-icon class="indicator-icon" matListIcon>format_indent_increase</mat-icon>
+            <span matLine>Edit Workflow Rules</span>
+          </mat-list-item>
+
+          <!-- <button mat-icon-button (click)="onMaximizeClick()" class="workflow_rule_headings full_screen_view" color="primary">
+            <mat-icon>fullscreen</mat-icon>
+
+          </button> -->
+
+          <button mat-icon-button (click)="exitWorkflowRulesClick()" class="workflow_rule_headings full_screen_view" color="primary">
+            <mat-icon >close</mat-icon>
+
+          </button>
+
+          <span fxFlex="1 1 auto"></span>
+        </mat-list>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div fxFlex="calc(100%-60px)" fxLayout="column">
+    <dps-workflow-header [selectedWorkflowRuleList]="selectedWorkflowRuleList" [workflowRuleList]="workflowRuleList" (onAddNewRuleClick)="addNewRule()"
+      (onRuleUpClick)="ruleUpClick()" (onRuleDownClick)="ruleDownClick()" (onDeleteWorkflowRulesClick)="deleteWorkflowRulesClick()"
+      (onSaveWorkflowRuleClick)="saveWorkflowRuleClick()" (onExitWorkflowRulesClick)="exitWorkflowRulesClick()" (onExportRulesClick)="exportRulesClick()"
+      (onImportRulesClick)="importRulesClick($event)">
+    </dps-workflow-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+   
+  
+      <div class="dps-workflowrule-list" fxFlex="calc(100%-40px)" >
+        <dps-workflow-rule-list [workflowRuleList]="workflowRuleList" [columnDef]="columnDef" [selectedWorkflowRuleList]="selectedWorkflowRuleList"
+          [isMaximize]="isMaximize" (onRowClick)="rowItemClick($event)" (onOperatorItemClick)="operatorItemClick($event)" (onActionItemClick)="actionItemClick($event)"
+          (onTestVarNoItemClick)="testVarNoItemClick($event)" (onCriteriaChange)="criteriaChange($event)" (onItemChange)="itemChange($event)"
+          (onDescriptionChange)="descriptionChange($event)" (onDeleteWorkflowRulesClick)="deleteWorkflowRulesClick()" (openWorkFlowMenuPopup)="onOpenWorkFlowMenuPopup($event)">
+        </dps-workflow-rule-list>
+      </div>
+   
+
+   
+  </div>
+
+
+</div>

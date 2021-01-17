@@ -1,0 +1,850 @@
+@import '~styles/variables.scss';
+
+
+.dps-theme-classic {
+
+  background: #fafafa;
+
+  ::ng-deep.dps-mail-widget-layout {
+    mat-toolbar {
+      background: #274e89;
+
+      mat-toolbar-row {
+        color: #fff;
+
+        .option-btn {
+          border: none;
+          background: none;
+          color: #fff;
+
+        }
+      }
+    }
+
+  }
+
+  ::ng-deep.widget-item.mls {
+
+    border-bottom: 1px solid #aac5d6;
+  }
+
+  ::ng-deep.dps-reply-btn {
+    min-width: 30px;
+    position: absolute;
+    right: 7px;
+    display: flex;
+    height: 31px;
+
+    mat-icon {
+      font-size: 17px;
+    }
+  }
+
+  ::ng-deep dps-calendar-widget-layout {
+    mat-toolbar {
+      background: #0b4269;
+
+      mat-toolbar-row {
+        color: #fff;
+
+
+        .dps-navigate-btn {
+          display: none !important;
+        }
+      }
+    }
+
+  }
+
+  ::ng-deep .dps-matter-widget-layout {
+    mat-toolbar {
+      background: #037754;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep .dps-my-task-widget-layout {
+    mat-toolbar {
+      background: #cfa543;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep .dps-work-done-widget-layout {
+    mat-toolbar {
+      background: #27b4c5;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+  }
+
+  ::ng-deep.dps-mls-widget-layout {
+    mat-toolbar {
+      background: #153352;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep dps-te-pie-chart-widget-layout {
+    mat-toolbar {
+      background: #785f98;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep .dps-team-widget-layout {
+    mat-toolbar {
+      background: #087bc4;
+    }
+
+    mat-toolbar-row {
+      color: #fff;
+    }
+  }
+
+  ::ng-deep dps-te-time-recorded-widget-layout {
+    mat-toolbar {
+      background: #785f98;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep dps-time-recorded-widget-layout {
+    mat-toolbar {
+      background: #d88c56;
+
+      mat-toolbar-row {
+        color: #fff;
+      }
+    }
+
+  }
+
+  ::ng-deep dps-actions-widget-manager {
+    mat-toolbar-row {
+      font-size: $primary-font-size - 2 !important;
+      color: #fff;
+    }
+  }
+
+
+  .dps-widget-group {
+    //   overflow-y: auto;
+    flex-flow: row wrap;
+    position: relative;
+    padding: 0 5px 0;
+
+    margin-right: 10px;
+    margin-top: -64px;
+
+    ::ng-deep .dps-widget {
+
+      .option-btn {
+        background: none;
+      }
+    }
+  }
+
+  .footer-shadow {
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .16), 0 -1px 6px rgba(0, 0, 0, .16);
+    box-shadow: 0 0 0 rgba(0, 0, 0, .16), 0 -1px 6px rgba(0, 0, 0, .16);
+    z-index: 2;
+    font-size: 14px;
+    height: 40px;
+
+    .version {
+      font-size: 11px;
+      color: #717171;
+    }
+  }
+
+  .simble {
+    font-size: 20px;
+    padding-right: 5px;
+
+    mat-icon {
+      vertical-align: sub;
+      font-size: 21px;
+      color: #717171;
+    }
+  }
+
+}
+
+this relate with angular v7 .spitfire-dashboard {
+  overflow-x: auto;
+}
+
+.spitfire-dashboard-controller {
+  height: 100%;
+  min-width: 760px;
+  overflow-y: auto;
+  // height: 100%;
+  //   overflow: hidden;
+}
+
+.dps-dashboard-main-header {
+  padding: 10px 16px 0px 0px;
+  box-shadow: none;
+  // background: #00498a;
+  background: #2068b4;
+  z-index: 0;
+
+
+}
+
+#dps-dashboard-main-header {
+  background-image: url("./../dashboard-layout/cloud.png");
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+.welcome-text {
+  text-align: left;
+  margin: 1.1em 5px 0;
+  text-indent: 8px;
+  z-index: 2;
+  padding-left: 11px; // font-family: 'Slabo 27px', serif;
+  font-family: 'Roboto Slab', serif;
+
+  .text {
+    display: inline-block;
+    font-size: $primary-font-size + 16;
+  }
+
+  .one {
+    color: $primary;
+  }
+
+  .two {
+    color: #ffc26d;
+    font-weight: 500;
+  }
+
+  .three {
+    color: #fffeff;
+  }
+
+  .four {
+    display: inline-block;
+    font-size: $primary-font-size;
+    color: $primary;
+    // padding: 10px;
+    padding: 0px 0px 0px 3px;
+    // margin-left: -3px;
+
+
+  }
+
+}
+
+.dps-back-drop.bar-chart {
+  opacity: 0.48;
+  // background: #346fa1;
+}
+
+
+
+.widgets-icon {
+  color: #1c5584;
+  font-size: 20px;
+}
+
+.opacity-line {
+  position: relative;
+  z-index: 100;
+}
+
+.dps-mat-slider {
+  position: absolute;
+  right: 23px;
+  bottom: 43px;
+}
+
+.dps-mat-slider mat-slider {
+  background: #cedff1;
+  border-radius: 25px;
+  width: 23px;
+  padding: 0px;
+  border-bottom-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
+
+.opacity-line button {
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+  background: #cedeef;
+  padding: 0px 6px 0px 4px;
+  border: 1px solid #cadff5;
+}
+
+.opacity-line button .widgets-icon {
+  color: #3992f1;
+  font-size: 30px;
+  top: -2px;
+  position: relative;
+}
+
+
+.dps-dashboard-main-contentainer {
+  height: 100%;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% - 50px);
+  // background: url("background.jpg");
+  background-size: cover; // background-color: #1e73c3;
+  overflow-y: auto;
+}
+
+.dashboard-inner-wrapper {
+  height: 100%;
+  position: relative;
+  margin-right: 3px;
+  overflow-y: auto;
+}
+
+.mat-card {
+  height: 100%
+}
+
+.spitfire-dashboard {
+  overflow-y: hidden;
+}
+
+.dps-white-gray-scroll[_ngcontent-c19]::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dps-white-gray-scroll::-webkit-scrollbar-thumb {
+  background-color: #9ab6ca;
+  border: 1px solid #cae3f4;
+}
+
+.dps-widget-group-inner {
+  overflow: hidden;
+}
+
+
+
+
+.dps-widget {
+  width: 385px;
+  margin: 0 10px 22px;
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+  background: #e3f3ff;
+  padding: 0px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  //   border: 1px solid #c6d9e6;
+  z-index: 100;
+
+}
+
+.dps-widget.calander-events {
+  border: 0;
+  background: none;
+}
+
+.item-card {
+  padding: 0px;
+  position: relative;
+  z-index: 100;
+  height: 100%;
+}
+
+
+footer {
+  color: #717171;
+  padding: 0 22px;
+  font-size: 10px;
+  height: 40px;
+  border-top: 1px solid #b3cfe2;
+  width: 97%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+}
+
+
+.text.support span {
+  vertical-align: middle;
+
+  i {
+    font-size: $primary-font-size + 2;
+  }
+}
+
+/* cloud animation */
+
+#awan {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 138px;
+  animation: awan-animasi 20s linear infinite;
+  -ms-animation: awan-animasi 20s linear infinite;
+  -moz-animation: awan-animasi 20s linear infinite;
+  -webkit-animation: awan-animasi 20s linear infinite;
+  margin-top: 40px;
+  background-color: #C0DEED;
+  background: url(./../dashboard-layout/cloud-animatin.png) center top repeat-x;
+}
+
+@keyframes awan-animasi {
+  0% {
+    background-position: -30% 0;
+  }
+
+  50% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -30% 0;
+  }
+}
+
+#awan-2 {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 138px;
+  animation: awan-2-animasi 35s linear infinite;
+  -ms-animation: awan-2-animasi 35s linear infinite;
+  -moz-animation: awan-2-animasi 35s linear infinite;
+  -webkit-animation: awan-2-animasi 35s linear infinite;
+  margin-top: 40px;
+  background-color: #C0DEED;
+  background: url(../dashboard-layout/cloud-animatin.png) center top repeat-x;
+}
+
+@keyframes awan-2-animasi {
+  0% {
+    background-position: 50% 0;
+    opacity: 1;
+  }
+
+  50% {
+    background-position: 100% 0;
+    opacity: 0.4;
+  }
+
+  100% {
+    background-position: -30% 0;
+    opacity: 1;
+  }
+}
+
+#awan-3-vimana {
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  padding: 0px;
+  padding-bottom: 10px;
+  margin-top: 40px;
+  width: 100%;
+  height: 138px;
+  animation: awan-3-vimana 19s linear infinite;
+  -ms-animation: awan-3-vimana 19s linear infinite;
+  -moz-animation: awan-3-vimana 19s linear infinite;
+  -webkit-animation: awan-3-vimana 19s linear infinite;
+  /*transform: rotate(-5deg);*/
+  background: url(./../dashboard-layout/spitfire-on-the-fly.png) center top no-repeat;
+  display: none;
+}
+
+@keyframes awan-3-vimana {
+  0% {
+    background-size: 145px 74px;
+    background-position: -50% 10px;
+  }
+
+  50% {
+    background-size: 125px 74px;
+    background-position: 150% 100px;
+  }
+
+  100% {
+    background-size: 145px 74px;
+    background-position: 150% 10px;
+  }
+}
+
+#awan-4-vimana {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  padding: 0px;
+  width: 500px;
+  height: 300px;
+  animation: awan-4-vimana 15s linear infinite;
+  -ms-animation: awan-4-vimana 15s linear infinite;
+  -moz-animation: awan-4-vimana 15s linear infinite;
+  -webkit-animation: awan-4-vimana 15s linear infinite;
+  background: url(./../dashboard-layout/vimaana.png) center top no-repeat;
+  z-index: 1;
+}
+
+@keyframes awan-4-vimana {
+  0% {
+    background-position: 200% 100%;
+  }
+
+  5% {
+    background-position: 80% 10px;
+  }
+
+  //   50% {
+  //       background-position: 50% 0;
+  //   }
+  85% {
+    background-position: 80% 10px;
+  }
+
+  100% {
+    background-position: -100% -500%;
+  }
+}
+
+.dps-white-gray-scroll::-webkit-scrollbar,
+.dps-widget-group::-webkit-scrollbar-thumb {
+  width: 5px;
+
+}
+
+.dps-white-gray-scroll::-webkit-scrollbar-thumb {
+  background-color: #738a9c;
+  border: 1px solid #738a9c;
+}
+
+.dps-widget-group::-webkit-scrollbar-thumb {
+  background-color: #5b97d4;
+  border: 1px solid #5b97d4;
+}
+
+
+
+/*dps-dashboard-version_v7*/
+
+.dps-dashboard-version_v7 {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: cover;
+  overflow: hidden;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cae3f4+64,e5f3fc+100 */
+  background: #cae3f4;
+  /* Old browsers */
+  background: -moz-linear-gradient(45deg, #cae3f4 64%, #e5f3fc 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #cae3f4 64%, #e5f3fc 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #cae3f4 64%, #e5f3fc 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cae3f4', endColorstr='#e5f3fc', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+
+
+
+  #cloud {
+    background: url(./../dashboard-layout/cloud-animatin-3.png) center bottom;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 29%;
+    bottom: -30px;
+    opacity: 0.8;
+    background-repeat: repeat-x;
+  }
+
+  .mail-section {
+    background: #b7ddf9;
+  }
+
+  .mail-section .dps-widget {
+    padding: 28px 0 21px;
+    background: none;
+    border: 0;
+    margin-right: 0;
+  }
+
+  .dps-back-drop {
+    background: none;
+    box-shadow: none !important;
+  }
+
+  ::ng-deep .dps-mail-widget-layout mat-toolbar-row {
+
+
+    .unread-msg {
+      border-radius: 50%;
+      background: #57a9ff;
+      color: #fff;
+      border: unset;
+      height: 24px;
+      width: 18px;
+      display: flex;
+      align-items: center;
+      place-content: center;
+      margin-right: 10px;
+    }
+
+    .header-name {
+      float: left;
+      padding-top: 3px;
+    }
+  }
+
+  #dps-dashboard-main-header {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-list-item .mat-list-item-content {
+    padding: 0 0 0 10px;
+    margin-right: 12px;
+  }
+
+  ::ng-deep {
+
+    dps-my-task-widget-item .mat-list-item-content,
+    .dps-matter-widget-layout .mat-list-item-content,
+    dps-calendar-widget-layout .mat-list-item-content,
+    .dps-work-done-widget-layout .mat-list-item-content {
+      border-bottom: 1px solid #a7c9e0;
+    }
+  }
+
+  ::ng-deep mat-nav-list {
+
+    padding-top: 0px;
+    margin-right: 12px;
+
+    // mat-list-item {
+    //   height: 54px !important;
+    // }
+
+  }
+
+
+  ::ng-deep .mail,
+  ::ng-deep .calender-event,
+  ::ng-deep .matter,
+  ::ng-deep .my-task,
+  ::ng-deep .work-done,
+  ::ng-deep .team-efficiency,
+  ::ng-deep .mls {
+    height: 44px;
+  }
+
+  ::ng-deep mat-toolbar {
+    min-height: 44px;
+  }
+
+  ::ng-deep .header {
+    vertical-align: middle;
+    font-size: 14px;
+    cursor: pointer;
+    color: #465f7d;
+    text-transform: uppercase;
+  }
+
+  ::ng-deep {
+    .option-btn {
+      color: #fff;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      border: 0;
+      margin-left: 5px;
+    }
+
+    .option-btn .mat-icon {
+      font-size: 16px;
+      line-height: 13px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .mail {
+      // background: $mail-primary;
+      color: $header-primary;
+    }
+
+
+  }
+
+
+  /* MLS Component */
+
+  ::ng-deep .dps-mls-user {
+    margin: -3px 0px 0px 8px;
+  }
+
+  ::ng-deep .dps-mls-rply {
+    position: absolute;
+    right: 0;
+
+    .dps-reply-btn {
+      color: #0d63a9;
+      background: none !important;
+    }
+
+  }
+
+  ::ng-deep .dps-mls-item-header {
+    font-size: $primary-font-size - 2;
+  }
+
+  ::ng-deep dps-mls-widget-layout {
+    .mat-list-base[dense] .mat-list-item .mat-list-item-content {
+      padding: 0px 8px;
+    }
+
+
+
+  }
+
+  /* End MLS Component */
+
+
+
+  ::ng-deep .wrong-massage {
+    position: absolute;
+    width: 94%;
+    margin: 15px 0px 1px 7px;
+    font-size: 13px;
+  }
+
+  /* Email - Component*/
+
+  ::ng-deep .dps-mail-item-data-col2 {
+    padding: 0px 0px;
+  }
+
+  ::ng-deep .dps-mail-item-To span {
+    font-size: $primary-font-size - 2 !important;
+  }
+
+  ::ng-deep .dps-mail-item-data {
+    margin: -3px 0px 0px 0px !important;
+
+
+  }
+
+  ::ng-deep .dps-mail-item-icons {
+    .dps-icon-index {
+      padding: 0px 2px 0px 0;
+    }
+  }
+
+  /* End Email - Component*/
+
+}
+
+.version {
+  font-size: $primary-font-size - 2;
+  font-family: $primary-font-stack;
+}
+
+.alerts {
+  background: #a83d3d;
+  color: #fff;
+  border-radius: 15px;
+  padding: 1px 10px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.alerts {
+  float: left;
+}
+
+.alert-label {
+  font-size: 12px;
+  // font-weight: bold;
+  // float: right;
+  // margin-top: 6px;
+  // margin-left: 4px;
+}
+
+.footer-shadow .text.alerts i {
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  font-size: 20px;
+}
+
+
+
+// @media screen and (max-width: 992px) {
+
+//   .dps-widget {
+
+//     margin: 0 5px 22px;
+//     padding: 1px;
+
+//   }
+
+//   .dps-widget-group {
+
+//     padding: 0;
+
+
+//   }
+
+
+//   .spitfire-dashboard-controller {
+//     min-width: auto;
+//   }
+
+//   .dps-dashboard-version_v7 .mail-section {
+
+//     width: calc(100% - 350px);
+//   }
+
+
+// }

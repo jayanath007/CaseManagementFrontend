@@ -1,0 +1,60 @@
+@import '~styles/variables.scss';
+:host {
+    cursor: pointer;
+}
+.column-header-section{
+    width: 100%;
+    height:40px
+}
+dps-grid-field-filter mat-icon{
+    font-size: $primary-font-size;
+}
+
+.dps-column-header {
+    width: 100%;
+    height:40px;
+    font-family: $primary-font-stack;
+}
+
+.filter-icon:hover{
+    /* background: #b6d8e6; */
+    // padding: 3px;
+    border-radius: 10px;
+    line-height: unset;
+}
+.filter-icon{
+    width: unset;
+    height: unset;
+    // padding: 3px;
+    line-height: unset;
+}
+.column-header{
+    padding: 13px 0px;
+    font-weight: 700;
+    color: #345061;
+    font-size: $primary-font-size - 1;
+    
+}
+
+.Units,
+.Rate{
+    text-align: center;
+}
+
+.Fee.Earner
+{
+    text-align: left;
+
+}
+/* .Amount,
+.Billed.Amount{
+    text-align: right;
+} */
+
+
+/* redarging ledger card */
+/* .VAT,.Dr,.Cr,.Office.Bal,.Client.Dr,.Client.Cr,.Client.Bal,.DDA.Bal,
+.Expenses,.Disbs,
+.Net,.Gross,.Bill.No,.Balance,.Debit,.Credit{
+    text-align: right;
+} */

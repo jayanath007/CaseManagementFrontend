@@ -1,0 +1,42 @@
+@import '~styles/variables.scss';
+textarea {
+    resize: none;
+}
+mat-form-field {
+    width: 100%;
+}
+.organizer-alert .mat-dialog-title
+{
+    padding: 5px 14px 5px;
+    color: $primary;
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.organizer-alert.general .mat-dialog-title
+{
+    background-color: #274e8a;
+}
+.mat-dialog-title .fa
+{
+    margin-right: 5px;
+
+}
+mat-dialog-content{
+    height: 139px;
+    width: 460px;
+    padding: 7px 20px;
+    margin: 0px;
+}
+mat-dialog-actions{
+    padding: 12px 20px;
+}
+
+button , textarea  {
+    font-size: 12px;
+}
+
+button.dps-event-send-btn {
+    background-color: #274e8a;
+    color: $primary
+}

@@ -1,0 +1,15 @@
+
+@import '~styles/variables.scss';
+mat-toolbar-row {
+  height: 50px;
+}
+mat-list {
+  width:100%;
+  padding-top:0px;
+}
+
+.dps-lookup-toolbar {
+  height: 53px;
+  background: $header-primary;
+}
+ 

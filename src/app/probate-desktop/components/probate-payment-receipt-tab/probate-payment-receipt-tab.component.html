@@ -1,0 +1,42 @@
+<div fxLayout="column" class="dps-probate-payment-receipt-layout">
+  <mat-tab-group (selectedTabChange)="tabChange($event)" [selectedIndex]="tabIndex">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Payment</span>
+      </ng-template>
+      <dps-probate-account-desktop-manager [token]="token" [matterData]="matterData" [isPopup]="false"
+        [openFrom]="probateDealtBy.Payment" #manager>
+        <dps-probate-account-layout [editDataPayment]="paymentData" (clear)="onClear()"
+          [savedData]="manager.savedData$ | async" (submitSaveData)="manager.onSubmitSaveData($event)"
+          [openFrom]="probateDealtBy.Payment">
+
+        </dps-probate-account-layout>
+      </dps-probate-account-desktop-manager>
+
+
+      <!-- 
+      <dps-probate-payment-receipt [transactionsEditRow]="transactionsEditRow"
+        (submitSaveData)="onSubmitSaveData($event)" openType="payment">
+      </dps-probate-payment-receipt> -->
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Receipt</span>
+      </ng-template>
+      <dps-probate-account-desktop-manager [isPopup]="false" [token]="token" [openFrom]="probateDealtBy.Receipt"
+        #manager>
+        <dps-probate-account-layout [editDataReciept]="receiptData" [savedData]="manager.savedData$ | async"
+          [openFrom]="probateDealtBy.Receipt" (submitSaveData)="manager.onSubmitSaveData($event)">
+
+        </dps-probate-account-layout>
+      </dps-probate-account-desktop-manager>
+      <!-- <dps-probate-payment-receipt [transactionsEditRow]="transactionsEditRow"
+        (submitSaveData)="onSubmitSaveData($event)" openType="receipt">
+      </dps-probate-payment-receipt> -->
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+</div>

@@ -1,0 +1,269 @@
+<dps-common-popup-header icon="work" title="CDS7 Report Information" buttons="close" [loading]="isLoading"
+  iconColor="#ffffff" titleColor="#ffffff" toolbarColor="#1b6ebe" (buttonClick)="onClose()">
+</dps-common-popup-header>
+<div class="dps-cds7-report-info-content dps-white-gray-scroll">
+  <div *ngIf="informationModel">
+    <div fxLayout="row">
+
+      <mat-card class="cds7-card highlight case-details mat-elevation-z0">
+        <mat-card-header>
+          <mat-card-title>Case Details </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <div fxLayout="row">
+
+            <mat-form-field appearance="fill" class="cds7-date">
+              <mat-label>Date of main offence</mat-label>
+              <input matInput [matDatepicker]="picker0"
+                [ngModel]="informationModel?.dateOfMainOffences | date:'yyyy-MM-dd'"
+                (dateChange)="onChangeModel('dateOfMainOffences', $event.value)">
+              <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+              <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="cds7-input w-sm ml-5">
+              <mat-label>Number of Defendants</mat-label>
+              <input matInput [value]="informationModel?.noOfDefendants" [dpsNumberOnly]="4"
+                (focusout)="onChangeModel('noOfDefendants', $event.target.value, true)">
+            </mat-form-field>
+
+            <div class="ml-20">
+              <div fxLayout="row">
+                <mat-checkbox [checked]="informationModel?.wasAssignedCounselInstructed"
+                  (change)="onChangeModel('wasAssignedCounselInstructed', $event.checked)">Was assigned councel
+                  instructed
+                </mat-checkbox>
+                <mat-checkbox [checked]="informationModel?.isYouth" (change)="onChangeModel('isYouth', $event.checked)">
+                  Does this involve a youth</mat-checkbox>
+                <mat-checkbox [checked]="informationModel?.wastedCostOrderMade"
+                  (change)="onChangeModel('wastedCostOrderMade', $event.checked)">Wasted Costs order made</mat-checkbox>
+              </div>
+              <mat-checkbox [checked]="informationModel?.isEndInThreeMonths"
+                (change)="onChangeModel('isEndInThreeMonths', $event.checked)">Was the defendant or any co-defendant
+                charged with any indictable only offence</mat-checkbox>
+            </div>
+
+
+
+            <!-------------------------------- column end -->
+          </div>
+          <div class="charge-layed" fxLayout="row">
+            <mat-label class="txt-sm2 lbl-ext">Date the charge was laid and encloses the indictment with this claim
+            </mat-label>
+            <mat-form-field appearance="fill" class="cds7-date ml-20">
+              <mat-label>Chose a date</mat-label>
+              <input matInput [matDatepicker]="picker1" [ngModel]="informationModel?.indClaimDate | date:'yyyy-MM-dd'"
+                (dateChange)="onChangeModel('indClaimDate', $event.value)"
+                [disabled]="!informationModel?.isEndInThreeMonths">
+              <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="!informationModel?.isEndInThreeMonths">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1 [disabled]="!informationModel?.isEndInThreeMonths"></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+
+      <!-------------------------------- row end -->
+    </div>
+
+
+    <div fxLayout="row" class="reasons">
+      <mat-card class="cds7-card non-standard-fee-chk-bx mat-elevation-z0">
+        <mat-card-header>
+          <mat-card-title>Reason(s) for non-standard fee claim</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-checkbox [checked]="informationModel?.isAboveLimit" [disabled]="true">Core costs exceed higher limit
+          </mat-checkbox>
+          <mat-checkbox [checked]="informationModel?.isEnhancedRates" [disabled]="true"
+            (change)="onChangeModel('isEnhancedRates', $event.checked)">Enhanced Rates Claimed</mat-checkbox>
+          <mat-checkbox [checked]="informationModel?.counselAsigned"
+            (change)="onChangeModel('counselAsigned', $event.checked)">Councel Assigned</mat-checkbox>
+          <mat-checkbox [checked]="informationModel?.extradition"
+            (change)="onChangeModel('extradition', $event.checked)">
+            Extradition</mat-checkbox>
+          <mat-checkbox [checked]="informationModel?.s61Committal"
+            (change)="onChangeModel('s61Committal', $event.checked)">S.6(1) committal</mat-checkbox>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="cds7-card withdrawn-date mat-elevation-z0 ml-20">
+        <mat-card-header>
+          <mat-card-title>Withdrawn Date <span>(Representation Order)</span></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="fill" class="cds7-date">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker2"
+              [ngModel]="informationModel?.representationOrderWithdrawnDate | date:'yyyy-MM-dd'"
+              (dateChange)="onChangeModel('representationOrderWithdrawnDate', $event.value)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+      <!-------------------------------- row end -->
+    </div>
+
+    <div fxLayout="row" class="case-disposal-wrap">
+      <mat-card class="cds7-card case-disposal mat-elevation-z0" fxFlex="1 1 auto" fxFlex="60">
+        <mat-card-header>
+          <mat-card-title>Case Disposal</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column">
+          <!-- <mat-select [ngModel]="informationModel?.caseType" []
+            (selectionChange)="onChangeModel('caseType', $event.value )" class="cds7-select mb-5"
+            placeholder="Case Type" fxFlex="100">
+            <mat-option *ngFor="let type of caseTypes" [value]="type.value">
+              {{ type.value }}
+            </mat-option>
+          </mat-select> -->
+
+          <mat-form-field class="cds7-input ml-5">
+            <mat-label>Case Type</mat-label>
+            <input matInput [value]="informationModel?.caseType" [dpsNumberOnly]="4" readonly>
+          </mat-form-field>
+
+
+          <div fxFlex="100">
+            <mat-form-field appearance="fill" class="cds7-date" fxFlex="50">
+              <mat-label>Warrant Issue Date</mat-label>
+              <input matInput [matDatepicker]="picker3"
+                [ngModel]="informationModel?.warrantIssueDate | date:'yyyy-MM-dd'"
+                (dateChange)="onChangeModel('warrantIssueDate', $event.value)" [disabled]="isDisableWarrantDate">
+              <mat-datepicker-toggle matSuffix [for]="picker3" [disabled]="isDisableWarrantDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker3 [disabled]="isDisableWarrantDate"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cds7-date ml-5" fxFlex="50">
+              <mat-label>Guilty Plea Indicated to Solicitor</mat-label>
+              <input matInput [matDatepicker]="picker4" [ngModel]="informationModel?.gpToSolDate | date:'yyyy-MM-dd'"
+                (dateChange)="onChangeModel('gpToSolDate', $event.value)" [disabled]="isDisableGpToSolDate">
+              <mat-datepicker-toggle matSuffix [for]="picker4" [disabled]="isDisableGpToSolDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker4 [disabled]="isDisableGpToSolDate"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="cds7-card case-disposal location mat-elevation-z0 ml-20" fxFlex="1 1 auto" fxFlex="40">
+        <mat-card-header>
+          <mat-card-title>Location</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="row">
+
+          <mat-form-field class="cds7-input" fxFlex="75px">
+            <mat-label>ID</mat-label>
+            <input #cds7locationIdInput matInput [ngModel]="informationModel?.locationId"
+              (focusout)="onChangeModel('locationId', cds7locationIdInput.value)">
+          </mat-form-field>
+
+          <mat-form-field class="cds7-input ml-5" fxFlex="1 1 auto">
+            <mat-label>Name</mat-label>
+            <input #cds7locationNameInput matInput placeholder="Type name here" value="Type name here"
+              [ngModel]="informationModel?.locationName"
+              (focusout)="onChangeModel('locationName', cds7locationNameInput.value)">
+            <button mat-button matSuffix mat-icon-button (click)="onOpenlocationSearch(cds7locationNameInput.value)">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <!-------------------------------- row end -->
+    </div>
+
+
+    <div fxLayout="row" class="claim-details">
+
+      <mat-card class="cds7-card case-disposal mat-elevation-z0">
+        <mat-card-header>
+          <mat-card-title>Claim Details</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <div fxLayout="row">
+            <mat-form-field class="cds7-input" fxFlex="25">
+              <mat-label>No. of Page of Prosecution Evidence</mat-label>
+              <input matInput [ngModel]="informationModel?.ppe" [dpsNumberOnly]="4"
+                (focusout)="onChangeModel('ppe', $event.target.value, true)">
+            </mat-form-field>
+
+            <mat-form-field class="cds7-input ml-5" fxFlex="25">
+              <mat-label>No. of Defence Statements</mat-label>
+              <input matInput [ngModel]="informationModel?.defStatements" [dpsNumberOnly]="4"
+                (focusout)="onChangeModel('defStatements', $event.target.value, true)">
+            </mat-form-field>
+
+            <mat-form-field class="cds7-input ml-5" fxFlex="25">
+              <mat-label>No. of Defence Witnesses</mat-label>
+              <input matInput [ngModel]="informationModel?.defWitnesses" [dpsNumberOnly]="4"
+                (focusout)="onChangeModel('defWitnesses', $event.target.value, true)">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="cds7-date ml-5" fxFlex="25">
+              <mat-label>Pre-order Work Date</mat-label>
+              <input matInput [matDatepicker]="picker5"
+                [ngModel]="informationModel?.preOrderWorkDate | date:'yyyy-MM-dd'"
+                (dateChange)="onChangeModel('preOrderWorkDate', $event.value)">
+              <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+              <mat-datepicker #picker5></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+
+          <div class="bottom-checkboxes">
+            <div class="checkbox-withlbl">
+              <mat-checkbox [checked]="informationModel?.isSupClaim"
+                (change)="onChangeModel('isSupClaim', $event.checked)">Supplemental Claim</mat-checkbox>
+              <mat-checkbox [checked]="informationModel?.isCaseBackToCC"
+                (change)="onChangeModel('isCaseBackToCC', $event.checked)">Has the case been remitted back to the magistrates by the Crown Court</mat-checkbox>
+              <!-- nimasa -->
+              <mat-checkbox [checked]="informationModel?.isDesignatedArea "
+                (change)="onChangeModel('isDesignatedArea ', $event.checked)">Is it a designated
+                area</mat-checkbox>
+            </div>
+            <div class="checkbox-with-valueinpt">
+              <mat-checkbox [checked]="informationModel?.isPrepTapeEvidence"
+                (change)="onChangeModel('isPrepTapeEvidence', $event.checked)">
+                Preparation time spent watching/listening to taped evidence
+              </mat-checkbox>
+              <!--------  <mat-form-field class=" cds7-input" fxFlex="15">
+                <mat-label>Total running time of the tap(s)</mat-label>
+                <input matInput [checked]="informationModel?.tapeInerviewDu"
+                  (change)="onChangeModel('tapeInerviewDu', $event.checked)">
+                </mat-form-field> -->
+              <mat-form-field class="cds7-input" fxFlex="15">
+                <dps-time-input [disabled]="!informationModel?.isPrepTapeEvidence"
+                  placeholder="Total running time of the tap(s)" [resetCount]="0" [isUnitDisable]="true"
+                  [value]="informationModel?.tapeInerviewDu" (changeValue)="onChangeModel('tapeInerviewDu', $event)">
+                </dps-time-input>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+    <!-------------------------------- row end -->
+
+    <div fxLayout="column" class="btn-container">
+      <button fxFlexAlign="end" mat-button class="save-btn" (click)="onSave()">Continue</button>
+    </div>
+
+    <!-------------------------------- dps-cds7-report-info-content end -->
+  </div>
+</div>

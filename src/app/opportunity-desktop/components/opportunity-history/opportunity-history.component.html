@@ -1,0 +1,28 @@
+<div fxLayout="column" class="dps-save-grid dps-white-gray-scroll dps-grid-x">
+  <div class="dps-width-controller" fxLayout="column">
+    <div class="row-highlight" dpsIsMobile>
+      <div class="inner-highlight">
+        <dps-column-header *ngFor="let header of historyColumDef" [fxFlex]="header.extras.fxFlex" [def]="header"
+          [filterAnchor]="header.extras.filterAnchor">
+        </dps-column-header>
+      </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="historyData?.isLoading"></mat-progress-bar>
+    </div>
+    <div fxLayout="column" fxFlex="calc(100%-36px)" class="dps-white-gray-scroll grid-content">
+      <mat-nav-list dence class="dps-grid-nav-list">
+        <mat-list-item class="dps-grid-list-item" *ngFor="let row of historyData?.data; let isOdd=odd;" dpsClick
+          (dpsDblClick)="onHistoryRowDBClick(row)" (dpsClick)="selectRow(row)"
+          [ngClass]="selectedRow?.opportunityTransId === row.opportunityTransId ? 'dps_selected_row': isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+          <div fxLayout="row" class="grid-data">
+            <div class="row-data dpa-mat-line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{row?.opportunityType }}">
+            </div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{row?.date | date:'dd-MM-yyyy'}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{row?.userBy}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{row?.userFor}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{row?.details}}"></div>
+          </div>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+</div>

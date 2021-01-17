@@ -1,0 +1,66 @@
+<div class="dps-year-activity-grid dps-white-gray-scroll">
+  <!-- <table class="table-scroll small-first-col">
+    <thead class="dps-grid-header">
+      <tr style=" height: 35px;">
+        <th>Status </th>
+        <th class="dps-stats-text"
+          *ngFor="let item of eventYearSummery?.allDayEvents; let index =index; let isOdd=odd; let isEven=even">
+          {{item.month}}
+        </th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody class="body-half-screen dps-white-gray-scroll">
+      <tr>
+        <td>
+      <tr *ngFor="let eventSum of eventYearSummery?.allDayEventSum" class="dps-team-stats {{eventSum?.userMovementTypeId | movementTheamClass }}">
+        
+          <mat-icon class="dps-round-icons">{{eventSum.userMovementTypeId | movementIcon}}</mat-icon>
+       
+      </tr>
+      </td>
+      <td *ngFor="let item of eventYearSummery?.allDayEvents">
+        <tr *ngFor="let keyItem of item.allDayEvent">
+          <td>{{keyItem.eventCount}}</td>
+        </tr>
+      </td>
+      <td>
+        <tr *ngFor="let eventSum of eventYearSummery?.allDayEventSum">
+          <td>{{ eventSum.sumOfMovementCount }} / {{eventSum.maxCount}}</td>
+        </tr>
+      </td>
+      </tr>
+
+     
+    </tbody>
+  </table> -->
+
+  <div class="dps-team-flex-container">
+      <div class="dps-column-status">
+          <div class="dps-team-col-header status">Status</div>
+          <div  *ngFor="let eventSum of eventYearSummery?.allDayEventSum" class="dps-team-stats {{eventSum?.userMovementTypeId | movementTheamClass }}">
+            <mat-icon matTooltip="{{ getMovementDesc(eventSum?.userMovementTypeId)}}" matTooltipPosition="after" class="dps-round-icons">{{eventSum.userMovementTypeId | movementIcon}}</mat-icon>
+          </div>
+      </div>
+   
+      <div class="dps-column-year-summery dps-white-gray-scroll">
+        <div class="dps-team-col-header-outer">
+          <div class="dps-team-col-header month-name" *ngFor="let item of eventYearSummery?.allDayEvents; let index =index; let isOdd=odd; let isEven=even">{{item.month}}</div>         
+        </div>
+          <div class="team-year-summery-data">
+          <div class="team-year-column-data" *ngFor="let item of eventYearSummery?.allDayEvents">
+              <div class="team-year-data" *ngFor="let keyItem of item.allDayEvent">{{keyItem.eventCount}}</div> </div>
+          </div>
+         
+      </div>
+
+
+    <div class="dps-column-total">
+        <div class="dps-team-col-header">Total</div>
+        <div class="team-year-data-tot" *ngFor="let eventSum of eventYearSummery?.allDayEventSum">{{ eventSum.sumOfMovementCount }} / {{eventSum.maxCount}}</div>
+    </div>
+   
+  </div>
+</div>
+
+

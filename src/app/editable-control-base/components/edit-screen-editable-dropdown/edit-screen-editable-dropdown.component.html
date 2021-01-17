@@ -1,0 +1,5 @@
+<dps-editable-dropdown [options]="detailList" [value]="modelData"
+  [placeholder]="customCaption || meta?.scL_Caption || meta?.scL_DefaultCaption || lableName"
+  [required]="meta?.scL_Required" (changeValue)="onChangeDetails($event)"
+  *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible">
+</dps-editable-dropdown>

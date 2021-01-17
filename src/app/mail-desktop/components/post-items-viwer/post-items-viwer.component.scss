@@ -1,0 +1,44 @@
+@import '~styles/variables.scss';
+.dps-post-items-viwer {
+  height: 100%;
+  width: 100%;
+
+  .dps-post-list-view {
+    overflow-y: auto !important;
+    width: 100%;
+    height: 100%;
+  }
+
+  mat-toolbar {
+    border-bottom: 1px solid #e1e1e1;
+    background: $primary;
+    .dps-toolbar-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    h3 {
+      font-size: $primary-font-size + 4;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    h4 {
+      font-size: $primary-font-size - 2;
+      color: #666;
+      line-height: 20px;
+    }
+
+    .Reply_all {
+      mat-icon {
+        color: #0079c4;
+      }
+    }
+
+  }
+
+}

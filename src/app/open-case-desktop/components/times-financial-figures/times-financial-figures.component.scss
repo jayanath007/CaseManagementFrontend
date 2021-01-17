@@ -1,0 +1,31 @@
+
+.opened-case-financial-figures .billed-amount-wrap,.unbilled-amount-wrap{
+    padding: 0px 8px;
+   
+}
+.opened-case-financial-figures .billed-amount-wrap label,.unbilled-amount-wrap label{
+    color: #94d6d1;
+    font-size: 12px;
+}
+.opened-case-financial-figures .billed-amount-wrap span,.unbilled-amount-wrap span{
+    color: #cde5f3;
+    font-size: 17px;
+    padding-bottom: 8px;
+    letter-spacing: 2px;
+}
+.total-amount-wrap{
+    padding: 0px 20px;
+    border-left: 1px solid #9bccc7;
+}
+.total-amount-wrap  label{
+    color: #94d6d1;
+}
+.total-amount-wrap  span{
+    font-size: 22px;
+    color: #e0f3f1;
+    font-weight: normal;
+}
+
+div.opened-case-financial-figures {
+    padding:6px 0px 0px 0px; 
+}

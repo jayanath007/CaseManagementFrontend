@@ -1,0 +1,69 @@
+<div class="drive-title-view" fxLayout="column" dpsFileDroppable dropClass="drive-content-drop"
+  (onDrop)="onDrop($event,activeView.owner)">
+  <div fxLayout="row" class="dps-title-view">
+    <div *ngFor="let item of items; trackBy: trackByFn" (contextmenu)="contextmenuOpen($event,driveContextMenue,item)">
+      <div [title]="item.data.name" *ngIf="item.data.folder"
+        [ngClass]="{'dps-file-select':item.selected,'dps-cut-file':isCutItem(item)}" (dblclick)="onOpen(item)"
+        (dpsClick)="onSelect($event,item)" class="drive-file dps-titleview" dpsFileDroppable [debounceTime]="100"
+        dpsDroppable (onDrop)="onDrop($event, item.data)" dropZone="driveDropFolder" [dpsDraggable]="true"
+        [dragData]="item" [dragElement]="dragElement" dragDataType="driveFile" [dropZones]="['driveDropFolder']"
+        (onDragStart)="onDragStart($event, item)">
+        <div class="folder-list-view">
+          <mat-icon>folder</mat-icon>
+          <div class="file-info">
+            <p class="dps-file-name">{{item.data.name}}</p>
+            <p>Folder</p>
+            <p>{{item.data.size | attachmentsSize }}</p>
+          </div>
+        </div>
+      </div>
+      <div [title]="item.data.name" *ngIf="item.data.file || item.data.package" class="table-content dps-titleview"
+        [ngClass]="{'dps-file-select':item.selected,'dps-cut-file':isCutItem(item)}" (dblclick)="onOpen(item)"
+        (dpsClick)="onSelect($event,item)" [dpsDraggable]="true" [dragData]="item.selected? selectedItems:[item]"
+        [debounceTime]="100" [dragElement]="dragElement" dragDataType="driveFile"
+        [dropZones]="['driveDropFolder','openCaseTab']" (onDragStart)="onDragStart($event, item)">
+        <div class="folder-list-view">
+          <mat-icon mat-list-icon *ngIf="item.data.file">
+            <i [ngClass]="item.data.name | attachmentIcon" aria-hidden="true">
+              <span></span>
+            </i>
+          </mat-icon>
+          <mat-icon mat-list-icon *ngIf="item.data.package">
+            <i [ngClass]="{'fa fa-file-text':item.data.package.type==='oneNote'}" aria-hidden="true">
+            </i>
+          </mat-icon>
+          <div class="file-info">
+            <p class="dps-file-name">{{item.data.name}}</p>
+            <p *ngIf="item.data.file">{{item.data.name | attachmentIcon:'type' | titlecase }} File</p>
+            <p *ngIf="item.data.package">{{item.data.package.type==='oneNote'?'One
+              Note':item.data.package.type}}</p>
+            <p>{{item.data.size | attachmentsSize }}</p>
+          </div>
+        </div>
+      </div>
+      <dps-drive-context-menue #driveContextMenue [id]="item.data.id" [isMultiSelect]="selectedItems?.length>1"
+        (download)="onDownloadFile()" [cutCopyItems]="!!copyItems" (cut)="onCut()" (copy)="onCopy()"
+        (share)="onShareFile()" (delete)="onDeleteFile()" (rename)="onRenameFile()" [item]="item.data"
+        (paste)="onPaste(item)" (attachToDPSFile)="onAttachToDPSFile()">
+      </dps-drive-context-menue>
+    </div>
+
+  </div>
+
+  <div id="dragPreView">
+    <div *ngIf="selectedItems?.length > 1">
+      <mat-icon class="mat-18">file_copy</mat-icon>
+      <span class="name">{{selectedItems?.length}}</span>
+    </div>
+    <span *ngIf="selectedItems?.length === 1">
+      <i [ngClass]="selectedItems[0]?.data.name | attachmentIcon" *ngIf="selectedItems[0]?.data.file"><span></span></i>
+      <mat-icon class="mat-18" *ngIf="selectedItems[0]?.data.folder">folder</mat-icon>
+      <span class="name">{{selectedItems[0]?.data.name}}</span>
+    </span>
+  </div>
+  <mat-nav-list dense *ngIf="activeView.skipToken && !isSearching" class="dps-load-more">
+    <mat-list-item (click)="onLoadMore()">
+      <span>Load More...</span>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

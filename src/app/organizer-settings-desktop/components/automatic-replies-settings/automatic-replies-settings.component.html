@@ -1,0 +1,134 @@
+<div class="dps-automatic-setting-layout dps-white-gray-scroll" fxLayout="column">
+
+  <div>
+    <p>
+      Create automatic reply (Out of Office) messages here. You can set your reply to start at a specific time, or set
+      it to continue until you turn it off.
+    </p>
+  </div>
+
+
+
+  <div fxLayout="column" class="dps-automatic-setting-controller" *ngIf="automaticRepliesSetting">
+    <mat-radio-group [ngModel]="status" (change)="onStatusChange($event)">
+      <div fxLayout="column">
+        <mat-radio-button color="primary" value="disabled">
+          Don't send automatic replies
+        </mat-radio-button>
+
+        <mat-radio-button color="primary" value="enabled">
+          Send automatic replies
+        </mat-radio-button>
+      </div>
+    </mat-radio-group>
+
+    <div class="dps-automatic-wrapper" fxLayout="column">
+
+      <mat-checkbox color="primary" [checked]="scheduled" (change)="onScheduledChange($event)"
+        [disabled]="automaticRepliesSetting.status==='disabled'">
+        Send replies only during this time period
+      </mat-checkbox>
+      <div class="dps-automatic-time" fxLayout="column"
+        [ngClass]="{'disabled':automaticRepliesSetting.status!=='scheduled'}">
+
+        <div class="dps-automatic-start" fxLayout="row" fxLayoutAlign=" baseline">
+          <div class="time">Start time</div>
+
+          <mat-form-field>
+            <input class="dps-date-input" matInput [matDatepicker]="startPicker" [value]="startDate"
+              (dateChange)="onChangeStartDate($event.value)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker [disabled]="automaticRepliesSetting.status!=='scheduled'"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" [disabled]="automaticRepliesSetting.status!=='scheduled'" dpsTimeOnly #startTimeInput
+              matInput [matAutocomplete]="startTimeOptions" [ngModel]="startTime"
+              (focusout)="onChangeStartTime(startTimeInput.value)">
+            <button mat-icon-button matSuffix [disabled]="automaticRepliesSetting.status!=='scheduled'">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-autocomplete #startTimeOptions="matAutocomplete">
+              <mat-option *ngFor="let time of timeList" [value]="time">
+                {{ time }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-button-toggle #startTimeToggle appearance="legacy" [checked]="startPeriod==='PM'"
+            [disabled]="automaticRepliesSetting.status!=='scheduled'"
+            (change)="onStartTimePeriodChange(startTimeToggle.checked?'PM':'AM')">{{startTimeToggle.checked?'PM':'AM'}}
+          </mat-button-toggle>
+        </div>
+
+        <div class="dps-automatic-end" fxLayout="row" fxLayoutAlign=" baseline">
+          <div class="time">End time</div>
+
+          <mat-form-field>
+            <input matInput class="dps-date-input" [matDatepicker]="endPicker" [value]="endDate" disabled
+              (dateChange)="onChangeEndDate($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker [disabled]="automaticRepliesSetting.status!=='scheduled'"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input [disabled]="automaticRepliesSetting.status!=='scheduled'" type="text" dpsTimeOnly #endTimeInput
+              matInput [matAutocomplete]="endTimeOptions" [ngModel]="endTime"
+              (focusout)="onChangeEndTime(endTimeInput.value)">
+            <button mat-icon-button matSuffix [disabled]="automaticRepliesSetting.status!=='scheduled'">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-autocomplete #endTimeOptions="matAutocomplete">
+              <mat-option *ngFor="let time of timeList" [value]="time">
+                {{ time }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-button-toggle #endTimeToggle appearance="legacy" [checked]="endPeriod==='PM'"
+            (change)="onEndTimePeriodChange(endTimeToggle.checked?'PM':'AM')"
+            [disabled]="automaticRepliesSetting.status!=='scheduled'">{{endTimeToggle.checked?'PM':'AM'}}
+          </mat-button-toggle>
+
+        </div>
+
+      </div>
+      <div class="dps-automatic-message" fxLayout="column">
+        <p>Send a reply once to each sender inside my organisation with the following message:</p>
+        <div>
+          <dps-ck-editor [readOnly]="automaticRepliesSetting.status==='disabled'" [config]="{}" [debounceTime]="500"
+            [ngModel]="automaticRepliesSetting.internalReplyMessage"
+            (ngModelChange)="onInternalReplyMessageChange($event)">
+          </dps-ck-editor>
+        </div>
+      </div>
+      <mat-checkbox [disabled]="automaticRepliesSetting.status==='disabled'" color="primary"
+        [checked]="automaticRepliesSetting.externalAudience !== 'none'" (change)="onIsOutsideChange($event)">
+        Send automatic reply messages to senders outside my organisation
+      </mat-checkbox>
+
+      <div class="dps-automatic-editor" *ngIf="automaticRepliesSetting.externalAudience !== 'none'" fxLayout="column">
+
+        <mat-radio-group fxLayout="column" [disabled]="automaticRepliesSetting.status==='disabled'"
+          [ngModel]="automaticRepliesSetting.externalAudience" (change)="onOutsideChange($event)">
+          <div fxLayout="column">
+            <mat-radio-button color="primary" value="contactsOnly">
+              Send replies only to senders in my Contact list
+            </mat-radio-button>
+            <mat-radio-button color="primary" value="all">
+              Send automatic replies to all external senders
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+        <div>
+          <dps-ck-editor [readOnly]="automaticRepliesSetting.status==='disabled'" [config]="{}" [debounceTime]="500"
+            [ngModel]="automaticRepliesSetting.externalReplyMessage"
+            (ngModelChange)="onExternalReplyMessageChange($event)">
+          </dps-ck-editor>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

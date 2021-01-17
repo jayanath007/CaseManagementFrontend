@@ -1,0 +1,69 @@
+@import '~styles/variables.scss';
+
+.dps-mls-popup-layout {
+  height: 100%;
+  width: 100%;
+  font-family: $primary-font-stack;
+
+  .dps-header {
+    mat-icon {
+      vertical-align: middle;
+      border: 2px solid whitesmoke;
+      border-radius: 50%;
+      padding: 4px 2px 0px 2px;
+      font-size: 20px;
+      margin-right: 4px;
+      text-align: center;
+    }
+  }
+
+  mat-toolbar {
+    min-height: 45px;
+    background: #528fe2;
+    color: white;
+    font-size: 16px;
+
+    mat-toolbar-row {
+      height: 45px;
+      justify-content: center;
+      position: relative;
+    }
+  }
+
+  .dps-mls-exit {
+    position: absolute;
+    right: 10px;
+  }
+}
+
+// ::ng-deep {
+
+//   .mls-body-preview-text,
+//   .dps-mls-item-mail,
+//   .dps-mls-item-date,
+//   h3,
+//   .dps-mls-user {
+//     font-family: $primary-font-stack;
+//   }
+
+
+// }
+
+::ng-deep .dps-mls-card-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+    // overflow: hidden;
+  }
+}
+
+
+
+
+// ::ng-deep dps-mls-popup-layout {
+//   ::ng-deep .dps-mls-chat-content-body {
+//     height: calc(100% - 122px) !important;
+//     flex: unset !important;
+//   }
+
+// }

@@ -1,0 +1,419 @@
+@import '~styles/variables.scss';
+/*============================  echit header  ===============================*/
+
+
+::ng-deep .dps-echit-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 0px;
+  }
+}
+
+.dps-echit-form-content {
+  height: calc(100% - 40px);
+}
+
+div {
+  font-family: $primary-font-stack;
+}
+
+[hidden] {
+  display: none;
+}
+
+.dps-echit {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  button {
+    font-size: $primary-font-size - 2;
+    border-radius: 0px;
+  }
+
+}
+
+.e-chit-header {
+  background: $dps-popup-matbar;
+  color: #cedce4;
+  font-size: $primary-font-size + 2;
+  height: 42px;
+
+  .dps-header {
+    mat-icon {
+
+      border-radius: 100%;
+      border: 2px solid #cedce4;
+      // color: #a9c6fd; 
+
+      vertical-align: middle;
+      padding: 5px;
+      color: #cedce4;
+      font-size: $primary-font-size + 7;
+      height: 20px;
+      width: 20px;
+    }
+
+    span {
+      margin-left: 4px;
+    }
+  }
+}
+
+mat-toolbar {
+  min-height: 42px;
+}
+
+form {
+  flex: 1;
+}
+
+/*============================  echit content  ===============================*/
+
+.dps-echit-inner-wrapper {
+  padding: 8px 15px; // flex: 1;
+
+}
+
+.dps-echit {
+
+  //   .mat-autocomplete-panel .mat-option {
+  //     line-height: 29px;
+  //     height: auto;
+  //     font-size: 12px;
+  // }
+  .dps-editable-drop-down {
+    font-size: 12px;
+    position: relative;
+    line-height: 36px !important;
+  }
+}
+
+.common-detail {
+  mat-form-field {
+    width: 200px;
+    font-size: 12px;
+
+    mat-option {
+      font-size: 12px;
+    }
+
+  }
+}
+
+.dps-echit-inner-wrapper {
+
+  .common-detail.e-chit-type {
+    ::ng-deep .mat-form-field {
+      width: 550px;
+    }
+  }
+
+  .common-detail,
+  .balance-detail,
+  .input-with-grid {
+
+    .echit-disbursments-inputs {
+      font-size: 13px;
+
+      ::ng-deep .mat-form-field {
+        width: 67px;
+      }
+
+      .limits-caption {
+        align-self: center;
+      }
+
+
+      /* Using NG deep is not the way to do this, Im using this becasue cannot re-code the whole inputs styled with NG deep here by someone
+      -- Dilantha 20.06.2020 */
+    }
+
+    // & {
+    //   margin-bottom: 10px;
+    // }
+    ::ng-deep .mat-form-field {
+      font-size: $primary-font-size - 2;
+      color: $header-primary;
+      width: 250px;
+      margin-right: 5px;
+
+      .mat-form-field-ripple.mat-form-field-ripple {
+        background: $header-primary;
+      }
+
+      .mat-form-field-label {
+        color: $header-primary;
+      }
+    }
+
+    ::ng-deep .mat-checkbox {
+      font-size: $primary-font-size - 2;
+      color: $header-primary;
+    }
+  }
+}
+
+.echit-input-btn {
+  width: 252px;
+
+  ::ng-deep .mat-form-field {
+    width: 202px !important;
+    margin-right: 0px !important;
+  }
+}
+
+.dps-echit-inner-wrapper {
+  .input-with-grid {
+    .pannel-content {
+      mat-panel-title {
+        color: #234078;
+
+        span {
+          top: 6px;
+          font-size: 13px;
+          top: 5px;
+          position: relative;
+        }
+      }
+
+      mat-expansion-panel-header {
+        background: #d7e2f9;
+      }
+    }
+  }
+
+  .options {
+    font-size: 12px !important;
+  }
+
+
+}
+
+.dps-echit-post {
+  background: $dps-primary-view;
+  color: $primary;
+}
+
+mat-expansion-panel-header {
+  height: 35px !important;
+}
+
+.footer-btn {
+  align-self: flex-end;
+  padding: 8px 15px 8px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  font-size: 12px;
+
+  th {
+    background: #deb881;
+  }
+}
+
+.bill-ref {
+  width: 15px
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: right;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+.e-chit-checkbox {
+  padding-bottom: 1.25em;
+}
+
+.dps-echit-content-outer {
+  padding: 10px 3px 5px;
+  overflow-y: scroll;
+}
+
+.text-area {
+  width: 542px !important;
+  margin-top: 15px;
+}
+
+.topic-line {
+  mat-icon {
+    vertical-align: middle;
+    color: #0c4b84;
+  }
+
+  label {
+    vertical-align: middle;
+    position: relative;
+    top: 3px;
+    left: 7px;
+    color: #0c4b84;
+  }
+}
+
+mat-expansion-panel-header,
+mat-expansion-panel-header:hover {
+  height: 48px;
+  background: #8fbadc !important;
+}
+
+.dps-expansion-panel {
+  width: 100%;
+}
+
+.dps-expansion-content {
+  padding-top: 5px;
+}
+
+.dps-echit-outer-wrapper {
+  mat-expansion-panel {
+    border-bottom: unset;
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 10px 5px 16px;
+  }
+}
+
+// option grid
+.option-grid {
+  ::ng-deep .mat-option-text {
+    flex: 1;
+
+  }
+
+  .option-grid-data {
+    width: 100%;
+    display: flex;
+  }
+}
+
+.option-grid-name {
+  padding: 0px 16px;
+  display: flex;
+  background: #d9e4ec;
+  box-sizing: border-box;
+
+  span {
+    border-right: 1px solid #d2d7da;
+    padding: 8px 5px;
+    box-sizing: border-box;
+  }
+
+  span:last-child {
+    border-right: unset;
+  }
+}
+
+.option-grid-data {
+  span {
+    border-right: 1px solid #d2d7da;
+    padding: 0px 5px;
+    box-sizing: border-box;
+  }
+
+  span:last-child {
+    border-right: unset;
+  }
+}
+
+.option-grid-name,
+.option-grid-data {
+  font-family: $primary-font-stack;
+
+  .code,
+  .code-data {
+    width: 20%;
+  }
+
+  .description,
+  .description-data {
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .rate,
+  .rate-data {
+    width: 20%;
+  }
+}
+
+.option-select-content {
+  ::ng-deep .mat-select-content {
+    overflow-y: scroll;
+  }
+}
+
+.indicator-lbl {
+  padding: 2px 13px 13px;
+
+  span {
+    font-size: 13px;
+    color: #8a570d;
+  }
+}
+
+.fileUploader-wrapper {
+  margin-top: 8px;
+}
+
+.matter_balances-lbl {
+  font-size: 13px;
+}
+
+
+.limits-caption-wrapper {
+
+  display: flex;
+  align-items: center;
+
+  span {
+    background-color: #c20b14;
+    color: #fff;
+    border-radius: 3px;
+    display: block;
+    padding: 6px;
+  }
+
+  /* warning colors */
+
+  .echit-warning
+
+  /*--- orange --*/
+    {
+    background-color: $my-task-primary;
+    color: $primary;
+  }
+
+  .echit-danger
+
+  /*--- red --*/
+    {
+    background-color: $dps-user-movment-item-8;
+    color: $primary;
+  }
+
+  .echit-success
+
+  /*--- green --*/
+    {
+
+
+    background-color: $primary-save-button-bg;
+    color: $primary;
+  }
+
+
+}

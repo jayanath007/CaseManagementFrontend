@@ -1,0 +1,125 @@
+.dps-probate-payment-receipt-layout {
+
+  padding-left: 22px;
+  width: 272px;
+
+  ::ng-deep.mat-tab-label {
+    padding: 0px 2px;
+    min-width: 125px;
+  }
+
+  ::ng-deep.mat-tab-header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  ::ng-deep.mat-tab-label:first-child {
+    background: #e29200;
+    color: #6d4d04;
+    border-color: #e29200;
+    opacity: 1;
+
+    &.mat-tab-label-active {
+      background-color: #e29200 !important;
+      opacity: 1;
+      color: #efeae2 !important;
+    }
+
+  }
+
+
+  ::ng-deep.mat-tab-label:nth-child(2) {
+    background: #316998;
+    color: #0b1621;
+    border-color: #205582;
+    opacity: 1;
+
+    &.mat-tab-label-active {
+      background-color: #205582 !important;
+      opacity: 1;
+      color: #dcdada !important;
+    }
+  }
+}
+
+
+.mat-tab-body-wrapper {
+  height: 100%;
+}
+
+mat-form-field {
+  width: 200px;
+  font-size: 12px;
+}
+
+
+.dps-tab-container-btn {
+  padding: 7px 17px;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+
+  .dps-payment-tab {
+
+    margin: -2px -17px -7px;
+    border-radius: 0px;
+    width: 125px;
+  }
+
+  .dps-receipt-tab {
+
+    margin: -2px 17px -7px;
+    border-radius: 0px;
+    width: 125px;
+  }
+
+  button {
+
+    font-size: 12px;
+    font-weight: 300;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  button {
+
+    font-weight: bold;
+
+    &.dps-save {
+      background-color: #128033;
+      color: #bdccd9 !important;
+      font-size: 12px;
+      line-height: 26px;
+      border-radius: 2px;
+      font-weight: 300;
+      height: 30px;
+
+    }
+
+    &.dps-cancel {
+      background-color: #800f0b;
+      color: #bdccd9 !important;
+      font-size: 12px;
+      line-height: 26px;
+      border-radius: 2px;
+      font-weight: 300;
+      height: 30px;
+
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  .dps-tab-container-btn {
+    padding: 7px 17px;
+
+  }
+
+
+}

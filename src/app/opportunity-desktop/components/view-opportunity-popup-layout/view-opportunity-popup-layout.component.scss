@@ -1,0 +1,114 @@
+@import '~styles/variables.scss';
+
+.dps-general-popup {
+  height: 100%;
+  position: relative;
+}
+
+mat-toolbar {
+  background: #dbf1ff;
+  height: 50px;
+
+  .dps-header {
+    .header-icon {
+      vertical-align: middle;
+      padding-right: 8px;
+      font-size: $primary-font-size + 12;
+      color: #0f5b9c;
+    }
+
+    .header-text {
+      font-size: 15px;
+      color: #06467d;
+    }
+
+  }
+}
+
+.dps-view-opportunity-popup {
+  ::ng-deep .mat-tab-body-wrapper {
+    height: 100%;
+  }
+}
+
+.dps-open-matter {
+  position: absolute;
+  right: 8px;
+  top: 54px;
+
+  button {
+    background: #2f9ade;
+    color: #fff;
+    font-size: $primary-font-size - 2;
+    border-radius: 0;
+    width: 148px;
+    cursor: pointer;
+    z-index: 111;
+
+    &:hover {
+      background-color: #d8914e;
+    }
+
+  }
+}
+
+mat-tab-group {
+  height: calc(100% - 45px);
+}
+
+.dps-enquiry-info {
+  height: 95%;
+  overflow-y: auto;
+  padding: 10px 20px;
+
+  .mat-expansion-panel {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    background: #d0dfe8;
+    margin-bottom: 1px;
+
+  }
+
+  a {
+    height: auto;
+    padding: 10px 0px;
+  }
+
+  .input-text {
+    font-size: 12px;
+    color: #0e5b9c;
+    padding: 10px 0px;
+  }
+
+  .input-infor {
+    font-size: 13px;
+    white-space: unset !important;
+  }
+
+}
+
+.dps_enquary_info_header {
+  background: none;
+  font-size: 13px;
+  font-weight: bold;
+  height: 40px !important;
+
+
+
+}
+
+.dps_enquary_info_header:hover {
+
+  mat-content * {
+    color: #115688;
+  }
+}
+
+
+.dps-view-opportunity-popup {
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 10px;
+    background: #e7edf1;
+  }
+}

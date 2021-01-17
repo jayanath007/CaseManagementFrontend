@@ -1,0 +1,55 @@
+@import '~styles/variables.scss';
+
+.total-description-main {
+    position: relative;
+    // height: 203px;
+
+    .class-description {
+        text-align: right;
+        position: relative;
+
+        button {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        position: absolute;
+        right: -13px;
+
+        mat-icon {
+                font-size: $primary-font-size + 6;
+            }
+
+        }
+    }
+
+}
+
+
+.pin
+{
+    font-size: 13px;
+    position: absolute;
+    right: 6px;
+    height: 24px;
+    width: 24px;
+    top: 3px;
+    background: #ff9400;
+    line-height: 24px;
+
+
+    i {
+        font-size: $primary-font-size - 1;
+        color: #fff;
+        line-height: 9px;
+    }
+}
+
+.price-cap-limit-data
+{
+    ::ng-deep th
+    {
+        color: #fff;
+        background: #62b215 !important;
+        
+    }
+}

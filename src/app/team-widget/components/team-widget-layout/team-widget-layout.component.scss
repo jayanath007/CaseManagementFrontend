@@ -1,0 +1,131 @@
+.dps-work-done-widget-layout {
+  width: 100%;
+  height: 329px;
+  background-color: bisque;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dps-team-widget-data-wraper {
+  height: 265px;
+  justify-content: space-around;
+}
+
+.dps-team-widget-chart-wraper {
+  width: 250px;
+  padding-top: 25px;
+}
+
+.dps-team-widget-count-wraper {
+  // padding: 1px 7em 0px 0em;
+  // justify-content: start;
+  // margin-top: 6px;
+  //   margin-bottom: 6px;
+  justify-content: center;
+  flex: 1 1 auto;
+    padding: 10px 20px;
+}
+
+.dps-team-widget-count {
+  // background-color: #3e51b5;
+  // height: 75px;
+  // width: 75px;
+  // border-radius: 50%;
+}
+
+.dps-team-widget-count-wraper-item {
+  // align-items: center;
+  // background: #dce8ed;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  &.sick {
+    .dps-team-widget-count-label {
+      color: #daa36e;
+
+    }
+
+    .dps-team-widget-count {
+      // background: #daa36e;
+    }
+  }
+
+  &.training {
+
+
+    .dps-team-widget-count-label {
+      color: #779c2b;
+    }
+
+    .dps-team-widget-count {
+      // background: #779c2b;
+    }
+  }
+
+
+  .dps-team-widget-count {
+    font-family: roboto;
+    font-size: 34px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+  }
+
+
+  .dps-team-widget-count-label {
+    margin-top: 4px;
+    font-family: roboto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}
+
+.dps-sick {
+  justify-content: space-between;
+  font-family: roboto;
+  padding-top: 25px;
+
+  .text {
+    font-size: 20px;
+    color: #daa36e;
+  }
+  .text-btm{
+    color: #546b84;
+    font-size: 12px;
+  }
+  .number{
+    font-size: 24px;
+    color: #224079;
+    font-weight: 500;
+  }
+}
+
+.dps-training {
+  justify-content: space-between;
+  font-family: roboto;
+  padding-bottom: 25px;
+
+  .text {
+    font-size: 20px;
+    color: #779c2b;
+  }
+  .text-btm{
+    color: #546b84;
+    font-size: 12px;
+  }
+  .number{
+font-size: 24px;
+          color: #224079;
+          font-weight: 500;
+  }
+}

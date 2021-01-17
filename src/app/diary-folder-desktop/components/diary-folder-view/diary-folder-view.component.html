@@ -1,0 +1,35 @@
+<div class="dps-menu-tree-inner-wrapper">
+  <!-- style="border-right: 1px solid #e0e0e0;" -->
+  <div class="dps-ui-tree dps-white-gray-scroll">
+
+    <div fxLayout="column" *ngFor="let menuItem of menuTreeItems">
+      <ng-container>
+        <mat-list fxFlex="1 1 100" fxLayout="column">
+          <div class="mat-list-wrapper" fxLayout="column" fxFlex="1 1 auto" (click)="onDpsTreeRowClick($event,menuItem)"
+            (dblclick)="onDpsTreeRowDoubleClick($event,menuItem)"
+            [ngClass]="{'edit-tree-row-select': menuItem.isRowSelected, 'menu-item-disable':menuItem.data.nodeStatus===2}">
+            <mat-list-item class="dps-folder-list-item workflow-menu-tee-item">
+              <i matListIcon (click)="dpsTreeNodeExpandClick($event,menuItem)"
+                [ngStyle]="{'padding-left.px': (menuItem.items.length>0? 0 : ((menuItem.treeLevel-1) * 10)+20),'padding-left.px': (menuItem.treeLevel) * 20}"
+                *ngIf="menuItem.items.length>0"
+                [ngClass]="{'fa-angle-right':menuItem.items.length>0 && !menuItem.isTreeNodeExpand,'fa-angle-down':menuItem.isTreeNodeExpand}"
+                class="fa dps-folder-item-toggle"></i>
+              <!-- <span fxFlex="1 1 auto"></span> -->
+              <div style="padding-left: 0px;">
+                <span [ngStyle]="{'padding-left.px': (menuItem.items.length>0? 0 : ((menuItem.treeLevel) * 20)+16)}"
+                  matLine class="dps-folder-item-name" title="{{menuItem.data.atN_Desc}}">
+                  <mat-icon class="{{menuItem.data.atN_Type | workflowMenuIcon}}"></mat-icon>
+                  <span class="grid-data {{gridFontSize}}">{{menuItem?.data.atN_Desc}}</span>
+                </span>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+        <dps-diary-folder-view *ngIf="(menuItem.items).length>0 && menuItem.isTreeNodeExpand"
+          (itemChange)="onItemChange($event)" [menuTreeItems]="menuItem.items" [gridFontSize]="gridFontSize">
+        </dps-diary-folder-view>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<mat-list dense >
+  <mat-list-item>
+    <h2 >Settings</h2>
+    <button mat-icon-button (click)="closeSettingsView.emit()">
+        <mat-icon>clear</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mdSubheader>Email signature</h3>
+  <!-- <ckeditor></ckeditor> -->
+  <mat-list-item>
+    <mat-checkbox>Automatically include my signature on messages I send</mat-checkbox>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mdSubheader>Regional</h3>
+  <mat-list-item>
+    <!-- <span mdPrefix>Current time zone: &nbsp;</span> -->
+    <mat-select placeholder="Current time zone" >
+      <mat-option value="kdfhkjhdkfj">kdfhkjhdkfj</mat-option>
+      <mat-option value="kdfhkjhdkfj">kdfhkjhdkfj</mat-option>
+      <mat-option value="kdfhkjhdkfj">kdfhkjhdkfj</mat-option>
+      <mat-option value="kdfhkjhdkfj">kdfhkjhdkfj</mat-option>
+    </mat-select>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mdSubheader>Chaser</h3>
+  <mat-list-item>
+    <mat-slide-toggle labelPosition="before">Disable chaser : </mat-slide-toggle>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span class="btn-positon"></span>
+    <button mat-raised-button (click)="closeSettingsView.emit()">
+        Save
+    </button>
+    <button mat-raised-button>
+        Cancel
+    </button>
+  </mat-list-item>
+</mat-list>

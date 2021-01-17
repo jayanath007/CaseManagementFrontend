@@ -1,0 +1,24 @@
+<div fxLayout="column" style="height: 100%;">
+  <dps-common-popup-header icon="home_work" title="Opportunity Settings" buttons="close" [loading]="loading"
+    iconColor="#9ec9e8" titleColor="#88a4b7" (buttonClick)="onClose()">
+  </dps-common-popup-header>
+  <div fxLayout="column"  style="padding: 0px 10px;height: calc(100% - 45px);">
+    <span style="padding: 10px 0px;">Upload email template</span>
+    <button class="dps-browse" mat-raised-button (click)="templateFileUploader.onFileUploadBtnClick()">
+      <span> Browse</span>
+      <dps-file-uploader #templateFileUploader inputId="opertunity_emial_template" accept=".html"
+        (fileUpload)="changeEmailTemplete($event)" [multiple]="false">
+      </dps-file-uploader>
+    </button>
+    <div style="height: 100%;" id="templete_preview" class="dps-preview dps-white-gray-scroll" width="100px"
+      height="100px">
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <div class="dps-popup-bottom-btn">
+      <button class="dps-stting-sve" mat-raised-button color="primary" [disabled]="!dirty"
+        (click)="onSave(file)">Save</button>
+      <button class="dps-stting-cancel" mat-raised-button color="primary" (click)="onClose()">Cancel</button>
+    </div>
+
+  </div>
+</div>

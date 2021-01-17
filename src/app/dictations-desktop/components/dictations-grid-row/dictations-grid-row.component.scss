@@ -1,0 +1,195 @@
+.expansion-panelgrid-header {
+  height: auto !important;
+}
+
+mat-expansion-panel {
+  border-radius: 0px;
+  border-bottom: unset;
+}
+
+.dps-dictation-expansion-panel {
+  border-radius: 0px;
+
+  &:nth-child(even) {
+    background-color: #f2f2f2;
+
+    &hover {
+      opacity: .9;
+    }
+  }
+
+  &:nth-child(odd) {
+    background-color: #eaeaea;
+
+    &hover {
+      opacity: .9;
+    }
+  }
+
+  mat-expansion-panel-header {
+    &:hover {
+      opacity: .8;
+      background: unset;
+    }
+
+    ::ng-deep .mat-expansion-indicator {
+      position: absolute;
+      left: 12px;
+    }
+
+    border-radius: 0px;
+    padding: 0 0 !important;
+    position: relative;
+
+    ::ng-deep.mat-expansion-panel-header-title {
+      margin-right: 0 !important;
+    }
+  }
+
+  &.mat-expanded {
+    mat-expansion-panel-header {
+      background-color: rgba(171, 129, 13, 0.5) !important;
+      padding: 0 0 !important;
+
+      ::ng-deep.mat-expansion-panel-header-title {
+        margin-right: 0 !important;
+      }
+    }
+
+    ::ng-deep .mat-expansion-panel-content {
+      background-color: rgba(182, 143, 37, 0.25) !important;
+    }
+  }
+
+  &.active-urgent {
+    mat-expansion-panel-header {
+
+      background-color: #cd4f47 !important;
+      border-bottom: .1px solid #d2817d;
+    }
+
+    &.mat-expanded {
+
+      ::ng-deep .mat-expansion-panel-content {
+
+        background-color: #eac6c4 !important;
+
+
+      }
+
+    }
+  }
+
+  &.active-important {
+    mat-expansion-panel-header {
+      background-color: #cd9247 !important;
+      border-bottom: .1px solid #cc9f67;
+    }
+
+    &.mat-expanded {
+
+      ::ng-deep .mat-expansion-panel-content {
+
+        background-color: rgba(210, 190, 163, 0.79) !important;
+
+
+      }
+    }
+  }
+
+  ::ng-deep.mat-expansion-panel-body {
+    padding: 13px 80px 8px;
+  }
+
+  &.mat-expansion-panel-spacing {
+    margin: 0 0 !important;
+  }
+
+  .grid-data {
+    width: 100%;
+  }
+
+
+
+  &.upload-in-progress,
+  .active-important.upload-in-progress {
+    mat-expansion-panel-header {
+
+      background-image: repeating-linear-gradient(-45deg, #cd9247, #cd9247 10px, #e2ac66 5px, #e2ac66 22px) !important;
+      -webkit-animation: progress 2s linear infinite;
+      -moz-animation: progress 2s linear infinite;
+      -ms-animation: progress 2s linear infinite;
+      animation: progress 2s linear infinite;
+      background-size: 150% 100%;
+    }
+
+    @-webkit-keyframes progress {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -75px 0px;
+      }
+    }
+
+    @-moz-keyframes progress {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -75px 0px;
+      }
+    }
+
+    @-ms-keyframes progress {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -75px 0px;
+      }
+    }
+
+    @keyframes progress {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -70px 0px;
+      }
+
+    }
+  }
+}
+
+
+.grid-data {
+  position: relative;
+}
+
+.dps-link-matter-indicator {
+  position: absolute;
+  transform: rotate(47deg);
+  left: 20px;
+  top: 3px;
+  font-size: 16px;
+}
+
+.dps-matter-indicator {
+  color: #476B30;
+  left: 13px;
+  position: relative;
+  top: 4px;
+  font-size: 20px;
+}
+
+.row-data.indicator {
+  padding: unset;
+  line-height: unset;
+  position: relative;
+  background: rgba(218, 218, 218, 0.32);
+}

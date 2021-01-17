@@ -1,0 +1,30 @@
+.listdemoBasicUsage md-divider {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+
+	.row-data{
+		/* color: #6f6d6d;	 */
+	   white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		border-width: 0 0 0 1px;
+		vertical-align: middle;
+		text-overflow: ellipsis;
+		padding: 0px 6px;
+	}
+.start-date{
+	text-align: center;
+}
+
+.row-data {
+	/* border-right: 1px solid #bfbdbd87; */
+    display: table-cell;
+    /* padding: 3px 6px; */
+    padding: 10px 6px;
+    font-size: 12px;
+}
+.grid-data{
+  display: table-row;
+  word-break: break-word;
+}	

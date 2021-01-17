@@ -1,0 +1,115 @@
+@import '~styles/variables.scss';
+
+.dps-team-movement-add {
+  .team-header {
+    background: $dps-popup-matbar;
+    color: #cedce4;
+    font-size: $primary-font-size + 2;
+    height: 42px;
+
+    .dps-header {
+      mat-icon {
+        border-radius: unset;
+        vertical-align: middle;
+        padding: 5px;
+        color: #cedce4;
+        font-size: $primary-font-size + 7;
+        height: 20px;
+        width: 20px;
+      }
+
+      span {
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+mat-dialog-actions {
+  padding: 8px 8px;
+}
+
+::ng-deep .dps-team-notification {
+  .mat-dialog-container {
+    padding: 0px !important;
+  }
+}
+
+.dps-add-movement-popup {
+  height: calc(100% - 47px);
+  overflow-y: auto;
+  position: relative;
+  margin-top: 2px;
+ 
+}
+
+.dps-ref {
+  font-size: 12px;
+    color: #b17b39;
+    font-weight: 700;
+    font-family: Roboto;
+    padding: 5px 10px;
+    position: absolute;
+    right: 8px;
+    border: 1px solid #f1c17a;
+    border-radius: 20px;
+    background: #fff7ed;    
+    top: 5px;
+}
+
+@import '~styles/variables.scss';
+.dps-team-drowp-menu{
+ 
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+  color: #4c4c4c !important;
+  height: 38px !important;
+
+}
+
+.dps-team-form {
+
+ 
+  
+  padding: 20px 10px 24px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  display: flex;
+
+
+ 
+  ::ng-deep .mat-form-field {
+    font-size: $primary-font-size - 2;
+    color: $header-primary;
+    width: 250px;
+    margin-right: 5px;
+
+    .mat-form-field-ripple.mat-form-field-ripple {
+      background: $header-primary;
+    }
+
+    .mat-form-field-label {
+      color: $header-primary;
+    }
+  }
+}
+
+.dps-btm-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  
+  .dps-task-submit{
+    background: #0d508c;
+    color: #fff;
+  }
+  button{
+    background: #0d508c;
+  }
+}
+
+.cancel {
+  color:$primary;
+  background: #696a6c;
+  margin-left: 4px; 
+}

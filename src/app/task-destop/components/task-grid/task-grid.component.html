@@ -1,0 +1,28 @@
+<div class="dps-task-grid" fxLayout="column">
+  <!-- *ngIf="!TaskData.loading" -->
+  <div fxFlex="calc(100%-56px)" fxLayout="column">
+    <mat-list-item class="flex-container mat-expansion-panel-header" fxLayout="row" fxLayoutAlign="left">
+      <!-- fxFlex="40px" -->
+      <mat-panel-title fxFlex="10">Do Date</mat-panel-title>
+      <mat-panel-title fxFlex="12">For </mat-panel-title>
+      <mat-panel-title fxFlex="12">By</mat-panel-title>
+      <mat-panel-title fxFlex="">Note</mat-panel-title>
+    </mat-list-item>
+    <div [@.disabled]="true" fxFlex="calc(100%-40px)" class="dps-accordion">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel (click)="IsExpand(item)" [expanded]="item.isExpand" *ngFor="let item of TaskData?.data ; let row = index">
+          <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+            <mat-panel-title class="row-data detail" fxFlex="10"> 09/10/2017 </mat-panel-title>
+            <mat-panel-title class="row-data detail" fxFlex="12"> {{item.data.TaskFor}} </mat-panel-title>
+            <mat-panel-title class="row-data detail" fxFlex="12"> {{item.data.PutOnBy}} </mat-panel-title>
+            <mat-panel-title class="row-data detail" fxFlex=""> {{item.data.Note}} </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div fxFlex="56px">
+    <mat-paginator [length]="TaskData?.total" [pageSize]="PageInfo.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="PageChange($event)">
+    </mat-paginator>
+  </div>
+</div>

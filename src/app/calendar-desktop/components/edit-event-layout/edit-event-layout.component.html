@@ -1,0 +1,21 @@
+<div class="dps-edit-event-layout" fxLayout="column">
+  <dps-edit-event-header [event]="event" [companyCode]="companyCode" [isDirty]="isDirty" [isNewEvent]="isNewEvent"
+    [isAttachmentLoad]="isAttachmentLoad" [isAttachmentChange]="isAttachmentChange"
+    [matterDisplyName]="matterDisplyName" (saveAndSend)="onSaveAndSend()" (delete)="onDelete($event)" fxFlex="50px"
+    class="dps-attachmentload" [attachments]="attachments" (close)="onClose($event)" (openSeriers)="onOpenSeries()"
+    (addAttachment)="onAddAttachment($event)" (response)="onCancelEvent($event)">
+  </dps-edit-event-header>
+  <div class="dps-white-gray-scroll dps-edit-event-content" fxFlex="calc(100%-50px)">
+    <dps-edit-event-content [event]="event" [rooms]="rooms" [optionalAttendees]="optionalAttendees"
+      [requiredAttendees]="requiredAttendees" [timeList]="timeList" [dayOfWeekList]="dayOfWeekList"
+      [freeBusyStatusList]="freeBusyStatusList" [reminderList]="reminderList" [weekIndexList]="weekIndexList"
+      [monthList]="monthList" [repeatList]="repeatList" [canEditCalendars]="canEditCalendars" [timeZone]="timeZone"
+      [repeatTypeList]="repeatTypeList" [attachments]="attachments" [isDirty]="isDirty"
+      [lastInlineAttachment]="lastInlineAttachment" (openMatter)="onOpenMatter($event)"
+      (AddAttendee)="onAddAttendee($event)" (removeAttendee)="onRemoveAttendee($event)"
+      (updateEventData)="onUpdateEventData($event)" (addAttachment)="onAddAttachment($event)"
+      (deleteAttachment)="onDeleteAttachment($event)" (openAttachement)="onOpenAttachement($event)"
+      (downloardFileAttachment)="onDownloardFileAttachment($event)" (openSeriers)="onOpenSeries()">
+    </dps-edit-event-content>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+
+.grid-data {
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    display: table-row;
+    word-break: break-word;
+    min-height: 32px;
+  }
+  
+  .grid-data .row-data:last-child {
+    border-right: none;
+  }
+
+
+  
+  .row-data {
+    color: #211f1f;
+    border-right: 1px solid #c3c3ca;
+    display: table-cell;
+    font-size: $primary-font-size - 2;
+    padding: $dps-grid-padding;
+    line-height: 20px;
+  }
+
+
+ 
+ 

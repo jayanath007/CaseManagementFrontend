@@ -1,0 +1,6 @@
+<mat-nav-list dense>
+  <mat-list-item [matTooltip]="item.data.displayName" matTooltipPosition="after" (click)="selectItem(item,$event)"
+    *ngFor="let item of folders" [ngStyle]="{'background-color': (item.selected && !isGroupMode)?'lightblue':''}">
+    <mat-icon>{{getIcon(item.data.wellKnownName)}}</mat-icon>
+  </mat-list-item>
+</mat-nav-list>

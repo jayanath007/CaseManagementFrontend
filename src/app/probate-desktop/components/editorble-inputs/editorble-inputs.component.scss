@@ -1,0 +1,56 @@
+.dps-input-lbl {
+  justify-content: space-around;
+  font-family: Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  font-size: 12px;
+  padding: 10px;
+
+  label {
+    color: #00233f;
+    font-weight: 500;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+    margin-top: 5px;
+
+  }
+
+  input {
+    text-align: right;
+    color: #215a88;
+
+  }
+
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+
+
+.dps-input-inner {
+  transform: scale(0.85);
+  margin-left: -2.5em;
+
+
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #1867a7 !important;
+    /*inner circle color change*/
+  }
+
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #5a7ab7 !important;
+    /*outer ring color change*/
+  }
+}

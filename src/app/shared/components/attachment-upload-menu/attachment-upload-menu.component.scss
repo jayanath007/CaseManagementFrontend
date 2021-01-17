@@ -1,0 +1,15 @@
+@import '~styles/variables.scss';
+
+button.mat-menu-item {
+  line-height: 30px;
+  height: 40px;
+  color: #155186;
+  font-size: $primary-font-size - 2;
+  padding: 0px 20px 0 0;
+
+  mat-icon {
+    color: #155186;
+    background: #e5f3ff;
+    padding: 8px;
+  }
+}

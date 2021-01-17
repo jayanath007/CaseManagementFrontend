@@ -1,0 +1,187 @@
+@import '~styles/variables.scss';
+
+
+.dps-chaser-form {
+  height: 100%;
+  margin-bottom: 14px;
+}
+
+.section-header {
+  display: block;
+  border-bottom: 1px solid #c7c6c6;
+  padding-top: 15px;
+  padding-bottom: 0px;
+  height: 22px;
+}
+
+.file-no-btn {
+  width: 30px;
+  height: 30px;
+
+  mat-icon {
+    font-size: 23px !important
+  }
+}
+
+.dps-unlink-address {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all linear 0.5s;
+  background: #fdb1b1;
+  height: 30px;
+  padding: 4px 0px;
+  color: #610909;
+}
+
+.ng-hide {
+
+  background-color: transparent;
+  padding: 10px 0px;
+}
+
+.dps-unlink-address a {
+  color: #f11515;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.dps-unlink-address a:hover {
+  opacity: .8;
+  text-decoration: underline;
+}
+
+.open-folder-list {
+  background: #edf5ff;
+  padding-top: 0px;
+  min-height: 250px;
+  overflow-y: auto;
+  max-height: 250px;
+
+  .contact {
+    background: #ecc49f;
+    ;
+  }
+
+  .client {
+    background: #ffe4e1;
+  }
+
+  .company {
+    background: #b6eff3;
+  }
+
+  mat-list-item.dps-list-mail {
+    padding: 0 !important;
+    height: 42px;
+  }
+
+  mat-icon.open-folder {
+    color: #274e8a;
+  }
+
+  .case-highlight {
+    background: #86c2f7;
+
+    &:hover {
+      background: #b9d0f3;
+    }
+  }
+
+  span.open_file {
+    margin-right: 10px;
+    font-size: 12px;
+    color: #103e84;
+    text-transform: uppercase;
+  }
+
+  span.dps_file-info {
+    font-size: 12px;
+    color: #103e84;
+  }
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+mat-list {
+  padding-top: 0px;
+}
+
+div[fxLayoutAlign] {
+  padding-left: 8px;
+  padding-top: 10px;
+}
+
+.chaser_open_file,
+.chaser_open_file:hover {
+  background: $toolbar-background;
+}
+
+.opened-case-selection {
+  background: $toolbar-background;
+}
+
+mat-panel-title span {
+  color: $primary
+}
+
+.opened-case-selection mat-expansion-panel-header {
+  background: #274e8a;
+  font-size: 12px;
+}
+
+mat-option,
+mat-form-field {
+  font-size: 12px !important;
+}
+
+mat-list-item {
+  font-size: $primary-font-size;
+  font-weight: 500;
+  color: #274e8a;
+  padding-bottom: 10px;
+  height: 34px;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #274e8a;
+  background: #e9f2ff;
+}
+
+mat-icon {
+  font-size: 18px !important;
+}
+
+div[fxLayoutAlign] {
+  padding-top: 10px;
+}
+
+.legal-aid {
+  font-size: 14px;
+  font-weight: 700;
+  color: #274e8a;
+  padding: 13px 0px 8px;
+  text-indent: 2px;
+  text-align: left;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-checkbox {
+  font-size: $primary-font-size;
+  font-weight: 500;
+  color: #0965ad;
+}
+
+mat-option,
+mat-form-field {
+  font-size: 12px !important;
+}
+
+.form-field-section,
+.dps-matform-currency,
+.dps-matform-home {
+  width: 150px;
+}

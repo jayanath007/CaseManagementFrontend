@@ -1,0 +1,30 @@
+@import '~styles/variables.scss';
+
+.row-data {
+  border-right: 1px solid #c3c3ca;
+  display: table-cell;
+  /* padding: 10px 6px; */
+  padding: 6px 6px 6px;
+  font-size: $primary-font-size - 2;
+  line-height: 18px;
+}
+
+.row-data:last-child {
+  border-right: none;
+}
+
+.grid-data {
+  font-size: $primary-font-size - 2;
+  display: table-row;
+  word-break: break-word;
+}
+
+.review-date,
+.lastused-date,
+.app-code {
+  text-align: center;
+}
+
+.dps-exponential-column-hide {
+  display: none !important;
+}

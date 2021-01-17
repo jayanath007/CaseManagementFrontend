@@ -1,0 +1,99 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "ng5-test"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "is-dps-mail.png",
+        "no-profile-img.png",
+        "gray25.png",
+        "item-drag.png",
+        "disabale-is-dps-mail.png",
+        "app-config.json",
+        "login-redirect.html",
+        "spitfire-ver.png",
+        "matt-layer-1.png",
+        "matt-layer-2.png",
+        "matt-layer-3.png",
+        "spitfire-shuttle.png",
+        "charts.jpg",
+        "screens-header_bg_continue.jpg",
+        "login/google-login.png",
+        "login/microsoft-login.png",
+
+        {
+  "glob": "{+(adapters|plugins|lang|skins)/**/*,config.js,styles.js,contents.css}",
+  "input": "../node_modules/ckeditor",
+  "output": "./assets/ckeditor",
+  "allowOutsideOutDir": false
+}
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "dps",
+      "styles": [
+        "./styles/styles.scss",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/fullcalendar/dist/fullcalendar.min.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    }
+  }
+}

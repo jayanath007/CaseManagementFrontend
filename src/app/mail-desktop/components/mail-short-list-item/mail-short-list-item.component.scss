@@ -1,0 +1,333 @@
+@import '~styles/variables.scss';
+
+mat-list-item {
+  border-left: 3px white solid;
+  height: 64px !important;
+}
+
+mat-list-item.dps-mail-item-unread {
+  border-left-color: #20adf1;
+  border-left-width: 3px;
+  background: $primary;
+}
+
+mat-nav-list {
+  padding-top: 0px;
+}
+
+mat-list-item.dps-mail-list-item {
+  height: 95px;
+}
+
+/* .dps-mail-list-item .dps-mail-item-avatar, .dps-mail-list-item .dps-mail-item-check{ 
+    height: 30px;
+    width: 30px;
+} */
+
+.dps-mail-item-avatar span {
+  color: white;
+  position: relative;
+  font-size: 15px;
+}
+
+.dps-mail-item-unselected .dps-mail-item-check span {
+  color: white;
+  position: relative;
+  bottom: -8px;
+  left: -1px;
+}
+
+/* .dps-mail-item-selected .dps-mail-item-check{
+    background-color:white;
+} */
+
+.dps-mail-item-unselected .dps-mail-item-check {
+  background-color: #0D557C;
+}
+
+.dps-mail-item-unselected .dps-mail-item-check span i {
+  font-size: 42px;
+}
+
+.dps-mail-item-selected .dps-mail-item-check span i {
+  font-size: 28px;
+}
+
+.dps-mail-item-avatar {
+  display: block;
+}
+
+.dps-mail-item-unselected:hover {
+
+  .dps-mail-item-avatar,
+  .dps-mail-item-avatar-img {
+    display: none;
+  }
+}
+
+.dps-mail-item-check {
+  display: none;
+}
+
+.dps-mail-item-unselected:hover .dps-mail-item-check {
+  display: block;
+}
+
+.dps-mail-item-selected .dps-mail-item-check {
+  display: block;
+}
+
+.dps-mail-item-selected {
+
+  .dps-mail-item-avatar,
+  .dps-mail-item-avatar-img {
+    display: none;
+  }
+}
+
+.dps-meeting-icons span {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+
+.dps-meeting-icons span .fa-question {
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  position: relative;
+  left: -14px;
+}
+
+.dps-meeting-icons span .fa-calendar-o {
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.dps-icon .fa-exclamation,
+.dps-icon .fa-flag-o {
+  color: darkred;
+}
+
+.dps-icon a {
+  color: #949494;
+}
+
+/* ---------------------------------------------------- */
+
+/* .dps-mail-item-data .dps-mail-item-data-col1{
+    padding-right: 24px;
+} */
+
+.dps-mail-item-data-col1 {
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.dps-mail-item-name {
+  flex: 1 1 0;
+  box-sizing: border-box;
+}
+
+.dps-mail-item-icons {
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.dps-mail-item-body {
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  display: flex;
+  padding-top: 3px;
+}
+
+.mail-body-preview-text {
+  flex: 1 1 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-mail-item-date {
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.dps-mail-item-data .dps-mail-item-data-col1,
+.dps-mail-item-data .dps-mail-item-data-col2,
+.dps-mail-item-data-col1 .dps-mail-item-name,
+.dps-mail-item-data-col2 .dps-mail-item-preview {
+  overflow: hidden;
+}
+
+.dps-mail-item-name .dps-mail-item-draft-tag,
+.dps-mail-item-preview .dps-mail-item-subject {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* padding-right: 12px;  */
+}
+
+.dps-mail-item-unread .mail-subject-text {
+  font-weight: 600;
+  font-size: 12px;
+  color: #0079c4;
+}
+
+.dps-mail-item-draft-tag span {
+  font-size: $primary-font-size;
+  font-weight: 400;
+  color: darkred;
+}
+
+.dps-mail-item-name .dps-mail-item-draft-tag {
+  padding-right: 5px;
+}
+
+.dps-mail-item-name .dps-mail-item-To {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-mail-item-To span {
+  font-size: $primary-font-size;
+  white-space: nowrap;
+}
+
+.dps-mail-item-unread .dps-mail-item-name,
+.dps-mail-item-unread .dps-mail-item-data-col2 .dps-mail-item-date {
+  font-weight: 500;
+}
+
+.dps-mail-item-unread .dps-mail-item-name .dps-mail-item-To,
+.dps-mail-item-unread .dps-mail-item-preview .dps-mail-item-subject {
+  color: #080808;
+}
+
+.dps-mail-item-unread .dps-mail-item-data-col2 .dps-mail-item-date {
+  color: #0079c4;
+  padding-right: 5px;
+}
+
+.dps-mail-item-read .dps-mail-item-name,
+.dps-mail-item-read .dps-mail-item-date {
+  font-weight: 400;
+}
+
+.dps-mail-item-data-col2 .dps-mail-item-body {
+  color: #949494;
+}
+
+.dps-mail-item-read .dps-mail-item-data-col2 .dps-mail-item-date {
+  color: #666;
+  padding-right: 5px;
+}
+
+.dps-mail-item-subject span {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.dps-mail-item-preview .dps-mail-item-body {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-mail-item-body span {
+  font-size: $secondary-font-size;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.dps-mail-item-data-col2 .dps-mail-item-date {
+  padding-left: 16px;
+  font-weight: normal;
+  font-size: $secondary-font-size;
+}
+
+.dps-mail-item-data-col1 .dps-mail-item-icons {
+  font-size: $primary-font-size;
+  text-align: right;
+  padding: 0 5px 0 0;
+}
+
+.dps-icon-btn {
+  display: none;
+}
+
+.dps-mail-list-item:hover .dps-icon-btn {
+  display: block;
+}
+
+.dps-icon {
+  display: block;
+}
+
+.dps-mail-list-item:hover .dps-icon {
+  display: none;
+}
+
+.dps-icon a {
+  padding-left: 4px;
+}
+
+.dps-icon-btn a {
+  padding-left: 6px;
+  color: #0D557C;
+}
+
+.dps-icon-btn a:hover {
+  color: #6899AD;
+}
+
+.dps-icon-index i {
+  font-size: $primary-font-size;
+}
+
+.dps-mail-item-selected .dps-mail-item-check span {
+  color: #2c3236;
+  position: relative;
+  bottom: -8px;
+}
+
+.dps-mail-list-item.dps-mail-item-selected.dps-mail-item-unread,
+.dps-mail-list-item.dps-mail-item-viewing.dps-mail-item-unselected.dps-mail-item-unread {
+  border-left: 3px solid #20adf1;
+}
+
+.dps-mail-list-item.dps-mail-item-selected {
+  background-color: #dcdcdc;
+  border-left: 3px solid #dcdcdc;
+}
+
+.dps-mail-list-item.dps-mail-item-viewing.dps-mail-item-unselected {
+  background-color: #d3e4ff;
+  border-left: 3px solid #d3e4ff;
+}
+
+/* .dps-mail-list-item.dps-mail-item-selected.dps-mail-item-read .dps-mail-item-data-col2 .dps-mail-item-date
+{
+    color: #0079c4;
+    font-weight:500;
+
+} */
+
+.dps-mail-list-item.dps-mail-item-selected.dps-mail-item-read .material-icons {
+  color: #2c3236;
+}
+
+.dps-mail-list-item.dps-mail-item-selected .dps-mail-item-body span,
+.dps-mail-list-item.dps-mail-item-selected .dps-mail-item-icons {
+  font-weight: 400;
+  color: #424242;
+}
+
+.mat-divider {
+  border-top-color: rgb(176, 200, 236);
+}

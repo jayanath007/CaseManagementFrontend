@@ -1,0 +1,73 @@
+@import '~styles/variables.scss';
+
+.dps-team-container {
+  height: 100%;
+
+  mat-nav-list {
+    padding-top: 0px !important;
+    height: 100%;
+  }
+
+  mat-drawer {
+    border-right: 0px;
+  }
+
+  ::ng-deep .mat-drawer-content {
+    overflow: unset;
+  }
+}
+
+.dps-team-sidenav {
+  width: 275px;
+  background: #b5dfff;
+}
+
+
+mat-list {
+  padding: 0px 5px;
+}
+
+.dps-sidenav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .dps-content-view {
+    height: calc(100% - 65px);
+
+  }
+}
+
+.dps-team-layout {
+  height: 100%;
+  background-color: $content-background;
+  width: 100%;
+}
+
+.dps-team-layout {
+  height: 100%;
+
+  .dps-team-members {
+    width: 300px;
+    background: #4a82b1;
+  }
+
+  .dps-user-profile {
+    background: #fff;
+    height: 100px;
+  }
+}
+
+mat-chip {
+  max-width: 200px;
+}
+
+.dps-team-primary-header {
+  ::ng-deep .dps-module-layout-header {
+    padding: 10px 20px 0px 5px;
+  }
+
+  ::ng-deep.dps-module-layout-forground {
+    padding: 0px 20px 20px 5px !important;
+  }
+}

@@ -1,0 +1,54 @@
+<div class="dps-template-directory-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" class="dps-white-gray-scroll" fxFlex="calc(100%-604px)" dpsIsMobile="dps-hide-indicator" fxHide
+    fxShow.gt-md>
+    <mat-icon fontSet="fontawesome" fontIcon="fa-th-large" class="fa dps-folder-indicator"></mat-icon>
+    <div>
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </div>
+    <div>
+      <span class="dps-path-name"><i class="fa">{{selectedApp.appMatterPrefix}}</i>
+        {{selectedApp.appDescription}}</span>
+    </div>
+  </div>
+  <div class="dps-sort-filter-btn">
+    <mat-checkbox [checked]="showCommonTemplates" labelPosition="before" color="primary" *ngIf="isLocationMatch===false"
+      (change)="onChangeShowCommonTemplates($event)">Show common templates
+    </mat-checkbox>
+    <button mat-icon-button matTooltip="Checkout by you" class="dps-you"
+      [ngClass]="{'active': filter===TemplateFilterByCheckoutType.You}"
+      (click)="onChangeFilter(TemplateFilterByCheckoutType.You)">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Checkout by other users" class="dps-other-users"
+      [ngClass]="{'active': filter===TemplateFilterByCheckoutType.OtherUsers}"
+      (click)="onChangeFilter(TemplateFilterByCheckoutType.OtherUsers)">
+      <mat-icon>people_alt</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Capable of checkout" class="dps-no-one"
+      [ngClass]="{'active': filter===TemplateFilterByCheckoutType.NoOne}"
+      (click)="onChangeFilter(TemplateFilterByCheckoutType.NoOne)">
+      <mat-icon>person_outline</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="All" class="dps-all"
+      [ngClass]="{'active': filter===TemplateFilterByCheckoutType.All}"
+      (click)="onChangeFilter(TemplateFilterByCheckoutType.All)">
+      <mat-icon>done_all</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Sort" (click)="onChangeSort()">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-sort-alpha-{{sort}}" class="fa"></mat-icon>
+    </button>
+  </div>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Type here" [ngModel]="searchText" (ngModelChange)="onChangeSearchText($event)">
+    <button mat-button mat-icon-button matSuffix (click)="onChangeSearchText('')" *ngIf="searchText">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-icon matSuffix *ngIf="!searchText">search</mat-icon>
+  </mat-form-field>
+  <div class="dps-template-directory-refresh">
+    <button mat-icon-button (click)="onRefresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>

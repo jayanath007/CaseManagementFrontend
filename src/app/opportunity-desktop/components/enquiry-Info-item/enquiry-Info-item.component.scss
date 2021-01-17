@@ -1,0 +1,34 @@
+
+
+a
+{
+    height: auto !important;
+    margin-top: 7px;
+    
+    ::ng-deep .mat-list-item-content
+    {
+        font-size: 12px;    
+
+        strong
+        {
+            color: #355977;
+        }
+        .item-answer
+        {
+            font-size: 11px;
+            white-space: normal;
+            text-overflow:unset;
+            text-align: justify;
+            font-size: 13px !important;
+            font-size: 13px !important;
+            max-height: 150px;
+            overflow: auto;
+        }
+    }
+
+}
+
+a:hover
+{ 
+  background: none;
+}

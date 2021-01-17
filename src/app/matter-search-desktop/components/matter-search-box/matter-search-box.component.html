@@ -1,0 +1,14 @@
+<mat-form-field class="matter-general-search" floatLabel="never">
+  <span matPrefix>&nbsp;&nbsp;</span>
+  <input type="search" matInput #searchTextInput matInput placeholder="Search all {{matterDisplyName}}"
+    [value]="searchText" [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)" />
+  <button matSuffix mat-icon-button (click)="OnSearchTextChanged(searchTextInput.value)">
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-hint class="" *ngIf="searchText && searchTextInput.value">
+    <span matPrefix>&nbsp;&nbsp;</span>
+    <span class="search-number">{{totalItems}}</span>
+    <span>{{matterDisplyName}} found for</span>
+    <span innerHTML="{{searchTextInput.value | seacrhTextHighligh : searchText}}"></span>
+  </mat-hint>
+</mat-form-field>

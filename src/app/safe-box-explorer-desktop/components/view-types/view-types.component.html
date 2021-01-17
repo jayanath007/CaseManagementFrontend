@@ -1,0 +1,19 @@
+<div class="safe-box-view">
+  <div class="view-executor">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="viewType" (change)="seletViewTypes($event)"
+      appearance="legacy">
+      <mat-button-toggle [value]="ExplorerViewType.Detail" matTooltip="Detail View" matTooltipPosition="below">
+        <mat-icon>list_alt</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle [value]="ExplorerViewType.Tile" matTooltip="Tile View" matTooltipPosition="below">
+        <mat-icon>view_module</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle [value]="ExplorerViewType.Icon" matTooltip="Icon View" matTooltipPosition="below">
+        <mat-icon>apps</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle [value]="ExplorerViewType.List" matTooltip="List View" matTooltipPosition="below">
+        <mat-icon>toc</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>

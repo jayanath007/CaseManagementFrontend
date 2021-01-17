@@ -1,0 +1,56 @@
+<div fxLayout="column" class="matter-by-client-form">
+
+  <mat-toolbar>
+    <mat-toolbar-row class="dps-toolbar-box-shadow matter-by-client-popup-header">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center" class="dps-header">
+        <mat-icon matListIcon class="matter-icon">list</mat-icon>
+        <span class="clients-text">{{matterLabel}} List</span>
+      </div>
+      <span fxFlex="1 1 auto"></span>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <div fxLayout="column" class="dps-white-gray-scroll dps-matters-list-grid-outer">
+    <div class="dps-white-gray-scroll dps-grid-x">
+      <div fxLayout="column" class="dps-matters-list-grid">
+        <div class="row-highlight" dpsIsMobile>
+          <div class="row-highlight-inner">
+            <dps-column-header *ngFor="let header of gridColoumn" [fxFlex]="header.extras.fxFlex" [def]="header"
+              (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)"
+              (toggleSorting)="onToggleSorting($event)" [filterAnchor]="header.extras.filterAnchor">
+            </dps-column-header>
+          </div>
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+        </div>
+
+        <div fxFlex="calc(100% - 40px)" class="dps-white-gray-scroll matter-view-by-client-content">
+          <mat-nav-list dence class="dps-grid-nav-list">
+            <mat-list-item class="matter-view-by-client-data dps-grid-list-item" dpsClick
+              (dpsDblClick)="popupRowdblclick(item)" (dpsClick)="popupRowclick(item)"
+              *ngFor="let item of gridData; let index =index; let isOdd=odd; let isEven=even"
+              [ngClass]="item === clickedItem ? 'dps-selected-row' : (item?.closed ?'closed-matters':(item?.isCompleteMatter ? 'complete-matter':isOdd?'dps_row_separation-0':'dps_row_separation-1'))">
+              <div fxLayout class="grid-data">
+                <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{item?.matterReferenceNo}}"></div>
+                <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{item?.matterDetails}}"></div>
+                <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{item?.clientName}}"></div>
+                <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{item?.closed}}"></div>
+              </div>
+            </mat-list-item>
+            <!-- <mat-divider></mat-divider> -->
+          </mat-nav-list>
+
+        </div>
+
+      </div>
+    </div>
+    <mat-paginator class="footer-shadow" fxFlex="nogrow" [length]="totalItem" [pageIndex]="paginatorDef?.currentPage"
+      [pageSize]="paginatorDef?.itemPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onNextPage($event)">
+    </mat-paginator>
+  </div>
+
+</div>

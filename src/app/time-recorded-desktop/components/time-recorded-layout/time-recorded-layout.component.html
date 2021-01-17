@@ -1,0 +1,67 @@
+<mat-sidenav-container (backdropClick)="onMemberNavClick()">
+  <mat-sidenav class="dps-team-member-sidenav" [disableClose]="true" *ngIf="userPermision?.isAllUsers" #teammembers
+    position="end" [mode]="memListPanelMode" [opened]="isMemberNavExpan" fxLayout="column">
+    <dps-team-member-manager #teammemberlist [teamMemberToken]="'TEAM_MEMBER_DATA_TIME_RECORDED'">
+    </dps-team-member-manager>
+    <mat-list dense class="team-member-header">
+      <mat-list-item>
+        <div fxFlex="row">
+          <button mat-icon-button (click)="onMemberNavClick()">
+            <mat-icon>reorder</mat-icon>
+          </button>
+          <span matLine class="team-member-lbl" fxFlexAlign="center" fxFlex="1 1 auto">Team Members</span>
+          <mat-chip-list *ngIf="teamMemberCount" class="team-member-count">
+            <mat-chip> {{teamMemberCount}} </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <dps-team-member-list fxFlex="calc(100%-50px)" [searchKey]="teammemberlist.searchKey$ | async"
+      [teamMemberList]="teammemberlist.teamMemberList$ | async"
+      [teamMemberListLoading]="teammemberlist.teamMembersLoading$ | async" [selected]="teammemberlist.selected$ | async"
+      (changeSearchKey)="teammemberlist.onSearchTextChanged($event)"
+      (changeSelectedTeamMember)="teammemberlist.onchangeSelectedTeamMember($event)">
+    </dps-team-member-list>
+  </mat-sidenav>
+  <div class="dps-time-recorded-main-contentainer" fxLayout="column">
+    <mat-card class="dps-time-recorded-main-header">
+      <mat-card-content class="dps-time-recorded-header" dpsIsMobile>
+        <div class="dps-profile">
+          <dps-user-profile-detail [selectedDepartment]="selectedDepartment" [selectedTeamMember]="selectedTeamMember">
+          </dps-user-profile-detail>
+        </div>
+        <div fxFlex="1 1 0%">
+          <dps-time-recorded-header [userPermision]="userPermision" [homeCurrancy]="homeCurrancy"
+            [departmentList]="departmentList" [typeList]="typeList" [selectedInfo]="selectedInfo" [summery]="summery"
+            (updateSelectedInfo)="onUpdateSelectedInfo($event)">
+          </dps-time-recorded-header>
+        </div>
+        <button mat-icon-button class="team-members-side-nav-controller" (click)="onMemberNavClick()"
+          *ngIf="!isMemberNavExpan && userPermision?.isAllUsers">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+      <div class="grid-wrapper-main" fxLayout="column">
+        <dps-time-recorded-views [periodList]="periodList" [userPermision]="userPermision" [selectedInfo]="selectedInfo"
+          [timeOffset]="timeOffset" [groupMode]="groupMode" [columnDef]="columnDef"
+          (updateSelectedInfo)="onUpdateSelectedInfo($event)" (gridRefresh)="onGridRefresh()"
+          (gridFontSize)="onChangeGridFontSize($event)" (onGroupBy)="groupBy($event)" (newTime)="newTimeClick()"
+          (exportToExcel)="oneExportToExcel()" (dateTypeChanged)="onDateTypeChanged($event)">
+        </dps-time-recorded-views>
+        <dps-time-recorded-grid fxFlex="calc(100%-80px)" [isLoading]="isLoading" [columnDef]="columnDef"
+          class="grid-data {{fontSizeClass}}" [homeCurrancy]="homeCurrancy" [gridData]="gridData"
+          [paginatorDef]="paginatorDef" [selectedInfo]="selectedInfo" [totalItem]="totalItem" [groupMode]="groupMode"
+          [groupData]="groupData" [canMinimizeViews]="canMinimizeViews" (rowSelect)="onRowSelect($event)"
+          (toggleExpand)="onToggleExpand($event)" (viewChange)="onViewChange($event)"
+          (selectRow)="onChangeSelectedRow($event)" (selectGroup)="onSelectGroup($event)"
+          (clickGridButton)="onClickGridButton($event)" (loadMoreData)="loadMore($event)"
+          (timeUpdateValue)=onTimeUpdating($event) (timeUpdateStartStop)="onStopStartTimeRecording($event)"
+          (saveTimeRecording)="onSaveTimeRecording($event)">
+        </dps-time-recorded-grid>
+      </div>
+    </mat-card>
+  </div>
+</mat-sidenav-container>

@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+mat-toolbar{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 2;
+    background: #3c4349;
+    color: $primary;
+    font-size: 16px;
+}
+.dps-mail-item-avatar{ 
+    height: 30px;
+    width: 30px;
+}
+.dps-mail-item-avatar span{
+    color: white;
+    font-size: 16px;
+}
+.dps-email-list-contacts-content{
+    overflow-y: auto;
+}
+.name{
+    color: #2475ad;
+    font-size: $primary-font-size;
+}
+.mail{
+    color: #61829c;
+}
+.type{
+    font-weight: 600;
+    color: #6fa2c7;
+}
+mat-list-item{
+    height: 50px !important;
+}

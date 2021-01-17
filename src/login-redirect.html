@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Enable IE Standards mode -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <style>
+        html,
+        body,
+        dps-root,
+            {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .dps-full-page-loader {
+            background: url(/assets/dps-loader-dark-2.gif) no-repeat center center;
+            background-size: 80px;
+            background-color: #FFF;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js"></script>
+
+</head>
+
+<body>
+    <div class="dps-full-page-loader"> </div>
+    <script type="text/javascript">
+
+        function loadAjax(url, error, success) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                    if (xmlhttp.status == 200) {
+                        success(xmlhttp.responseText);
+                    }
+                    else if (xmlhttp.status == 400) {
+                        error()
+                    }
+                    else {
+                        error();
+                    }
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function inIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+
+        function processTokenAcquire(authContext, hash) {
+            var requestInfo = authContext.getRequestInfo(hash);
+            authContext.saveTokenFromHash(requestInfo);
+            if (requestInfo.stateMatch) {
+                if (requestInfo.requestType === authContext.REQUEST_TYPE.RENEW_TOKEN) {
+                    const callback = window.parent.callBackMappedToRenewStates[requestInfo.stateResponse] || authContext.callback;
+                    if (callback && typeof callback === 'function') {
+                        // id_token or access_token can be renewed
+                        var token = requestInfo.parameters['access_token'] || requestInfo.parameters['id_token'];
+                        var error = requestInfo.parameters['error'];
+                        var errorDescription = requestInfo.parameters['error_description'];
+                        callback(errorDescription, token, error);
+                    }
+                } else {
+                    window.location.href = window.location.origin;
+                }
+            } else {
+                if (!inIframe()) {
+                    window.location.href = window.location.origin;
+                }
+            }
+        }
+
+        function handleAuth(config) {
+
+            var endpoints = {
+                graphApi: 'https://graph.microsoft.com',
+                outlookApi: 'https://outlook.office.com',
+            };
+
+            if (config.dpsResources) {
+                for (var key in config.endpoints) {
+                    endpoints[key] = config.endpoints[key];
+                }
+            }
+
+            var config = {
+                instance: 'https://login.microsoftonline.com/',
+                tenant: config.tenant,
+                redirectUri: window.location.href.split("?")[0].split("#")[0],
+                clientId: config.appId,
+                //endpoints: endpoints,
+                cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
+            };
+
+            var authContext = new AuthenticationContext(config);
+            if (window.location.hash) {
+                processTokenAcquire(authContext, window.location.hash)
+            } else {
+                window.location.href = window.location.origin;
+            }
+        }
+
+        loadAjax('/app-config.json', function () { }, function (result) {
+            var config = JSON.parse(result);
+            handleAuth(config);
+        });
+
+    </script>
+
+</body>
+
+</html>

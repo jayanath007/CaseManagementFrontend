@@ -1,0 +1,77 @@
+@import '~styles/variables.scss';
+.top-button-panel
+{
+    padding: 5px;
+    margin-bottom: 14px;
+    background: #327ba9;
+    font-family: roboto;
+    font-size: 12px;
+    color: $primary;
+}
+
+.contact-screen-general-btn
+{
+    font-size: $secondary-font-size;
+    color: $primary;
+    font-weight: normal;
+    border-radius: 3px;    
+    background: #286992;
+    color: $primary;
+    line-height: 25px;
+    min-width: 50px;
+    border: 1px solid #357faf;
+    min-width: 50px;
+}
+.contact-manage
+{
+    float: right;
+}
+.contact-screen-general-btn:hover
+{
+    background: orange;
+
+
+}
+.contact-screen-general-btn:hover .file-no
+{
+    background: rgb(211, 137, 0);
+
+}
+.contact-screen-general-btn.file
+{
+    padding-right: 32px;
+}
+.contact-screen-general-btn.file .file-no
+{
+    background: #195173;
+    padding: 0 6px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    line-height: 23px;
+
+}
+.contact-screen-general-btn.warn:hover
+{
+    background: rgba(197, 7, 7, 0.973);
+    line-height: 30px;
+}
+
+.contact-manage .matter
+{
+    float: right;
+    display: block;
+    padding: 9px;
+
+}
+
+.save
+{
+    background: #61b318;
+    border: 1px solid #72bd31;
+
+    
+
+}

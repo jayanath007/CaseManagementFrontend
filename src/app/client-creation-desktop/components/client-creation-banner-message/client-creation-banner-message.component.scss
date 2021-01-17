@@ -1,0 +1,32 @@
+mat-chip-list
+{
+    padding: 8px 15px;
+    
+    mat-icon
+    {
+        
+
+        &.first
+        {
+            font-size: 19px;
+            line-height: 25px;
+            color: #ff8c8c;
+        }
+        &.last
+        {
+            margin-left: 3px;
+        }
+    }
+    
+
+    .risk
+    {
+        background: #dc3232;
+        color: #fff;
+    }
+    .high-risk
+    {
+        background: #bf1111;
+        color: #fff;
+    }
+}

@@ -1,0 +1,994 @@
+<div class="dps-matter-search-layout" fxLayout="column">
+  <div class="general-loader-light" mode="indeterminate" *ngIf="!metaData || isLoading || isInit"></div>
+  <div class="dps-matter-search-header">
+    <dps-matter-creation-header (popupClosed)="onPopupClosed($event)" (openLedgerCard)="onOpenLedgerCard()"
+      (delete)="onMattereDelete()" (save)="onMatterSave()" (add)="onMattereAdd()" (clear)="onMattereClear()"
+      [mode]="mode" [isModelDirty]="isModelDirty" [title]="headerTitle" (ok)="onOk()"
+      (openMatterSearch)="onMatterSearch(matterModelData?.matter)">
+    </dps-matter-creation-header>
+    <!--Start-Matter-Header-->
+    <div class="dps-matter-search-common-section" *ngIf="metaData">
+      <div class="dps-matter-search-common-wrapper" fxLayout="row">
+        <div fxLayout="row wrap">
+          <!-- fxLayoutAlign="space-between" -->
+
+          <!-- <dps-edit-screen-text-input [disabled]="mode===Mode.EditMode"
+            (inputValueChange)="onValueChanged(ControllerType.input,$event,'MatterTitle')"
+            [modelData]="matterModelData?.matter?.clientName" [meta]="metaDataLinker('Matter')">
+          </dps-edit-screen-text-input> -->
+
+          <dps-edit-screen-text-input [disabled]="mode===Mode.EditMode"
+            (inputValueChange)="onValueChanged('input',$event,'matterRef')"
+            [modelData]="matterModelData?.matter?.matterRef" [maxlength]="12"
+            [meta]="metaDataLinker('INPtxtMatterMatRef')"></dps-edit-screen-text-input>
+
+
+          <dps-edit-screen-input-search [disabled]="mode===Mode.EditMode"
+            (searchClick)="onClientSearchClick(matterModelData?.matter?.clientRef)"
+            (inputValueChange)="onValueChanged(ControllerType.button,$event,'clientRef')"
+            [modelData]="matterModelData?.matter?.clientRef" [meta]="metaDataLinker('INPtxtMatterClientRef')">
+          </dps-edit-screen-input-search>
+
+          <dps-edit-screen-text-input [maxlength]="100" [disabled]="mode===Mode.EditMode"
+            (inputValueChange)="onValueChanged(ControllerType.input,$event,'clientName')"
+            [modelData]="matterModelData?.matter?.clientName" [meta]="metaDataLinker('INPtxtMatterClientName')">
+          </dps-edit-screen-text-input>
+
+          <dps-edit-screen-single-column-select [comboModelData]="branchIDList" showType="value"
+            [modelData]="matterModelData?.matter?.branchID" [noEntriesFoundLabel]="noEntriesFoundLabel"
+            [placeholderLabel]="placeholderLabel" [columnName]="'Name'" [meta]="metaDataLinker('INPcboMatterBranch')"
+            (selectionchangedData)="onBranchChanged(ControllerType.cmb,$event,'branchID')">
+          </dps-edit-screen-single-column-select>
+
+          <dps-edit-screen-single-column-select [disabled]="mode===Mode.EditMode && !!originalModel?.matter?.appCode"
+            [comboModelData]="appCodeList" showType="valueANDdescription1" [modelData]="matterModelData?.matter?.appId"
+            [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+            [meta]="metaDataLinker('INPcboMatterAppCode')"
+            (selectionchangedData)="onAppCodeChanged(ControllerType.cmb,$event,'appId')">
+          </dps-edit-screen-single-column-select>
+
+          <dps-edit-screen-checkbox (valueChange)="onPrivateChanged(ControllerType.chb,$event,'private')"
+            [modelData]="matterModelData?.matter?.private" [meta]="metaDataLinker('INPchkMatterPrivate')"
+            class="private"></dps-edit-screen-checkbox>
+
+          <!-- <div fxLayout="row">
+
+            <dps-edit-screen-text-input [disabled]="mode===Mode.EditMode" (inputValueChange)="onValueChanged('input',$event,'matterRef')"
+              [modelData]="matterModelData?.matter?.matterRef" [maxlength]="12" [meta]="metaDataLinker('INPtxtMatterMatRef')"></dps-edit-screen-text-input>
+
+            <dps-edit-screen-checkbox (valueChange)="onPrivateChanged(ControllerType.chb,$event,'private')" [modelData]="matterModelData?.matter?.private"
+              [meta]="metaDataLinker('INPchkMatterPrivate')" class="private"></dps-edit-screen-checkbox>
+
+          </div> -->
+
+          <div>
+            <dps-edit-screen-textarea (inputValueChange)="onValueChanged('input',$event,'matterDetails')"
+              [modelData]="matterModelData?.matter?.matterDetails" [meta]="metaDataLinker('INPtxtMatterDetails')">
+            </dps-edit-screen-textarea>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="3px" class="matter-completed-close">
+            <dps-edit-screen-checkbox style="position: relative;
+            top: 13px;" labelPosition="before" [disabled]="matterModelData?.matter?.matterCloseMatter"
+              (valueChange)="onCompletedMatterChanged(ControllerType.chb,$event,'isMatterCompleted')"
+              [modelData]="matterModelData?.matter?.isMatterCompleted"
+              [meta]="metaDataLinker('INPchkMatterCompletedMatter')" class="matter_checkbox">
+            </dps-edit-screen-checkbox>
+            <dps-edit-screen-datepicker
+              [disabled]="matterModelData?.matter?.matterCloseMatter || !matterModelData?.matter?.isMatterCompleted"
+              (dateChange)="onValueChanged(ControllerType.dtp,$event,'matterCompletedDate')"
+              [modelData]="matterModelData?.matter?.matterCompletedDate"
+              [meta]="metaDataLinker('INPdteMatterCompletedDate')" class="closedate"></dps-edit-screen-datepicker>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="3px" class="matter-completed-close">
+            <dps-edit-screen-checkbox style="position: relative;
+            top: 13px;" labelPosition="before"
+              [disabled]="closerProcessing?.balancesOrAllocationsOrProformasExist &&!(matterModelData?.matter?.matterCloseMatter)"
+              (valueChange)="onCloseMatterChanged(ControllerType.chb,$event,'matterCloseMatter')"
+              [modelData]="matterModelData?.matter?.matterCloseMatter"
+              [meta]="metaDataLinker('INPchkMatterCloseMatter')" class="matter_checkbox">
+            </dps-edit-screen-checkbox>
+            <dps-edit-screen-datepicker [disabled]="!matterModelData?.matter?.matterCloseMatter"
+              (dateChange)="onValueChanged(ControllerType.dtp,$event,'matterClosedate')"
+              [modelData]="matterModelData?.matter?.matterClosedate" [meta]="metaDataLinker('INPdteMatterCloseDate')"
+              class="closedate"></dps-edit-screen-datepicker>
+          </div>
+
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlexAlign="end end">
+            <dps-edit-screen-paginator *ngIf="matterSeatchList && matterSeatchList.length>1"
+              (changePage)="onPageChange($event)" [pageIndex]="matterIndex" [pagesLength]="matterSeatchList.length">
+            </dps-edit-screen-paginator>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--End-Matter-Header-->
+  </div>
+  <!--End-dps-matter-search-header-->
+  <div fxLayout="column" fxFlex="1 1 auto" *ngIf="metaData" class="dps-plot-content">
+    <!-- <mat-sidenav-container class="dps-sidenav-container"> -->
+    <!-- <mat-sidenav class="dps-matter-creation-side-nav dps-white-gray-scroll" mode="side" [opened]="true"> -->
+    <mat-nav-list class="dps-matter-creation-side-nav dps-white-gray-scroll" dense>
+      <dps-edit-screen-tab [tabIcon]="'fa-briefcase'" [meta]="metaDataLinker('INPtpgMatter')"
+        [modelData]="matterModelData" [ngClass]="{'active':selectedTab==='INPtpgMatter'}"
+        (click)="matterTabClick('INPtpgMatter')">
+      </dps-edit-screen-tab>
+      <!--start-Matter Linked comentted because this may be test client site-->
+      <dps-edit-screen-tab
+        [hidden]="!(matterModelData?.matter?.matterId && matterModelData?.matter?.matterId!==-1) ? true: null"
+        [tabIcon]="'fa-link'" [meta]="metaDataLinker('INPtpgLinkedMatters')" [modelData]="matterModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgLinkedMatters'}" (click)="matterTabClick('INPtpgLinkedMatters')">
+      </dps-edit-screen-tab>
+      <!--End-Matter Linked-->
+      <dps-edit-screen-tab [tabIcon]="'fa-tag'" [meta]="metaDataLinker('INPtpgDocRegister')"
+        [modelData]="matterModelData" [ngClass]="{'active':selectedTab==='INPtpgDocRegister'}"
+        (click)="matterTabClick('INPtpgDocRegister')">
+      </dps-edit-screen-tab>
+      <dps-edit-screen-tab [hidden]="matterModelData?.matter?.private ? true: null" [tabIcon]="'fa-gavel'"
+        [meta]="metaDataLinker('INPtpgLegalAid')" [modelData]="matterModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgLegalAid'}" (click)="matterTabClick('INPtpgLegalAid')">
+      </dps-edit-screen-tab>
+      <dps-edit-screen-tab [tabIcon]="'fa-check-circle'" [meta]="metaDataLinker('INPtpgCompletion')"
+        [modelData]="matterModelData" [ngClass]="{'active':selectedTab==='INPtpgCompletion'}"
+        (click)="matterTabClick('INPtpgCompletion')">
+      </dps-edit-screen-tab>
+      <dps-edit-screen-tab [tabIcon]="'fa-renren'" [meta]="metaDataLinker('INPtpgSundry')" [modelData]="matterModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgSundry'}" (click)="matterTabClick('INPtpgSundry')">
+      </dps-edit-screen-tab>
+      <!-- [hidden]="(matterModelData?.matter?.appId || matterModelData?.matter?.matterId===-1)?matterModelData.matter.appId!==3:null" -->
+      <dps-edit-screen-tab [hidden]="isHiddenCrimeTab" [tabIcon]="'fa-balance-scale'"
+        [meta]=" metaDataLinker('INPtpgCrimeTab')" [modelData]="matterModelData"
+        [ngClass]="{'active':selectedTab==='INPtpgCrimeTab'}" (click)="matterTabClick('INPtpgCrimeTab')">
+      </dps-edit-screen-tab>
+      <dps-edit-screen-tab [tabIcon]="'fa-users'" [meta]="metaDataLinker('INPtpgContactInfo')"
+        [modelData]="matterModelData" [ngClass]="{'active':selectedTab==='INPtpgContactInfo'}"
+        (click)="matterTabClick('INPtpgContactInfo')">
+      </dps-edit-screen-tab>
+
+      <dps-edit-screen-tab [tabIcon]="'fa-user-circle'" [meta]="metaDataLinker('INPtpgClients')"
+        [modelData]="matterModelData" [ngClass]="{'active':selectedTab==='INPtpgClients'}"
+        (click)="matterTabClick('INPtpgClients')">
+      </dps-edit-screen-tab>
+
+      <!-- <mat-list-item class="dps-primary-tab" [ngClass]="{'active':selectedTab==='Clients'}"
+        (click)="matterTabClick('Clients')"> -->
+      <!-- <mat-icon matListIcon fontSet="fontawesome" class="fa" fontIcon="fa-user"></mat-icon> -->
+      <!-- <i matListIcon class="material-icons clients-icon">
+          supervisor_account
+        </i>
+        <h4 matLine>Clients
+          <span></span>
+        </h4>
+      </mat-list-item> -->
+    </mat-nav-list>
+    <!-- </mat-sidenav> -->
+    <div class="dps-matter-creation-tab-content">
+      <!--  ===================== Matter Tab ==================== -->
+      <div class="dps-matter-creation-content-wrapper dps-white-gray-scroll" [hidden]="selectedTab!='INPtpgMatter'"
+        [@.disabled]="true">
+        <!--start-matter-->
+        <mat-accordion [multi]="true">
+          <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblMatterDetails')?.scL_Visible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>assignment</mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblMatterDetails')">
+                </dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expanded-content" fxLayout="row wrap" fxLayoutGap="5em">
+              <div fxLayout="column wrap">
+                <dps-edit-screen-datepicker [readonly]="true"
+                  (dateChange)="onValueChanged(ControllerType.dtp,$event,'matterStartDate')"
+                  [modelData]="matterModelData?.matter?.matterStartDate"
+                  [meta]="metaDataLinker('INPdteMatterStartDate')"></dps-edit-screen-datepicker>
+                <!-- <div fxLayout="row wrap">
+                    <dps-edit-screen-checkbox labelPosition="before"
+                      [disabled]="closerProcessing?.balancesOrAllocationsOrProformasExist &&!(matterModelData?.matter?.matterCloseMatter)"
+                      (valueChange)="onCloseMatterChanged(ControllerType.chb,$event,'matterCloseMatter')"
+                      [modelData]="matterModelData?.matter?.matterCloseMatter"
+                      [meta]="metaDataLinker('INPchkMatterCloseMatter')" class="matter_checkbox">
+                    </dps-edit-screen-checkbox>
+                    <dps-edit-screen-datepicker [disabled]="!matterModelData?.matter?.matterCloseMatter"
+                      (dateChange)="onValueChanged(ControllerType.dtp,$event,'matterClosedate')"
+                      [modelData]="matterModelData?.matter?.matterClosedate"
+                      [meta]="metaDataLinker('INPdteMatterCloseDate')" class="closedate"></dps-edit-screen-datepicker>
+                  </div> -->
+                <dps-edit-screen-single-column-select [comboModelData]="feeEarnerListDropDownList" showType=""
+                  [modelData]="matterModelData?.matter?.matterFeeEarner" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" columnName="Code"
+                  [meta]="metaDataLinker('INPcboMatterFeeEarner')"
+                  (selectionchangedData)="onFeeEarnerValueChanged(ControllerType.cmb,$event,'matterFeeEarner')">
+                </dps-edit-screen-single-column-select>
+                <dps-edit-screen-single-column-select [comboModelData]="supervisorList" showType=""
+                  [modelData]="matterModelData?.matter?.matterSupervisor" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboSundrySupervisor')"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'matterSupervisor')">
+                </dps-edit-screen-single-column-select>
+              </div>
+              <div fxLayout="column wrap">
+                <dps-edit-screen-single-column-select [comboModelData]="matterDepartmentDropDowndList" showType="value"
+                  [modelData]="matterDepartment" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboMatterDepartment')"
+                  (selectionchangedData)="onDepartmentChanged(ControllerType.cmb,$event,'matterDepartment')">
+                </dps-edit-screen-single-column-select>
+                <dps-edit-screen-single-column-select [disabled]="!matterModelData?.matter?.matterDepartment"
+                  [comboModelData]="matterCategoryList" showType="value"
+                  [modelData]="matterModelData?.matter?.matterCategory" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboMatterMatCategory')"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'matterCategory')">
+                </dps-edit-screen-single-column-select>
+                <dps-edit-screen-single-column-select [comboModelData]="matterRateCategoryList" showType="value"
+                  [modelData]="matterModelData?.matter?.matterRateCategory" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboMatterRateCategory')"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'matterRateCategory')">
+                </dps-edit-screen-single-column-select>
+              </div>
+              <div fxLayout="column wrap">
+                <dps-edit-screen-single-column-select [comboModelData]="matterInterestSchemeList" showType="value"
+                  [modelData]="matterModelData?.matter?.matterInterestScheme"
+                  [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboMatterInterestScheme')"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'matterInterestScheme')">
+                </dps-edit-screen-single-column-select>
+                <dps-edit-screen-lookup-select class="form-row-input" lableName="Introduction"
+                  [isLookupLinkDisable]="true" [comboModelData]="matterIntroductionList"
+                  [showType]="intruductionShowType" [modelData]="matterModelData?.matter?.matterIntroduction"
+                  [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                  [meta]="metaDataLinker('INPcboMatterIntroduction')"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'matterIntroduction')">
+                </dps-edit-screen-lookup-select>
+                <!-- <dps-edit-screen-checkbox (valueChange)="onValueChanged(ControllerType.chb,$event,'matterIsprecedentHmatter')"
+                    [modelData]="matterModelData?.matter?.matterIsprecedentHmatter" [meta]="metaDataLinker('INPchkMatterPrecedentH')"></dps-edit-screen-checkbox> -->
+                <div class="security" fxLayout="row wrap" fxLayoutAlign="space-between">
+                  <dps-edit-screen-checkbox [disabled]="!feeEarnerIsUser"
+                    *ngIf="metaDataLinker('INPlblMatterDetails')?.scL_Visible && metaDataLinker('INPchkMatterFileSecurity')?.scL_Visible" [hidden]="!useFileSecurity"
+                    (valueChange)="onValueChanged(ControllerType.chb,$event,'matterFileSecurity')"
+                    [modelData]="matterModelData?.matter?.matterFileSecurity"
+                    [meta]="metaDataLinker('INPchkMatterFileSecurity')">
+                  </dps-edit-screen-checkbox>
+                  <div class="dps-file-security" *ngIf="matterModelData?.matter?.matterFileSecurity && useFileSecurity">
+                    <button mat-button (click)="onLoadFileSecurityModal()">
+                      <mat-icon>security</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="matterModelData?.matter?.appId">
+                  <!-- eBilling Comment  *ngIf="matterModelData?.matter?.eBilling [ngModel]="eBillingModelValue"> 0"  *ngIf="!matterModelData?.matter?.appId"-->
+                  <!-- <mat-checkbox class="e-billing-schema" (change)="onEBillingChange($event)" [ngModel]="eBillingModelValue"
+                      *ngIf="metaDataLinkerForEbilling('INPchkMatterPrecedentH')?.scL_Visible">eBilling</mat-checkbox> -->
+                  <dps-edit-screen-single-column-select class="form-row-input" [comboModelData]="eBillingSchemeList"
+                    showType="value" [modelData]="matterModelData?.matter?.eBilling"
+                    [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel" columnName="Name"
+                    lableName="eBilling" [meta]="metaDataLinkerForEbilling('INPchkMatterPrecedentH')"
+                    (selectionchangedData)="onSchemeChanged(ControllerType.cmb,$event,'eBilling')">
+                  </dps-edit-screen-single-column-select>
+                </div>
+
+              </div>
+              <div fxLayout="column wrap">
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'matterUnderDefined1')"
+                  [modelData]="matterModelData?.matter?.matterUnderDefined1"
+                  [meta]="metaDataLinker('INPtxtMatterUser1')"></dps-edit-screen-text-input>
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'matterUnderDefined2')"
+                  [modelData]="matterModelData?.matter?.matterUnderDefined2"
+                  [meta]="metaDataLinker('INPtxtMatterUser2')"></dps-edit-screen-text-input>
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'matterUnderDefined3')"
+                  [modelData]="matterModelData?.matter?.matterUnderDefined3"
+                  [meta]="metaDataLinker('INPtxtMatterUser3')"></dps-edit-screen-text-input>
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'matterUnderDefined4')"
+                  [modelData]="matterModelData?.matter?.matterUnderDefined4"
+                  [meta]="metaDataLinker('INPtxtMatterUser4')"></dps-edit-screen-text-input>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblCreditLimitDetails')?.scL_Visible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon fontSet="fontawesome" fontIcon="fa-credit-card" class="fa"></mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblCreditLimitDetails')">
+                </dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expanded-content" fxLayout="row wrap" fxLayoutGap="5em">
+              <div fxLayout="column wrap">
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'creditLimitCost')"
+                  [modelData]="matterModelData?.matter?.creditLimitCost" [meta]="metaDataLinker('INPtxtAntCosts')">
+                </dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'creditLimitDibs')"
+                  [modelData]="matterModelData?.matter?.creditLimitDibs" [meta]="metaDataLinker('INPtxtAntDisbs')">
+                </dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'creditLimitExpenses')"
+                  [modelData]="matterModelData?.matter?.creditLimitExpenses"
+                  [meta]="metaDataLinker('INPtxtAntExpense')"></dps-edit-screen-number-input>
+              </div>
+
+              <div fxLayout="column wrap">
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedWIPCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedWIPCredit"
+                  [meta]="metaDataLinker('INPtxtSundryWIPCreditLimit')"></dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedDisbCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedDisbCredit"
+                  [meta]="metaDataLinker('INPtxtSundryDISBCreditLimit')"></dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedBillCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedBillCredit"
+                  [meta]="metaDataLinker('INPtxtSundryBILLCreditLimit')"></dps-edit-screen-number-input>
+              </div>
+
+            </div>
+          </mat-expansion-panel>
+          <!-- <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblAnticipatedLimits')?.scL_Visible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>rate_review</mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblAnticipatedLimits')">
+                </dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+              <div fxLayout="column wrap">
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedWIPCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedWIPCredit"
+                  [meta]="metaDataLinker('INPtxtSundryWIPCreditLimit')"></dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedDisbCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedDisbCredit"
+                  [meta]="metaDataLinker('INPtxtSundryDISBCreditLimit')"></dps-edit-screen-number-input>
+                <dps-edit-screen-number-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'anticipatedBillCredit')"
+                  [modelData]="matterModelData?.matter?.anticipatedBillCredit"
+                  [meta]="metaDataLinker('INPtxtSundryBILLCreditLimit')"></dps-edit-screen-number-input>
+              </div>
+            </div>
+          </mat-expansion-panel> -->
+        </mat-accordion>
+        <!--End-matter-->
+      </div>
+
+      <!--start-Matter Linked comentted because this may be test client site-->
+      <div [hidden]="selectedTab!='INPtpgLinkedMatters'"
+        *ngIf="matterModelData?.matter?.matterId && matterModelData?.matter?.matterId!==-1"
+        class="dps-matter-creation-content-wrapper grid">
+        <dps-matter-linked-desktop-manager [token]="matterCreationToken" [openFrom]="MatterLinkOpenFrom"
+          [matterRef]="matterModelData?.matter?.matterRef" [matterData]="matterModelData?.matter" #matterLinkedManager
+          [parentToken]="matterCreationToken">
+          <dps-matter-linked-layout [gridData]="matterLinkedManager.gridData$ | async" [mode]="mode" [isPopup]="false"
+            [isLoading]="matterLinkedManager.isLoading$ | async" [matterData]="matterModelData?.matter"
+            [onlySelectMatter]="false" [coloumnDef]="matterLinkedManager.coloumnDef$ | async"
+            [openFrom]="MatterLinkOpenFrom" [selectedMatterData]="matterLinkedManager.selectedMatter$ | async"
+            [multiSelectItem]="matterLinkedManager.multiSelectItem$ | async"
+            [plotRange]="matterLinkedManager.plotRange$ | async"
+            (onCreateLinkedMatter)="matterLinkedManager.createLinkedMatter($event)"
+            (selectedMatter)="matterLinkedManager.onSelectedMatter($event)"
+            (selectAllMatter)="matterLinkedManager.onSelectAllMatter($event)"
+            (multiSelectMatter)="matterLinkedManager.onMultiSelectMatter($event)"
+            (changePlotRange)="matterLinkedManager.onChangePlotRange($event)"
+            (onOpenLinkedMatter)="matterLinkedManager.openLinkedMatter($event)">
+          </dps-matter-linked-layout>
+
+        </dps-matter-linked-desktop-manager>
+      </div>
+      <!--end-Matter Linked-->
+
+      <!--start-doc reg-->
+      <div class="dps-matter-creation-content-wrapper grid" [hidden]="selectedTab!='INPtpgDocRegister'">
+        <dps-grid-container [gridColoumn]="docRegisterGridColumn" [pageEvent]="relatedDocumentsPageEvent"
+          (page)="onGridPageChange($event)">
+          <dps-doc-register-view-data [gridColoumn]="docRegisterGridColumn" [gridData]="documentRegistriesGridData"
+            (rowClick)="onDocRegisterRowClick($event)">
+          </dps-doc-register-view-data>
+        </dps-grid-container>
+      </div>
+      <!--end-doc reg-->
+      <!--start-legal Aid-->
+      <div class="dps-matter-creation-content-wrapper dps-white-gray-scroll" [hidden]="selectedTab!='INPtpgLegalAid'"
+        [@.disabled]="true">
+        <mat-accordion [multi]="true">
+          <mat-expansion-panel *ngIf="metaDataLinker('INPlblLegalAidDetails')?.scL_Visible" [expanded]="true"
+            class="legal-aid-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon fontSet="fontawesome" fontIcon="fa-gavel" class="fa"></mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblLegalAidDetails')">
+                </dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" class="dps-legai-aid">Public
+              Funded</div>
+            <mat-radio-group (change)="onValueChanged(ControllerType.rdb,$event.value,'legalPublicFunded')"
+              class="expanded-content legal-aid" fxLayout="row wrap" fxLayoutAlign="flex-start"
+              [ngModel]="matterModelData?.matter?.legalPublicFunded">
+              <mat-radio-button [value]="0" color="primary" *ngIf="metaDataLinker('INPoptLegalHelp')?.scL_Visible">
+                {{metaDataLinker('INPoptLegalHelp')?.scL_Caption ||
+                  metaDataLinker('INPoptLegalHelp')?.scL_DefaultCaption || "Legal"}}
+              </mat-radio-button>
+              <mat-radio-button [value]="2" color="primary" *ngIf="metaDataLinker('INPoptLegalPrivate')?.scL_Visible">
+                {{metaDataLinker('INPoptLegalPrivate')?.scL_Caption ||
+                  metaDataLinker('INPoptLegalPrivate')?.scL_DefaultCaption || "Private"}}
+              </mat-radio-button>
+              <mat-radio-button [value]="1" color="primary"
+                *ngIf="metaDataLinker('INPoptLegalPubliclyFunded')?.scL_Visible">
+                {{metaDataLinker('INPoptLegalPubliclyFunded')?.scL_Caption ||
+                  metaDataLinker('INPoptLegalPubliclyFunded')?.scL_DefaultCaption
+                  || "Publicly"}}
+              </mat-radio-button>
+              <mat-radio-button [value]="3" color="primary" *ngIf="metaDataLinker('INPoptLegalCLR')?.scL_Visible">
+                {{metaDataLinker('INPoptLegalCLR')?.scL_Caption ||
+                  metaDataLinker('INPoptLegalCLR')?.scL_DefaultCaption || "Publicly"}}
+              </mat-radio-button>
+              <mat-radio-button [value]="5" color="primary"
+                *ngIf="metaDataLinker('INPoptLegalFundsControl')?.scL_Visible">
+                {{metaDataLinker('INPoptLegalFundsControl')?.scL_Caption ||
+                  metaDataLinker('INPoptLegalFundsControl')?.scL_DefaultCaption
+                  || "Publicly"}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div fxLayout="row wrap" fxLayoutAlign="start" class="legal-aid-tab-content">
+          <div fxLayout="column wrap" class="legal-aid-form">
+            <dps-edit-screen-checkbox labelPosition="before"
+              (valueChange)="onValueChanged(ControllerType.chb,$event,'legalLAACivilBilling')"
+              [modelData]="matterModelData?.matter?.legalLAACivilBilling" [lableName]="legalLAACivilBillingLabelName"
+              [meta]="metaDataLinker('INPchkLetterToClient')" [priorityToLableName]="true">
+            </dps-edit-screen-checkbox>
+            <dps-edit-screen-text-input (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeUFN')"
+              [modelData]="matterModelData?.matter?.crimeUFN" [meta]="metaDataLinker('INPtxtCrimeUniqueFileNo')"
+              maxlength='10'>
+            </dps-edit-screen-text-input>
+            <dps-edit-screen-datepicker
+              (dateChange)="onLegalCaseStartedChanged(ControllerType.dtp,$event,'legalCaseStarted')"
+              title="This date is used as the start date for Controlled (Levels 1 and 2) cases. Enter start date for Licensed cases in the Civil Billing module"
+              lableName="Case Started:" [hidden]="false" [disabled]="!matterModelData?.matter?.legalLAACivilBilling"
+              [modelData]="matterModelData?.matter?.legalCaseStarted" [meta]="metaDataLinker('')">
+            </dps-edit-screen-datepicker>
+            <dps-edit-screen-single-column-select #laMatterTypes
+              *ngIf="!matterModelData?.matter?.legalLAACivilBilling || matterModelData?.matter?.appCode === 'MA'"
+              (click)="onLegalMatterTypeClick(laMatterTypes.matSelect)" [comboModelData]="laMatterTypesList"
+              showType="value" [modelData]="matterModelData?.matter?.legalMatterType"
+              [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [columnName]="'Name'"
+              [meta]="metaDataLinker('INPcboLegalMatterType')"
+              (selectionchangedData)="onLegalMatterTypeChanged(ControllerType.cmb,$event,'legalMatterType')"
+              class="custom-form-controller">
+            </dps-edit-screen-single-column-select>
+            <dps-edit-screen-unbind-select *ngIf="!matterModelData?.matter?.legalLAACivilBilling"
+              lableName="{{matterDisplyName}} Type 1:" [comboModelData]="matterType1List" showType=""
+              [modelData]="matterModelData?.matter?.legalMatterType1"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [noEntriesFoundLabel]="noEntriesFoundLabel"
+              [placeholderLabel]="placeholderLabel" [columnName]="'Name'"
+              (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'legalMatterType1')"
+              class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+            <dps-edit-screen-unbind-select *ngIf="!matterModelData?.matter?.legalLAACivilBilling"
+              lableName="{{matterDisplyName}} Type 2:" [comboModelData]="matterType2List" showType=""
+              [modelData]="matterModelData?.matter?.legalMatterType2"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [noEntriesFoundLabel]="noEntriesFoundLabel"
+              [placeholderLabel]="placeholderLabel" [columnName]="'Name'"
+              (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'legalMatterType2')"
+              class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+            <dps-edit-screen-unbind-select *ngIf="!isStageLevelHide" lableName="Case Stage Level:"
+              [comboModelData]="caseStageLevelList" showType=""
+              [modelData]="matterModelData?.matter?.legalCaseStageLevel" [noEntriesFoundLabel]="noEntriesFoundLabel"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [placeholderLabel]="placeholderLabel"
+              [columnName]="'Name'"
+              (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'legalCaseStageLevel')"
+              class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+            <dps-edit-screen-unbind-select *ngIf="!isStageReachedHide" lableName="Stage Reached:"
+              [comboModelData]="stageReachedList" showType=""
+              [modelData]="matterModelData?.matter?.legalCaseStageReached" [noEntriesFoundLabel]="noEntriesFoundLabel"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [placeholderLabel]="placeholderLabel"
+              [columnName]="'Name'" (selectionchangedData)="onValueChanged('cmb',$event,'legalCaseStageReached')"
+              class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+            <dps-edit-screen-unbind-select *ngIf="!isStageLevelHide" lableName="Outcome:" [comboModelData]="outcomeList"
+              showType="" [modelData]="matterModelData?.matter?.legalCaseOutcome"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [noEntriesFoundLabel]="noEntriesFoundLabel"
+              [placeholderLabel]="placeholderLabel" [columnName]="'Name'"
+              (selectionchangedData)="onValueChanged('cmb',$event,'legalCaseOutcome')" class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+            <dps-edit-screen-unbind-select *ngIf="!isCriteriaHide" lableName="Criteria:" [comboModelData]="criteriaList"
+              showType="" [modelData]="matterModelData?.matter?.legalCaseStageReached"
+              [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+              [disabled]="!matterModelData?.matter?.legalLAACivilBilling" [columnName]="'Name'"
+              (selectionchangedData)="onValueChanged('cmb',$event,'legalCaseStageReached')"
+              class="custom-form-controller">
+            </dps-edit-screen-unbind-select>
+          </div>
+        </div>
+      </div>
+      <!--End-legal Aid-->
+      <!--Start Completion-->
+      <div class="dps-matter-creation-content-wrapper  dps-white-gray-scroll "
+        [hidden]="selectedTab!='INPtpgCompletion'">
+        <div fxLayout="row wrap" fxLayoutAlign="start" class="dps-completion-tab">
+          <div fxLayout="column wrap" class="completion-form">
+            <dps-edit-screen-text-input
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'completionDocLocation')"
+              [modelData]="matterModelData?.matter?.completionDocLocation"
+              [meta]="metaDataLinker('INPtxtCompletionDocLocation')"></dps-edit-screen-text-input>
+            <dps-edit-screen-text-input
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'completionArchiveRef')"
+              [modelData]="matterModelData?.matter?.completionArchiveRef"
+              [meta]="metaDataLinker('INPtxtCompletionArchiveRef')"></dps-edit-screen-text-input>
+            <dps-edit-screen-datepicker [hidden]="false"
+              (dateChange)="onValueChanged(ControllerType.dtp,$event,'completionDistroyDate')" lableName="Destroy Date"
+              [modelData]="matterModelData?.matter?.completionDistroyDate" [meta]="metaDataLinker('')">
+            </dps-edit-screen-datepicker>
+            <dps-edit-screen-checkbox (valueChange)="onValueChanged(ControllerType.chb,$event,'completionDistroyed')"
+              labelPosition="before" [hidden]="false" lableName="Destroyed"
+              [modelData]="matterModelData?.matter?.completionDistroyed" [meta]="metaDataLinker('')">
+            </dps-edit-screen-checkbox>
+          </div>
+
+          <div fxLayout="column wrap">
+            <dps-edit-screen-button (onButtonClickData)="completionNegWO($event)" [hidden]="'false'"
+              [disabled]="!closerProcessing?.isCompletionNegWOEnabled" [modelData]="''"
+              [meta]="metaDataLinker('INPcmdCompletionNegWO')" class="completion_btn"></dps-edit-screen-button>
+            <div class="clearfix"></div>
+            <div class="completionNegWO-txt">
+              <div class="completionNegWO-lbl">
+                <div allign="left">
+                  <pre>{{closerProcessing?closerProcessing.cannotCloseMessage:''}}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column wrap"></div>
+        </div>
+      </div>
+      <!--End Completion-->
+      <!--start sundry-->
+      <div class="dps-matter-creation-content-wrapper dps-white-gray-scroll" [hidden]="selectedTab!='INPtpgSundry'">
+        <!-- <div class="sundry-label">
+          <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPgrpMatterControlTrustAccount')"
+            class="sundry-heading"></dps-edit-screen-lable>
+        </div> -->
+
+        <!-- </div> -->
+        <mat-accordion [multi]="true" [@.disabled]="true">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>picture_in_picture</mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPgrpMatterControlTrustAccount')"
+                  class="sundry-heading"></dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row wrap" fxLayoutAlign="start">
+              <!-- class="sundry-tab-wraper" -->
+              <div fxLayout="row wrap" class="sundry-tab">
+                <mat-radio-group (change)="onTrustAccountValueChanged($event.value)" fxLayout="row wrap"
+                  [ngModel]="trustAccount">
+                  <mat-radio-button [value]="true" color="primary" class="sundry-radio">
+                    Yes
+                  </mat-radio-button>
+                  <mat-radio-button [value]="false" color="primary">
+                    No
+                  </mat-radio-button>
+                </mat-radio-group>
+                <dps-edit-screen-single-column-select class="sundry-radio-group-text-field" [disabled]="!trustAccount"
+                  [hidden]="false" [comboModelData]="trusAccNoList" showType=""
+                  [modelData]="matterModelData?.matter?.sundryTrustAccount" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" [columnName]="'Name'"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'sundryTrustAccount')">
+                </dps-edit-screen-single-column-select>
+              </div>
+              <div fxLayout="row wrap" fxLayoutGap="2em">
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryOldReference')"
+                  [modelData]="matterModelData?.matter?.sundryOldReference"
+                  [meta]="metaDataLinker('INPtxtSundryOldRef')">
+                </dps-edit-screen-text-input>
+                <!-- <dps-edit-screen-text-input (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryOtherMatter')" [modelData]="matterModelData?.matter?.sundryOtherMatter"
+                        [meta]="metaDataLinker('INPtxtSundryOtherMatter')"></dps-edit-screen-text-input> -->
+                <dps-edit-screen-input-search
+                  (searchClick)="onOtherMatterSearchClick(matterModelData?.matter?.sundryOtherMatter)"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryOtherMatter')"
+                  [modelData]="matterModelData?.matter?.sundryOtherMatter"
+                  [meta]="metaDataLinker('INPtxtSundryOtherMatter')"></dps-edit-screen-input-search>
+                <dps-edit-screen-text-input [disabled]="true" lableName="DPS File Number"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryDPSFileNumber')"
+                  [modelData]="matterModelData?.matter?.sundryDPSFileNumber"
+                  [meta]="metaDataLinker('INPlblSundryMATFileIDEDT')"></dps-edit-screen-text-input>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+
+
+
+
+          <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblCreditControlDetails')?.scL_Visible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>credit_card</mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblCreditControlDetails')">
+                </dps-edit-screen-lable>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+              <div fxLayout="row wrap" fxLayoutGap="2em">
+                <dps-edit-screen-single-column-select showType="value"
+                  [modelData]="matterModelData?.matter?.sundryCrediteConrtolStage"
+                  [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                  [columnName]="'Name'" [meta]="metaDataLinker('INPcboCreditControlStage')"
+                  [comboModelData]="creditControlStageList"
+                  (selectionchangedData)="onSundryCrediteConrtolStageChanged(ControllerType.cmb,$event,'sundryCrediteConrtolStage')">
+                </dps-edit-screen-single-column-select>
+
+                <dps-edit-screen-text-input [disabled]="true"
+                  [modelData]="matterModelData?.matter?.sundryStageSet|date:'dd/MM/yyyy'"
+                  [meta]="metaDataLinker('INPlblDateStageSet')"></dps-edit-screen-text-input>
+
+                <dps-edit-screen-checkbox labelPosition="before"
+                  (valueChange)="onValueChanged(ControllerType.chb,$event,'sundrySuspendCrediteControl')"
+                  [modelData]="matterModelData?.matter?.sundrySuspendCrediteControl"
+                  [meta]="metaDataLinker('INPchkSuspendCreditControl')" class="credit_checked">
+                </dps-edit-screen-checkbox>
+                <dps-edit-screen-text-input
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryReasonToSuspend')"
+                  [modelData]="matterModelData?.matter?.sundryReasonToSuspend"
+                  [meta]="metaDataLinker('INPtxtSuspendReason')"></dps-edit-screen-text-input>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblAntFeesDetails')?.scL_Visible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>account_balance</mat-icon>
+                <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblAntFeesDetails')">
+                </dps-edit-screen-lable>
+                <span fxFlex="0 0 1%"></span>
+                <dps-address-finder [addressFindId]="'sundryAddress'" (changeAddress)="autofillAddress($event)"
+                  (click)="stopEventPropagation($event)"></dps-address-finder>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="start center">
+              <div fxLayout="row wrap" fxLayoutGap="2em" class="sundry_content">
+
+                <dps-edit-screen-text-input lableName="Address 1"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryBullingAddress1')"
+                  [modelData]="matterModelData?.matter?.sundryBullingAddress1"
+                  [meta]="metaDataLinker('INPtxtAddressBillingAddr1')"></dps-edit-screen-text-input>
+                <dps-edit-screen-text-input lableName="Address 2"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryBullingAddress2')"
+                  [modelData]="matterModelData?.matter?.sundryBullingAddress2"
+                  [meta]="metaDataLinker('INPtxtAddressBillingAddr2')"></dps-edit-screen-text-input>
+                <dps-edit-screen-text-input lableName="Town"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryTown')"
+                  [modelData]="matterModelData?.matter?.sundryTown" [meta]="metaDataLinker('INPtxtAddressBillingTown')">
+                </dps-edit-screen-text-input>
+                <dps-edit-screen-text-input lableName="Country"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryCountry')"
+                  [modelData]="matterModelData?.matter?.sundryCountry"
+                  [meta]="metaDataLinker('INPtxtAddressBillingCounty')"></dps-edit-screen-text-input>
+              </div>
+              <div fxLayout="row wrap" fxLayoutGap="2em">
+                <dps-edit-screen-checkbox labelPosition="before"
+                  (valueChange)="onValueChanged(ControllerType.chb,$event,'sundryLablePriented')"
+                  [modelData]="matterModelData?.matter?.sundryLablePriented"
+                  [meta]="metaDataLinker('INPchkSundryLabelPrinted')" class="antfees_checked">
+                </dps-edit-screen-checkbox>
+                <dps-edit-screen-text-input lableName="Postcode"
+                  (inputValueChange)="onValueChanged(ControllerType.input,$event,'sundryPostCode')"
+                  [modelData]="matterModelData?.matter?.sundryPostCode"
+                  [meta]="metaDataLinker('INPtxtAddressBillingPostcode')"></dps-edit-screen-text-input>
+                <dps-edit-screen-single-column-select showType=""
+                  [modelData]="matterModelData?.matter?.sundryProfitCost" [noEntriesFoundLabel]="noEntriesFoundLabel"
+                  [placeholderLabel]="placeholderLabel" [columnName]="'Name'"
+                  [meta]="metaDataLinker('INPcboSundryProfitCost')" [comboModelData]="sundryProfitCostList"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'sundryProfitCost')">
+                </dps-edit-screen-single-column-select>
+                <dps-edit-screen-single-column-select showType=""
+                  [modelData]="matterModelData?.matter?.sundryDefaultDDABank"
+                  [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"
+                  [columnName]="'Name'" [meta]="metaDataLinker('INPtxtDefaultDDABank')"
+                  [comboModelData]="defaultDDABankList"
+                  (selectionchangedData)="onValueChanged(ControllerType.cmb,$event,'sundryDefaultDDABank')">
+                </dps-edit-screen-single-column-select>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <!--End sundry-->
+
+      <!--start crime-->
+      <div class="dps-matter-creation-content-wrapper dps-white-gray-scroll" [hidden]="selectedTab!='INPtpgCrimeTab'">
+        <div fxLayout="column wrap" fxLayoutAlign="start start" class="dps-crime-tab">
+          <div fxLayout="row wrap" class="crime_tab_content">
+            <dps-edit-screen-text-input (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeUFN')"
+              [modelData]="matterModelData?.matter?.crimeUFN" [meta]="metaDataLinker('INPtxtCrimeUniqueFileNo')"
+              maxlength='10'>
+            </dps-edit-screen-text-input>
+            <dps-edit-screen-text-input (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeLeadUFN')"
+              [modelData]="matterModelData?.matter?.crimeLeadUFN" [meta]="metaDataLinker('INPtxtCrimeLeadUFN')">
+            </dps-edit-screen-text-input>
+
+            <dps-edit-screen-checkbox labelPosition="before"
+              (valueChange)="onLeadFileForBillingChanged(ControllerType.chb,$event,'leadFileForBilling')"
+              [meta]="metaDataLinker('INPchkCrimeIsLeadUFNCheck')" class="lead_checked">
+            </dps-edit-screen-checkbox>
+
+
+          </div>
+          <!-- <div>
+            <span class="ufn">UFN for billing Proceedings</span>
+            <button mat-raised-button (click)="crimeLeadUFN()" class="crime_assign">
+              <mat-icon>input</mat-icon>
+              Assign
+            </button>
+          </div> -->
+
+          <div fxLayout="row wrap">
+            <dps-edit-screen-editable-dropdown
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeBailCondition1')"
+              [modelData]="matterModelData?.matter?.crimeBailCondition1"
+              [meta]="metaDataLinker('INPtxtCrimeBailCondition1')" [detailList]="crimeBailConditionList">
+            </dps-edit-screen-editable-dropdown>
+            <dps-edit-screen-editable-dropdown
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeBailCondition2')"
+              [modelData]="matterModelData?.matter?.crimeBailCondition2"
+              [meta]="metaDataLinker('INPtxtCrimeBailCondition2')" [detailList]="crimeBailConditionList">
+            </dps-edit-screen-editable-dropdown>
+            <dps-edit-screen-editable-dropdown
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeBailCondition3')"
+              [modelData]="matterModelData?.matter?.crimeBailCondition3"
+              [meta]="metaDataLinker('INPtxtCrimeBailCondition3')" [detailList]="crimeBailConditionList">
+            </dps-edit-screen-editable-dropdown>
+            <dps-edit-screen-editable-dropdown
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeBailCondition4')"
+              [modelData]="matterModelData?.matter?.crimeBailCondition4"
+              [meta]="metaDataLinker('INPtxtCrimeBailCondition4')" [detailList]="crimeBailConditionList">
+            </dps-edit-screen-editable-dropdown>
+            <dps-edit-screen-editable-dropdown
+              (inputValueChange)="onValueChanged(ControllerType.input,$event,'crimeBailCondition5')"
+              [modelData]="matterModelData?.matter?.crimeBailCondition5"
+              [meta]="metaDataLinker('INPtxtCrimeBailCondition5')" [detailList]="crimeBailConditionList">
+            </dps-edit-screen-editable-dropdown>
+          </div>
+
+        </div>
+      </div>
+      <!--End crime-->
+
+      <!--start client-side-->
+      <div class="dps-matter-creation-content-wrapper dps-white-gray-scroll"
+        [hidden]="selectedTab!='INPtpgContactInfo'">
+        <div class="expanded-content dps-white-gray-scroll" [@.disabled]="true">
+          <mat-accordion [multi]="true">
+            <!-- <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblOurClient')?.scL_Visible">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>assignment_ind</mat-icon>
+                    <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblOurClient')">
+                    </dps-edit-screen-lable>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="space-between">
+                  <div fxLayout="column wrap">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Title"
+                        [value]="matterModelData?.client1?.clientTitle">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="First Name"
+                        [value]="matterModelData?.client1?.firstName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Last Name"
+                        [value]="matterModelData?.client1?.lastName">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column wrap">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Letter Title"
+                        [value]="matterModelData?.client1?.letterTitle">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Contact Name"
+                        [value]="matterModelData?.client1?.contactName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Email" [value]="matterModelData?.client1?.email1">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column wrap">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Second Email"
+                        [value]="matterModelData?.client1?.email2">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Telephone No"
+                        [value]="matterModelData?.client1?.phone">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Work Phone"
+                        [value]="matterModelData?.client1?.workPhone">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column wrap">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Mobile No"
+                        [value]="matterModelData?.client1?.mobilePhone">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Fax No" [value]="matterModelData?.client1?.fax">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblOurClient')?.scL_Visible">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>assignment_ind</mat-icon>
+                    Our Client 2
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="dps-client-search-btn">
+                  <button mat-button class="client_search" (click)="onSearchSecondClient()">
+                    <mat-icon>search</mat-icon>
+                    <span>Client Search</span>
+                  </button>
+
+                  <button mat-button class="client_clear" (click)=onClearSecondClient()>
+                    <mat-icon>clear_all</mat-icon>
+                    <span>Clear Search</span>
+                  </button>
+                </div>
+
+                <div class="expanded-content " fxLayout="row wrap" fxLayoutAlign="start start">
+                  <div fxLayout="column wrap" class="dps-matter-form-controller">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Ref" [value]="matterModelData?.matter?.clientRef2">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Title"
+                        [value]="matterModelData?.client2?.clientTitle">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="First Name"
+                        [value]="matterModelData?.client2?.firstName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Last Name"
+                        [value]="matterModelData?.client2?.lastName">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column wrap">
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Letter Title"
+                        [value]="matterModelData?.client2?.letterTitle">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Contact Name"
+                        [value]="matterModelData?.client2?.contactName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput disabled="true" placeholder="Email" [value]="matterModelData?.client2?.email1">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-expansion-panel> -->
+
+            <mat-expansion-panel [expanded]="true" *ngIf="metaDataLinker('INPlblOtherSideDetails')?.scL_Visible">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>person_outline</mat-icon>
+                  <dps-edit-screen-lable [modelData]="''" [meta]="metaDataLinker('INPlblOtherSideDetails')">
+                  </dps-edit-screen-lable>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="expanded-content" fxLayout="row wrap" fxLayoutAlign="start start">
+                <div fxLayout="column wrap" class="dps-matter-form-controller">
+                  <dps-edit-screen-text-input
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'outSideSurname1')"
+                    [modelData]="matterModelData?.matter?.outSideSurname1"
+                    [meta]="metaDataLinker('INPtxtSundrySurname1')"></dps-edit-screen-text-input>
+                  <dps-edit-screen-text-input
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'outsidePostCode1')"
+                    [modelData]="matterModelData?.matter?.outsidePostCode1"
+                    [meta]="metaDataLinker('INPtxtSundryPostcode1')"></dps-edit-screen-text-input>
+
+                  <dps-edit-screen-datepicker (dateChange)="onValueChanged(ControllerType.dtp,$event,'outsideDOB1')"
+                    [modelData]="matterModelData?.matter?.outsideDOB1" [meta]="metaDataLinker('INPdteSundryDOB1')">
+                  </dps-edit-screen-datepicker>
+                </div>
+                <div fxLayout="column wrap">
+                  <dps-edit-screen-text-input
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'outSideSurname2')"
+                    [modelData]="matterModelData?.matter?.outSideSurname2"
+                    [meta]="metaDataLinker('INPtxtSundrySurname2')"></dps-edit-screen-text-input>
+                  <dps-edit-screen-text-input
+                    (inputValueChange)="onValueChanged(ControllerType.input,$event,'outsidePostCode2')"
+                    [modelData]="matterModelData?.matter?.outsidePostCode2"
+                    [meta]="metaDataLinker('INPtxtSundryPostcode2')"></dps-edit-screen-text-input>
+                  <dps-edit-screen-datepicker (dateChange)="onValueChanged(ControllerType.dtp,$event,'outsideDOB2')"
+                    [modelData]="matterModelData?.matter?.outsideDOB2" [meta]="metaDataLinker('INPdteSundryDOB2')">
+                  </dps-edit-screen-datepicker>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <div class="dps-matter-creation-clients dps-white-gray-scroll" [hidden]="selectedTab!='INPtpgClients'">
+
+
+
+        <div class="button-outer-wrapper content">
+          <!-- <button mat-button class="dps-add-btn" (click)="onSearchSecondClient()">
+                <mat-icon>add</mat-icon>
+                <span>Add</span>
+              </button> -->
+          <button mat-button class="dps-add-btn" [disabled]="disabledAddClientButton" (click)="onAddOtherClient()"
+            mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            <span>Add</span>
+          </button>
+        </div>
+        <!-- <button class="dps-add-btn" style="   " mat-button >Add</button> -->
+        <!-- <dps-grid-container style="height:calc(100% - 35px);" [gridColoumn]="clientGridColumn" [pageEvent]="">
+          <dps-client-view-data [gridColoumn]="clientGridColumn" [gridData]="clientList"
+            (removeClient)="onClearSecondClient()">
+          </dps-client-view-data>
+        </dps-grid-container> -->
+        <dps-common-grid-table [columns]="clientGridColumns" [rows]="clientRows"
+          [matMenu]="selectedClient?.data?.client === 'lead' ? matClientMenu:  matClientFullMenu"
+          [rippleEnabled]="false" (rowClick)="onSelectClient($event)" (rowRightClick)="onSelectClient($event)"
+          (rowButtonClick)="onRemoveClient($event)">
+        </dps-common-grid-table>
+        <mat-menu #matClientMenu="matMenu">
+          <button class="dps-client-menu-item dps-view-client" mat-menu-item (click)="onViewClient()">
+            <mat-icon>person_add</mat-icon>
+            View Client
+          </button>
+        </mat-menu>
+        <mat-menu #matClientFullMenu="matMenu">
+          <button class="dps-client-menu-item dps-view-client" mat-menu-item (click)="onViewClient()">
+            <mat-icon>person_add</mat-icon>
+            View Client
+          </button>
+          <mat-divider></mat-divider>
+          <button class="dps-client-menu-item dps-remove-client" mat-menu-item (click)="onRemoveSelectedClient()">
+            <mat-icon>delete</mat-icon>
+            Remove Client On Matter
+          </button>
+          <mat-divider></mat-divider>
+          <button *ngIf="isMuiliClient()" class="dps-client-menu-item dps-poromote-client" mat-menu-item
+            (click)="onPromoteClient()">
+            <mat-icon>speaker_group</mat-icon>
+            Promote to Lead Client
+          </button>
+        </mat-menu>
+      </div>
+      <!--End client-side-->
+    </div>
+    <!-- </mat-sidenav-container> -->
+  </div>
+</div>

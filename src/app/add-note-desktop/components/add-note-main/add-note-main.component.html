@@ -1,0 +1,48 @@
+<div class="dps-white-gray-scroll dps-addnote-diary-type" fxFlex="1 1 auto">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <dps-add-note-for-user [feeEarnerList]="feeEarnerList" placeholder="For"
+      (updatedFeeErner)="onFeeEarnerChanged($event)"></dps-add-note-for-user>
+    <dps-add-note-diary-type [isDiaryTypeDisable]="isDiaryTypeDisable" [diaryTypes]="diaryTypes"
+      (updateSelectedType)="onDiaryTypeChanged($event)"></dps-add-note-diary-type>
+    <mat-form-field floatLabel="always">
+      <input matInput [matDatepicker]="picker" placeholder="Date Done" [ngModel]="dateDone | date:'yyyy-MM-dd'"
+        (dateChange)="onChangeDateDone($event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="strat center" fxLayoutGap="40px">
+    <!-- <dps-add-note-folder [customeSelectedfolder]="0" [isSelectDefultFolder]="true" [folderList]="folderList"
+      (updateSelectedFolder)="onFolderChanged($event)"></dps-add-note-folder> -->
+    <button mat-button [matMenuTriggerFor]="menu.childMenu" class="addnote-master-folder">
+      <i class="fa tree-folder-ico fa-folder"></i>Folder [{{selectedFolder?.folderName}}]
+    </button>
+    <dps-add-note-folder-menu #menu [items]="treeFolder" (updateSelectedFolder)="onFolderChanged($event)">
+    </dps-add-note-folder-menu>
+    <dps-add-note-action [actionTypeList]="actionType" (updateSelectedAction)="onActionChanged($event)">
+    </dps-add-note-action>
+    <span fxFlex="1 1 auto"></span>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+    <dps-add-note-file-upload *ngIf="!isEdit" [isEdit]="isEdit" [fileUploadDisable]="fileUploadDisable"
+      [password]="password" [itemDataList]="itemDataList" (uploadedFile)="onUploadeFile($event)" [isLoading]="isLoading"
+      [itemsLoading]="itemsLoading" (updatePassword)="onupdatePassword($event)">
+    </dps-add-note-file-upload>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="8em" class="signature-hide">
+    <mat-checkbox class="dps-signature" labelPosition="before" [checked]="sendForSignature"
+      (change)="onSendForSignatureChange($event)" color="primary">Send for signature</mat-checkbox>
+    <dps-add-note-for-user [feeEarnerList]="sendForSignatureToList" [disabled]="!sendForSignature" placeholder="To"
+      (updatedFeeErner)="onSendForSignatureToChange($event)"></dps-add-note-for-user>
+  </div>
+
+  <div class="full-width" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <mat-form-field floatLabel="always" class="add-note-editor">
+      <textarea matInput placeholder="Note" rows="3" maxlength="250" [(ngModel)]="note"
+        (focusout)="onNoteChange($event)"></textarea>
+    </mat-form-field>
+  </div>
+</div>

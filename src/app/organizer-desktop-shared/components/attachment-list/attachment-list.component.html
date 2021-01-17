@@ -1,0 +1,78 @@
+<mat-chip-list *ngIf="!canDelete" class="mat-typography">
+  <div *ngFor="let attachment of attachments">
+    <mat-chip *ngIf="attachment.name.endsWith('.dps') && attachment.name|isDPSMail:companyCode"
+      [disabled]="!(moduleIsActive(module.Matter) | async) || (mailItemData?.popupType==='eChitAuthorisations')"
+      class="dps-attachment-icon dps-link" (click)="onClickDpsLink(attachment, $event)">
+      <img src="is-dps-mail.png" width="17px" height="17px">
+      <span class="dps-link name"
+        [title]="attachment.name.replace('.dps', '')">{{attachment.name.replace('.dps', '')}}</span>
+    </mat-chip>
+    <mat-chip *ngIf="!attachment.name.endsWith('.dps')" [matTooltip]="attachment.size | attachmentsSize"
+      [disabled]="mailItemData?.popupType==='eChitAuthorisations'" [matTooltipDisabled]="attachment.size<1"
+      matTooltipPosition="below" class="dps-attachment-icon" (click)="onClickAttachement(attachment, $event)">
+      <i [ngClass]="attachment.name | attachmentIcon"
+        *ngIf="!attachment['@odata.type'] || attachment['@odata.type']==='#microsoft.graph.fileAttachment'"
+        aria-hidden="true">
+        <span></span>
+      </i>
+      <i *ngIf="attachment['@odata.type']==='#microsoft.graph.itemAttachment'"
+        class="fa fa-envelope dps-item-attachment"></i>
+      <span [title]="attachment.name" class="name">&nbsp;&nbsp;{{attachment.name}}</span>
+      <!-- Uncomment for disable the download option in file viwer  -->
+      <!-- <mat-icon matChipRemove *ngIf="attachment['@odata.type']==='#microsoft.graph.fileAttachment'"  -->
+      <mat-icon matChipRemove *ngIf="(!attachment['@odata.type'] || attachment['@odata.type']==='#microsoft.graph.fileAttachment') &&
+        isComputerDownloadOnly" title="Download" (click)="onDownloardFileAttachment('computer',attachment, $event)">
+        file_download</mat-icon>
+      <mat-icon matChipRemove *ngIf="(!attachment['@odata.type'] || attachment['@odata.type']==='#microsoft.graph.fileAttachment') &&
+        !isComputerDownloadOnly" title="Download" (click)="stopPropagation($event)"
+        [matMenuTriggerFor]="attachmentUploadMenu.contextMenu">
+        file_download</mat-icon>
+      <dps-attachment-upload-menu #attachmentUploadMenu [mailItemData]="mailItemData"
+        (fromComputer)="onDownloardFileAttachment('computer',attachment, $event)"
+        (fromCloud)="onDownloardFileAttachment('cloud',attachment, $event)"></dps-attachment-upload-menu>
+    </mat-chip>
+  </div>
+
+</mat-chip-list>
+
+<mat-chip-list *ngIf="canDelete === true" class="mat-typography dps-can-edit">
+  <div *ngFor="let attachment of composeAttachments">
+    <mat-chip *ngIf="attachment.attachment.name.endsWith('.dps')"
+      [disabled]="!(moduleIsActive(module.Matter) | async) || (mailItemData?.popupType==='eChitAuthorisations')"
+      (click)="onClickDpsLink(attachment.attachment, $event)" class="dps-attachment-icon dps-link">
+      <img src="is-dps-mail.png" width="17px" height="17px">
+      <span [title]="attachment.attachment.name.replace('.dps', '')"
+        class="name">{{attachment.attachment.name.replace('.dps', '')}}</span>
+      <mat-icon matChipRemove *ngIf="!attachment.isUploding" (click)="onDeleteAttachment(attachment.attachment, $event)"
+        title="Delete">cancel</mat-icon>
+      <i matChipRemove class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="attachment.isUploding"></i>
+    </mat-chip>
+    <mat-chip *ngIf="!attachment.attachment.name.endsWith('.dps')"
+      [disabled]="mailItemData?.popupType==='eChitAuthorisations'"
+      [matTooltip]="attachment.attachment.size | attachmentsSize"
+      (click)="onClickAttachement(attachment.attachment, $event)" matTooltipPosition="below"
+      class="dps-attachment-icon">
+      <i [ngClass]="attachment.attachment.name | attachmentIcon"
+        *ngIf="attachment.attachment['@odata.type']==='#microsoft.graph.fileAttachment'" aria-hidden="true">
+        <span></span>
+      </i>
+      <i *ngIf="attachment.attachment['@odata.type']==='#microsoft.graph.itemAttachment'"
+        class="fa fa-envelope dps-item-attachment"></i>
+      <span [title]="attachment.attachment.name" class="name">&nbsp;&nbsp;{{attachment.attachment.name}}</span>
+      <mat-icon matChipRemove *ngIf="attachment.attachment['@odata.type']==='#microsoft.graph.fileAttachment' && !attachment.isUploding &&
+        isComputerDownloadOnly" (click)="onDownloardFileAttachment('computer',attachment.attachment, $event)"
+        title="Download">
+        file_download</mat-icon>
+      <mat-icon matChipRemove *ngIf="attachment.attachment['@odata.type']==='#microsoft.graph.fileAttachment' && !attachment.isUploding &&
+        !isComputerDownloadOnly" (click)="stopPropagation($event)"
+        [matMenuTriggerFor]="attachmentUploadMenu2.contextMenu" title="Download">
+        file_download</mat-icon>
+      <dps-attachment-upload-menu #attachmentUploadMenu2 [mailItemData]="mailItemData"
+        (fromComputer)="onDownloardFileAttachment('computer',attachment.attachment, $event)"
+        (fromCloud)="onDownloardFileAttachment('cloud',attachment.attachment, $event)"></dps-attachment-upload-menu>
+      <mat-icon matChipRemove *ngIf="!attachment.isUploding" (click)="onDeleteAttachment(attachment.attachment, $event)"
+        title="Delete">cancel</mat-icon>
+      <i matChipRemove class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="attachment.isUploding"></i>
+    </mat-chip>
+  </div>
+</mat-chip-list>

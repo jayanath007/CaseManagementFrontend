@@ -1,0 +1,70 @@
+@import '~styles/variables.scss';
+
+mat-form-field {
+  width: 100%;
+}
+
+.organizer-alert {
+  height: 100%;
+
+  .mat-dialog-title {
+    padding: 5px 14px 5px;
+    color: $primary;
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+}
+
+.organizer-alert.general .mat-dialog-title {
+  background-color: #274e8a;
+}
+
+.mat-dialog-title mat-icon {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+mat-dialog-content {
+  min-height: 100px;
+  max-height: 100px;
+  padding: 0 18px;
+  margin: 0px;
+
+  div {
+    & {
+      font-size: 13px;
+    }
+
+    font-family: $primary-font-stack;
+  }
+}
+
+mat-dialog-actions {
+  padding: 12px 20px;
+}
+
+.dps-display-name {
+  padding-left: 38px;
+}
+
+.dps_recipient_name {
+  position: absolute;
+  top: -9px;
+  text-align: center;
+  width: 28px;
+  color: white;
+  font-size: $primary-font-size - 1;
+}
+
+.dps_recipient {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px
+}
+
+.dps-mail-item-avatar span {
+  color: white;
+}

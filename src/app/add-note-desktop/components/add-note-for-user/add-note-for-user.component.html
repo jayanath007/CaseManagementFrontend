@@ -1,0 +1,7 @@
+<mat-form-field floatLabel="always">
+  <mat-select [placeholder]="placeholder" [ngModel]="selectedFeeEarner" [disabled]="disabled"  (selectionChange)="onChangeFeeEarner($event.value)">
+    <mat-option *ngFor="let Group of feeEarnerList" [value]="Group">
+      {{ Group.groupName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

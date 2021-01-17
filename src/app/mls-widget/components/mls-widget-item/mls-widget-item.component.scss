@@ -1,0 +1,158 @@
+@import '~styles/variables.scss';
+
+.widget-item {
+  height: 60px !important;
+}
+
+.dps-mls-user {
+  display: flex;
+}
+
+
+
+
+.dps-sender-avatar span {
+  font-size: 15px;
+  color: $primary;
+  position: relative;
+  top: -2px;
+}
+
+.mls-body-preview-text {
+  // flex: 1 1 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  font-size: $primary-font-size - 3;
+}
+
+.dps-mls-chat-item-name {
+  // flex: 1 1 0;
+  font-weight: 600;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #143352;
+}
+
+.dps-mls-chat-item-icon {
+  font-weight: 500;
+  color: #1f4769;
+  font-size: $secondary-font-size;
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.dps-mls-item-date {
+  font-weight: 500;
+  color: #1f4769;
+  font-size: $secondary-font-size;
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.dps-mls-item-body {
+  position: absolute;
+  right: 45px;
+  flex-flow: row wrap;
+  padding-top: 1px;
+  align-items: flex-end;
+}
+
+
+
+input {
+  height: 100%;
+}
+
+.dps-reply-fld-outer {
+  background: #6dc1f9;
+  padding: 5px 12px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.dps-reply-btn {
+  padding: 0px 0px;
+  min-width: 45px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background: #2ea6f6;
+  color: #ffffff;
+}
+
+// .message {
+//   width: 0px;
+//   height: 0px;
+//   border-top: 7px solid transparent;
+//   border-bottom: 7px solid transparent;
+//   border-right: 8px solid #6dc1f9;
+//   position: relative;
+//   top: 18px;
+
+//   &.dps-send-fld {
+//     border-right: 8px solid #ffffff;
+//   }
+// }
+
+.dps-message-module {
+  z-index: 1;
+  display: flex;
+  border: 1px solid #cae3f4;
+  position: relative;
+  width: 100%;
+}
+
+.dps-input-message {
+  width: 100%;
+  border-width: 0;
+  background-color: #ffffff;
+  padding: 0 15px;
+}
+
+.dps-send-btn {
+  background: #dceaf5;
+  border-radius: 0px;
+  min-width: 30px;
+  padding: 0px 5px;
+  mat-icon {
+    font-size: $primary-font-size + 8;
+    height: 21px;
+    color: #276bb1;
+  }
+}
+
+.dps-exit {
+  position: absolute;
+    top: -10px;
+    left: -10px;
+
+    mat-icon {
+      font-size: 15px;
+     color: #ef8585;
+    }
+}
+
+
+.dps-input-message:focus {
+  outline: none;
+
+}
+
+input[type="text"] {
+  outline-style: none;
+}
+
+.hide-compose {
+  display: none !important;
+}
+
+.show-compose {
+  height: 209px;
+  width: 225px;
+  
+}
+

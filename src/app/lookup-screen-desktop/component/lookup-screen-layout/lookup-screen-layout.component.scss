@@ -1,0 +1,21 @@
+@import '~styles/variables.scss';
+
+.lookup-popup-form {
+    height: 600px;
+    position: relative;
+}
+
+.mat-dialog-content {
+    display: block;    
+    max-height: 80vh;
+    min-height: 80vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+
+dps-lookup-screen-grid-row {
+    height: 100%;
+}

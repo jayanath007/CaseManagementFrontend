@@ -1,0 +1,100 @@
+@import '~styles/variables.scss';
+
+.dps-core-bundle-popup {
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  mat-toolbar {
+    min-height: 40px;
+  }
+
+  mat-toolbar-row {
+    height: 40px;
+
+    & .primary-section {
+      background: #d4e5f5;
+    }
+  }
+
+  .dps-core-bundle-header {
+    background: $header-primary;
+    color: #dfeaff;
+    font-size: $primary-font-size;
+
+    .dps-header {
+      mat-icon {
+        vertical-align: middle;
+        border-radius: 100%;
+        border: 2px solid #859ece;
+        color: #a9c6fd;
+        height: 14px;
+        width: 18px;
+        font-size: 18px;
+        line-height: 9px;
+        padding: 5px 1px 1px 1px;
+        margin: -2px 0 0 0;
+      }
+    }
+  }
+
+  dps-column-header {
+    height: 40px;
+    padding: 8px 6px 6px !important;
+
+    ::ng-deep .from.Core.Bundle {
+      line-height: 13px;
+    }
+
+  }
+
+
+  .dps-core-action {
+    padding: 0px 15px 10px 0px;
+    .dps-core-btn {
+      background: #2482bf;
+      font-size: $primary-font-size - 2;
+      color: $primary;
+      font-weight: 400;
+    }
+    
+  }
+
+}
+
+.dps-core-bundle-header {
+  background: $header-primary;
+  color: #dfeaff;
+  font-size: $primary-font-size;
+
+  .dps-header {
+    mat-icon {
+      vertical-align: middle;
+      border-radius: 100%;
+      border: 2px solid #859ece;
+      color: #a9c6fd;
+      height: 14px;
+      width: 18px;
+      font-size: 18px;
+      line-height: 9px;
+      padding: 5px 1px 1px 1px;
+      margin: -2px 0 0 0;
+    }
+  }
+}
+
+
+.row-highlight {
+  background: #7fb5e6;
+  height: 35px;
+  font-family: $primary-font-stack;
+  width: calc(100% - 15px);
+}
+
+
+.dps-grid-scroll {
+  overflow: scroll;
+}
+

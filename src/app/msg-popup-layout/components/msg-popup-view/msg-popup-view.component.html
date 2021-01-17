@@ -1,0 +1,28 @@
+<div fxLayout="column" class="mail-preview">
+
+
+  <div class="popup-header" fxFlex="0 0 42px">
+    <mat-toolbar>
+      <mat-toolbar-row class="dps-toolbar-box-shadow dps-msg-viewer-header">
+        <span></span>
+        <div fxFlexAlign="center" class="dps-header">
+          <mat-icon matListIcon class="matter-icon">mail_outline</mat-icon>
+          <span class="clients-text">MSG Viewer</span>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <button mat-icon-button (click)="onClose()">
+          <mat-icon class="close-btn">close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <mat-dialog-content class="dps-white-gray-scroll">
+    <dps-mail-view-content [item]="item.emailItem" *ngIf="item?.emailItem" (meetingResponse)="onMeetingResponse($event)"
+      [timeZone]="timeZone" [companyCode]="companyCode" (replyForward)="onReplyForward($event)"
+      (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+      (viewDpsFile)="onViewDpsFile($event)" [isItemAttachment]="true"
+      [openFrom]="msgToken==='MSG_FILE_POPUP'?'openCase':(msgToken==='ECHIT_AUTHORISATIONS_MSG_FILE_POPUP'?'echit':'mail')">
+    </dps-mail-view-content>
+  </mat-dialog-content>
+
+</div>

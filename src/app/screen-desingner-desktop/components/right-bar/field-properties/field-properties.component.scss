@@ -1,0 +1,79 @@
+@import '~styles/variables.scss';
+.field-properties-container
+{
+    padding: 5px 5px 0;
+    overflow: auto;
+    height: calc(100% - 80px);
+    margin-bottom: 14px;
+}
+.field-properties-container h1
+{
+    font-size: 15px;
+    font-weight: 500;
+    padding-top: 8px;
+    padding-left: 8px;
+
+}
+.mat-input-element, .property-value-drop
+{
+    font-size: 12px;
+    width: 100%;
+}
+.property-value-text
+{
+    width: 100%; 
+}
+
+.property-value-text .mat-input-element
+{
+    font-size: 12px;
+}
+.top-update-button-wrap
+{
+    padding-top: 15px;
+    margin-bottom: 17px;
+    text-align: right;
+    padding-right: 15px;
+}
+.update-button
+{
+    background: #397d3f;
+    color: $primary;
+}
+.lookup-btn
+{
+    padding-top:8px; 
+    padding-left:4px;
+}
+.lookup-btn button
+{
+    
+    background: #3f7eb5;
+    color: $primary;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.bottom-controller-set
+{
+    padding:10px 3px;
+    height: 65px;
+}
+.bottom-controller-set .property-navigation
+{
+    background-color: #22529a;
+}
+.mat-expansion-panel
+{
+    background: none;
+}
+.mat-expansion-panel-header
+{
+    background: #a4d0ea;
+}
+.mat-accordion .mat-expansion-panel-spacing {
+    background: #a4d1ea;
+}
+mat-divider{
+    margin-bottom: 20px;
+}

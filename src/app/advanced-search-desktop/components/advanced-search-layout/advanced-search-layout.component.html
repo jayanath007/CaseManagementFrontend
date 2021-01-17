@@ -1,0 +1,37 @@
+<div fxLayout="column" class="dps-Advanced-search-layout">
+
+  <div class="dps-Advanced-search-header" fxFlex="0 0 46px">
+    <mat-toolbar>
+      <mat-toolbar-row fxLayoutAlign="center center" class="dps-toolbar-box-shadow">
+        <mat-list matLine fxLayout="row">
+          <span fxFlex="1 1 auto"></span>
+          <mat-list-item fxLayoutAlign="center center">
+            <mat-icon class="header-icon" matListIcon>pageview</mat-icon>
+            <span matLine class="matter-heading">Advanced Search</span>
+          </mat-list-item>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button (click)="onClose()">
+            <mat-icon class="header-icon-delete">close</mat-icon>
+          </button>
+        </mat-list>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+  </div>
+  <!-- 
+{{advancedSearchViewMode.searchFields | json}}  -->
+  <!-- {{clientList | json}}   -->
+
+  <dps-advanced-search-header (changeAppCode)="onChangeAppCode($event)" [branchList]="branchList"
+    [isLoading]="isLoading" [advancedSearchViewMode]="advancedSearchViewMode"
+    [matterDisplyName]="resoleModuleName('matter_search')|async"
+    [clientDisplyName]="resoleModuleName('client_search')|async" (viewChange)="onViewChange($event)"
+    (advancedSearchClick)="onAdvancedSearchClick()" [clientList]="clientList" [appCodeList]="appCodeList">
+  </dps-advanced-search-header>
+  <dps-advanced-search-grid fxFlex="calc(100%-103px)" (openCaseClick)="onOpenCaseClick($event)"
+    (viewChange)="onViewChange($event)" (coloumnHeaderRightClick)="onColoumnHeaderRightClick($event)"
+    [paginatorDef]="paginatorDef" [totalItem]="total" [advancedSearchViewMode]="advancedSearchViewMode"
+    [columnDef]="columnDef" [isLoading]="isLoading" [coloumnArray]="coloumnArray" [gridDataList]="gridDataList">
+  </dps-advanced-search-grid>
+
+</div>

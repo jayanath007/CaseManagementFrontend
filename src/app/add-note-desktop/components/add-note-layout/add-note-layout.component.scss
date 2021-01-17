@@ -1,0 +1,101 @@
+@import '~styles/variables.scss';
+
+mat-dialog-content {
+  height: 500px;
+}
+
+mat-toolbar {
+  background: $dps-popup-matbar;
+  height: 42px;
+  mat-icon {
+    color: $primary;
+  }
+
+  mat-list-item {
+    span {
+      font-size: $primary-font-size;
+    }
+  }
+
+}
+
+mat-toolbar mat-list-item {
+  color: $toolbar-title;
+}
+
+mat-list-item {
+  width: 100%;
+  font-size: $primary-font-size;
+}
+
+div.addnote-form {
+  height: 100%;
+}
+
+.dps-addnote-matlist {
+  width: 100%;
+  padding-top: 0px
+}
+
+.dps-addnote-main {
+  overflow: auto;
+  height: 100%
+}
+
+.mat-dialog-content {
+  display: block;
+  padding: 0 0px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  padding: 0px 20px 0px 20px;
+}
+
+.mat-tab-body-wrapper {
+  display: block;
+  height: 65vh;
+  min-height: 65vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.mat-form-field-infix {
+  font-size: 10px
+}
+
+.mat-select {
+  font-size: 15px;
+}
+
+.mat-input-element {
+  font-size: 15px;
+}
+
+.mat-checkbox-layout {
+  font-size: 15px;
+}
+
+mat-option,
+mat-checkbox,
+button {
+  font-size: 12px !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #006cc1;
+  background: #d9eeff;
+}
+
+.dps-time-submit {
+  background: $dps-primary-view;
+  color: $primary;
+}
+
+.dps-can-not-edit-label {
+  color: red;
+  padding-left: 16px;
+}

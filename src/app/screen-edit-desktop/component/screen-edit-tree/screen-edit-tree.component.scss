@@ -1,0 +1,29 @@
+@import '~styles/variables.scss';
+
+span.screen_tree_item {
+  font-size: $primary-font-size - 2;
+  color: #0f4a8e;
+  vertical-align: super;
+  font-family: $primary-font-stack;
+}
+
+.indicator-icon {
+  color: #3795c3;
+  margin-right: 4px;
+}
+
+tree-root::ng-deep {
+  .node-content-wrapper {
+    width: 100%;
+  }
+  .node-content-wrapper.node-content-wrapper-focused {
+    background: #beebff;
+  }
+  tree-node-expander {
+    padding-right: 4px;
+  }
+}
+
+.dps-tree-node {
+  width: 100%;
+}

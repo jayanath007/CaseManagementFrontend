@@ -1,0 +1,405 @@
+@import '~styles/variables.scss';
+
+.row-data {
+  padding: 0px 0px 0px;
+}
+
+.fa-angle-right:before {
+  margin-left: 5px;
+}
+
+.fa-angle-right:before {
+  margin-left: 5px;
+}
+
+.right-click {
+  border-bottom: 1px solid #dbdcdc;
+  padding: 5px 15px;
+  background: #F0EFF4;
+}
+
+.edit-field-area {
+  background: #88cef1;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(82, 98, 142, 0.2), rgba(160, 188, 232, 0.2) 1px, #a2c4ef00 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+  padding: 5px 10px 40px 0px;
+}
+
+.edit-tree-row-select:focus {
+  outline: 0;
+}
+
+.icon-box {
+  border-radius: 23px;
+  margin: 0px 10px;
+  padding: 2px 3px;
+}
+
+.add-item-above {
+  border: 2px solid rgb(234, 201, 157);
+  background-color: #fff0c2;
+  padding: 8px 0px;
+  position: relative;
+  top: 4px;
+}
+
+.add-item-above mat-icon {
+  color: #ffae2e;
+  padding: 2px;
+  left: 5px;
+  position: relative;
+}
+
+.add-item-above mat-icon span {
+  color: #ac7113;
+}
+
+.add-menu-above {
+  border: 2px solid #2187cc;
+  background: #d7efff;
+  padding: 8px 0px;
+  position: relative;
+  top: 4px;
+
+}
+
+mat-list.workflow-edit-list {
+  padding-top: 0px;
+
+  .list-item {
+    width: 100%;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  i.dps-folder-item-toggle {
+    padding: 5px;
+    width: 13px;
+    font-size: $primary-font-size + 4;
+    color: #175c79;
+  }
+
+  mat-icon {
+    font-size: $primary-font-size - 2;
+  }
+}
+
+.input-wrapper {
+  padding-left: 35px
+}
+
+
+.add-menu-above mat-icon {
+  color: #3498db;
+  padding: 2px;
+  left: 2px;
+  position: relative;
+}
+
+.add-menu-above mat-icon span {
+  color: #156ea8;
+
+}
+
+.fa-th-large:before {
+
+  color: #f39c12;
+}
+
+.fa-sort-up:before,
+.fa-sort-asc:before {
+  color: #0e3e65;
+}
+
+.item-move mat-icon {
+  font-size: $primary-font-size - 2;
+}
+
+.expanded mat-icon {
+  border: 1px solid #a06804;
+  background: #eabd6b;
+
+  position: relative;
+}
+
+.expanded span {
+  color: #6e5139;
+  font-size: 18px;
+  position: relative;
+  // top: -3px;
+  top: 3px;
+  left: 3px;
+}
+
+.expand-icon button {
+  padding: 0;
+  min-width: 0;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  line-height: 0px;
+  border-radius: 50%;
+  position: relative;
+  top: -3px;
+  right: 7px;
+}
+
+.expand-icon mat-icon {
+  font-size: $primary-font-size + 2;
+  padding: 0px 0px;
+}
+
+.row-option button {
+
+  min-width: 0;
+  width: 35px;
+  height: 35px;
+
+}
+
+.row-option button.cut {
+  color: $primary;
+  background: #6dbdc6;
+  border: 1px solid #6dbdc6;
+}
+
+.row-option button.duplicate {
+  color: #add7f6;
+  background: #19639a;
+  border: 1px solid #19639a;
+
+  i {
+    font-size: 19px;
+    padding-top: 0px;
+    line-height: 22px;
+  }
+}
+
+.row-option button.copy {
+  color: #eef7ff;
+  border: 1px solid #4eaf7a;
+  background: #4eaf7a;
+}
+
+.row-option button.paset {
+  color: #eef7ff;
+  border: 1px solid #f9941e;
+  background: #f9941e;
+}
+
+.row-option button.paset:disabled {
+  opacity: 0.4;
+}
+
+
+.row-option button.delete {
+  color: #ebd3d0;
+  background: #f14c4c;
+  border: 1px solid #f14c4c;
+}
+
+.row-option button mat-icon {
+  font-size: $primary-font-size;
+  padding-top: 0px;
+  line-height: 16px;
+}
+
+.dps-folder-list-item .dps-folder-item-name {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  font-size: $primary-font-size - 2;
+  font-weight: 400;
+  color: #596469;
+}
+
+.dps-folder-list-item .dps-folder-item-totalitemcount {
+  float: right;
+  font-size: $primary-font-size;
+  font-weight: 400;
+  color: #596469;
+}
+
+.dps-folder-list-item .dps-folder-item-unreaditemcount {
+  float: right;
+  font-size: $primary-font-size;
+  font-weight: 600;
+  color: #0D557C;
+}
+
+.dps-folder-list-item .mat-list-item-content {
+  padding-bottom: 10px;
+
+}
+
+.dps-folder-item-selected .dps-folder-item-name {
+  color: #0D557C;
+  font-weight: 600;
+}
+
+.dps-folder-item-selected .dps-folder-item-totalitemcount {
+  font-weight: 600;
+}
+
+.dps-dragover,
+.dps-dragover.dps-folder-list-item.dps-folder-item-selected {
+  background: #274e8a;
+}
+
+.dps-dragover .dps-folder-item-name,
+.dps-dragover .dps-folder-item-unreaditemcount,
+.dps-dragover .dps-folder-item-totalitemcount,
+.dps-dragover .dps-folder-item-toggle {
+  color: $primary;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: $primary-font-size - 2;
+}
+
+.edit-tree-row-select {
+  background: #cce0ff;
+}
+
+.menu-edit-btn {
+  color: #2f6a82;
+  background-color: #b6dbf7 !important;
+  width: 25px;
+  height: 25px;
+  box-shadow: none;
+}
+
+.input-line {
+  border-bottom: 1px solid rgb(9, 76, 143);
+}
+
+.workflow-edit-list:focus {
+  outline: 0;
+}
+
+.menu-edit-btn i {
+  font-size: $primary-font-size + 2;
+  margin-top: -10px;
+}
+
+div[fxLayoutAlign] {
+  padding-left: 8px;
+}
+
+.editable-items button mat-icon {
+  font-size: 20px;
+}
+
+.editable-items button.active mat-icon {
+  font-size: $primary-font-size + 1;
+  padding: 0px 0px;
+}
+
+.editable-items button .template {
+  color: #3a9ee0;
+}
+
+.editable-items button .screen {
+  color: #17c2a0;
+
+}
+
+.editable-items button .menu {
+  color: #f79d0c;
+}
+
+.editable-items button.active .template {
+  border: 2px solid #3a9ee0;
+}
+
+.editable-items button.active .screen {
+  border: 2px solid #17c2a0;
+}
+
+.editable-items button.active .menu {
+  border: 2px solid #f79d0c;
+}
+
+/* Start right click icons changers */
+.export-menu-localpc.active .expanded mat-icon,
+.export-menu-server.active mat-icon,
+.import-menu.active mat-icon {
+  border-radius: 3px;
+  border: none;
+}
+
+.export-menu-localpc.active,
+.export-menu-server.active,
+.import-menu.active {
+  margin-bottom: 0px;
+}
+
+.export-menu-localpc.active .expand-icon,
+.export-menu-server.active .expand-icon,
+.import-menu.active .expand-icon {
+  border: 1px solid #e8ddc8;
+  padding: 8px 6px;
+  position: relative;
+  top: -2px;
+  left: -17px;
+  box-sizing: border-box;
+  background: #debf85;
+}
+
+
+.workflow-edit-list .list-item:hover {
+  background: #e9f6ff;
+}
+
+.fa.fa-exclamation-triangle::before {
+  border: 2px solid #ff9292;
+  padding: 4px;
+  border-radius: 12px;
+  color: #ff9292;
+  display: inline-block;
+  margin-left: -15px;
+  animation-name: stretch;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  margin: 10px;
+}
+
+.dps-folder-description-item {
+  width: 70%;
+}
+
+.dps-folder-list-item.workflow-menu-tee-item {
+  width: 30%;
+}
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+  .dps-folder-description-item {
+    width: 50%;
+  }
+
+  .dps-folder-list-item.workflow-menu-tee-item {
+    width: 50%;
+  }
+}
+
+
+.workflow-tree-items-edit-list {
+
+  .dps-screen-icon,
+  .dps-template-icon {
+    font-size: $primary-font-size + 2;
+    padding: 0px 5px 0px 0px;
+  }
+}

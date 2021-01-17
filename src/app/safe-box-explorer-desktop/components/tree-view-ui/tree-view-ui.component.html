@@ -1,0 +1,24 @@
+<div class="dps-safebox-menu-tree">
+  <div class="safe-box-option-tree" *ngFor="let node of treeItem?.nodes">
+    <div [ngClass]="{'active': node?.isSelect && isBlobSelect}" dpsFileDroppable (onDrop)="onDrop($event, node)"
+      (contextmenu)="contextmenuFolderOpen($event,safeboxContextFolderTreeMenue, node)">
+      <mat-list-item (click)="expand(node, $event)" title="{{ node?.name }}" dpsDroppable
+        (onDrop)="onDrop($event, node)" dropZone="safeBoxDragFolder">
+        <i class="material-icons" *ngIf="node?.nodes?.length > 0" (click)="expandCollapsed(node, $event)">
+          {{node?.isExpand?'keyboard_arrow_up':'keyboard_arrow_down'}}
+        </i>
+        <span matLine class="dps-folder-item-name" [ngStyle]="{'padding-left.px': level * 15}">
+          <i class="fa fa-folder"></i> {{node?.name}}</span>
+
+      </mat-list-item>
+      <dps-safebox-context-menue #safeboxContextFolderTreeMenue [id]="'dps-safe-box-tree-item'+node?.prefix"
+        [isMultiSelect]="selectedBlobData?.length>1" [copyItems]="copyItems" [isFolder]="true" (paste)="onPaste(node)">
+      </dps-safebox-context-menue>
+    </div>
+    <dps-tree-view-ui *ngIf="node?.isExpand" [isBlobSelect]="isBlobSelect" [level]="level+1"
+      [selectedBlobData]="selectedBlobData" [copyItems]="copyItems" (changeFolderItem)="onChangeFolderItem($event)"
+      (onExpand)="expandEvent($event)" (onExpandCollapsed)="expandCollapsedEvent($event)"
+      (changeFileItem)="onChangeFileItem($event)" [treeItem]="node" class="dps-safebox-treeview">
+    </dps-tree-view-ui>
+  </div>
+</div>

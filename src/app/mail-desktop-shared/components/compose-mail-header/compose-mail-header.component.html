@@ -1,0 +1,89 @@
+<mat-toolbar class="dps-compose-mail-header">
+  <button mat-icon-button (click)="onSend($event)" matTooltip="Send" matTooltipPosition="below">
+    <mat-icon>send</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onSendAs($event)" matTooltip="Send as" matTooltipPosition="below"
+    *ngIf="hasEmailSendAsPermission">
+    <mat-icon class="dps-send-as">how_to_reg</mat-icon>
+    <mat-icon class="dps-send">send</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Attach files" matTooltipPosition="below"
+    [matMenuTriggerFor]="attachmentUploadMenu.contextMenu">
+    <mat-icon>attach_file</mat-icon>
+    <dps-file-uploader #fileUploader [inputId]="fileUploaderId" (fileUpload)="onAddAttachment($event)"
+      [multiple]="true"></dps-file-uploader>
+    <dps-attachment-upload-menu #attachmentUploadMenu (fromComputer)="onFromComputer(fileUploader)"
+      (fromCloud)="onCloud()"></dps-attachment-upload-menu>
+  </button>
+  <button mat-button (click)="onDiscard($event)" matTooltip="Discard" matTooltipPosition="below">
+    <span>Discard</span>
+  </button>
+  <button mat-icon-button matTooltip="Recipients List" *ngIf="hasRecipientsList" matTooltipPosition="below"
+    (click)="onShowRecipientsList()">
+    <mat-icon>contact_mail</mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="composeMoreMenu" matTooltip="More" matTooltipPosition="below">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+  <mat-menu #composeMoreMenu="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item (click)="onDraft($event)" class="dps-menu-item">Save draft</button>
+    <button mat-menu-item [matMenuTriggerFor]="importanceMenu" class="dps-menu-item" *ngIf="!isGoogle">
+      Set importance
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="followupMenu" class="dps-menu-item" *ngIf="!isGoogle">
+      Set follow up
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="securityMenu" class="dps-menu-item" *ngIf="!isGoogle">
+      Security
+    </button>
+    <mat-menu #importanceMenu="matMenu">
+      <button mat-menu-item (click)="onImportance('high')" class="dps-menu-item">
+        High
+        <i class="fa fa-exclamation fa-lg" aria-hidden="true"></i>
+      </button>
+      <button mat-menu-item (click)="onImportance('normal')" class="dps-menu-item">
+        Normal
+      </button>
+      <button mat-menu-item (click)="onImportance('low')" class="dps-menu-item">
+        Low
+        <i class="fa fa-long-arrow-down fa-lg" aria-hidden="true"></i>
+      </button>
+    </mat-menu>
+    <mat-menu #followupMenu="matMenu">
+      <button mat-menu-item (click)="onFlagFollowUp('today')" class="dps-menu-item">
+        Today
+      </button>
+      <button mat-menu-item (click)="onFlagFollowUp('tomorrow')" class="dps-menu-item">
+        Tomorrow
+      </button>
+      <button mat-menu-item (click)="onFlagFollowUp('thisWeek')" class="dps-menu-item">
+        This Week
+      </button>
+      <button mat-menu-item (click)="onFlagFollowUp('nextWeek')" class="dps-menu-item">
+        Next Week
+      </button>
+      <button mat-menu-item (click)="onFlagFollowUp('noDate')" class="dps-menu-item">
+        No Date
+      </button>
+      <button mat-menu-item (click)="onFlagFollowUp('clearflag')" class="dps-menu-item">
+        Clear Flag
+      </button>
+    </mat-menu>
+    <mat-menu #securityMenu="matMenu">
+      <button mat-menu-item (click)="onSecure()" class="dps-menu-item">
+        Secure
+      </button>
+      <button mat-menu-item (click)="onDNF()" class="dps-menu-item">
+        Do Not Forward
+      </button>
+    </mat-menu>
+  </mat-menu>
+  <span fxFlex="1 1 auto"></span>
+  <button mat-icon-button *ngIf="!isWindowUrlPopup" (click)="onOpenUrlPoup($event)" matTooltip="Pop-up"
+    matTooltipPosition="below">
+    <mat-icon>open_in_new</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onClose($event)" matTooltip="Close" matTooltipPosition="below" class="dps-mail-exit">
+    <mat-icon matListIcon>close</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+
+.dps-grid-row-inner-btn {
+    &.btn:hover{
+opacity: .8;
+    }
+    &.btn{
+cursor: pointer;
+padding: 0px 15px;
+    }
+
+   mat-icon{
+        padding: 6px 0px 0px 8px;
+        font-size: 17px;
+        border-radius: 100%;
+        background: #C4A75A;
+        color: #3e2807;
+        width: 25px;
+        height: 25px;
+       
+    }
+    span:first-child{
+        width: 100%;
+  display: flex;
+  justify-content: center;
+    }
+    span:last-child{
+        color: #827210;
+        font-size: 12px;
+        padding-top: 2px;
+        text-align: center;
+    }
+}
+button{
+    padding: 0 8px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
+}
+    button span{
+        padding-left: 8px;
+    }
+.dps-checking-menu-first{
+    padding: 10px;
+  text-align: center;
+  background: #50493F;
+  color: #E2E1DC;
+}
+
+.material-icons-outlined,
+.material-icons.material-icons--outlined {
+  font-family: 'Material Icons Outlined';
+}
+
+.dps-ref{
+    padding: 15px 4em;
+    color: #1f581b;
+}

@@ -1,0 +1,33 @@
+<div class="dps-add-edit-group-content" *ngIf="group">
+  <mat-form-field floatLabel="always">
+    <input matInput placeholder="Group name" [ngModel]="group.displayName" [formControl]="nameInputCtrl">
+  </mat-form-field>
+  <mat-form-field *ngIf="!group.id && showMailNickname" floatLabel="always">
+    <input matInput placeholder="Group email address" [(ngModel)]="mailNickname" [formControl]="mailInputCtrl">
+    <mat-error *ngIf="mailInputCtrl.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field floatLabel="always">
+    <textarea matInput placeholder="Description" rows="3" [value]="group.description" [formControl]="descriptionInputCtrl"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Privacy" [value]="group.visibility" (selectionChange)="onVisibilityChange($event)">
+      <mat-option value="Public">
+        Public - Anyone in your organization can see what's inside
+      </mat-option>
+      <mat-option value="Private">
+        Private - Only approved members can see what's inside
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-selection-list>
+    <mat-list-option checkboxPosition="before" *ngIf="group.id" [selected]="group.allowExternalSenders"
+      (selectionChange)="onAllowExternalSendersChange($event)">
+      Let people outside the organization email the group
+    </mat-list-option>
+    <mat-list-option class="dps-mail-enabled" checkboxPosition="before" [selected]="group.mailEnabled"
+      (selectionChange)="onMailEnabledChange($event)">
+      Send all group conversations and events to members' inboxes. They can stop following this group later if they
+      want to.
+    </mat-list-option>
+  </mat-selection-list>
+</div>

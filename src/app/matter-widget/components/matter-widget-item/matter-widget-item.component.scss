@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+
+.mat-list-item
+{
+  height: 50px !important;
+}
+.indicator{
+  background: $matter-search-primaty;
+  color: #cae3f4;
+  text-align: center;
+  padding-top: 5px !important;
+  height: 18px !important;
+  font-size: 16px !important;
+}
+/* .spacer {
+  flex: 1 1 auto;
+} */
+
+.content{
+
+
+  width: 100%;
+  .ref{
+    font-weight: 400;
+    color: #3b7160;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-right: 7px;
+    text-overflow: clip;
+    overflow: visible;
+  }
+  .client 
+  {
+    font-size: 11px;
+    text-align: right;
+    font-weight: bold;
+    color: #616161;
+  }
+
+  .details
+  {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    line-height: 21px;
+    
+  }
+
+}
+.widget-item{
+  border-bottom: 1px solid #aac5d6;
+}
+.widget-item-content {
+  width: calc(100% - 5px);
+
+}

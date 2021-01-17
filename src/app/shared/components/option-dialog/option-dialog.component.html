@@ -1,0 +1,32 @@
+<div class="dps-notification-wrap general">
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <span> {{ data.content.title }} </span>
+      </span>
+      <span class="spacer"></span>
+      <mat-icon class="header-icon close" (click)="close(null)">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- general-notification end -->
+
+  <mat-dialog-content class="notification-body dps-white-gray-scroll dps-blue-scroll" >
+    <mat-selection-list *ngIf="!hidePanel" tabindex="-1">
+      <mat-list-option *ngFor="let item of data?.list" (click)="selectItem(item)" [selected]="item.isSelect">
+        {{item.displyName}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-dialog-content>
+  <!-- general-notification body end -->
+
+  <div class="bottom-controllers">
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onAction()">
+      {{ data.content.actionName | strDefault : 'Ok' }}</button>
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="close(null)">
+      {{ data.content.cancelBtn | strDefault : 'Cancel' }}</button>
+
+
+  </div>
+  <!-- general-bottom controller end -->
+</div>

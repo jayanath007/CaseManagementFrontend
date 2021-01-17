@@ -1,0 +1,20 @@
+<button class="hd-bar-notifications-btn" [style.display]="items && items?.length > 0 ? 'inline-block' : 'none'"
+  cdk-overlay-origin #trigger="cdkOverlayOrigin" mat-icon-button (click)="indicatorClick()"
+  [matBadge]="uploadinIitems?.length" matBadgeColor="warn"
+  [matBadgeHidden]="!uploadinIitems || uploadinIitems.length<1">
+  <mat-icon class="dps-hd-icon" [ngClass]="{'dps-arrow-up': uploadinIitems?.length>0}">forward</mat-icon>
+</button>
+
+<ng-template [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayWidth]="300" [cdkConnectedOverlayOpen]="showList"
+  cdk-connected-overlay cdkConnectedOverlayHasBackdrop="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop" (backdropClick)="indicatorClick()"
+  [cdkConnectedOverlayPositions]="position">
+  <mat-card class="dps-mat-card">
+    <mat-card-content>
+      <mat-list dense class="dps-white-gray-scroll">
+        <dps-upload-indictor-item *ngFor="let item of items" [item]="item" (removeItem)="onRemoveItem($event)">
+        </dps-upload-indictor-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

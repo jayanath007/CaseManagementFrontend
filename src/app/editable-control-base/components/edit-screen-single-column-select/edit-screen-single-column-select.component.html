@@ -1,0 +1,30 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible"
+  class="label-with-drop-down">
+  <mat-form-field>
+    <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+    </mat-placeholder>
+    <mat-select [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" [value]="modelData"
+      (selectionChange)="selectionChange($event)" (closed)="closeSelector()" >
+
+      <dps-select-search (change)="cmbFilterChanged($event)" [noEntriesFoundLabel]="noEntriesFoundLabel"
+        [placeholderLabel]="placeholderLabel" [hiddenEmptyValue]="hiddenEmptyValue"></dps-select-search>
+
+      <mat-option *ngIf="!hiddenEmptyValue" [value]="''">-- None --</mat-option>
+
+      <mat-option *ngIf="enabaeForceDataItem" [value]="forceSelectDataItem.key">
+        {{showType==='key'?forceSelectDataItem.key:
+        (showType==='value'?forceSelectDataItem.value:
+        showType==='valueANDdescription1'? (forceSelectDataItem.value+' | '+ forceSelectDataItem.description1) 
+        :((forceSelectDataItem.key+' | '+ forceSelectDataItem.value)))
+      }}
+      </mat-option>
+
+      <mat-option *ngFor="let dataItem of (cmbDataListList | async)" [value]="dataItem.key">
+        {{showType==='key'?dataItem.key:      
+        showType==='valueANDdescription1'? (dataItem.value+' | '+ dataItem.description1):  
+        (showType==='value'?dataItem.value:(dataItem.key+' | '+dataItem.value))}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

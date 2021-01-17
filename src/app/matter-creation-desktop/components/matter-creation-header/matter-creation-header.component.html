@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <mat-toolbar-row class="dps-toolbar-box-shadow dps-matter-creation-header">
+    <div fxFlexAlign="center" class="dps-header">
+      <mat-icon matListIcon class="dps-header-icon">add_to_photos</mat-icon>
+      <span class="dps-header-text">{{title}} <label> {{mode?'- '+mode:''}}</label></span>
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon class="close-btn">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row fxLayoutAlign="left center" class="dps-primary-action-btn">
+    <div class="dps-primary-action-btn-inner" fxLayoutAlign="left center" fxLayout="row wrap">
+      <button mat-button (click)="onAdd()" [disabled]="mode!==Mode.SearchMode">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span> Add</span>
+      </button>
+      <button mat-button class="icon-btn" (click)="onSave()" [disabled]="mode===Mode.SearchMode || !isModelDirty">
+        <mat-icon>save</mat-icon>
+        <span> Save</span>
+      </button>
+      <button mat-button (click)="onOpenMatterSearch()" [disabled]="mode===Mode.AddMode">
+        <mat-icon>search</mat-icon>
+        <span> Search</span>
+      </button>
+      <button mat-button (click)="onClear()">
+        <mat-icon class="mat-18">insert_drive_file</mat-icon>
+        <span> Clear</span>
+      </button>
+      <button mat-button (click)="onDelete()" [disabled]="mode!==Mode.EditMode">
+        <mat-icon>delete</mat-icon>
+        <span> Delete</span>
+      </button>
+      <button mat-button [disabled]="mode!==Mode.EditMode">
+        <mat-icon>print</mat-icon>
+        <span> Print</span>
+      </button>
+      <button *ngIf="moduleIsActive(module.LedgerCard) | async" mat-button (click)="onLedger()"
+        [disabled]="mode!==Mode.EditMode">
+        <mat-icon>business_center</mat-icon>
+        <span> Ledger</span>
+      </button>
+      <button *ngIf="(amendScreensWorkflow$ | async)" mat-button (click)="onScreenEdit()"
+        [disabled]="mode===Mode.AddMode">
+        <mat-icon>widgets</mat-icon>
+        <span> Screen Edit</span>
+      </button>
+      <button mat-button (click)="onOk()" [disabled]="mode!==Mode.EditMode">
+        <mat-icon>done_all</mat-icon>
+        <span> Ok</span>
+      </button>
+
+
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>

@@ -1,0 +1,27 @@
+<dps-common-popup-header icon="contacts" [title]="'contacts'" buttons="close" iconColor="#e8a348" titleColor="#a9c0f6"
+  (buttonClick)="onClose($event)">
+</dps-common-popup-header>
+
+<!-- <mat-toolbar>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <mat-toolbar-row class="dps-toolbar-box-shadow">
+    <span fxFlex="1 1 auto"></span>
+    <div fxFlexAlign="center" class="dps-header">
+      <mat-icon matListIcon class="matter-icon"></mat-icon>
+      <span class="header-text" matTooltip="" matTooltipPosition="after">Contacts </span>
+    </div>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon class="close-btn">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar> -->
+
+<dps-contact-create-header [contactSearchKey]="contactSearchKey" (searchTextChanged)="onSearchTextChanged($event)"
+  (changeContactMode)="contactMode=$event">
+</dps-contact-create-header>
+<dps-contact-create-data-content [mode]="mode" [contactSearchKey]="contactSearchKey" [token]="token"
+  [showSearchTab]="showSearchTab" [selectedTab]="selectedTab" [types]="types" [matterData]="matterData"
+  (changeSelectedTab)="onChangeSelectedTab($event)" (selectContact)="onChangeContact($event)"
+  (changeDetails)="onChangeDetails($event)">
+</dps-contact-create-data-content>

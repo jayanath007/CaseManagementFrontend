@@ -1,0 +1,30 @@
+<!-- <input id="matAttachmentUploader" [id]="screenContanerComponent.control.name" type="file" style="display: none"
+  (change)="onFileChange($event)" /> -->
+
+<dps-file-uploader #matAttachmentUploader [inputId]="screenContanerComponent.control.name"
+  (fileUpload)="onFileChange($event)" [multiple]="false">
+</dps-file-uploader>
+
+
+<dps-contaner class="label-componenent-wrap" matTooltip="{{screenContanerComponent.control.helpText}}"
+  matTooltipShowDelay='tooltipShowDelay' matTooltipShowDelay="1000" [ngStyle]="containerStyle(screenContanerComponent)"
+  [screenContanerComponent]="screenContanerComponent" [formGroup]="group">
+  <span class="var">{{screenContanerComponent.varNo}}</span>
+  <button class="file-attachment-btn" mat-raised-button
+    [ngClass]="{'attachment-done-status': screenContanerComponent.isUploaded }"
+    [matMenuTriggerFor]="attachmentUploadMenu.contextMenu">
+    <mat-icon class="attach-icon">attach_file</mat-icon>
+    <mat-icon *ngIf="screenContanerComponent.isUploaded" class="done-status">done</mat-icon>
+
+    <dps-attachment-upload-menu #attachmentUploadMenu (fromComputer)="matAttachmentUploader.onFileUploadBtnClick()" (fromCloud)="onCloud()">
+    </dps-attachment-upload-menu>
+
+  </button>
+  <input type="text" [tabindex]="screenContanerComponent.control.tabindex"
+    [attr.control-name]="screenContanerComponent.control.name"
+    [readonly]="(screenContanerComponent.control.readonly || !screenContanerComponent.control.enabale)"
+    #dynamicController (keyup)="onKeyup($event)" (change)="onChange($event)" (dblclick)="onDoubleClick($event)"
+    (keypress)="onKeyPress($event)" (blur)="onBlur($event)" (keydown)="onKeyDown($event)" (focus)="onFocus($event)"
+    [formControlName]="screenContanerComponent.control.name" [ngStyle]="controlStyle(screenContanerComponent)">
+
+</dps-contaner>

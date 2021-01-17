@@ -1,0 +1,16 @@
+
+<div class="screen-view-general-popup-body">
+<h1>Edit Lookup</h1>
+  <textarea class="edit-lookup-text-area dps-white-gray-scroll dps-blue-scroll"
+
+   matInput [(ngModel)]='data.textFileData'></textarea>
+   <!-- {{data.textFileData}} -->
+<div class="general-buttons-bottom">
+
+  <button mat-button (click)="onSave(data.textFileData)">Save</button>
+  <button mat-button class="close-pop"  color="warn" (click)="onClose()">Close</button>
+
+
+</div>
+</div>
+

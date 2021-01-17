@@ -1,0 +1,147 @@
+@import '~styles/variables.scss';
+
+.dps-bundle-monitor-layout {
+  padding: 5px;
+
+  mat-toolbar {
+    min-height: 40px;
+
+    mat-toolbar-row {
+      background: $header-primary;
+
+      height: 45px;
+
+      mat-list {
+        padding-top: 0px;
+      }
+
+      span {
+        color: #dfeaff;
+        font-size: 14PX;
+        font-weight: 500;
+      }
+
+      ::ng-deep .mat-list .mat-list-item .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
+        padding-left: 8px;
+      }
+
+      mat-icon {
+        vertical-align: middle;
+        border-radius: 100%;
+        border: 2px solid #859ece;
+        color: #a9c6fd;
+        height: 14px;
+        width: 18px;
+        font-size: 18px;
+        line-height: 9px;
+        padding: 8px 3px 3px 5px;
+        margin: 0px 0px 2px 0px;
+      }
+
+    }
+  }
+
+  .dps-monitor-controllers {
+    mat-toolbar {
+      background: #dfeaff;
+      height: 45px;
+      border-bottom: 1px solid #cfcfd0;
+
+      .grid-item-delete
+      {
+        padding: 2px;
+        min-width: 44px;
+        margin-left: 0;
+        background: #f3d2d2;
+      }
+    }
+
+    mat-form-field {
+      font-size: 12px;
+      margin: 10px 10px 0px 0px;
+    }
+
+  }
+
+  dps-column-header {
+    height: 40px;
+    font-family: $primary-font-stack;
+    color: #11306d;
+    background: #b9d1ff;
+
+    ::ng-deep .Log,
+    ::ng-deep .Progress {
+      text-align: center;
+    }
+
+    ::ng-deep .fa-trash {
+      font-size: 18px;
+      margin: 0 auto 0;
+      display: block;
+      text-align: center;
+      opacity: 0.5;
+    }
+
+    ::ng-deep .fa-trash.delete-activated {
+      color: #8a0f0f;
+      opacity: 1;
+      background: #ebf1fb;
+      width: 22px;
+      border-radius: 2px;
+      padding: 1px 0;
+
+    }
+
+    ::ng-deep .fa-trash.delete-activated:hover {
+      box-shadow: 1px 1px 1px #a7a2a2;
+    }
+
+  }
+
+}
+
+.row-highlight {
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  width: calc(100% - 15px);
+}
+
+
+mat-list-item.dps-grid-list-item {
+  height: auto;
+}
+
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+.dps-grid-scroll {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.mat-dialog-content {
+  display: block;
+  margin: 0 0px;
+  padding: 0 0px;
+  max-height: unset;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dps-grid-x {
+  display: grid !important;
+  height: 100%;
+  margin: 10px 18px;
+}
+
+.dps-grid-nav-list {
+  width: 100%;
+}
+
+dps-bundle-monitor-grid-items {
+  width: 100%;
+}

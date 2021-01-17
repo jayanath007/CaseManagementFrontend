@@ -1,0 +1,19 @@
+<div fxLayout="row">
+    <div *ngIf="getHiddenProperty(0)" [fxFlex]="getFxFlexProperty(0)" class="row-data"></div>
+    <div *ngIf="getHiddenProperty(1)" class="row-data date mat_line" [fxFlex]="getFxFlexProperty(1)"> {{ rowData.data.dateDone | date :'dd/MM/yyyy'}} </div>
+    <div *ngIf="getHiddenProperty(2)" class="row-data by mat_line" [fxFlex]="getFxFlexProperty(2)"> {{rowData.data.feeEarner}} </div>
+    <div *ngIf="getHiddenProperty(3)" class="row-data type" [fxFlex]="getFxFlexProperty(3)"> {{rowData.data.description}}</div>
+    <div *ngIf="getHiddenProperty(4)" class="row-data details" [fxFlex]="getFxFlexProperty(4)" [innerHTML]="rowData.data.details" > </div>
+    <div *ngIf="getHiddenProperty(5)" class="row-data units mat_line" [fxFlex]="getFxFlexProperty(5)"> {{rowData.data.units}}</div>
+    <div *ngIf="getHiddenProperty(6)" class="row-data rate mat_line" [fxFlex]="getFxFlexProperty(6)"> {{rowData.data.rate}}</div>
+    <div *ngIf="getHiddenProperty(7)" class="row-data units mat_line" [fxFlex]="getFxFlexProperty(7)"> {{rowData.data.usUnits}}</div>
+    <div *ngIf="getHiddenProperty(8)" class="row-data rate mat_line" [fxFlex]="getFxFlexProperty(8)"> {{rowData.data.usRate}}</div>
+    <div *ngIf="getHiddenProperty(9)" class="row-data amount" [fxFlex]="getFxFlexProperty(9)"> £ {{rowData.data.value | number : '1.2-2' }}</div>
+    <div *ngIf="getHiddenProperty(10)" class="row-data billed mat_line" [fxFlex]="getFxFlexProperty(10)">
+        <div *ngIf="rowData.data.billed == 1">Yes</div>
+        <div *ngIf="rowData.data.billed != 1">No</div>
+    </div>
+    <div *ngIf="getHiddenProperty(11)" class="row-data date-billed mat_line" [fxFlex]="getFxFlexProperty(11)"> {{rowData.data.dateBilled | date :'dd/MM/yyyy' }}</div>
+    <div *ngIf="getHiddenProperty(12)" class="row-data billed-amount mat_line" [fxFlex]="getFxFlexProperty(12)"> £ {{ rowData.data.netBilled | number : '1.2-2'}}</div>
+    <div *ngIf="getHiddenProperty(13)" class="row-data bill-no mat_line" [fxFlex]="getFxFlexProperty(13)"> {{rowData.data.billNo}}</div>
+</div>

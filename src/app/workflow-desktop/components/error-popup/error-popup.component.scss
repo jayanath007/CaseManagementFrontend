@@ -1,0 +1,20 @@
+@import '~styles/variables.scss';
+.screen-view-general-popup-body {
+  outline: none !important;
+}
+
+.save {
+  background: #397d3f;
+  margin-right: 2px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  color: $primary;
+}
+
+.dps-error-message {
+  padding: 0 0 10px;
+  font-family: monospace;
+  font-size: 13px;
+  overflow: auto;
+}

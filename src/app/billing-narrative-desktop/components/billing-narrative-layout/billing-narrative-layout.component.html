@@ -1,0 +1,102 @@
+<div class="dps-billing-narrative-layout">
+
+  <dps-common-popup-header icon="vertical_split" [title]="'Narratives'" buttons="close" [loading]="isLoading"
+    iconColor="#db9c57" titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+  </dps-common-popup-header>
+
+  <div class="dps-billing-sub-toobar">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="dps-narrative-header">
+      <div class="dps-narrative-wrapper">
+        <mat-form-field>
+          <input matInput #groupData placeholder="Group" [ngModel]="narrativeInfo?.narrativeGroupDescription"
+            (keyup)="onChangeGroup(groupData.value)" [value]="">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput #itemData placeholder="Name" [ngModel]="narrativeInfo?.narrativeItemDescription"
+            (keyup)="onChangeItem(itemData.value)" [value]="">
+        </mat-form-field>
+
+        <button mat-mini-fab class="narrative-save" [ngClass]="{'dps_button_disable': isLoading}">
+          <mat-icon fontSet="fontawesome" (click)="onSaveNarrativeInfo($event)" fontIcon="fa-save" class="fa">
+          </mat-icon>
+        </button>
+
+        <button mat-mini-fab class="narrative-undo" [ngClass]="{'dps_button_disable': isLoading}">
+          <mat-icon>undo</mat-icon>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="dps-narrative-controller">
+    <div style="height: calc(100% - 170px);overflow: auto;padding: 10px 10px 0px 20px;" class="dps-white-gray-scroll">
+      <div class="dps-billing-narratives" style="display: flex; flex-wrap: wrap;height: 100%;;">
+        <div style="width:24%;">
+          <div class="Narrative-Groups">
+            <div>
+              <h4>Narrative Groups</h4>
+            </div>
+            <div class="narrative-holder">
+              <div (click)="selectGroup($event,group)"
+                [ngClass]="{'dps_row_selected': narrativeInfo.narrativeGroupId===group.narrativeGroupId}"
+                *ngFor="let group of narrativeData; let index =index; let isOdd=odd; let isEven=even">
+                {{group.narrativeGroupName}}
+              </div>
+            </div>
+          </div>
+          <div class="Narrative-Items">
+            <div>
+              <h4>Narrative Items</h4>
+            </div>
+            <div class="narrative-holder">
+              <div (click)="selectGroupItem($event,item)"
+                [ngClass]="{'dps_row_selected':narrativeInfo.narrativeItemId === item.narrativeItemId }"
+                *ngFor="let item of narrativeGroupItems; let index =index; let isOdd=odd; let isEven=even">
+                {{item.narrativeItemDescription}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="Narratives-actions">
+          <div>
+            <button mat-button class="Narratives-delete" *ngIf="narrativeGroupItems.length===0"
+              (click)="onDeleteGroup()" [ngClass]="{'dps_button_disable': isLoading}">
+              Delete
+            </button>
+            <button mat-button class="Narratives-add" (click)="addNarrative()"
+              [ngClass]="{'dps_button_disable': isLoading}">
+              Add
+            </button>
+            <button mat-button class="Narratives-delete" *ngIf="narrativeGroupItems.length != 0"
+              (click)="deleteNarrative()" [ngClass]="{'dps_button_disable': isLoading}">
+              Delete
+            </button>
+          </div>
+        </div>
+        <div class="dps-narratives-text">
+          <div>
+            <h4>Narrative Text</h4>
+          </div>
+          <div class="narratives-text-editor">
+            <mat-form-field class="example-full-width">
+              <textarea matInput rows="22" maxlength="250" (keyup)="onChangeNarrativeText(narrativeText.value)"
+                #narrativeText [value]="" placeholder="Narrative Text"
+                [ngModel]="narrativeInfo?.narrativeItemText"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dps-narrative-actions">
+      <button mat-button class="select" (click)="onSelect($event)" [disabled]="isdurty"
+        [ngClass]="{'dps_button_disable': isLoading || isdurty}">
+        Select
+      </button>
+      <button mat-button class="cancel" (click)="onClose($event)" [ngClass]="{'dps_button_disable': isLoading}">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="dps-document-view" fxLayout="column">
+  <!-- <h1> {{documentUrlIsLoading +' ' +iFrameLoaded }}</h1> -->
+  <!-- <mat-spinner *ngIf="documentUrlIsLoading || !iFrameLoaded"></mat-spinner> -->
+  <div class="editable" fxLayout="" fxLayoutGap="20px" layout-align="space-between">
+    <button mat-mini-fab *ngIf="!showDocumentEdit" (click)="openDocumentEdit()" color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="openInPopup()" color="primary">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+  </div>
+  <iframe *ngIf="!isWopiUrl" sandbox fxLayoutGap="20px" (load)="onIFrameLoad()" [style.height.px]="documentHeight-120" 
+    [src]="sanitizerDocumentUrl"> </iframe>
+  <iframe *ngIf="isWopiUrl" fxLayoutGap="20px" (load)="onIFrameLoad()" [style.height.px]="documentHeight-120" 
+    [src]="sanitizerDocumentUrl"> </iframe>
+</div>

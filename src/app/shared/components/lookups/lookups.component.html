@@ -1,0 +1,64 @@
+<div class="dps-notification-wrap general" fxLayout="column">
+  <mat-toolbar class="popup-toolbar">
+
+    <span class="title">
+      <span>{{data.title}}</span>
+    </span>
+    <span class="spacer"></span>
+    <mat-icon class="header-icon close" (click)="onClosePopup()">close</mat-icon>
+
+  </mat-toolbar>
+  <mat-toolbar class="dps-popup-sub-title-type-01">
+    <span> {{data.secondTitle}}</span>
+    <input *ngIf="data.enableSearch" #searchLoockup matInput placeholder="Search" [ngModel]="searchText"
+      (keyup)="filterList(searchLoockup.value)">
+  </mat-toolbar>
+
+  <div class="dps-lookup-content dps-white-gray-scroll" *ngIf="data.editable" fxFlex="calc(100%-130px)">
+    <div fxLayout="row" *ngFor="let lookup of lookups; let index =index; let isOdd=odd;"
+      [ngClass]="index === selectIndex ? 'dps-selected-item' :isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+      (click)="selectIndex = index">
+      <span class="dps-lookup-key"
+        *ngIf="index !== selectIndex && data.keyColumsEnable">{{getKeyString(lookup.name)}}</span>
+      <input matInput tabindex="-1" autocomplete="off" [ngModel]="getLookupWord(lookup.name, index)"
+        [id]="getInputClass(index)" (keydown)="onInputKeyDown(index, $event)" (focusout)="changeLockup(index, $event)"
+        (dblclick)="onSelect(index)">
+      <!-- <input [formControl]="inputCtrl" matInput tabindex="1" autocomplete="off" [ngModel]="lookup"
+        [id]="getInputIndex(index)" (keydown)="onInputKeyDown(index, $event)" *ngIf="index === selectIndex"> -->
+    </div>
+  </div>
+
+  <div class="dps-lookup-content dps-white-gray-scroll" *ngIf="!data.editable" fxFlex="calc(100%-130px)">
+    <div fxLayout="row" class="content-row" *ngFor="let lookup of lookups; let index =index; let isOdd=odd;"
+      [ngClass]="index === selectIndex ? 'dps-selected-item' :isOdd?'dps_row_separation-0':'dps_row_separation-1'"
+      (click)="selectIndex = index" (dblclick)="onSelect(index)">
+      <span class="dps-lookup-key"
+        *ngIf="index !== selectIndex && data.keyColumsEnable">{{getKeyString(lookup.name)}}</span>
+      <span> {{getLookupWord(lookup.name, index)}}
+      </span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="bottom-controllers" fxLayout="row">
+    <button class="notification-button mat-elevation-z0" mat-raised-button tabindex="3" color="primary"
+      (click)="onSelect()" [disabled]="!(selectIndex > -1)"> Select
+    </button>
+    <span fxFlex="1 1 auto"></span>
+
+
+    <button class="notification-button dps-btn-icon-save mat-elevation-z0" mat-raised-button tabindex="3"
+      (click)="onSave()" [disabled]="!isDirty" *ngIf="data.editable"> <i class="material-icons">save</i>
+    </button>
+
+    <button class="notification-button mat-elevation-z0" mat-raised-button tabindex="3" color="warn"
+      (click)="onDeleteRow()" *ngIf="data.editable"> <i class="material-icons">delete</i>
+    </button>
+
+    <!-- 
+    <button class="notification-button mat-elevation-z0" mat-raised-button tabindex="3" color="primary"
+      (click)="onClosePopup()">Cancel
+    </button> -->
+  </div>
+</div>

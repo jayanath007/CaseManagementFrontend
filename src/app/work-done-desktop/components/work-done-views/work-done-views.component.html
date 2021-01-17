@@ -1,0 +1,89 @@
+<mat-list class="grid-controller-set" fxLayout="row" fxLayoutAlign="end center">
+
+
+  <div class="dps_workdonegrid_controller" fxLayout="row" fxLayoutAlign="center center">
+
+    <div *ngIf="selectedInfo.periodId === 5" class="dps_workdone_time_filter">
+
+      <mat-form-field class="workdone-input from">
+        <mat-placeholder class="time_record_selector from">From</mat-placeholder>
+        <input matInput [matDatepicker]="picker" [ngModel]="selectedInfo?.dateFrom | date:'yyyy-MM-dd'" (dateChange)="onChangeFromDateDone($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="workdone-input to">
+        <mat-placeholder class="time_record_selector to">To</mat-placeholder>
+        <input matInput [matDatepicker]="picker1" [ngModel]="selectedInfo?.dateTo | date:'yyyy-MM-dd'" (dateChange)="onChangeToDateDone($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="workdone-input custom" floatLabel="never">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <mat-placeholder class="time_record_selector">Period</mat-placeholder>
+      <mat-select (selectionChange)="onChangePeriod($event)" [ngModel]="selectedPeriod">
+        <mat-option *ngFor="let period of periodList" [value]="period">
+          {{period.groupName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="dps-wrkdone-search">
+      <span matPrefix>&nbsp;&nbsp;</span>
+      <input type="search" matInput #searchTextInput matInput placeholder="" [value]="selectedInfo?.searchText"
+        [formControl]="inputCtrl" (keydown)="onKeydownSearchText($event)" />
+
+
+      <button matSuffix mat-icon-button (click)="onSearchTextChanged(searchTextInput.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+  </div>
+
+
+
+
+
+  <button class="dps-grouping-cntxt-menu" [matMenuTriggerFor]="menu" mat-flat-button>
+    <mat-icon class="mat-18">{{groupMode | groupIconByMode}}</mat-icon>
+    <span *ngIf="groupMode === GroupMode.Default">View</span>
+    <span *ngIf="groupMode === GroupMode.ByUser">By User</span>
+    <span *ngIf="groupMode === GroupMode.Date">Date</span>
+    <span *ngIf="groupMode === GroupMode.ByUserDate">By Date</span>
+    <span *ngIf="groupMode === GroupMode.DateByUser">Date By</span>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(GroupMode.Default)">
+      <mat-icon class="material-icons">insert_drive_file</mat-icon>{{GroupMode.Default}}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(GroupMode.ByUser)">
+      <mat-icon class="material-icons">person</mat-icon>{{GroupMode.ByUser}}
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(GroupMode.Date)">
+      <mat-icon class="material-icons">calendar_today</mat-icon>Date
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(GroupMode.ByUserDate)">
+      <mat-icon class="material-icons">ballot</mat-icon>By Date
+    </button>
+    <mat-divider></mat-divider>
+    <button class="contxt-menu-btn" mat-menu-item (click)="onMenuChange(GroupMode.DateByUser)">
+      <mat-icon class="material-icons">event</mat-icon>Date By
+    </button>
+    <mat-divider></mat-divider>
+  </mat-menu>
+  <button mat-icon-button (click)="onPrint()" matTooltip="Print" matTooltipPosition="below" [disabled]="isLoading">
+    <mat-icon>print</mat-icon>
+  </button>
+  <dps-grid-font-controller [activeClass]="buttonActiveClass" [showRefreshButton]="true" (fontSizeMin)="onFontSizeMinusClick()"
+    (fontSizeReset)="onFontSizeResetClick()" (fontSizePlus)="onFontSizePlusClick()" (refresh)="onRefresh()"></dps-grid-font-controller>
+  <!-- </div> -->
+
+</mat-list>

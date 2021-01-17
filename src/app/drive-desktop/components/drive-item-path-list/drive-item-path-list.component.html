@@ -1,0 +1,65 @@
+<div class="dps-drive-file-path-list" fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;">
+  <div fxLayout="row" *ngIf="!searchText" class="dps-white-gray-scroll dps-safe-box-path">
+    <mat-icon class="dps-folder-indicator">cloud</mat-icon>
+    <div *ngFor="let navigation of navigations" class="dps-drive-file-path" (click)="onNavigate(navigation)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+      <span class="dps-path-name">{{navigation.label}}</span>
+    </div>
+  </div>
+
+  <div class="dps-drive-refresh" fxShow="!searchText">
+    <button mat-button *ngIf="copyingItems.length>0" #copyingMenuTrigger [matMenuTriggerFor]="copyingMenu">
+      <span *ngIf="_copyingItems.length>0">{{_copyingItems.length+' item(s) copying...'}}</span>
+      <span *ngIf="_copyingItems.length===0">{{copyingItems.length+' item(s) copied'}}</span>
+    </button>
+    <button mat-button *ngIf="uploadingItems.length>0" #uploadingMenuTrigger [matMenuTriggerFor]="uploadingMenu">
+      <span *ngIf="_uploadingItems.length>0">{{_uploadingItems.length+' item(s) uploading...'}}</span>
+      <span *ngIf="_uploadingItems.length===0">{{uploadingItems.length+' item(s) uploaded'}}</span>
+    </button>
+    <button mat-icon-button (click)="onRefresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-menu #copyingMenu="matMenu" [overlapTrigger]="false" (closed)="onCopyingMenueClosed()">
+      <div *ngFor="let item of copyingItems">
+        <mat-divider></mat-divider>
+        <button mat-menu-item *ngIf="item.operation.status==='completed'">
+          <div class="copying-item" fxLayout="row" fxLayoutAlign=" center">
+            <mat-icon>check</mat-icon>
+            <div fxFlex="calc(100%-40px)"><span>{{item.item.name}}</span></div>
+          </div>
+        </button>
+        <button mat-menu-item *ngIf="item.operation.status==='inProgress'">
+          <div fxLayout="column" class="copying-item">
+            <span>{{item.item.name}}</span>
+            <mat-progress-bar mode="determinate" [value]="item.operation.percentageComplete"></mat-progress-bar>
+          </div>
+        </button>
+      </div>
+    </mat-menu>
+    <mat-menu #uploadingMenu="matMenu" [overlapTrigger]="false" (closed)="onUploadingMenueClosed()">
+      <div *ngFor="let item of uploadingItems">
+        <mat-divider></mat-divider>
+        <button mat-menu-item *ngIf="item.status==='completed'">
+          <div class="copying-item" fxLayout="row" fxLayoutAlign=" center">
+            <mat-icon>check</mat-icon>
+            <div fxFlex="calc(100%-40px)"><span>{{item.name}}</span></div>
+          </div>
+        </button>
+        <button mat-menu-item *ngIf="item.status==='inProgress'">
+          <div fxLayout="column" class="copying-item">
+            <span>{{item.name}}</span>
+            <mat-progress-bar mode="determinate" [value]="item.percentageComplete"></mat-progress-bar>
+          </div>
+        </button>
+        <button mat-menu-item *ngIf="item.status==='error'">
+          <div class="copying-item" fxLayout="row" fxLayoutAlign=" center">
+            <mat-icon color="warn">error_outline</mat-icon>
+            <div fxFlex="calc(100%-40px)"><span>{{item.name}}</span></div>
+          </div>
+        </button>
+      </div>
+    </mat-menu>
+  </div>
+  <span class="dps-search-text" *ngIf="searchText">Search results for "{{searchText}}" in
+    {{navigations[0].label}}</span>
+</div>

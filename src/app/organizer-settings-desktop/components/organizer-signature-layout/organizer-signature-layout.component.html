@@ -1,0 +1,207 @@
+<div class="dps-organizer-signature-layout" fxLayout="column">
+  <dps-common-popup-header [title]="'Signature Creator'" icon="perm_identity" toolbarColor="#004487">
+  </dps-common-popup-header>
+
+  <div class="dps-signature-content dps-white-gray-scroll" fxFlex="calc(100%-98px)" fxLayout="column">
+
+    <div fxLayout="row" *ngIf="!data?.globalSig">
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="name" placeholder="Name">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-user"></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="role" placeholder="Job Title">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-briefcase"></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="emailAddress" placeholder="Email">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-envelope"></mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" *ngIf="!data?.globalSig">
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="workNumber" placeholder="Work Number">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-phone"></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="mobileNumber" placeholder="Mobile Number">
+        <mat-icon matSuffix>phone_android</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="faxNumber" placeholder="Fax Number">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-fax"></mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="webSiteUrl" placeholder="Website">
+        <mat-icon matSuffix>language</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="linkedIn" placeholder="LinkedIn">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-linkedin-square"></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <input matInput type="text" [(ngModel)]="twitter" placeholder="Twitter">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-twitter-square"></mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex="100">
+        <mat-label>Logo URL <mat-error *ngIf="isLogoUrlNotSecure"> (URL is not secure)</mat-error>
+        </mat-label>
+        <input matInput type="text" [(ngModel)]="logoUrl">
+        <mat-icon matSuffix>photo</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex="100">
+        <mat-label>Banner URL <mat-error *ngIf="isBannerUrlNotSecure"> (URL is not secure)</mat-error>
+        </mat-label>
+        <input matInput type="text" [(ngModel)]="bannerUrl">
+        <mat-icon matSuffix [color]="isBannerUrlNotSecure?'warn':''">panorama</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex="100">
+        <input matInput type="text" [(ngModel)]="bannerRedirectUrl" placeholder="Banner Linking To">
+        <mat-icon matSuffix class="fa" fontSet="fontawesome" fontIcon="fa-external-link-square"></mat-icon>
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div id="signaturePreview" class="dps-signature-preview dps-white-gray-scroll" fxFlex="calc(100%-293px)">
+      <table style="border:undefined">
+        <tr>
+          <td>
+            <img alt="Company Logo" height="75" src="{{logoUrl}}" style="height:75px; width:75px" width="75"
+              *ngIf="logoUrl" />
+          </td>
+          <td>
+            <table style="border:undefined">
+              <tr>
+                <td>
+                  <b *ngIf="name">
+                    <span style="font-size:10pt">
+                      <span style="font-family: Arial,Helvetica,sans-serif;">
+                        <span style="color: #2980b9;">{{name}}</span>
+                      </span>
+                    </span>
+                  </b>
+                  <b *ngIf="name && role">
+                    <span style="font-size:11pt">
+                      <span style="font-family: Arial,Helvetica,sans-serif;">
+                        <span style="color:#2980b9"> | </span>
+                      </span>
+                    </span>
+                  </b>
+                  <i *ngIf="role">
+                    <span style="font-size:10pt">
+                      <span style="font-family: Arial,Helvetica,sans-serif;">
+                        <span style="color:#2980b9">{{role}}</span>
+                      </span>
+                    </span>
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span style="font-size:10pt" *ngIf="emailAddress">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9">
+                        E: <a target="_blank" href="mailto:{{emailAddress}}">{{emailAddress}}</a>
+                      </span>
+                    </span>
+                  </span>
+                  <b *ngIf="emailAddress && (workNumber || mobileNumber)">
+                    <span style="font-size:11pt">
+                      <span style="font-family: Arial,Helvetica,sans-serif;">
+                        <span style="color:#2980b9"> | </span>
+                      </span>
+                    </span>
+                  </b>
+                  <span style="font-size:10pt" *ngIf="workNumber || mobileNumber">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9">
+                        T: <a target="_blank" href="tel:{{workNumber}}" *ngIf="workNumber">{{workNumber}};</a>
+                        <span *ngIf="workNumber || mobileNumber">&nbsp;</span>
+                        <a target="_blank" href="tel:{{mobileNumber}}" *ngIf="mobileNumber">{{mobileNumber}};</a>
+                      </span>
+                    </span>
+                  </span>
+                  <b *ngIf="faxNumber && (emailAddress || workNumber || mobileNumber)">
+                    <span style="font-size:11pt">
+                      <span style="font-family: Arial,Helvetica,sans-serif;">
+                        <span style="color:#2980b9"> | </span>
+                      </span>
+                    </span>
+                  </b>
+                  <span style="font-size:10pt" *ngIf="faxNumber">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9">
+                        F: <a target="_blank" href="fax:{{faxNumber}}">{{faxNumber}}</a>
+                      </span>
+                    </span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span style="font-size:10pt" *ngIf="webSiteUrl">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9"><a target="_blank"
+                          href="{{webSiteUrl}}">{{webSiteUrl.replace('http://','')}}</a>. </span>
+                    </span>
+                  </span>
+                  <span style="font-size:10pt" *ngIf="linkedIn || twitter">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9">We are on </span>
+                    </span>
+                  </span>
+                  <span style="font-size:10pt" *ngIf="linkedIn">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9"><a target="_blank" href="{{linkedIn}}">LinkedIn</a></span>
+                    </span>
+                  </span>
+                  <span style="font-size:10pt" *ngIf="linkedIn && twitter">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9"> and </span>
+                    </span>
+                  </span>
+                  <span style="font-size:10pt" *ngIf="twitter">
+                    <span style="font-family: Arial,Helvetica,sans-serif;">
+                      <span style="color:#2980b9"><a target="_blank" href="{{twitter}}">Twitter</a></span>
+                    </span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <a target="_blank" href="{{bannerRedirectUrl}}" *ngIf="bannerRedirectUrl && bannerUrl">
+        <img alt="Company Message" src="{{bannerUrl}}" style="width: 500px;" width="500" />
+      </a>
+      <img alt="Company Message" src="{{bannerUrl}}" style="width: 500px;" *ngIf="!bannerRedirectUrl && bannerUrl"
+        width="500" />
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+  <mat-dialog-actions>
+    <span fxFlex="1 1 auto"></span>
+    <button mat-button [mat-dialog-close]="htmlContent" class="dps-signature-add">Add</button>
+    <button mat-button mat-dialog-close class="dps-signature-discard">Discard</button>
+  </mat-dialog-actions>
+</div>

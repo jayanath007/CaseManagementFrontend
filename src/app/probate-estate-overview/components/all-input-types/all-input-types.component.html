@@ -1,0 +1,241 @@
+<!--================all input types====================== -->
+
+<!-- LABEL -------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.Label" class="probate-controller-input-wrapper">
+  <strong> {{controllerText}}</strong>
+</div>
+
+<!-- TABLE INPUT BOX -------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.TableInputBox" class="probate-controller-input-wrapper">
+  <input class="tbl-input-custom-type" type="text" #inputTabBox matInput [value]="dataModel.itemData[controllerName]"
+    (focusout)="onValueChanged(CommonControllerTypes.Input,inputTabBox.value,controllerName)" />
+</div>
+
+<!--TABLE INPUT AMOUNT -------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.TableAmount" class="probate-controller-input-wrapper">
+  <input [disabled]="controllerDisabled" #inputTabAmount type="number" class="tbl-input-custom-type number-right-align"
+    matInput [value]="dataModel.itemData[controllerName]" autocomplete="off"
+    (blur)="onblurInputData(CommonControllerTypes.Input,inputTabAmount.value,controllerName)">
+</div>
+
+<!--INPUT PERCENTAGE -------------------------------------------------------- dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="15"  -->
+<div *ngIf="controllerType===CommonControllerTypes.Percentage" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field appearance="fill" class="probate-controller-input input-sm">
+    <input [disabled]="controllerDisabled" #inputAmountVal matInput dpsNumbersOnlyWithDecimals [maxlength]="2"
+      class="number-right-align" [value]="dataModel.itemData[controllerName]" autocomplete="off"
+      (blur)="onblurInputData(CommonControllerTypes.Input,inputAmountVal.value,controllerName)">
+  </mat-form-field>
+</div>
+<!--INPUT AMOUNT ---------------------------------------------------------->
+<div *ngIf="controllerType===CommonControllerTypes.Amount" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field appearance="fill" class="probate-controller-input input-sm">
+    <input [disabled]="controllerDisabled" #inputAmountVal matInput type="number" class="number-right-align"
+      [value]="dataModel.itemData[controllerName]" autocomplete="off"
+      (blur)="onblurInputData(CommonControllerTypes.Input,inputAmountVal.value,controllerName)">
+  </mat-form-field>
+</div>
+<!--INPUT AMOUNT TWO DECIMAL ---------------------------------------------------------->
+<div *ngIf="controllerType===CommonControllerTypes.TwoDecimal" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field appearance="fill" class="probate-controller-input input-sm">
+    <input [disabled]="controllerDisabled" #inputAmountVal matInput class="number-right-align"
+      [value]="dataModel.itemData[controllerName]" dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="2" [maxlength]="20"
+      autocomplete="off" (blur)="onblurInputData(CommonControllerTypes.Input,inputAmountVal.value,controllerName)">
+  </mat-form-field>
+</div>
+<!--INPUT AMOUNT FOUR DECIMAL ---------------------------------------------------------->
+<div *ngIf="controllerType===CommonControllerTypes.FourDecimal" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field appearance="fill" class="probate-controller-input input-sm">
+    <input [disabled]="controllerDisabled" #inputAmountVal matInput class="number-right-align"
+      [value]="dataModel.itemData[controllerName]" dpsNumbersOnlyWithDecimals [noOfdecimalsPoint]="4" [maxlength]="20"
+      (blur)="onblurInputData(CommonControllerTypes.Input,inputAmountVal.value,controllerName)">
+  </mat-form-field>
+</div>
+<!--INPUT AMOUNT For Jointly owned assets type id-13/14/15-------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.JointlyOwnedAssetsTypes"
+  class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field appearance="fill" class="probate-controller-input input-sm">
+    <input [disabled]="controllerDisabled || dataModel.itemData['isJointNotApplicable']===true" #inputAmountVal matInput
+      type="number" class="number-right-align" [value]="dataModel.itemData[controllerName]"
+      (blur)="onblurInputData(CommonControllerTypes.Input,inputAmountVal.value,controllerName)">
+  </mat-form-field>
+</div>
+
+<!--TextBox -------------------------------------------------------- -->
+<div class="probate-controller-input-wrapper inline-lbl" *ngIf="controllerType===CommonControllerTypes.TextBox">
+  <mat-form-field class="probate-controller-input">
+    <input #inputTextboxVal matInput [value]="dataModel.itemData[controllerName]"
+      (focusout)="onValueChanged(CommonControllerTypes.Input,inputTextboxVal.value,controllerName)">
+  </mat-form-field>
+</div>
+
+<!--Inputs with Text -------------------------------------------------------- -->
+
+<div class="probate-controller-input-wrapper inline-lbl" *ngIf="controllerType===CommonControllerTypes.Input">
+  <label class="half-screen">{{controllerText}}</label>
+  <mat-form-field [ngClass]="styleSheet.class" class="probate-controller-input">
+    <!-- <mat-placeholder>{{controllerText}}</mat-placeholder> -->
+    <input #inputVal matInput [value]="dataModel.itemData[controllerName]" autocomplete="off"
+      (focusout)="onValueChanged(CommonControllerTypes.Input,inputVal.value,controllerName)">
+  </mat-form-field>
+</div>
+
+<!-- InputNumber -->
+<div class="probate-controller-input-wrapper inline-lbl" *ngIf="controllerType===CommonControllerTypes.InputNumber">
+  <label class="half-screen">{{controllerText}}</label>
+  <mat-form-field [ngClass]="styleSheet.class" class="probate-controller-input">
+    <input #inputNumVal matInput [value]="dataModel.itemData[controllerName]"
+      (focusout)="onValueChanged(CommonControllerTypes.Input,inputNumVal.value,controllerName)">
+  </mat-form-field>
+</div>
+
+<!--INPUT WITH A matPrefix -------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.InputMatPrefix" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen">{{controllerText}}</label>
+  <mat-form-field class="probate-controller-input" [ngClass]="styleSheet.class">
+    <span matPrefix>% &nbsp;</span>
+    <input type="tel" matInput>
+  </mat-form-field>
+</div>
+
+<!--CHECK_BOX -------------------------------------------------------- -->
+<section *ngIf="controllerType===CommonControllerTypes.CheckBox" class="probate-controller-input-wrapper">
+  <mat-checkbox (change)="onValueChanged(CommonControllerTypes.CheckBox,$event.checked,controllerName)" color="primary"
+    [ngModel]="dataModel.itemData[controllerName]">
+    {{controllerText}}</mat-checkbox>
+</section>
+
+<!--RADIO_BUTTON - multiple radio button-------------------------------------------------------- -->
+<section *ngIf="controllerType===CommonControllerTypes.RadioBtn" class="probate-controller-input-wrapper">
+  <mat-radio-group fxLayout="row"
+    (change)="onRadioButtonValueChanged(CommonControllerTypes.RadioBtn,$event.value,controllerName)"
+    [value]="dataModel.itemData[controllerName]===true?'Yes':'No'">
+    <mat-radio-button color="primary" [value]="item" *ngFor=" let item of controllerValueArray"> {{item}}
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+<!--RADIO_BUTTON - single radio button-------------------------------------------------------- -->
+<section *ngIf="controllerType===CommonControllerTypes.SingleRadioBtn" class="probate-controller-input-wrapper">
+  <mat-radio-group fxLayout="row"
+    (change)="onRadioButtonValueChanged(CommonControllerTypes.SingleRadioBtn,$event.value,controllerName)"
+    [value]="dataModel.itemData[controllerName]">
+    <mat-radio-button color="primary" [value]="true">
+      {{controllerText}}
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<!-- DATEPICKER -------------------------------------------------------- -->
+<div *ngIf="controllerType===CommonControllerTypes.DatePicker" class="probate-controller-input-wrapper inline-lbl">
+  <label class="half-screen">{{controllerText}}</label>
+  <mat-form-field class="probate-controller-input">
+    <input #dateVal matInput [matDatepicker]="picker"
+      [disabled]="controllerDisabled || dataModel.itemData['isJointNotApplicable']===true"
+      [ngModel]="dataModel?.itemData[controllerName] | date:'yyyy-MM-dd'"
+      (dateChange)="onValueChanged(CommonControllerTypes.DatePicker,$event.value,controllerName)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<!--DROP_DOWN -------------------------------------------------------- -->
+<div class="probate-controller-input-wrapper inline-lbl " *ngIf="controllerType===CommonControllerTypes.DropDown">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field [ngClass]="styleSheet.class" class="probate-controller-input alt">
+    <mat-select placeholder="Select" [ngModel]="dataModel.itemData[controllerName]"
+      (selectionChange)="onValueChanged(CommonControllerTypes.DropDown,$event.value,controllerName)">
+      <mat-option style="width: auto!important;" *ngFor="let item of controllerValueArray" [value]="item">{{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<!--DROP_DOWN Custom liabilityAsset-------------------------------------------------------- -->
+<div class="probate-controller-input-wrapper inline-lbl"
+  *ngIf="controllerType===CommonControllerTypes.LiabilityAssetDropDown">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field [ngClass]="styleSheet.class" class="probate-controller-input">
+    <mat-select placeholder="Select" [ngModel]="dataModel.itemData[controllerName]"
+      (selectionChange)="onValueChanged(CommonControllerTypes.DropDown,$event.value,controllerName)">
+      <mat-option *ngFor="let item of liabilityAsset" [value]="item.id">{{item.description}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<!--DROP_DOWN Custom exemptionAsset -------------------------------------------------------- -->
+<div class="probate-controller-input-wrapper inline-lbl"
+  *ngIf="controllerType===CommonControllerTypes.ExemptionAssetDropDown">
+  <label class="half-screen"> {{controllerText}}</label>
+  <mat-form-field [ngClass]="styleSheet.class" class="probate-controller-input">
+    <mat-select placeholder="Select" [ngModel]="dataModel.itemData[controllerName]"
+      (selectionChange)="onValueChanged(CommonControllerTypes.DropDown,$event.value,controllerName)">
+      <mat-option *ngFor="let item of exemptionAsset" [value]="item.id">{{item.description}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<!--================all input types end ====================== -->
+
+<!-- =========== This component not in used ============ -->
+<div *ngIf="false">
+  <!--INPUTS WITH TEXTAREA -------------------------------------------------------- -->
+  <mat-form-field class="example-full-width probate-controller-input">
+    <textarea matInput placeholder="Leave a comment"></textarea>
+  </mat-form-field>
+  <!--INPUT WITH A CLEAR BUTTON -------------------------------------------------------- -->
+  <mat-form-field class="probate-controller-input">
+    <input matInput type="text" placeholder="Clearable input">
+    <button mat-button *ngIf="null" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <!--INPUT WITH A SEARCH BUTTON -------------------------------------------------------- -->
+  <mat-form-field class="probate-controller-input">
+    <input matInput type="text" placeholder="Clearable input">
+    <button mat-button *ngIf="null" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <div>
+    <mat-form-field class="probate-controller-input">
+      <mat-placeholder>Email</mat-placeholder>
+      <input matInput type="text">
+    </mat-form-field>
+    <button mat-raised-button>Open</button>
+  </div>
+  <!--INPUT WITH A DISABLE VALUE -------------------------------------------------------- -->
+  <mat-form-field class="example-full-width  probate-controller-input">
+    <input matInput placeholder="Company (disabled)" disabled value="Google">
+  </mat-form-field>
+  <!--INPUT WITH HINTS -------------------------------------------------------- -->
+  <mat-form-field class="example-full-width  probate-controller-input">
+    <mat-placeholder>Message</mat-placeholder>
+    <input matInput #message maxlength="256">
+    <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+  <!-- DATEPICKER -------------------------------------------------------- -->
+  <mat-form-field class="probate-controller-input">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <!--DISABLED DATEPICKER -------------------------------------------------------- -->
+  <mat-form-field class="probate-controller-input">
+    <input matInput [matDatepicker]="dp1" placeholder="Completely disabled" disabled>
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+  </mat-form-field>
+  <!--CHECK_BOX -------------------------------------------------------- -->
+  <section class="probate-controller-input">
+    <mat-checkbox class="dps-editorble-element" labelPosition="before">Checked</mat-checkbox>
+  </section>
+  <!--RADIO_BUTTON -------------------------------------------------------- -->
+  <section class="dps-editorble-element probate-controller-input">
+    <mat-radio-group fxLayout="row">
+      <mat-radio-button *ngFor=" let nameRadiobtn of nameRadiobtn" value="before">example
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+</div>

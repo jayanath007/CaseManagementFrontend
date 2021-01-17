@@ -1,0 +1,29 @@
+.filter-drop-down .mat-form-field
+{
+    width: 100px;
+    padding: 0px 0 0px;
+}
+.filter-drop-down .mat-card
+{
+    padding: 11px;
+}
+.filter-drop-down .mat-card-content
+{
+    margin-bottom:0;
+}
+.filter-drop-down .mat-card>.mat-card-actions:last-child
+{
+    margin-bottom:0;
+}
+.filter-drop-down .mat-card-actions
+{
+    padding: 0;
+}
+.filter-drop-down .mat-select-value-text {
+    font-size: 12px;
+}
+.filter-drop-down .mat-select-panel .mat-optgroup-label, .filter-drop-down .mat-select-panel .mat-option {
+    line-height: 29px;
+    height: auto;
+    font-size: 12px;
+}

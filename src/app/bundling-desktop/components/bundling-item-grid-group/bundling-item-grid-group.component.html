@@ -1,0 +1,33 @@
+<div *ngFor="let group of groupData ; let row = index">
+  <mat-list dense [ngClass]="{'dps_selected_group': selectGroup?.groupHash === group.groupHash}">
+    <mat-list-item class="dps-clmn-main-group" fxLayout="row" [ngClass]="{cssClass: group.isExpand}" disableRipple
+      [dragData]="group" [dpsDraggable]="true" (onDragStart)="onDragStart($event,group)" [dropZones]="['inBundle']"
+      (click)="onSelectGroup(group)">
+      <span (click)="onGroupRowChange(group)">
+        <i class="material-icons arrow-right-down-btn">
+          {{isGroupExpand(group.groupHash)?'keyboard_arrow_down':'keyboard_arrow_right'}}
+        </i>
+      </span>
+
+      <div fxFlex="row" class="dps-bundling-group">
+        <mat-icon class="mat-18">
+          <span> folder </span>
+        </mat-icon>
+        <div class="group-count">{{group.value}} ({{getNotRemoveCount(group)}})</div>
+      </div>
+
+    </mat-list-item>
+  </mat-list>
+  <div>
+    <div *ngIf="isGroupExpand(group.groupHash)">
+      <div class="dps-case-file-grid-row mat-elevation-z">
+        <dps-bundling-item-grid-row [gridData]="getFileHistoryGroupData(group.groupHash)" [selectedGridItems]="selectedGridItems"
+          [groupData]="group" (clickGridButton)="onClickGridButton($event)" (openDocument)="onOpenDocument($event)"
+          (rowExpand)="gridRowExpan($event)" fxFlex="" (selectRow)="onSelectRow($event)" [columnDef]="columnDef">
+        </dps-bundling-item-grid-row>
+      </div>
+      <button class="dps-load-more" *ngIf="!loading && (getFileHistoryGroupData(group.groupHash).length + getRemoveCount(group) !== group.count )"
+        mat-flat-button (click)="loadMore(group)">Load More</button>
+    </div>
+  </div>
+</div>

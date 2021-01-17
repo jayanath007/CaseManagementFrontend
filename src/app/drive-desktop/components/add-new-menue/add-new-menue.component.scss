@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+
+button.mat-menu-item {
+  line-height: 30px;
+  height: 40px;
+  font-size: $primary-font-size - 2;
+  padding: 0px 20px 0 0;
+
+  mat-icon.fa-folder {
+    color: #155186;
+  }
+
+  mat-icon.fa-file-word-o {
+    color: #001492
+  }
+
+  mat-icon.fa-file-powerpoint-o {
+    color: #d14a26
+  }
+
+  mat-icon.fa-file-excel-o {
+    color: #3da529
+  }
+
+  mat-icon.fa-file-text {
+    color: #8028b0;
+  }
+
+  mat-icon.fa {
+    font-size: 24px;
+    padding: 8px;
+  }
+}

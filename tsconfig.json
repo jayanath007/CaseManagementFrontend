@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "importHelpers": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "module": "es2015",
+    // "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    // SK 08.01.2021 - skip library check for urgent release - 
+    // This needs to be recheck and need to enable library check 
+    // this is temporary - need to be checked from FE
+    "skipLibCheck": true
+  }
+}

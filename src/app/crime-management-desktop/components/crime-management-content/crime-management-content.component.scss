@@ -1,0 +1,109 @@
+@import '~styles/variables.scss';
+
+.dps-crime-management-content {
+  height: 100%;
+  width: 100%;
+
+  .dps-crime-management-grid {
+    overflow-x: auto;
+
+    .dps-crime-management-grid-content {
+      overflow-y: scroll;
+    }
+
+  }
+}
+
+.row-highlight.dps-is-mobile {
+  width: 100%;
+}
+
+.row-highlight {
+  background-color: #fff3f3;
+  box-shadow: 0 2px 6px rgba(99, 93, 93, 0.16), 0 3px 6px rgba(232, 203, 203, 0.16);
+  z-index: 2;
+  width: calc(100% - 15px);
+}
+
+.row-highlight-inner {
+  height: 40px;
+}
+
+.dps-grid-x {
+  height: 100%;
+  overflow-x: auto;
+}
+
+.lenth-calc {
+  min-width: 1000px;
+  height: 100%
+}
+
+mat-expansion-panel {
+  border-bottom: 1px solid #f1f2f4;
+}
+
+.expansion-panelgrid-header {
+  height: auto !important;
+}
+
+.mat-expansion-panel-header {
+  font-size: 12px;
+  padding: 0px 0px;
+}
+
+.mat-expansion-panel-body {
+  padding: 12px 24px 12px;
+}
+
+.dps-crime-management-grid-content {
+  .grid-data {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-expansion-indicator {
+    position: absolute;
+    left: 0.7%;
+    right: auto;
+    top: 7px;
+  }
+
+  mat-expansion-panel-header {
+    position: relative;
+    padding: 0px 0px;
+  }
+
+  ::ng-deep .mat-expansion-panel-spacing {
+    margin: 0px 0px !important;
+  }
+
+  .mat-expansion-panel-header-title {
+    margin-right: 0px;
+  }
+}
+
+.dps-crime-management-grid {
+  margin: 19px;
+}
+
+.row-highlight-inner {
+  height: 30px;
+}
+
+dps-column-header {
+  background: #1976c1;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 11px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 10px;
+  padding: 15px 7px;
+  height: 27px;
+}
+
+dps-crime-class-summery {
+  margin-left: auto;
+  margin-right: 0;
+  color: #fff;
+  padding: 26px 0 0;
+}

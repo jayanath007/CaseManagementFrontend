@@ -1,0 +1,12 @@
+@import '~styles/variables.scss';
+.dps-compose-mail-layout{
+    min-width: 500px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $primary;
+}
+.dps-compose-mail-layout dps-compose-mail-header{
+    // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    // z-index: 2;
+}

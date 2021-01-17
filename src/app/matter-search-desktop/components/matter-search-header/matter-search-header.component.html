@@ -1,0 +1,24 @@
+<div class="matter-summary" fxLayout="row">
+
+  <div class="total-matter-count-wrap" fxFlex="1 1 auto">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div class="total-matter-count">
+        <span *ngIf="activeView==='MyMatters'">{{totalMatterCount}}</span>
+        <span *ngIf="activeView==='Recent50'">50</span>
+        <label *ngIf="activeView==='MyMatters'">{{matterDisplyName}}</label>
+        <label *ngIf="activeView==='Recent50'">Recent {{matterDisplyName}}</label>
+        <label *ngIf="activeView==='AllMatters'">All {{matterDisplyName}}</label>
+      </div>
+      <div class="total-bill-outstanding-count" *ngIf="activeView==='MyMatters'">
+        <span>{{homeCurrancy | currencySymbols}}{{totalBillsOutstanding | number : '1.2-2'}}</span>
+        <label>Total Bills Outstanding</label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="matter-filter-grid-controllers">
+    <dps-matter-search-dapartments [selectedDepartment]="selectedDepartment" [departmentList]="departmentList"
+      (updateSelectedDepartment)="onDepartmentChange($event)"></dps-matter-search-dapartments>
+  </div>
+</div>

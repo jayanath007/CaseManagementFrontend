@@ -1,0 +1,9 @@
+<div class="team-efficiency-spinner"  *ngIf="isloading">
+  <!-- <mat-spinner diameter= "35" strokeWidth= "3"></mat-spinner> -->
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div>
+  <canvas style="height:400px" baseChart [hidden]="isloading" [height]="chartHeight" [datasets]="barChartData" [labels]="barChartLabels" [options]="chartOptions" [colors]="lineChartColors"
+    [legend]="barChartLegend" [ngStyle]="{'height.px': chartHeight}" [chartType]="type" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+</div>
+  

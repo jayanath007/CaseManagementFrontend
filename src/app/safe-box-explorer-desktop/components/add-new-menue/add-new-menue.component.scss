@@ -1,0 +1,17 @@
+@import '~styles/variables.scss';
+
+button.mat-menu-item {
+  line-height: 30px;
+  height: 40px;
+  font-size: $primary-font-size - 2;
+  padding: 0px 20px 0 0;
+
+  mat-icon.fa-file-code-o {
+    color: #006bbc !important;
+  }
+
+  mat-icon.fa {
+    font-size: 24px;
+    padding: 8px;
+  }
+}

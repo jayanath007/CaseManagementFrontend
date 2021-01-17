@@ -1,0 +1,6 @@
+<dps-virtual-scroll class="dps-conversation-list-view dps-white-gray-scroll" #virtualScroll [items]="conversations"
+  (update)="viewPortItems = $event" (end)="onListChange($event)" [bufferAmount]="25">
+  <dps-conversation-short-list-item *ngFor="let item of viewPortItems" [companyCode]="companyCode" [conversation]="item"
+    [timeZone]="timeZone" (conversationSelect)="onConversationSelect($event)" (conversationDelete)="onConversationDelete($event)"></dps-conversation-short-list-item>
+  <mat-progress-bar mode="indeterminate" *ngIf="isConversationsLoading"></mat-progress-bar>
+</dps-virtual-scroll>

@@ -1,0 +1,7 @@
+<div class="dps-team-members-container">
+  <mat-nav-list class="dps-team-member-nav-list" dense>
+    <mat-list-item *ngFor="let member of teamMemberList" (click)=onTeamMemberChange(member) [title]="member.fullName" [ngClass]="{'dps-selected-Member': member.selected}">
+      <img matListAvatar src="no-profile-img.png" alt="...">
+    </mat-list-item>
+  </mat-nav-list>
+</div>

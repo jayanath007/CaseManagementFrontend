@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+.dps-tasks-grid-button{
+    align-items: center;
+    padding-right: 12px;
+    font-size: 18px;
+    color: #2b475a;
+}
+.dps-tasks-grid-button span{
+    text-align: center;
+    font-size: $secondary-font-size;
+}
+.dps-tasks-grid-button:hover
+{
+  color:#8e6a10;
+  transition:all 0.2s ease-in-out;
+
+}
+
+.grid-sub-button-container .mat-icon-button
+{
+    line-height: normal;
+    margin-top: 4px;
+    width: 28px;
+    height: 28px;
+}

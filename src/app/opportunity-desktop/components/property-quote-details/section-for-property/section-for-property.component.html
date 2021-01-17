@@ -1,0 +1,17 @@
+<div class="input-section seperator">
+  <h3>Property Information </h3>
+  <div fxLayout="row" fxLayoutGap="2em">
+    <mat-checkbox [ngModel]="propertyQuRequest[key.hipsLeasehold] === leaseHold.Yes "
+      (change)="onChnageProQuoteRequest(key.hipsLeasehold, ($event.checked === true ? leaseHold.Yes : leaseHold.No))"
+      color="primary">
+      <label>Property leasehold</label>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="isEnabaleCost(propertyQuRequest?.appId, 'shared_ownership', cost, propertyQuRequest?.branchId)"
+      [ngModel]="propertyQuRequest[key.sellShare]" (change)="onChnageProQuoteRequest(key.sellShare, $event.checked)"
+      color="primary">
+      <!-- <label>Is this property part of a shared ownership scheme?</label> -->
+      <label>{{costDescription(propertyQuRequest?.appId, 'shared_ownership', cost, propertyQuRequest?.branchId)}}</label>
+    </mat-checkbox>
+  </div>
+
+</div>

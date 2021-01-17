@@ -1,0 +1,54 @@
+@import '~styles/variables.scss';
+
+::ng-deep .dps-open-workflow-rule-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}
+
+.workflow-rules {
+  width:100%; 
+  height: 100%;
+  overflow:hidden;
+}
+
+mat-list {
+  width:100%;
+  padding-top: 0px;
+}
+
+mat-list-item  {
+  width:100%;
+  font-size: $primary-font-size;
+}
+
+mat-toolbar{
+    background: $dps-popup-matbar;
+    height: 42px;
+  }
+
+  mat-toolbar-row {
+    height: 42px;
+  }
+  
+  mat-toolbar mat-list-item{    
+    color: $primary;
+  }
+ 
+  .dps-workflowrule-list {
+    padding-left: 15px;
+  }
+
+  .workflow_rule_headings.full_screen_view , button mat-icon  {
+    color: $primary;
+    line-height: 40px;
+  }
+
+
+  ::selection {
+    background: transparent; /* WebKit/Blink Browsers */
+  }
+  ::-moz-selection {
+    background: transparent; /* Gecko Browsers */
+  }

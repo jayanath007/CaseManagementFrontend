@@ -1,0 +1,10 @@
+<div class="input-section">
+  <div class="general-input-type-text figure highlight">
+    <h3>{{header}}</h3>
+    <mat-form-field class="input-wrapper">
+      <label class="sign">{{currency}}</label>
+      <input matInput type="text" maxlength="15" size="15" [ngModel]="value | thousandSeperator" autofocus
+        (keyup)="onChangePrice($event.target.value)">
+    </mat-form-field>
+  </div>
+</div>

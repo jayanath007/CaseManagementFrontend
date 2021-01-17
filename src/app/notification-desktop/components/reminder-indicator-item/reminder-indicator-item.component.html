@@ -1,0 +1,35 @@
+<div class="dps-event-notification-alert">
+
+  <mat-list-item>
+
+    <div fxLayout="row" fxLayoutAlign="space-between ">
+      <div class="dps-alert-inforamtion">
+        <span matLine class="dps-eventSubject">{{reminder.eventSubject}}&nbsp;</span>
+        <span matLine class="dps-eventime">{{reminder.eventStartTime.dateTime|dpsDate}} -
+          {{reminder.eventEndTime.dateTime|dpsDate}}</span>
+        <span matLine class="dps-event-location">{{reminder.eventLocation.displayName}}&nbsp;</span>
+      </div>
+      <div class="dps-alert-time">
+        <span matLine class="dps-duration">{{durationString}} </span>
+        <span matLine class="dps-duration-overdue" [ngClass]="overdueRemaining">{{overdueRemaining}}</span>
+      </div>
+    </div>
+
+  </mat-list-item>
+
+  <mat-list-item fxLayout="row" class="dps-alert-from-controller">
+    <mat-form-field>
+      <mat-select [value]="5" #snoozeSelect (openedChange)="onOpenedChange($event)">
+        <mat-option *ngFor="let snooze of snoozeList" [value]="snooze.val">
+          {{snooze.lable}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button class="dps-event-snnoze" (click)="onSnoozeClick(snoozeSelect.value)">Snooze</button>
+    <button mat-button color="primary" (click)="onDismissClick()">Dismiss</button>
+  </mat-list-item>
+
+
+
+</div>

@@ -1,0 +1,57 @@
+@import '~styles/variables.scss';
+
+.dps-secondary-side-nav
+{
+    width:250px;
+    height: 100%;
+    background: #b1c3d1;
+
+}
+.dps-bio-detail span{
+    text-align: center;
+    color: #11354a;
+    font-weight: 600;
+}
+.dps-bio-detail label{
+    font-size: 13px;
+    color: #403b3b;
+    text-align: center;
+}
+.mat-expansion-panel-body{
+    margin: 0px;
+}
+.general-matter-search-box
+{
+    margin-top:10px;
+    float: right;
+}
+.matter-summary{
+    position: absolute;
+    top:94px;
+    left:0;
+    font-family: $primary-font-stack;
+    color: #000b35;
+    text-align: center;
+    width: 80%;
+    padding: 0 10%;
+}
+.total-matter-count 
+{
+    padding-bottom: 10px;
+}
+.total-matter-count label,
+.total-bill-outstanding-count label
+{
+    font-size: 12px;
+
+}
+.total-matter-count span,
+.total-bill-outstanding-count span
+{
+    font-size: 20px;
+    padding-bottom: 4px;
+}
+.total-bill-outstanding-count
+{
+    padding-top: 15px;
+}

@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+.dps-mail-view-header{
+    height: 50px;
+
+    mat-icon {
+        color: #0079c4;
+    }
+
+    .dps-mail-exit {
+        color: #c73535;
+    }
+
+}
+.dps-mail-view-header button {
+    color: #666666;
+    margin-right: 12px;
+}
+.dps-mail-view-header{
+    padding-top:0px; 
+}
+.mat-toolbar
+{
+    background: $primary;
+    border-bottom: 1px solid #e1e1e1;
+}

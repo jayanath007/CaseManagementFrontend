@@ -1,0 +1,78 @@
+@import '~styles/variables.scss';
+
+.probate-controller-input {
+  font-size: 12px;
+  color: #000000;
+}
+
+.number-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-label {
+  margin-top: 0;
+}
+
+.probate-controller-input-wrapper {
+  font-family: $primary-font-stack;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  .mat-radio-button {
+    margin-right: 15px;
+  }
+
+  &.inline-lbl {
+    label {
+      margin-right: 15px;
+      display: inline-block;
+      font-weight: bold;
+
+    }
+
+    .half-screen {
+      width: 253px;
+    }
+  }
+
+  .tbl-input-custom-type {
+    background: white;
+    padding: 4px;
+    border-radius: 2px;
+    border: 1px solid #8ea4b7;
+    outline: none;
+  }
+
+}
+
+.alt {
+  &.mat-form-field {
+    width: auto;
+    min-width: 200px;
+  }
+
+  &.JointlyOwnedSharesSecurities {
+    min-width: 500px !important;
+  }
+
+  &.OtherJointlyOwnedAssets {
+    min-width: 340px !important;
+  }
+
+  .mat-select-value {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .mat-form-field-infix {
+    width: 100% !important;
+  }
+
+
+}

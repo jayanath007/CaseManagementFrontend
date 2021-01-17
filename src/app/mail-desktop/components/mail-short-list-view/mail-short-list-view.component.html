@@ -1,0 +1,16 @@
+<!-- 
+      <dps-mail-short-list-item *ngFor="let item of items" [item]="item" (itemReadUnread)="onItemsReadUnread($event)" (itemSelect)="onItemSelect($event)"
+      (itemFlag)="onItemsFlag($event)" (itemCheck)="onItemCheck($event)" (itemDelete)="onItemsDelete($event)" [selectedItems]="selectedItems" [timeZone]="timeZone"></dps-mail-short-list-item>
+    -->
+<dps-virtual-scroll class="dps-mail-list-view dps-white-gray-scroll" #virtualScroll [items]="items"
+  (update)="viewPortItems = $event" (end)="onListChange($event)" [bufferAmount]="25">
+  <dps-mail-short-list-item *ngFor="let item of viewPortItems" [item]="item"
+    (itemReadUnread)="onItemsReadUnread($event)" (itemSelect)="onItemSelect($event)" (itemFlag)="onItemsFlag($event)"
+    (itemCheck)="onItemCheck($event)" (itemDelete)="onItemsDelete($event)" [selectedItems]="selectedItems"
+    [timeZone]="timeZone" [companyCode]="companyCode">
+  </dps-mail-short-list-item>
+  <mat-progress-bar mode="indeterminate" *ngIf="itemsLoading"></mat-progress-bar>
+</dps-virtual-scroll>
+
+
+<!-- class="dps-mail-list-view dps-white-gray-scroll" -->

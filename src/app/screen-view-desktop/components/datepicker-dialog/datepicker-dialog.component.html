@@ -1,0 +1,43 @@
+  <!--<div class="dps-notification-wrap general">
+ <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <span>UFN Genaration </span>
+      </span>
+      <span class="spacer"></span>
+      <mat-icon class="header-icon close" (click)="onCancel()">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar> -->
+    <!-- <mat-toolbar>    
+      <mat-icon class="header-icon close" (click)="onCancel()">close</mat-icon> 
+    </mat-toolbar> -->
+
+  <mat-dialog-content class="mat-typography">
+    <h4 mat-dialog-title >Please select a date for the UFN </h4>
+    <mat-form-field class="date-picker-ufn">
+      <input matInput [(ngModel)] ="selectedDate "  [matDatepicker]="picker" placeholder="Date Done"
+      (dateChange)="onChangeDateDone($event)">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-dialog-content>
+	  <hr />
+  <mat-dialog-actions align="end">
+    <button mat-button class="save-screen" (click)="onAction()"> OK </button>
+    <button mat-button class="cancel-screen" (click)="onCancel()"> Cancel </button>
+  </mat-dialog-actions>
+<!-- </div> -->
+
+<!-- <h2 mat-dialog-title>{{ data.content.title }}</h2>
+<mat-dialog-content class="mat-typography">{{ data.content.message  }}</mat-dialog-content>
+
+<input matInput [(ngModel)] ="selectedDate"  [matDatepicker]="picker" placeholder="Date Done"
+ (dateChange)="onChangeDateDone($event)">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="onAction()"> ok </button>
+  <button mat-raised-button color="primary" (click)="onCancel()"> cancel </button>
+</mat-dialog-actions>
+ -->

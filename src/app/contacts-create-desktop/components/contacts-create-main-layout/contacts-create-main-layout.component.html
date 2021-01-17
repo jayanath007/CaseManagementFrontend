@@ -1,0 +1,20 @@
+<div class="dps-contact-main-contentainer" fxLayout="column">
+
+  <div class="dps-contact-main-main-header">
+    <dps-contact-create-header [contactSearchKey]="contactSearchKey" (searchTextChanged)="onSearchTextChanged($event)">
+    </dps-contact-create-header>
+  </div>
+
+  <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+    <div class="grid-wrapper-main" fxLayout="column">
+
+      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <dps-contact-create-data-content fxFlex="1 1 auto" class="dpa-case-contact-manager" [mode]="mode"
+        [contactSearchKey]="contactSearchKey" [token]="token" [showSearchTab]="showSearchTab"
+        [selectedTab]="selectedTab" [types]="types" (changeSelectedTab)="onChangeSelectedTab($event)"
+        (selectContact)="onChangeContact($event)" (changeDetails)="onChangeDetails($event)">
+      </dps-contact-create-data-content>
+    </div>
+
+  </mat-card>
+</div>

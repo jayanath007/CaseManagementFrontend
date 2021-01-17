@@ -1,0 +1,35 @@
+<mat-list dense>
+  <mat-list-item class="dps-clmn-main-group" fxLayout="row" [ngClass]="{cssClass: group.isExpand}" (click)="onSelectGroup(group)">
+    <!-- <div class="tittle" fxLayout="row"> -->
+      <i class="material-icons arrow-right-down-btn">
+        {{isGroupExpand(group.groupHash)?'keyboard_arrow_down':'keyboard_arrow_right'}}
+      </i>
+      <h3> <i class="material-icons indicator" style=vertical-align:middle;>{{selectedGroup | groupIconByMode}}</i>
+       <span *ngIf="selectedGroup === GroupMode.Date" style="vertical-align: middle;"> {{ group.value | date :'dd/MM/yyyy' }} ({{group.count}})</span>
+       <span *ngIf="selectedGroup !== GroupMode.Date" style="vertical-align: middle;"> {{ group.value }} ({{group.count}})</span>
+      </h3>
+    <!-- </div> -->
+  </mat-list-item>
+</mat-list>
+<div>
+  <div *ngIf="isGroupExpand(group.groupHash)" style="padding-left: 26px;">
+    <div class="dps-case-file-grid-row mat-elevation-z">
+      <dps-post-office-grid-row [selectedGroup]="selectedGroup" [gridData]="getPostOfficeGroupData(group.groupHash)"
+       [columnDef]="columnDef" [selectedInfo]="selectedInfo" [isMuiltySelect]="getIsMuiltySelect"
+       [selectedRows]="selectedRows"
+        [expandedRow]="expandedRow" (clickGridButton)="onClickGridButton($event)"  (rowExpand)="gridRowExpan($event)">
+      </dps-post-office-grid-row>
+      <button class="dps-load-more" mat-flat-button (click)="loadMore(group)" *ngIf="getPostOfficeGroupData(group.groupHash).length > 0 && group?.currentItems < group?.count">Load
+        More</button>
+    </div>
+
+    <div class="dps-level-two">
+      <dps-postoffice-group *ngFor="let data of group.items" [selectGroupHash]="selectGroupHash" [gridData]="gridData"
+        [group]="data" [columnDef]="columnDef" (selectGroup)="onSelectGroup($event)"
+        [selectedInfo]="selectedInfo" [expandedRow]="expandedRow" [selectedGroup]="selectedGroup"
+        (loadMoreData)="loadMore($event)" (clickGridButton)="onClickGridButton($event)"  (rowExpand)="gridRowExpan($event)">
+      </dps-postoffice-group>
+    </div>
+  </div>
+
+</div>

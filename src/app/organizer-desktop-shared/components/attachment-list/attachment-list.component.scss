@@ -1,0 +1,65 @@
+@import '~styles/variables.scss';
+
+.mat-chip {
+  background: #fbfbfb;
+  border: 1px solid #e4e4e4;
+  cursor: pointer !important;
+}
+
+mat-chip.dps-link {
+  padding: 7px 12px 7px 0px;
+  border: 1px solid #4d8eb7;
+
+  img {
+    padding: 7px;
+    background: #6ba0c1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  span {
+    text-decoration: underline;
+    padding-left: 10px;
+  }
+}
+
+.dps-attachment-icon i {
+  font-size: 22px;
+}
+
+mat-chip-list .dps-attachment-icon {
+  border-radius: 0px;
+}
+
+.dps-item-attachment.fa-envelope {
+  color: #457bcc;
+}
+
+mat-chip span.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  box-sizing: border-box;
+  color: #0079c4;
+  font-weight: 500;
+  font-size: $primary-font-size - 2;
+}
+
+mat-chip {
+  max-width: 200px;
+  height: 16px;
+  margin: 2px 2px !important;
+}
+
+.mat-icon[title="Download"] {
+  color: #2e7d32 !important;
+  opacity: 5 !important;
+  font-size: 21px !important;
+}
+
+.mat-icon.mat-chip-remove[title="Delete"] {
+  color: #d32f2f !important;
+  opacity: 5 !important;
+  font-size: 21px !important;
+}

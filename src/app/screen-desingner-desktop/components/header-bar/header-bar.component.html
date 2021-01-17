@@ -1,0 +1,107 @@
+<div class="screen-views-button-wrapper" [ngClass]="{'multi-screens': screenIds?.length > 1}" >
+
+        <div class="left-buttons">
+
+                <button class="panel-controller left" (click)="leftCollapseMenu()">
+                        <i class='fa fa-chevron-left screen-edit-wrapper' [ngClass]="{' active': !leftCollapse }"></i>
+                        <i class='fa fa-chevron-right screen-edit-wrapper' [ngClass]="{' active': leftCollapse }"></i>
+                </button>
+
+                <div *ngFor="let rowData of screenLogicDocuments" class="logic-button-left" >
+                      
+                            <!-- <i *ngIf="isCheckoutFile(rowData) || rowData.editingBusy == true"  
+                             title="Checkout by {{rowData.checkedOutByUser || 'you' }}" 
+                             [ngClass]="{'file-access': isCheckoutByMe(rowData), 'file-abord': !isCheckoutByMe(rowData), 'blink': rowData.editingBusy == true}"
+                             class="material-icons">person</i> -->
+
+                             <!-- 
+                              <button mat-flat-button class="mat-elevation-z0 logic-button entry" (click)="doDiscardCheckin(rowData)"  *ngIf="isCheckoutByMe(rowData)"
+                               mat-raised-button class="mat-elevation-z0 logic-button entry"
+                               title="{{rowData.name + ' Abort' }}">
+                              <span>Abort</span>
+                              </button>
+                        
+                              <button mat-flat-button class="mat-elevation-z0 logic-button entry" (click)="doCheckin(rowData)" *ngIf="isCheckoutByMe(rowData)"
+                              mat-raised-button class="mat-elevation-z0 logic-button entry"
+                              title="{{rowData.name + '  Check-In' }}">
+                  
+                              <span>Check-In</span>
+                              </button> -->
+        
+                            <!-- <button mat-mini-fab  class="mat-elevation-z0 logic-button entry" (click)="onLogic(rowData)" mat-raised-button 
+                              title={{rowData.name}}>
+                                      <i *ngIf="rowData.id === 'EntryLogic'" class="fa fa-code"></i>
+                                      <i *ngIf="rowData.id === 'TabLogic'" class="fa fa-step-forward"></i>
+                                      <i *ngIf="rowData.id === 'ExitLogic'" class="fa fa-sign-out"></i>
+                              </button> -->
+
+
+                              <mat-spinner *ngIf="rowData.editingBusy == true"  ></mat-spinner>
+                              <button [ngClass]="{'is-checkout-file': isCheckoutFile(rowData) }" [disabled]="rowData.editingBusy == true"  mat-mini-fab  class="mat-elevation-z0 logic-button entry" (click)="onLogic(rowData)" mat-raised-button 
+                              title={{rowData.name}}>
+                                      <i *ngIf="rowData.id === 'EntryLogic'" class="fa fa-code"></i>
+                                      <i *ngIf="rowData.id === 'TabLogic'" class="fa fa-step-forward"></i>
+                                      <i *ngIf="rowData.id === 'ExitLogic'" class="fa fa-sign-out"></i>
+                              </button>
+
+                </div>
+
+        </div>
+
+
+        <div class="right-buttons">
+
+                <button class="panel-controller right" (click)="rightCollapseMenu()">
+                        <i class='fa fa-chevron-left screen-edit-wrapper' [ngClass]="{' active': rightCollapse }"></i>
+                        <i class='fa fa-chevron-right screen-edit-wrapper' [ngClass]="{' active': !rightCollapse }"></i>
+                </button>
+
+
+                <button mat-mini-fab (click)="closeDialog()" color="warn" title = "Exit Screen">
+                        <i class="material-icons">close</i>
+                </button>
+
+
+                <button (click)="save()" mat-mini-fab class="mat-elevation-z0 save-canvas" title = "Save Screen">
+                        <i class="material-icons">
+                                save
+                                </i>
+                    </button>
+                    <button (click)="xmlExport()" mat-mini-fab class="mat-elevation-z0 export-xml"
+                    title = "Export screen to xml">
+                                <!-- Export to -->
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>  
+                                
+                               
+                                <!-- <mat-icon>file_upload</mat-icon> -->
+                    </button>
+                    <button mat-mini-fab class="mat-elevation-z0 file-based"
+                     *ngIf="screenDefinition?.ScreenDefType == 0" title="File Based Screen">
+                     <i class="fa fa-file-o" aria-hidden="true"></i>
+                </button>
+
+
+
+                <div class="screen-navigation" *ngIf="screenIds?.length > 1">
+
+                        <button class="mat-elevation-z0" mat-mini-fab [disabled]="screenIds?.length === curentIndex+1" (click)="next($event)">
+                                <i class="material-icons">chevron_right</i>
+                        </button>
+
+                        <button class="mat-elevation-z0" mat-mini-fab [disabled]="curentIndex === 0" (click)="prives($event)">
+                                <i class="material-icons">chevron_left</i>
+                        </button>
+
+
+
+                </div>
+
+
+        </div>
+
+        
+
+        <div class="screen-title">
+
+                {{screenDefinition?.screenTitle}}</div>
+</div>

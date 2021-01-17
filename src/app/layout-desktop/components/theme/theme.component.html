@@ -1,0 +1,4 @@
+<mat-radio-group (change)="onThemeChange($event)" [ngModel]='(theme$ | async)' fxLayout="row" fxLayoutGap="2rem">
+  <mat-radio-button color="primary" [value]='Theme.Angular7'>Angular7</mat-radio-button>
+  <mat-radio-button color="primary" [value]='Theme.Classic'>Classic</mat-radio-button>
+</mat-radio-group>

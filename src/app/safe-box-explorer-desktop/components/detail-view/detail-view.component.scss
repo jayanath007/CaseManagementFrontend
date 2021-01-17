@@ -1,0 +1,172 @@
+@import '~styles/variables.scss';
+
+.safe-box-detail-view {
+  dps-safebox-context-menue {
+    position: fixed;
+  }
+
+  .safebox-file {
+    padding: 5px 0px 5px 0px;
+
+    &:hover {
+      background-color: #ddefff;
+      box-shadow: inset 1px 1px #b7daf9, 1px 1px #b7daf9; // border: 1px solid #b7daf9;
+    }
+
+  }
+
+  $breakpoint-alpha: 480px;
+
+  .rwd-table {
+    .table-header {
+      background: #c3e2ff;
+      font-size: $primary-font-size - 2;
+      font-weight: 400;
+      color: #043967;
+
+      .file {
+        width: 40%;
+        border-bottom: 1px solid #e4e4e4;
+      }
+
+      .date {
+        width: 20%;
+        border-bottom: 1px solid #e4e4e4;
+      }
+    }
+
+    .table-content {
+      font-size: $primary-font-size - 2;
+      font-weight: 400;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddefff;
+      }
+
+      mat-icon {
+        padding-left: 3px;
+
+        i {
+          font-size: 20px;
+        }
+      }
+
+      span {
+        padding-left: 2px;
+        font-weight: 500;
+      }
+
+      .file {
+        width: 40%;
+        border-bottom: 1px solid #e4e4e4;
+      }
+
+      .date {
+        width: 20%;
+        border-bottom: 1px solid #e4e4e4;
+      }
+    }
+
+    tr {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+    }
+
+    td {
+      display: block;
+
+      &:first-child {
+        padding-top: .2em;
+      }
+
+      &:last-child {
+        padding-bottom: .5em;
+      }
+
+      &:before {
+        content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+        font-weight: bold; // optional stuff to make it look nicer
+        width: 6.5em; // magic number :( adjust according to your own content
+        display: inline-block; // end options
+
+        @media (min-width: $breakpoint-alpha) {
+          display: none;
+        }
+      }
+    }
+
+    th,
+    td {
+      text-align: left;
+
+      @media (min-width: $breakpoint-alpha) {
+        display: table-cell;
+        padding: 0.6em .5em;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+
+  td {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 5px 0px 8px 5px;
+  }
+
+  cursor: pointer;
+
+  mat-icon {
+    vertical-align: middle;
+    font-size: $primary-font-size + 6;
+    color: #155186;
+  }
+
+  span.name {
+    font-size: $primary-font-size - 2;
+    font-weight: 500;
+    padding-left: 2px;
+  }
+
+  .date {
+    font-size: $primary-font-size - 2;
+  }
+
+
+
+
+
+
+  #dragPreView {
+    background: #658db1;
+    padding: 3px 9px 3px;
+    -webkit-box-shadow: 2px -1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -1px 5px 0px #51677b;
+    border: 1px solid #658db1;
+    border-radius: 3px;
+    max-width: 95px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: -100;
+
+    mat-icon {
+      color: #1161ab;
+      border-right: 1px solid #4979;
+      vertical-align: middle;
+    }
+
+    span.name {
+      color: #1d3b54;
+      font-size: 13px;
+      padding-left: 5px;
+    }
+  }
+}

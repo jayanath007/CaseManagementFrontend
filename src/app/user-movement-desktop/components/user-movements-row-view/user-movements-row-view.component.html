@@ -1,0 +1,98 @@
+<div fxLayout="row" class="dps-user-movements-row-view" style="height: 100%;">
+  <div fxFlex="250px" *ngIf="userList?.length > 0 && !loading" id="dps-user-row-view" class="dps-white-gray-scroll">
+    <mat-nav-list class="dps-users-list" [disableRipple]="true">
+      <div class="dps-separeate-color" *ngFor="let userProfile of userList; trackBy: trackByFn"
+        (click)="onSelectUserInMovements(userProfile)">
+        <mat-list-item class="left-slide-menu"
+          [ngClass]="{'dps-selected-user-movement': userProfile?.user === selectedUserInMovement?.user}">
+          <div class="dps-profile-picture">
+            <button matListAvatar mat-icon-button *ngIf="!img.showProfileImg" class="dps-sender-avatar"
+              [ngStyle]="{'background-color': userProfile?.userEmail| recipientColorCode}">
+              <span style="color: rgb(220, 220, 221);">{{userProfile?.fullName | nameInitials}}</span>
+            </button>
+            <img style="vertical-align: middle;" matListAvatar [hidden]="!img.showProfileImg"
+              src="{{userProfile?.userEmail | dpsUserImage | async}}" alt="..." (load)="img.showProfileImg=true" #img>
+          </div>
+
+
+          <div class="dps-pro-details" fxLayoutGap="3px">
+            <span fxLayout="row wrap">
+              <span matTooltip="{{userProfile?.fullName}}" matTooltipPosition="below"
+                class="s-name">{{userProfile?.fullName}}</span>
+              <span *ngIf="userProfile?.jobTitle" matTooltip="{{userProfile?.jobTitle}}"
+                class="title">({{userProfile?.jobTitle}}) </span>
+            </span>
+
+            <span class="s-name extension" *ngIf="userProfile?.directDialNo"><i class="material-icons">
+                settings_phone
+              </i>{{userProfile?.directDialNo}}</span>
+
+            <span *ngIf="getLastLocation(userProfile)" class="s-name location">
+              <i class="material-icons">room</i>
+              <span>{{getLastLocation(userProfile)}}</span>
+            </span>
+          </div>
+
+          <div class="dps-indicate-icons" fxLayout="column" fxLayoutGap="20px">
+            <i [ngClass]="{'dps-empty-movement': !userProfile?.dayMovements?.userMovements?.length > 0}"
+              class="material-icons">
+              supervisor_account
+            </i>
+            <i [ngClass]="{'dps-empty-event': !userProfile?.calanderEvents?.scheduleItems?.length > 0 }"
+              class="material-icons">
+              today
+            </i>
+
+
+
+          </div>
+
+        </mat-list-item>
+      </div>
+
+    </mat-nav-list>
+  </div>
+  <div *ngIf="userList?.length > 0 && !loading" fxFlex="1 1 auto" (scroll)="scrollHandler($event)"
+    class="dps-white-gray-scroll dps-movements-row-view" id="dps-movements-row-view">
+    <mat-nav-list class="dps-movements-row-view-content">
+      <dps-user-movement-row class="dps-separeate-color" *ngFor="let user of userList; trackBy: trackByFn" [user]="user"
+        [selectedUserInMovement]="selectedUserInMovement" [usermovements]="user?.dayMovements"
+        [schedulItems]="user?.calanderEvents?.scheduleItems" [nowDateTime]="clock$|async"
+        (click)="onSelectUserInMovements(user)">
+      </dps-user-movement-row>
+    </mat-nav-list>
+  </div>
+
+  <div class="dps-empty-timeline" *ngIf="!loading && userList?.length <= 0">
+    <i class="material-icons dps-mat-icon">
+      hourglass_empty
+    </i>
+    <span class="dps-text">NO USER(S)!</span>
+  </div>
+</div>
+
+
+
+<!-- <mat-nav-list [disableRipple]="true" class="dps-white-gray-scroll">
+  <div fxLayout="column wrap">
+    <div fxLayout="column wrap">
+      <div *ngFor="let user of userList; trackBy: trackByFn"> aa</div>
+    </div>
+
+    <div fxLayout="column wrap">
+      <dps-user-movement-row class="dps-separeate-color" *ngFor="let user of userList; trackBy: trackByFn" [user]="user"
+        [selectedUserInMovement]=[selectedUserInMovement] (click)="onSelectUserInMovements(user)">
+      </dps-user-movement-row>
+    </div>
+  </div>
+
+
+  <div class="dps-empty-timeline" *ngIf="userList?.length <1">
+    <i class="material-icons dps-mat-icon">
+      hourglass_empty
+    </i>
+    <span class="dps-text">NO USER(S)!</span>
+  </div>
+
+
+</mat-nav-list>  -->

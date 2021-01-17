@@ -1,0 +1,77 @@
+<mat-toolbar class="dps-header-bar" fxLayout="row" style="height: 50px;">
+  <!-- <span class="dps-header-name" fxFlex="1 1 auto">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+    </span> -->
+  <!-- <mat-tab-group  class="opened-case-tab" (selectedTabChange)="onItemClick($event)">
+            <mat-tab  *ngFor="let item of menuOpenCaseItems"> -->
+  <div class="dps-header-tab" fxFlexAlign="end">
+    <mat-tab-group class="opened-case-tab" [selectedIndex]="activeIndex"
+      [ngClass]="{'opencase-tab-disabale': isOpenCaseItemsExitLogicRuning}">
+      <mat-tab *ngFor="let item of menuOpenCaseItems;let i = index">
+        <ng-template mat-tab-label>
+          <div class="case-tab" *ngIf="menuGroups.OpenCase === item.group && item.data" (click)="onItemClick(item,i)"
+            [matTooltip]="item?.data?.mouseOverText" matTooltipPosition="below" dpsDroppable dropZone="openCaseTab"
+            (onDrop)="onDrop(item,$event)">
+
+            <span matLine>
+              <span *ngIf="item.data?.matterData?.data?.isPlotMasterMatter">MASTER:</span>
+
+              <span>{{item.data?.eBilling }} </span>
+              <span> {{item.data?.menuDisplayText3}} </span>
+            </span>
+
+            <span matLine class="case-text"> {{item.data?.menuDisplayText1}}</span>
+            <span matLine *ngIf="isExitLogicRuning(item.data)"> Closing... </span>
+            <span matLine *ngIf="!(item.data?.menuDisplayText2 || item.data?.menuDisplayText3 || item.data?.menuDisplayText1 ||
+              isExitLogicRuning(item.data))">
+              Loading... </span>
+            <mat-icon *ngIf="isEntryLogicCompleted(item.data)" (click)="onCloseClick(item, $event)" class="close">close
+            </mat-icon>
+          </div>
+          <div fxLayoutGap="3px" *ngIf="menuGroups.OpenCase !== item.group" (click)="onItemClick(item,i)"
+            [matTooltip]="item.label" matTooltipPosition="below">
+            <mat-icon matListIcon class="credit-card">credit_card</mat-icon>
+            <span>{{item.label}}</span>
+            <mat-icon (click)="onCloseClick(item, $event)" class="close">close</mat-icon>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div fxFlex="1 1 auto" class="dps-main-header-right" fxLayout="row">
+    <span fxFlex="1 1 auto"></span>
+    <div class="dps-main-right" fxLayout="row">
+      <div class="dps-module-section">
+        <ng-content select="[azure-storage-section]">
+        </ng-content>
+        <ng-content select="[notification-section]">
+        </ng-content>
+      </div>
+      <ng-content select="[notifications-btn]">
+      </ng-content>
+      <ng-content select="[settings-btn]">
+      </ng-content>
+
+    </div>
+
+    <button mat-button class="dps-user-btn" fxLayout="row" [title]="user?.profile?.upn"
+      (click)="onShowSetingsSidenav()">
+      <span class="dps-user-name"><span>HELLO!</span> {{userProfileName}}</span>
+      <!-- <mat-icon>account_circle</mat-icon> -->
+      <!-- <img hidden src="favicon.ico" alt="..." class="dps-user-avatar"> -->
+      <div class="dps-user-img">
+        <!-- <img [hidden]="showProfileImg" src="no-profile-img.png"
+                    alt="..."> -->
+        <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-team-member-avatar"
+          [ngStyle]="{'background-color': user?.profile?.upn | recipientColorCode}">
+          <span>{{user?.profile?.name | nameInitials}}</span>
+        </button>
+        <img [hidden]="!showProfileImg"
+          src="{{ isGoogle? user.userImage :(user | dpsLoginUserImage:'64x64'  | async) }}" alt="..."
+          (load)="showProfileImg=true">
+      </div>
+    </button>
+  </div>
+</mat-toolbar>

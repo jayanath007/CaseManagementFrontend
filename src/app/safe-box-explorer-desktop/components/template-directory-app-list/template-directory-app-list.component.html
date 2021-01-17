@@ -1,0 +1,21 @@
+<mat-nav-list dense>
+  <mat-divider></mat-divider>
+  <mat-list-item (click)="expandCollapsed()">
+    <span matLine>
+      <i class="fa fa-th-large"></i> Template Directory</span>
+    <mat-icon *ngIf="!isLoading">{{isAppListExpand?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+    <button mat-icon-button *ngIf="isLoading">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-circle-o-notch" class="fa fa-spin"></mat-icon>
+    </button>
+  </mat-list-item>
+  <div *ngIf="isAppListExpand">
+    <div *ngFor="let app of appList"
+      [ngClass]="{'active': selectedApp && app.appId===selectedApp.appId && isAppselect}">
+      <mat-list-item (click)="onSelectApp(app)">
+        <span matLine>
+          <i class="fa">{{app.appMatterPrefix}}</i> {{app.appDescription}}</span>
+      </mat-list-item>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</mat-nav-list>

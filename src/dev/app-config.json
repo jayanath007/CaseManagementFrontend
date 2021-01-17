@@ -1,0 +1,43 @@
+{
+  "tenant": "common",
+  "appId": "5dd7987f-52c7-4884-88fb-1b5ea33ebef8",
+  "endpoints": {
+    "dpsWebService": "https://dpssoftware.onmicrosoft.com/7169bd6f-aeee-4910-9b77-65079a3d4927",
+    "dpsWopiService": "https://dpssoftware.onmicrosoft.com/7169bd6f-aeee-4910-9b77-65079a3d4927",
+    "graphApi": "https://graph.microsoft.com"
+  },
+  "serviceBase": "/v2serviceBase",
+  "serviceBase2": "/v2secondServiceBase",
+  "graphApiBase": "/GraphApi",
+
+  "crime": "/crime/v1",
+  "solicitor": "/solicitor/v1",
+  "teamTalk": "/teamTalk/v1",
+  "workflow": "/workflow/v1",
+  "diary": "/diary/v1",
+  "documentHandler": "/document-handler/v1",
+  "inbox": "/inbox/v1",
+  "opportunity": "/opportunity/v1",
+  "fileserver": "/fileserver/v1",
+  "precidentH": "/precidentH/v1",
+  "probate": "/probate/v1",
+  "safebox": "/safebox/v1",
+  "civil": "/civil/v1",
+
+  "documentHandlerProxy": "/document-handler-proxy/v1",
+  "durableProxy": "/durable-proxy/v1",
+  "storageProxy": "/storage-proxy/v1",
+
+  "workflowStreamingUrl": "/hubs/workflow-streaming",
+
+  "pdfviwer": "http://40.114.255.226/",
+  "inlineAttachmentBase": "https://spitfiretest.dpshosted.com/inline-attachements",
+  "profilePhotoBase": "https://spitfiretest.dpshosted.com/profile-photo",
+  "outlookApiBase": "https://outlook.office.com/api",
+
+
+  "insightsInstrumentationKey": "c8c50401-1456-4445-8238-2348091bd7db",
+  "indexeddbVersion": "1",
+  "dashboardTheme": "Classic",
+  "googleClientId": "800667086381-4a1ct41vajn6d3n2m58jp17t57u0il44.apps.googleusercontent.com"
+}

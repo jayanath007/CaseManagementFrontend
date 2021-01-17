@@ -1,0 +1,17 @@
+<mat-list-item>
+  <img matListAvatar [hidden]="!showProfileImg"
+    src="{{attendee.emailAddress.address | dpsUserImage | async}}" alt="..." (load)="showProfileImg=true">
+  <button matListAvatar mat-icon-button *ngIf="!showProfileImg" class="dps-mail-item-avatar"
+    [ngStyle]="{'background-color': attendee.emailAddress.address|recipientColorCode}">
+    <span>{{attendee.emailAddress.name|nameInitials}}</span>
+  </button>
+  <span matLine class="attendee-name">{{attendee.emailAddress.name}}</span>
+  <span matLine class="attendee-email">{{attendee.emailAddress.address}}</span>
+  <span matLine class="attendee-status" *ngIf="attendee.status">{{attendee.status.response==='organizer'?'Organizer':
+    (attendee.status.response==='accepted'?'Accepted':
+    (attendee.status.response==='tentativelyAccepted'?'Tentatively accepted':
+    (attendee.status.response==='declined'?'Declined':'Not responded')))}}</span>
+  <button mat-icon-button *ngIf="hasRemove" (click)="onRemove()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-list-item>

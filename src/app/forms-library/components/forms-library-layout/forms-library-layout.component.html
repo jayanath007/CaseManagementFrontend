@@ -1,0 +1,51 @@
+    <div fxLayout="column" style="height: 100%;">
+      <dps-common-popup-header icon="timelapse" title="Forms Library" buttons="close" iconColor="#a9c0f6"
+        titleColor="#a9c0f6" (buttonClick)="onClose($event)">
+      </dps-common-popup-header>
+      <div class="forms-library-folder-container" fxLayout="row wrap" fxFlex="calc(100%-43px)">
+        <div class="workflow-controller">
+          <div class="row-highlight" dpsIsMobile>
+            <mat-list fxLayout="row" fxFlex="">
+              <div>
+                <mat-list-item class="column-header menu-tree">
+                  <!-- <span matPrefix (click)="onSearchTextClear($event)">&nbsp;&nbsp;</span> -->
+                  <input type="search" #searchTextInput matInput [value]="searchText" placeholder="Search here"
+                    (keydown)="onKeydownSearchText($event)" />
+                  <button matSuffix mat-icon-button (click)="onSearchTextClick(searchTextInput.value)">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-list-item>
+              </div>
+              <div class="column-header">
+                <mat-list-item class="description row-data">
+                  <span class="text">Includes</span>
+                </mat-list-item>
+              </div>
+            </mat-list>
+          </div>
+          <mat-progress-bar *ngIf="flLoading" mode="indeterminate"></mat-progress-bar>
+          <div fxLayout="row" class="workflow-controller-wrapper">
+            <div class="dps-workflow-menu-tree-container dps-white-gray-scroll">
+              <mat-card *ngIf="!!searchText" class="search-filter-applied" fxLayout="row" fxLayoutAlign="center center">
+                <div>
+                  <span class="filter-text"> Filter applied for <label>{{searchText}}</label></span>
+                  <span class="path" *ngIf="selectedMenuChildList.length>0 && selectedDetailItem &&
+                    selectedDetailItem.nodeType===TreeItemType.Template">
+                    <strong>Template path Selected</strong> <br />
+                    <label class="dps-white-gray-scroll">{{selectedDetailItem?.data?.path}}</label></span>
+                </div>
+              </mat-card>
+              <dps-forms-library-tree *ngIf="!searchText && formsLibrarytree?.items.length>0"
+                (itemChange)="onItemChange($event)" [formsLibrarytree]=formsLibrarytree?.items>
+              </dps-forms-library-tree>
+            </div>
+            <div class="dps-workflow-menu-details-container dps-white-gray-scroll" dpsIsMobile>
+              <dps-forms-library-tree-details (selectedDetailItem)=setSelectedItem($event)
+                (treeItemClick)="onTreeItemClick($event)" [selectedMenuChildList]=selectedMenuChildList
+                (runWorkFlow)="onRunWorkFlow($event)" (detailViewItemClick)="onDetailViewItemClick($event)">
+              </dps-forms-library-tree-details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

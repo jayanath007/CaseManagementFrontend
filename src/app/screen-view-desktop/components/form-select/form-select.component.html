@@ -1,0 +1,29 @@
+<dps-contaner [screenContanerComponent]="screenContanerComponent" [formGroup]="group" class="label-componenent-wrap" (mouseover)="dropDownlistMouseover()"
+  (mouseleave)="dropDownlistMouseleave()">
+  <span class="var">{{screenContanerComponent.varNo}}</span>
+  <div class="select-component-wrapper" [ngStyle]="containerStyle(screenContanerComponent)">
+    <div class="select-component">
+      <input type="text" [tabindex]="screenContanerComponent.control.tabindex" matTooltip="{{screenContanerComponent.control.helpText}}"
+        [readonly]="(screenContanerComponent.control.readonly || !screenContanerComponent.control.enabale)" matTooltipShowDelay='tooltipShowDelay'
+        matTooltipShowDelay="1000" #dynamicController (change)="onChange($event)" (keypress)="onKeyPress($event)" (keydown)="onKeyDown($event)"
+        (blur)="onBlur($event)" [formControlName]="screenContanerComponent.control.name" [ngStyle]="controlStyle(screenContanerComponent)"
+        [attr.control-name]="screenContanerComponent.control.name" />
+
+      <button #btntoggle [attr.control-name]="screenContanerComponent.control.name" (blur)="onButtonForcus($event)">
+        <i (click)="toggleDropDownList($event)" class="material-icons">keyboard_arrow_down</i>
+      </button>
+
+      <div class="dps-clear-both"></div>
+    </div>
+    <div class="dps-clear-both"></div>
+  </div>
+
+  <div [style.left.px]="left" [style.top.px]="top" *ngIf="showDropDownList" class="data-drop" [style.minWidth.px]="screenContanerComponent.control.width+4"
+    class="data-drop" [style.minWidth.px]="screenContanerComponent.control.width+4">
+    <ul>
+      <li *ngFor="let option of screenContanerComponent.control.options" (click)="updateItemValue(option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</dps-contaner>

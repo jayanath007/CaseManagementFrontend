@@ -1,0 +1,52 @@
+@import '~styles/variables.scss';
+h3
+{
+    padding: 10px 15px 10px;
+    font-family: $primary-font-stack;
+    font-size: 12px;
+    margin: 0;
+    color: #0979d3;
+}
+.cls-inf-main-filters
+{
+    padding: 15px;
+    
+
+    ::ng-deep .mat-form-field-infix,
+    ::ng-deep .mat-form-field-suffix
+    {
+        font-size: 14px;
+        
+        .mat-select
+        {
+            font-size: 12px;
+        }
+    }
+
+
+    .advo-assi-btn
+    {
+        background: #0979d3;
+        padding: 7px;
+        line-height: 14px;
+        color: #fff;
+        font-size: 11px;
+        margin-left: 8px;
+    }
+
+}
+
+.cls-inf-main-filters-wrap {
+    ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+        background-color: #c8c8c8;
+    }
+}
+
+.cls-inf-main-filters.drops
+{
+    width: 290px;
+}
+.cls-inf-main-filters.inputs
+{
+    width: 200px;
+}

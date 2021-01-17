@@ -1,0 +1,82 @@
+<div *ngIf="matterBannerMsg && !isCloseBanner" class="dps-matter-activity blink">
+  <div class="action-one"> {{matterBannerMsg}}</div>
+  <button (click)="closeBanner()" mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div fxLayout="row" class="dps-open-case-layout file-history-tab-header"
+  [ngClass]="{'dps-matter-banner-in': matterBannerMsg && !isCloseBanner }" dpsIsMobile
+  [ngClass]="{'header-less-tabs': true}">
+
+  <mat-tab-group class="left-side" (selectedTabChange)="onChangeTap($event)" [selectedIndex]="getSelectedTab">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div>
+          <span>File</span>
+        </div>
+      </ng-template>
+      <dps-file-history-manager [fontSizeClass]="fontSizeClass" [matterInfo]="matterInfo" [searchText]="searchText"
+        [refreshCount]="refreshCount" fxFlex="calc(100% - 64px)" [deleteEntrySecurityInfo]="deleteEntrySecurityInfo">
+      </dps-file-history-manager>
+    </mat-tab>
+    <mat-tab [disabled]="!(moduleIsActive(module.WorkToDo) | async)">
+      <ng-template mat-tab-label>
+        <div>
+          <span>Task</span>
+        </div>
+      </ng-template>
+      <dps-case-task-manager [showContent]="selectedTab  === 'case-task'" [openCaseToken]="openCaseToken"
+        [fontSizeClass]="fontSizeClass" [matterInfo]="matterInfo" [refreshCount]="refreshCount"
+        fxFlex="calc(100% -  64px)">
+      </dps-case-task-manager>
+    </mat-tab>
+    <mat-tab [disabled]="!(moduleIsActive(module.Contact) | async)">
+      <ng-template mat-tab-label>
+        <div>
+          <span class="case-tab-lbl" [ngClass]="contactMode === 'All'   ? 'case-active': ''"
+            (click)="onAllContact($event)">Contacts/</span>
+          <span class="case-tab-lbl" [ngClass]="contactMode === 'View'  ? 'case-active' : ''"
+            (click)="onAllContact($event)">All</span>
+        </div>
+      </ng-template>
+      <dps-case-contact-manager [openCaseToken]="openCaseToken" [fontSizeClass]="fontSizeClass"
+        [hidden]="selectedTab  != 'case-contact'" [matterInfo]="matterInfo" [refreshCount]="refreshCount"
+        fxFlex="calc(100% -  64px)">
+      </dps-case-contact-manager>
+      <dps-case-contact-manager [openCaseToken]="openCaseToken" [fontSizeClass]="fontSizeClass"
+        [hidden]="selectedTab != 'all-case-contact'" [matterInfo]="matterInfo" [refreshCount]="refreshCount"
+        fxFlex="calc(100% -  64px)" [fromContact]="true">
+      </dps-case-contact-manager>
+    </mat-tab>
+    <mat-tab [disabled]="!(moduleIsActive(module.TimeRecorded) | async)">
+      <ng-template mat-tab-label>
+        <div>
+          <span>Time</span>
+        </div>
+      </ng-template>
+      <dps-case-time-manager [showContent]="selectedTab  === 'case-time'" [fontSizeClass]="fontSizeClass"
+        [showFDFigures]="showFDFigures" [matterInfo]="matterInfo" [refreshCount]="refreshCount"
+        fxFlex="calc(100% -  64px)">
+      </dps-case-time-manager>
+    </mat-tab>
+    <mat-tab [disabled]="(mlsManager.users$|async)?.length < 1">
+      <ng-template mat-tab-label>
+        <div>
+          <span>MyLegalSpace</span>
+        </div>
+      </ng-template>
+      <dps-mls-manager #mlsManager [showContent]="selectedTab  === 'mls'" [matterInfo]="matterInfo"
+        [refreshCount]="refreshCount" fxFlex="calc(100% -  64px)"></dps-mls-manager>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="right-side">
+    <dps-open-case-tabs [fdDetails]="fdDetails" (fontSizeClassChangeValue)="onFontSizeClassChange($event)"
+      [matterInfo]="matterInfo" [selectedTab]="selectedTab" [groupMode]="groupMode" [contactMode]="contactMode"
+      [token]="openCaseToken" [screensContactTypeList]="screensContactTypeList" (ShowContent)="onShowContent($event)"
+      (refresh)="onRefresh()" [hidden]="selectedTab != 'file-history'" [searchText]="searchText"
+      (searchTextChanged)="onSearchTextChanged($event)" (menuChange)="onMenuChange($event)"
+      [homeCurrancy]="homeCurrancy" [isSearchFullText]="isSearchFullText"
+      (searchFullTextValue)="onIsSearchFullTextValue($event)"></dps-open-case-tabs>
+  </div>
+
+</div>

@@ -1,0 +1,274 @@
+@import '~styles/variables.scss';
+
+dps-mls-chat-item {
+  height: 0px;
+}
+
+.dps-mls-message {
+  
+  clear: both;
+}
+
+.dps-mls-item-body {
+  .mls-chat-attached {
+    i {
+      font-size: 18px;
+      margin: 4px;
+      cursor: default;
+    }
+  }
+}
+
+.dps-mls-msgtime {
+  padding: 0px 6px 5px 6px;
+  font-size: $primary-font-size - 3;
+  clear: both;
+
+    .dps-mls-item-date {
+      float: right;
+    }
+}
+
+
+
+
+
+
+.mls-chat-controller {
+
+
+
+  .dps-mls-message-inner-wrap
+  {
+    padding: 6px 6px 5px 6px;
+    min-height: 50px;
+    max-height: 250px;
+    border-radius: 6px;
+    font-size: $primary-font-size - 2;
+    text-align: left;
+    position: relative;
+    margin: 7px 0;
+    box-shadow: 0 2px 1px -1px rgba(232, 232, 232, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    
+  }
+  .dps-mls-message-in 
+  {
+    float: left;
+    width: 35%;
+    clear: both;
+
+    .mls-body-preview-text {
+    
+      color: $primary;
+    }
+    
+  }
+  .dps-mls-message-in  .dps-mls-message-inner-wrap {
+  background-color: #528fe2;
+  border: 1px solid #5eaeff;
+
+
+  
+
+  .dps-mls-item-mail {
+    
+    color: #4e4e4e;
+    font-size: $primary-font-size - 3;
+    
+   
+  }
+
+  .mls-msg-information {
+    margin: 4px 0 0 39px;
+    font-weight: 500;
+    color: #4e4e4e;
+  }
+
+  .mls-attached-xml {
+    // position: absolute;
+    // right: 8px;
+    // top: 12px;
+    font-size: $primary-font-size - 3;
+    color: #c1dbff;
+    font-family: $primary-font-stack;
+    
+    i {
+    font-size: $primary-font-size + 10;
+    text-align: center;
+    color: #bbddff;
+    margin-bottom: 2px;
+    margin: 2px 2px 4px 0px;
+    }
+
+    .mls-xml-doc {
+      color: #cfe3f7;
+      font-size: $primary-font-size - 3;
+    }
+
+  }
+
+  }
+  
+  .dps-mls-message-out
+  {
+    float: right;
+    width: 35%;
+    clear: both;
+
+    .mls-body-preview-text {
+    
+      color: #4e4e4e;
+    }
+
+  }
+  .dps-mls-message-out .dps-mls-message-inner-wrap {
+    background-color: #fff;
+    border: 1px solid #fefefe;
+
+  
+  
+  
+  
+
+
+  .dps-mls-item-mail {
+    
+   
+    color: #4e4e4e;
+    font-size: $primary-font-size - 3;
+    
+  }
+
+  .mls-attached-xml {
+    
+    font-size: $primary-font-size - 3;
+    margin-left: -9px;
+    
+    i {
+    font-size: $primary-font-size + 10;
+    text-align: center;
+    color: #bbddff;
+    margin-bottom: 2px;
+    margin: 0px 2px 4px 0px;
+    }
+
+    .mls-xml-doc {
+      color: #cfe3f7;
+      font-size: $primary-font-size - 3;
+    }
+
+  }
+
+  }
+
+
+  .dps-mls-item-date {
+    font-weight: 500;
+    color: #4e4e4e;
+    font-size: $primary-font-size - 3;
+    
+    
+  }
+
+  .mls-body-preview-text {
+    
+    color: #4e4e4e;
+    width: 100%;
+    word-break: break-all;
+  }
+
+  .mls-chat-attached {
+    float: right;
+  }
+
+  .mls-body-msg {
+    float: left;
+    padding: 5px;
+  }
+  
+
+}
+
+
+.dps-mls-msg-null {
+  .dps-mls-message-inner-wrap  {
+    border: none !important;
+    background: none !important;
+    width: 8%;
+    box-shadow: none;
+    height: 20px;
+  }
+
+  
+
+  .dps-mls-item-body {
+    .mls-chat-attached {
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .mls-attached-xml {
+    i {
+      margin: -5px 80px 2px 0px !important;
+    }
+  }
+ 
+  .dps-mls-msgtime {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
+} 
+
+
+.widget-item {
+  height: 60px !important;
+}
+
+.dps-sender-avatar span {
+  font-size: 15px;
+  color: $primary;
+  position: relative;
+  top: -2px;
+}
+
+
+
+.dps-mls-chat-item-name {
+  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dps-mls-chat-item-icon {
+  font-weight: 500;
+  color: #1f4769;
+  font-size: $secondary-font-size;
+  
+}
+
+.mls-xml-statement {
+  color: #528fe2;
+}
+
+
+
+
+@media only screen and (max-width: 1440px) {
+
+  
+
+  }
+
+
+
+
+
+
+
+
+
+

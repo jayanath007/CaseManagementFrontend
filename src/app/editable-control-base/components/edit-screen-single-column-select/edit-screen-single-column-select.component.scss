@@ -1,0 +1,15 @@
+@import '~styles/variables.scss';
+
+.mat-option:hover {
+    background: #e6f1fd;
+}
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $header-primary;
+    background: #e6f1fd;
+    font-weight: 500;
+}
+.label-with-drop-down {
+    .nominal-input{
+        width: 532px !important;   
+    }
+}

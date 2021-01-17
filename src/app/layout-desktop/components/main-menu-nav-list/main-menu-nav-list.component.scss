@@ -1,0 +1,391 @@
+  @import '~styles/variables.scss';
+
+  // .drag-enabale{
+  //   color: red  !important ;
+  // }
+
+  .dps-main-nav-list .mat-list-item {
+    // color: #d0d0d0;
+    color: #879bab;
+    font-size: $primary-font-size - 2;
+    .mat-list-text{
+      padding-left: 10px !important;
+    }
+  }
+
+  .dps-post-count {
+    width: 60px;
+    text-align: center;
+    color: #c77878;
+    font-weight: 500;
+  }
+
+  .dps-main-nav-list .mat-list-item.mat-list-item-focus {
+    color: $primary;
+    font-weight: bold;
+  }
+
+
+
+  .mat-nav-list .mat-list-item.mat-list-item-focus .mat-list-icon {
+    color: $primary;
+  }
+
+  .material-icons.md-16 {
+    width: 18px;
+    // height: 20px;
+    height: 48px;
+    font-size: 24px;
+    color: #4e687b;
+  }
+
+  .dps-main-nav-list .mat-list-item.mat-list-item-focus {
+    background: #2bb500;
+  }
+
+  .dps-main-nav-list {
+    overflow-y: auto;
+    // background-color: #051827;
+    background-color: #263a49;
+    width: 100%;
+    height: 100%;
+  }
+
+  .dps-main-nav-list .mat-list-item {
+    // color: #d0d0d0;
+    color: #8a9dab;
+    font-size: $primary-font-size - 2;
+    ::ng-deep.mat-list-text{
+      padding-left: 10px !important;
+    } 
+  }
+
+
+
+  .dps-main-nav-list .mat-list-item.mat-list-item-focus {
+    color: $primary;
+    font-weight: bold;
+  }
+
+
+
+  .mat-nav-list .mat-list-item.mat-list-item-focus .mat-list-icon {
+    color: $primary;
+  }
+
+  .material-icons.md-16 {
+    padding: 0px 16px 0px 10px;
+    background: #1d2c38;
+    line-height: 52px;
+    border-radius: 0px;
+    color: #7895ab;
+    width: 27px;
+    height: 52px;
+    font-size: 24px;
+    text-align: center;
+  }
+  mat-list-item{
+    height: 52px !important;
+  }
+  .dps-main-nav-list .mat-list-item.mat-list-item-focus {
+    background: #2bb500;
+  }
+
+  .dps-main-nav-list .mat-list-item.mat-list-item-focus .mat-icon {
+    color: #2ab300;
+  }
+
+  .mat-nav-list .mat-list-item .matter-id.mat-list-icon {
+    background: #0e6b28;
+    border: 3px solid #02561a;
+    font-size: 12px;
+    color: #1e212a;
+    font-weight: bold;
+    font-style: normal;
+    height: 14px;
+    width: 20px;
+    padding-top: 4px;
+  }
+
+  .dps-pageview-nav.active {
+    // background: $matter-search-primaty;
+
+    mat-icon.md-16 {
+
+      // border-radius: 100%;
+      // border: 2px solid #24a77e;
+      color: #19a77a;
+    }
+
+    h3 {
+      color: #5ccca8;
+    }
+  }
+
+  .dps-assignment_turned_in-nav.active {
+
+    // background: $workdone-primary;
+    mat-icon.md-16 {
+
+      // border-radius: 100%;
+      // border: 2px solid #289da9;
+      color: #31afbb;
+
+    }
+
+    h3 {
+      color: #71dee8;
+    }
+  }
+  .dps-headset_mic-nav.active {
+
+    // background: $workdone-primary;
+    mat-icon.md-16 {
+
+      // border-radius: 100%;
+      // border: 2px solid #289da9;
+      color: #C79346;
+
+    }
+
+    h3 {
+      color: #C79346;
+    }
+  }
+
+  .dps-timeline-nav.active {
+
+    // background: $team-efficiency-primary;
+    mat-icon.md-16 {
+
+      // border-radius: 100%;
+      // border: 2px solid #9e7ec3;
+      color: #e1c8ff;
+    }
+
+    h3 {
+      color: #d3afff;
+    }
+  }
+
+  .dps-timer-nav.active {
+
+    // background: $time-record-primary;\
+    mat-icon.md-16 {
+
+      // border-radius: 100%;
+      // border: 2px solid #d29061;
+      color: #d88c56;
+
+    }
+
+    h3 {
+      color: #ffb885;
+    }
+  }
+
+  .dps-contacts-nav.active {
+    background: $dps-contacts-primary;
+  }
+
+  .dps-person-nav.active {
+
+    // background: $client-search-primary;
+    mat-icon.md-16 {
+      color: #65c4ec;
+      // border-radius: 100%;
+      // border: 2px solid #65c4ec;
+    }
+
+    h3 {
+      color: #65c4ec;
+    }
+
+  }
+
+  .dps-credit_card-nav.active {
+
+    // background: $ledger-card-primary;
+    mat-icon.md-16 {
+      color: #7db7de;
+      // border-radius: 100%;
+      // border: 2px solid #7db7de;
+    }
+
+    h3 {
+      color: #7db7de;
+    }
+  }
+
+  .dps-picture_as_pdf-nav.active {
+    // background: $ledger-card-primary;
+    mat-icon {
+      color: #ec89ad;
+      border-radius: 100%;
+      border: 2px solid #e6aac0;  
+    }
+    h3 {
+      color: #e6aac0;
+    }
+  }
+
+  .dps-assignment_ind-nav.active {
+
+    // background: $my-task-primary;
+    mat-icon.md-16 {
+      // border: 2px solid #bb9945;
+      color: #bf942a;
+      // border-radius: 100%;
+
+    }
+
+    h3 {
+      color: #efc358;
+    }
+  }
+
+  .dps-security-nav.active {
+    // background: $safebox-primary;
+
+    mat-icon.md-16 {
+      color: #64aef3;
+      // border-radius: 100%;
+      // border: 2px solid #64aef3;
+    }
+
+    h3 {
+      color: #64aef3;
+    }
+  }
+
+  // .dps-track_changes-nav.active {
+    
+  //   mat-icon.md-16 {
+
+      
+  //     color: #4198e0;
+  //   }
+
+  //   h3 {
+  //     color: #65b5f7;;
+  //   }
+  // }
+
+  .dps-mail_outline-nav.active {
+
+    // background: $mail-primary;
+    mat-icon.md-16 {
+      color: #93beff;
+      // border-radius: 100%;
+      // border: 2px solid #93beff;
+    }
+
+    h3 {
+      color: #93beff;
+    }
+  }
+
+  .dps-public-nav.active {
+
+
+    mat-icon.md-16 {
+      color: #619dfd;
+      // border-radius: 100%;
+      // border: 2px solid #4175c7;
+    }
+
+    h3 {
+      color: #87afef;
+    }
+
+
+  }
+
+  .dps-today-nav.active {
+
+    // background: $calender-primary;
+    mat-icon.md-16 {
+      color: #b2ddf9;
+      // border-radius: 100%;
+      // border: 2px solid #b2ddf9;
+    }
+
+    h3 {
+      color: #b2ddf9;
+    }
+  }
+
+  .dps-dashboard-nav.active {
+    // background: $dashboard-primary;
+
+    mat-icon.md-16 {
+      // border-radius: 100%;
+      // border: 2px solid #9c572d;
+      color: #ff9758;
+    }
+
+    h3 {
+      color: #ffac7a;
+    }
+  }
+
+
+  .dps-drafts-nav.active {
+
+    mat-icon.md-16 {
+      color: #c56f6f;
+    }
+
+    h3 {
+      color: #d27979;
+    }
+
+  }
+
+
+  .active h3 {
+    color: $primary;
+  }
+
+  .open_in_browser {
+    display: none;
+    color: #d0d0d0;
+  }
+
+  mat-list-item:hover .open_in_browser {
+    display: block;
+  }
+
+  .dps-nav-icon {
+    background: #263a4a;
+    border-radius: 0;
+    padding: 10px 15px;
+  }
+
+  .dps-main-nav-list {
+    ::ng-deep.mat-list-item-content {
+      padding: 0px 0px;
+      background: #263a4a;
+
+      &:hover {
+        background: #293e4f;
+
+        .material-icons.md-16 {
+          background: #21313e;
+          text-align: center;
+        }
+      }
+
+    }
+
+  }
+  .dps-main-nav-list .mat-list-item .mat-line {
+    // color: #6d7e8b;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 12px;
+  }
+  mat-nav-list{
+    padding-top: 0px !important;
+  }

@@ -1,0 +1,15 @@
+<div fxLayout="column" class="dps-document-view-popup">
+  <mat-toolbar class="dps-toolbar-box-shadow">
+    <mat-icon *ngIf="data.input">{{data.input.icon||'insert_drive_file'}}</mat-icon>
+    <span *ngIf="data.input" fxFlex="1 1 auto">{{data.input.title || 'Document viewer'}}</span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div fxFlex="calc(100% - 50px)">
+    <dps-document-view-page style="height:100%;" *ngIf="data.input?.fileItem" [isPopup]="true" [documentUrl]="data.input.fileItem?.signAndSendUrl ? data.input.fileItem?.signAndSendUrl : data.input.fileItem?.documentUrl"
+      [fileItem]="data.input.fileItem" [documentUrlLoadSuccess]="true" (sendSignDoc)="onSendSignDoc()" [documentUrlIsLoading]="false" [isSignDoc]="data.input.fileItem?.signAndSendUrl ? true : false"
+      [signandSendToken]="data.input.fileItem?.signAndSendUrl ? data.input.signandSendToken : null" [extension]="data.input.fileItem?.signAndSendUrl ? 'pdf' :data.input.fileItem?.data.letter_icon" [noSandBox]="data.input.noSandBox">
+    </dps-document-view-page>
+  </div>
+</div>

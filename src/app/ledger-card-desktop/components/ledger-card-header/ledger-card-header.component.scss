@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.search-number {
+  background: #ff9400;
+}
+
+.search-number {
+  background: #ff9400;
+  padding: 1px 4px;
+  border-radius: 5px;
+}
+
+.mat-hint {
+  padding: 2%;
+  color: $primary;
+}
+
+
+.mat-input-element , mat-placeholder.matter-ref {
+  color: $primary;
+}
+
+.mat-list-item-content {
+  border-bottom: 1px solid #8397a9;
+}
+
+.search-option {
+  margin-top: 12px;
+}
+
+.search-option .search-icon {
+  position: relative;
+  /* top: 10px; */
+  color: #b6bbd6;
+  padding: 6px;
+}
+
+button mat-icon {
+  color: $primary !important;
+}
+
+.dps_ledger_matter_icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.search-input{
+  padding-left: 26px;
+}

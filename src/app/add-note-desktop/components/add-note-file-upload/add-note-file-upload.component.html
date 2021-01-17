@@ -1,0 +1,30 @@
+<div>
+  <div fxLayout="row" fxFlex="1 1 auto">
+    <!-- <input id="diaryFileUploader" type="file" class="ng-hide dps-diary-uploader" (change)="fileUpload($event)" /> -->
+    <dps-file-uploader #addNoteFileUpload inputId="addNoteFileUpload" (fileUpload)="fileUpload($event)"
+      [multiple]="true" [maxSize]="1000000">
+
+    </dps-file-uploader>
+    <div class="dps-file-upload" [matMenuTriggerFor]="attachmentUploadMenu.contextMenu"
+      *ngIf="!(itemDataList && itemDataList.length>0)" [ngClass]="{'dps-disable-div': fileUploadDisable || isLoading ||
+      itemsLoading}">
+      <button mat-icon-button [disabled]="fileUploadDisable || isLoading || itemsLoading">
+        <mat-icon *ngIf="!itemsLoading">file_upload</mat-icon>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-circle-o-notch" class="fa fa-spin fa-fw" *ngIf="itemsLoading">
+        </mat-icon>
+      </button>
+      <span> {{itemsLoading?'Uploading...':'Upload File(s)'}} </span>
+      <dps-attachment-upload-menu #attachmentUploadMenu (fromComputer)="addNoteFileUpload.onFileUploadBtnClick()"
+        (fromCloud)="onCloud()"></dps-attachment-upload-menu>
+    </div>
+  </div>
+  <mat-chip-list #fileInput *ngIf="itemDataList && itemDataList.length>0">
+    <mat-chip class="dps-file-upload-chip" matTooltip={{filename}}>
+      <span class="upload-file-name"> {{filename}}</span>
+      <mat-icon (click)="fileRemove()" matChipRemove *ngIf="isEnableRemover">cancel</mat-icon>
+      <div *ngIf="isEnablePassword && !isEdit">
+        <i class="material-icons" (click)="openDialog()">lock</i>
+      </div>
+    </mat-chip>
+  </mat-chip-list>
+</div>

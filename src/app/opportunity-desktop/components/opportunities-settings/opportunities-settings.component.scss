@@ -1,0 +1,124 @@
+@import '~styles/variables.scss';
+
+mat-toolbar
+{
+  min-height: 50px;
+
+  .dps-primary-header
+  {
+    background: #106ba9;
+    color: #ddecf7;
+  }
+
+
+}
+.dps-oppertunity-setting-screen-content{
+  height: calc(100% - 80px); overflow-y: scroll; overflow-x: hidden;
+}
+::ng-deep .dps-oppertunity-settings-popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+    overflow-x: hidden;
+  }
+}
+
+.inquiry-from-wrapper
+{
+  padding: 10px;
+}
+.dps-add-new-row {
+  background: #ecf4f9;
+  box-shadow: 0px 1px 1px #dedddd;
+  border-bottom: 1px solid #f5fbff;
+  margin-bottom: 18px;
+  padding-top: 10px;
+}
+
+.dps-primary-header {
+  background: #1f3544;
+  color: #c3c5c7;
+  height: 50px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.dps-secondary-header {
+  justify-content: center;
+  font-size: 15px;
+  background: #c9cfd117;
+  height: 33px;
+  color: #02243b;
+
+  mat-icon {
+    line-height: 25px;
+  }
+}
+
+.dps-title-bar {
+
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  background: #2e5c7b;
+  padding: 0 10px;
+
+  span {
+    font-size: 13px;
+    color: #ffffff;
+  }
+}
+
+.dps-opportunity-content {
+  height: calc(100% - 135px);
+  padding: 10px 10px 0;
+}
+
+.dps-bottom-btn {
+  justify-content: flex-end;
+  flex-direction: row;
+  display: flex;
+  padding-right: 15px;
+
+  button {
+    background: #344d5e;
+  }
+}
+
+.dps-form-section {
+  &:nth-child(2n + 1) {
+    background: #d8dfe3;
+  }
+
+  &:nth-child(2n) {
+    background: #d8dfe3;
+  }
+}
+
+.dps-popup-bottom-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 15px 16px 0 0;
+    box-shadow: 0px -2px 5px #e1e1e1;
+    margin-top: 16px;
+}
+
+button.dps-stting-sve {
+  background: #2c4e63;
+  color: $primary;
+  margin-right: 10px;
+}
+
+button.dps-stting-sve,
+button.dps-stting-cancel {
+  font-size: $primary-font-size - 2;
+}
+
+.dps-stting-cancel {
+  background: none;
+  box-shadow: 0px 0px 1px #939393;
+  color: #2c4e63;
+  border: 1px solid #2c4e63;
+  line-height: 34px;
+  cursor: pointer;
+}
+
+

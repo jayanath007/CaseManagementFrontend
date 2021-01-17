@@ -1,0 +1,91 @@
+@import '~styles/variables.scss';
+
+.dps-mls-cace-list {
+  h1 {
+    margin: 0px 0px 12px 0;
+    font-size: $primary-font-size + 6;
+    color: $primary;
+    text-align: left;
+    padding: 14px 0px 0px 24px;
+    font-weight: 500;
+  }
+
+  .dps-mls-case-item {
+    font-size: $primary-font-size - 2;
+
+    .dps-mls-cases {
+      background: #2f4d6b;
+      padding: 15px 5px 15px 20px;
+      color: #efefef;
+      margin: 1px 0px 0 0;
+      border: 1px solid #22466b;
+      min-height: 40px;
+      cursor: pointer;
+
+      &:hover {
+        background: #2161a2;
+        border: 1px solid #2161a2;
+      }
+
+      .mls-case-date {
+        font-size: $primary-font-size - 4;
+        height: 0px;
+      }
+
+      .dps-mls-user {
+        padding: 6px 0px 0px 6px;
+        .mls-user-info {
+          font-size: $primary-font-size - 1;
+          font-weight: 500;
+          text-transform: capitalize;
+        }
+        .mls-user-mail {
+          font-size: $primary-font-size - 2;
+          font-weight: 300;
+        }
+      }
+      
+
+    }
+
+    .dps-mls-selected-user {
+      background: #1058a2 !important;
+      border-bottom: 1px solid #2776cc !important;
+    }
+
+    .dps-sender-avatar {
+      line-height: 44px;
+    }
+
+  }
+
+
+  .dps-white-gray-scroll::-webkit-scrollbar-thumb,
+  .mat-menu-panel::-webkit-scrollbar-thumb,
+  .fc-scroller::-webkit-scrollbar-thumb,
+  .mat-select-panel::-webkit-scrollbar-thumb,
+  .mat-autocomplete-panel::-webkit-scrollbar-thumb,
+  .mat-dialog-container::-webkit-scrollbar-thumb,
+  .time-information-content .mat-tab-body-content::-webkit-scrollbar-thumb {
+    background-color: #6292c3;
+    border-radius: 0px;
+    border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    height: 40px;
+    width: 40px;
+  }
+
+  .dps-white-gray-scroll {
+    overflow: auto;
+  }
+
+  .dps-sender-avatar span {
+    font-size: 15px;
+    color: $primary;
+    position: relative;
+    top: -2px;
+  }
+
+}
+
+

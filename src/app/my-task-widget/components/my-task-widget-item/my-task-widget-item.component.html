@@ -1,0 +1,28 @@
+  <mat-list-item class="widget-item">
+    <div class="widget-item-content">
+      <div class="content">
+        <div class="primary-tag" fxLayout="row">
+          <span class="ref" mat-line>{{item?.matterReferenceNo}}</span>
+          <span class="client" mat-line fxFlex="1 1 auto">{{item?.client}} </span>
+        </div>
+        <span class="details">{{item?.note}}</span>
+      </div>
+
+    </div>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon class="option">keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button class="dps-folder-action" mat-menu-item (click)="onOptionBtnClick(btnOption.OpenCase, item)">
+        <mat-icon class="option btn-icon">folder</mat-icon>
+        <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+        <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+      </button>
+      <button class="dps-folder-action" mat-menu-item (click)="onOptionBtnClick(btnOption.Compltete, item)">
+        <mat-icon class="option btn-icon">done</mat-icon>
+        Complete
+      </button>
+    </mat-menu>
+  </mat-list-item>
+  <!-- <mat-divider></mat-divider> -->

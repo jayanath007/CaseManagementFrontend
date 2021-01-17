@@ -1,0 +1,48 @@
+<mat-card class="dps-mat-card dps-notification">
+  <mat-card-content>
+    <div class="dps-notification-wrap warning" (mouseenter)="onMouseOver()" (mouseleave)="onMouseLeave()">
+      <mat-toolbar class="toolbar">
+        <mat-toolbar-row>
+          <span class="title">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span>{{data.content.title}}</span>
+          </span>
+          <span class="spacer"></span>
+          <mat-icon *ngIf="closeIcon === 'close'" class="header-icon close" (click)="onRemove(data.id)">close</mat-icon>
+          <mat-icon *ngIf="closeIcon !== 'close'" class="header-icon close minimize" (click)="onClose(data.id)">minimize
+          </mat-icon>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <!-- general-notification end -->
+      <div class="dps-notification-content">
+        <div class="notification-body dps-white-gray-scroll">
+          <p class="expection-indicator-data" [innerHTML]="data.content.path"></p>
+          <p class="alert-information-body" [innerHTML]="data.content.message+' '+ data.content.code">
+          </p>
+        </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="composUrlPopUploding"></mat-progress-bar>
+        <div class="report-error">
+          <h3> Report this error <span>{{data.content.dateTime}}</span></h3>
+          <div class="report-method">
+            <div class="phone">
+              <mat-icon>contact_phonel</mat-icon>
+              <a href="tel:+44-0-20-8804-1022">+44 (0) 20 8804 1022</a>
+            </div>
+            <div class="mail">
+              <mat-icon>contact_mail</mat-icon>
+              <!-- <a ng-disabled="true" href="tech@dpssoftware.co.uk">tech@dpssoftware.co.uk</a> -->
+              <a (click)="sendEmail()"> TechnicalSupport@dpssoftware.co.uk </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- general-notification body end -->
+      <!-- 
+    <div class="bottom-controllers">
+      <button class="notification-button mat-elevation-z0" (click)="onClose(data.id)" mat-raised-button> Ok </button>
+    </div> -->
+      <!-- general-bottom controller end -->
+    </div>
+  </mat-card-content>
+</mat-card>

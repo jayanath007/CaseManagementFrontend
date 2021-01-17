@@ -1,0 +1,54 @@
+@import '~styles/variables.scss';
+  div[fxLayoutAlign] {padding-top:15px;}
+
+  .dps-addnotecost {
+    overflow-x: auto;
+  }
+
+.value,.rate{
+  text-align: right;
+}
+
+mat-checkbox , .addnote-extra-time {
+  font-size: $primary-font-size;
+  font-weight: 500;
+  color: #0965ad;
+}
+
+mat-form-field.dps-matform-always {
+  width:100px
+}
+
+mat-form-field.dps-matform-currency {
+  width:130px
+}
+
+mat-form-field.dps-matform-home {
+  width:150px
+}
+.dps-crime-inputs{
+  mat-form-field{
+    font-size: $primary-font-size;
+    font-weight: 500;
+    // color: #0965ad;
+  }
+  mat-option{
+
+  }
+
+div[fxLayoutAlign] {padding-top:8px;}
+}
+.legal-aid{
+  font-size: 14px;
+    font-weight: 700;
+    color: #495156;
+    padding: 13px 0px 8px;
+    background: #f9f9f9;
+    border: 1px solid #f7f7f7;
+    text-indent: 2px;
+    text-align: center;
+}
+mat-option,
+mat-form-field {
+  font-size: 12px !important;
+}

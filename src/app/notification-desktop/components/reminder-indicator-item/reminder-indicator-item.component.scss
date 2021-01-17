@@ -1,0 +1,85 @@
+@import '~styles/variables.scss';
+mat-form-field {
+    width: 126px;
+    /* height: 36px; */
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0078ce;
+    background: #e7f5ff;
+}
+
+ div.dps-event-notification-alert {
+   
+    
+    padding: 8px 0px 12px 0px;
+    position: relative;
+}
+
+div.dps-alert-inforamtion {
+    line-height: 17px;
+    margin: 14px 0px 0px 0px;
+}
+
+.dps-alert-from-controller {
+    margin: 30px 0px 0px 2px;
+    
+}
+
+div.dps-alert-time {
+    padding: 32px 0px 0px 0px;
+    line-height: 17px;
+}
+
+span.dps-eventSubject {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    width: 262px;
+}
+
+span.dps-event-location {
+    font-size: $secondary-font-size !important;
+    font-weight: 400 !important;;
+    width: 270px;
+}
+
+span.dps-eventime , span.dps-duration {
+    color: #2a82ef;
+}
+
+span.dps-duration {
+    text-align: right;
+}
+
+span.dps-duration-overdue.Overdue {
+    color: #ec1313;
+    
+}
+
+span.dps-duration-overdue {
+    color: #2a82ef;
+    text-align: right;
+    font-size: $secondary-font-size;
+}
+
+button.dps-event-snnoze {
+    background: #2b95e0;
+    color: $primary;
+}
+
+div.dps_reminder_content , div.dps_reminder_time {
+    line-height: 18px;
+}
+
+button {
+    font-size: 12px;
+    font-weight: 400;
+    
+}
+
+button.dps-event-snnoze {
+    background: #2b95e0;
+    color: $primary;
+}

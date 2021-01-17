@@ -1,0 +1,96 @@
+@import '~styles/variables.scss';
+
+.dps-contacts-tab-common {
+  padding: 0 8px; // background: #0b5b90;
+  background: #346c84;
+  
+
+  ::ng-deep .mat-form-field {
+    color: #d3e3ef !important;
+
+    .placeholder,
+    mat-icon {
+      color: #d3e3ef;
+    }
+
+    //  .mat-input-element {
+    //   caret-color: #d3e3ef;
+    // }   
+    .mat-form-field-ripple.mat-form-field-ripple {
+      background: #abd1ea !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #d3e3ef;
+  }
+
+  .button-row {
+    padding-bottom: 12px;
+
+    .new-btn {
+      &.mat-raised-button {
+        background-color: #99c8de;
+        color: #205a75;
+      }
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+
+    .save-btn {
+      &.mat-raised-button {
+        background-color: #37ab7a;
+        color: #eefff8;
+      }
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+
+    .clear-btn {
+      &.mat-raised-button {
+        background: #b74141;
+        color: #f7c1c1;
+      }
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
+
+
+  // Tem changes // need to be change after complete contact creation #LS
+
+
+  .case-tab-lbl {
+    cursor: pointer;
+  }
+
+  .case-tab-lbl:hover {
+    color: #a8c5da;
+  }
+
+}
+
+.contact-type-select
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 22px;
+  color: #fff;
+  font-family: $primary-font-stack;
+  font-size: $primary-font-size - 2;
+
+  .case-tab-lbl
+  {
+    margin: 0 5px;
+    &.case-active {
+      opacity: 0.5;
+    }
+  }
+}

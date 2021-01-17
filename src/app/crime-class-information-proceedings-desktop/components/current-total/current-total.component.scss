@@ -1,0 +1,125 @@
+@import '~styles/variables.scss';
+h3
+{
+    padding: 15px;
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    margin: 0;
+    color: #18426c;
+    background: #dae1e9;
+}
+
+.figure-tbl
+{
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    width: 100%;
+    width: 100%;
+    padding: 10px 20px 2px;
+
+    th, td
+    {
+        text-align: left;
+        padding: 0;
+        border-bottom: 1px solid #d6d6d6;
+        position: relative;
+        line-height: 20px;
+        height: 20px;
+
+
+    }
+
+    th.header {
+        border-bottom: 2px solid #1b6ebe;
+    }
+
+    th.total , td.value {
+        text-align: right;
+    }
+
+    td.value {
+        position: relative;
+        cursor: pointer;
+
+        .value-tab-higlight
+        {
+            padding: 6px 8px 4px 35px;
+            font-weight: bold;
+            border-top-right-radius: 3px;
+            border-top-left-radius: 3px;
+            display: inline-block;
+            position: relative;
+            height: 20px;
+            min-width: 36px;
+        }
+        .value-tab-higlight:hover,
+        .value-tab-higlight.dps-active
+        {
+            background: #63b216;
+            color: #fff;
+        }
+
+       
+        
+        .pin
+        {
+            font-size: 13px;
+            position: absolute;
+            left: 6px;
+            height: 24px;
+            width: 24px;
+            top: 3px;
+            background: #d9e4cd;
+            line-height: 24px;
+
+
+            i {
+                font-size: $primary-font-size - 1;
+                color: #ff9400;
+                line-height: 9px;
+            }
+        }
+    }
+}
+
+.value-tab-higlight.dps-active .pin i
+{
+     transform: rotate(50deg);
+     transition: all 0.3s ease-in-out;
+}
+
+.fixed-fee-total {
+    
+    .primary-fee-wrapper {
+
+        padding: 10px 20px;
+    }
+
+
+    .dps-fee-controller {
+
+    font-size: $primary-font-size - 2;
+    padding: 5px 0 0 0;
+
+    .fee-txt {
+
+        font-weight: 500;
+    }
+    }
+
+
+
+    div , span {
+        font-family: $primary-font-stack;
+    }
+
+    h3 {
+        background: none;
+        border-bottom: 1px dashed #f87c19;
+        margin: 0px 22px;
+        padding: 8px 0px;
+        color: #dc6f18;
+    } 
+
+}
+

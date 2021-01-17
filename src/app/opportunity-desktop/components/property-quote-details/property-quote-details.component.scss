@@ -1,0 +1,162 @@
+@import '~styles/variables.scss';
+.seperator{
+  padding-top: 10px;
+}
+.Buying{
+  
+  ::ng-deep.figure {
+
+    background-color: #daefc9;
+    border: 2px #b6cca3 dotted;
+    
+}
+
+}
+.Selling{
+
+  ::ng-deep.figure {
+
+  background-color: #f7edd0;
+  border: 2px dashed #f1dda7;
+  
+}
+}
+
+.workspace {
+  background: #fff;
+  border: 1px solid #e3e6e9;
+  padding: 10px;
+  position: relative;
+  // height: 665px;
+
+  .selling-head {
+    color: #4b7138;
+    margin: 0;
+    font-size: $primary-font-size + 8;
+    font-weight: 600;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: $primary-font-size - 1;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #151515;
+  }
+
+
+  .input-wrapper-section-half-screen {
+    float: left;
+    width: 50%;
+  }
+
+  .general-other-inputs,
+  .clear {
+    clear: both;
+  }
+
+  .editForm.quote-details {
+    padding-top: 10px;
+  }
+
+  .input-section {
+    margin-bottom: 0px;
+
+    mat-radio-button,
+    mat-checkbox {
+      margin-right: 15px;
+    }
+
+    .dps-option {
+      width: 100%;
+    }
+  }
+
+  .general-text.selling {
+    background: #daefc9;
+    border: 2px #b6cca3 dotted;
+    text-align: center;
+    padding: 12px;
+    margin: 5px 0px 0 0;
+  }
+
+  ::ng-deep {
+
+    .mat-radio-button.mat-accent .mat-radio-inner-circle,
+    .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+    .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple,
+    .mat-checkbox-checked.mat-primary .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+      background-color: #193d5e;
+    }
+
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: #193d5e;
+    }
+  }
+
+}
+
+
+
+.dps-option {
+  width: 100%;
+}
+
+.general-button {
+  float: right;
+  background: #1c2c39;
+  border-radius: 1px;
+  font-size: $primary-font-size - 2;
+  color: $primary;
+
+  mat-icon {
+    font-size: $primary-font-size + 8;
+  }
+}
+
+
+.general-input-type-checkbox.vertical {
+  margin-right: 45px;
+
+}
+
+@media screen and (max-width: 720px) {
+
+  .quote-details {
+
+
+    .input-wrapper-section-half-screen {
+      float: none;
+      width: 100%;
+    }
+
+  }
+
+  .input-wrapper-section-half-screen.right {
+    margin-left: 0;
+  }
+
+  .general-input-type-checkbox.vertical {
+    float: none;
+    margin-right: 0;
+
+  }
+
+}
+
+
+@media only screen and (max-height: 851px) {
+  .workspace {
+    height: 400px;
+    overflow-y: scroll;
+  }
+
+  .dps-property-quote-popup-panel .mat-dialog-container {
+    height: 585px;
+  }
+  .editForm.quote-details.disable-input {
+    
+  }
+}

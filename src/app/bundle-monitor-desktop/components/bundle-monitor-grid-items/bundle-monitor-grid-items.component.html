@@ -1,0 +1,32 @@
+<div fxLayout="row" class="grid-data dps-bundle-monitor-grid-works"
+  [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+  <div class="row-data" [fxFlex]="getFxFlexProperty(0)">
+    <mat-checkbox [checked]="row?.selected" color="primary" class="delete-record"
+      (change)="onSelectRow($event,row.pbH_BundleID)"></mat-checkbox>
+  </div>
+  <div class="row-data id" [fxFlex]="getFxFlexProperty(1)">{{row?.pbH_BundleID}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(2)">{{row?.pbH_MatterRef}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(3)">{{row?.pbH_Name}}&nbsp;&nbsp;&nbsp;</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(4)">{{row?.pbH_Version}} </div>
+  <div class="row-data dps-{{row?.bundleStatus}}" [fxFlex]="getFxFlexProperty(5)">{{row?.bundleStatus}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(6)">{{row?.pbH_TotalDocuments}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(7)">{{row?.pbH_LastSubmitDate | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(8)">{{row?.pbH_CreateUser}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(9)">{{row?.pbH_ProgressComplete}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(10)">{{row?.pbH_ProcessStartDate | date:'dd-MM-yyyy HH:mm:ss'}}
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(11)">{{row?.pbH_ProcessEndDate | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(12)">
+    <div class="dps-{{row?.bundleStatus}}">
+      <mat-progress-bar [mode]="'determinate'" [value]="row?.pbH_ProgressComplete">
+      </mat-progress-bar>
+      <span>{{row?.pbH_ProgressComplete}}%</span>
+    </div>
+  </div>
+  <div class="row-data" [fxFlex]="getFxFlexProperty(13)">{{row?.pbH_ProgressText}}</div>
+  <div class="row-data view-log" [fxFlex]="getFxFlexProperty(14)">
+    <button mat-button (click)="onOpenLogFile(row.pbH_BundleID)" color="primary">
+      View log
+    </button>
+  </div>
+</div>

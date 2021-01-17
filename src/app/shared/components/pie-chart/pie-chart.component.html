@@ -1,0 +1,10 @@
+<div [hidden]="!pieChartDataset?.isLoading"  class="team-efficiency-spinner">
+  <!-- <mat-spinner diameter="35" strokeWidth="3"></mat-spinner> -->
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngIf="!pieChartDataset?.isLoading">
+  <canvas height="chartHeight" baseChart [datasets]="chartValue" [labels]="chartLabel" [chartType]="pieChartType" [colors]="colors"
+    [options]="chartOptions" [ngStyle]="{'height.px': chartHeight}" (chartHover)="chartHovered($event)">
+  </canvas>
+</div>
+

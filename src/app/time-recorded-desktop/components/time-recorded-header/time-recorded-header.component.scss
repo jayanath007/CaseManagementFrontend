@@ -1,0 +1,52 @@
+@import '~styles/variables.scss';
+.time-recorded-grid-controllers {
+  text-align: right;
+  margin-top: 16px;
+}
+
+.total-matter-count-wrap {
+  font-size: 24px;
+  color: $primary;
+  font-weight: normal;
+  transition: all 0.1s ease-in-out;
+}
+
+.total-matter-count {
+  text-align: center;
+  padding-right: 10px;
+  min-width: 50px;
+  margin-top: 22px;
+}
+
+.total-matter-count label {
+  color: #f7f7f7;
+}
+
+
+
+.total-bill-outstanding-count {
+  text-align: center;
+  padding-left: 10px;
+  min-width: 50px;
+  margin-top: 4px;
+  
+}
+
+.total-bill-outstanding-count .total_unbilled {
+  margin-left: 0px;  
+  padding-left: 12px;
+}
+
+span.dps_seperator {
+  border-left: 1px solid #fdcaa5 !important;
+  height: 40px;
+  width: 10px;
+  margin-left: 15px;
+}
+
+.total-bill-outstanding-count label {
+  font-size: 12px;
+  font-weight: normal;
+  color: #f5ebe4;
+  display: block;
+}

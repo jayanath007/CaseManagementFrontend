@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+.header-detail {
+  border-bottom: 1px solid #d8d6d6;
+}
+
+.notification-body {
+  table {
+    font-family: $primary-font-stack;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td,
+  th {
+    border: 1px solid #dadada;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #ececec;
+  }
+  .dps-white-gray-scroll {
+    overflow-y: auto;
+  }
+}
+
+.dps-notification-wrap.warning {
+  height: 100%;
+}

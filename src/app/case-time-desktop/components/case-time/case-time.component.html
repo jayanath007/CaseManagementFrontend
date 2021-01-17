@@ -1,0 +1,58 @@
+<div class="dps-time-grid">
+  <div fxLayout="column" class="dps-white-gray-scroll dps-grid-x">
+
+    <div fxLayout="column" class="dps-casetime-controller">
+
+      <div class="row-highlight" dpsIsMobile>
+        <div class="dps-columnheader">
+          <dps-column-header *ngFor="let header of columnDefList" [fxFlex]="headerFlex(header)" [def]="header"
+            (filterApply)="onFilterApply($event)" (filterClear)="onFilterClear($event)" (toggleSorting)="onToggleSorting($event)"
+            [filterAnchor]="header.extras.filterAnchor">
+          </dps-column-header>
+        </div>
+        <mat-progress-bar *ngIf="caseTimeData?.loading" mode="indeterminate"></mat-progress-bar>
+      </div>
+
+      <div fxLayout="column" class="dps-white-gray-scroll dps-time-panel" fxFlex="calc(100%-40px)">
+
+
+        <div fxLayout="column" [@.disabled]="true" fxFlex="calc(100%-40px)" class="dps-white-gray-scroll dps-task-panel">
+          <mat-accordion [multi]="false">
+            <mat-expansion-panel [expanded]="item.isExpand" *ngFor="let item of caseTimeData?.data ; let row = index; let isOdd=odd; let isEven=even"
+              [ngClass]="item.isExpand?'dps-selected-row':isOdd?'dps_row_separation-0':'dps_row_separation-1'" class="dps-case-task-grid-row mat-elevation-z">
+              <mat-expansion-panel-header class="expansion-panel-case-task" (click)="onSelectRow(item)">
+                <mat-panel-title>
+                  <dps-case-time-grid-row [columnDef]="columnDef" [rowData]="item" (click)="onSelectRow(item)">
+                  </dps-case-time-grid-row>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!-- *ngIf="item?.expanded" -->
+              <div fxLayout="row">
+                <div fxLayout="row" class="grid-sub-button-container">
+                  <div class="dps-time-grid-button" (click)="onEditTimeClick(item)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <span>Edit</span>
+                  </div>
+                  <div class="dps-time-grid-button" (click)="onDelteTimeClick(item)" fxLayout="column">
+                    <button mat-icon-button>
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <span>Delete</span>
+                  </div>
+
+                </div>
+
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

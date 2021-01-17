@@ -1,0 +1,19 @@
+@import '~styles/variables.scss';
+
+.grid-sub-button-container {
+    padding: 5px 0px 0px 32px;
+    .dps-global-grid-button {
+        padding-right: 12px;
+        align-items: center;
+
+        mat-icon {
+            line-height: 32px;
+            color: #3b64a7;
+        }
+
+        span {
+            color: #3b64a7;
+        }
+
+    }
+}

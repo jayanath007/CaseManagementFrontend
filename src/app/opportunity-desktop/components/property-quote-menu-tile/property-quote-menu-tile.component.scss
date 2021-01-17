@@ -1,0 +1,48 @@
+@import '~styles/variables.scss';
+
+.item {
+    float: left;
+    width: 33.33%;
+    cursor: pointer;
+
+    img {
+    width: 115px;
+    margin: 0 auto;
+    display: block;
+    }
+
+    h3 {
+        margin: 0;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;  
+    }
+
+    
+
+   
+}
+
+.item.ps {
+    color: #557597;
+}
+
+.item.p {
+    color: #d19d5a;
+}
+
+.item.s {
+    color: #88996a;
+}
+
+.item.e {
+    color: #9477ac;
+}
+
+.item.r {
+    color: #7a73b9;
+}
+
+.item.t {
+    color: #cc656f;
+}

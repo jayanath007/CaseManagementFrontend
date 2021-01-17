@@ -1,0 +1,356 @@
+@import '~styles/variables.scss';
+
+.dps-billing-requesting {
+    width: 100%;
+    height: 100%;
+    
+    
+
+    .dps-white-gray-scroll {
+        overflow: auto;
+        height: calc(100% - 145px);
+    }   
+
+    div , span {
+        font-family: $primary-font-stack;
+    }
+
+    .dps-narrative {
+        display: flex;
+        align-items: center;
+
+        div {
+        font-size: $primary-font-size - 2;
+        width: 70px;   
+        }
+    }
+
+    button {
+        font-size: $primary-font-size - 2;
+    }
+
+    .bill-add-profit , .load-narrative , .bill-add-expences {
+        background: #2972b6;
+        color: $primary;
+        margin-left: 5px;
+    }
+
+    .bill-add-expences {
+        width: 115px;
+    }
+
+    .dps-billing-form-data   {
+        width: 40%;
+        padding: 22px 5px 5px 36px;
+
+
+        .billing-matter-search {
+        background: #d2e9ff;
+        border-radius: 35%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0px 20px 0px 0px;
+        color: #2972b6;
+        }
+
+        .billing-matter-search:disabled {
+            background: #e4e4e4;
+            color: #a7a7a7;
+        }
+
+        .dps-matter-wrapper {
+            mat-form-field {
+                width: 203px;
+            }
+        }
+
+        .dps-billing-wrapper {
+            mat-form-field {
+                width: 228px;
+            }
+        }
+        
+    }
+
+    .dps-billing-grid-data {
+        width: 60%;
+        padding: 10px 24px 5px 10px;
+
+        .dps-fees-total , .dps-total-disbs , .dps-total-expences , .dps-final-total {
+            font-size: $primary-font-size + 3;
+            font-weight: 500;
+            color: #193d5e;
+            padding: 0 15px 0 0;
+            }
+
+         .dps-total {
+
+            height: 50px;
+
+            .dps-bill-total {
+                font-size: $primary-font-size + 6;
+                padding: 0 15px 0 0;
+                font-weight: 600;
+                color: #2381d7;
+            } 
+            
+            mat-form-field {
+                font-size: $primary-font-size + 8;
+                font-weight: 600;
+                width: 220px !important;
+                color: #2381d7;
+            }
+
+         }   
+         
+
+        .quick-bill , .clear_all {
+            width: 110px;
+            border-radius: 0%;
+            color: #193d5e;
+        }
+
+        .bill-select-time , .bill-select-disb {
+            background: #bddfff;
+            color: #193d5e;
+        }
+
+        .bill-select-disb {
+            width: 96px;
+        }
+
+        .dps-billing-total-fees {
+            // padding: 8px 0px 8px 0;
+            padding: 4px 0px 1px 0px;
+            margin-right: -20px;
+
+            mat-form-field {
+                width: 100px;
+                text-align: right;
+            }            
+        }
+        .dps-billing-total-expences {
+            padding: 10px 0 0 0;
+            margin-right: -15px;
+            mat-form-field {
+                width: 100px;
+                text-align: right;
+            }
+        }
+
+       .dps-billing-data-action {
+        margin-bottom: 8px;
+
+        button:disabled  {
+            color: #a7a4a4;
+            background: none;
+            border: none;
+            
+        }
+
+        .dps-data-action {
+            button:disabled {
+                color: #a7a4a4;
+        background: #e4e4e4;
+        border: 1px solid #d2d1d1;
+                
+            }
+        }   
+
+       }
+
+        
+        
+
+    }
+
+
+    .dps-billing-request {
+        text-align: right;
+        // padding: 0px 20px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        margin-right: -8px;
+
+        button {
+        background: #193d5e;
+        width: 130px;
+        color: #fff;
+        font-weight: 500;
+        font-size: $primary-font-size;
+        margin: 2px 37px 0px 0px;
+        }
+        
+        button:disabled {
+            color: #a7a4a4;
+            background: #e4e4e4;
+            border: 1px solid #d2d1d1;
+        }
+    }
+
+
+    ::ng-deep .dps-common-overlay-layout, .dps-mat-card {
+        background: #f8f8f8;
+    }
+
+
+    ::ng-deep {
+            
+        .dps-quickbill-overlay {
+            mat-form-field , mat-checkbox {
+                font-size: $primary-font-size - 2;
+            } 
+
+            button {
+                background: #2972b6;
+                font-size: $primary-font-size - 2;
+                color: $primary;
+                line-height: 30px;
+                border-radius: 3px;
+            }
+
+             
+                .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+                    background-color: #193d5e;
+                }
+            
+        }
+
+        mat-card {
+            background: #f8f8f8;
+        }
+    
+}
+
+
+
+    mat-form-field {
+        font-size: $primary-font-size - 2;
+        color: #193d5e;
+        margin-right: 20px;
+    }
+
+    ::ng-deep {
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            background-color: #193d5e;
+        }
+
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            color: #193d5e;  
+        }
+    }
+
+
+    button:disabled {
+        color: #a7a4a4;
+        background: #e4e4e4;
+        border: 1px solid #d2d1d1;
+    }
+
+    
+}
+
+.dps-expences-grid {
+    height: 150px;
+}
+
+dps-common-grid-table {
+//   height: 170px;
+    height: 160px;
+}
+
+
+.dps-billing-quickbill {
+    padding: 10px;
+}
+
+::ng-deep .dps-quickbill-wrapper {
+    button:disabled {
+        color: #a7a4a4;
+        background: #e4e4e4;
+        border: 1px solid #d2d1d1;
+    }
+}
+
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+
+    .dps-billing-form-data  {
+
+        .dps-matter-wrapper {
+            mat-form-field {
+                width: 122px !important;
+            }
+        }
+
+        .dps-billing-wrapper {
+            mat-form-field {
+                width: 147px !important;
+            }
+        }
+
+    }
+
+    ::ng-deep .dps-billing-grid-data {
+        .tableContainer {
+          height: 160px !important;
+      }
+      }
+
+     
+    
+}
+
+
+@media only screen and (min-width: 1440px) and (max-height: 900px) {
+
+    .dps-billing-form-data  {
+
+        .dps-matter-wrapper {
+            mat-form-field {
+                width: 133px !important;
+            }
+        }
+
+        .dps-billing-wrapper {
+            mat-form-field {
+                width: 158px !important;
+            }
+        }
+
+    }
+
+}
+
+
+@media only screen and (min-width: 1280px) and (max-height: 800px) {
+    .dps-billing-form-data  {
+
+        .dps-matter-wrapper {
+            mat-form-field {
+                width: 110px !important;
+            }
+        }
+
+        .dps-billing-wrapper {
+            mat-form-field {
+                width: 135px !important;
+            }
+        }
+
+    }
+}
+
+
+@media only screen and (min-width: 1280px)  {
+
+    ::ng-deep .dps-billing-grid-data {
+        .tableContainer {
+          height: 160px !important;
+      }
+      }
+
+}
+
+
+

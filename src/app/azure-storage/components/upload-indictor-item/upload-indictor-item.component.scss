@@ -1,0 +1,43 @@
+.dps-upload-indictor-item {
+  position: relative;
+
+  i[matListAvatar] {
+    font-size: 30px;
+  }
+
+  span[matLine] {
+    margin: 5px 0px !important;
+
+    mat-icon {
+      color: #11c721;
+    }
+
+    span {
+      align-self: center;
+
+      &.dps-error {
+        color: darkred;
+      }
+
+      &.dps-file-name {
+        width: 190px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  .popup-close-circle {
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    font-weight: 700;
+  }
+}

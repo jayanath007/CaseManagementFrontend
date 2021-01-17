@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+
+.dps-add-edit-group-popup {
+  height: 100%;
+
+  .dps-toolbar-box-shadow {
+    background: #006cc1;
+    height: 50px;
+
+    mat-icon {
+      color: $primary;
+    }
+
+    span {
+      padding-left: 16px;
+      color: $toolbar-title;
+      font-size: $primary-font-size+2;
+    }
+  }
+
+  .dps-footer-btn {
+    margin-right: 10px;
+  }
+
+  .dps-add-edit-group-content {
+    overflow-y: auto;
+  }
+}

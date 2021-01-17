@@ -1,0 +1,50 @@
+<mat-drawer-container class="dps-team-month-container" autosize style="    height: 100%;">
+
+
+
+  <mat-drawer [opened]="!startSidenaveOpened" mode="side" [disableClose]="true" position="end"
+    class="dps-team-month-sidenav" mode="side" style="width: 350px;">
+
+
+
+    <mat-list class="dps-white-gray-scroll dps-activity-list">
+
+      <mat-list-item *ngFor="let activity of activityListByDay;" class="{{activity.userMovementTypeId | movementTheamClass }}">
+        <div class="primary-header">
+            <mat-icon class="dps-round-icons" mat-list-icon> {{activity.userMovementTypeId | movementIcon}} </mat-icon>  
+            <span class="dps-round-text">{{activity.userDes}} </span>
+        </div>
+      
+         <div class="dps-activity-content">
+          <span mat-line> {{activity.dateTime | dpsDate}} </span>
+          <div> {{activity.notes}}</div>
+        </div>
+      </mat-list-item>
+
+      
+      <mat-divider></mat-divider>
+
+    </mat-list>
+
+  
+
+  </mat-drawer>
+
+  <div class="dps-team-month-content dps-team-mnth-table">
+   
+    <mat-calendar [selected]="selectedDate" [dateClass]="dateclass" #matCalendar [headerComponent]="customHeader"
+      (selectedChange)="onSelectDay($event)"></mat-calendar>
+
+  </div>
+
+</mat-drawer-container>
+
+
+
+<!-- 
+<div style="width: 100; height: 50;">
+<mat-card class="dps-team-mnth-table">
+    <mat-calendar name="appoinment_date" [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+    </mat-card>
+
+  </div> -->

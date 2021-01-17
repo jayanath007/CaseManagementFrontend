@@ -1,0 +1,34 @@
+<form class="dynamic-form-edit" [formGroup]="form" (mousedown)="formMousedown($event)" (submit)="handleSubmit($event)">
+      <div class="screen-editor-main-wrapper-outer-main" dpsDragSelectComponentsDirective (selectionChange)="onEventOutputEditor($event)">
+            <div id='dps-dynamic-form-wrapper' class="screen-editor-main-wrapper" [style.height.px]="formContainerHeight" [style.width.px]="formContainerWidth"
+                  dpsContanerDraggable (editorContanerEventOutput)="onEventOutputEditor($event)"  (contextmenu)="contextmenuopen($event)">
+
+                  <div class="ghost-select">
+                        <span></span>
+                  </div>
+                  <dps-edit-contaner *ngFor="let screenComponent of screenComponentList;" [style.left.px]="screenComponent.containerXAxis"
+                        [style.top.px]="screenComponent.containerYAxis" [style.width.px]="screenComponent.containerWidth" (editorContanerEventOutput)="onEventOutputEditor($event)"
+                        (ondisplayTabOnRightBar)=displayTabOnRightBar()
+                        [screenContanerComponent]="screenComponent" class="screen-editor-component-wrap">
+                        <ng-container dynamicField [screenContanerComponent]="screenComponent" [screenDefinition]="screenDefinition" [group]="form"
+                              (eventOutput)="onEventOutput($event)">
+                        </ng-container>
+                  </dps-edit-contaner>
+            </div>
+            <span #menu class="dps-menu-trigger" [matMenuTriggerFor]="contextMenu" [style.top.px]="clientY" [style.left.px]="clientX"></span>
+            <div class="screen-editor-main-wrapper-outer-right" dpsFormContanerResizes [changeKind]="'XAxis'" (axisChange)="updateFormContaner($event)"
+                  [style.height.px]="formContainerHeight"></div>
+
+            <div class="clear"></div>
+            <div class="screen-editor-main-wrapper-outer-bottom-left" dpsFormContanerResizes [changeKind]="'YAxis'" [style.width.px]="formContainerWidth"
+                  (axisChange)="updateFormContaner($event)" [style.width.px]="formContainerWidth"></div>
+            <div class="screen-editor-main-wrapper-outer-bottom-right" dpsFormContanerResizes [changeKind]="'XAxisAndYAxis'" (axisChange)="updateFormContaner($event)"></div>
+            <div class="clear"></div>
+            <!-- screen-editor-main-wrapper end -->
+      </div>
+      <mat-menu #contextMenu="matMenu" class="dps-matMenu">
+                  <button class="dps-matmenu-btn" mat-menu-item (click)="onEntryLogic()" >Entry Logic</button>
+                  <button class="dps-matmenu-btn" mat-menu-item (click)="onTabLogic()">Tab Logic</button>
+                  <button class="dps-matmenu-btn" mat-menu-item (click)="onExitLogic()">Exit Logic</button>
+              </mat-menu>
+</form>

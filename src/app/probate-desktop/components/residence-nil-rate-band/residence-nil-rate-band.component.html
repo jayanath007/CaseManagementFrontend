@@ -1,0 +1,81 @@
+<mat-accordion class="example-headers-align dps-white-gray-scroll" [multi]="true">
+
+  <div class="dps-container-btn">
+
+
+    <span fxFlex="1 1 auto"></span>
+    <button class="blue" mat-button (click)="updateRnrb()">
+      <mat-icon>playlist_add_check</mat-icon> Update
+    </button>
+
+  </div>
+
+
+
+  <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+
+    <mat-expansion-panel-header collapsedHeight="35px" expandedHeight="35px">
+      <mat-panel-title>
+        <mat-icon>account_circle</mat-icon><span> Residence Nil Rate Band(RNRB)</span>
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <div class="dps-input-container dps-white-gray-scroll">
+
+      <div fxLayout="column">
+
+        <div class="dps-input-lbl" fxLayout="row wrap">
+          <label fxFlex="1 1 auto">RNRB in force at Date of Death</label>
+          <input mat-input type="number" maxlength="11" disabled #forceDOD (blur)="changeRnrbInForceDOD(forceDOD.value)"
+            [value]="rnrbInForceDOD">
+        </div>
+
+
+      </div>
+
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mat-elevation-z" [expanded]="true">
+
+    <mat-expansion-panel-header collapsedHeight="35px" expandedHeight="35px">
+      <mat-panel-title>
+        <mat-icon>account_circle</mat-icon><span> Transferable Residence Nil Rate Band(TRNRB)</span>
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <div class="dps-input-container dps-white-gray-scroll">
+
+      <div fxLayout="column">
+
+        <div class="dps-input-lbl" fxLayout="row wrap">
+          <label fxFlex="1 1 auto">TRNRB in force at Date of Death</label>
+          <input mat-input type="number" maxlength="11" disabled #trnrbDOD
+            (blur)="changeTrnrbInForceDOD(trnrbDOD.value)" [value]="trnrbInForceDOD ">
+        </div>
+        <div class="dps-input-lbl" fxLayout="row wrap">
+          <label fxFlex="1 1 auto">Number of pre-deceased spouses of civil partners</label>
+          <input mat-input type="number" maxlength="11" #noOfPreDeceased
+            (blur)="changeNoOfPreDeceased(noOfPreDeceased.value)" [value]="noOfPreDeceasedSpouses">
+        </div>
+
+        <div class="dps-input-lbl" fxLayout="row wrap">
+          <label fxFlex="1 1 auto">Percentage TRNRB used previously</label>
+          <input mat-input type="number" maxlength="11" #usedTRNRB (blur)="changeUsedTRNRB(usedTRNRB.value)"
+            [value]="previouslyUsedTRNRB">
+        </div>
+
+        <div class="dps-input-lbl" fxLayout="row wrap">
+          <label fxFlex="1 1 auto">Remaining TRNRB to be included in current estate</label>
+          <input mat-input type="text" disabled #remain (blur)="changeRemainingTRNRB(remain.value)"
+            [value]="remainingTRNRB">
+        </div>
+
+      </div>
+
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

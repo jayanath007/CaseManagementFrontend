@@ -1,0 +1,38 @@
+<mat-nav-list dense >
+  <diV class="nav-list-item">
+    <mat-list-item [title]="calendarGroup.data.name" *ngIf="calendarGroup.editMode !== CalendarGroupEditMode.Rename" (contextmenu)="contextmenuOpen($event)">
+      <mat-icon *ngIf="calendarGroup.hasChild"  matListIcon (click)="onGroupToggle(calendarGroup.data)">{{calendarGroup.expanded?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+      <span class="dps-calendar-group" *ngIf="!calendarGroup.hasChild" matListIcon></span>
+      <span class="dps-calendar-group-name">{{calendarGroup.data.name}}</span>
+      <span [matMenuTriggerFor]="contextMenu"></span>
+    </mat-list-item>
+    <mat-list-item disableRipple *ngIf="calendarGroup.editMode === CalendarGroupEditMode.Rename">
+      <input class="dps-cal-group-input" #renameInput (keydown)="editingKeyPress($event, CalendarGroupEditMode.Rename, $event.target.value)" 
+        [value]="calendarGroup.data.name" (blur)="editingBlur($event, CalendarGroupEditMode.Rename, $event.target.value)">
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item disableRipple *ngIf="calendarGroup.editMode === CalendarGroupEditMode.Create">
+      <input #createInput  (keydown)="editingKeyPress($event, CalendarGroupEditMode.Create, $event.target.value)"
+        (blur)="editingBlur($event, CalendarGroupEditMode.Create, $event.target.value)">
+    </mat-list-item>
+    <mat-list-item disableRipple *ngIf="calendarGroup.editMode === CalendarGroupEditMode.CreateCalendar">
+      <input #createCalendarInput  (keydown)="newCalendarKeyPress($event, CalendarGroupEditMode.CreateCalendar, $event.target.value)"
+        (blur)="newCalendarBlur($event, CalendarGroupEditMode.CreateCalendar, $event.target.value)">
+    </mat-list-item>
+  </diV>
+  <div *ngIf="calendarGroup.expanded">
+    <dps-calendar-list-item [calendar]="calendar" *ngFor="let calendar of calendarGroup.calendars|keyValues" (toggleCalendar)="onToggleCalendar($event)" (calendarEditOperations)="onCalendarEditOperations($event)"></dps-calendar-list-item>
+  </div>
+  <!-- <mat-list-item>
+    <img matListAvatar style="height: 27px; width: 27px;margin-left: 30px" src="no-profile-img.png" alt=":">
+    <span matLine>Calendar</span>
+  </mat-list-item>
+  <dps-calendar-list-item></dps-calendar-list-item> -->
+</mat-nav-list>
+<mat-menu #contextMenu="matMenu">
+  <button mat-menu-item  class="dps-folder-action"  (click)="createCalendar()" >Add new calendar</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item  class="dps-folder-action" (click)="create()" >New calendar group</button>
+  <button mat-menu-item  class="dps-folder-action" *ngIf="!calendarGroup.isDefalut" (click)="rename()" >Rename calendar group</button>
+  <button mat-menu-item  class="dps-folder-action" *ngIf="!calendarGroup.isDefalut" [disabled]="calendarGroup.hasChild" (click)="delete()" >Delete calendar group</button>
+</mat-menu>

@@ -1,0 +1,83 @@
+.dps-team-common-header {
+  height: auto !important;
+
+  mat-toolbar-row {
+
+    &.dps-team-primery-header {
+      background: #1d6eb0;
+
+      .dps-event-owner {
+        font-weight: 400;
+        font-size: 14px;
+        position: relative;
+        top: 10px;
+
+        .owner-stats {
+          font-size: 13px;
+          position: relative;
+          bottom: 13px;
+          color: #b3d3e7;
+          font-weight: 400;
+          justify-content: center;
+          display: flex;
+        }
+      }
+
+      .dps-addmovement-btn {
+        font-size: 12px;
+
+        mat-chip {
+          background-color: #529bd2;
+          color: #fff;
+          min-height: 26px;
+
+          .btn-test {
+            font-size: 12px
+          }
+        }
+      }
+    }
+
+
+
+  }
+
+}
+
+
+
+
+
+.active {
+  background: #2b90e2;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 400;
+}
+
+mat-chip {
+  padding: 10px 20px;
+  font-weight: 400;
+  color: #7e7e7e;
+}
+
+.dps-selected-view {
+  color: #687a8e;
+  font-size: 17px;
+}
+
+.dps-today {
+  color: #8c8989;
+}
+
+
+.example-icon {
+  padding: 0px 0px;
+  font-size: 16px;
+  position: relative;
+  top: 3px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

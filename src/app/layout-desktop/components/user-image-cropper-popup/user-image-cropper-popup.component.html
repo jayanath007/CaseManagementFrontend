@@ -1,0 +1,47 @@
+<div class="dps-user-image-cropper-popup" fxLayout="column">
+  <dps-common-popup-header icon="crop" title="Change your photo" buttons="close" [loading]="imageNotFound===undefined"
+    (buttonClick)="onClose()">
+  </dps-common-popup-header>
+  <div fxFlex="50px" fxLayout="row" fxLayoutAlign="start center">
+    <button mat-stroked-button (click)="fileUploader.onFileUploadBtnClick()" matTooltip="New photo">
+      <mat-icon>add_photo_alternate</mat-icon>
+      <dps-file-uploader #fileUploader inputId="dpsUserImage" (fileUpload)="onFileChange($event)" [multiple]="false"
+        accept="image/*">
+      </dps-file-uploader>
+    </button>
+    <button mat-stroked-button (click)="rotateLeft()" matTooltip="Rotate left">
+      <mat-icon>rotate_left</mat-icon>
+    </button>
+    <button mat-stroked-button (click)="rotateRight()" matTooltip="Rotate right">
+      <mat-icon>rotate_right</mat-icon>
+    </button>
+    <button mat-stroked-button (click)="flipHorizontal()" matTooltip="Flip horizontal">
+      <mat-icon>flip</mat-icon>
+    </button>
+    <button mat-stroked-button (click)="flipVertical()" matTooltip="Flip vertical">
+      <mat-icon class="fa-rotate-90">flip</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxFlex="calc(100%-150px)" fxLayout="row" class="dps-user-image-cropper-content">
+    <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon *ngIf="imageNotFound" (click)="fileUploader.onFileUploadBtnClick()">add_photo_alternate</mat-icon>
+      <image-cropper [imageFile]="imageFile" [maintainAspectRatio]="true" [cropperMinWidth]="100" outputType="both"
+        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'">
+      </image-cropper>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="214px" [hidden]="imageNotFound">
+      <img class="dps-cropped-image" [src]="croppedImage"
+        [style.display]="showCroppedImage && showCropper ? null : 'none'" (load)="onCroppedImageLoad()" />
+      <img src="{{ data | dpsLoginUserImage  | async }}" (load)="onImageLoad($event)" (error)="onImageError()"
+        crossorigin="anonymous" hidden>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxFlex="50px" fxLayout="row" fxLayoutAlign="end center">
+    <!-- <button mat-raised-button (click)="onDelete()">Remove</button> -->
+    <button mat-raised-button color="primary" (click)="onSave()">Apply</button>
+    <button mat-raised-button (click)="onClose()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div fxLayout="row" class="dps-open-case-search-section">
+  <mat-checkbox [checked]='isSearchFullText' (change)="OnIsSearchFullText($event.checked)">
+    Full Text
+  </mat-checkbox>
+  <mat-form-field floatLabel="never" class="dps-file-history-search">
+    <span matPrefix>&nbsp;&nbsp;</span>
+    <input type="search" [value]="searchText" #searchTextInput matInput placeholder="Search"
+      (keyup)="onKeydownSearchText($event)" [formControl]="inputCtrl" autocomplete="off">
+    <button matSuffix mat-icon-button (click)="onSearchTextChanged(searchTextInput.value)">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+</div>
+

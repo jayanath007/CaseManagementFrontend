@@ -1,0 +1,18 @@
+<div class="dps-screen-contact-layout" fxLayout="column">
+  <dps-screen-contact-search *ngIf="isContactSearch" [fontSizeClass]="fontSizeClass"
+    (onExpandSelection)="onExpand($event)" (viewChange)="onViewChange($event)" [visibleColumnDef]="visibleColumnDef"
+    [contactScreenData]="contactScreenData" [pageInfo]="pageInfo" [searchType]="searchType" fxFlex="calc(100%-13px)"
+    (onDeleteContacts)="deleteContacts($event)" (onNewContact)="newContact($event)"
+    (onContactHighlighted)="contactHighlighted($event)" (onContactSelected)="contactSelected($event)"
+    (onClose)="closePopup()" (onRemoveFromFile)="removeFromFile($event)" (onViewChange)="onViewChange($event)"
+    [searchText]="searchText" [screenDefinition]="screenDefinition" [isLoading]="isLoading"
+    [isContactsLoading]="isContactsLoading" [newContactPermission]="newContactPermission"
+    [isMuiliClient]="isMuiliClient">
+  </dps-screen-contact-search>
+
+  <dps-screen-config-contact-search *ngIf="!isContactSearch" (onClose)="closePopup()"
+    [defaultSearchFields]="defaultSearchFields" [mappedSearchFields]="mappedSearchFields"
+    (onSearchFieldChanged)="searchFieldChanged($event)" (onSaveSearchFields)="saveSearchFields($event)"
+    [isLoading]="isLoading">
+  </dps-screen-config-contact-search>
+</div>

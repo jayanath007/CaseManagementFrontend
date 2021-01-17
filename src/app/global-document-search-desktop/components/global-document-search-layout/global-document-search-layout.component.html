@@ -1,0 +1,38 @@
+<div class="dps-global-document-layout" fxLayout="column">
+
+  <mat-card class="dps-global-document-header">
+    <mat-card-content>
+      <div class="dps-profile">
+        <dps-global-document-header (searchDoc)="onSearchDoc()" (searchClear)="onSearchClear()" [searchText]="filterViewModel.searchText"
+          (changeSearchText)="onChangeSearchText($event)">
+        </dps-global-document-header>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!-- fxFlex="calc(100%-220px)" -->
+  <mat-card class="grid-contents" fxFlex="calc(100%-220px)">
+    <div class="grid-wrapper-main" fxLayout="column" [fxFlex]="calculateHeight">
+
+      <div fxLayout="column" fxFlex="1 1 100">
+        <dps-global-document-search-filter [filterExpanded]="filterExpanded" [feeEarnerList]="feeEarnerList"
+          [appCodeList]="appCodeList" [filterViewModel]="filterViewModel" (addFilterRow)="onAddFilterRow()"
+          (filterItemChange)="onfilterItemChange($event)" (fontSizeClassChangeValue)="onFontSizeClassChange($event)"
+          (refresh)="onRefresh()" (documentClear)="onDocumentClear($event)" (removeFilterRow)="onRemoveFilterRow($event)"
+          (documentSearch)="onDocumentSearch()"></dps-global-document-search-filter>
+
+       
+        <div fxFlex= "calc(100% - 60px)" class="dps-global-document-grid {{fontSizeClass}}" fxLayout="column" >
+          <dps-global-document-grid fxFlex="1 1 100" (openCaseClick)="onOpenCaseClick($event)" (share)="onShare($event)"
+            (openInPopup)="onOpenInPopup()" (closeViewer)="onCloseViewer()" (viewChange)="onViewChange($event)"
+            (clickGridRow)="onClickGridRow($event)" [documentViewOpened]="documentViewOpened" [paginatorDef]="paginatorDef"
+            [totalItem]="totalItem" [columnDef]="columnDef" [gridData]="gridData" [isLoading]="isLoading"></dps-global-document-grid>
+        </div>
+
+      </div>
+
+
+    </div>
+  </mat-card>
+
+</div>

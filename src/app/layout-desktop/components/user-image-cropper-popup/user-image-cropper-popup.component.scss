@@ -1,0 +1,49 @@
+.dps-user-image-cropper-popup {
+  height: 100%;
+  width: 100%;
+
+  img.dps-cropped-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #dde2e6;
+    padding: 5px 5px;
+  }
+
+  button[mat-raised-button] {
+    margin-right: 10px;
+  }
+
+  button[mat-stroked-button]:first-of-type {
+    margin-left: 10px;
+  }
+
+  .dps-user-image-cropper-content {
+    div {
+      margin: 0 10px;
+    }
+
+    mat-icon {
+      font-size: 100px;
+      height: 100px;
+      width: 100px;
+      color: #c3c3c3;
+      cursor: pointer;
+    }
+
+    div[hidden] {
+      display: none !important;
+    }
+  }
+
+  image-cropper {
+    border: 1px solid #d2d2d2;
+  }
+}
+
+::ng-deep .dps-user-image-cropper-popup {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}

@@ -1,0 +1,22 @@
+<h1>Look up List </h1>
+<div class="screen-view-general-popup-body">
+  <div class="dps-white-gray-scroll dps-blue-scroll lookup-list-item-wrapper">
+  <div class="lookup-list-items" (dblclick)="setDroDownValue(dataItem)" *ngFor="let dataItem of data.lookupFiles;let index =index;let isOdd=odd;let isEven=even" [class.odd]="isOdd" [class.even]="isEven">
+    <label>
+      {{dataItem}}
+    </label>
+    <span>
+      <button mat-button (click)="viewContanet(dataItem)">Edit Lookup</button>
+    </span>
+    <div class="clear"></div>
+  </div>
+</div>
+
+  <div class="general-buttons-bottom">
+  <button mat-button color="warn" class="close-pop" (click)="onClose()">
+Close
+    </button>
+
+    </div>
+
+</div>

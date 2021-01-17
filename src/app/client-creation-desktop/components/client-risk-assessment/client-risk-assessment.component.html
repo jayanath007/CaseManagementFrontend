@@ -1,0 +1,54 @@
+<dps-grid-container fxFlex="calc(100% - 320px)" [gridColoumn]="gridColums" [pageEvent]="">
+  <mat-nav-list dence class="dps-grid-nav-list" [disableRipple]="true">
+    <mat-list-item [ngClass]="{'dps-disbale': disableEditing}" class="dps-grid-list-item"
+      *ngFor="let rowData of data?.clientRiskAssessmentQuestions; let index =index; let isOdd=odd; let isEven=even"
+      [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" dpsClick (dpsDblClick)="onRowClick(rowData)">
+      <div fxLayout class="grid-data">
+        <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData.text}}"></div>
+        <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(1)">
+          <mat-checkbox [disabled]="disableEditing"
+            [checked]='(data?.assessmentDetails?.doneBy || editMode) && rowData.value === 1'
+            (click)="onChangeQuationAnsState(1, rowData)"></mat-checkbox>
+        </div>
+        <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(2)">
+          <mat-checkbox [disabled]="disableEditing"
+            [checked]='(data?.assessmentDetails?.doneBy || editMode) && rowData.value === 0'
+            (click)="onChangeQuationAnsState(0, rowData)"></mat-checkbox>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</dps-grid-container>
+
+<div class="submittion-input-types" fxLayout="column">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Submitted by" readonly [value]="data?.assessmentDetails?.doneBy">
+  </mat-form-field>
+  <mat-form-field class="date-picker-inner">
+    <input matInput readonly placeholder="Date Submitted" [ngModel]="data?.assessmentDetails?.date | date:'dd/MM/yyyy'">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Overridden by" [readonly]="!overridden"
+      [value]="data?.assessmentDetails?.overRiddenByBy">
+  </mat-form-field>
+  <mat-form-field class="date-picker-inner">
+    <input matInput readonly placeholder="Date Overridden"
+      [ngModel]="data?.assessmentDetails?.overRiddenDate | date:'dd/MM/yyyy'" readonly>
+  </mat-form-field>
+
+  <div class="button-container" fxLayout="row">
+
+    <button class="submit" mat-button [disabled]="disableEditing" (click)="submit()">Submit</button>
+    <span fxFlex="1 1 auto"></span>
+    <button class="override" mat-button
+      *ngIf="(accessControl?.getUserPermision(userPermisionType.approveRiskAssessments)|async) && client?.riskAssessmentFailed === true"
+      (click)="overridden=true">Override</button>
+
+  </div>
+
+
+  <mat-form-field class="fail-status" *ngIf="client?.riskAssessmentFailed !== null">
+    <input matInput type="text" placeholder="Pass/Fail" readonly
+      [value]="client?.riskAssessmentFailed === false ? 'Passed'  : client?.riskAssessmentFailed === true ? 'Failed' : null">
+  </mat-form-field>
+</div>

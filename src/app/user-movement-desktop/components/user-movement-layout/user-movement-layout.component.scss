@@ -1,0 +1,249 @@
+@import '~styles/variables.scss';
+
+.dps-user-movement-layout {
+  height: 100%;
+
+  mat-form-field {
+    font-size: 13px;
+    color: $primary;
+
+    .mat-input {
+      caret-color: #3f51b5;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: rgba(0,0,0,.42);
+    }
+  }
+
+  .add-movement-btn {
+    background: #fda55b;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  .dps-team-drop-down-list,
+  .dps-team-members-search,
+  .dps-team-filter-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .dps-team-drop-down-list {
+    position: relative;
+    top: -7px;
+  }
+
+  .dps-team-search {
+    color: #ffd5cc;
+  }
+
+  .dps-empty-selected {
+    // top: 7px;
+  }
+
+  .dps-primary-header {
+    position: relative;
+    top: 6px;
+  }
+
+  .secondary-header {
+    padding: 3px 47px 0px 25px;
+    height: 100%;
+
+    ::ng-deep .mat-form-field-underline {
+      background-color: #256091;
+    }
+
+    ::ng-deep .mat-select-arrow,
+    .mat-select-disabled .mat-select-value {
+      color: $primary;
+    }
+
+    .dps-checkbox-events {
+      color: #fff;
+      align-self: center;
+      border: 1px solid #1e8bcf;
+      padding: 1px 10px;
+      font-size: 13px;
+    }
+
+    .dps-team-drop-down-location {
+      & ::ng-deep.mat-menu-item {
+        .mat-icon {
+          margin-right: 0px !important;
+        }
+      }
+
+      ::ng-deep mat-form-field {
+        font-size: 13px;
+        line-height: 22px;
+
+        .mat-form-field-label,
+        .mat-input-element {
+          font-size: 14px;
+          color: $primary;
+        }
+
+        mat-icon {
+          // font-size: 19px;
+          top: 6px;
+        }
+
+        color: $primary;
+
+        .mat-icon,
+        .mat-form-field-label,
+        .mat-input-element {
+          color: $primary !important;
+          caret-color: $primary !important;
+
+        }
+
+      }
+
+    }
+
+    ::ng-deep.mat-form-field-underline {
+      background: $primary;
+    }
+
+    ::ng-deep.mat-select-value {
+      color: $primary;
+    }
+
+    ::ng-deep.mat-form-field-label {
+      color: $primary;
+    }
+
+    ::ng-deep.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+      color: #b6d8f5;
+    }
+
+    ::ng-deep.mat-form-field-ripple.mat-form-field-ripple {
+      background: #b6d8f5;
+    }
+
+    .dps-team-members-search {
+      .mat-select-trigger {
+        color: $primary !important;
+      }
+
+      .mat-icon,
+      .mat-form-field-label,
+      .mat-input-element {
+        color: $primary !important;
+        caret-color: $primary !important;
+      }
+    }
+
+  }
+
+}
+
+.dps-addmovement-btn {
+  font-size: 12px;
+
+  mat-chip {
+    background-color: #fda55b;
+    color: #fff;
+    min-height: 26px;
+
+    .btn-test {
+      font-size: 12px
+    }
+  }
+}
+
+.dps-team-primary {
+  ::ng-deep .mat-form-field {
+    font-size: 12PX;
+    color: #b6d8f3;
+
+    .mat-form-field-label {
+      color: #b6d8f3 !important;
+    }
+  }
+}
+
+.dps-team-common-btn {
+  position: relative;
+  top: 6px;
+}
+
+.dps-team-search {
+  background: #0d597b;
+  position: relative;
+  top: 16px;
+  color: #fff !important;
+  width: 35px;
+  height: 35px;
+  font-size: 16px;
+  line-height: 37px;
+
+  mat-icon {
+    font-size: 20px;
+  }
+}
+
+.dps-filter-btn {
+  display: none;
+}
+
+// @media screen and (min-width: 1450px) {
+//   ::ng-deep .cdk-overlay-container {
+//     display: none;
+//   }
+// }
+
+
+@media screen and (max-width: 1450px) {
+
+
+
+  .dps-primary-header {
+    display: none !important;
+
+  }
+
+  .dps-filter-btn {
+    display: block;
+  }
+}
+
+.dps-filter-btn {
+  height: 36px;
+  position: relative;
+  top: 22px;
+  background: #123c56;
+  color: #fff;
+  font-size: 12px;
+
+  span {
+    margin-left: 2px;
+  }
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: 300px;
+  padding: 5px 10px !important;
+  height: 200px;
+}
+
+::ng-deep .mat-menu-content {
+  width: 250px !important;
+  padding-top: 5px;
+
+  mat-form-field {
+    font-size: 13px;
+  }
+
+}
+
+::ng-deep.dps-team-drop-down-location.dps-menu-item {
+  mat-form-field {
+    width: 100%;
+
+  }
+}

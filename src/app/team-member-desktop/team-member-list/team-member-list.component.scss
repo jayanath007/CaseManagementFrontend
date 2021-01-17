@@ -1,0 +1,75 @@
+@import '~styles/variables.scss';
+
+.mat-card {
+  padding: 0;
+}
+
+.mat-card-header {
+  padding-top: 19px;
+  background: #293740;
+  color: $primary;
+}
+
+.mat-drawer {
+  border-bottom: 1px solid #728a9c;
+}
+
+.dps-team-members-container {
+  min-height: 315px;
+  background: #263a4a;
+  box-shadow: none;
+  padding: 0 10px;
+  height: 100%;
+}
+
+.dps-team-members-search {
+  width: 100%;
+}
+
+.dps-team-members-search .mat-icon-button {
+  color: $primary;
+}
+
+.dps-team-members-search input {
+  font-size: 13px;
+  color: $primary;
+}
+
+.material-icons.slide-controller {
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  color: $primary;
+}
+
+.mat-card-content {
+  text-align: center;
+}
+
+.dps-team-member-nav-list {
+  width: 100%;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.dps-team-member-nav-list .mat-list-item {
+  border-bottom: 1px solid #274e68;
+}
+
+.dps-team-member-nav-list .mat-list-avatar {
+  background: #0b3f65;
+}
+
+.dps-team-member-nav-list .mat-list-item-content {
+  padding: 0;
+}
+
+.dps-team-members-container input {
+  line-height: 13sp;
+}
+
+
+.dps-white-gray-scroll::-webkit-scrollbar-thumb {
+  background-color: #314f67;
+  border-radius: 10px;
+}

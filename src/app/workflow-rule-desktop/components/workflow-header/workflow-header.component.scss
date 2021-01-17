@@ -1,0 +1,25 @@
+@import '~styles/variables.scss';
+.dps_wrk_flow_heading {
+    background: #cce4ff;
+    color: #0f59af;
+
+    .dps-is-mobile {
+        overflow-x: auto !important;
+        width: 950px;
+        -webkit-overflow-scrolling: touch;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+}
+
+.workflow_rule_headings {
+
+    i {
+        padding-right: 4px;
+    }
+    span {
+        font-size: $primary-font-size - 1;
+    }
+}
+

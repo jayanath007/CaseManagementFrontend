@@ -1,0 +1,83 @@
+<div class="dps-global-doc-filters" fxLayout="row" fxFlexAlign="center matSuffix"
+  [ngClass]="{'default-first-child': !filterRow.fieldHidden}">
+
+
+  <mat-form-field (click)="$event.stopPropagation()">
+    <mat-select placeholder="Filter Type" [ngModel]="filterRow?.filterType"
+      (selectionChange)="filterTypeChange(filterRow,$event)">
+      <mat-option [value]="FilterType.AppType">App Type</mat-option>
+      <mat-option [value]="FilterType.FeeEarner">Fee Earner</mat-option>
+      <mat-option [value]="FilterType.FromDate"> From Date</mat-option>
+      <mat-option [value]="FilterType.ToDate"> To Date</mat-option>
+      <mat-option [value]="FilterType.DocType"> Doc Type</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field (click)="$event.stopPropagation()">
+    <mat-select placeholder="Operator" [ngModel]="filterRow?.operator"
+      (selectionChange)="changeFilterOperator(filterRow,$event)">
+      <mat-option *ngFor="let operator of filterRow.operatorType" [value]="operator.id">
+        {{operator.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="filterRow.filterType === FilterType.FeeEarner" (click)="$event.stopPropagation()">
+    <mat-select placeholder="Fee Earner" [ngModel]="filterRow?.filterValue" floatPlaceholder="never"
+      (selectionChange)="changeFilterValue(filterRow,$event)">
+      <mat-option *ngFor="let feeEarner of feeEarnerList" [value]="feeEarner.key">
+        {{ feeEarner.key }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="filterRow.filterType === FilterType.AppType" (click)="$event.stopPropagation()">
+    <mat-select placeholder="App Code" floatPlaceholder="never" [ngModel]="filterRow?.filterValue"
+      (selectionChange)="changeFilterValue(filterRow,$event)">
+      <mat-option *ngFor="let appCode of appCodeList" [value]="appCode.value">
+        {{ appCode.value }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="filterRow.filterType === FilterType.DocType" (click)="$event.stopPropagation()">
+    <mat-select placeholder="Doc Type" floatPlaceholder="never" [ngModel]="filterRow?.filterValue"
+      (selectionChange)="changeFilterValue(filterRow,$event)">
+      <mat-option [value]="docType.Eml">Email</mat-option>
+      <mat-option [value]="docType.Pdf">Pdf</mat-option>
+      <mat-option [value]="docType.Docx">Docx</mat-option>
+      <mat-option [value]="docType.Excel">Excel</mat-option>
+      <mat-option [value]="docType.Image">Image</mat-option>
+      <!-- <mat-option [value]="docType.All">All</mat-option> -->
+    </mat-select>
+  </mat-form-field>
+
+
+
+  <mat-form-field *ngIf="filterRow.filterType === FilterType.FromDate" (click)="$event.stopPropagation()">
+    <input matInput [ngModel]="filterRow?.filterValue | date:'yyyy-MM-dd'" [matDatepicker]="picker"
+      (dateChange)="changeFilterValue(filterRow,$event)" placeholder="Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="!filterRow.fieldHidden" (click)="$event.stopPropagation()">
+    <mat-select placeholder="And/Or" [ngModel]="filterRow?.fieldOperator"
+      (selectionChange)="filterFieldChange(filterRow,$event)">
+      <mat-option [value]="Logic.Or">-OR-</mat-option>
+      <mat-option [value]="Logic.And">-AND-</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+  <button mat-icon-button (click)="onRemoveFilterRow(filterRow,$event)" *ngIf="filterList.length!==0">
+    <mat-icon class="remove">remove_circle</mat-icon>
+
+  </button>
+  <button mat-icon-button (click)="onAddFilterRow($event)" *ngIf="filterRow.fieldHidden && filterList.length<5">
+    <mat-icon class="add">add_circle</mat-icon>
+  </button>
+
+
+</div>

@@ -1,0 +1,79 @@
+@import '~styles/variables.scss';
+
+
+::ng-deep .dps-Advanced-search-Popup-panel {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
+dps-advanced-search-grid {
+  overflow: hidden;
+}
+
+span {
+  font-family: $primary-font-stack;
+}
+
+.dps-Advanced-search-layout {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .dps-Advanced-search-header {
+
+    mat-toolbar {
+      min-height: 46px;
+    }
+
+    mat-toolbar-row {
+      height: 46px;
+      background: $header-primary;
+
+      mat-list {
+        padding-top: 0px;
+        width: 100%;
+      }
+
+      mat-icon.header-icon {
+        vertical-align: middle;
+        border-radius: 100%;
+        border: 2px solid #859ece;
+        padding: 2px;
+        color: #a9c6fd;
+        font-size: $primary-font-size + 6;
+        text-align: center;
+        line-height: 24px;
+        }
+      
+      .header-icon-delete {
+        color: $primary;
+        font-size: $primary-font-size + 8;
+        
+      }
+
+      button {
+        margin-top: 8px;
+      }
+    }
+
+    ::ng-deep .mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content .mat-list-text {
+      padding-left: 6px;
+    }
+    
+    mat-list-item span.matter-heading {
+      font-size: $primary-font-size + 1;
+      color: #dfeaff;
+      font-weight: 500;
+    }
+  }
+}
+
+.dps-row-column-header {
+  height: 40px;
+}
+
+dps-column-header {
+  font-family: $primary-font-stack;
+}
+

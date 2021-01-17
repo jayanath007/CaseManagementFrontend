@@ -1,0 +1,27 @@
+<div class="dps-wrkflow-rule" fxLayout="column" >
+  <div class="row-highlight " dpsIsMobile>
+    <div class="dps-columnheader" >
+      <dps-column-header *ngFor="let header of columnDef" [fxFlex]="header.extras.fxFlex" [def]="header">
+      </dps-column-header>
+      <!-- [filterAnchor]="clientHeader.extras.filterAnchor" -->
+    </div>
+  </div>
+  <mat-dialog-content class="dps-popup-content">
+    <div tabindex="0" (keyup)="keyUpOnGrid($event)" fxLayout="column" class="dps-white-gray-scroll workflow-scroll wrkflow_list">
+      <mat-nav-list class="workflowrule-list">
+        <div *ngFor="let item of workflowRuleList; let index =index; let isOdd=odd; let isEven=even" [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+          <mat-list-item class="list-item" disableRipple>
+
+            <dps-rule-grid-fix-row (onRowClick)="rowItemClick($event)" (onOperatorItemClick)="operatorItemClick($event)"
+              (onActionItemClick)="actionItemClick($event)" (onTestVarNoItemClick)="testVarNoItemClick($event)" (onCriteriaChange)="criteriaChange($event)"
+              (onItemChange)="itemChange($event)" (onDescriptionChange)="descriptionChange($event)" (btnDelete)="onBtnDelete($event)"
+              (openWorkFlowMenuPopup)="onEditItem($event)" [ruleRowData]="item" [columnDef]="columnDef" [selectedWorkflowRuleList]="selectedWorkflowRuleList">
+
+            </dps-rule-grid-fix-row>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-nav-list>
+    </div>
+  </mat-dialog-content>
+</div>

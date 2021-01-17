@@ -1,0 +1,48 @@
+<mat-list-item [ngClass]="{'dps-mail-item-selected':conversation.selected}" class="dps-mail-list-item" (click)="select($event)">
+  <div matLine class="dps-mail-item-data">
+    <div class="dps-mail-item-data-col1">
+      <div class="dps-mail-item-name">
+        <span class="dps-mail-item-To">
+          <span *ngFor="let sender of conversation.data.uniqueSenders">{{sender}}; </span>
+        </span>
+      </div>
+      <div class="dps-mail-item-icons">
+        <div class="dps-icon">
+
+          <a *ngIf="conversation.data.hasAttachments">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+          </a>
+          <a *ngIf="conversation.data.topic | isDPSMail:companyCode">
+            <img src="is-dps-mail.png" width="13px" height="13px">
+          </a>
+        </div>
+
+        <div class="dps-icon-btn">
+          <a (click)="delete($event)" title="Delete">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="dps-mail-item-data-col2">
+      <!-- fxFlex="1 1 auto" fxLayout="row" fxLayoutWrap="nowrap" -->
+      <div class="dps-mail-item-preview">
+        <!-- fxFlex="1 1 auto" fxLayout="column" fxLayoutWrap="nowrap" -->
+        <div class="dps-mail-item-subject">
+          <!-- fxFlex="0 0 auto" -->
+          <span class="mail-subject-text">{{conversation.data.topic ? conversation.data.topic : '(No topic)'}}</span>
+        </div>
+
+      </div>
+      <div class="dps-mail-item-body">
+        <!-- fxFlex="0 1 auto" -->
+        <span class="mail-body-preview-text">{{conversation.data.preview?conversation.data.preview: 'No preview is
+          available.'}}&nbsp; </span>
+        <span class="dps-mail-item-date">{{conversation.data.lastDeliveredDateTime | timezone:timeZone | dpsDate}}</span>
+      </div>
+
+      <!-- fxFlex="0 0 auto" fxFlexAlign="end" -->
+    </div>
+  </div>
+</mat-list-item>
+<mat-divider></mat-divider>

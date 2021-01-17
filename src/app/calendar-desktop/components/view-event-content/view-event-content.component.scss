@@ -1,0 +1,140 @@
+@import '~styles/variables.scss';
+
+div , span  {
+    font-family: $primary-font-stack;
+}
+
+.dps-message{
+    padding-top: 5px;
+}
+.dps-message div{
+    height: 30px;
+    width: 100%;
+    border-left: 3px solid #a6a6a6;
+    background-color: #efefef;
+}
+.dps-message .dps-event-message{
+    padding-left: 10px;
+    color: #767676;
+    font-family: $primary-font-stack;
+    font-size: $primary-font-size - 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding-top: 8px;
+}
+.dps-edit-event-content{
+    width: 100%;
+    height: calc(100% - 15px); 
+    min-width: 880px;
+}
+.dps-open-series{
+    color: #0062AF;
+    cursor:pointer;
+}
+
+.calender_event_msg {
+    margin-top:4px;
+}
+
+.calender_evt , .calender_people {
+    height: 100%;
+} 
+
+.calender_evt_details , .calender_people {
+    padding-top:30px;
+}
+
+.event_container {
+    margin-top: 10px !important;
+}
+
+.calender_evt_details span.details  , .calender_people span.details {
+    font-size: $primary-font-size + 8;
+    color: #3e3c3c;
+    font-weight: 300;
+}
+
+span.dps_event-info {
+    font-size: $primary-font-size + 8 !important;
+    color: #3e3c3c !important;
+    font-weight: 400 !important;
+
+}
+
+span.dps_evt_details {
+    font-size: $primary-font-size - 2 !important;
+    font-weight: 500 !important;
+}
+
+.dps_event_time {
+    line-height: 22px;
+    margin: 10px 0px 10px;
+}
+
+.when , .where {
+    font-weight: 600 !important;
+    font-size: $primary-font-size - 1 !important;
+    display: inline-block;
+    width: 60px;
+}
+
+mat-option {
+    font-size: $primary-font-size - 2 !important;
+    font-weight: 500;
+    color: #4c4c4c !important;
+}
+
+.view-event-form-controller {
+    margin-right: 10px;
+}
+
+.mat-option.mat-selected.mat-active , .mat-option.mat-selected:not(.mat-option-disabled) {
+    
+    background: #c9e7fd;
+}
+
+.dps-lable {
+    font-size: $primary-font-size;
+    font-weight: 400;
+    color: #4c4c4c !important;
+    margin-left: -7px;
+}
+
+.checkbox-label {
+    font-size: $primary-font-size - 1;
+}
+
+.dps-view-event-content {
+    ::ng-deep .dps-link img {
+        border-radius: 0px !important;
+    }
+}
+
+mat-option .busy {
+    border-left: 5px solid $calendar-day-busy;
+}
+
+mat-option .free {
+    border-left: 5px solid $calendar-day-free;
+}
+
+mat-option .tentative {
+    border-left: 5px solid $calendar-day-tentative;
+}
+
+mat-option .oof {
+    border-left: 5px solid $calendar-day-oof;
+}
+
+mat-option .workingElsewhere {
+    border-left: 5px solid $calendar-day-workingElsewhere;
+}
+
+mat-option .unknown {
+    border-left: 5px solid $calendar-day-unknown;
+}
+
+
+

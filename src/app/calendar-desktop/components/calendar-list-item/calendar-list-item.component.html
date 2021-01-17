@@ -1,0 +1,118 @@
+<div [ngStyle]="{'background-color': calendar.selected?calendar.color:''}" class="dps-calender-list">
+  <mat-list-item *ngIf="calendar.editMode !== CalendarEditMode.Rename" (contextmenu)="contextmenuOpen($event)"
+    (click)="onToggleCalendar()">
+    <mat-icon class="dps-cal-cake" [title]="calendar.data.owner?.address" matListIcon
+      *ngIf="calendar.isBirthdaysCalendar">cake</mat-icon>
+    <mat-icon class="dps-cal-event" [title]="calendar.data.owner?.address" matListIcon
+      *ngIf="(calendar.isSecondary&&!calendar.isBirthdaysCalendar)">event</mat-icon>
+    <img class="dps-user-avator" [title]="calendar.data.owner?.address" matListAvatar
+      *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar)"
+      [src]="calendar.data.owner?.address | dpsUserImage | async" (load)="showProfileImg=true"
+      alt="calendar.data.owner?.address"
+      [hidden]="!showProfileImg">
+    <button [title]="calendar.data.owner?.address" matListAvatar mat-icon-button class="dps-calendar-avatar"
+      *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar) && !showProfileImg"
+      [ngStyle]="{'background-color': (calendar.data.owner?.address | recipientColorCode)}">
+      <span>{{calendar.data.owner?.name | nameInitials}}</span>
+    </button>
+    <!-- <img matListAvatar *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar)" style="height: 27px; width: 27px;margin-left: 30px"
+      src="no-profile-img.png" alt="calendar.data.owner?.address" [hidden]="showProfileImg"> -->
+    <span class="dps-cal-data-name" [title]="calendar.data.name" matLine>{{calendar.data.name}}</span>
+    <span [matMenuTriggerFor]="contextMenu"></span>
+  </mat-list-item>
+  <mat-list-item disableRipple *ngIf="calendar.editMode === CalendarEditMode.Rename">
+    <mat-icon class="dps-cal-cake" [title]="calendar.data.owner?.address" matListIcon
+      *ngIf="calendar.isBirthdaysCalendar">cake</mat-icon>
+    <mat-icon class="dps-cal-event" [title]="calendar.data.owner?.address" matListIcon
+      *ngIf="(calendar.isSecondary&&!calendar.isBirthdaysCalendar)">event</mat-icon>
+    <img class="dps-user-avator" [title]="calendar.data.owner?.address" matListAvatar
+      *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar)"
+      [src]="calendar.data.owner?.address | dpsUserImage | async" (load)="showProfileImg=true"
+      alt="calendar.data.owner?.address"
+      [hidden]="!showProfileImg">
+    <button [title]="calendar.data.owner?.address" matListAvatar mat-icon-button class="dps-calendar-avatar"
+      *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar) && !showProfileImg"
+      [ngStyle]="{'background-color': (calendar.data.owner?.address | recipientColorCode)}">
+      <span>{{calendar.data.owner?.name | nameInitials}}</span>
+    </button>
+    <input #renameInput (keydown)="editingKeyPress($event, CalendarEditMode.Rename, $event.target.value)"
+      class="dps-calendarEditMode" [value]="calendar.data.name"
+      (blur)="editingBlur($event, CalendarEditMode.Rename, $event.target.value)">
+  </mat-list-item>
+</div>
+<mat-menu #contextMenu="matMenu">
+  <button mat-menu-item *ngIf="!((calendar.data.isDefaultCalendar|| (
+          calendar.data.name === 'Calendar' &&
+          calendar.data.canEdit === true &&
+          calendar.data.canShare === true &&
+          calendar.data.canViewPrivateItems === true))||calendar.isBirthdaysCalendar)" class="dps-folder-action"
+    (click)="rename()">Rename</button>
+  <button mat-menu-item *ngIf="!((calendar.data.isDefaultCalendar|| (
+          calendar.data.name === 'Calendar' &&
+          calendar.data.canEdit === true &&
+          calendar.data.canShare === true &&
+          calendar.data.canViewPrivateItems === true))||calendar.data.isSharedWithMe||calendar.isBirthdaysCalendar)"
+    class="dps-folder-action" (click)="delete()">Delete</button>
+  <button mat-menu-item *ngIf="calendar.data.isSharedWithMe" class="dps-folder-action"
+    (click)="delete()">Remove</button>
+  <button mat-menu-item class="dps-folder-action" [matMenuTriggerFor]="colorMenu" (click)="color()">Color</button>
+  <button mat-menu-item *ngIf="calendar.isBirthdaysCalendar" class="dps-folder-action" (click)="newBirthDay()">New
+    birthday</button>
+</mat-menu>
+<mat-menu #colorMenu="matMenu">
+  <button class="dps-folder-action" mat-menu-item (click)="colorSelect(CalendarEditMode.Color,'auto')">Automatic <i
+      *ngIf="calendar.data.color==='auto'" class="fa fa-check" aria-hidden="true"></i></button>
+  <div class="dps-calendar-color-palet">
+    <div fxLayout="row">
+      <div class="dps-cal-item-i">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightBlue'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightBlue')"></button>
+      </div>
+      <div class="dps-cal-item-ii">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightTeal'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightTeal')"></button>
+      </div>
+      <div class="dps-cal-item-iii">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightGreen'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightGreen')"></button>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div class="dps-cal-item-iv">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightGray'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightGray')"></button>
+      </div>
+      <div class="dps-cal-item-v">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightRed'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightRed')"></button>
+      </div>
+      <div class="dps-cal-item-vi">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightPink'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightPink')"></button>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div class="dps-cal-item-vii">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightBrown'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightBrown')"></button>
+      </div>
+      <div class="dps-cal-item-iix">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightOrange'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightOrange')"></button>
+      </div>
+      <div class="dps-cal-item-ix">
+        <button class="dps-folder-action" mat-menu-item
+          [ngClass]="{'dps-selected-color': calendar.data.color==='lightYellow'}"
+          (click)="colorSelect(CalendarEditMode.Color,'lightYellow')"></button>
+      </div>
+    </div>
+  </div>
+</mat-menu>

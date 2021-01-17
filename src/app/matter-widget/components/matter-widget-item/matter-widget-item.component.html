@@ -1,0 +1,13 @@
+<mat-list-item class="widget-item" (click)="onClickItem(item)">
+  <!-- <mat-icon mat-list-icon class="indicator">description</mat-icon> -->
+  <div class="widget-item-content">
+  <div class="content">
+    <div class="primary-tag" fxLayout="row">
+      <span class="ref" mat-line>{{item?.matterReferenceNo}}</span>
+      <span class="client" mat-line fxFlex="1 1 auto">{{item?.clientName}}</span>
+    </div>
+    <span class="details">{{item?.matterDetails}} </span>
+  </div>
+  </div>
+
+</mat-list-item>

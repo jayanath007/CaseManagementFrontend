@@ -1,0 +1,15 @@
+<div class="label-with-drop-down" [dpsQaAtm]="lableName">
+  <mat-form-field>
+    <mat-placeholder>{{lableName}}
+    </mat-placeholder>
+    <mat-select [disabled]="disabled" (selectionChange)="selectionChange($event.value)" [value]="modelData">
+      <dps-select-search (change)="cmbFilterChanged($event)" [noEntriesFoundLabel]="noEntriesFoundLabel" [placeholderLabel]="placeholderLabel"></dps-select-search>
+      <mat-option [value]="''" class="none">-- None --</mat-option>
+      <mat-option *ngFor="let dataItem of (cmbDataListList | async)" [value]="dataItem.key">
+        <div *ngIf="showType==='key'"> {{dataItem.key}}</div>
+        <div *ngIf="showType==='value'"> {{dataItem.value}}</div>
+        <div *ngIf="showType===''"> {{dataItem.key}} | {{dataItem.value}}</div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

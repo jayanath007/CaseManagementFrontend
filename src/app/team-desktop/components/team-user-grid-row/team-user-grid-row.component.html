@@ -1,0 +1,43 @@
+<div class="dps-year-activity-grid dps-white-gray-scroll">
+  <table class="table-scroll small-first-col">
+    <thead class="dps-grid-header">
+      <tr style=" height: 35px;">
+        <th class="dps-stats-text"> Stats</th>
+        <th>JANUARY </th>
+        <th>FEBRUARY </th>
+        <th>MARCH </th>
+        <th>APRIL </th>
+        <th>MAY </th>
+        <th>JUNE </th>
+        <th>JULY </th>
+        <th>AUGUST </th>
+        <th>SEPTEMBER </th>
+        <th>OCTOBER </th>
+        <th>NOVEMBER </th>
+        <th>DECEMBER </th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody class="body-half-screen dps-white-gray-scroll">
+      <tr *ngFor="let item of eventYearSummery; let index =index; let isOdd=odd; let isEven=even">
+        <td class="dps-team-stats {{item.userMovementTypeID | movementTheamClass }}">
+          <mat-icon class="dps-round-icons">{{item.userMovementTypeID | movementIcon}}</mat-icon>
+        </td>
+        <td>{{item.eventCountWithMonths[1] ? item.eventCountWithMonths[1] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[2] ? item.eventCountWithMonths[2] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[3] ? item.eventCountWithMonths[3] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[4] ? item.eventCountWithMonths[4] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[5] ? item.eventCountWithMonths[5] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[6] ? item.eventCountWithMonths[6] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[7] ? item.eventCountWithMonths[7] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[8] ? item.eventCountWithMonths[8] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[9] ? item.eventCountWithMonths[9] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[10] ? item.eventCountWithMonths[10] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[11] ? item.eventCountWithMonths[11] : 0 }}</td>
+        <td>{{item.eventCountWithMonths[12] ? item.eventCountWithMonths[12] : 0 }}</td>
+        <td>{{ item.sumOfMovementCount}}/{{item.maxCount}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,26 @@
+<mat-toolbar class="dps-team-common-header" color="primary">
+
+
+  <mat-toolbar-row class="dps-team-primery-header">
+    <span class="example-spacer"></span>
+    <div class="dps-event-owner" fxLayout="column">
+      <span class="owner-name">{{selectedTeamUser?.fullName}}</span>
+      <span class="owner-stats">personal status</span>
+    </div>
+    <span class="example-spacer"></span>
+
+    <mat-chip-list class="dps-addmovement-btn" aria-label="Fish selection">
+
+      <mat-chip [disabled]="teamUsersLoading" (click)="onAddMovement()" color="primary" selected>
+        <!-- <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">add
+        </mat-icon> -->
+        <span class="example-spacer"></span>
+        <span class="btn-test"> User Movements</span>
+      </mat-chip>
+    </mat-chip-list>
+
+  </mat-toolbar-row>
+
+
+
+</mat-toolbar>

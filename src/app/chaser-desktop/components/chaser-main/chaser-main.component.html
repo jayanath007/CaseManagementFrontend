@@ -1,0 +1,56 @@
+<div fxLayout="column" class="dps-chaser-layout">
+
+  <mat-toolbar fxFlex="53px">
+    <mat-toolbar-row class="dps-toolbar-box-shadow" fxLayoutAlign="center center">
+      <mat-list class="dps-chaser-matlist" matLine fxLayout="row">
+        <span fxFlex="1 1 auto"></span>
+        <mat-list-item fxLayoutAlign="center center">
+          <mat-icon matListIcon>contact_mail</mat-icon>
+          <span matLine>DPS Spitfire:Send Mail</span>
+        </mat-list-item>
+        <span fxFlex="1 1 auto"></span>
+      </mat-list>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-progress-bar *ngIf="chaserDataLoading || subjectPrefixLoading|| isMailSending" mode="indeterminate">
+  </mat-progress-bar>
+  <mat-dialog-content fxFlex="calc(100%-115px)" class="dps-white-gray-scroll chaser-scroll">
+
+    <dps-chaser-container [fileNo]="fileNo" (updateSelectedMatterData)="onMatterDataChanged($event)"
+      [feeEarnerList]="feeEarnerList" (updateSelectedFeeEarner)=onFeeEarnerChanged($event) [folderList]="folderList"
+      (updateSelectedFolder)=onFolderChanged($event) [timeTypeList]="timeTypeList"
+      [loadingMatterList]="loadingMatterList" (updateSelectedTimeType)=onTimeTypeChanged($event) [unitValue]="unitValue"
+      (updateSelectedUnit)="onUnitChanged($event)" [fileNoteData]="fileNoteData"
+      [contactMapResponce]="contactMapResponce" [timeRecordType]="timeRecordType" [classType]="classType"
+      [attTypeList]="attTypeList" [section51]="section51" [isBulkEntry]="isBulkEntry" [noOfEntryBy]="noOfEntryBy"
+      [uncharged]="uncharged" (updateSelectedFileNote)=onFileNoteChanged($event) [openCasefileData]="openCasefileData"
+      [selectedMatterInfo]="selectedMatterInfo" (updateSelectedOpenFile)=onOpenFileChanged($event)
+      [typeValueDisable]="typeValueDisable" (updateClearData)="onSearchClear($event)"
+      (matterLinkOutputData)=onMatterLinkOutputData($event) [isLoading]="chaserDataLoading"
+      [pageLoadType]="pageLoadType" [worktypeList]="worktypeList" [activitiList]="activitiList" [phaseList]="phaseList"
+      [phaseWiseTaskList]="phaseWiseTaskList" (changeWorkType)="onChangeWorkType($event)"
+      (changePhase)="onChangePhase($event)" (changeTask)="onChangeTask($event)"
+      (changeActivity)="onChangeActivity($event)" (changeClassType)="onChangeClassType($event)"
+      (changeAttType)="onChangeCrimeWorkType($event)" (changeSection51)="onChangeSection51($event)"
+      (changeIsBulkEntry)="onChangeIsBulkEntry($event)" (changeNumOfEntries)="onChangeNumOfEntries($event)"
+      (updateChangeUncharged)="onUpdateUncharged($event)" [precedentUnitValue]="precedentUnitValue"
+      [homeCurrency]="homeCurrency" [precedentRate]="precedentRate" [precedentValueTotal]="precedentValueTotal"
+      (precedentRateValue)=onPrecedentChangeRate($event) (updatePrecedentUnit)="onUpdatePrecedentUnit($event)"
+      [civilClassList]="civilClassList" [civilLevelList]="civilLevelList"
+      (changeCivilClass)="onChangeCivilClass($event)" (changeCivilLevel)="onChangeCivilLevel($event)"
+      (loadMatterList)="onloadMatterList()">
+    </dps-chaser-container>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions fxFlex="60px">
+    <span fxFlex="1 1 auto"></span>
+    <button mat-raised-button *ngIf="selectedMatterInfo && selectedMatterInfo?.isPlotMasterMatter"
+      class="dps-chaser-send-btn" (click)="onSelectLinkedMatter()" tabindex="-1">Sync Linked
+      Matter & Send</button>
+    <button mat-raised-button [disabled]="chaserDataLoading || isMailSending || subjectPrefixLoading"
+      class="dps-chaser-send-btn" (click)="onSendChaser(null)" tabindex="2">Send</button>
+    <button [disabled]="chaserDataLoading || isMailSending" (click)="onClose()" tabindex="-1"
+      class="dps-cancel">Cancel</button>
+  </mat-dialog-actions>
+</div>

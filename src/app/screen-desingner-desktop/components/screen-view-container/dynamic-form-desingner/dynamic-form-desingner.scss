@@ -1,0 +1,116 @@
+@import '~styles/variables.scss';
+// .ghost-select > span {
+//    background-color: rgba(239, 28, 190, 0.6);
+//      border: 1px solid #b20e8c; 
+// }
+
+.ghost-active {
+    position: absolute;
+    background: rgb(115, 147, 194);
+    border: 2px dashed rgb(29, 53, 105);
+    opacity: 0.6;
+    z-index: 5000;
+}
+
+.screen-editor-component-wrap
+{
+    position: absolute;
+}
+
+.cordinations
+{
+    font-size: 9px;
+    position: absolute;
+    right: -40px;
+    top: 0px;
+    font-family: $primary-font-stack;
+    color: #fff;
+    text-align: center;
+    z-index: 1000;
+    width: 65px;
+    opacity: 0.8;
+}
+.cordinations:hover
+{
+    opacity: 1;
+}
+
+/* screen editor outer div structure for canvas re-size event */
+
+.screen-editor-main-wrapper-outer-main
+{
+    float: left;
+    padding: 15px;
+    position: relative;
+}
+
+.screen-editor-main-wrapper-outer-right
+{
+    width: 6px;
+    background: #2f7bad;
+    cursor: col-resize;
+    position: absolute;
+    right: 14px;
+}
+.screen-editor-main-wrapper-outer-right:hover,
+.screen-editor-main-wrapper-outer-bottom-left:hover,
+.screen-editor-main-wrapper-outer-bottom-right:hover
+
+{
+    background: #f1960a;
+}
+.screen-editor-main-wrapper-outer-bottom-left
+{
+
+    height: 6px;
+    background: #206796;
+    float: left;
+    cursor: row-resize;
+}
+
+.screen-editor-main-wrapper-outer-bottom-right
+{
+    height: 6px;
+    width: 6px;
+    background: #0e2b3e;
+    float: left;
+    cursor: se-resize;
+    position: absolute;
+    right: 14px;
+    z-index: 1;
+}
+.clear
+{
+    clear: both;
+}
+
+/* screen editor outer div structure for canvas re-size event -- end */
+.screen-editor-main-wrapper
+{
+    position: relative;
+    overflow: hidden;
+    float: left;
+
+    background-color: transparent;
+    background-image: linear-gradient(0deg, transparent 9%, rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 12%, transparent 13%, 
+    transparent 29%, rgba(255, 255, 255, .1) 30%, rgba(255, 255, 255, .1) 31%, transparent 32%, transparent 49%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 51%, transparent 52%, transparent 69%, rgba(255, 255, 255, .1) 70%, rgba(255, 255, 255, .1) 71%, transparent 72%, transparent 89%, rgba(255, 255, 255, .1) 90%, rgba(255, 255, 255, .1) 91%, transparent 92%, transparent), linear-gradient(90deg, transparent 9%, rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 12%, transparent 13%, transparent 29%, rgba(255, 255, 255, .1) 30%, rgba(255, 255, 255, .1) 31%, transparent 32%, transparent 49%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 51%, transparent 52%, transparent 69%, rgba(255, 255, 255, .1) 70%, rgba(255, 255, 255, .1) 71%, transparent 72%, transparent 89%, rgba(255, 255, 255, .1) 90%, rgba(255, 255, 255, .1) 91%, transparent 92%, transparent);
+    height: 100%;
+    background-size: 5px 5px;
+}
+
+
+
+.dps-matmenu-btn {
+    font-size: 12px;
+    color: #fff;
+    background: #4FA4E7;
+}
+
+.dps-matmenu-btn:hover {
+    background: rgb(41, 132, 201);
+    color: #fff;
+}
+.dps-menu-trigger{
+    position: fixed;
+}
+

@@ -1,0 +1,16 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+  <mat-list-item [ngClass]="{'active': rowData.selected}" class="dps-grid-list-item" *ngFor="let rowData of gridData; let index =index; let isOdd=odd; let isEven=even"
+    [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'" [ngClass]="{'active': rowData.selected}" dpsClick (dpsDblClick)="onRowClick(rowData)">
+    <div fxLayout class="grid-data">
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData.user}}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData.dateAdded | date :'dd/MM/yyyy' }}"></div>
+      <div class="row-data mat_line" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData.type}}"></div>
+      <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{rowData.note}}"></div>
+      <div class="row-data for-icon" [fxFlex]="getFxFlexProperty(4)">
+        <button mat-icon-button class="client_clear" (click)="onRowDeleteClick(rowData)">
+          <mat-icon class="icon-delete">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-nav-list>

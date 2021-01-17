@@ -1,0 +1,73 @@
+<div class="drive-item-view" fxLayout="column">
+  <div fxLayout="row" class="drive-itemview dps-toolbar-box-shadow">
+    <div *ngIf="!selectedItems || selectedItems.length===0">
+      <mat-icon>folder</mat-icon>
+      <span>{{items?items.length:0}} Items</span>
+    </div>
+    <div *ngIf="selectedItems && selectedItems.length>1">
+      <mat-icon>file_copy</mat-icon>
+      <span>{{selectedItems.length}} Items Selected</span>
+    </div>
+    <div *ngIf="selectedItems && selectedItems.length===1">
+      <mat-icon>insert_drive_file</mat-icon>
+      <span *ngIf="selectedItems[0]?.data.file">{{selectedItems[0].data.name | attachmentIcon:'type' | titlecase }}
+        File
+      </span>
+      <span *ngIf="selectedItems[0]?.data.package">{{selectedItems[0]?.data.package.type==='oneNote'?'One
+        Note':selectedItems[0]?.data.package.type}}</span>
+      <span *ngIf="selectedItems[0]?.data.folder">Folder</span>
+    </div>
+  </div>
+
+  <div class="drive-item-info" fxLayout="column" *ngIf="!selectedItems || selectedItems.length===0">
+    <i class="fa fa-folder-open-o" aria-hidden="true">
+      <span></span>
+    </i>
+
+    <span>{{ currentFolder?.owner.name}}</span>
+  </div>
+  <div class="drive-item-info" fxLayout="column" *ngIf="selectedItems && selectedItems.length===1">
+    <i class="material-icons folder" *ngIf="selectedItems[0]?.data.folder">folder</i>
+    <i [ngClass]="selectedItems[0]?.data.name | attachmentIcon" aria-hidden="true" *ngIf="selectedItems[0]?.data.file">
+      <span></span>
+    </i>
+    <i [ngClass]="{'fa fa-file-text':selectedItems[0]?.data.package.type==='oneNote'}" aria-hidden="true" *ngIf="selectedItems[0]?.data.package">
+    </i>
+    <span>{{ selectedItems[0].data.name}}</span>
+  </div>
+  <div class="drive-items-info" fxLayout="column" *ngIf="selectedItems && selectedItems.length>1">
+    <div *ngFor="let item of selectedItems" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="file-type">
+        <i class="material-icons folder" *ngIf="item?.data.folder">folder</i>
+        <i [ngClass]="item?.data.name | attachmentIcon" aria-hidden="true" *ngIf="item?.data.file">
+          <span></span>
+        </i>
+        <i [ngClass]="{'fa fa-file-text':item?.data.package.type==='oneNote'}" aria-hidden="true" *ngIf="item?.data.package">
+        </i>
+      </div>
+      <div class="file-information">{{ item.data.name}}</div>
+    </div>
+  </div>
+  <div class="info file-info" *ngIf="selectedItems && selectedItems.length===1">
+    <div class="left">
+      <div *ngIf="selectedItems[0].data.size"> Size</div>
+      <div> Date Created </div>
+      <div> Date Modified </div>
+    </div>
+    <div class="right">
+      <div *ngIf="selectedItems[0].data.size">{{selectedItems[0].data.size | attachmentsSize }}</div>
+      <div>{{selectedItems[0].data.createdDateTime|date:'dd/MM/yyyy h:mm a' }}</div>
+      <div>{{selectedItems[0].data.lastModifiedDateTime|date:'dd/MM/yyyy h:mm a' }}</div>
+    </div>
+  </div>
+
+  <div class="info file-info" *ngIf="selectedItems && selectedItems.length>1">
+    <div class="left">
+      <div>Totle Size</div>
+    </div>
+    <div class="right">
+      <div>{{totleSize | attachmentsSize }}</div>
+    </div>
+  </div>
+
+</div>

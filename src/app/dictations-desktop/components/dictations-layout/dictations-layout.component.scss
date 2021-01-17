@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+
+
+.dps-dictations-layout {
+  height: 100%;
+  background-color: $content-background;
+  width: 100%;
+}
+
+.secondary-header {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.dps-grid-primary-header-outer {
+  justify-content: center;
+  width: 100%;
+}
+
+.dps-grid-primary-header {
+  h3 {
+    text-align: center;
+    margin: 10px 0 2px 0;
+
+    span {
+      border-radius: 100%;
+      background: #a77020;
+      color: #ECE2DB;
+      font-size: 13px;
+      min-width: 40px;
+      display: inline-block;
+      line-height: 40px;
+      text-align: center;
+      box-shadow: inset 0px 0px 9px #9a6518;
+    }
+
+  }
+
+  span {
+    color: #f3f3f3;
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+}

@@ -1,0 +1,61 @@
+@import '~styles/variables.scss';
+.dps-post-office-header {
+    padding: 8px 0px 0px 20px;
+
+  .dps-post-office-heading {
+    i {
+      color: #ffd5cc;
+      padding: 6px 8px 0px 0px;
+    }
+
+    h1 {
+      margin:0;
+      font-size: $primary-font-size + 2;
+      color: $primary;
+      font-weight: 500;
+    }
+
+    span {
+      font-size: $primary-font-size - 2;
+      color: #ffd5cc;
+    }
+
+  }
+
+  mat-form-field {
+    font-size: $primary-font-size - 2;
+    margin-right: 10px;
+  }
+
+  .dps-post-office-forms {
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background: #ffd5cc;
+    }
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: #ffd5cc;
+    }
+
+    ::ng-deep .mat-select-value-text , ::ng-deep .mat-form-field-autofill-control , ::ng-deep .mat-select-arrow {
+      color: #ffd5cc;
+    }
+
+    ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+      background-color: #ffd5cc;
+    }
+
+    .dps-post-search {
+      color: #ffd5cc;
+    }
+
+    .dps-post-cancel {
+      color: #ffd5cc;
+      border: 2px solid #ffd5cc;
+      height: 30px;
+      width: 30px;
+      line-height: 25px;
+    }
+    
+  }
+
+}

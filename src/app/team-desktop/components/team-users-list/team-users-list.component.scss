@@ -1,0 +1,40 @@
+
+
+.dps-team-filter-bar-outer{
+    height: calc(100% - 156px);
+}
+.dps-team-filter-bar{
+    padding: 10px 16px;
+    background: #5999cd38;
+    ::ng-deep .mat-form-field-wrapper{
+        // padding-top: 10px;
+        padding-bottom: 12px;
+
+    }
+    mat-form-field {
+        // height: 50px;
+    }
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-infix{
+        padding: 8px;
+    }
+
+.dps-team-drop-down-list{
+    font-size: 12px;
+    width:100%;
+    
+}
+
+.dps-team-down-menu{
+    font-size: 12px;
+    padding: 0 4px;
+}
+.dps-team-members-search{
+    width: 100%;
+    // background-color: #087bc4;
+}
+.dps-user-list{
+    height: calc(100% - 105px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}

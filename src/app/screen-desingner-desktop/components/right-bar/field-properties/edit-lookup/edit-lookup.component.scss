@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+.lookup-list-items
+{
+    font-size: 12px;
+    margin-bottom: 1px;
+    padding: 0px 0 0px 10px;
+    font-family: $primary-font-stack;
+    
+}
+
+.lookup-list-item-wrapper
+{
+    height: 360px;
+    overflow:auto;
+}
+.lookup-list-items label
+{
+    float: left;
+    line-height: 36px;
+
+}
+
+.lookup-list-items span
+{
+    float: right;
+
+}
+
+.lookup-list-items.odd
+{
+    background: #e4f4ff;
+
+}
+
+.lookup-list-items.even
+{
+    background: #cce6f7;
+}
+
+
+.lookup-list-items span button
+{
+    font-size: 12px;
+    color: #256e9e;
+}

@@ -1,0 +1,10 @@
+<div class="dps-case-task-layout" fxLayout="column">
+  <div fxFlex="calc(100%-50px)" fxLayout="column">
+    <dps-case-task class="{{fontSizeClass}}" [fontSizeClass]="fontSizeClass" (selectRow)="selectRow($event)" (viewChange)="onViewChange($event)"
+      [columnDef]="columnDef" [caseTaskData]="caseTaskData" (addEditTaskOut)="onAddEditTaskOut($event)" [pageInfo]="pageInfo"
+       ></dps-case-task>
+  </div>
+  <mat-paginator  class="footer-shadow" [pageIndex]="pageInfo?.pageIndex" [length]="caseTaskData?.total"
+    [pageSize]="pageInfo.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

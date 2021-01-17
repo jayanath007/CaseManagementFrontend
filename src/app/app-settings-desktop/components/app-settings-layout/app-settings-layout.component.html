@@ -1,0 +1,9 @@
+<div class="settings-popup" fxLayout="column">
+  <dps-common-popup-header [title]="token" icon="settings" toolbarColor="#004487"></dps-common-popup-header>
+  <!-- <mat-toolbar fxFlex="42px" class="dps-toolbar-box-shadow">
+    <mat-icon mat-list-icon>settings</mat-icon> {{token}}
+  </mat-toolbar> -->
+  <div fxFlex="calc(100%-42px)" class="settings-content">
+      <dps-organizer-settings-manager *ngIf="token==='Mail settings'"  (cancel)="onClose()" [token]="token"></dps-organizer-settings-manager>
+  </div>
+</div>

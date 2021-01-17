@@ -1,0 +1,33 @@
+<mat-list dense>
+  <mat-list-item class="dps-clmn-main-group" fxLayout="row" [ngClass]="{cssClass: group.isExpand}" (click)="onSelectGroup(group)">
+    <!-- <div class="tittle" fxLayout="row"> -->
+      <i class="material-icons arrow-right-down-btn">
+        {{isGroupExpand(group.groupHash)?'keyboard_arrow_down':'keyboard_arrow_right'}}
+      </i>
+      <h3> <i class="material-icons indicator" style=vertical-align:middle;>{{selectedGroup | groupIconByMode}}</i>
+       <span style="vertical-align: middle;"> {{group.value}} ({{group.count}})</span>
+      </h3>
+    <!-- </div> -->
+  </mat-list-item>
+</mat-list>
+<div>
+  <div *ngIf="isGroupExpand(group.groupHash)" style="padding-left: 26px;">
+    <div class="dps-case-file-grid-row mat-elevation-z">
+      <dps-work-done-grid-row [selectedGroup]="selectedGroup" [gridData]="getWorkDoneGroupData(group.groupHash)"
+        [homeCurrancy]="homeCurrancy" [columnDef]="columnDef" [searchText]="searchText" [selectedInfo]="selectedInfo"
+        [expandedRow]="expandedRow" (clickGridButton)="onClickGridButton($event)"  (rowExpand)="gridRowExpan($event)">
+      </dps-work-done-grid-row>
+      <button class="dps-load-more" mat-flat-button (click)="loadMore(group)" *ngIf="getWorkDoneGroupData(group.groupHash).length > 0 && group?.currentItems < group?.count">Load
+        More</button>
+    </div>
+
+    <div class="dps-level-two">
+      <dps-workdone-group *ngFor="let data of group.items" [selectGroupHash]="selectGroupHash" [gridData]="gridData"
+        [group]="data" [homeCurrancy]="homeCurrancy" [columnDef]="columnDef" (selectGroup)="onSelectGroup($event)"
+        [searchText]="searchText" [selectedInfo]="selectedInfo" [expandedRow]="expandedRow" [selectedGroup]="selectedGroup"
+        (loadMoreData)="loadMore($event)" (clickGridButton)="onClickGridButton($event)"  (rowExpand)="gridRowExpan($event)">
+      </dps-workdone-group>
+    </div>
+  </div>
+
+</div>

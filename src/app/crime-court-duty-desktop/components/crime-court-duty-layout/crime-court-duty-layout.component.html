@@ -1,0 +1,262 @@
+<div fxLayout="column" class="dps-crime-court-duty-popup">
+  <dps-common-popup-header icon="policy" [title]="'Court Duty Standby time'" buttons="close" iconColor="#bda07a"
+    titleColor="#c6d1da" [loading]="isloading" toolbarColor="#075c9e" (buttonClick)="closePopup()">
+  </dps-common-popup-header>
+  <div fxLayout="column" fxFlex="calc(100%-46px)">
+
+    <mat-tab-group #matTabGroupId>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div>
+            <span>Information</span>
+          </div>
+        </ng-template>
+        <div class="dps-white-gray-scroll dps-court-duty-tab-content">
+          <div fxLayout="column" fxLayoutGap="5px">
+            <mat-card class="dps-card top-content mat-elevation-z0">
+              <!-- <h3>Court Duty Information</h3> -->
+              <mat-card-content class="dps-card-content-cdInfor">
+                <div fxLayoutGap="1em" class="dps-top-content-inner">
+                  <mat-form-field>
+                    <mat-label>Branch</mat-label>
+                    <mat-select (selectionChange)="onChangeModel('branchId', $event.value)" [ngModel]="model?.branchId">
+                      <mat-option *ngFor="let i of branchList" [value]="i.key">
+                        {{i.value}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Fee Earner</mat-label>
+                    <mat-select (selectionChange)="onChangeModel('feeEarner', $event.value)"
+                      [ngModel]="model?.feeEarner">
+                      <mat-option *ngFor="let i of feeEarnerListByBranchId" [value]="i.userId">
+                        {{i.userId}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker1" placeholder="Standby date"
+                      [ngModel]="model?.timDate | date:'yyyy-MM-dd'"
+                      (dateChange)="onChangeModel('timDate', $event.value)">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker2" placeholder="Bill Date"
+                      [ngModel]="model?.nextHearDate | date:'yyyy-MM-dd'"
+                      (dateChange)="onChangeModel('nextHearDate', $event.value)" [readonly]="lockBilldate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="lockBilldate">
+                    </mat-datepicker-toggle>
+                    <button matSuffix mat-icon-button *ngIf="!lockBilldate" (click)="lockBilldate = true">
+                      <mat-icon class="dps-place-icon lock-icon">lock</mat-icon>
+                    </button>
+                    <button matSuffix mat-icon-button *ngIf="lockBilldate" (click)="lockBilldate = false">
+                      <mat-icon class="dps-place-icon lock_open-icon">lock_open</mat-icon>
+                    </button>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput type="text" placeholder="No of.Defendant" #CCDutyfeMin [ngModel]="model?.feMin"
+                      (focusout)="onChangeModel('feMin', CCDutyfeMin.value)">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput type="text" placeholder="Location ID" #CCDutylocationIdInput
+                      [ngModel]="model?.locationId"
+                      (focusout)="onChangeModel('locationId', CCDutylocationIdInput.value)">
+                    <button matSuffix mat-icon-button aria-label="Search"
+                      (click)="onOpenlocationSearch(CCDutylocationIdInput?.value)">
+                      <mat-icon class="dps-place-icon">place</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <mat-form-field class="dps-input-name">
+                    <input matInput type="text" placeholder="Location Name" #CCDutylocationNameInput
+                      [ngModel]="model?.locationName"
+                      (focusout)="onChangeModel('locationName', CCDutylocationNameInput.value)">
+                    <button matSuffix mat-icon-button aria-label="Search"
+                      (click)="onOpenlocationSearch(CCDutylocationNameInput?.value)">
+                      <mat-icon class="dps-place-icon">place</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <mat-checkbox [ngModel]="model?.doNotClaimTravel"
+                    (change)="onChangeModel('doNotClaimTravel',$event.checked)" class="dps-chk-margin">Do not claim
+                    Travel
+                  </mat-checkbox>
+                  <mat-checkbox [ngModel]="model?.isLonRates" (change)="onChangeModel('isLonRates',$event.checked)"
+                    class="dps-chk-margin">Claim
+                    London rates</mat-checkbox>
+                  <mat-checkbox [ngModel]="model?.isYouth" (change)="onChangeModel('isYouth',$event.checked)"
+                    class="dps-chk-margin">Is Youth</mat-checkbox>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <div class="dps-card dps-value-container" fxLayout="column" style="padding-bottom:0px">
+              <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around">
+                <mat-card>
+                  <h3>Time</h3>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <span class="time-information-input short">HH:MM</span>
+                    <span class="time-information-input sub-2 values">Rate</span>
+                    <span class="time-information-input sub-2 values">Value</span>
+                  </div>
+                  <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                    <mat-form-field class="">
+                      <dps-time-input placeholder="Social Time" [value]="model?.socialTimeHrsMin" [isUnitDisable]="true"
+                        (changeValue)="onChangeModel('socialTimeHrsMin', $event)">
+                      </dps-time-input>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.socialTimeRate)" readonly>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.socialTimeVal)" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                    <mat-form-field class="">
+                      <dps-time-input placeholder="Unsocial Time" [value]="model?.unSocialTimeHrsMin"
+                        [isUnitDisable]="true" (changeValue)="onChangeModel('unSocialTimeHrsMin', $event)">
+                      </dps-time-input>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.unSocialTimeRate)" readonly>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.unSocialTimeVal)" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="dpsrate-calculation" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                    <mat-form-field class="">
+                      <dps-time-input placeholder="Travel" [value]="model?.travelHrsMin" [isUnitDisable]="true"
+                        (changeValue)="onChangeModel('travelHrsMin', $event)">
+                      </dps-time-input>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.travelRate)" readonly>
+                    </mat-form-field>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.travelVal)" readonly>
+                    </mat-form-field>
+                  </div>
+                </mat-card>
+                <mat-card>
+                  <h3>Disbursement</h3>
+                  <div>
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                      <mat-form-field class="">
+                        <mat-label>Mileage<b class="milage-rate">{{model?.mileageRate}}</b> </mat-label>
+                        <input dpsNumbersOnlyWithDecimals matInput [value]="model?.mileage"
+                          (keyup)="onChangeModel('mileage', $event.target.value)">
+                      </mat-form-field>
+                      <mat-form-field class="">
+                        <input matInput [value]="fixToTwoDecimalPoint(model?.mileageValue)" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                      <mat-form-field class="">
+                        <mat-label>Vatable Fares</mat-label>
+                        <input matInput dpsNumbersOnlyWithDecimals [value]="model?.vatFares"
+                          (keyup)="onChangeModel('vatFares', $event.target.value)">
+                      </mat-form-field>
+                      <mat-form-field class="">
+                        <input matInput [value]="fixToTwoDecimalPoint(model?.vatFares)" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                      <mat-form-field class="">
+                        <mat-label>Non-Vatable Fares</mat-label>
+                        <input dpsNumbersOnlyWithDecimals matInput [value]="model?.nonVATFares"
+                          (keyup)="onChangeModel('nonVATFares', $event.target.value)">
+                      </mat-form-field>
+                      <mat-form-field class="">
+                        <input matInput [value]="fixToTwoDecimalPoint(model?.nonVATFares)" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                      <mat-form-field class="">
+                        <mat-label>Parking</mat-label>
+                        <input dpsNumbersOnlyWithDecimals matInput [value]="model?.parking"
+                          (keyup)="onChangeModel('parking', $event.target.value)">
+                      </mat-form-field>
+                      <mat-form-field class="">
+                        <input matInput [value]="fixToTwoDecimalPoint(model?.parking)" readonly>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </mat-card>
+                <mat-card>
+                  <h3>Value</h3>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <span class="time-information-input sub-2 values">Total Value <b>LA</b></span>
+                    <mat-form-field class="">
+                      <input matInput [value]="timeValueTotal" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <span class="time-information-input sub-2 values">Disbursements</span>
+                    <mat-form-field class="">
+                      <input matInput [value]="disbursementValueTotal" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <span class="time-information-input sub-2 values">Total</span>
+                    <mat-form-field class="">
+                      <input matInput [value]="fixToTwoDecimalPoint(model?.totalValue)" readonly>
+                    </mat-form-field>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div>
+            <span>Note</span>
+          </div>
+        </ng-template>
+        <div *ngIf="matTabGroupId.selectedIndex===1" class="dps-note-tab">
+          <dps-ck-editor [debounceTime]="400" [ngModel]="model.note" (ngModelChange)="onTextDataChange($event)">
+          </dps-ck-editor>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <div fxLayout="row">
+      <div fxLayout="row" fxLayoutGap="1em" class="dps-crime-duty-filter-btn">
+        <mat-icon class="material-icons"> arrow_drop_down</mat-icon>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker3" placeholder="From date"
+            [ngModel]="gridDataFilter?.fromData | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeGridFilter('fromData', $event.value)">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker4" placeholder="To date"
+            [ngModel]="gridDataFilter?.toDate | date:'yyyy-MM-dd'"
+            (dateChange)="onChangeGridFilter('toDate', $event.value)">
+          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <span fxFlex="1 1 100%"></span>
+      <div fxLayout="row" fxLayoutGap="1em" class="dps-action-btn">
+        <button mat-flat-button color="primary" (click)="onNew()">New</button>
+        <button mat-flat-button color="primary" (click)="onAction('Save')">Save</button>
+        <button mat-flat-button color="primary" (click)="onAction('Print')" [disabled]="model?.timId === 0"
+          [ngClass]="{'disabled-btn':model?.timId === 0}">Print</button>
+        <button mat-flat-button color="primary" class="dps-delete" (click)="onDelete()" [disabled]="model?.timId === 0"
+          [ngClass]="{'disabled-btn':model?.timId === 0}">Delete</button>
+      </div>
+    </div>
+    <div fxLayout="column" class="dps-court-duty-rate">
+      <dps-common-grid-table minWidth="1000px" [columns]="timeGridcolumns" [rows]="gridRows"
+        [loading]="isLoadinghistory" (rowDblClick)="selectTimeRecord($event)">
+      </dps-common-grid-table>
+      <mat-paginator fxFlex="50px" #paginator [length]="gridDataPaginatorDef?.total"
+        [pageIndex]="gridDataPaginatorDef?.currentPage" [pageSize]="gridDataPaginatorDef?.itemPerPage"
+        [pageSizeOptions]="[10,20,50]" (page)="onNextPage($event)" class="footer-shadow">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

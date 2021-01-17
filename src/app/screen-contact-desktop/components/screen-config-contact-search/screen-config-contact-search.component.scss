@@ -1,0 +1,27 @@
+@import '~styles/variables.scss';
+.screen-view-general-popup-body
+{
+    font-family: $primary-font-stack;
+}
+
+.tool-bar-contact-search .save
+{
+  color: $primary;
+  background: rgb(3, 116, 18);
+  font-size: 12px;
+}
+h2
+{
+    color: #03588d;
+    font-size: $primary-font-size;
+    margin: 25px 0 8px 0;
+}
+
+.data-grid-scroll
+{
+    height: 460px;
+    overflow: auto;
+}
+.dps-config-row{
+    width:100%;
+}

@@ -1,0 +1,215 @@
+<div class="dps-main-toolbar opened-case-top-button-toolbar" dpsIsMobile>
+  <div dense class="file-history-summary-upper" fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+    <label *ngIf="menuButtonType=='ViewFileHistoy'">File History</label>
+    <label *ngIf="menuButtonType!='ViewFileHistoy'">Workflow</label>
+    <label mat-line class="mat-line file-history-ref">{{hedingText}}</label>
+  </div>
+
+  <div class="popup-forms-indicator" fxLayout="row">
+    <span matTooltipPosition="above" matTooltip="Record Time" *ngIf="moduleIsActive(module.TimeRecorded) | async">
+      <button mat-icon-button>
+        <i class="material-icons" (click)="onOpenTimeRecord()">alarm_add</i>
+      </button>
+    </span>
+    <span matTooltipPosition="above" matTooltip="Add Note" *ngIf="selectedFileHistoryTab !== 'case-task'">
+      <button mat-icon-button>
+        <i class="material-icons" (click)="onOpenAddNote()">note_add</i>
+      </button>
+    </span>
+    <span matTooltipPosition="above" matTooltip="Add Task"
+      *ngIf="(selectedFileHistoryTab === 'case-task') && moduleIsActive(module.WorkToDo) | async">
+      <button mat-icon-button>
+        <i class="material-icons" (click)="onOpenAddTask()">playlist_add</i>
+      </button>
+    </span>
+    <span matTooltipPosition="above" matTooltip="Dictate" *ngIf="moduleIsActive(module.DictationDictation) | async">
+      <button mat-icon-button>
+        <i class="material-icons">headset_mic</i>
+      </button>
+    </span>
+    <span matTooltipPosition="above" matTooltip="New Email">
+      <button mat-icon-button>
+        <i class="material-icons" (click)="onOpenMailPopup()">email</i>
+      </button>
+    </span>
+
+
+    <span matTooltipPosition="above" [matTooltip]="getToolTip('client_creation')"
+      *ngIf="moduleIsActive(module.Client) | async">
+      <button mat-icon-button (click)="onClientCreationClick()">
+        <i class="material-icons"> {{(isPlotUser$|async)  ? 'post_add' : 'person_add'}} </i>
+      </button>
+    </span>
+    <span matTooltipPosition="above" [matTooltip]="getToolTip('matter_creation')"
+      *ngIf="moduleIsActive(module.Matter) | async">
+      <button mat-icon-button (click)="onMatterCreationClick()">
+        <i class="material-icons">library_add</i>
+      </button>
+    </span>
+
+    <span class="dps-accounts">
+      <button (click)="onOptionsClick()" mat-icon-button matTooltipPosition="above" matTooltip="Options"
+        [matMenuTriggerFor]="menu">
+        <i class="material-icons more-icon">playlist_play</i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-nav-list dense class="dps-action-menu">
+          <mat-list-item class="btn-list-item ledger-card" (click)="onOpenLedgerCard()"
+            *ngIf="(moduleIsActive(module.LedgerCard) | async) && !matterInfo.isProspectMatter">
+            <mat-icon matListIcon>credit_card</mat-icon>
+            <span>Ledger Card</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item e-chit" (click)="onOpenEchit()"
+            *ngIf="(moduleIsActive(module.ChequeRequest) | async) && !matterInfo.isProspectMatter">
+            <mat-icon matListIcon>library_books</mat-icon>
+            <span>e-Chit</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item billing-guide" (click)="onOpenBillingGuide()"
+            *ngIf="(moduleIsActive(module.Accounts) | async) && !matterInfo.isProspectMatter">
+            <mat-icon matListIcon>line_weight</mat-icon>
+            <span>Billing Guide</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item conflict-search" (click)="onOpenConflictSearch()">
+            <mat-icon matListIcon>youtube_searched_for</mat-icon>
+            <span>Conflict Search</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item class="btn-list-item crime-court-duty" (click)="onOpenCrimeDuty()"
+            *ngIf="(timeRecordType|async) === timeType.CrimeTime  && (moduleIsActive(module.Crime) | async) && (moduleIsActive(module.TimeRecorded) | async)">
+            <mat-icon matListIcon>policy</mat-icon>
+            <span>Crime Duty</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item class="btn-list-item probate" (click)="onOpenProbate()"
+            *ngIf="(moduleIsActive(module.IHTEstate) | async) && (matterInfo.AppCode ==='PR')">
+            <mat-icon matListIcon>policy</mat-icon>
+            <span>IHT & Estate</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item
+            *ngIf="(timeRecordType|async) === timeType.CivilTime && (moduleIsActive(module.TimeRecorded) | async)"
+            class="btn-list-item probate" (click)="onOpenCivilTimeRecording()">
+            <mat-icon matListIcon>alarm_on</mat-icon>
+            <span>Civil Classes</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item class="btn-list-item linked-matters" *ngIf="matterInfo.isPlotMatter"
+            (click)="onLinkedMatter()">
+            <mat-icon matListIcon>insert_link</mat-icon>
+            <span>Linked {{getToolTip('matter_creation')}}</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item crime-class"
+            *ngIf="(timeRecordType|async) === timeType.CrimeTime  && (moduleIsActive(module.Crime) | async) && (moduleIsActive(module.TimeRecorded) | async)"
+            (click)="onOpenCrimeClassManager()">
+            <mat-icon matListIcon>alarm_on</mat-icon>
+            <span>Crime Case Class</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item *ngIf="(moduleIsActive(module.Accounts) | async) &&
+             ((matterInfo.eBilling === 'PrecedentH')|| (matterInfo.eBilling ==='PrecedentS'))"
+            class="btn-list-item e-chit" (click)="onEBilling()">
+            <mat-icon matListIcon>how_to_reg</mat-icon>
+            <span>eBilling</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item bundle" (click)="onOpenBundle()">
+            <mat-icon matListIcon>book</mat-icon>
+            <span>Bundle To PDF </span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item manage-folders" (click)="onManageDiaryFolders()"
+            *ngIf="ammendTemplatesMenus">
+            <mat-icon matListIcon>folder_special</mat-icon>
+            <span>Manage Diary Folders </span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item billing-rqst" (click)="openBillingRequestPopup()"
+            *ngIf="(moduleIsActive(module.Accounts) | async) && !matterInfo.isProspectMatter">
+            <mat-icon matListIcon>business</mat-icon>
+            <span>Billing Request</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item class="btn-list-item mls" (click)="onSendMsgViaMLS()">
+            <mat-icon matListIcon>message</mat-icon>
+            <span>Send Message Via MLS </span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-menu>
+    </span>
+  </div>
+  <span class="spacer"></span>
+  <div class="workflow-btn" fxLayout="row">
+    <div fxLayoutAlign="strat end">
+      <button [disabled]="workFlowButtonStatus" *ngIf="menuButtonType=='WorkflowMenuView'" mat-raised-button
+        color="primary" (click)="fileHistoryClick();">
+        <i class="material-icons">history</i>
+        File History
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button [disabled]="workFlowButtonStatus" *ngIf="menuButtonType=='ViewFileHistoy'" mat-raised-button
+        color="primary" (click)="viewWorkflowClick();">
+        <mat-icon>poll</mat-icon>
+        View Workflow
+      </button>
+      <button *ngIf="moduleIsActive(module.FormsLibrary) | async" [disabled]="workFlowButtonStatus" mat-raised-button
+        color="primary" (click)="openFormsLibraryPopup();">
+        <mat-icon>folder</mat-icon>
+        Forms Library
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end" *ngIf="!matterInfo?.isProspectMatter">
+      <button [disabled]="workFlowButtonStatus"
+        *ngIf="(amendScreensWorkflow$ |async) && (menuButtonType=='WorkflowMenuView')" mat-raised-button color="primary"
+        (click)="editWorkflowClick();">
+        <mat-icon class="material-icons">mode_edit</mat-icon>
+        Edit Workflow
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button [disabled]="workFlowButtonStatus"
+        *ngIf="(amendScreensWorkflow$ |async) && (menuButtonType=='WorkflowMenuView')" mat-raised-button color="primary"
+        (click)="WorkflowRuleClick();">
+        <mat-icon>border_all</mat-icon>
+        Workflow Rules
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button [disabled]="workFlowButtonStatus" *ngIf="menuButtonType=='WorkflowMenuView'" mat-raised-button
+        color="primary" (click)="PropertiesClick();" [ngClass]="{'active':viewProperty}">
+        <mat-icon class="material-icons">developer_board</mat-icon>
+        Properties
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button *ngIf="menuButtonType=='WorkflowMenuEdit' && isFromFileBase" mat-raised-button color="primary"
+        (click)="WorkflowMenuFileBaseClick();">
+        Import File Base Menu
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button *ngIf="menuButtonType=='WorkflowMenuEdit' && !isFromFileBase"
+        [ngClass]="{'dpsworkflow_btn_disable':!isDirtyMenu}" [disabled]="!isDirtyMenu" mat-raised-button color="primary"
+        (click)="WorkflowMenuSaveClick();">
+        <i class="material-icons">save</i>
+        Save
+      </button>
+    </div>
+    <div fxLayoutAlign="strat end">
+      <button *ngIf="menuButtonType=='WorkflowMenuEdit'" mat-raised-button color="primary"
+        (click)="closeEditingClick();">
+        <i class="material-icons">close</i>
+        Close Editing
+      </button>
+    </div>
+  </div>
+</div>

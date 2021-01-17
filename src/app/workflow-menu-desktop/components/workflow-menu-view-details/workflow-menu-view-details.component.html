@@ -1,0 +1,81 @@
+<div class="dps-white-gray-scroll dps-scroll">
+  <div *ngFor="let menuItem of selectedMenuChildList ; let i = index" [attr.tabindex]="i" [attr.id]="i" class="list-content-wrapper"
+    (keydown)="upDownClick($event, menuItem,i)">
+    <mat-list dpsIsMobile class="detail-list-items"
+      *ngIf="!(menuItem.data.nodeStatus===0 || menuItem.data.atN_Type===6 ||  menuItem.data.atN_Type===7)"
+      [ngClass]="{'menu-row-selected': menuItem && selectedItem && menuItem.treeId===selectedItem?.treeId,'menu-item-disable':menuItem.data.nodeStatus===2}"
+      fxLayout="row" dpsClick [debounceTime]="350" (dpsDblClick)="menuViewItemClick($event,menuItem)"
+      (dpsClick)="itemSelect(menuItem)">
+      <!-- (click)="itemSelect(menuItem)" (dblclick)="menuViewItemClick($event,menuItem)" -->
+      <!-- <mat-list-item class="menu-item" style="width:100%;" fxLayout="row"> </mat-list-item> -->
+      <!-- <span (click)="menuViewItemClick(menuItem)">
+                    BB
+                  </span> -->
+      <mat-list-item class="row-data command-description">
+        <div class="detail" [ngClass]="{'command-active':isCommandColumnShow}">
+          <i *ngIf="isCheckoutFile(menuItem) || menuItem.editingBusy == true"
+            matTooltip="Checkout by {{menuItem.data.checkedOutHashKey?'you':menuItem.data.checkedOutByUser}}"
+            [ngClass]="{'file-access': isCheckoutByMe(menuItem), 'file-abord': !isCheckoutByMe(menuItem), 'blink': menuItem.editingBusy == true}"
+            class="material-icons dps-indicator">person</i>
+
+          <mat-icon class="{{menuItem.data.atN_Type | workflowMenuIcon}}"></mat-icon>
+          <span class="description-test grid-data {{gridFontSize}}">{{menuItem.data.atN_Desc}}</span>
+          <span fxFlex="1 1 auto"></span>
+          <!-- <mat-icon style="font-size:12px" class="material-icons">mode_edit</mat-icon> -->
+          <button
+            [disabled]="(((menuItem.data.atN_Type === 2 || menuItem.data.atN_Type === 4) && !(amendScreensWorkflow$ |async)) || menuItem.editingBusy == true || isPDF(menuItem)) ? true : (menuItem.data.nodeStatus === 2)"
+            *ngIf="menuItem.data.atN_Type!==1" dpsIsMobile tabindex="-1" (click)="onEditTemplate($event,menuItem)"
+            class="menu-edit-btn command-icon" mat-fab>
+            <i *ngIf="!(isCheckoutFile(menuItem) && !isCheckoutByMe(menuItem))"
+              [matTooltipDisabled]="menuItem.data.nodeStatus===2" class="material-icons" matTooltip="Edit">edit</i>
+            <i *ngIf="isCheckoutFile(menuItem) && !isCheckoutByMe(menuItem)"
+              [matTooltipDisabled]="menuItem.data.nodeStatus===2" class="material-icons"
+              matTooltip="View">remove_red_eye</i>
+          </button>
+          <!-- <button matTooltip="Download" [disabled]="menuItem.data.nodeStatus===2" *ngIf="menuItem.data.atN_Type==4"
+            tabindex="-1" (click)="onDownloadTemplate($event,menuItem)" class="menu-download-btn command-icon" mat-fab>
+            <i class="material-icons">file_download</i>
+          </button> -->
+
+          <button matTooltip="Check-In" [disabled]="menuItem.data.nodeStatus===2 || menuItem.editingBusy == true"
+            *ngIf="(menuItem.data.atN_Type==4 && isCheckoutByMe(menuItem) && (amendScreensWorkflow$ |async))"
+            tabindex="-1" (click)="doCheckin(menuItem)" class="menu-download-btn command-icon" mat-fab>
+            <i class="material-icons">assignment_turned_in</i>
+          </button>
+
+          <button matTooltip="Abort" [disabled]="menuItem.data.nodeStatus===2 || menuItem.editingBusy == true"
+            *ngIf="menuItem.data.atN_Type==4 && isCheckoutByMe(menuItem) && (amendScreensWorkflow$ |async)"
+            tabindex="-1" (click)="doDiscardCheckin(menuItem)" class="menu-download-btn command-icon abord-icon-bac"
+            mat-fab>
+            <i class="material-icons">assignment_return</i>
+          </button>
+
+
+        </div>
+        <div class="command" *ngIf="isCommandColumnShow">
+          <div class="grid-data {{gridFontSize}}">
+            <span class="command-test"> {{menuItem.data.atN_Command}}</span>
+          </div>
+        </div>
+      </mat-list-item>
+      <!-- <span fxFlex="1 1 auto"></span> -->
+
+      <mat-list-item class="row-data date-done dps-date-done-details">
+        <div class="mat_line">
+          <span class="grid-data {{gridFontSize}}">{{menuItem.data.dateDone | date :'dd/MM/yyyy'}}</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="done-by dps-done-by-details row-data">
+        <div class="mat_line">
+          <span class="grid-data {{gridFontSize}}"> {{menuItem.data.createUser}}</span>
+        </div>
+      </mat-list-item>
+
+
+      <!-- <mat-divider></mat-divider> -->
+    </mat-list>
+  </div>
+  <div *ngIf="!selectedMenuChildList" class="workflow-noitem">
+    No Files to view
+  </div>
+</div>

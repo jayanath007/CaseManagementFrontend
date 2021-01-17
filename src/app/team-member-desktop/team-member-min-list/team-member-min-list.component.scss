@@ -1,0 +1,77 @@
+@import '~styles/variables.scss';
+mat-icon {
+  margin-top: 14px;
+  position: absolute;
+  right: 5px;
+  top: 0px;
+}
+.mat-card
+{
+
+  padding: 0;
+}
+.mat-card-header {
+  padding-top: 19px;
+  background: #2d495d;
+  color: $primary;
+}
+
+.mat-list-item
+{
+  border-bottom: 1px solid #728a9c;
+}
+/* .dps-team-member-search mat-form-field {
+  color: #9d9da5;
+}
+
+.dps-team-member-nav-header mat-list-item {
+  color: #9d9da5; 
+} */
+.dps-team-members-container
+{
+  min-height: 315px;
+  background: #b1c3d1;;
+  box-shadow: none;
+ 
+}
+.material-icons.slide-controller
+{
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  color: $primary;
+}
+
+.mat-card-content
+{
+  text-align: center;
+}
+
+.dps-team-member-nav-list
+{
+
+  width: 100%;
+  text-align: left;
+}
+
+.dps-team-member-nav-list .mat-list-item
+{
+  /* border-bottom: 1px solid #284d67; */
+  margin: 0 18px;
+}
+.dps-team-member-nav-list .mat-list-item .mat-list-text .role
+{
+  color: #2e485c;
+
+}
+
+.dps-team-member-nav-list .mat-list-item:first-child
+{
+  border-top: 1px;
+}
+
+/* .dps-team-member-nav-header .mat-form-field-wrapper .mat-icon
+{
+  color: $primary;
+
+} */

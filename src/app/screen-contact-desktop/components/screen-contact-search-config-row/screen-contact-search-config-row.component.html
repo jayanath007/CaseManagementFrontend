@@ -1,0 +1,5 @@
+<div  fxLayout="row" class="grid-data" *ngFor="let field of searchFields">
+      <div class="row-data dps-text-align-center" fxFlex="15%"><input type="checkbox" [checked]="field.checked" (change)="searchFieldChanged($event,field)"></div>
+      <div class="row-data" fxFlex="65%">{{field.contactField}}</div>
+      <div class="row-data" fxFlex="20%">{{field.screenLabel}}</div>
+</div>

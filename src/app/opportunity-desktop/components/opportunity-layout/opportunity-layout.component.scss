@@ -1,0 +1,190 @@
+@import '~styles/variables.scss';
+
+.dps-opportunity-layout {
+  height: 100%;
+  background-color: $content-background;
+  width: 100%;
+
+  ::ng-deep.mat-tab-label-active {
+    background-color: #297BB5;
+    opacity: 1;
+    color: #fff;
+  }
+
+  ::ng-deep.mat-card {
+    border-radius: unset !important;
+  }
+
+  ::ng-deep.mat-tab-label {
+    height: 52px;
+  }
+
+  .dps-input-outer {
+    font-size: $primary-font-size - 2;
+
+    .mat-form-field-label {
+      color: #297bb5;
+      font-size: $primary-font-size;
+    }
+
+    .mat-select-arrow {
+      color: #297bb5;
+    }
+
+    .mat-form-field-underline {
+      background-color: #297bb5;
+    }
+
+    .mat-select-value-text {
+      font-size: $primary-font-size - 2;
+      COLOR: #002646;
+    }
+  }
+}
+
+.dps-setting-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 7px;
+  padding: 0px 12px;
+  line-height: 27px;
+  z-index: 1;
+  color: #d9e9f7;
+  font-size: 12px;
+  background: #44535d;
+
+  i {
+    padding: 0px 8px 0px 0px;
+  }
+}
+
+.dps-opportunity-header {
+  background: #235680;
+  // padding: 22px 0px 110px 25px;
+  box-shadow: none;
+}
+
+.grid-contents.mat-card-content>:first-child,
+.grid-contents.mat-card>:first-child {
+  margin-top: -72px;
+}
+
+.grid-contents.mat-card {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.grid-contents.mat-card:not {
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+
+.grid-wrapper-main {
+  height: calc(100% + 72px);
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  background-color: $primary;
+}
+
+.dps-opportunity-grid {
+  // height: 100%;
+}
+
+.dps-opportunity-header {
+  padding: 0px 0px 60px 25px;
+  display: flex;
+  align-items: center;
+  color: $primary;
+
+  .dps-opportunity-heading {
+    font-weight: 400;
+    color: $primary;
+    font-size: $primary-font-size + 2;
+  }
+
+  span {
+    color: $primary;
+    font-size: $primary-font-size - 2;
+  }
+
+  mat-icon {
+    margin-right: 10px;
+    color: #c6dbff;
+    font-size: $primary-font-size + 14;
+  }
+}
+
+mat-tab-group {
+  height: 100%;
+  display: block;
+}
+
+.dps-opportunities {
+  ::ng-deep .mat-tab-body-wrapper {
+    height: calc(100% - 53px);
+  }
+
+  ::ng-deep.mat-tab-header {
+    background: #32434d;
+  }
+
+  ::ng-deep .mat-tab-body-content {
+    overflow: hidden;
+    /*added to mat-body coz scroll appear*/
+  }
+
+  ::ng-deep.mat-tab-label-content {
+    color: #fff;
+  }
+
+}
+
+.dps-opportunity-layout {
+  ::ng-deep .mat-tab-body.mat-tab-body-active {
+    // height: calc(100% - 84px);
+  }
+}
+
+.dps-refresh-btn {
+  BORDER: 1px solid #f2f2f2;
+  color: #297bb5;
+}
+
+.dps-opportunity-status-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  flex-direction: row;
+  display: flex;
+  z-index: 1000;
+  padding: 12px;
+  width: calc(100% - 535px);
+
+  mat-form-field {
+    .dps-lable {
+      color: #fff;
+
+    }
+
+    ::ng-deep.mat-select-value-text,
+    ::ng-deep.mat-select-arrow {
+      color: #fff;
+    }
+
+    ::ng-deep.mat-form-field-underline {
+      background-color: #fff;
+    }
+  }
+
+
+}
+
+.dps-save-opportunity-grid {
+  ::ng-deep.mat-tab-body-content {
+    overflow-y: hidden;
+  }
+}
+
+.dps-grid-font-controller {
+  position: relative;
+  bottom: 6px;
+}

@@ -1,0 +1,28 @@
+<mat-nav-list dence class="dps-grid-nav-list">
+  <div fxLayout="column">
+      <mat-list-item class="dps-grid-list-item" *ngFor="let rowData of gridData; let index =index; let isOdd=odd; let isEven=even" [ngClass]="isOdd?'dps_row_separation-0':'dps_row_separation-1'">
+          <div fxLayout="row"  class="grid-data" >
+         
+              <div class="row-data" [fxFlex]="getFxFlexProperty(0)" innerHTML="{{rowData?.client?.clientTitle}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(1)" innerHTML="{{rowData?.client?.letterTitle}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(2)" innerHTML="{{rowData?.client?.firstName}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(3)" innerHTML="{{rowData?.client?.lastName}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(4)" innerHTML="{{rowData?.client?.contactName}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(5)" innerHTML="{{rowData?.client?.email1}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(6)" innerHTML="{{rowData?.client?.email2 }}"></div>       
+            <div class="row-data" [fxFlex]="getFxFlexProperty(7)" innerHTML="{{rowData?.client?.phone }}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(8)" innerHTML="{{rowData?.client?.fax}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(9)" innerHTML="{{rowData?.client?.workPhone}}"></div>
+            <div class="row-data" [fxFlex]="getFxFlexProperty(10)">
+                <button class="dps-close-btn" mat-icon-button *ngIf="rowData.enableRemove" (click)="onRemoveClient()"> 
+                    <mat-icon >close</mat-icon>
+                </button>
+            </div>
+          </div>
+          
+            
+        </mat-list-item>
+  </div>
+
+  </mat-nav-list>
+  

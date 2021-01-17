@@ -1,0 +1,37 @@
+
+<mat-toolbar>
+  <mat-toolbar-row class="dps-primary-header">
+    <span>MLS Inquiry forms</span>
+  </mat-toolbar-row>
+  <!-- <mat-toolbar-row class="dps-secondary-header">
+    <mat-icon matListIcon class="fa dps-icon" fontSet="fontawesome" fontIcon="fa-pencil-square-o"></mat-icon>
+    <span>Screens</span>
+  </mat-toolbar-row> -->
+</mat-toolbar>
+<mat-progress-bar style="height: 3px;" mode="indeterminate" *ngIf="settingIsLoading"></mat-progress-bar>
+<div fxLayout="column" class="dps-opportunity-content dps-white-gray-scroll">
+  <div class="dps-title-bar" fxLayout="row">
+    <span fxFlex="200px">App Id</span>
+    <span fxFlex="125px">Screen</span>
+    <span>Title</span>
+  </div>
+  <div class="dps-add-new-row" fxLayout="column" [ngClass]="{'': (submit && newItemAppId)}">
+    <dps-oppertunity-setting-screen-item [appCodes]="appCodes" [settingIsLoading]="settingIsLoading"
+      [screen]="formatedscreenList" [isNew]="true" (changeAppId)="onAppCodeChanged($event)"
+      (addItem)="onAddItem($event)" [addedScreenList]="addedScreenList" (changeNewItem)="onChangeNewItem($event)">
+    </dps-oppertunity-setting-screen-item>
+  </div>
+  <div  class="dps-white-gray-scroll dps-oppertunity-setting-screen-content">
+    <dps-oppertunity-setting-screen-item class="dps-form-section" *ngFor="let item of addedScreenList; let i = index"
+      [appCodes]="appCodes" [settingIsLoading]="settingIsLoading" [screen]="formatedscreenList"
+      [selectAppId]="item.appId" [screenName]="item.screenName" [note]="item.note" [addedScreenList]="addedScreenList"
+      (changeAppId)="onAppCodeChanged($event)" (editItem)="onEditItem($event, i)" (removeItem)="onRemoveItem(i)">
+    </dps-oppertunity-setting-screen-item>
+  </div>
+</div>
+<div class="dps-popup-bottom-btn">
+  <button class="dps-stting-sve" mat-raised-button color="primary" (click)="onSaveScreenList()"
+    [disabled]="settingIsLoading">Submit</button>
+  <button class="dps-stting-cancel" mat-raised-button color="primary" (click)="onClose()"
+    [disabled]="settingIsLoading">Cancel</button>
+</div>

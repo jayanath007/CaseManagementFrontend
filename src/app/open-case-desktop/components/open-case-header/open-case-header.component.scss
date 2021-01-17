@@ -1,0 +1,307 @@
+@import '~styles/variables.scss';
+
+.dps-is-mobile.opened-case-top-button-toolbar {
+  overflow-x: auto;
+}
+
+.opened-case-top-button-toolbar {
+  top: 5px;
+}
+
+.opened-case-top-button-toolbar .mat-icon-button {
+  color: #cde4f3;
+}
+
+.opened-case-top-button-toolbar .dps-grid-refresh-button.mat-mini-fab {
+  background: #23587b;
+}
+
+.opened-case-top-button-toolbar .mat-raised-button {
+  background: #3a94cf;
+  box-shadow: 0 1px 1px -2px rgba(0, 0, 0, .2), 0 0px 1px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  border-radius: 0;
+}
+
+.opened-case-top-button-toolbar .mat-raised-button.active {
+  background: #105e90;
+}
+
+mat-toolbar.dps-main-toolbar {
+  height: 70px;
+}
+
+
+.dps-main-toolbar {
+  position: relative;
+  z-index: 3;
+}
+
+
+.workflow-btn button {
+  color: $primary;
+}
+
+.workflow-btn .crime-class {
+  background: #a4443a;
+  border: 1px solid #b43123;
+  line-height: 33px;
+
+}
+
+.dps-grid-refresh-button {
+  position: absolute;
+  right: 10px;
+  top: 70px;
+}
+
+.file-history-summary-upper label {
+  color: $primary;
+  /* position: relative; */
+  top: 12px;
+  font-size: 19px;
+  font-weight: normal;
+}
+
+.file-history-summary-upper span {
+  text-align: left;
+  color: #e0e0e0;
+  font-size: 12px;
+}
+
+.file-history-summary-upper .file-history-ref {
+  text-align: left;
+  color: #e0e0e0;
+  font-size: 12px;
+}
+
+.file-history-summary-upper .file-history-ref {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: normal;
+}
+
+.workflow-btn button {
+  margin: 2px;
+}
+
+.dpsworkflow_btn_disable:disabled {
+  opacity: 0.6;
+}
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+  .file-history-summary-upper {
+    min-width: 30%;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dps-accounts {
+  .more-icon {
+
+    font-size: 34px;
+    padding: 10px;
+  }
+
+}
+
+.dps-action-menu {
+  ::ng-deep .mat-list-item .mat-list-item-content {
+    padding: 0px 0px;
+  }
+
+  span {
+    font-family: $primary-font-stack;
+  }
+
+  mat-list-item {
+    height: 40px !important;
+
+    mat-icon {
+      padding: 10px 10px 10px;
+      border-radius: unset;
+    }
+
+    span {
+      padding: 0px 10px 0px 10px;
+    }
+  }
+
+  button {
+    // background: red;
+    border-radius: 0px;
+    height: 36px;
+    line-height: 11px;
+  }
+
+  .ledger-card {
+
+    // background: #e8bbbb;
+    mat-icon {
+      color: #c13434;
+      background: #f1dada;
+    }
+
+    span {
+      color: #441616;
+    }
+  }
+
+  .e-chit {
+    mat-icon {
+      color: #a9c6fd;
+      background: #237fbb;
+    }
+
+    span {
+      color: #237fbb;
+    }
+  }
+
+  .bundle {
+    mat-icon {
+      background: #6273d2;
+      color: white;
+    }
+
+    span {
+      color: #6273d2;
+    }
+  }
+
+  .billing-guide {
+    mat-icon {
+      color: #055184;
+      background: #64b4e8;
+    }
+
+    span {
+      color: #64b4e8;
+    }
+
+  }
+
+  .probate {
+    mat-icon {
+      background: #283d56;
+      color: #a4b2da;
+    }
+
+    span {
+      color: #537daf;
+    }
+
+  }
+
+  .conflict-search {
+    mat-icon {
+      color: #774a35;
+      background: #dcb390;
+    }
+
+    span {
+      color: #774a35;
+    }
+
+  }
+
+  .crime-court-duty {
+    mat-icon {
+      color: #5f380c;
+      background: #a3866d;
+    }
+
+    span {
+      color: #5f380c;
+    }
+  }
+
+  .linked-matters {
+    mat-icon {
+      color: #87a1b7;
+      background: #314f69;
+    }
+
+    span {
+      color: #314f69;
+    }
+  }
+
+  .crime-class {
+    mat-icon {
+      color: #fff;
+      background: #9e3e3e;
+    }
+
+    span {
+      color: #840505;
+    }
+  }
+
+  .manage-folders {
+    mat-icon {
+      background: #964584;
+      color: #efb1e1;
+    }
+
+    span {
+      color: #964584;
+    }
+  }
+
+  .billing-rqst {
+    mat-icon {
+      background: #bbe4ff;
+      color: #314f69;
+    }
+
+    span {
+      color: #314f69;
+    }
+
+  }
+
+  .mls {
+    mat-icon {
+      background: #2161a2;
+      color: #153352;
+    }
+
+    span {
+      color: #153352;
+    }
+
+  }
+
+  .move-to-folder {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 0px;
+
+    mat-icon {
+      color: #e3ebef;
+      background: #90a9ba;
+      margin-right: 0px;
+      padding: 8px 8px;
+    }
+
+    span {
+      color: #7494ac;
+      font-size: 12px;
+      padding-right: 30px;
+      margin-left: 10px;
+    }
+  }
+}
+
+.dps-selected-row {
+  background: #65acd6;
+
+  .edit.material-icons {
+    color: $primary;
+  }
+}

@@ -1,0 +1,9 @@
+<div [dpsQaAtm]="meta?.scL_Name" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible" class="label-with-inputtext input-wrapper">
+  <mat-form-field floatLabel="always" class="dps-matter-editor">
+    <mat-placeholder>{{meta?.scL_Caption || meta?.scL_DefaultCaption || lableName}}
+      <span class="required-star" *ngIf="meta?.scL_Required">*</span>
+    </mat-placeholder>
+    <textarea class="textarea-resize" matInput [readonly]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly" rows="1" maxlength="250" [value]="modelData" [formControl]="inputCtrl"></textarea>
+  </mat-form-field>
+
+</div>

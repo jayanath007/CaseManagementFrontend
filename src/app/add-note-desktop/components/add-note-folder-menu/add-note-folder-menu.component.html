@@ -1,0 +1,21 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+  <span *ngFor="let child of items">
+    <!-- branch node menu items -->
+    <span *ngIf="child.children && child.children.length > 0">
+      <button mat-menu-item class="tree-view-folder" (click)="onFolderChanged(child)" #t="matMenuTrigger"
+        [matMenuTriggerFor]="menu.childMenu">
+        <i class="fa tree-folder-ico" [ngClass]=" t.menuOpen ? 'fa-folder-open active rubberBand': 'fa-folder'"></i>
+        <span>{{child.folderName}}</span>
+      </button>
+      <dps-add-note-folder-menu (updateSelectedFolder)="onFolderChanged($event)" #menu [items]="child.children">
+      </dps-add-note-folder-menu>
+    </span>
+    <!-- leaf node menu items -->
+    <span *ngIf="!child.children || child.children.length === 0">
+      <button class="tree-view-folder" mat-menu-item (click)="onFolderChanged(child)">
+        <i class="fa tree-folder-ico fa-folder"></i>
+        <span>{{child.folderName}}</span>
+      </button>
+    </span>
+  </span>
+</mat-menu>

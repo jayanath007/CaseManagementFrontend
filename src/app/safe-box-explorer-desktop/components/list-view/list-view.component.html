@@ -1,0 +1,52 @@
+<div class="safe-box-listview" fxLayout="column" fxLayoutAlign="start start">
+  <mat-list>
+    <div [title]="item.name" *ngFor="let item of treeNodeItem?.nodes"
+      [ngClass]="selectedFolder === item.prefix?'dps-folder-select':''" (dblclick)="expand(item)"
+      (dpsClick)="selectFolder(item)" dpsFileDroppable dpsDroppable (onDrop)="onDrop($event, item)"
+      dropZone="safeBoxDragFolder" (contextmenu)="contextmenuFolderOpen($event,safeboxContextFolderMenue,item)">
+      <div class="folder-list-view">
+        <mat-icon>folder</mat-icon>
+        <span class="name">{{item?.name}}</span>
+      </div>
+      <dps-safebox-context-menue #safeboxContextFolderMenue [id]="item?.prefix"
+        [isMultiSelect]="selectedBlobData?.length>1" [copyItems]="copyItems" [isFolder]="true" (paste)="onPaste(item)">
+      </dps-safebox-context-menue>
+    </div>
+  </mat-list>
+
+  <mat-list>
+    <div [title]="blob.displayName"
+      [ngClass]="{'dps-file-select':isSelected(blob,selectedBlobData),'dps-cut-file':isCutItem(blob)}"
+      *ngFor="let blob of treeNodeItem?.data?.Blobs?.Blob" (click)="onSelectedBlob($event,blob)"
+      (contextmenu)="contextmenuOpen($event,safeboxContextMenue,blob)" [dpsDraggable]="true" [dragData]="blob"
+      [dragElement]="dragElement" dragDataType="safeBoxFile" [dropZones]="['safeBoxDragFolder']"
+      (onDragStart)="onDragStart($event, blob)">
+      <div class="type-list-view">
+        <dps-safebox-context-menue #safeboxContextMenue [id]="blob?.Name" [isMultiSelect]="selectedBlobData?.length>1"
+          [copyItems]="copyItems" (cut)="onCut()" (copy)="onCopy()" (download)="onDownloadFile()"
+          (share)="onShareFile()" (delete)="onDeleteFile()" (rename)="onRenameFile()">
+        </dps-safebox-context-menue>
+        <mat-icon>
+          <i [ngClass]="blob.displayName| attachmentIcon" aria-hidden="true">
+            <span></span>
+          </i>
+        </mat-icon>
+        <span class="name">{{blob.displayName}}</span>
+      </div>
+    </div>
+  </mat-list>
+
+  <div id="dragPreView">
+    <div *ngIf="selectedBlobData?.length > 1">
+      <mat-icon class="mat-18">file_copy</mat-icon>
+      <span class="name">{{selectedBlobData?.length}}</span>
+    </div>
+    <span *ngIf="selectedBlobData?.length === 1">
+      <i [ngClass]="selectedBlobData[0]?.Name | attachmentIcon">
+        <span></span>
+      </i>
+      <span class="name">{{selectedBlobData[0]?.Name}}</span>
+    </span>
+  </div>
+
+</div>

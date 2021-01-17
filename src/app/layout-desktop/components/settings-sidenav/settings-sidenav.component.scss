@@ -1,0 +1,126 @@
+@import '~styles/variables.scss';
+
+.dps-settings-sidenav {
+  height: 100%;
+  overflow: hidden;
+
+  div,
+  span {
+    font-family: $primary-font-stack;
+  }
+
+
+  .dps-user-img {
+
+    img,
+    div {
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+    }
+
+    div {
+      margin-left: 5px;
+    }
+  }
+
+  .dps-user-img .dps-camera-btn {
+    position: relative;
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    color: $primary;
+    background-color: rgba(0, 0, 0, .6);
+    display: none;
+
+  }
+
+  .dps-user-img .dps-team-member-avatar {
+    height: 50px;
+    width: 50px;
+  }
+
+  .dps-user-img .dps-team-member-avatar span {
+    font-size: 20px;
+    color: white;
+  }
+
+  .dps-user-img div:hover .dps-camera-btn {
+    display: block;
+  }
+
+  div.dps-setting-panel {
+
+    padding: 10px 10px 10px 15px;
+    background: #30a3e0;
+  }
+
+  .dps-profile-details {
+    width: 75%;
+    color: $primary;
+
+  }
+
+  .dps-profile-details .dps-profile-name {
+    font-size: $primary-font-size;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .dps-profile-details .dps-profile-mail {
+    font-size: $primary-font-size - 3;
+    font-weight: 400;
+  }
+
+  dps-dashboard-widget-enable {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  mat-nav-list {
+    height: 100%;
+    padding-top: 0px;
+
+    .dps-white-gray-scroll {
+      overflow-y: auto;
+    }
+
+    mat-list-item {
+      height: 50px !important;
+
+      [matLine] {
+        font-size: $primary-font-size - 2 !important;
+        font-weight: 600;
+      }
+
+      mat-icon {
+        font-size: $primary-font-size + 10 !important;
+        margin-left: 13px;
+      }
+
+      .fa.fa-cog {
+        position: absolute;
+        margin: 7px 0 0 31px;
+        background-color: $primary;
+      }
+
+      &.dps-log-out {
+        color: #bf5a5a;
+        height: 38px !important;
+      }
+
+      h5 {
+        margin: 0px 0px 0px -14px;
+      }
+
+    }
+
+    div.dps-log-out {
+      background-color: #ffeeee;
+      border-top: 1px solid #e2c1c1;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.dps-mat-card {
+  padding: 0px;
+  width: 300px;
+}
+
+.dps-reminder-mat-card {
+  padding: 0px;
+  width: 350px;
+}
+
+.dps-mat-card mat-nav-list,
+.dps-reminder-mat-card mat-nav-list {
+  padding-top: 0px;
+}
+
+.popup-close-circle {
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: 700;
+}
+
+button {
+  display: none;
+}
+
+
+
+.hd-bar-notifications-btn {
+  background: #397aad;
+  color: #a6cce8;
+  animation: blink 1s linear infinite;
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: .5;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &.mat-icon-button {
+    width: 30px;
+    height: 30px;
+
+  }
+
+  .dps-hd-icon {
+    font-size: 18px;
+    line-height: 16px;
+  }
+
+}

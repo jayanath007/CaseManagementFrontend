@@ -1,0 +1,5 @@
+<div [dpsQaAtm]="meta?.scL_Name" class="editable-controle checkbox" *ngIf="(hidden===true || hidden===false)? !hidden : meta?.scL_Visible">
+  <mat-checkbox [labelPosition]="labelPosition" (change)="onChange($event)" [ngModel]="modelData" [disabled]="(disabled===true || disabled===false)? disabled : meta?.scL_ReadOnly"  color="primary">
+    {{ priorityToLableName && !!lableName ? lableName :( meta?.scL_Caption || meta?.scL_DefaultCaption || lableName) }}
+  </mat-checkbox>
+</div>

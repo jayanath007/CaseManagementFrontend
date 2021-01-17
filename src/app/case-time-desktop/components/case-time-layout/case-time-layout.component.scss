@@ -1,0 +1,21 @@
+@import '~styles/variables.scss';
+.dps-case-time-layout mat-toolbar{
+    background: $primary;
+}
+
+.dps-case-time-layout {
+    height: 100%;
+}
+
+.dps-casetime , dps-case-time {
+    width:100%;
+}
+
+mat-paginator {
+    height: 50px !important;
+}
+
+.footer-shadow{
+    box-shadow:0 0px 0px rgba(0,0,0,0.16), 0 -1px 6px rgba(0,0,0,0.16);
+    z-index:2;
+  }

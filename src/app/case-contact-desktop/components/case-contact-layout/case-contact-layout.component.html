@@ -1,0 +1,11 @@
+<div class="dps-case-contact-layout {{fontSizeClass}}"  fxLayout="column">
+  <div class="dps-layout"  fxFlex="calc(100%-50px)">
+    <dps-case-contact [contactMode]="contactMode" [fontSizeClass]="fontSizeClass" (onExpandSelection)="onExpand($event)" (viewChange)="onViewChange($event)"
+      [columnDef]="columnDef" [caseContactData]="caseContactData" [pageInfo]="pageInfo" (requestComposeMail)="onRquestComposeMail($event)"
+      (selectRow)="onRowClick($event)" (selectRowForSearch)="onSelectRowForSearch($event)">
+    </dps-case-contact>
+  </div>
+  <mat-paginator class="footer-shadow" [pageIndex]="pageInfo?.pageIndex" [length]="caseContactData?.total"
+    [pageSize]="pageInfo?.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

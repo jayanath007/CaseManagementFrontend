@@ -1,0 +1,215 @@
+<div fxLayout="column" fxFlex="">
+  <div fxFlex="">
+    <mat-toolbar class="dps-toolbar-box-shadow dps-popup-header">
+      <mat-icon matListIcon class="icon">timer</mat-icon>
+      <span matLine> Time Recording </span>
+      <!-- fxFlex="1 1 auto" -->
+      <!-- <span matLine *ngIf="canMinimize && clientMatterData?.clientName">-
+        {{clientMatterData?.clientName}}
+
+      </span> -->
+      <span fxFlex="1 1 auto" class="client-details-txt" matLine *ngIf="canMinimize && clientMatterData?.matterDetails">
+        ( {{clientMatterData?.matterDetails}}
+        )
+      </span>
+      <span fxFlex="1 1 auto"></span>
+
+      <button mat-icon-button *ngIf="canMinimize" (click)="onMinimize()">
+        <mat-icon matListIcon>remove</mat-icon>
+      </button>
+
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div class="dps-time-recorded-outer">
+    <div fxLayout="column">
+      <span class="dps-client-name" matLine *ngIf="canMinimize && clientMatterData?.clientName">
+        {{clientMatterData?.clientName}}
+
+      </span>
+      <div fxLayout="row wrap" class="dps-time-recording-primary-header">
+        <div *ngIf="canMinimize" fxLayoutGap="4px" class="dps-record-time">
+          <span class="ref"> {{timeRecordingView?.matterRefNo}}
+            <span style="color:#bf3838;"> ( {{getTimeRecord(timeValue)}} )</span>
+          </span>
+          <!-- @@{{isActiveToken}}2{{isTimerStart}}3{{isMinimizePopup}} -->
+          <button mat-icon-button (click)="onStartStopClock()">
+            <mat-icon class="play" [ngClass]="{'pause':stopStartState==='START'}">
+              {{stopStartState==='START'?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
+          </button>
+        </div>
+        <!-- <span ></span> -->
+        <div fxFlex="1 1 auto" class="dps-matter-ref-outer" fxLayoutGap="5px">
+          <!-- *ngIf="!matterReferenceNo" *ngIf="isActiveToken" -->
+          <button *ngIf="canMinimize" mat-raised-button color="primary" (click)="onMatterSearch()">Select
+            {{matterLabel}}</button>
+
+          <!-- <span fxFlex="1 1 auto"></span> -->
+
+          <button class="ref-field" *ngIf="canMinimize && !!matterReferenceNo" mat-stroked-button color="primary">
+            <span class="ref"> <strong> Ref:</strong> {{matterReferenceNo}} </span>
+          </button>
+
+          <mat-chip-list *ngIf="!canMinimize && !!matterReferenceNo">
+            <mat-chip class="ref-field" color="primary" selected="true">
+              <span class="ref"> <strong> Ref:</strong> {{matterReferenceNo}} </span>
+            </mat-chip>
+          </mat-chip-list>
+
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutGap="2em">
+        <mat-form-field floatLabel="always">
+          <mat-select [placeholder]="feeEarneraLabel" [ngModel]="selectedFeeEarner"
+            (selectionChange)="onChangeFeeEarner($event)" [disabled]="isLoading">
+            <mat-option *ngFor="let feeEarner of feeEarnerList" [value]="feeEarner">
+              {{pageLoadType ==eBillingType.PrecedentH ? feeEarner.groupName +' | '+ feeEarner?.jobTitle :
+               feeEarner.groupName +' | '+ (feeEarner?.name?feeEarner?.name:'') }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="dps-date-field" floatLabel="always">
+          <input matInput [matDatepicker]="picker" [placeholder]="!!editData ? 'Posting Date' : 'Date'"
+            [ngModel]="date | date:'yyyy-MM-dd'" (dateChange)="onDateChange($event)"
+            [disabled]="isLoading || !!editData ">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-tab-group #matTabGroup class="dps-time-recorded-tab">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Details</span>
+        </ng-template>
+
+
+        <div class="dps-time-recorded-tab-content" fxLayout="row wrap" fxLayoutAlign="strat center" fxLayoutGap="34px">
+
+          <div>
+            <mat-form-field floatLabel="always" *ngIf="pageLoadType ==eBillingType.PrecedentH">
+              <mat-select placeholder="Work Type" [ngModel]="selectedWorkType"
+                (selectionChange)="onChangeWorkType($event)" [disabled]="isLoading">
+                <mat-option *ngFor="let workTypeItem of worktypeList" [value]="workTypeItem">
+                  {{ workTypeItem.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- eBilling Comment - phase,task,activity -->
+
+          <div *ngIf="pageLoadType===eBillingType.PrecedentS" fxLayoutGap="34px">
+            <mat-form-field floatLabel="always">
+              <mat-select placeholder="Phase" [ngModel]="selectedPhase" (selectionChange)="onChangePhase($event)"
+                [disabled]="isLoading">
+                <mat-option *ngFor="let phaseItem of phaseList" [value]="phaseItem">
+                  {{ phaseItem.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field floatLabel="always">
+              <mat-select placeholder="Task" [ngModel]="selectedTask" (selectionChange)="onChangeTask($event)"
+                [disabled]="isLoading">
+                <mat-option *ngFor="let taskItem of phaseWiseTaskList" [value]="taskItem">
+                  {{ taskItem.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field floatLabel="always">
+              <mat-select placeholder="Activity" [ngModel]="selectedActivity"
+                (selectionChange)="onChangeActivity($event)" [disabled]="isLoading">
+                <mat-option *ngFor="let activitiItem of activitiList" [value]="activitiItem">
+                  {{ activitiItem.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+
+        <div fxLayout="row" *ngIf="!editData" fxLayoutAlign="strat center" fxLayoutGap="34px"
+          class="dps-drop-down editable-text mid">
+
+          <mat-form-field floatLabel="always" *ngIf="pageLoadType ==eBillingType.PrecedentH">
+            <mat-select [placeholder]="'Rate'" [ngModel]="selectedRateItem" (selectionChange)="onPHRateChange($event)">
+              <mat-option *ngFor="let rate of precedentHRateList" [value]="rate">
+                {{ rate.type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <dps-editable-dropdown [options]="detailList" [value]="selectDetail" [placeholder]="'Details'"
+            (changeValue)="onChangeDetails($event)">
+          </dps-editable-dropdown>
+
+        </div>
+        <div fxLayout="row" *ngIf="editData" fxLayoutAlign="strat center">
+          <mat-form-field floatLabel="always" fxFlex="1 1 auto">
+            <textarea #selectDetailTextarea matInput placeholder="Note" rows="5" maxlength="500"
+              [ngModel]="selectDetail" (focusout)="onChangeDetails(selectDetailTextarea.value)" [disabled]="isLoading">{{selectDetail}}
+            </textarea>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field floatLabel="always" class="mpu">
+            <input matInput placeholder="MPU" [value]=mpu [readonly]="true">
+          </mat-form-field>
+          <mat-form-field floatLabel="always" class="unit">
+            <input type="number" #selectedUnit matInput placeholder="Unit" min="1" [formControl]="inputUnitCtrl"
+              [value]="unit" (focusout)="onChangeUnit(selectedUnit.value, $event)" [readonly]="isLoading || canMinimize">
+          </mat-form-field>
+          <mat-form-field floatLabel="always" class="hourlyrate">
+            <input matInput #selectedRate
+              placeholder="{{pageLoadType===eBillingType.PrecedentH ? 'Rate':'Hourly Rate'}}" type="number" min="0"
+              [value]="hourlyRate" [formControl]="inputRateCtrl" (focusout)="onChangeHourlyRate(selectedRate.value)"
+              [readonly]="pageLoadType === eBillingType.PrecedentH">
+          </mat-form-field>
+          <mat-form-field floatLabel="always" disable class="amount">
+            <input matInput placeholder="Amount" [value]=amount [readonly]="true">
+          </mat-form-field>
+          <mat-checkbox [ngModel]=isUncharge (change)="onUnchargeChange($event)" [disabled]="isLoading" color="primary">
+            {{unchargeText}}</mat-checkbox>
+        </div>
+        <div fxLayout="row" *ngIf="!editData" fxLayoutAlign="strat center">
+          <mat-form-field floatLabel="always" fxFlex="1 1 auto">
+            <textarea #note matInput
+              [placeholder]="bodyTextRechText ? 'Note - (Use Attendance note tab for edit the text)' : 'Note'" rows="5"
+              maxlength="500" [formControl]="inputNoteCtrl" [ngModel]="setbodyText"
+              (focusout)="onChangeNote(note.value)" [disabled]="isLoading" [readonly]="bodyTextRechText"
+              matTooltip="Use Attendance note tab for edit the text" matTooltipPosition="above"
+              [matTooltipDisabled]="!bodyTextRechText">{{bodyText}}</textarea>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Attendance note</span>
+        </ng-template>
+        <div *ngIf="matTabGroup.selectedIndex===1" style="height: 400px;overflow: auto;">
+          <dps-ck-editor [debounceTime]="200" [ngModel]="bodyText" (ngModelChange)="onAttendanceNoteChange($event)"
+            [config]="{autoGrow_minHeight:200,autoGrow_maxHeight:290 }">
+          </dps-ck-editor>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions fxFlex="0 0 56px" class="button-wrap" style="padding-right: 10px;">
+    <!-- <span class="dps-can-not-edit-label" *ngIf="editData?.billed && editData?.netBilled === 0">Cannot edit billed
+      time.</!-->
+    <span fxFlex="1 1 auto"></span>
+    <button *ngIf="canMinimize" mat-raised-button class="dps-time-Save" tabindex="2" (click)="onSave()"
+      [disabled]="isLoading">Save</button>
+    <button mat-raised-button class="dps-time-submit" tabindex="2" (click)="onSubmit()"
+      [disabled]="isLoading">Submit</button>
+    <button mat-raised-button *ngIf="canMinimize && timeRecordingView?.timeRecordId>0" [disabled]="isLoading "
+      class="dps-cancel dps-delete-btn" tabindex="-1"
+      (click)="onDelete(timeRecordingView?.timeRecordId)">Delete</button>
+    <button *ngIf="!canMinimize" class="dps-cancel" tabindex="-1" (click)="onClose()">Cancel</button>
+  </mat-dialog-actions>
+</div>

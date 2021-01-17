@@ -1,0 +1,64 @@
+<mat-list class="grid-controller-set" fxLayout="row wrap">
+  <span fxFlex="1 1 auto"></span>
+  <div fxLayout="row">
+    <mat-list-item class="general-client-search-box">
+      <dps-client-search-box [searchText]="searchText" [totalItems]="totalItems" [showSearchHint]="showSearchHint"
+        [clientLabel]="clientDisplyName" (updateSelectedSearchTextChange)="onSearchTextChanged($event)"
+        (updateSearchTextClick)="onSearchTextTextClick($event)"
+        (updateSelectedSearchTextClear)="onSearchTextClear($event)"></dps-client-search-box>
+    </mat-list-item>
+    <button mat-button [matMenuTriggerFor]="matter">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #matter="matMenu">
+
+      <mat-nav-list dense>
+        <!-- <mat-list-item (click)="onClickClientMenu(clientMenu.AddClient)">
+                    <mat-icon matListIcon>person_add</mat-icon>
+                    <span>{{clientCreationTitle}}</span>
+                    <mat-divider></mat-divider>
+                  </mat-list-item> -->
+        <mat-list-item (click)="onClickClientMenu(clientMenu.LedgerCard)"
+          *ngIf="moduleIsActive(module.LedgerCard) | async">
+          <mat-icon matListIcon>credit_card</mat-icon>
+          <span>{{clientMenu.LedgerCard}}</span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item (click)="onClickClientMenu(clientMenu.eChit)"
+          *ngIf="moduleIsActive(module.ChequeRequest) | async">
+          <mat-icon matListIcon>library_books</mat-icon>
+          <span>{{clientMenu.eChit}}</span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-menu>
+    <button mat-icon-button (click)="onClickClientMenu(clientMenu.AddClient)" [matTooltip]="clientDisplyName"
+      matTooltipPosition="below">
+      <mat-icon> {{(isPlotUser$|async)  ? 'post_add' : 'person_add'}}</mat-icon>
+    </button>
+    <div class="grid-font-controller dps-grid-font-controller {{buttonActiveClass}}">
+      <button (click)="onFontSizeMinusClick()" mat-mini-fab>
+        <mat-icon>
+          <span class="fa fa-minus fa-1"></span>
+        </mat-icon>
+      </button>
+      <button (click)="onFontSizeResetClick()" mat-mini-fab>
+        <mat-icon>
+          <span>A</span>
+        </mat-icon>
+      </button>
+      <button (click)="onFontSizePlusClick()" mat-mini-fab>
+        <mat-icon>
+          <span class="fa fa-plus fa-1"></span>
+        </mat-icon>
+      </button>
+    </div>
+    <div class="dps-grid-refresh-button">
+      <button (click)="onRefresh()" [disabled]="searchText?.length<3" mat-mini-fab>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+
+</mat-list>

@@ -1,0 +1,36 @@
+<div fxLayout="row" class="grid-sub-button-container">
+  <div class="dps-tasks-grid-button" (click)="onOpenCaseClick()" fxLayout="column"
+    *ngIf="moduleIsActive(module.Matter) | async">
+    <button mat-icon-button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <span *ngIf="!(getSettingValue(settingKey.IsPlotUser) | async)">Open Case</span>
+    <span *ngIf="(getSettingValue(settingKey.IsPlotUser) | async)">Open Plot</span>
+  </div>
+  <div class="dps-tasks-grid-button" (click)="onAddTaskClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+    <span>Add</span>
+  </div>
+  <div class="dps-tasks-grid-button" (click)="onEditTaskClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <span>Edit</span>
+  </div>
+  <div class="dps-tasks-grid-button" (click)="onCompeteTaskClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>done</mat-icon>
+    </button>
+    <span>Complete</span>
+  </div>
+
+  <div *ngIf="selectedTaskData?.action" class="dps-tasks-grid-button" (click)="onRunCommandClick()" fxLayout="column">
+    <button mat-icon-button>
+      <mat-icon>launch</mat-icon>
+    </button>
+    <span>Run Template</span>
+  </div>
+
+</div>

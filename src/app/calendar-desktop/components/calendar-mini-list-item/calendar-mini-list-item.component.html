@@ -1,0 +1,17 @@
+<div [ngStyle]="{'background-color': calendar.selected?calendar.color:''}" class="dps-calender-list">
+  <mat-list-item (click)="onToggleCalendar(calendar)" [title]="calendar.data.owner?.address"
+    [matTooltip]="calendar.data.name" matTooltipPosition="right">
+    <mat-icon matListIcon *ngIf="calendar.isBirthdaysCalendar" class="dps-cal-cake">cake</mat-icon>
+    <mat-icon matListIcon *ngIf="(calendar.isSecondary&&!calendar.isBirthdaysCalendar)" class="dps-cal-event">event
+    </mat-icon>
+    <img matListAvatar *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar)" class="dps-user-avator"
+      [src]="calendar.data.owner?.address | dpsUserImage | async" (load)="showProfileImg=true"
+      alt="calendar.data.owner?.address"
+      [hidden]="!showProfileImg">
+    <button matListAvatar mat-icon-button class="dps-calendar-avatar"
+      *ngIf="!(calendar.isSecondary || calendar.isBirthdaysCalendar) && !showProfileImg"
+      [ngStyle]="{'background-color': (calendar.data.owner?.address | recipientColorCode)}">
+      <span>{{calendar.data.owner?.name | nameInitials}}</span>
+    </button>
+  </mat-list-item>
+</div>

@@ -1,0 +1,46 @@
+<div class="mls-chat-controller" [ngClass]="!message?.text? 'dps-mls-msg-null ': ''">
+  <div class="dps-mls-message">
+    <div [ngClass]="isSendMsg(message) ? 'dps-mls-message-out':'dps-mls-message-in'">
+
+
+      <div class="dps-mls-message-inner-wrap">
+
+        <div class="dps-mls-item-body">
+          <div class="mls-body-msg">
+            <span class="mls-body-preview-text">{{message?.text}}&nbsp; </span>
+
+
+          </div>
+          <div class="mls-chat-attached">
+            <span dps-mls-chat-item-header-icon>
+              <i class="material-icons" *ngIf="message?.documentDetails"
+                [ngClass]="message?.documentDetails?.lettername | attachmentIcon"><span></span></i>
+              <span
+                *ngIf="(message?.xmlid && message?.xmlStatus) || (message?.documentDetails && message?.documentDetails?.status)"
+                fxLayout="column" class="mls-attached-xml">
+                <i *ngIf="message?.xmlid && message?.xmlStatus" class="material-icons fa fa-file dps-file-icon"></i>
+                <span class="mls-xml-doc" *ngIf="isXmlStatueIsNew || isFormFillingStatuesIsNew">Pending</span>
+                <span class="mls-xml-status" *ngIf="!isXmlStatueIsNew">{{message?.xmlStatus}}</span>
+                <span *ngIf="!isFormFillingStatuesIsNew">{{message?.documentDetails?.status}}</span>
+              </span>
+            </span>
+          </div>
+
+          <div class="clear"></div>
+
+        </div>
+
+      </div>
+
+      <div class="dps-mls-msgtime">
+        <span class="dps-mls-item-mail"> {{message?.messageSender?.emailAddress}}</span>
+        <span class="dps-mls-item-date">{{message?.datePosted | date :'HH:mm dd/MM/yyyy'}}</span>
+
+      </div>
+
+
+      <!--dps-mls-message-out':'dps-mls-message-in - end-->
+    </div>
+
+  </div>
+</div>

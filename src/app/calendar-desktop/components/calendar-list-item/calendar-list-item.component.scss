@@ -1,0 +1,100 @@
+@import '~styles/variables.scss';
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: $primary-font-size - 2;
+}
+
+.dps-calendar-color-palet .dps-folder-action {
+  border: 1px solid $primary;
+  width: 40px;
+}
+
+.dps-calendar-color-palet .dps-selected-color {
+  border-color: $calender-boder;
+}
+
+mat-list-item {
+  height: 40px !important;
+}
+
+.dps-calendar-avatar {
+  height: 36px !important;
+  width: 36px !important;
+  margin-left: 25px;
+  color: $primary;
+  padding: 8px 0px 0px 0px;
+}
+
+.dps-calendar-avatar span {
+  font-family: $primary-font-stack;
+  font-size: 15px;
+  position: relative;
+  bottom: 10px;
+}
+
+.dps-calender-list {
+  margin: 0px 0px 1px 0px;
+  ;
+}
+
+mat-icon.dps-cal-cake,
+mat-icon.dps-cal-event {
+  margin-left: 25px;
+  background-color: $calender-bck;
+  color: $calender-bck-color;
+  padding: 8px !important;
+}
+
+.dps-user-avator {
+  height: 36px !important;
+  width: 36px !important;
+  margin-left: 25px;
+}
+
+span.dps-cal-data-name {
+  font-size: 12px;
+  color: $calender-bck-option;
+  font-weight: 500;
+}
+
+input.dps-calendarEditMode {
+  width: 100%;
+  margin-left: 15px;
+}
+
+div.dps-calendar-color-palet {
+  div {
+    .dps-cal-item-i {
+      background-color: $calendar-back-palet-i;
+    }
+    .dps-cal-item-ii {
+      background-color: $calendar-back-palet-ii;
+    }
+    .dps-cal-item-iii {
+      background-color: $calendar-back-palet-iii;
+    }
+  }
+  div {
+    .dps-cal-item-iv {
+      background-color: $calendar-back-palet-iv;
+    }
+    .dps-cal-item-v {
+      background-color: $calendar-back-palet-v;
+    }
+    .dps-cal-item-vi {
+      background-color: $calendar-back-palet-v;
+    }
+  }
+  div {
+    .dps-cal-item-vii {
+      background-color: $calendar-back-palet-vii;
+    }
+    .dps-cal-item-iix {
+      background-color: $calendar-back-palet-iix;
+    }
+    .dps-cal-item-ix {
+      background-color: $calendar-back-palet-ix;
+    }
+  }
+}

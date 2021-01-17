@@ -1,0 +1,16 @@
+<div class="opened-case-financial-figures" fxLayout="row" fxLayoutAlign="end center">
+  <div class="billed-amount-wrap" fxLayout="column" fxLayoutAlign="center center">
+    <span>{{homeCurrancy | currencySymbols}}{{fdDetails?.netBilled | number : '1.2-2'}}</span>
+    <label>Billed Amount</label>
+  </div>
+  <div class="unbilled-amount-wrap" fxLayout="column" fxLayoutAlign="center center">
+    <span>{{homeCurrancy | currencySymbols}}{{fdDetails?.unBilled  | number : '1.2-2'}}</span>
+    <label>Unbilled Amount</label>
+  </div>
+
+  <div fxLayout="column" class="total-amount-wrap" fxLayoutAlign="center center">
+    <span><label>Total</label> &nbsp;
+      {{homeCurrancy | currencySymbols}}{{ fdDetails?.value  | number : '1.2-2' }}</span>
+
+  </div>
+</div>

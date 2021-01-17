@@ -1,0 +1,247 @@
+<div class="dps-billing-requesting">
+
+  <div class="dps-white-gray-scroll" fxLayout="row" fxLayoutAlign="space-evenly">
+    <div class="dps-billing-form-data" fxLayout="column">
+      <div class="dps-matter-wrapper">
+        <mat-form-field>
+          <input matInput placeholder="{{matterDisplyName}} Ref" (blur)="onFromMatterSearchBlur($event)"
+            id="matterRefId" (keypress)="onMatterSearchKeypress($event)"
+            [value]="requestViewData?.matterData?.matterRef" [readonly]="requestViewData?.billRequestID > 0">
+        </mat-form-field>
+        <button *ngIf="requestViewData?.billRequestID === 0" mat-icon-button (click)="onMatterSearch($event)"
+          [disabled]="mainLoader" class="billing-matter-search">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field>
+          <input matInput disabled [value]="requestViewData?.matterData?.clientRef">
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="{{matterDisplyName}} Details" disabled
+          [value]="requestViewData?.matterData?.matterDetails">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{clientDisplyName}} Name" disabled
+          [value]="requestViewData?.matterData?.clientName">
+      </mat-form-field>
+      <div class="dps-billing-wrapper">
+        <mat-form-field>
+          <input matInput placeholder="No" disabled [value]="requestViewData?.matterData?.branchId">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Branch" disabled [value]="requestViewData?.matterData?.branchName">
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" matInput #billText
+          placeholder={{requestViewData?.proformaText?.billText}}
+          (focusout)="onControllerFocusOut('billOrProformaText',billText.value)"
+          [value]="requestViewData?.billOrProformaText">
+      </mat-form-field>
+      <div class="dps-billing-wrapper">
+        <mat-form-field>
+          <input [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" matInput #billNo
+            placeholder={{requestViewData?.proformaText?.billNumber}} [ngModel]="requestViewData?.billOrProformaNo"
+            (focusout)="onControllerFocusOut('billOrProformaNo',billNo.value)">
+        </mat-form-field>
+        <mat-form-field>
+          <input [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" matInput #billDate
+            [matDatepicker]="picker" placeholder={{requestViewData?.proformaText?.billDate}}
+            [value]="requestViewData?.billOrProformaData"
+            (dateChange)="onControllerFocusOut('billOrProformaData',$event.value)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" matInput #billAddress
+          placeholder={{requestViewData?.proformaText?.billAddressee}}
+          (focusout)="onControllerFocusOut('billOrProformaAddress',billAddress.value)"
+          [value]="requestViewData?.billOrProformaAddress">
+      </mat-form-field>
+
+      <div class="dps-narrative">
+        <div>Narrative</div>
+        <button [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" mat-button
+          class="load-narrative" [disabled]="mainLoader" (click)="onOpenBillingNarrativePopup($event)">Load
+          Narrative</button>
+      </div>
+      <mat-form-field class="example-full-width">
+        <textarea [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" #narrative matInput
+          rows="46" maxlength="3199" placeholder="Narrative" (focusout)="onChangeNarrativeItemText(narrative.value)"
+          [value]="requestViewData?.narrativeItemText"></textarea>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" matInput #billNote
+          rows="9" maxlength="250" placeholder="Notes" [value]="requestViewData?.note"
+          (focusout)="onControllerFocusOut('note',billNote.value)"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="dps-billing-grid-data" fxLayout="column">
+      <div>
+        <button [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" mat-icon-button
+          class="quick-bill" [dpsCommonOverlayTriggerFor]="overlay" triggerWhen="click">
+          <mat-icon>{{overlay?.overlayRef?.hasAttached()?'indeterminate_check_box':'add_box'}}</mat-icon>
+          <span>Quick Bill</span>
+        </button>
+        <dps-common-overlay-layout #overlay [width]="300" [height]="100" [disposeWhenBackdropClick]="true"
+          class="dps-quickbill-overlay">
+          <div class="dps-billing-quickbill">
+            <div class="dps-quickbill-wrapper" fxLayout="row">
+
+              <div fxLayout="column" style="width: 40px;">
+                <mat-radio-group (change)="onRadioButtonChange($event.value)" [value]="'QuickBillEverything'">
+                  <mat-radio-button color="primary" [value]="'QuickBillToDate'" style="margin-bottom: 35px;">
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" [value]="'QuickBillToAmount'" style="margin-bottom: 35px;">
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" [value]="'QuickBillEverything'"
+                    style="font-size: 12px;color:#193d5e;margin-bottom: 26px;" color="primary">
+                    Bill Everything
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="billToDatePicker" placeholder="Bill To Date"
+                    [value]="requestViewData?.quickBillDate" (dateChange)="onBillToDateChange($event.value)">
+                  <mat-datepicker-toggle matSuffix [for]="billToDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #billToDatePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput #billToAmount placeholder="Bill To Amount"
+                    (focusout)="onBillToAmountFocusout(billToAmount.value)"
+                    [value]="requestViewData?.quickBillAmmount| number:'1.2-2'" step="0.01">
+                </mat-form-field>
+
+                <div style="text-align: right;">
+                  <button mat-button [disabled]="mainLoader" (click)="onAddToBill()" class="bill-select-time" style="background: #2972b6;
+                          font-size: 12px;
+                          color: #fff;
+                          line-height: 30px;
+                          border-radius: 3px;">Add to bill</button>
+                </div>
+              </div>
+            </div> <!-- dps-quickbill-wrapper - End -->
+          </div>
+        </dps-common-overlay-layout>
+      </div>
+      <div class="dps-billing-data-action" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="dps-data-action">
+          <button mat-button class="bill-select-time"
+            [disabled]="!requestViewData?.matterData?.matterRef || mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            (click)="onSelectTime()">Select Time</button>
+          <button mat-button class="bill-add-profit"
+            [disabled]="!requestViewData?.matterData?.matterRef || mainLoader || requestViewData?.matterData?.eBilling==='LegalAid' || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            (click)="onAddProfitCost('PROFIT')">Add Profit Cost</button>
+        </div>
+        <div>
+          <button [disabled]="requestViewData?.billRequestID > 0 && !requestViewData.enableEditData" mat-icon-button
+            [disabled]="requestViewData?.timeAndProfitHeaderGridData.length<1 || mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            class="clear_all" (click)="onRemoveAllGridDataByGridType('Time')">
+            <mat-icon>clear_all</mat-icon><span>Remove All</span>
+          </button>
+        </div>
+      </div>
+      <!-- Grid Table -->
+      <!-- @@{{requestViewData| json}} -->
+      <dps-common-grid-table minWidth="560px" [columns]="timeGridcolumns" [rows]="timeHeaderGridOrderData"
+        (rowClick)="onRowClick($event)" (rowDblClick)="onRowDblClick($event)">
+      </dps-common-grid-table>
+      <!-- End Grid Table -->
+      <div class="dps-billing-total-fees">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="dps-fees-total">Total Fees</div>
+          <div>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalFeesValue| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalFeesVat| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="dps-billing-data-action" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="dps-data-action">
+          <button mat-button class="bill-select-disb"
+            [disabled]="!requestViewData?.matterData?.matterRef || mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            (click)="onDisbursements()">Select Disb</button>
+          <button mat-button class="bill-add-expences"
+            [disabled]="!requestViewData?.matterData?.matterRef || mainLoader || requestViewData?.matterData?.eBilling==='LegalAid' || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            (click)="onAddExpences('EXPENCES')">Add
+            Expense</button>
+        </div>
+        <div>
+          <button mat-icon-button class="clear_all"
+            [disabled]="requestViewData?.disbsAndExpenseHeaderGridData.length<1 || mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+            (click)="onRemoveAllGridDataByGridType('Disbursment')">
+            <mat-icon>clear_all</mat-icon><span>Remove All</span>
+          </button>
+        </div>
+      </div>
+      <!--Disbursment Grid Table -->
+      <dps-common-grid-table minWidth="560px" [columns]="disbursmentGridcolumns"
+        [rows]="requestViewData?.disbsAndExpenseHeaderGridData" (rowClick)="onRowClick($event)"
+        (rowDblClick)="onRowDblClick($event)">
+      </dps-common-grid-table>
+      <!-- End Grid Table -->
+      <div class="dps-billing-total-expences">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="dps-total-disbs">Disbs</div>
+          <div>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalDisbursmentValue| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalDisbursmentVat| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="dps-total-expences">Expenses</div>
+          <div>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalExpenseValue| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalExpenseVat| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="dps-final-total">Total</div>
+          <div>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalNetSum| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.totalVatSum| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" class="dps-total">
+          <div class="dps-bill-total">Bill Total</div>
+          <div>
+            <mat-form-field>
+              <input readonly matInput [value]="totalValues?.billTotal| number:'1.2-2'" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="dps-billing-request">
+    <button mat-button
+      [disabled]="(requestViewData?.timeAndProfitHeaderGridData.length<1 && requestViewData?.disbsAndExpenseHeaderGridData.length<1) || mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+      (click)="onRequestSave(requestViewData?.proformaText?.requestButtonText)">
+      {{ requestViewData?.billRequestID > 0 ? 'Resubmit' :requestViewData?.proformaText?.requestButtonText}}</button>
+    <button color="warn" mat-button *ngIf="requestViewData?.billRequestID > 0"
+      [disabled]="mainLoader || (requestViewData?.billRequestID > 0 && !requestViewData.enableEditData)"
+      (click)="onDeleteBillRequest()">
+      Delete
+    </button>
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+@import '~styles/variables.scss';
+.dps-crime-management-header-bar {
+  height: 60px;
+  background: #e6f0f8;
+  border-bottom: 1px solid #cde5f8;
+
+
+  .dps-crime-field-controller {
+    padding: 10px 0px 0px 20px;
+
+  
+
+  mat-form-field {
+    width: 130px;
+    font-size: $primary-font-size - 2;
+    font-weight: 400;
+    margin-right: 5px;
+   
+  }
+
+  button.dps-crime-filed-btn  {
+    background: #006cc1;
+      color: #fff;
+    font-size: 12px;
+    padding: 0 15px;
+    min-width: 65px;
+    line-height: 32px;
+    height: 31px;
+    margin-top: 4px;
+    margin-right: 14px;
+  }
+
+  button.dps-crime-filed-btn.uploading
+  {
+    background: #5d5d5d;
+  }
+
+}
+
+}
+

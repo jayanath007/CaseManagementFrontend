@@ -1,0 +1,308 @@
+@import '~styles/variables.scss';
+
+mat-toolbar {
+  height: 50px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+
+mat-button-toggle {
+  color: $calender-primary;
+}
+
+mat-button-toggle:hover,
+button.today:hover {
+  background: #cbe9fd;
+}
+
+mat-button-toggle.active {
+  color: #e8f6ff;
+  background: $calender-primary;
+}
+
+mat-button-toggle mat-icon {
+  vertical-align: sub !important;
+}
+
+.dps_calendar_toolbar {
+  background: #e8f6ff;
+  color: $calender-primary;
+}
+
+.dps-folder-action {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+mat-checkbox {
+  font-size: 12px;
+  color: $calender-primary;
+  font-weight: 500;
+  margin-left: 17px;
+}
+
+.dps-calendar-layout {
+  width: 100%;
+  height: 100%;
+
+  ::ng-deep {
+
+    .mat-checkbox-indeterminate,
+    .mat-checkbox-checked {
+      &.mat-primary .mat-checkbox-background {
+        background-color: $calender-primary !important;
+      }
+    }
+  }
+}
+
+dps-event-context-menue {
+  position: fixed;
+}
+
+mat-form-field {
+  width: 0px;
+}
+
+div.dps-calendaroptions {
+  padding: 0px 5px;
+}
+
+.dps-calendaroptions-body {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.dps-calendaroptions-body {
+  ::ng-deep {
+
+    .fc-day.fc-widget-content.fc-state-highlight,
+    .fc-today.fc-state-highlight,
+    .fc-day-top.fc-today.fc-state-highlight {
+      background-color: #e5f1fd !important;
+      opacity: 1 !important;
+    }
+
+    .fc-state-highlight.fc-bgevent {
+      background-color: #a6d1f5 !important;
+    }
+
+    .fc-unthemed td.fc-today {
+      background: #e8f6ff !important;
+    }
+
+    .fc-day-top.fc-today,
+    .fc-day-header.fc-widget-header.fc-today {
+      box-shadow: inset 0px 2px 0px 0px $calender-primary;
+    }
+
+    .fc-day-top.fc-today .fc-day-number {
+      font-weight: 600;
+      color: #094268;
+    }
+
+    .fc-toolbar.fc-header-toolbar {
+      margin-bottom: 0px;
+      height: 10px;
+    }
+
+    .fc-head-container {
+      .fc-day-header span {
+        color: $calender-primary;
+        font-size: $primary-font-size;
+        font-weight: 500;
+      }
+    }
+
+    .fc-more-cell {
+      text-align: right;
+
+      div a.fc-more {
+        font-size: $primary-font-size - 2 !important;
+        color: $calender-secondary;
+      }
+    }
+
+    .fc-dayGridMonth-view .fc-event-container {
+      div {
+        text-align: right;
+
+        a.fc-more {
+          font-size: $primary-font-size - 2 !important;
+          color: $calender-secondary;
+        }
+      }
+    }
+
+    .dps-calendar-event {
+      // font-size: 12px !important;
+      color: $calender-secondary !important;
+      border-radius: 1px !important;
+    }
+
+    div.fc-dayGridMonth-view .dps-calendar-event {
+      font-size: $primary-font-size - 2 !important;
+    }
+
+    .dps-calendar-event .fc-content {
+      padding: 2px;
+    }
+
+    div.fc-timeGridDay-view,
+    div.fc-timeGridFourDay-view,
+    div.fc-timeGridWeek-view {
+      .dps-calendar-event.busy {
+        border-left: 3px solid #b84f66 !important;
+      }
+
+      .dps-calendar-event.free {
+        border-left: 3px solid #058cd7 !important;
+      }
+
+      .dps-calendar-event.tentative {
+        border-left: 3px solid #7e3672 !important;
+      }
+
+      .dps-calendar-event.oof {
+        border-left: 3px solid #ecb521 !important;
+      }
+
+      .dps-calendar-event.workingElsewhere {
+        border-left: 3px solid #399641 !important;
+      }
+
+      .dps-calendar-event.unknown {
+        border-left: 3px solid #d3b21d !important;
+      }
+
+      .fc-time {
+        text-align: center;
+
+        span {
+          font-size: $primary-font-size - 2;
+          color: $calender-primary;
+          font-weight: 500;
+        }
+      }
+
+      .fc-axis {
+        text-align: center;
+        font-size: $primary-font-size - 2;
+        color: $calender-primary;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      .fc-day-header {
+        color: $calender-primary;
+        font-size: $primary-font-size;
+        font-weight: 500;
+        padding-top: 1px;
+      }
+    }
+
+    .fc-dayGridMonth-view {
+      .fc-content {
+        display: flex;
+        justify-content: flex-start;
+
+        .fc-time {
+          padding-right: 2px;
+        }
+
+        .fc-title {
+          font-size: $primary-font-size - 2;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-align: left;
+          white-space: nowrap;
+        }
+      }
+
+      .fc-more-popover {
+        .fc-header {
+          padding: 4px;
+          background: #e8f6ff;
+          border-bottom: 1px solid #b5d4e8;
+
+          .fc-title {
+            color: $calender-primary;
+          }
+        }
+
+        span.fc-title {
+          font-size: $primary-font-size - 1;
+          color: $calender-secondary;
+        }
+      }
+    }
+
+    .fc-timeGrid-view {
+      .fc-content {
+        .fc-time {
+          display: none;
+        }
+
+        .fc-title {
+          font-size: $primary-font-size - 2;
+        }
+      }
+
+      .fc-day-grid-event {
+        .fc-content {
+          display: flex;
+          justify-content: space-between;
+
+          .fc-title {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: left;
+            white-space: nowrap;
+          }
+
+          i {
+            font-size: $primary-font-size + 1;
+            display: flex;
+            align-items: center;
+          }
+
+          span.dps-fc-icon {
+            display: inline-flex;
+          }
+        }
+      }
+
+      .fc-time-grid-event {
+        .fc-content {
+          z-index: 1 !important;
+        }
+      }
+
+      .fc-event .dps-fc-bg {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-end;
+        background: unset !important;
+        opacity: 1 !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2 !important;
+
+        i {
+          font-size: $primary-font-size + 1;
+          display: flex;
+          align-items: center;
+        }
+
+        span.dps-fc-icon {
+          display: inline-flex;
+        }
+      }
+    }
+  }
+}

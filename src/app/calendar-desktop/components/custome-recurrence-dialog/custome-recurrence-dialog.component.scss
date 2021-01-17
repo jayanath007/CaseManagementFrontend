@@ -1,0 +1,134 @@
+@import '~styles/variables.scss';
+.mat-dialog-title {
+  padding: 5px 14px 5px;
+  background-color: #274e8a;
+  color: $primary;
+  font-size: $primary-font-size - 1;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.mat-dialog-title .fa {
+  margin-right: 5px;
+}
+
+div,
+span {
+  font-family: $primary-font-stack;
+}
+
+mat-option {
+  font-size: $primary-font-size - 2 !important;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: $primary-font-size + 2;
+  font-weight: 400;
+  text-transform: capitalize;
+  color: #4c4c4c;
+}
+
+.dps-custome-save {
+  background: #0465a5;
+  color: #e8f6ff;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.dps-custome-save:hover {
+  background: #00436f;
+  color: $primary;
+}
+
+.dps-custome-cancel {
+  background: #e8f6ff;
+  color: $calender-primary;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.dps-custome-cancel:hover {
+  background: #c4e8ff;
+}
+
+span.dps-custome-title {
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  display: inline-block;
+  width: 60px;
+}
+
+mat-form-field.dps-custome-days {
+  width: 50px;
+}
+
+mat-form-field.dps-occurs-controller {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.dps-custome-daily,
+.mat-form-field-autofill-control,
+mat-checkbox {
+  color: #4c4c4c;
+  font-size: 12px;
+}
+
+.dps-custome-daily {
+  margin-right: 10px;
+}
+
+mat-checkbox {
+  margin: 0px 6px 0px 0;
+}
+
+.dps-custome-weekly {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* justify-content: space-evenly; */
+}
+
+.dps-custome-dates {
+  width: 50%;
+}
+
+.dps-cal-select mat-select {
+  width: 20%;
+  margin: 0px 0px 0px 10px;
+  border-bottom: 1px solid #7b7b7b;
+  padding: 0px 0px 8px 1px;
+}
+
+.dps-cal-month-select mat-select {
+  width: 20%;
+  margin: 0px 0px 0px 10px;
+  border-bottom: 1px solid #7b7b7b;
+  padding: 0px 0px 6px 1px;
+}
+
+.dps-cal-select {
+  margin: 17px 0 0 0;
+}
+
+.dps-cal-select.dps-every-month-calc {
+  margin: 5px 0 0 0;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  background: #c9e7fd;
+}
+
+mat-dialog-content {
+  width: 460px;
+  padding: 0px 12px;
+  margin: 0px 0px;
+  height: 140px;
+  overflow: hidden;
+}
+
+mat-dialog-actions {
+  padding: 12px 20px;
+}

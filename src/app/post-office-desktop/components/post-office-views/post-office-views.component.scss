@@ -1,0 +1,148 @@
+@import '~styles/variables.scss';
+.grid-controller-set {
+  background: #32434d;
+  padding: 6px 0px 6px 0;
+}
+
+.grid-controller-set .mat-line {
+  color: $primary;
+}
+
+.grid-controller-set .mat-radio-checked .mat-line {
+  color: #44a020;
+}
+
+.grid-controller-set .mat-radio-button {
+  margin-right: 10px;
+}
+
+.grid-controller-set .mat-checkbox {
+  margin-right: 10px;
+}
+
+.search_clear_icon {
+  font-size: 16px !important;
+  color: #d86969;
+}
+
+.time_record_selector {
+  color: $primary;
+  font-weight: 400;
+  font-size: $primary-font-size - 1;
+}
+
+mat-option {
+  font-size: $primary-font-size - 1 !important;
+  font-weight: 500;
+}
+
+.mat-datepicker-toggle[_ngcontent-c38] {
+  color: $primary !important;
+}
+
+.mat-select-trigger {
+  color: $primary !important;
+}
+
+.mat-input-element.mat-form-field-autofill-control {
+  color: $primary !important;
+}
+
+.mat-option.mat-selected.mat-active,
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #076973;
+  background: #defcff;
+}
+
+.mat-form-field-autofill-control {
+  font-size: $primary-font-size - 2;
+}
+
+@media only screen and (min-width: 1366px) and (max-height: 768px) {
+  .dps_postoffice_time_filter {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.postoffice-input {
+  font-size: $primary-font-size - 2;
+}
+
+.postoffice-input.from,
+.postoffice-input.to,
+.postoffice-input.custom {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.dps_postoffice_grid_controller {
+  align-items: center;
+}
+
+.postoffice-input.search {
+  mat-icon {
+    font-size: $primary-font-size + 2;
+  }
+}
+
+mat-list {
+      padding-top: 0px;
+}
+
+::ng-deep {
+  .mat-menu-panel {
+    border-radius: 0px;
+  }
+}
+
+.dps-grouping-cntxt-menu {
+  margin-right: 10px;
+  background: #b77474;
+  font-size: $primary-font-size - 2;
+  color: #ffffff;
+    border-radius: 0px;
+ 
+
+mat-icon {
+  vertical-align: middle;
+  font-size: $primary-font-size + 6;
+  color: $primary;
+}
+}
+
+.contxt-menu-btn {
+  &:hover {
+    background: #b8dbf3;
+    opacity: .9;
+  }
+  
+  background:$primary;
+  padding: 0px 12px 0px 0px;
+  height: 35px;
+  line-height: 35px;
+  font-size: $primary-font-size - 2;
+  color: #0c4367;
+  
+  mat-icon {
+    color: #d09090;
+    border: 1px solid #eac9c9;
+    padding: 6px 12px;
+    background: #ffe9e9;
+    margin-right: 10px;
+  }
+  }
+
+
+  .dps-scan {
+    mat-icon {
+      line-height: 16px;
+      margin-right: 5px;
+    }
+    margin-right: 6px;
+    border-radius: 0px;
+    background: #689f38;
+    color: $primary;
+    font-size: 12px;
+    line-height: 32px;
+  }

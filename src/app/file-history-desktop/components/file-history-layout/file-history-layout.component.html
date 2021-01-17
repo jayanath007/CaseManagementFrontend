@@ -1,0 +1,22 @@
+<div class="dps-file-history-layout {{fontSizeClass}}" fxLayout="column">
+  <div dpsIsMobile class="dps-white-gray-scroll dps-file-history-scroll" fxFlex="calc(100%-50px)">
+    <dps-file-history (loadMore)="onLoadMore($event)" [groupMode]="groupMode"
+      (moveSelectedFolder)="onMoveSelectedFolder($event)" [folderList]="folderList" [matterInfo]="matterInfo"
+      [xdraftViewSuccess]="xdraftViewSuccess" [isDocumentVersioning]="isDocumentVersioning"
+      [documentViewOpened]="documentViewOpened" [documentViewPopupOpened]="documentViewPopupOpened"
+      (addFiles)="onDrop($event)" [fontSizeClass]="fontSizeClass" (rowChangeEvent)="onRowChange($event)"
+      (viewChange)="onViewChange($event)" [columnDef]="columnDef" [fileHistorData]="fileHistorData"
+      [checkedItems]="checkedItems" [timeZone]="timeZone" [companyCode]="companyCode" [dpsSignDetails]="dpsSignDetails"
+      [pageInfo]="pageInfo" [signIsLoading]="signIsLoading" [signandSendToken]="signandSendToken"
+      (deleteSelectedItem)="deleteRows()" (requestReplytoMail)="replyToMail($event)" (xdraftItem)="onXdraftItem($event)"
+      (xdraftItemselect)="onXdraftItemselect($event)" (shareOnSafeBox)="onShareOnSafeBox($event)"
+      (closeDocumentViewPopup)="onCloseDocumentViewPopup()" (groupRowChange)="onGroupRowChange($event)"
+      (onCheckin)="doCheckin($event)" (onDiscardCheckin)="doDiscardCheckin($event)">
+    </dps-file-history>
+    <!-- <input id="hisoryfileInput" type="file" class="ng-hide" (change)="fileUpload($event)" multiple /> -->
+    <dps-file-uploader #hisoryfileInput inputId="hisoryfileInput" (fileUpload)="fileUpload($event)" [multiple]="true"
+      [maxSize]="1000000">
+    </dps-file-uploader>
+
+  </div>
+</div>

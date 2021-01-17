@@ -1,0 +1,335 @@
+<div class="dps-edit-event-content" fxLayout="column">
+  <div class="calender_event_msg">
+    <!-- Dps-event layout message in header  -->
+    <div class="dps-message" *ngIf="event?.attendees && event?.attendees.length>0 && !(event?.calendar?.isDefaultCalendar|| (
+event?.calendar?.name === 'Calendar' &&
+event?.calendar?.canEdit === true &&
+event?.calendar?.canShare === true &&
+event?.calendar?.canViewPrivateItems === true))">
+      <div>
+        <span matLine class="dps-event-message">Responses won't be tallied for events saved on this calendar. To tally
+          responses, use your primary calendar.</span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="isPastEvent">
+      <div>
+        <span matLine class="dps-event-message" *ngIf="event.type !== 'seriesMaster'">This event occurs in the
+          past.</span>
+        <span matLine class="dps-event-message" *ngIf="event.type === 'seriesMaster'">All instances of this repeating
+          event occur in the past.</span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event?.seriesMasterId">
+      <div>
+        <span matLine class="dps-event-message">You're editing a single occurrence of a repeating series.
+          <a class="dps-open-series" (click)="onOpenSeries()">Edit series.</a>
+        </span>
+      </div>
+    </div>
+    <div class="dps-message" *ngIf="event?.type==='seriesMaster'">
+      <div>
+        <span matLine class="dps-event-message">You're editing the series.</span>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="1 1 auto" fxLayout="row">
+    <div class="dps-cal-event" fxFlex="1 0 560px">
+      <div class="calender_event">
+        <span class="details">Event</span>
+      </div>
+
+      <mat-form-field class="dps-event-input">
+        <span matPrefix class="dps-lable">&nbsp; Title &nbsp;</span>
+        <input #eventTitle matInput [value]="event?.subject" (focusout)="onUpdateTitle(eventTitle.value)">
+      </mat-form-field>
+
+      <mat-form-field class="dps-location-input">
+        <span matPrefix class="dps-lable">&nbsp; Locations &nbsp;</span>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let location of event?.locations; let i=index" (removed)="onRemoveLocation(location,i)">
+            <mat-icon *ngIf="location.locationType==='conferenceRoom'" class="dps-chip-icon">meeting_room</mat-icon>
+            <mat-icon *ngIf="location.locationType!=='conferenceRoom' && location.coordinates &&
+              Object.keys(location.coordinates).length > 0" class="dps-chip-icon">place</mat-icon>
+            {{location.displayName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="onAddLocation($event)">
+        </mat-chip-list>
+        <!-- <input #locationInput matInput [value]="event?.location.displayName"
+          (focusout)="onUpdateLocation(locationInput.value)" [disabled]="ChTeamsOnline.checked"> -->
+        <mat-checkbox #ChTeamsOnline matSuffix [checked]="event?.isOnlineMeeting"
+          *ngIf="event && !(event.isOnlineMeeting && (event.onlineMeetingUrl || event.onlineMeeting?.joinUrl))"
+          (change)="onClickTeamsAppointment($event)" color="primary">
+          Teams Online</mat-checkbox>
+      </mat-form-field>
+      <div fxLayout="row" class="dps-location-rooms-gio">
+        <mat-form-field floatLabel="never">
+          <mat-icon matPrefix>meeting_room</mat-icon>
+          <input placeholder="Find Rooms" #roomFinderInput matInput [matAutocomplete]="roomList"
+            [formControl]="roomsControl">
+          <mat-autocomplete #roomList="matAutocomplete" [displayWith]="roomDisply"
+            (optionSelected)="onAddRoomLocation($event,roomFinderInput)">
+            <mat-option *ngFor="let room of filteredRooms| async" [value]="room">
+              {{ room.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field floatLabel="never">
+          <mat-icon matPrefix>place</mat-icon>
+          <input #addressFinderInput matInput id="dps-event-gio-location" dpsAddressFinder
+            (changeAddress)=onAddGeoLocation($event,addressFinderInput) placeholder="Find Geolocation">
+        </mat-form-field>
+      </div>
+
+      <div class="dps_edit_event_from" fxLayout="row">
+        <!--edit event form start-->
+
+        <div>
+          <!--Edit event form in left panel-->
+
+          <div fxLayoutAlign=" baseline" class="edit_event_contoller">
+            <mat-form-field class="dps_edit_event-start">
+              <mat-placeholder class="dps-lable">&nbsp; Start</mat-placeholder>
+              <input class="dps-date-input" [ngClass]="{'disabled':selectedRepeatItem?.val !== 'never'}" matInput
+                [matDatepicker]="startPicker" [value]="startDate" (dateChange)="onChangeStartDate($event.value)"
+                disabled>
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker [disabled]="selectedRepeatItem?.val !== 'never'"></mat-datepicker>
+            </mat-form-field>
+            <div fxLayoutAlign=" baseline">
+              <mat-form-field>
+                <input type="text" [disabled]="event?.isAllDay" dpsTimeOnly #startTimeInput matInput
+                  [matAutocomplete]="startTimeOptions" [ngModel]="startTime"
+                  (focusout)="onChangeStartTime(startTimeInput.value)">
+                <button mat-icon-button matSuffix>
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-autocomplete #startTimeOptions="matAutocomplete">
+                  <mat-option *ngFor="let time of timeList" [value]="time">
+                    {{ time }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <mat-button-toggle #startTimeToggle appearance="legacy" [checked]="startPeriod==='PM'"
+                (change)="onStartTimePeriodChange(startTimeToggle.checked?'PM':'AM')">
+                {{startTimeToggle.checked?'PM':'AM'}}</mat-button-toggle>
+            </div>
+            <mat-checkbox [checked]="event?.isAllDay" color="primary" (change)="changeAllDay($event?.checked)">All day
+            </mat-checkbox>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign=" baseline">
+            <mat-form-field class="dps_edit_event-start">
+              <mat-placeholder class="dps-lable">&nbsp; End</mat-placeholder>
+              <input matInput class="dps-date-input" [ngClass]="{'disabled':selectedRepeatItem?.val !== 'never'}"
+                [matDatepicker]="endPicker" [ngModel]="endDate" [min]="startDate" disabled
+                (dateChange)="onChangeEndDate($event.value)">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker [disabled]="selectedRepeatItem?.val !== 'never'"></mat-datepicker>
+            </mat-form-field>
+            <div fxLayoutAlign=" baseline">
+              <mat-form-field>
+                <input type="text" dpsTimeOnly [disabled]="event?.isAllDay" #endTimeInput matInput
+                  [matAutocomplete]="endTimeOptions" [ngModel]="endTime"
+                  (focusout)="onChangeEndTime(endTimeInput.value)">
+                <button mat-icon-button matSuffix>
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-autocomplete #endTimeOptions="matAutocomplete">
+                  <mat-option *ngFor="let time of timeList" [value]="time">
+                    {{ time }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <mat-button-toggle #endTimeToggle appearance="legacy" [checked]="endPeriod==='PM'"
+                (change)="onEndTimePeriodChange(endTimeToggle.checked?'PM':'AM')">{{endTimeToggle.checked?'PM':'AM'}}
+              </mat-button-toggle>
+
+
+            </div>
+
+            <mat-checkbox [checked]="event?.sensitivity!=='normal'" *ngIf="!event?.seriesMasterId" color="primary"
+              (change)="changePrivate($event?.checked)">Private</mat-checkbox>
+          </div>
+
+
+          <div fxLayout="row">
+            <mat-form-field class="edi-event-form-controller">
+              <mat-placeholder class="dps-lable">&nbsp; Reminder</mat-placeholder>
+              <mat-select [value]="event?.reminderMinutesBeforeStart"
+                (selectionChange)="onReminderChange($event?.value)">
+                <mat-option *ngFor="let reminder of reminderList" [value]="reminder.val">
+                  {{reminder.lable}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="edi-event-form-controller">
+              <mat-placeholder class="dps-lable">&nbsp; Show as</mat-placeholder>
+              <mat-select [value]="event?.showAs" (selectionChange)="onShowAsChange($event?.value)">
+                <mat-option *ngFor="let status of freeBusyStatusList" [value]="status.val">
+                  {{status.lable}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+
+        </div>
+        <!--Edit event form in left panel-->
+
+
+        <div *ngIf="event?.type!=='occurrence'&&event?.type!=='exception'">
+          <!--Edit event form in right panel-->
+
+          <div class="dps-event-edit-form">
+            <mat-form-field class="edi-event-form-controller dps-form-controller">
+              <mat-placeholder class="dps-lable">&nbsp; Repeat</mat-placeholder>
+              <mat-select (selectionChange)="onRepeatChange($event?.value)" [ngModel]="selectedRepeatItem">
+                <mat-option *ngFor="let repeat of repeatList" [value]="repeat">
+                  {{repeat.lable}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="edi-event-form-controller">
+              <mat-placeholder class="dps-lable">&nbsp; Save to calendar</mat-placeholder>
+              <mat-select [disabled]="event?.id" [value]="event?.calendar"
+                (selectionChange)="onSaveToCalendarChange($event?.value)">
+                <mat-option [value]="calendar.data" *ngFor="let calendar of canEditCalendars">
+                  {{calendar.data.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div>
+              <div>
+                <mat-form-field class="edi-event-form-controller" *ngIf="selectedRepeatItem?.val !== 'never'">
+                  <mat-placeholder class="dps-lable">&nbsp; From</mat-placeholder>
+                  <input matInput class="dps-date-input" [matDatepicker]="fromPicker" [value]="fromDate"
+                    (dateChange)="onChangeFromDate($event?.value)" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #fromPicker disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="edi-event-form-controller" *ngIf="selectedRepeatItem?.val !== 'never'"
+                  floatLabel="always">
+                  <mat-placeholder class="dps-lable">&nbsp; To</mat-placeholder>
+                  <input [hidden]="!toDate" class="dps-date-input" type="search" matInput [matDatepicker]="toPicker"
+                    [value]="toDate" (dateChange)="onChangeToDate($event?.value)" disabled>
+                  <input *ngIf="!toDate" class="dps-date-input" matInput value="None" disabled>
+                  <button mat-icon-button matSuffix (click)="onChangeToDate()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #toPicker disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <span *ngIf="event?.type==='seriesMaster' && selectedRepeatItem?.val === 'custom'"
+                class="dps_evt_details">
+                <span *ngIf="event.recurrence.pattern.type==='daily'">
+                  Every {{event.recurrence.pattern.interval===1?'day':(event.recurrence.pattern.interval===2?'other
+                  day':event.recurrence.pattern.interval+'
+                  days')}}
+                </span>
+
+                <span *ngIf="event.recurrence.pattern.type==='weekly'">
+                  Every
+                  {{event.recurrence.pattern.interval===1?'':(event.recurrence.pattern.interval===2?'other':event.recurrence.pattern.interval+'
+                  weeks on')}}
+                  <span
+                    *ngFor="let daysOfWeek of event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                    <span *ngIf="event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                    <span>
+                      {{daysOfWeek|titlecase}}{{event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                  </span>
+                </span>
+
+                <span *ngIf="event.recurrence.pattern.type==='absoluteMonthly'">
+                  Day {{event.recurrence.pattern.dayOfMonth}} of every
+                  {{event.recurrence.pattern.interval===1?'month':(event.recurrence.pattern.interval===2?'other
+                  month':event.recurrence.pattern.interval+' months')}}
+                </span>
+
+                <span *ngIf="event.recurrence.pattern.type==='relativeMonthly'">
+                  Every {{event.recurrence.pattern.interval===1?'month':(event.recurrence.pattern.interval===2?'other
+                  month':event.recurrence.pattern.interval+'
+                  months')}} on the {{event.recurrence.pattern.index}}
+                  <span
+                    *ngFor="let daysOfWeek of event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                    <span *ngIf="event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                    <span>
+                      {{daysOfWeek|titlecase}}{{event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                  </span>
+                </span>
+
+                <span *ngIf="event.recurrence.pattern.type==='absoluteYearly'">
+                  Every {{'0000-'+event.recurrence.pattern.month+'-1' | date : 'MMMM'}}
+                  {{event.recurrence.pattern.dayOfMonth}}
+                </span>
+
+                <span *ngIf="event.recurrence.pattern.type==='relativeYearly' &&  event.recurrence.pattern.month">
+                  Every {{event.recurrence.pattern.interval===1?'year':(event.recurrence.pattern.interval===2?'other
+                  year':event.recurrence.pattern.interval+'
+                  years')}} on the {{event.recurrence.pattern.index}}
+                  <span
+                    *ngFor="let daysOfWeek of event.recurrence.pattern.daysOfWeek; let first = first; let last = last; let index = index;">
+                    <span *ngIf="event.recurrence.pattern.daysOfWeek.length>1&&last">and</span>
+                    <span>
+                      {{daysOfWeek|titlecase}}{{event.recurrence.pattern.daysOfWeek.length>(index+2)?',':''}}</span>
+                  </span>
+                  of {{'0000-'+event.recurrence.pattern.month+'-1' | date : 'MMMM'}}
+                </span>
+
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--edit event form end-->
+      <div fxLayout="row" *ngIf="(attachments && attachments.length > 0)" class="dps-attachment-list">
+        <dps-attachment-list [canDelete]="true" [composeAttachments]="attachments" (openMatter)="onOpenMatter($event)"
+          (openAttachement)="onOpenAttachement($event)" (downloardFileAttachment)="onDownloardFileAttachment($event)"
+          (deleteAttachment)="onDeleteAttachment($event)"></dps-attachment-list>
+      </div>
+      <div>
+        <dps-ck-editor dpsCkEditorInlineImageRendere [ngModel]="event?.body?.content"
+          (ngModelChange)="onBodyChange.next($event)" (attachedFile)="onFileAttachement($event)"
+          (attachedInline)="onInlineAttachemnt($event)" [attachmentStatus]="lastInlineAttachment"></dps-ck-editor>
+      </div>
+
+    </div>
+
+    <div class="dps-event-calendar" fxFlex="0 1 560px" fxLayout="column">
+      <div *ngIf="event?.calendar" fxFlex="125px">
+        <div class="calender_atendees">
+          <span class="details">Organizer</span>
+        </div>
+        <mat-list dense>
+          <dps-attendee-item [attendee]="{emailAddress:event?.calendar.owner}" [hasRemove]="false"></dps-attendee-item>
+        </mat-list>
+      </div>
+      <div class="calender_atendees" fxFlex="71px">
+        <span class="details">Attendees</span>
+        <span fxFlex="1 1 auto"></span>
+        <mat-checkbox color="primary" *ngIf="event?.attendees && event?.attendees.length>0 && (event?.calendar?.isDefaultCalendar|| (
+event?.calendar?.name === 'Calendar' &&
+event?.calendar?.canEdit === true &&
+event?.calendar?.canShare === true &&
+event?.calendar?.canViewPrivateItems === true))" (change)="changeRequestResponses($event?.checked)"
+          labelPosition="before" [checked]="event?.responseRequested">Request
+          responses</mat-checkbox>
+      </div>
+      <dps-recipient-input-manager #recipientInputManager fxFlex="1 1 auto">
+        <dps-attendees-input [people]="recipientInputManager.people$ | async"
+          (searchDirectory)="recipientInputManager.searcheUsers($event)"
+          [searchedPeople]="recipientInputManager.searcheUsers$ | async"
+          (addPerson)="recipientInputManager.addPerson($event)" [requiredAttendees]="requiredAttendees"
+          [optionalAttendees]="optionalAttendees" (addAttendee)="onAddAttendee($event)"
+          (removeAttendee)="onRemoveAttendee($event)">
+        </dps-attendees-input>
+      </dps-recipient-input-manager>
+    </div>
+  </div>
+</div>

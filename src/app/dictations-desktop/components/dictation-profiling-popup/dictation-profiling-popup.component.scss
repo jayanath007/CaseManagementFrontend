@@ -1,0 +1,63 @@
+@import '~styles/variables.scss';
+@import '~styles/grid-styles.scss';
+
+.dps-add-movement-popup
+{
+  padding: 0 15px 15px;
+
+  button
+  {
+    font-size: 12px;
+  }
+}
+.job-profile-wrap {
+  mat-card {
+    font-size: 14px;
+    padding-left: 0;
+    font-weight: bold;
+  }
+
+  mat-form-field {
+    font-size: 12px;
+    margin-right: 10px;
+    flex: 1 1 auto;
+  }
+
+  .btn-insertlink {
+    background: #095386;
+    color: white;
+    height: 38px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  .confidentiality
+  {
+    font-size: 12px;
+  }
+}
+
+.team-header
+{
+  height: 40px;
+  font-size: 12px;
+  background: $in-meeting;
+    color: $primary;
+  .mat-icon
+  {
+    margin-top: 3px;
+  }
+}
+
+.dps-btm-btn
+{
+  background: #ddebf5;
+    padding: 10px;
+    margin: 0 -15px -15px;
+    text-align: right;
+
+    .dps-task-submit
+    {
+      background: #095386;
+      color: white;
+    }
+}

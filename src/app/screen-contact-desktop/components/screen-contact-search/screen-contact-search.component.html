@@ -1,0 +1,86 @@
+<div fxLayout="column" style="height: 100%;">
+  <mat-toolbar>
+
+    <mat-toolbar-row class="dps-toolbar-box-shadow">
+      <!-- <span fxFlex="1 1 auto"></span> -->
+      <div fxFlexAlign="center" class="dps-header">
+        <!-- <mat-icon matListIcon class="fa-rotate-90 matter-icon">line_weight</mat-icon> -->
+        <span class="header-text">Contact Search</span>
+      </div>
+      <!-- <span fxFlex="1 1 auto"></span>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon class="close-btn">close</mat-icon>
+    </button> -->
+    </mat-toolbar-row>
+    <mat-progress-bar *ngIf="isContactsLoading" mode="indeterminate"></mat-progress-bar>
+  </mat-toolbar>
+
+  <div fxFlex="calc(100% - 53px)" fxLayout="column" class="screen-view-general-popup-body">
+
+    <div class="tool-bar-contact-search" *ngIf="!isMuiltiClientScreen">
+      <button mat-button class="new" (click)="newContact($event)"
+        *ngIf="isAllSearch && newContactPermission">New</button>
+      <div class="contact-search">
+        <label>{{headerLabel}}</label>
+        <dps-screen-contact-search-input class="search-box" [searchText]="searchText"
+          (searchTextChanged)="onSearchTextChanged($event)"></dps-screen-contact-search-input>
+      </div>
+      <button mat-button class="remove-from-file" *ngIf="isFileSearch" (click)="removeFromFile($event)">Remove from
+        File</button>
+      <button mat-button class="delete" (click)="deleteContacts($event)">Delete</button>
+    </div>
+
+    <div fxLayout="column" class="dps-grid-layout-controller dps-white-gray-scroll">
+
+      <!-- fxFlex="125px" -->
+      <div class="row-highlight" dpsIsMobile [style.width]="calculateLayoutWidth()">
+        <dps-column-header *ngFor="let columnDef of getColums" [def]="columnDef"
+          [fxFlex]="isMuiltiClientScreen ? columnDef.extras.fxFlex : '125px'" (filterApply)="onFilterApply($event)"
+          (filterClear)="onFilterClear($event)" [filterAnchor]="columnDef.extras.filterAnchor">
+        </dps-column-header>
+      </div>
+
+
+
+
+      <mat-progress-bar *ngIf="contactScreenData?.loading" mode="indeterminate"></mat-progress-bar>
+
+
+      <div *ngIf="!contactScreenData?.loading" fxLayout="column"
+        class="dps-white-gray-scroll dps-blue-scroll contacts-data-grid dps-grid-x"
+        [style.width]="calculateLayoutWidth()">
+        <mat-nav-list>
+          <div *ngFor="let item of contactScreenData ; let row = index" (click)="rowClicked($event,item)"
+            [ngClass]="{'row-selected': item.selected == true}">
+            <mat-list-item disableRipple>
+              <dps-screen-contact-grid-row [columnDef]="getColums" [isFileSearch]="isFileSearch" [rowData]="item"
+                [isMuiltiClientScreen]="isMuiltiClientScreen">
+              </dps-screen-contact-grid-row>
+
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-nav-list>
+      </div>
+    </div>
+
+
+
+    <mat-paginator *ngIf="!contactScreenData?.loading" class="footer-shadow" [pageIndex]="pageInfo.pageIndex"
+      [length]="pageInfo.length" [pageSize]="pageInfo.pageSize" (page)="onPageChange($event)"
+      [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+
+    <div class="popup-internal-message-wrapper">
+      <div class="popup-internal-message" *ngIf="pageInfo.length === 0 &&  !isContactsLoading">No items to display</div>
+      <div class="popup-internal-message"
+        *ngIf="(visibleColumnDef.length === 0) && !(pageInfo.length === 0 &&  !isContactsLoading) ">
+        Please configure contact search columns for view data </div>
+    </div>
+
+    <div class="general-buttons-bottom">
+      <button mat-button class="close-pop" color="warn" (click)="closePopup()">Close</button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="dps-notification-wrap warning" fxLayout="column">
+
+
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span class="title">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        <span>{{ data.messageHeader || 'DPS Spitfire' }}</span>
+      </span>
+      <span class="spacer"></span>
+
+      <mat-icon class="header-icon close" (click)="onAction()">close</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- general-notification end -->
+
+
+  <mat-dialog-content fxFlex="1 1 auto" class="notification-body" fxLayout="column">
+    <p class="text-field"> {{ data.messageBody || ' ' }}</p>
+    <div class="dps-white-gray-scroll" fxFlex="1 1 auto">
+      <table *ngIf="data.detailStatus">
+        <tr>
+          <th *ngIf="data.detailStatus[0]?.title">Name</th>
+          <th>Reason</th>
+        </tr>
+        <tr *ngFor="let item of data.detailStatus">
+          <td *ngIf="data.detailStatus[0]?.title"> {{item.title}} </td>
+          <td innerHTML="{{item.message | plainTexttoHTML}}"> </td>
+        </tr>
+      </table>
+    </div>
+  </mat-dialog-content>
+  <!-- general-notification body end -->
+
+
+  <div class="bottom-controllers">
+    <button class="notification-button mat-elevation-z0" mat-raised-button (click)="onAction()"> OK </button>
+  </div>
+  <!-- general-bottom controller end -->
+
+</div>

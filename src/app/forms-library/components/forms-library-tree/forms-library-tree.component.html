@@ -1,0 +1,35 @@
+<div class="dps-forms-library-tree-inner-wrapper">
+  <div class="dps-fl-tree dps-white-gray-scroll">
+    <div fxLayout="column" *ngFor="let menuItem of formsLibrarytree | formsLibraryFilter">
+      <ng-container *ngIf=true>
+        <mat-list fxFlex="1 1 100" fxLayout="column">
+          <div class="mat-list-wrapper" fxLayout="column" fxFlex="1 1 auto" (click)="onDpsTreeRowClick($event,menuItem)"
+            (dblclick)="onDpsTreeRowDoubleClick($event,menuItem)"
+            [ngClass]="{'dps-tree-row-select': menuItem.isRowSelected}">
+            <mat-list-item class="dps-folder-list-item forms-library-tee-item">
+              <i matListIcon (click)="dpsTreeNodeExpandClick($event,menuItem)"
+                [ngStyle]="{'padding-left.px': ((menuItem.items | formsLibraryFilter).length>0? 0 : ((menuItem.treeLevel-1) * 10)+20),'padding-left.px': (menuItem.treeLevel) * 20}"
+                *ngIf="(menuItem.items | formsLibraryFilter).length>0" [ngClass]="{'fa-angle-right':(menuItem.items | formsLibraryFilter).length>0 &&
+                !menuItem.isTreeNodeExpand,'fa-angle-down':menuItem.isTreeNodeExpand}"
+                class="fa dps-folder-item-toggle"></i>
+              <!-- <i class="fa dps-folder-item-toggle" (click)="dpsTreeNodeExpandClick($event,menuItem)"></i> -->
+              <div style="padding-left: 0px;">
+                <span [ngStyle]="{'padding-left.px': ((menuItem.items | formsLibraryFilter).length>0? 0 :
+                  ((menuItem.treeLevel) * 20)+5)}" matLine class="dps-folder-item-name"
+                  title="{{menuItem.data.description}}">
+                  <mat-icon class="fa fa-folder dps-menu-icon" [ngClass]="{'rubberBand': menuItem.isRowSelected}">
+                  </mat-icon>
+                  <span class="grid-data">{{menuItem?.data.description}}</span>
+                </span>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+        <dps-forms-library-tree *ngIf="menuItem.items.length>0 && menuItem.isTreeNodeExpand"
+          (itemChange)="onItemChange($event)" [formsLibrarytree]="menuItem?.items">
+        </dps-forms-library-tree>
+      </ng-container>
+    </div>
+  </div>
+</div>

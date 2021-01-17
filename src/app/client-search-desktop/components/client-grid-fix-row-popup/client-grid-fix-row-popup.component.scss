@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+.grid-data{
+    line-height: 36px;
+}
+.grid-data:last-child{
+    background-image: none;
+}
+
+.row-data:first-child{
+    border-left:1px solid #afafaf;;
+}
+
+
